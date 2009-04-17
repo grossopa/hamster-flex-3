@@ -5,8 +5,8 @@
 
 Contains all available components, these components are all ready to use and with advanced functionality/UI.
   
-  * *Chrome Tab*
-  * *Advanced View Stack*
+  * *Chrome Tab *
+  * *Advanced View Stack *
   * *Reflection Canvas *
 
 = debug =
@@ -31,9 +31,9 @@ Contains all extended Flex errors.
 Contains Flex frameworks.
 
   * *services*
-    * EventService*
+    * Event Service *
   
-  * *undo model*
+  * *Undo Model*
 
 = log =
 
@@ -55,8 +55,8 @@ Contains preloader classes.
 
 Contains all util classes.
 
-  * *GraphicsExtendUtil *
-  * *ImageUtil *
-  * *MathExtendUtil *
-  * *SkewUtil *
-  * *VersionUtil *
+  * *Graphics Extend Util *
+  * *Image Util *
+  * *Math Extend Util *
+  * *Skew Util *
+  * *Version Util *
