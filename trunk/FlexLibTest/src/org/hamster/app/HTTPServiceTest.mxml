@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
+ 	applicationComplete="appComplete()" xmlns:app="org.hamster.test.networks.service.*"
+ 	 implements="org.hamster.networks.command.ICommandResponder">
+	<mx:Script source="HTTPServiceTestAs.as" />
+	<app:HTTPServices />
+</mx:Application>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="org.hamster.components.AdvancedHBox"/>
+<classEntry path="org.hamster.components.AdvancedViewStack"/>
+<classEntry path="org.hamster.components.ReflectionCanvas"/>
+<classEntry path="org.hamster.components.chrometab.ChromeTab"/>
+<classEntry path="org.hamster.components.chrometab.ITabExtraAction"/>
+<classEntry path="org.hamster.components.chrometab.unit.ChromeTabUnit"/>
+<classEntry path="org.hamster.debug.Assert"/>
+<classEntry path="org.hamster.effects.SkewEffect"/>
+<classEntry path="org.hamster.effects.advancedviewstack.AdvDoorAVS"/>
+<classEntry path="org.hamster.effects.advancedviewstack.AdvSplit9AVS"/>
+<classEntry path="org.hamster.effects.advancedviewstack.AdvSplitAVS"/>
+<classEntry path="org.hamster.effects.advancedviewstack.FadeAVS"/>
+<classEntry path="org.hamster.effects.advancedviewstack.FadeScaleAVS"/>
+<classEntry path="org.hamster.effects.advancedviewstack.IrisAVS"/>
+<classEntry path="org.hamster.effects.advancedviewstack.MoveAVS"/>
+<classEntry path="org.hamster.effects.advancedviewstack.RotateScaleYAVS"/>
+<classEntry path="org.hamster.effects.advancedviewstack.ScaleXAVS"/>
+<classEntry path="org.hamster.effects.advancedviewstack.ScaleYAVS"/>
+<classEntry path="org.hamster.effects.advancedviewstack.SkewAVS"/>
+<classEntry path="org.hamster.effects.advancedviewstack.base.AbstractAdvancedViewStackEffect"/>
+<classEntry path="org.hamster.effects.advancedviewstack.base.IAdvancedViewStackEffect"/>
+<classEntry path="org.hamster.effects.effectInstance.SkewEffectInstance"/>
+<classEntry path="org.hamster.frameworks.services.EventService"/>
+<classEntry path="org.hamster.frameworks.undo.IUndoCommand"/>
+<classEntry path="org.hamster.frameworks.undo.IUndoCommandManager"/>
+<classEntry path="org.hamster.frameworks.undo.UndoCommandHistoryManager"/>
+<classEntry path="org.hamster.log.Logger"/>
+<classEntry path="org.hamster.log.LoggerModel"/>
+<classEntry path="org.hamster.log.LoggerPanel"/>
+<classEntry path="org.hamster.networks.command.AbstractCommand"/>
+<classEntry path="org.hamster.networks.command.ICommand"/>
+<classEntry path="org.hamster.networks.command.ICommandResponder"/>
+<classEntry path="org.hamster.networks.service.HTTPServiceLocator"/>
+<classEntry path="org.hamster.preloaders.LinePreloader"/>
+<classEntry path="org.hamster.utils.GraphicsExtendUtil"/>
+<classEntry path="org.hamster.utils.ImageUtil"/>
+<classEntry path="org.hamster.utils.MathExtendUtil"/>
+<classEntry path="org.hamster.utils.SkewUtil"/>
+<classEntry path="org.hamster.utils.VersionUtil"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests/>
+</flexLibProperties>

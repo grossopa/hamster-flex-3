@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HTTPServiceLocator xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="org.hamster.networks.service.*" urlPrefix="http://www.">
+	<mx:HTTPService id="baidu" url="" resultFormat="text" />
+	<mx:HTTPService id="google" url="google.com" resultFormat="text" />
+</HTTPServiceLocator>

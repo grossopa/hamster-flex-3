@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" verticalGap="0"
+	applicationComplete="completeHandler()" xmlns:components="org.hamster.components.*">
+	<mx:Script source="AdvViewStackTestAs.as" />
+	<mx:HBox>
+		<mx:Button click="goPageLeft()" label="goPageLeft" />
+		<mx:Button click="goPageRight()" label="goPageRight"/>
+		<mx:ComboBox id="comboBox" dataProvider="{comboBoxList}" change="selectHandler(event)" rowCount="20" />
+	</mx:HBox>
+	<components:AdvancedViewStack id="avs" width="600" height="400" y="50">
+		<components:viewStack>
+			<mx:ViewStack id="viewStack" width="600" height="400">
+				<mx:Canvas width="100%" height="100%" backgroundColor="0x7F0000" name="red">
+					<mx:Canvas width="80%" height="80%" backgroundColor="0x00007F" name="blue" x="100" />
+				</mx:Canvas>
+				<mx:Canvas width="100%" height="100%" backgroundColor="0x7F7F00" name="yellow">
+					<mx:TextInput text="123" width="300" />
+					<mx:Label y="80" text="sadfadsf adsf asdf asdf asdf asd asdf asdf "/>
+				</mx:Canvas>
+				<mx:Canvas width="100%" height="100%" backgroundColor="0x7F7F7F" name="gray">
+					<mx:TextInput y="160" text="adsfad fasd ads f" width="300" />
+					<mx:Label y="200" text="sadfadsf adsf asdf asdf asdf asd asdf asdf "/>
+				</mx:Canvas>
+				<mx:Canvas width="100%" height="100%" backgroundColor="0x00007F" name="blue" />		
+				<mx:Canvas width="100%" height="100%" backgroundColor="0x007F7F" name="green">
+					<mx:TextInput y="180" text="adsfad fasddf adsf adsf asdf asdf  ads f" width="300" x="100" />
+					<mx:Label y="100" text="sadfadsf da ds fsf dsfads asd adsf asdf asdf asdf asd asdf asdf "/>
+				</mx:Canvas>
+			</mx:ViewStack>			
+		</components:viewStack>
+	</components:AdvancedViewStack>
+	<components:ReflectionCanvas id="refCanvas" width="600" height="800" />
+</mx:Application>
