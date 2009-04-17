@@ -55,8 +55,8 @@ Contains preloader classes.
 
 Contains all util classes.
 
-  * *GraphicsExtend Util *
-  * *Image Util *
-  * *MathExtend Util *
-  * *Skew Util *
-  * *Version Util *
+  * *GraphicsExtendUtil *
+  * *ImageUtil *
+  * *MathExtendUtil *
+  * *SkewUtil *
+  * *VersionUtil *
