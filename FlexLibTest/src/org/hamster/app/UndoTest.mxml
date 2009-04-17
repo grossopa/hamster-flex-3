@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
+	dragDrop="dragDropHandler(event)" dragEnter="dragEnterHandler(event)" 
+	xmlns:undo="org.hamster.test.undo.*" xmlns:log="org.hamster.log.*" 
+	 creationComplete="creationComplete()">
+	<mx:Button label="undo" click="undoHandler()" />
+	<mx:Button label="redo" click="redoHandler()" x="50" />
+	<undo:TestDragableUnit />
+	<mx:Script source="UndoTestAs.as" />
+</mx:Application>

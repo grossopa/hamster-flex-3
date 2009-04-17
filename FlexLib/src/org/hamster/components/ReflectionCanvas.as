@@ -1,0 +1,54 @@
+package org.hamster.components
+{
+	import flash.display.DisplayObject;
+	import flash.geom.Matrix;
+	
+	import org.hamster.utils.ImageUtil;
+	
+	import mx.containers.Canvas;
+	import mx.controls.Image;
+
+	public class ReflectionCanvas extends Canvas
+	{
+		private const mainImage:Image = new Image();
+		private const reflection:Image = new Image();
+		private var disObj:DisplayObject;
+		public var gap:uint = 5;
+		
+		public function setMainDisObj(disObj:DisplayObject):void
+		{
+			this.disObj = disObj;
+		}
+		
+		public function ReflectionCanvas()
+		{
+			super();
+			this.addChild(mainImage);
+			this.addChild(reflection);
+		}
+		
+		override public function set width(value:Number):void
+		{
+			super.width = value;
+		}
+		
+		override public function set height(value:Number):void
+		{
+			super.height = value;
+		}
+		
+		public function paintReflection():void
+		{
+			mainImage.width = this.width;
+			mainImage.height = disObj.height / disObj.width * this.width;
+			reflection.width = mainImage.width;
+			reflection.height = mainImage.height;
+			reflection.y = mainImage.height + gap;
+			mainImage.source = ImageUtil.toImage(disObj).source;
+			var tm:Matrix = new Matrix(1, 0, 0, -1, 0, disObj.height);
+			reflection.source = ImageUtil.fadeImage(
+					disObj, tm, 0, null, [0, 255]).source;
+		}
+		
+	}
+}

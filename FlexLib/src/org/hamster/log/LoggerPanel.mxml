@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" title="Log" creationPolicy="all"
+	horizontalScrollPolicy="off" verticalGap="0" verticalScrollPolicy="off" creationComplete="creationCompleteHandler()">
+	<mx:Script source="LoggerPanelAs.as" />
+	<mx:HBox verticalAlign="middle">
+		<mx:Button id="showHideButton" label="hide" click="showHideHandler()" />
+		<mx:Button label="clear" click="clearHandler()" />		
+		<mx:Label text="width"/>
+		<mx:NumericStepper id="widthStepper" minimum="400" maximum="1000" stepSize="50" change="changeWidthHandler()"/>
+		<mx:Label text="height"/>
+		<mx:NumericStepper id="heightStepper" minimum="200" maximum="800" stepSize="50" change="changeHeightHandler()"/>
+		<mx:Label text="level"/>
+		<mx:HSlider id="levelHSlider" width="100" minimum="1" maximum="6" 
+			snapInterval="1" dataTipFormatFunction="changeLevelHandler" />
+	</mx:HBox>
+	<mx:TextArea id="mainTextArea" width="100%" height="100%" 
+		horizontalScrollPolicy="off" editable="false" borderStyle="none"/>
+</mx:Panel>
