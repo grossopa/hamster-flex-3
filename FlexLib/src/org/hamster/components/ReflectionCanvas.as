@@ -23,6 +23,8 @@ package org.hamster.components
 		public function ReflectionCanvas()
 		{
 			super();
+			this.verticalScrollPolicy = "off";
+			this.horizontalScrollPolicy = "off";
 			this.addChild(mainImage);
 			this.addChild(reflection);
 		}
@@ -47,7 +49,7 @@ package org.hamster.components
 			mainImage.source = ImageUtil.toImage(disObj).source;
 			var tm:Matrix = new Matrix(1, 0, 0, -1, 0, disObj.height);
 			reflection.source = ImageUtil.fadeImage(
-					disObj, tm, 0, null, [0, 255]).source;
+					disObj, tm, Math.PI * 1.5, [0, 0.3], [0, 255]).source;
 		}
 		
 	}
