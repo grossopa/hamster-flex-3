@@ -8,8 +8,6 @@ package org.hamster.effects.effectInstance
 
 	public class SkewEffectInstance extends TweenEffectInstance
 	{
-		private var log:Logger = Logger.getLogger("SkewEffectInstance");
-		
 		public var skew:SkewUtil;
 		
 		public var x0From:Number = 0;
