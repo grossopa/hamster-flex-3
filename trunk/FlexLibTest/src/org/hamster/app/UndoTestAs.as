@@ -1,12 +1,15 @@
 
 import flash.geom.Point;
 
-import org.hamster.frameworks.undo.UndoCommandHistoryManager;
-import org.hamster.log.LoggerPanel;
-import org.hamster.test.undo.TestDragableUnit;
-
 import mx.events.DragEvent;
 import mx.managers.DragManager;
+
+import org.hamster.effects.CurveMove;
+import org.hamster.frameworks.undo.UndoCommandHistoryManager;
+import org.hamster.log.LoggerPanel;
+import org.hamster.maths.curve.CurveSin;
+import org.hamster.maths.curve.CurveYX2;
+import org.hamster.test.undo.TestDragableUnit;
 
 private var undoManager:UndoCommandHistoryManager = new UndoCommandHistoryManager();
 
