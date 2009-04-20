@@ -7,8 +7,12 @@ package org.hamster.effects.advancedviewstack
 	import mx.effects.AnimateProperty;
 	import mx.effects.Move;
 	import mx.effects.Parallel;
-
-	public class ScaleXAVS extends AbstractAdvancedViewStackEffect implements IAdvancedViewStackEffect
+	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 
+	public class ScaleXAVS extends AbstractAdvancedViewStackEffect 
 	{
 		public function ScaleXAVS(arg:AdvancedViewStack)
 		{

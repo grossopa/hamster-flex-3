@@ -15,20 +15,42 @@ package org.hamster.components.chrometab
 	import mx.effects.Move;
 	import mx.events.FlexEvent;
 	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 * 
+	 * A google chrome tab component.
+	 * 
+	 * you can either use a ViewStack as the main container or custom 
+	 * a list of containers as the main container.
+	 * 
+	 * please implements the interface ITabExtraAction.
+	 * @see org.hamster.components.chrometab.ITabExtraAction.as
+	 * 
+	 * use static (without add/remove child) ViewStack:
+	 * use setter function viewStack(value:ViewStack) to pass the reference.
+	 * set canAddTab and canCloseTab "false";
+	 * 
+	 * use a non-static ViewStack or custom select/add/remove event:
+	 * implements the interface ITabExtraAction.
+	 */
+	
 	public class ChromeTab extends Canvas
 	{
-		public static const TAB_NUMBER:int = 5;
 		public static const TAB_GAP:Number = 195;
 		public static const MOVE_DURATION:Number = 200;
 		
 		public var iTabExtraAction:ITabExtraAction;
+		// for default new tab name, the format is (NewTabName + count)
 		public var newTabName:String = "New Tab";
 		
 		[Embed(source='assets/new_tab.png')]
 		private var new_tab:Class;
+		
+		//see getter/setter functions
 		private var _canAddTab:Boolean = true;
 		private var _canCloseTab:Boolean = true;
 		private var _viewStack:ViewStack;
+		
 		private var dragObject:ChromeTabUnit;
 		private var mouseDownX:Number;
 		private var newTabButton:Image;
@@ -44,11 +66,18 @@ package org.hamster.components.chrometab
 			height = ChromeTabUnit.DEFAULT_HEIGHT;
 			setStyle("backgroundColor", 0x569AEE);
 			
+			// add event listener to the global application to handle the
+			// outside mouse event.
 			tabArrCol = new ArrayCollection();
 			var app:Object = Application.application;
 			app.addEventListener(MouseEvent.MOUSE_MOVE, tabMouseMoveHandler);
 			app.addEventListener(MouseEvent.MOUSE_UP, tabMouseUpHandler);
-			app.addEventListener(FlexEvent.APPLICATION_COMPLETE, appCompleteHandler);
+			if(stage == null) {
+				app.addEventListener(FlexEvent.APPLICATION_COMPLETE, 
+						appCompleteHandler);
+			} else {
+				appCompleteHandler();
+			}
 			
 			newTabButton = new Image();
 			newTabButton.width = 30;
@@ -59,7 +88,7 @@ package org.hamster.components.chrometab
 			addChildAt(newTabButton, 0);
 		}
 		
-		private function appCompleteHandler(evt:FlexEvent):void
+		private function appCompleteHandler(evt:FlexEvent = null):void
 		{
 			stage.addEventListener(Event.MOUSE_LEAVE, tabMouseUpHandler);
 		}
@@ -88,6 +117,14 @@ package org.hamster.components.chrometab
 			return this._canCloseTab;
 		}
 		
+		
+		/**
+		 * initialize the ViewStack, remove all existing tabs and recreate
+		 * them.
+		 * 
+		 * @param arg viewStack
+		 * 
+		 */
 		public function set viewStack(arg:ViewStack):void
 		{
 			tabArrCol = new ArrayCollection();
@@ -110,6 +147,8 @@ package org.hamster.components.chrometab
 		
 		/**
 		 * delegation
+		 * 
+		 * The ChromeTabUnit inside this class is hided.
 		 */
 		final public function setTabText(contentIndex:int, text:String):void
 		{
@@ -124,12 +163,18 @@ package org.hamster.components.chrometab
 			return ChromeTabUnit(tabArrCol[contentIndex]).labelText;
 		}
 		
+		/**
+		 * Count new tab button's x location.
+		 */
 		private function refreshNewTabBtn():void
 		{
 			setChildIndex(newTabButton, 0);
 			newTabButton.x = TAB_GAP * tabArrCol.length + 10;
 		}
 		
+		/**
+		 * ChromeTabUnit factory method.
+		 */
 		private function newTab(i:int, nameString:String):void
 		{
 			var tabUnit:ChromeTabUnit = new ChromeTabUnit(this);
@@ -143,6 +188,9 @@ package org.hamster.components.chrometab
 			addChildAt(tabUnit, tabArrCol.length - 1);		
 		}
 		
+		/**
+		 * move tab by tab's current index.
+		 */
 		private function moveTab(tabUnit:ChromeTabUnit):void
 		{
 			var move:Move = new Move(tabUnit);
@@ -151,6 +199,11 @@ package org.hamster.components.chrometab
 			move.play();
 		}
 		
+		/**
+		 * When user perform a mouse down event to a tab, this function
+		 * will be called.  this function will do two things, select current
+		 * tab and record mouse Down x location.
+		 */
 		private function tabMouseDownHandler(evt:MouseEvent):void
 		{
 			var curTab:ChromeTabUnit = ChromeTabUnit(evt.currentTarget);
@@ -158,6 +211,9 @@ package org.hamster.components.chrometab
 			mouseDownX = evt.localX + this.localToGlobal(new Point(x,0)).x;
 		}
 		
+		/**
+		 * change tabs location if user selected a tab and drag it.
+		 */
 		private function tabMouseMoveHandler(evt:MouseEvent):void
 		{
 			if(dragObject == null || !evt.buttonDown) {
@@ -209,6 +265,9 @@ package org.hamster.components.chrometab
 			return null;
 		}
 		
+		/**
+		 * select tab by index.
+		 */
 		public function selectTab(index:int):void
 		{
 			if(iTabExtraAction != null && !iTabExtraAction.beforeSelectTab(index)) {

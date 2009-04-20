@@ -2,7 +2,13 @@ package org.hamster.effects.advancedviewstack.base
 {
 	import org.hamster.components.AdvancedViewStack;
 	
-	public class AbstractAdvancedViewStackEffect implements IAdvancedViewStackEffect
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 * 
+	 * This is an abstract method.  Every AVS effects should extend this class.
+	 */
+	public class AbstractAdvancedViewStackEffect 
+			implements IAdvancedViewStackEffect
 	{
 		protected var _eff1:Array;
 		protected var _eff2:Array;
@@ -36,6 +42,9 @@ package org.hamster.effects.advancedviewstack.base
 			return "";
 		}
 		
+		/**
+		 * get direction
+		 */
 		public function leftDirection():Boolean
 		{
 			return advViewStack.direction == AdvancedViewStack.TURN_LEFT;

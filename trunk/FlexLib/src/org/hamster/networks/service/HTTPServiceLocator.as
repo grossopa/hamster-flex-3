@@ -4,6 +4,10 @@ package org.hamster.networks.service
 	import mx.rpc.IResponder;
 	import mx.rpc.http.mxml.HTTPService;
 	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 	
 	public class HTTPServiceLocator
 	{
 		private static var instance:HTTPServiceLocator;

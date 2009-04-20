@@ -12,6 +12,10 @@ package org.hamster.utils
 	
 	import mx.controls.Image;
 	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 	
 	public class ImageUtil
 	{
 		public static function toImage(displayObject:DisplayObject):Image

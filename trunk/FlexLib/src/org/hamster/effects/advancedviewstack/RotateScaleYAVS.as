@@ -10,8 +10,12 @@ package org.hamster.effects.advancedviewstack
 	import mx.effects.Rotate;
 	import mx.effects.Zoom;
 	import mx.effects.easing.Linear;
-
-	public class RotateScaleYAVS extends AbstractAdvancedViewStackEffect implements IAdvancedViewStackEffect
+	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 
+	public class RotateScaleYAVS extends AbstractAdvancedViewStackEffect 
 	{
 		public function RotateScaleYAVS(arg:AdvancedViewStack)
 		{

@@ -4,7 +4,8 @@ package org.hamster.effects.advancedviewstack
 	import flash.geom.Rectangle;
 	
 	import org.hamster.components.AdvancedViewStack;
-	import org.hamster.effects.advancedviewstack.base.AbstractAdvancedViewStackEffect;
+	import org.hamster.effects.advancedviewstack.base
+			.AbstractAdvancedViewStackEffect;
 	import org.hamster.effects.advancedviewstack.base.IAdvancedViewStackEffect;
 	import org.hamster.utils.ImageUtil;
 	
@@ -13,8 +14,12 @@ package org.hamster.effects.advancedviewstack
 	import mx.effects.Move;
 	import mx.effects.Parallel;
 	import mx.effects.Zoom;
-
-	public class AdvSplit9AVS extends AbstractAdvancedViewStackEffect implements IAdvancedViewStackEffect
+	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 
+	public class AdvSplit9AVS extends AbstractAdvancedViewStackEffect 
 	{
 		public function AdvSplit9AVS(arg:AdvancedViewStack)
 		{
@@ -37,14 +42,15 @@ package org.hamster.effects.advancedviewstack
 				
 			for (var i:int = 0; i < 3; i++) {
 				for(var j:int = 0; j < 3; j++) {
-					var ddd:Point
 					var imgTemp1:Image = ImageUtil.splitImage(curImage, 
-							new Rectangle(smallWidth * j, smallHeight * i, smallWidth, smallHeight), 
+							new Rectangle(smallWidth * j, smallHeight * i, 
+									smallWidth, smallHeight), 
 							new Point(0,0));
 					imgTemp1.x = smallWidth * j;
 					imgTemp1.y = smallHeight * i;
 					var imgTemp2:Image = ImageUtil.splitImage(nextImage, 
-							new Rectangle(smallWidth * j, smallHeight * i, smallWidth, smallHeight), 
+							new Rectangle(smallWidth * j, smallHeight * i, 
+									smallWidth, smallHeight), 
 							new Point(0,0));
 					imgTemp2.x = smallWidth * j;
 					imgTemp2.y = smallHeight * i;
@@ -74,7 +80,8 @@ package org.hamster.effects.advancedviewstack
 				fade1.alphaTo = 0;
 				var move1:Move = new Move();
 				move1.xFrom = k % 3 * smallWidth;
-				move1.xTo = advViewStack.direction == AdvancedViewStack.TURN_RIGHT
+				move1.xTo = advViewStack.direction 
+								== AdvancedViewStack.TURN_RIGHT
 						? advViewStack.width - k / 3 * smallWidth
 						: k / 3 * smallWidth;
 				move1.yFrom = Math.floor(k / 3) * smallHeight;
@@ -95,7 +102,8 @@ package org.hamster.effects.advancedviewstack
 				fade2.alphaTo = 1;
 				var move2:Move = new Move();
 				move2.xTo = k % 3 * smallWidth;
-				move2.xFrom = advViewStack.direction == AdvancedViewStack.TURN_RIGHT
+				move2.xFrom = advViewStack.direction 
+								== AdvancedViewStack.TURN_RIGHT
 						? k / 3 * smallWidth
 						: advViewStack.width - k / 3 * smallWidth;
 				move2.yTo = Math.floor(k / 3) * smallHeight;

@@ -9,6 +9,16 @@ package org.hamster.components.chrometab.unit
 	import mx.controls.Image;
 	import mx.controls.Label;
 
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 * 
+	 * Used outside from ChromeTab is deprecated.
+	 * 
+	 * This component is a visible tab unit works for ChromeTab. the width
+	 * and height and backgroundImage all comes from tabs of Google Chrome.
+	 * 
+	 */
+
 	public class ChromeTabUnit extends Canvas
 	{
 		public static const DEFAULT_WIDTH:Number = 210;
@@ -19,9 +29,16 @@ package org.hamster.components.chrometab.unit
 		[Embed(source='../assets/tab_unselected.png')]
 		private var tab_unselected:Class;
 		
+		// current location of this tab, this value will be changed when 
+		// user changes the tabs location.
 		public var index:int = -1;
+		
+		// the content data index of this tab, this value stands for the 
+		// ViewStack children's index(if use ViewStack mode) or other index.
+		// this value will not be changed when user change the tabs location.
 		public var contentIndex:int = -1;
 		
+		// see getter/setter functions
 		private var _label:String;
 		private var _isSelected:Boolean;
 		private var _chromeTab:ChromeTab;
@@ -64,7 +81,10 @@ package org.hamster.components.chrometab.unit
 			return this.closeUnit.visible;
 		}
 		
-		public function ChromeTabUnit(chromeTab:ChromeTab = null)
+		/**
+		 * @param chromeTab, ordinary, the chromeTab should not be null.
+		 */
+		public function ChromeTabUnit(chromeTab:ChromeTab)
 		{
 			super();
 			_chromeTab = chromeTab;
@@ -84,9 +104,12 @@ package org.hamster.components.chrometab.unit
 			closeUnit.height = 10;
 			closeUnit.setStyle("verticalCenter", 1);
 			closeUnit.setStyle("right", 15);
-			closeUnit.addEventListener(MouseEvent.ROLL_OVER, closeBtnRollOverHandler);
-			closeUnit.addEventListener(MouseEvent.ROLL_OUT, closeBtnRollOutHandler);
-			closeUnit.addEventListener(MouseEvent.CLICK, closeTabHandler);
+			closeUnit.addEventListener(MouseEvent.ROLL_OVER, 
+					closeBtnRollOverHandler);
+			closeUnit.addEventListener(MouseEvent.ROLL_OUT, 
+					closeBtnRollOutHandler);
+			closeUnit.addEventListener(MouseEvent.CLICK, 
+					closeTabHandler);
 			closeBtnRollOutHandler();
 			addChild(closeUnit);
 		}
@@ -106,6 +129,9 @@ package org.hamster.components.chrometab.unit
 			drawCloseBtn(false);
 		}
 		
+		/**
+		 * use graphics method to draw the close tab button.
+		 */
 		private function drawCloseBtn(rollOut:Boolean):void
 		{
 			var alpha:Number = rollOut ? 0.01 : 1;

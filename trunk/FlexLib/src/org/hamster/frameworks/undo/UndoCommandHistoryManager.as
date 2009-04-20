@@ -1,5 +1,10 @@
 package org.hamster.frameworks.undo
 {
+	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 
 	public class UndoCommandHistoryManager implements IUndoCommandManager
 	{
 		public var undoList:Array = new Array();

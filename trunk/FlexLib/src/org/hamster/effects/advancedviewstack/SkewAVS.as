@@ -7,13 +7,15 @@ package org.hamster.effects.advancedviewstack
 	import org.hamster.utils.SkewUtil;
 	
 	import mx.controls.Image;
-
+	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 
 	public class SkewAVS extends AbstractAdvancedViewStackEffect
 	{
 		private var skew1:SkewUtil;
 		private var skew2:SkewUtil;
-		
-		private var logger:Logger = Logger.getLogger("SkewTest");
 		
 		public function SkewAVS(arg:AdvancedViewStack)
 		{

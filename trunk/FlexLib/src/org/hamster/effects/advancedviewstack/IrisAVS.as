@@ -5,8 +5,12 @@ package org.hamster.effects.advancedviewstack
 	import org.hamster.effects.advancedviewstack.base.IAdvancedViewStackEffect;
 	
 	import mx.effects.Iris;
-
-	public class IrisAVS extends AbstractAdvancedViewStackEffect implements IAdvancedViewStackEffect
+	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 
+	public class IrisAVS extends AbstractAdvancedViewStackEffect 
 	{
 		public function IrisAVS(arg:AdvancedViewStack)
 		{

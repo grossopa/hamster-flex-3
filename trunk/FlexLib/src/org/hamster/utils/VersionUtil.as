@@ -5,6 +5,10 @@ package org.hamster.utils
 	
 	import mx.core.Application;
 	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 	
 	public class VersionUtil
 	{
 		public static function buildVersion(menuText:String):void

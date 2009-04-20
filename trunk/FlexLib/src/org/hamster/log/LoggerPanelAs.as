@@ -1,13 +1,24 @@
 
 import flash.display.DisplayObject;
+import flash.external.ExternalInterface;
+
+import mx.collections.ArrayCollection;
+import mx.core.Application;
+import mx.managers.PopUpManager;
 
 import org.hamster.log.Logger;
 import org.hamster.log.LoggerModel;
 import org.hamster.log.LoggerPanel;
 
-import mx.collections.ArrayCollection;
-import mx.core.Application;
-import mx.managers.PopUpManager;
+	
+/**
+ * @author jack yin grossopforever@gmail.com
+ */
+	 
+
+public static const TRACE_MODE:uint = 0x001;
+public static const PANEL_MODE:uint = 0x010;
+public static const HTML_MODE:uint = 0x100;
 
 private const TRACE_COLOR:String = "#3F4FFF";
 private const DEBUG_COLOR:String = "#000000";
@@ -19,6 +30,62 @@ private const FATAL_COLOR:String = "#FF0000";
 private static var instance:LoggerPanel = new LoggerPanel();
 private var _enableLog:Boolean;
 
+private var _enabledTraceMode:Boolean;
+private var _enabledPanelMode:Boolean;
+private var _enabledHTMLMode:Boolean;
+
+public function set enabledTraceMode(value:Boolean):void
+{
+	_enabledTraceMode = value;
+}
+
+public function get enabledTraceMode():Boolean
+{
+	return this._enabledTraceMode;
+}
+
+public function set enabledPanelMode(value:Boolean):void
+{
+	_enabledPanelMode = value;
+	if(_enabledPanelMode) {
+		var app:DisplayObject = DisplayObject(Application.application);
+		PopUpManager.addPopUp(instance, app);
+		instance.width = app.width * 0.5;
+		instance.height = app.height * 0.5;
+	} else {
+		PopUpManager.removePopUp(instance);		
+	}
+}
+
+public function get enabledPanelMode():Boolean
+{
+	return this._enabledPanelMode;
+}
+
+public function set enabledHTMLMode(value:Boolean):void
+{
+	_enabledHTMLMode = value;
+	if(_enabledHTMLMode) {
+		ExternalInterface.call("eval", 
+		"function createLoggerPanelTextArea() {" + 
+			"var textarea = document.createElement('textarea');" + 
+			"textarea.setAttribute('style', 'width:100%;height:500');" + 
+			"textarea.setAttribute('id', 'logForFlash');" + 
+			"document.body.appendChild(textarea);" + 
+		"}");
+		ExternalInterface.call("eval", 
+		"function addLogToTextArea(logText) {" + 
+			"document.getElementById('logForFlash').value += logText;" + 
+		"}");
+		ExternalInterface.call("createLoggerPanelTextArea");
+	}
+}
+
+public function get enabledHTMLMode():Boolean
+{
+	return this._enabledHTMLMode;
+}
+
 [Bindable] private var logDatas:ArrayCollection = new ArrayCollection();
 
 public static function getInstance():LoggerPanel
@@ -26,17 +93,11 @@ public static function getInstance():LoggerPanel
 	return instance;
 }
 
-public function set enableLog(value:Boolean):void
+public function setLogMode(modes:uint):void
 {
-	if(value) {
-		var app:DisplayObject = DisplayObject(Application.application);
-		PopUpManager.addPopUp(instance, app);
-		instance.width = app.width * 0.5;
-		instance.height = app.height * 0.5;
-	} else if(_enableLog){
-		PopUpManager.removePopUp(instance);	
-	}
-	_enableLog = value;
+	enabledTraceMode = (TRACE_MODE & modes) != 0;
+	enabledPanelMode = (PANEL_MODE & modes) != 0;
+	enabledHTMLMode  = (HTML_MODE  & modes) != 0;
 }
 		
 public function get enableLog():Boolean
@@ -50,7 +111,8 @@ private function creationCompleteHandler():void
 	heightStepper.value = instance.height;
 }
 
-public function addLog(logger:Logger, loggerModel:LoggerModel, level:String):void
+public function addLog(logger:Logger, 
+		loggerModel:LoggerModel, level:String):void
 {
 	var color:String;
 	var levelValue:int = 7;
@@ -87,7 +149,11 @@ public function addLog(logger:Logger, loggerModel:LoggerModel, level:String):voi
 	var resultString:String = loggerModel.toFormatString();
 	mainTextArea.htmlText += "<font color=\"" + color + "\">"
 			+ resultString + "</font><br />";
-	trace(resultString);
+	
+	if(this.enabledTraceMode) trace(resultString);
+	if(this.enabledHTMLMode) {
+		ExternalInterface.call("addLogToTextArea", resultString + "\\n");
+	}
 	logDatas.addItem(loggerModel);
 	mainTextArea.verticalScrollPosition 
 			= mainTextArea.maxVerticalScrollPosition + 1;

@@ -5,7 +5,11 @@ package org.hamster.effects.effectInstance
 	
 	import mx.effects.Tween;
 	import mx.effects.effectClasses.TweenEffectInstance;
-
+	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 
 	public class SkewEffectInstance extends TweenEffectInstance
 	{
 		public var skew:SkewUtil;

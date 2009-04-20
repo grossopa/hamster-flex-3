@@ -8,8 +8,12 @@ package org.hamster.effects.advancedviewstack
 	import mx.effects.Move;
 	import mx.effects.Parallel;
 	import mx.effects.Zoom;
-
-	public class FadeScaleAVS extends AbstractAdvancedViewStackEffect implements IAdvancedViewStackEffect
+	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 
+	public class FadeScaleAVS extends AbstractAdvancedViewStackEffect 
 	{
 		public function FadeScaleAVS(arg:AdvancedViewStack)
 		{
@@ -19,6 +23,7 @@ package org.hamster.effects.advancedviewstack
 		
 		override public function advInitFunction(imgs1:Array, imgs2:Array):void
 		{
+			
 		}
 		
 		override public function initAnimation():void
