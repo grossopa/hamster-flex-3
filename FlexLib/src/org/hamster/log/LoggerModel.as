@@ -1,5 +1,10 @@
 package org.hamster.log
 {
+	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 
 	public class LoggerModel
 	{
 		private const GAP_STR:String = " || ";

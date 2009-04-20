@@ -2,6 +2,9 @@ package org.hamster.debug
 {
 	import mx.containers.VBox;
 	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
 	public class Assert
 	{
 		public static function isTrue(obj:Boolean):void

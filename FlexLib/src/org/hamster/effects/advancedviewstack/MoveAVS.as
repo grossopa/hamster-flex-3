@@ -7,7 +7,11 @@ package org.hamster.effects.advancedviewstack
 	import mx.effects.Move;
 	import mx.events.EffectEvent;
 	
-	public class MoveAVS extends AbstractAdvancedViewStackEffect implements IAdvancedViewStackEffect
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 	
+	public class MoveAVS extends AbstractAdvancedViewStackEffect 
 	{
 		public function MoveAVS(arg:AdvancedViewStack)
 		{

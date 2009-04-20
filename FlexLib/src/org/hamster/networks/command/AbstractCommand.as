@@ -1,7 +1,11 @@
 package org.hamster.networks.command
 {
 	import mx.rpc.IResponder;
-	
+		
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 
 	public class AbstractCommand implements ICommand, IResponder
 	{
 		

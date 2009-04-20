@@ -2,6 +2,10 @@ package org.hamster.utils
 {
 	import flash.display.Graphics;
 	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 	
 	public class GraphicsExtendUtil
 	{
 		public static function drawPoly(g:Graphics, points:Array):void

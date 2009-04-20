@@ -5,8 +5,12 @@ package org.hamster.effects.advancedviewstack
 	import org.hamster.effects.advancedviewstack.base.IAdvancedViewStackEffect;
 	
 	import mx.effects.Fade;
-
-	public class FadeAVS extends AbstractAdvancedViewStackEffect implements IAdvancedViewStackEffect
+	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 
+	public class FadeAVS extends AbstractAdvancedViewStackEffect 
 	{
 		public function FadeAVS(arg:AdvancedViewStack)
 		{

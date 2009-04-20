@@ -14,19 +14,32 @@ package org.hamster.components
 	import mx.events.EffectEvent;
 	import mx.events.FlexEvent;
 
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 * 
+	 * This component is extend Canvas rather than ViewStack because it will
+	 * perform some animation on change children. A viewStack is composited
+	 * to this class.
+	 */
 	public class AdvancedViewStack extends Canvas
 	{
 		public static const TURN_RIGHT:int = -1;
 		public static const TURN_LEFT:int = 1;
 		
+		// turn left index -->> index - 1
+		// turn right index -->> index + 1
 		public var direction:int = TURN_LEFT;
 		public var duration:Number = 1000;
 		
+		//see getter/setter functions
 		private var _viewStack:ViewStack;
 		private var _backgroundRenderer:Canvas;
 		private var _isPlaying:Boolean;
+		
+		// animation type
 		private var avsEffect:IAdvancedViewStackEffect;
 		
+		// stores all temp images
 		private var curImages:Array;
 		private var nextImages:Array;
 		
@@ -50,6 +63,10 @@ package org.hamster.components
 			return avsEffect.isQueue;
 		}
 		
+		/**
+		 * call this function just like this:
+		 * setAnimationClass(FadeAVS);
+		 */
 		public function setAnimationClass(className:Class):void
 		{
 			avsEffect = new className(this);
@@ -60,6 +77,9 @@ package org.hamster.components
 			return [_eff1, _eff2];
 		}
 		
+		/**
+		 * initialize viewStack
+		 */
 		public function set viewStack(arg:ViewStack):void
 		{
 			this._viewStack = arg;
@@ -104,9 +124,13 @@ package org.hamster.components
 		
 		protected function completeHandler(evt:FlexEvent):void
 		{
+			// default animation is FadeAVS
 			this.setAnimationClass(FadeAVS);
 		}
 		
+		/**
+		 * change current page function, return true if page changed.
+		 */
 		public function goPage(index:int):Boolean
 		{
 			if(_isPlaying) return false;
@@ -116,33 +140,44 @@ package org.hamster.components
 			return true;
 		}
 		
+		/**
+		 * initialize animation function.
+		 */ 
 		private function beginInitialize(nextIndex:int):void
 		{
+			//initialize direction
 			this.direction = viewStack.selectedIndex > nextIndex 
 					? TURN_RIGHT : TURN_LEFT;
-					
+			
+			// disppatch a effect start event
 			this.dispatchEvent(new EffectEvent(EffectEvent.EFFECT_START));
+			
+			// initialize image collections
 			curImages = new Array();
 			nextImages = new Array();
 			
+			// convert current page to Image.
 			curImages.push(ImageUtil.toImage(viewStack.selectedChild));
 			
+			// change viewStack selected index to next index.
 			viewStack.selectedIndex = nextIndex;
 			viewStack.visible = false;
 			viewStack.validateNow();
 			
+			// convert next page to Image.
 			nextImages.push(ImageUtil.toImage(viewStack.selectedChild));
 			
 			var numChildren:int = this.getChildren().length;
 			
+			// initial avsEffect
 			avsEffect.advInitFunction(curImages, nextImages);
 			avsEffect.initAnimation();
 			
+			// set duration
 			var tempDuration:Number = _isQueue ? duration / 2 : duration;
 			for(var i:int = 0; i < _eff1.length; i++) {
 				IEffect(_eff1[i]).duration = tempDuration;
 			}
-			
 			for(i = 0; i < _eff2.length; i++) {
 				IEffect(_eff2[i]).duration = tempDuration;
 			}
@@ -158,14 +193,15 @@ package org.hamster.components
 			}
 			_eff2[0].addEventListener(EffectEvent.EFFECT_END, endAnimation);
 			
+			// add images to the top of this class.
 			for (i = 0; i < nextImages.length; i++) {
 				this.addChildAt(nextImages[i], numChildren++);
 			}
-			
 			for (i = 0; i < curImages.length; i++) {
 				this.addChildAt(curImages[i], numChildren++);
 			}
 			
+			// do animation
 			doAnimation();
 		}
 		
@@ -213,6 +249,9 @@ package org.hamster.components
 			dispatchEvent(new EffectEvent(EffectEvent.EFFECT_END));
 		}
 		
+		/**
+		 * On event finished, clear all temp images.
+		 */
 		private function removeAllRendererImage():void
 		{
 			for each(var disObj:DisplayObject in this.getChildren()) {

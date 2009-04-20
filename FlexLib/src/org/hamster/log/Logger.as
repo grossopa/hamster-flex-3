@@ -4,6 +4,10 @@ package org.hamster.log
 	
 	import mx.formatters.DateFormatter;
 	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 	
 	final public class Logger
 	{
 		public static const TRACE:String = "TRACE";
@@ -18,14 +22,10 @@ package org.hamster.log
 		public static const SEQ_STR:int = 2;
 		public static const SEQ_CLASS:int = 3;
 		
-		private static const DEF_DATE_FORMAT_STR:String = "J:NN:SS";
-		
 		private static var sequence:Array;
 		private static var panel:LoggerPanel = LoggerPanel.getInstance();
 		
 		private var _className:String;
-		
-		public var dateFormatter:DateFormatter;
 		
 		public function setSequence(...arg):void
 		{
@@ -40,10 +40,6 @@ package org.hamster.log
 		public function Logger(className:String)
 		{
 			this._className = className;
-			if(dateFormatter == null) {
-				dateFormatter = new DateFormatter();
-				dateFormatter.formatString = DEF_DATE_FORMAT_STR;
-			}
 			
 			if(sequence == null) {
 				setSequence(SEQ_TIME, SEQ_LEVEL, SEQ_CLASS, SEQ_STR);
@@ -96,11 +92,14 @@ package org.hamster.log
 			
 			var result:LoggerModel = new LoggerModel();
 			var date:Date = new Date();
-			if(dateFormatter == null) {
-				dateFormatter = new DateFormatter();
-				dateFormatter.formatString = DEF_DATE_FORMAT_STR;
-			}
-			result.time	= dateFormatter.format(date);
+			
+			var min:int = date.getMinutes();
+			var sec:int = date.getSeconds();
+			var minStr:String = min < 10 ? "0" + min.toString() : min.toString();
+			var secStr:String = sec < 10 ? "0" + sec.toString() : sec.toString();
+			result.time	= date.getHours().toString() + ":" 
+					+ minStr + ":" + secStr + "."
+					+ date.getMilliseconds().toString(); 
 			result.level = level;
 			result.className = this._className;
 			if (func != null && func.length != 0) {

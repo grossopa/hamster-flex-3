@@ -5,13 +5,18 @@ package org.hamster.effects.advancedviewstack
 	
 	import org.hamster.components.AdvancedViewStack;
 	import org.hamster.effects.SkewEffect;
-	import org.hamster.effects.advancedviewstack.base.AbstractAdvancedViewStackEffect;
+	import org.hamster.effects.advancedviewstack.base
+			.AbstractAdvancedViewStackEffect;
 	import org.hamster.utils.ImageUtil;
 	import org.hamster.utils.SkewUtil;
 	
 	import mx.controls.Image;
 	import mx.effects.Fade;
 	import mx.effects.Parallel;
+	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
 
 	public class AdvDoorAVS extends AbstractAdvancedViewStackEffect
 	{
@@ -35,12 +40,18 @@ package org.hamster.effects.advancedviewstack
 			var img1:Image = Image(imgs1.pop());
 			var img2:Image = Image(imgs2.pop());
 			
-			var rect1:Rectangle = new Rectangle(0,0, img1.width / 2, img1.height);
-			var rect2:Rectangle = new Rectangle(img1.width / 2, 0, img1.width / 2, img1.height); 
-			var img11:Image = ImageUtil.splitImage(img1, rect1, new Point(0, 0));
-			var img12:Image = ImageUtil.splitImage(img1, rect2, new Point(0, 0));
-			var img21:Image = ImageUtil.splitImage(img2, rect1, new Point(0, 0));
-			var img22:Image = ImageUtil.splitImage(img2, rect2, new Point(0, 0));
+			var rect1:Rectangle = new Rectangle(0, 0, 
+					img1.width / 2, img1.height);
+			var rect2:Rectangle = new Rectangle(img1.width / 2, 0,
+					img1.width / 2, img1.height); 
+			var img11:Image 
+					= ImageUtil.splitImage(img1, rect1, new Point(0, 0));
+			var img12:Image 
+					= ImageUtil.splitImage(img1, rect2, new Point(0, 0));
+			var img21:Image 
+					= ImageUtil.splitImage(img2, rect1, new Point(0, 0));
+			var img22:Image 
+					= ImageUtil.splitImage(img2, rect2, new Point(0, 0));
 			
 			imgs1.push(img11);
 			imgs1.push(img12);

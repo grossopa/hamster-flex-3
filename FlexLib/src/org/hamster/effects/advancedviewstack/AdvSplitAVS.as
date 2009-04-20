@@ -13,8 +13,12 @@ package org.hamster.effects.advancedviewstack
 	import mx.effects.Move;
 	import mx.effects.Parallel;
 	import mx.effects.easing.Linear;
-
-	public class AdvSplitAVS extends AbstractAdvancedViewStackEffect implements IAdvancedViewStackEffect
+	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 */
+	 
+	public class AdvSplitAVS extends AbstractAdvancedViewStackEffect 
 	{
 		public function AdvSplitAVS(arg:AdvancedViewStack)
 		{
@@ -33,7 +37,8 @@ package org.hamster.effects.advancedviewstack
 			var nextImage:Image = imgs2[0] as Image;
 				
 			var img11:Image = ImageUtil.splitImage(curImage, 
-						new Rectangle(0, 0, advViewStack.width, advViewStack.height >> 1), new Point(0,0));
+						new Rectangle(0, 0, advViewStack.width, 
+						advViewStack.height >> 1), new Point(0,0));
 			var img12:Image = ImageUtil.splitImage(curImage, 
 						new Rectangle(0, advViewStack.height >> 1, advViewStack.width, advViewStack.height >> 1), new Point(0,0));
 			var img21:Image = ImageUtil.splitImage(nextImage, 

@@ -7,6 +7,11 @@ package org.hamster.components
 	
 	import mx.containers.Canvas;
 	import mx.controls.Image;
+	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 * 
+	 */
 
 	public class ReflectionCanvas extends Canvas
 	{

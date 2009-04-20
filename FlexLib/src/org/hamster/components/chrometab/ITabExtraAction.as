@@ -1,16 +1,19 @@
-/**
- * @author org.hamster
- * 
- * Description: this interface supports the ChromeTab Class,
- * if use a static viewStack then this interface needn't to be implemented,
- * but if use a non-static viewStack or user need to define a chain of 
- * custom actions then this interface must be implemented and set to ChromeTab.
- */
+
 
 package org.hamster.components.chrometab
 {
 	import flash.display.DisplayObject;
 	
+	/**
+	 * @author jack yin grossopforever@gmail.com
+	 * 
+	 * Description: this interface supports the ChromeTab Class,
+	 * if use a static viewStack then this interface needn't to be implemented,
+	 * but if use a non-static viewStack or user need to define a chain of 
+	 * custom actions then this interface must be implemented 
+	 * and set to ChromeTab.
+	 */	
+	 
 	public interface ITabExtraAction
 	{
 		/**
