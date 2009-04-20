@@ -1,6 +1,7 @@
 
 import flash.events.Event;
 
+import org.hamster.effects.advancedviewstack.Adv9AVS;
 import org.hamster.effects.advancedviewstack.AdvDoorAVS;
 import org.hamster.effects.advancedviewstack.AdvSplit9AVS;
 import org.hamster.effects.advancedviewstack.AdvSplitAVS;
@@ -12,7 +13,6 @@ import org.hamster.effects.advancedviewstack.RotateScaleYAVS;
 import org.hamster.effects.advancedviewstack.ScaleXAVS;
 import org.hamster.effects.advancedviewstack.ScaleYAVS;
 import org.hamster.effects.advancedviewstack.SkewAVS;
-import org.hamster.utils.ImageUtil;
 
 
 [Bindable] private var comboBoxList:Array;
@@ -21,7 +21,7 @@ private function completeHandler():void
 {
 	comboBoxList = ["AdvSplit9AVS", "AdvSplitAVS", "FadeAVS", "FadeScaleAVS",
 			"IrisAVS", "MoveAVS", "RotateScaleYAVS", "ScaleXAVS", "ScaleYAVS", "Skew"
-			,"AdvDoorAVS"];
+			,"AdvDoorAVS", "Adv9AVS"];
 	comboBox.selectedIndex = 2;
 	avs.duration = 1000;
 }
@@ -75,6 +75,9 @@ private function selectHandler(event:Event):void
 			break;
 		case 10:
 			avs.setAnimationClass(AdvDoorAVS);
+			break;
+		case 11:
+			avs.setAnimationClass(Adv9AVS);
 			break;
 	}
 }
