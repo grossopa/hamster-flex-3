@@ -1,10 +1,12 @@
 package org.hamster.effects
 {
-	import org.hamster.effects.effectInstance.SkewEffectInstance;
-	import org.hamster.utils.SkewUtil;
+	import flash.display.Graphics;
 	
 	import mx.effects.IEffectInstance;
 	import mx.effects.TweenEffect;
+	
+	import org.hamster.effects.effectInstance.SkewEffectInstance;
+	import org.hamster.utils.SkewUtil;
 	
 	/**
 	 * @author jack yin grossopforever@gmail.com
@@ -60,6 +62,7 @@ package org.hamster.effects
 			SkewEffectInstance(instance).y2To = y2To;
 			SkewEffectInstance(instance).y3From = y3From;
 			SkewEffectInstance(instance).y3To = y3To;
+			
          }  
 		
 	}

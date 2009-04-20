@@ -17,5 +17,23 @@ package org.hamster.utils
 			var l3:Number = Math.sqrt((p2.x - p3.x) * (p2.x - p3.x) + (p2.y - p3.y) * (p2.y - p3.y));
 			return Math.abs(l1 - l3 - l2) < inaccuracy;
 		}
+		
+		/**
+		 * @return y
+		 */
+		public static function circle(x:Number, radius:Number, negative:Boolean = false):Number
+		{
+			var temp:Number = Math.sqrt(radius * radius - x * x);
+			return negative ? -temp : temp;
+		}
+
+		/**
+		 * @return y
+		 */		
+		public static function ellipse(x:Number, a:Number, b:Number, negative:Boolean = false):Number
+		{
+			var temp:Number = Math.sqrt(b * b * (1 - x * x / a * a));
+			return negative ? -temp : temp;
+		}
 	}
 }
