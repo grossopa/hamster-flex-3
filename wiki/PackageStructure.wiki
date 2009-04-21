@@ -1,6 +1,4 @@
 #labels Phase-Design,Phase-Implementation
-= Introduction =
-
 = components =
 
 Contains all available components, these components are all ready to use and with advanced functionality/UI.
