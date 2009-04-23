@@ -1,7 +1,9 @@
 // ActionScript file
 import flash.display.Graphics;
 
+import mx.effects.Move;
 import mx.effects.easing.Linear;
+import mx.events.EffectEvent;
 
 import org.hamster.effects.SinMove;
 
