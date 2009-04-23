@@ -1,20 +1,28 @@
 package org.hamster.effects.effectInstance
 {
-	import org.hamster.errors.TodoError;
 	
 	/**
 	 * @author Jack Yin grossopaforever@gmail.com
 	 * 
-	 */	
-	public class CircleMoveInstance extends AbstractCurveMoveInstance
+	 * (x - oX)^2   (y - oY)^2
+	 * ---------- + ---------- = 1
+	 *     a^2          b^2
+	 * 
+	 * x = oX + a * cos(angle)
+	 * y = oY + b * sin(angle)
+	 * 
+	 * 
+	 */
+	public class EllipseMoveInstance extends AbstractCurveMoveInstance
 	{
-		public var radius:Number;
+		public var a:Number;
+		public var b:Number;
 		public var oX:Number;
 		public var oY:Number;
 		public var angleFrom:Number;
-		public var angleTo:Number;		
+		public var angleTo:Number;
 		
-		public function CircleMoveInstance(target:Object)
+		public function EllipseMoveInstance(target:Object)
 		{
 			super(target);
 		}
@@ -25,8 +33,8 @@ package org.hamster.effects.effectInstance
 			var val:Number = Number(value);
 			var curAngle:Number = this.angleFrom 
 					+ val * (this.angleTo - this.angleFrom);
-			var curX:Number = radius * Math.cos(curAngle) + oX;
-			var curY:Number = radius * Math.sin(curAngle) + oY;
+			var curX:Number = a * Math.cos(curAngle) + oX;
+			var curY:Number = b * Math.sin(curAngle) + oY;
 			
 			this.target.x = curX;
 			this.target.y = curY;
