@@ -5,6 +5,7 @@ import mx.effects.easing.Linear;
 import mx.events.EffectEvent;
 
 import org.hamster.effects.CircleMove;
+import org.hamster.effects.EllipseMove;
 import org.hamster.effects.SinMove;
 
 public static const DURATION:Number = 5000;
@@ -12,7 +13,7 @@ public static const DURATION:Number = 5000;
 public function appComplete():void
 {
 	var g:Graphics = moveTarget.graphics;
-	g.beginFill(0xFFFFFF, 0.8);
+	g.beginFill(0xFF0000, 0.8);
 	g.drawCircle(moveTarget.width >> 1, moveTarget.height >> 1, moveTarget.width >> 1);
 	g.endFill();
 	
@@ -46,4 +47,20 @@ public function circleMoveTest(evt:EffectEvent):void
 	circleMove.radius = 200;
 	circleMove.easingFunction = Linear.easeNone;
 	circleMove.play();
+	
+	circleMove.addEventListener(EffectEvent.EFFECT_END, ellipseMoveTest);
+}
+
+public function ellipseMoveTest(evt:EffectEvent):void
+{
+	var ellipseMove:EllipseMove = new EllipseMove(moveTarget);
+	ellipseMove.duration = DURATION;
+	ellipseMove.angleFrom = Math.PI / 2;
+	ellipseMove.angleTo = Math.PI * 6;
+	ellipseMove.oX = this.width >> 1;
+	ellipseMove.oY = this.height >> 1;
+	ellipseMove.a = 200;
+	ellipseMove.b = 70;
+	ellipseMove.easingFunction = Linear.easeNone;
+	ellipseMove.play();
 }
