@@ -1,5 +1,8 @@
 package org.hamster.effects.effectInstance
 {
+	import mx.effects.Move;
+	import mx.effects.Tween;
+	
 	
 	/**
 	 * @author Jack Yin grossopaforever@gmail.com
@@ -28,7 +31,6 @@ package org.hamster.effects.effectInstance
 			if(isNaN(d)) d = 0;
 			if(isNaN(xFrom)) xFrom = target.x;
 			super.play();
-			
 		}
 		
 		override public function onTweenUpdate(value:Object):void

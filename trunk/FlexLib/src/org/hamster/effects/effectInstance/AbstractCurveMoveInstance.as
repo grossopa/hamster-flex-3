@@ -1,7 +1,10 @@
 package org.hamster.effects.effectInstance
 {
+	import mx.core.mx_internal;
 	import mx.effects.Tween;
 	import mx.effects.effectClasses.TweenEffectInstance;
+	
+	use namespace mx_internal;
 	
 	/**
 	 * @author Jack Yin grossopaforever@gmail.com
@@ -23,7 +26,11 @@ package org.hamster.effects.effectInstance
 		override public function play():void
 		{
 			super.play();
-			new Tween(this, 0, 1, duration);
+			if(this.playReversed) {
+				new Tween(this, 1, 0, duration);
+			} else {
+				new Tween(this, 0, 1, duration);
+			}
 		}
 		
 	}
