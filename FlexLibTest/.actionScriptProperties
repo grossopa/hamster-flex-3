@@ -9,10 +9,11 @@
 <sourceAttachmentPath/>
 </compiler>
 <applications>
+<application path="org/hamster/app/UndoTest.mxml"/>
+<application path="org/hamster/app/HTTPServiceTest.mxml"/>
 <application path="org/hamster/app/AdvViewStackTest.mxml"/>
 <application path="org/hamster/app/ChromeTabTest.mxml"/>
-<application path="org/hamster/app/HTTPServiceTest.mxml"/>
-<application path="org/hamster/app/UndoTest.mxml"/>
+<application path="org/hamster/app/CurveMoveTest.mxml"/>
 </applications>
 <modules/>
 <buildCSSFiles/>
