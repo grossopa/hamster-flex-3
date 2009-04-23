@@ -3,7 +3,7 @@ package org.hamster.utils
 	import flash.geom.Point;
 	
 	/**
-	 * @author jack yin grossopforever@gmail.com
+	 * @author Jack Yin grossopforever@gmail.com
 	 */
 	 	
 	public class MathExtendUtil

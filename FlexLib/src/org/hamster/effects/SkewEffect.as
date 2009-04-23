@@ -40,7 +40,7 @@ package org.hamster.effects
 		}  
    
 		override public function getAffectedProperties():Array{  
-			return [];  
+			return []; 
 		}  
 		
 		override protected function initInstance(instance:IEffectInstance):void{  
