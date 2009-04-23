@@ -1,10 +1,9 @@
 package org.hamster.effects.effectInstance
 {
-	import org.hamster.log.Logger;
-	import org.hamster.utils.SkewUtil;
-	
 	import mx.effects.Tween;
 	import mx.effects.effectClasses.TweenEffectInstance;
+	
+	import org.hamster.utils.SkewUtil;
 	
 	/**
 	 * @author jack yin grossopforever@gmail.com
@@ -36,12 +35,14 @@ package org.hamster.effects.effectInstance
 			super(target);
 		}
 
-		override public function play():void {  
+		override public function play():void
+		{  
 			super.play(); 
 			new Tween(this, 0, 1, duration);  
 		}  
    
-		override public function onTweenUpdate(value:Object):void {  
+		override public function onTweenUpdate(value:Object):void
+		{  
 			super.onTweenUpdate(value);
 			var val:Number = Number(value);
 			var x0:Number = (1 - val) * x0From + val * x0To;
@@ -53,7 +54,13 @@ package org.hamster.effects.effectInstance
 			var y2:Number = (1 - val) * y2From + val * y2To;
 			var y3:Number = (1 - val) * y3From + val * y3To;
 			skew.setTransform(x0, y0, x1, y1, x2, y2, x3, y3);
-		}  
+		}
+		
+		override public function reverse():void
+		{
+			super.reverse();
+			new Tween(this, 1, 0, duration);
+		}
 		
 	}
 }

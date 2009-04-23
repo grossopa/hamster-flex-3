@@ -1,6 +1,7 @@
 package org.hamster.effects
 {
 	import mx.effects.IEffectInstance;
+	import mx.effects.Move;
 	
 	import org.hamster.effects.effectInstance.SinMoveInstance;
 	

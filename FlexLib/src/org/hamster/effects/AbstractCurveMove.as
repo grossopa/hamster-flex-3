@@ -18,7 +18,8 @@ package org.hamster.effects
 		override public function getAffectedProperties():Array 
 		{  
 			return ["x", "y"];  
-		}  
+		}
+		
 		
 	}
 }
