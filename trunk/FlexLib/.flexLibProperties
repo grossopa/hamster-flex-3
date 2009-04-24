@@ -5,6 +5,7 @@
 <classEntry path="org.hamster.components.chrometab.unit.ChromeTabUnit"/>
 <classEntry path="org.hamster.effects.advancedviewstack.AdvDoorAVS"/>
 <classEntry path="org.hamster.networks.command.IDataFormatter"/>
+<classEntry path="org.hamster.effects.effectInstance.NikeMoveInstance"/>
 <classEntry path="org.hamster.log.LoggerModel"/>
 <classEntry path="org.hamster.components.chrometab.ChromeTab"/>
 <classEntry path="org.hamster.effects.SkewEffect"/>
@@ -25,6 +26,7 @@
 <classEntry path="org.hamster.components.ReflectionCanvas"/>
 <classEntry path="org.hamster.networks.command.AbstractCommand"/>
 <classEntry path="org.hamster.errors.TodoError"/>
+<classEntry path="org.hamster.effects.ArchimedesSpiralMove"/>
 <classEntry path="org.hamster.networks.command.ICommandResponder"/>
 <classEntry path="org.hamster.effects.SinMove"/>
 <classEntry path="org.hamster.networks.service.HTTPServiceLocator"/>
@@ -39,6 +41,7 @@
 <classEntry path="org.hamster.utils.GraphicsExtendUtil"/>
 <classEntry path="org.hamster.frameworks.undo.IUndoCommand"/>
 <classEntry path="org.hamster.effects.advancedviewstack.RotateScaleYAVS"/>
+<classEntry path="org.hamster.effects.effectInstance.ArchimedesSpiralMoveInstance"/>
 <classEntry path="org.hamster.components.chrometab.ITabExtraAction"/>
 <classEntry path="org.hamster.effects.effectInstance.EllipseMoveInstance"/>
 <classEntry path="org.hamster.log.LoggerPanel"/>
@@ -46,6 +49,7 @@
 <classEntry path="org.hamster.effects.advancedviewstack.SkewAVS"/>
 <classEntry path="org.hamster.effects.advancedviewstack.IrisAVS"/>
 <classEntry path="org.hamster.effects.effectInstance.SkewEffectInstance"/>
+<classEntry path="org.hamster.effects.NikeMove"/>
 <classEntry path="org.hamster.log.Logger"/>
 <classEntry path="org.hamster.effects.effectInstance.SinMoveInstance"/>
 <classEntry path="org.hamster.effects.effectInstance.AbstractCurveMoveInstance"/>

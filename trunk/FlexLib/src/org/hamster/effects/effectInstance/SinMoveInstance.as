@@ -35,6 +35,7 @@ package org.hamster.effects.effectInstance
 		
 		override public function onTweenUpdate(value:Object):void
 		{
+			super.onTweenUpdate(value);
 			// value is from 0 to 1
 			var val:Number = Number(value);
 			

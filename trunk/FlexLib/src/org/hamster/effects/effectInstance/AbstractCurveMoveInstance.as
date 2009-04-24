@@ -3,6 +3,7 @@ package org.hamster.effects.effectInstance
 	import mx.core.mx_internal;
 	import mx.effects.Tween;
 	import mx.effects.effectClasses.TweenEffectInstance;
+	import mx.events.TweenEvent;
 	
 	use namespace mx_internal;
 	
@@ -26,6 +27,11 @@ package org.hamster.effects.effectInstance
 			} else {
 				new Tween(this, 0, 1, duration);
 			}
+		}
+		
+		override public function onTweenUpdate(value:Object):void
+		{
+			this.dispatchEvent(new TweenEvent(TweenEvent.TWEEN_UPDATE));
 		}
 		
 	}
