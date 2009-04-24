@@ -2,6 +2,7 @@
 import flash.display.Graphics;
 import flash.events.Event;
 
+import mx.effects.easing.Exponential;
 import mx.effects.easing.Linear;
 import mx.events.EffectEvent;
 import mx.events.TweenEvent;
@@ -26,9 +27,8 @@ public function appComplete():void
 	g.beginFill(0xFF0000, 0.8);
 	g.drawCircle(moveTarget.width >> 1, moveTarget.height >> 1, moveTarget.width >> 1);
 	g.endFill();
-	
-	//LoggerPanel.getInstance().setLogMode(LoggerPanel.PANEL_MODE | LoggerPanel.HTML_MODE);
-	//logger = Logger.getLogger("CurveTest");
+	LoggerPanel.getInstance().setLogMode(LoggerPanel.HTML_MODE);
+	logger = Logger.getLogger("CurveTest");
 	sinMoveTest();
 }
 
@@ -38,13 +38,18 @@ public function onTweenUpdate(evt:Event):void
 	drawCanvas.graphics.drawCircle(moveTarget.x + moveTarget.width / 2, moveTarget.y + moveTarget.height / 2, 5);
 	drawCanvas.graphics.endFill();
 	
-	//logger.traceValue(moveTarget.x.toString() + " " + moveTarget.y.toString());
+	logger.traceValue(moveTarget.x.toFixed(3).toString() + "   " + moveTarget.y.toFixed(3).toString());
+}
+
+public static function easeNone(t:Number, b:Number,
+								  c:Number, d:Number):Number
+{
+	return c * t / d + b;
 }
 
 public function sinMoveTest():void
 {
 	curColor = 0xFF0000;
-	
 	var sinMove:SinMove = new SinMove(moveTarget);
 	sinMove.duration = DURATION;
 	sinMove.a = 100;
@@ -53,7 +58,7 @@ public function sinMoveTest():void
 	sinMove.d = 400;
 	sinMove.xFrom = 0;
 	sinMove.xTo = 800;
-	sinMove.easingFunction = Linear.easeNone;
+	sinMove.easingFunction = easeNone;
 	sinMove.addEventListener(TweenEvent.TWEEN_UPDATE, onTweenUpdate);
 	sinMove.play();
 	
@@ -71,7 +76,7 @@ public function circleMoveTest(evt:EffectEvent):void
 	circleMove.oX = this.width >> 1;
 	circleMove.oY = this.height >> 1;
 	circleMove.radius = 200;
-	circleMove.easingFunction = Linear.easeNone;
+	circleMove.easingFunction = easeNone;
 	circleMove.addEventListener(TweenEvent.TWEEN_UPDATE, onTweenUpdate);
 	circleMove.play();
 	
@@ -90,7 +95,7 @@ public function ellipseMoveTest(evt:EffectEvent):void
 	ellipseMove.oY = this.height >> 1;
 	ellipseMove.a = 200;
 	ellipseMove.b = 70;
-	ellipseMove.easingFunction = Linear.easeNone;
+	ellipseMove.easingFunction = easeNone;
 	ellipseMove.addEventListener(TweenEvent.TWEEN_UPDATE, onTweenUpdate);
 	ellipseMove.play();
 	
@@ -108,7 +113,7 @@ public function asMoveTest(evt:EffectEvent):void
 	asMove.oX = this.width >> 1;
 	asMove.oY = this.height >> 1;
 	asMove.a = 20;
-	asMove.easingFunction = Linear.easeNone;
+	asMove.easingFunction = easeNone;
 	asMove.addEventListener(TweenEvent.TWEEN_UPDATE, onTweenUpdate);
 	asMove.play();
 	
@@ -127,7 +132,7 @@ public function nikeMoveTest(evt:EffectEvent):void
 	nikeMove.oY = 1000;
 	nikeMove.a = -1;
 	nikeMove.b = -90000;
-	nikeMove.easingFunction = Linear.easeNone;
+	nikeMove.easingFunction = easeNone;
 	nikeMove.addEventListener(TweenEvent.TWEEN_UPDATE, onTweenUpdate);
 	nikeMove.play();
 }
