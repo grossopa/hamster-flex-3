@@ -22,16 +22,16 @@ private function appComplete():void
 	googleCmd.execute();
 }
 
-public function commandResult(cmd:ICommand):void
+public function commandResult(cmd:ICommand, formattedData:*):void
 {
 	if (cmd is GetGoogleCmd) {
-		Alert.show("google");
+		Alert.show(int(formattedData).toString());
 	} else if (cmd is GetBaiduCmd) {
-		Alert.show("baidu");
+		Alert.show(int(formattedData).toString());
 	}
 }
 
-public function commandFault(cmd:ICommand):void
+public function commandFault(cmd:ICommand, formattedData:*):void
 {
 	
 }
