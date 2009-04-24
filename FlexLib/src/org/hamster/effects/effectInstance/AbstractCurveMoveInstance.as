@@ -18,11 +18,6 @@ package org.hamster.effects.effectInstance
 			super(target);
 		}
 		
-		override public function set target(value:Object):void
-		{
-			super.target = value;
-		}
-		
 		override public function play():void
 		{
 			super.play();

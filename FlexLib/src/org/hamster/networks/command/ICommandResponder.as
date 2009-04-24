@@ -7,7 +7,24 @@ package org.hamster.networks.command
 	 
 	public interface ICommandResponder
 	{
-		function commandResult(cmd:ICommand):void;
-		function commandFault(cmd:ICommand):void;
+		/**
+		 * formattedData can be any type, such as int, string, custom Model
+		 * Object.
+		 * 
+		 * @param cmd
+		 * @param formattedData  
+		 * 
+		 */
+		function commandResult(cmd:ICommand, formattedData:*):void;
+		
+		/**
+		 * formattedData can be any type, such as int, string, custom Model
+		 * Object.
+		 * 
+		 * @param cmd
+		 * @param formattedData  
+		 * 
+		 */
+		function commandFault(cmd:ICommand, formattedData:*):void;
 	}
 }

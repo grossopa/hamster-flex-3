@@ -1,7 +1,6 @@
 package org.hamster.frameworks.services
 {
 	import flash.events.EventDispatcher;
-	import flash.events.IEventDispatcher;
 	
 	/**
 	 * @author jack yin grossopforever@gmail.com
@@ -15,5 +14,6 @@ package org.hamster.frameworks.services
 		{
 			return _instance;
 		}
+		
 	}
 }
