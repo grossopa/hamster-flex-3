@@ -97,9 +97,12 @@ package org.hamster.log
 			var sec:int = date.getSeconds();
 			var minStr:String = min < 10 ? "0" + min.toString() : min.toString();
 			var secStr:String = sec < 10 ? "0" + sec.toString() : sec.toString();
+			var milStr:String = date.getMilliseconds().toString();
+			if(milStr.length == 1) milStr = "00" + milStr;
+			if(milStr.length == 2) milStr = "0" + milStr;
 			result.time	= date.getHours().toString() + ":" 
 					+ minStr + ":" + secStr + "."
-					+ date.getMilliseconds().toString(); 
+					+ milStr; 
 			result.level = level;
 			result.className = this._className;
 			if (func != null && func.length != 0) {

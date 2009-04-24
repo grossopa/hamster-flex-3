@@ -144,19 +144,24 @@ public function addLog(logger:Logger,
 			break;
 	}
 	loggerModel.color = color;
-	if(levelValue < levelHSlider.value) return;
+	if(levelHSlider != null 
+			&& levelValue < levelHSlider.value) return;
 	
 	var resultString:String = loggerModel.toFormatString();
-	mainTextArea.htmlText += "<font color=\"" + color + "\">"
-			+ resultString + "</font><br />";
+	if(mainTextArea != null) {
+		mainTextArea.htmlText += "<font color=\"" + color + "\">"
+				+ resultString + "</font><br />";
+	}
 	
 	if(this.enabledTraceMode) trace(resultString);
 	if(this.enabledHTMLMode) {
 		ExternalInterface.call("addLogToTextArea", resultString + "\\n");
 	}
 	logDatas.addItem(loggerModel);
-	mainTextArea.verticalScrollPosition 
-			= mainTextArea.maxVerticalScrollPosition + 1;
+	if(mainTextArea != null) {
+		mainTextArea.verticalScrollPosition 
+				= mainTextArea.maxVerticalScrollPosition + 1;
+	}
 }
 
 private function clearHandler():void
