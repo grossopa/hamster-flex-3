@@ -19,6 +19,7 @@ Contains all extended Flex effects.
 
   * *Advanced View Stack Effects*
   * *Skew Effect*
+  * *Curve Move Effects*
 
 = errors =
 
@@ -44,6 +45,7 @@ Contains tools for logger.
 Contains frameworks for network.
 
   * *Command - Service Model*
+  * *HTTP Service Locator*
 
 = preloaders =
 
