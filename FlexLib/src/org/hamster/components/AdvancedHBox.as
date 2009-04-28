@@ -1,8 +1,8 @@
 package org.hamster.components
 {
-	import mx.containers.Canvas;
+	import mx.containers.HBox;
 
-	public class AdvancedHBox extends Canvas
+	public class AdvancedHBox extends HBox
 	{
 		public function AdvancedHBox()
 		{
