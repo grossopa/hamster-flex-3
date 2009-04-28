@@ -3,10 +3,10 @@ package org.hamster.components
 	import flash.display.DisplayObject;
 	import flash.geom.Matrix;
 	
-	import org.hamster.utils.ImageUtil;
-	
 	import mx.containers.Canvas;
 	import mx.controls.Image;
+	
+	import org.hamster.utils.ImageUtil;
 	
 	/**
 	 * @author jack yin grossopforever@gmail.com
@@ -20,9 +20,14 @@ package org.hamster.components
 		private var disObj:DisplayObject;
 		public var gap:uint = 5;
 		
-		public function setMainDisObj(disObj:DisplayObject):void
+		public function set mainDisObj(disObj:DisplayObject):void
 		{
 			this.disObj = disObj;
+		}
+		
+		public function get mainDisObj():DisplayObject
+		{
+			return this.disObj;
 		}
 		
 		public function ReflectionCanvas()

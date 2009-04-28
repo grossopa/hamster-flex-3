@@ -1,6 +1,7 @@
 package org.hamster.effects.advancedviewstack.base
 {
 	import org.hamster.components.AdvancedViewStack;
+	import org.hamster.errors.ExtendError;
 	
 	/**
 	 * @author jack yin grossopforever@gmail.com
@@ -37,8 +38,13 @@ package org.hamster.effects.advancedviewstack.base
 			return this._isQueue;
 		}
 		
+		
+		/**
+		 * This is an abstract function.
+		 */
 		public function get type():String
 		{
+			throw new ExtendError(ExtendError.ABSTRACT);
 			return "";
 		}
 		
@@ -50,12 +56,24 @@ package org.hamster.effects.advancedviewstack.base
 			return advViewStack.direction == AdvancedViewStack.TURN_LEFT;
 		}
 		
+		/**
+		 * This is an abstract function but implements it is optional.
+		 * 
+		 * @param imgs1
+		 * @param imgs2
+		 * 
+		 */
 		public function advInitFunction(imgs1:Array, imgs2:Array):void
 		{
+			// throw new ExtendError(ExtendError.ABSTRACT);
 		}
 		
+		/**
+		 * This is an abstract function.
+		 */
 		public function initAnimation():void
 		{
+			throw new ExtendError(ExtendError.ABSTRACT);
 		}
 
 	}

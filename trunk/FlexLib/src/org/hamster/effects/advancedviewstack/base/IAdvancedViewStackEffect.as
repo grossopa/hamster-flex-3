@@ -34,7 +34,7 @@ package org.hamster.effects.advancedviewstack.base
 		/**
 		 * This function will only be called inside AdvancedViewStack.
 		 * The imgs1 will contain a image shot of ViewStack origin child.
-		 * The imgs2 will contain a image shot of ViewStack origin child.
+		 * The imgs2 will contain a image shot of ViewStack next child.
 		 * if you want do do some extra work (such as split the images to
 		 * blocks and move them to different location), you can reference
 		 * org.hamster.effects.advancedviewstack.AdvSplit9AVS.
