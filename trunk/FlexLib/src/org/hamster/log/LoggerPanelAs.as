@@ -27,6 +27,8 @@ private const WARNING_COLOR:String = "#AF972B";
 private const ERROR_COLOR:String = "#F6872D";
 private const FATAL_COLOR:String = "#FF0000";
 
+[Bindable] public var levelValue:int = 0;
+
 private static var instance:LoggerPanel = new LoggerPanel();
 private var _enableLog:Boolean;
 
@@ -115,40 +117,39 @@ public function addLog(logger:Logger,
 		loggerModel:LoggerModel, level:String):void
 {
 	var color:String;
-	var levelValue:int = 7;
+	var curLevelValue:int = 7;
 	
 	switch(level) {
 		case Logger.TRACE:
 			color = TRACE_COLOR;
-			levelValue = 1;
+			curLevelValue = 1;
 			break;
 		case Logger.DEBUG:
 			color = DEBUG_COLOR;
-			levelValue = 2;
+			curLevelValue = 2;
 			break;
 		case Logger.INFO:
 			color = INFO_COLOR;
-			levelValue = 3;
+			curLevelValue = 3;
 			break;
 		case Logger.WARN:
 			color = WARNING_COLOR;
-			levelValue = 4;
+			curLevelValue = 4;
 			break;
 		case Logger.ERROR:
 			color = ERROR_COLOR;
-			levelValue = 5;
+			curLevelValue = 5;
 			break;
 		case Logger.FATAL:
 			color = FATAL_COLOR;
-			levelValue = 6;
+			curLevelValue = 6;
 			break;
 	}
 	loggerModel.color = color;
-	if(levelHSlider != null 
-			&& levelValue < levelHSlider.value) return;
+	if(curLevelValue < levelValue) return;
 	
 	var resultString:String = loggerModel.toFormatString();
-	if(mainTextArea != null) {
+	if(this.enabledPanelMode) {
 		mainTextArea.htmlText += "<font color=\"" + color + "\">"
 				+ resultString + "</font><br />";
 	}
@@ -158,7 +159,7 @@ public function addLog(logger:Logger,
 		ExternalInterface.call("addLogToTextArea", resultString + "\\n");
 	}
 	logDatas.addItem(loggerModel);
-	if(mainTextArea != null) {
+	if(this.enabledPanelMode) {
 		mainTextArea.verticalScrollPosition 
 				= mainTextArea.maxVerticalScrollPosition + 1;
 	}
@@ -196,7 +197,8 @@ private function changeHeightHandler():void
 
 private function changeLevelHandler(val:Number):String
 {
-	switch(int(val)) {
+	levelValue = int(val);
+	switch(levelValue) {
 		case 1:
 			return "ALL";
 		case 2:
