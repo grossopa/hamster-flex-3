@@ -27,7 +27,8 @@ public function appComplete():void
 	g.beginFill(0xFF0000, 0.8);
 	g.drawCircle(moveTarget.width >> 1, moveTarget.height >> 1, moveTarget.width >> 1);
 	g.endFill();
-	LoggerPanel.getInstance().setLogMode(LoggerPanel.HTML_MODE);
+	LoggerPanel.getInstance().setLogMode(LoggerPanel.HTML_MODE | LoggerPanel.PANEL_MODE);
+	LoggerPanel.getInstance().levelValue = 3;
 	logger = Logger.getLogger("CurveTest");
 	sinMoveTest();
 }
