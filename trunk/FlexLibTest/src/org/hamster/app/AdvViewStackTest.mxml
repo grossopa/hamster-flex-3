@@ -29,5 +29,5 @@
 			</mx:ViewStack>			
 		</components:viewStack>
 	</components:AdvancedViewStack>
-	<components:ReflectionCanvas id="refCanvas" width="300" height="400" />
+	<components:ReflectionHList id="refHList" width="100%" height="200" />
 </mx:Application>
