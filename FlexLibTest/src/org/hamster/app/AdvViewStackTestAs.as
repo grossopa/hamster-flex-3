@@ -1,6 +1,7 @@
 
 import flash.events.Event;
 
+import org.hamster.components.graphics.SelectedArrow;
 import org.hamster.effects.advancedviewstack.Adv9AVS;
 import org.hamster.effects.advancedviewstack.AdvDoorAVS;
 import org.hamster.effects.advancedviewstack.AdvSplit9AVS;
@@ -24,20 +25,28 @@ private function completeHandler():void
 			,"AdvDoorAVS", "Adv9AVS"];
 	comboBox.selectedIndex = 2;
 	avs.duration = 1000;
+	//for (var i:int = 0; i < viewStack.getChildren().length; i++) {
+	refHList.reflectionGap = 4;
+		refHList.addChild(viewStack.getChildAt(0));
+	//}
+	
+	var selected:SelectedArrow = new SelectedArrow();
+	selected.width = 20;
+	selected.height = 20;
+	this.addChild(selected);
+	
 }
 
 private function goPageLeft():void
 {
 	avs.goPage(avs.viewStack.selectedIndex - 1);
-	refCanvas.setMainDisObj(avs.viewStack.selectedChild);
-	refCanvas.paintReflection();
+	refHList.addChild(viewStack.getChildAt(avs.viewStack.selectedIndex));
 }
 
 private function goPageRight():void
 {
 	avs.goPage(avs.viewStack.selectedIndex + 1);
-	refCanvas.setMainDisObj(avs.viewStack.selectedChild);
-	refCanvas.paintReflection();
+	refHList.addChild(viewStack.getChildAt(avs.viewStack.selectedIndex));
 }
 
 private function selectHandler(event:Event):void
