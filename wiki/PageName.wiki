@@ -3,5 +3,4 @@
 
 = Sample Applications =
 || *Name* || *Update date* || *address* ||
-|| advViewStack || 29 April 2009 ||<a href="https://hamster-flex-3.googlecode.com/svn/">Try Sample</a>||
-
+|| advViewStack || 29 April 2009 ||<a href="https://hamster-flex-3.googlecode.com/svn/sample/AdvViewStackTest.html">Try Sample</a>||
