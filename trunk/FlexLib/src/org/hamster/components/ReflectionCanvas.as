@@ -51,8 +51,8 @@ package org.hamster.components
 		
 		public function paintReflection():void
 		{
-			mainImage.width = this.width;
-			mainImage.height = disObj.height / disObj.width * this.width;
+			mainImage.height = (this.height - gap) / 2;
+			mainImage.width = disObj.width / disObj.height * mainImage.height;
 			reflection.width = mainImage.width;
 			reflection.height = mainImage.height;
 			reflection.y = mainImage.height + gap;
