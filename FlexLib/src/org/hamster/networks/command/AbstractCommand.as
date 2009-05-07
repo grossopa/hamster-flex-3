@@ -8,6 +8,8 @@ package org.hamster.networks.command
 		
 	/**
 	 * @author jack yin grossopforever@gmail.com
+	 * 
+	 * 
 	 */
 	 
 	public class AbstractCommand implements ICommand, IResponder

@@ -5,7 +5,7 @@ package org.hamster.components
 	import flash.filters.GlowFilter;
 	
 	import mx.containers.Canvas;
-	import mx.events.ListEvent;
+	import mx.controls.Button;
 	
 	/**
 	 * not available yet.
@@ -26,6 +26,7 @@ package org.hamster.components
 		
 		// functionality definition
 		private var _selectable:Boolean;
+	//	private var _usePagination:Boolean;
 		
 		public function set selectable(value:Boolean):void
 		{
@@ -47,6 +48,21 @@ package org.hamster.components
 		{
 			return this._selectable;
 		}
+		
+//		public function set usePagination(value:Boolean):void
+//		{
+//			this._usePagination = value;
+//			if(_usePagination) {
+//				
+//			} else {
+//				
+//			}
+//		}
+		
+//		public function get usePagination():Boolean
+//		{
+//			return this._usePagination;
+//		}
 		
 		public function ReflectionHList()
 		{
