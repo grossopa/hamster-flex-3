@@ -5,6 +5,8 @@ package org.hamster.networks.command
 	
 	/**
 	 * @author jack yin grossopforever@gmail.com
+	 * 
+	 * This class serves for AbstractCommand
 	 */
 	public interface IDataFormatter
 	{
@@ -12,6 +14,7 @@ package org.hamster.networks.command
 		 * format result data.
 		 * 
 		 * @param result
+		 * @return formattedData
 		 */
 		function formatResult(result:ResultEvent):*;
 		
@@ -19,6 +22,7 @@ package org.hamster.networks.command
 		 * format fault data.
 		 * 
 		 * @param fault
+		 * @return formattedData
 		 */
 		function formatFault(fault:FaultEvent):*;
 	}
