@@ -9,12 +9,29 @@ package org.hamster.networks.command
 	/**
 	 * @author jack yin grossopforever@gmail.com
 	 * 
+	 * You can define your own service command by extends this class.
+	 * 
+	 * This class supports the HTTPRequest, this class is an IResponder so that
+	 * you can override execute function like:
+	 * 
+	 * override public function execute():void
+	 * {
+	 * 		HTTPServiceLocator.getInstance().sendService("getContent", this);
+	 * }
 	 * 
 	 */
 	 
 	public class AbstractCommand implements ICommand, IResponder
 	{
+		
+		/**
+		 * The final commandResponder, usually is a controller object.
+		 */
 		public var commandResponder:ICommandResponder;
+		
+		/**
+		 * Interface to format data.
+		 */
 		public var dataFormatter:IDataFormatter;
 		
 		public function AbstractCommand()
@@ -22,11 +39,17 @@ package org.hamster.networks.command
 			
 		}
 		
+		/**
+		 * Abstrct function.
+		 */
 		public function execute():void
 		{
 			throw new ExtendError(ExtendError.ABSTRACT);
 		}
 		
+		/**
+		 * IResponder.result
+		 */
 		public function result(data:Object):void
 		{
 			var formattedData:*;
@@ -38,6 +61,9 @@ package org.hamster.networks.command
 			}
 		}
 		
+		/**
+		 * IResponder.fault
+		 */
 		public function fault(info:Object):void
 		{
 			var formattedData:*;
