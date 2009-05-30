@@ -5,8 +5,6 @@ package org.hamster.components.chrometab
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
-	import org.hamster.components.chrometab.unit.ChromeTabUnit;
-	
 	import mx.collections.ArrayCollection;
 	import mx.containers.Canvas;
 	import mx.containers.ViewStack;
@@ -14,6 +12,9 @@ package org.hamster.components.chrometab
 	import mx.core.Application;
 	import mx.effects.Move;
 	import mx.events.FlexEvent;
+	
+	import org.hamster.components.chrometab.events.ChromeTabEvent;
+	import org.hamster.components.chrometab.unit.ChromeTabUnit;
 	
 	/**
 	 * @author jack yin grossopforever@gmail.com
@@ -185,11 +186,14 @@ package org.hamster.components.chrometab
 			tabUnit.addEventListener(MouseEvent.MOUSE_DOWN, tabMouseDownHandler);
 			tabArrCol.addItem(tabUnit);
 			setTabText(i, nameString);
-			addChildAt(tabUnit, tabArrCol.length - 1);		
+			addChildAt(tabUnit, tabArrCol.length - 1);
+			
+			// dispatch tab added event
+			this.dispatchEvent(new ChromeTabEvent(ChromeTabEvent.TAB_ADDED));
 		}
 		
 		/**
-		 * move tab by tab's current index.
+		 * start to move tab by tab's current index.
 		 */
 		private function moveTab(tabUnit:ChromeTabUnit):void
 		{
@@ -209,6 +213,12 @@ package org.hamster.components.chrometab
 			var curTab:ChromeTabUnit = ChromeTabUnit(evt.currentTarget);
 			selectTab(curTab.contentIndex);
 			mouseDownX = evt.localX + this.localToGlobal(new Point(x,0)).x;
+			
+			// dispatch event
+			var chromeTabEvt:ChromeTabEvent 
+					= new ChromeTabEvent(ChromeTabEvent.TAB_SELECTED);
+			chromeTabEvt.selectdTab = curTab;
+			this.dispatchEvent(chromeTabEvt);
 		}
 		
 		/**
@@ -223,12 +233,14 @@ package org.hamster.components.chrometab
 			var curX:Number = evt.stageX - mouseDownX;
 			dragObject.x = curX <= 0 ? 0 : curX;
 			var index:int = dragObject.index;
-			if(curX >= (index + 0.5)* TAB_GAP && index + 1 < tabArrCol.length) {
+
+			if (curX >= (index + 0.5)* TAB_GAP 
+					&& index + 1 < tabArrCol.length) {
 				var tempTab:ChromeTabUnit = getTabByIndex(index + 1);
 				tempTab.index--;
 				moveTab(tempTab);
 				dragObject.index++;
-			} else if(curX <= (index - 0.5) * TAB_GAP && index - 1 >= 0) {
+			} else if (curX <= (index - 0.5) * TAB_GAP && index - 1 >= 0) {
 				tempTab = getTabByIndex(index - 1);
 				tempTab.index++;
 				moveTab(tempTab);
@@ -240,6 +252,13 @@ package org.hamster.components.chrometab
 		{
 			if(dragObject == null) return;
 			moveTab(dragObject);
+			
+			// dispatch event
+			var chromeTabEvt:ChromeTabEvent
+					= new ChromeTabEvent(ChromeTabEvent.TAB_END_DRAG);
+			chromeTabEvt.selectdTab = dragObject;
+			this.dispatchEvent(chromeTabEvt);
+			
 			dragObject = null;
 		}
 		
