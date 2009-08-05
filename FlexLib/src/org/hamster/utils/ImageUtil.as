@@ -18,10 +18,20 @@ package org.hamster.utils
 	 	
 	public class ImageUtil
 	{
-		public static function toImage(displayObject:DisplayObject):Image
+		/**
+		 * if transparent is true, then the background color of 
+		 * the displayObject is transparent.
+		 */
+		public static function toImage(displayObject:DisplayObject, 
+				transparent:Boolean = false):Image
 		{
-			var bd:BitmapData = new BitmapData(
-					displayObject.width, displayObject.height);
+			var bd:BitmapData;
+			if (transparent) {
+				bd = new BitmapData(
+					displayObject.width, displayObject.height, true, 0x00);
+			} else {
+				bd = new BitmapData(displayObject.width, displayObject.height);
+			}
 			bd.draw(displayObject);
 			var bm:Bitmap = new Bitmap(bd);
 			var im:Image = new Image();
@@ -30,6 +40,7 @@ package org.hamster.utils
 			im.source = bm;
 			return im;
 		}
+
 		
 		public static function splitImage(
 				image:Image, rect:Rectangle, destPoint:Point):Image
