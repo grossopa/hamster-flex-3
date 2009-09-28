@@ -83,8 +83,8 @@ package org.hamster.components
 		public function set viewStack(arg:ViewStack):void
 		{
 			this._viewStack = arg;
-			this.width = _viewStack.width;
-			this.height = _viewStack.height;
+		//	this.width = _viewStack.width;
+		//	this.height = _viewStack.height;
 			if(!this.contains(_viewStack)) {
 				this.removeAllChildren();
 				this.addChildAt(_backgroundRenderer, 0);
