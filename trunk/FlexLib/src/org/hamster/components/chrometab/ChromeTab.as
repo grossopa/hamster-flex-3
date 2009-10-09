@@ -1,6 +1,7 @@
 package org.hamster.components.chrometab
 {
 	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -133,7 +134,14 @@ package org.hamster.components.chrometab
 			_viewStack = arg;
 			if(arg != null && arg.numChildren > 0) {
 				for(var i:int = 0; i < _viewStack.numChildren; i++) {
-					newTab(i, _viewStack.getChildAt(i).name);
+					var disObj:DisplayObject = _viewStack.getChildAt(i);
+					var txt:String;
+					if (disObj.hasOwnProperty("label")) {
+						txt = disObj["label"];
+					} else {
+						txt = disObj.name;
+					}
+					newTab(i, txt);
 				}
 			}
 			addChildAt(newTabButton, 0);
