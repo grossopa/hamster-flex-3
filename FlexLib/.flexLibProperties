@@ -2,7 +2,9 @@
 <flexLibProperties version="1">
   <includeClasses>
     <classEntry path="org.hamster.commands.AbstractCommand"/>
+    <classEntry path="org.hamster.commands.AbstractCommandWrapper"/>
     <classEntry path="org.hamster.commands.ICommand"/>
+    <classEntry path="org.hamster.commands.ICommandWrapper"/>
     <classEntry path="org.hamster.commands.events.CommandEvent"/>
     <classEntry path="org.hamster.commands.impl.CommandQueue"/>
     <classEntry path="org.hamster.components.AdvancedHBox"/>
@@ -52,6 +54,7 @@
     <classEntry path="org.hamster.log.Logger"/>
     <classEntry path="org.hamster.log.LoggerModel"/>
     <classEntry path="org.hamster.log.LoggerPanel"/>
+    <classEntry path="org.hamster.networks.service.HTTPServiceLocator"/>
     <classEntry path="org.hamster.preloaders.LinePreloader"/>
     <classEntry path="org.hamster.utils.GraphicsExtendUtil"/>
     <classEntry path="org.hamster.utils.ImageUtil"/>

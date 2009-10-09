@@ -2,15 +2,13 @@ package org.hamster.commands.impl
 {
 	import flash.events.Event;
 	
-	import org.hamster.commands.AbstractCommand;
+	import org.hamster.commands.AbstractCommandWrapper;
 	import org.hamster.commands.ICommand;
+	import org.hamster.commands.ICommandWrapper;
 	import org.hamster.commands.events.CommandEvent;
 	
-	public class CommandQueue extends AbstractCommand implements ICommand
+	public class CommandQueue extends AbstractCommandWrapper implements ICommand
 	{
-		private var nextIndex:int;
-		
-		public var cmdArray:Array;
 		public var failedThenQuit:Boolean;
 		
 		public function CommandQueue(cmdArray:Array, failedThenQuit:Boolean = false)
@@ -33,6 +31,7 @@ package org.hamster.commands.impl
 		private function executeNext(cmd:ICommand):void
 		{
 			addListener(cmd);
+			cmd.cmdWrapper = this;
 			cmd.execute();
 		}
 		
@@ -42,7 +41,7 @@ package org.hamster.commands.impl
 			removeListener(cmd);
 			nextIndex++;	
 			if (cmdArray.length == nextIndex) {
-				this.result();
+				this.result(null);
 			} else {
 				this.executeNext(ICommand(cmdArray[nextIndex]));
 			}
@@ -54,9 +53,9 @@ package org.hamster.commands.impl
 			removeListener(cmd);
 			nextIndex++;	
 			if (this.failedThenQuit) {
-				this.fault();
+				this.fault(null);
 			} else if (cmdArray.length == nextIndex) {
-				this.result();
+				this.result(null);
 			} else {
 				this.executeNext(ICommand(cmdArray[nextIndex]));
 			} 

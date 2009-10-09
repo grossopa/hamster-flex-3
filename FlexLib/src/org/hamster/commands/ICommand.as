@@ -3,10 +3,12 @@ package org.hamster.commands
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
 	
-	public interface ICommand extends IEventDispatcher
+	import mx.rpc.IResponder;
+	
+	public interface ICommand extends IEventDispatcher, IResponder
 	{
 		function execute():void;
-		function result(evt:Event = null):void;
-		function fault(evt:Event = null):void;
+		function set cmdWrapper(value:ICommandWrapper):void;
+		function get cmdWrapper():ICommandWrapper;
 	}
 }
