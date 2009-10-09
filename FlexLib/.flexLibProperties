@@ -55,7 +55,6 @@
     <classEntry path="org.hamster.log.LoggerModel"/>
     <classEntry path="org.hamster.log.LoggerPanel"/>
     <classEntry path="org.hamster.networks.service.HTTPServiceLocator"/>
-    <classEntry path="org.hamster.preloaders.LinePreloader"/>
     <classEntry path="org.hamster.utils.GraphicsExtendUtil"/>
     <classEntry path="org.hamster.utils.ImageUtil"/>
     <classEntry path="org.hamster.utils.MathExtendUtil"/>
