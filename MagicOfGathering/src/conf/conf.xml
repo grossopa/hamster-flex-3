@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configure>
+	<database>
+		<path>resource/magic.db</path>
+		<password>MagicOfGathering0-0-1</password>
+	</database>
+	<locales>
+		<locale>zh_CN</locale>
+		<locale>en_US</locale>
+	</locales>
+</configure>
