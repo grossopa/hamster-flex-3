@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" 
+	xmlns:containers="noorg.controls.management.containers.*" minWidth="800" minHeight="600"
+	applicationComplete="completeHandler()"
+	backgroundColor="black" xmlns:common="noorg.controls.common.*" 
+	xmlns:containersAlbum="noorg.controls.album.containers.*" 
+	xmlns:navigators="noorg.controls.album.navigators.*">
+	
+	<mx:Script source="FlyAs.as" />
+	
+	<mx:Style source="noorg/css/main.css" />
+	
+	<navigators:AlbumEditPage id="albumEditPage" width="100%" height="100%" styleName="bigContainer" />
+	<common:HTabList id="tabList" bindViewStack="{managementViewStack}" width="100%" height="20" 
+		tabRenderer="noorg.controls.renderer.TabRenderer" />
+	<mx:ViewStack id="managementViewStack" width="100%" height="220" bottom="0" styleName="bigContainer">
+		<containers:SelFileContainer id="mainSelFileContainer" label="Management" width="100%" height="100%" />
+	</mx:ViewStack>
+	
+</mx:WindowedApplication>

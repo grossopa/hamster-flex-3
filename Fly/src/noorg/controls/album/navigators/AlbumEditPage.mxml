@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+	creationComplete="completeHandler()" 
+	rollOver="rollOverHandler()" rollOut="rollOutHandler()"
+	xmlns:containers="noorg.controls.album.containers.*" 
+	xmlns:containers1="noorg.controls.management.containers.*">
+	
+	<mx:Script source="AlbumEditPageAs.as" />
+	
+	<containers:PageUnitContainerWrapper id="mainContainer" width="100%" height="100%" x="250" y="30" />
+	
+	<mx:HBox id="menubar" styleName="bigContainer" borderSides="bottom" width="100%" height="30"
+		verticalAlign="middle" horizontalAlign="left" paddingLeft="5" paddingRight="10">
+		<mx:Button id="newPageBtn" label="Add Page" click="addPageHandler()" />
+	</mx:HBox>
+	
+	<mx:Canvas id="leftMenu" width="250" height="100%" 
+		verticalScrollPolicy="off" horizontalScrollPolicy="off">
+		<mx:Accordion x="0" y="30" height="100%" width="250" creationPolicy="all">
+			<containers1:SelBgImgContainer label="Background" id="selBgImgContainer" width="100%" height="100%" />
+			<containers1:SelImgPosContainer label="Page Style" id="selImgPosContainer" width="100%" height="100%" />
+		</mx:Accordion>
+	</mx:Canvas>
+
+</mx:Canvas>

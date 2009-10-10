@@ -1,0 +1,16 @@
+/* CSS file */
+.bigContainer {
+	borderColor		: #FFFFFF;
+	borderStyle 	: solid;
+	borderThickness : 1;
+}
+
+.pageUnitSelected {
+	borderStyle		: solid;
+	borderThickness : 2;
+	borderColor		: #FF981F;
+}
+
+.pageUnitUnselected {
+	borderStyle		: none;
+}

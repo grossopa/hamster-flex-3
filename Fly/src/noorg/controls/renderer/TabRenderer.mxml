@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CanvasButton xmlns="flexlib.controls.*" xmlns:mx="http://www.adobe.com/2006/mxml"
+	implements="mx.core.IFactory" buttonMode="true" mouseChildren="false"
+	creationComplete="completeHandler()">
+	<mx:Script source="TabRendererAs.as" />
+	<mx:Canvas id="mainCanvas" width="100%" height="100%" backgroundColor="{_bgColor}" 
+		verticalScrollPolicy="off" horizontalScrollPolicy="off" 
+		borderColor="white" borderStyle="solid">
+		<mx:Label id="mainLabel" text="{_labelText}" width="100%" height="100%"
+			color="{_labelColor}" verticalCenter="0" horizontalCenter="0" />
+	</mx:Canvas>
+</CanvasButton>

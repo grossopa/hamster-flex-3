@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="completeHandler()" xmlns:containers="noorg.controls.album.containers.*">
+	<mx:Script source="SelImgPosContainerAs.as" />
+	
+	<containers:PageUnitContainer id="mainContainer" width="100%" height="100%" 
+		paddingLeft="10" paddingTop="10" paddingRight="10" paddingBottom="10" />
+</mx:Canvas>
