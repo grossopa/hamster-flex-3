@@ -1,11 +1,11 @@
 package org.hamster.components.chrometab
 {
 	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
+	import mx.binding.utils.BindingUtils;
 	import mx.collections.ArrayCollection;
 	import mx.containers.Canvas;
 	import mx.containers.ViewStack;
@@ -135,13 +135,7 @@ package org.hamster.components.chrometab
 			if(arg != null && arg.numChildren > 0) {
 				for(var i:int = 0; i < _viewStack.numChildren; i++) {
 					var disObj:DisplayObject = _viewStack.getChildAt(i);
-					var txt:String;
-					if (disObj.hasOwnProperty("label")) {
-						txt = disObj["label"];
-					} else {
-						txt = disObj.name;
-					}
-					newTab(i, txt);
+					newTab(i, disObj);
 				}
 			}
 			addChildAt(newTabButton, 0);
@@ -161,7 +155,7 @@ package org.hamster.components.chrometab
 		 */
 		final public function setTabText(contentIndex:int, text:String):void
 		{
-			ChromeTabUnit(tabArrCol[contentIndex]).labelText = text;
+			ChromeTabUnit(tabArrCol[contentIndex]).label = text;
 		}
 		
 		/**
@@ -169,7 +163,7 @@ package org.hamster.components.chrometab
 		 */
 		final public function getTabText(contentIndex:int):String
 		{
-			return ChromeTabUnit(tabArrCol[contentIndex]).labelText;
+			return ChromeTabUnit(tabArrCol[contentIndex]).label;
 		}
 		
 		/**
@@ -184,20 +178,31 @@ package org.hamster.components.chrometab
 		/**
 		 * ChromeTabUnit factory method.
 		 */
-		private function newTab(i:int, nameString:String):void
+		private function newTab(i:int, disObj:DisplayObject, text:String = null):ChromeTabUnit
 		{
 			var tabUnit:ChromeTabUnit = new ChromeTabUnit(this);
+			if (disObj != null) {
+				if (disObj.hasOwnProperty("label")) {
+					BindingUtils.bindProperty(tabUnit, "label", disObj, ["label"]);
+				} else {
+					BindingUtils.bindProperty(tabUnit, "label", disObj, ["name"]);
+				}
+			} else {
+				tabUnit.label = text;
+			}
+			
 			tabUnit.index = i;
 			tabUnit.contentIndex = i;
 			tabUnit.x = TAB_GAP * i;
 			tabUnit.closeBtnVisible = this._canCloseTab;
 			tabUnit.addEventListener(MouseEvent.MOUSE_DOWN, tabMouseDownHandler);
 			tabArrCol.addItem(tabUnit);
-			setTabText(i, nameString);
 			addChildAt(tabUnit, tabArrCol.length - 1);
 			
 			// dispatch tab added event
 			this.dispatchEvent(new ChromeTabEvent(ChromeTabEvent.TAB_ADDED));
+			
+			return tabUnit;
 		}
 		
 		/**
@@ -346,19 +351,19 @@ package org.hamster.components.chrometab
 			addTab(newTabName + " " + (++newTabIndex).toString());
 		}
 		
-		public function addTab(text:String):void
+		public function addTab(text:String = null):void
 		{
 			var i:int = tabArrCol.length;
 			if(iTabExtraAction != null && !iTabExtraAction.beforeAddTab(i)) {
 				return;
 			}
+			var child:DisplayObject;
 			
-			newTab(i, text);
 			if(_viewStack != null && iTabExtraAction != null) {
-				var child:DisplayObject = iTabExtraAction.createViewStackChild();
+				child = iTabExtraAction.createViewStackChild();
 				if(child != null) _viewStack.addChild(child);
 			}
-			
+			newTab(i, child, text);
 			refreshNewTabBtn();
 		}
 		
