@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="300" verticalAlign="middle" 
+	horizontalAlign="center">
+
+	<mx:ProgressBar id="psBar" horizontalCenter="0" width="350" indeterminate="true" trackHeight="20" 
+		labelPlacement="center" label="{text}" visible="true" color="#FFFFFF"/>
+
+	<mx:Script>
+		<![CDATA[
+			[Bindable] public var text:String = ''
+		]]>
+	</mx:Script>	
+</mx:HBox>

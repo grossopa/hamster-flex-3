@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" minWidth="800" minHeight="600" width="1024" height="768" backgroundColor="white"
+ 	initialize="init()" applicationComplete="appCompleteHandler()" xmlns:controls="noorg.magic.controls.*" xmlns:ns1="org.hamster.components.chrometab.*">
+	<mx:Script source="MagicOfGatheringAs.as" />
+	
+	<mx:Metadata>
+		[ResourceBundle("main")]
+	</mx:Metadata>
+	
+	<ns1:ChromeTab id="chromeTab" width="100%" height="24" canCloseTab="false" canAddTab="false" />
+	<mx:ViewStack id="mainViewStack" width="100%" height="100%" y="24">
+		<controls:InitContainer  label="{resourceManager.getString('main', 'initContainer.label')}" id="initContainer" />
+		<controls:LoadContainer  label="{resourceManager.getString('main', 'loadContainer.label')}" id="loadContainer" />
+		<controls:BuildContainer label="{resourceManager.getString('main', 'buildContainer.label')}" id="buildContainer" />
+		<controls:PlayContainer  label="{resourceManager.getString('main', 'playContainer.label')}" id="playContainer" />
+	</mx:ViewStack>
+	
+</mx:WindowedApplication>
