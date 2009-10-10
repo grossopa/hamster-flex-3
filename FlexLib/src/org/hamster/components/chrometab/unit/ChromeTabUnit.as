@@ -46,15 +46,10 @@ package org.hamster.components.chrometab.unit
 		private var labelUnit:Label = new Label();
 		private var closeUnit:Image = new Image();
 		
-		public function set labelText(arg:String):void
+		override public function set label(arg:String):void
 		{
 			labelUnit.text = arg;
-			this._label = arg;
-		}
-		
-		public function get labelText():String
-		{
-			return this._label;
+			super.label = arg;
 		}
 		
 		public function set isSelected(arg:Boolean):void
