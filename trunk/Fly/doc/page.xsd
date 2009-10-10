@@ -1,0 +1,23 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:element name="page">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="image-position" />
+			</xsd:sequence>
+			<xsd:attribute name="background-image" type="xsd:string" use="required" />
+			<xsd:attribute name="ratio" type="xsd:string" use="required" />
+			<xsd:attribute name="img-count" type="xsd:string" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="img-position">
+		<xsd:complexType>
+			<xsd:attribute name="percent-x" type="xsd:float" use="required" />
+			<xsd:attribute name="percent-y" type="xsd:float" use="required" />
+			<xsd:attribute name="percent-width" type="xsd:float" use="required" />
+			<xsd:attribute name="percent-height" type="xsd:float" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+	
+</xsd:schema>

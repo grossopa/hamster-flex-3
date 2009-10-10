@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page ratio="4:3" img-count="2">
+	<img-position percent-x="0.2" percent-y="0.1" percent-width="0.4" percent-height="0.4" />
+	<img-position percent-x="0.2" percent-y="0.55" percent-width="0.4" percent-height="0.4" />
+</page>

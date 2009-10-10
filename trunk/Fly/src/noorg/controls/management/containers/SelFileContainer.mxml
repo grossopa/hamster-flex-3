@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+	creationComplete="completeHandler()">
+	<mx:Script source="SelFileContainerAs.as" />
+	
+	<mx:Button label="Browse" click="selectImgFiles()" x="5" y="5"/>
+	<mx:Tile id="mainTile" direction="horizontal" x="10" y="40"
+		borderStyle="none" width="100%"  height="100%"
+		paddingLeft="5" paddingTop="5" paddingRight="5" paddingBottom="5"
+		verticalGap="20" horizontalGap="10" tileWidth="100" tileHeight="100" />
+</mx:Canvas>
