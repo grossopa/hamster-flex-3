@@ -2,8 +2,11 @@
 import flash.filesystem.File;
 
 import mx.collections.ArrayCollection;
+import mx.events.ListEvent;
 
 import noorg.magic.commands.impl.LoadCardsCmd;
+import noorg.magic.controls.renderer.CardRenderer;
+import noorg.magic.models.Card;
 import noorg.magic.models.CardCollection;
 import noorg.magic.services.DataService;
 import noorg.magic.utils.Configures;
@@ -62,4 +65,12 @@ private function loadCardsCompletedHandler(evt:CommandEvent):void
 private function collectionChanged():void
 {
 	_curColl = CardCollection(this.collectionComboBox.selectedItem).cards;
+}
+
+private function cardClickedHandler(evt:ListEvent):void
+{
+	var curItem:CardRenderer = CardRenderer(evt.itemRenderer);
+	detailPopup.card = Card(curItem.data);
+	DS.selectedCards.addItem(curItem.data);
+	
 }

@@ -16,5 +16,8 @@ package noorg.magic.services
 		
 		[Bindable]
 		public var cardCollections:ArrayCollection = new ArrayCollection();
+		
+		[Bindable]
+		public var selectedCards:ArrayCollection = new ArrayCollection();
 	}
 }

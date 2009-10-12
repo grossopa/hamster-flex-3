@@ -10,6 +10,9 @@ package noorg.magic.models
 		public var imgPath:String;
 		public var oracleText:String;
 		
+		// for extended usage
+		public var isSelected:Boolean;
+		
 		public function toString():String
 		{
 			return '[pid:'+ pid + ', name:' + name + ", imgUrl:" + imgUrl + ", oracleText:" + oracleText + "]";

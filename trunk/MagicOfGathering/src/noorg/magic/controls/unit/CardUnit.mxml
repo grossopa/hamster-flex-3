@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+	verticalScrollPolicy="off" horizontalScrollPolicy="off">
+	<mx:Script source="CardUnitAs.as" />
+	<mx:Image source="{_source}" width="100%" height="100%" />
+</mx:Canvas>

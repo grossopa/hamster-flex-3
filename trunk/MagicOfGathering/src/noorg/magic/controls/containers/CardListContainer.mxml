@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml">
+<mx:Script source="CardListContainerAs.as" />
+	<mx:DataGrid dataProvider="{DS.selectedCards}" rowHeight="55" width="100%" itemClick="selectChangedHandler()">
+		<mx:columns>
+			<mx:DataGridColumn headerText="{this.resourceManager.getString('main', 'buildContainer.list.title1')}" 
+				itemRenderer="noorg.magic.controls.renderer.CardListSelectRenderer" width="40"/>
+			<mx:DataGridColumn headerText="{this.resourceManager.getString('main', 'buildContainer.list.title2')}" 
+				itemRenderer="noorg.magic.controls.renderer.CardListImageRenderer" width="55" />
+			<mx:DataGridColumn headerText="{this.resourceManager.getString('main', 'buildContainer.list.title3')}" 
+				dataField="name"/>
+			<mx:DataGridColumn headerText="{this.resourceManager.getString('main', 'buildContainer.list.title4')}" 
+				dataField="oracleText" wordWrap="true"/>
+		</mx:columns>
+	</mx:DataGrid>
+	
+</mx:VBox>
