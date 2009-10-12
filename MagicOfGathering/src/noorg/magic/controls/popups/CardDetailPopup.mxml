@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:models="noorg.magic.models.*" 
+	xmlns:unit="noorg.magic.controls.unit.*" height="311"
+	 creationComplete="completeHandler()">
+	<mx:Script source="CardDetailPopupAs.as" />
+	<unit:CardUnit id="mainCardImg" width="{Constants.CARD_WIDTH}" height="{Constants.CARD_HEIGHT}" />
+	<mx:VBox width="100%" height="100%">
+		<mx:Label text="{_name}" fontWeight="bold" fontSize="13" />
+		<mx:Spacer height="10" width="100%" />
+		<mx:TextArea text="{_descrption}" backgroundAlpha="0" editable="false" width="100%" height="100%" borderStyle="none" />
+	</mx:VBox>
+</mx:HBox>

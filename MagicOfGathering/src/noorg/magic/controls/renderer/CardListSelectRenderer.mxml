@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml" verticalAlign="middle" horizontalAlign="center">
+	<mx:Script source="CardListSelectRendererAs.as" />
+	<mx:CheckBox id="mainCheckBox" change="selectChangedHandler()" selected="{_selected}" 
+		width="20" height="20" />
+</mx:Box>
