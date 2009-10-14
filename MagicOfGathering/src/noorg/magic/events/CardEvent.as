@@ -7,6 +7,7 @@ package noorg.magic.events
 	public class CardEvent extends Event
 	{
 		public static const SELECT_CHANGED:String = "cardSelectChanged";
+		public static const ADD:String = "addCard";
 		
 		public var card:Card;
 		

@@ -75,13 +75,18 @@ private function collectionChanged():void
 private function cardSelectionChangedHandler(evt:CardEvent):void
 {
 	detailPopup.card = evt.card;
-	
 }
 
-private function cardClickedHandler(evt:ListEvent):void
+private function cardClickHandler(evt:ListEvent):void
 {
 	var curItem:CardRenderer = CardRenderer(evt.itemRenderer);
 	detailPopup.card = Card(curItem.data);
-	//DS.selectedCards.addItem(curItem.data);
 	ES.cardChanged(detailPopup.card);	
+}
+
+private function cardDoubleClickHandler(evt:ListEvent):void
+{
+	var curItem:CardRenderer = CardRenderer(evt.itemRenderer);
+	detailPopup.card = Card(curItem.data);
+	ES.addCard(detailPopup.card);		
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" minWidth="800" minHeight="600" width="1024" height="768" backgroundColor="white"
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" minWidth="800" minHeight="600" width="800" height="600" backgroundColor="white"
  	initialize="init()" applicationComplete="appCompleteHandler()" xmlns:controls="noorg.magic.controls.*" xmlns:ns1="org.hamster.components.chrometab.*">
 	<mx:Script source="MagicOfGatheringAs.as" />
 	

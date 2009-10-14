@@ -4,6 +4,7 @@ package noorg.magic.utils
 	{
 		public static var databasePath:String;
 		public static var databasePassword:String;
+		
 		[Bindable]
 		public static var locales:Array;
 		
@@ -14,6 +15,9 @@ package noorg.magic.utils
 			}
 			return null;
 		}
+		
+		[Bindable]
+		public static var cardNum:int;
 
 	}
 }

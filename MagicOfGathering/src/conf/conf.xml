@@ -8,4 +8,7 @@
 		<locale>zh_CN</locale>
 		<locale>en_US</locale>
 	</locales>
+	<game>
+		<card-num>140</card-num>
+	</game>
 </configure>
