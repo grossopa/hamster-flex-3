@@ -47,6 +47,10 @@ package noorg.magic.commands.impl.init
 			}
 			ResourceManager.getInstance().localeChain = [Properties.defaultLocale];
 			ResourceManager.getInstance().update();
+			
+			// game configuration
+			Properties.cardNum = xml.game.child("card-num")[0];
+
 			super.result(null);
 		}
 		

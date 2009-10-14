@@ -1,5 +1,8 @@
 // ActionScript file
 import noorg.magic.models.Card;
+import noorg.magic.services.DataService;
+
+private const DS:DataService = DataService.getInstance();
 
 public var card:Card;
 [Bindable]
@@ -20,5 +23,7 @@ private function selectChangedHandler():void
 {
 	card.isSelected = mainCheckBox.selected;
 	_selected = card.isSelected;
+	DS.selectedNumChanged();
+	
 }
 

@@ -2,6 +2,8 @@ package noorg.magic.services
 {
 	import mx.collections.ArrayCollection;
 	
+	import noorg.magic.models.Card;
+	
 	public class DataService
 	{
 		private static var _instance:DataService;
@@ -19,5 +21,19 @@ package noorg.magic.services
 		
 		[Bindable]
 		public var selectedCards:ArrayCollection = new ArrayCollection();
+		
+		[Bindable]
+		public var selectedNum:int;
+		
+		public function selectedNumChanged():void
+		{
+			var result:int = 0;
+			for each (var card:Card in selectedCards) {
+				if (card.isSelected) {
+					result += card.count;
+				}
+			}
+			selectedNum = result;
+		}
 	}
 }

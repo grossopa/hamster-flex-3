@@ -30,5 +30,12 @@ package noorg.magic.services
 			_instance.dispatchEvent(cardEvent);
 		}
 		
+		public function addCard(card:Card):void
+		{
+			var cardEvent:CardEvent = new CardEvent(CardEvent.ADD);
+			cardEvent.card = card;
+			_instance.dispatchEvent(cardEvent);
+		}
+		
 	}
 }

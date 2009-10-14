@@ -12,6 +12,7 @@ package noorg.magic.models
 		
 		// for extended usage
 		public var isSelected:Boolean;
+		public var count:int;
 		
 		public function toString():String
 		{

@@ -11,7 +11,9 @@
 				dataField="name"/>
 			<mx:DataGridColumn headerText="{this.resourceManager.getString('main', 'buildContainer.list.title4')}" 
 				dataField="oracleText" wordWrap="true"/>
+			<mx:DataGridColumn headerText="{this.resourceManager.getString('main', 'buildContainer.list.title5')}" 
+				itemRenderer="noorg.magic.controls.renderer.CardListCountRenderer" width="70"/>
 		</mx:columns>
 	</mx:DataGrid>
-	
+	<mx:Label width="100%" textAlign="right" text="{DS.selectedNum} / {Properties.cardNum}" />
 </mx:VBox>

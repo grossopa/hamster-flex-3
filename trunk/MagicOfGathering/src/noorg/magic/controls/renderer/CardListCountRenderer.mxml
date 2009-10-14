@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml" height="50" 
+	verticalAlign="middle" horizontalAlign="center" 
+	creationComplete="completeHandler()">
+	
+	<mx:Script source="CardListCountRendererAs.as" />
+	
+	<mx:NumericStepper id="stepper" minimum="0" maximum="140" stepSize="1" change="stepperChangedHandler()"/>
+	
+</mx:Box>
