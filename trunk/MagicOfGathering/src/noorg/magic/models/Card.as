@@ -42,5 +42,6 @@ package noorg.magic.models
 			var xml:XML = this.toXML();
 			return xml.toXMLString();
 		}
+		
 	}
 }
