@@ -2,16 +2,16 @@
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="completeHandler()" 
 	xmlns:popups="noorg.magic.controls.popups.*" xmlns:containers="noorg.magic.controls.containers.*">
 	<mx:Script source="BuildContainerAs.as" />
-	<mx:HDividedBox x="0" y="0" width="100%" height="100%" paddingTop="3" paddingLeft="3" paddingRight="3" paddingBottom="3">
+	<mx:HDividedBox x="0" y="0" width="{this.width}" height="{this.height}" paddingTop="3" paddingLeft="3" paddingRight="3" paddingBottom="3">
 		<mx:VBox height="100%" width="280">
 			<mx:ComboBox id="collectionComboBox" dataProvider="{DS.cardCollections}" change="collectionChanged()"/>
 			<mx:TileList width="100%" height="100%" itemRenderer="noorg.magic.controls.renderer.CardRenderer"
 				 dataProvider="{_curColl}" columnWidth="120" rowHeight="160" itemClick="cardClickHandler(event)"
 				 itemDoubleClick="cardDoubleClickHandler(event)" />
 		</mx:VBox>
-		<mx:VBox height="100%">
-			<popups:CardDetailPopup id="detailPopup" width="100%" height="100%" />
-			<containers:CardListContainer id="cardListContainer" width="100%" height="100%" />
+		<mx:VBox>
+			<popups:CardDetailPopup id="detailPopup" width="100%" />
+			<containers:CardListContainer id="cardListContainer" width="100%" />
 		</mx:VBox>
 	</mx:HDividedBox>
 </mx:Canvas>

@@ -1,12 +1,9 @@
 // ActionScript file
 import noorg.magic.commands.CommandWrapper;
 import noorg.magic.commands.impl.GetCardFromWebCmd;
-import noorg.magic.commands.impl.init.CreateSchemaCmd;
-import noorg.magic.commands.impl.init.InitializeDatabaseCmd;
-import noorg.magic.commands.impl.init.LoadConfigureCmd;
-import noorg.magic.pojos.DCard;
-import noorg.magic.services.HTTPServices;
+import noorg.magic.models.CardCollectionMeta;
 import noorg.magic.utils.Configures;
+import noorg.magic.utils.Properties;
 
 import org.hamster.commands.events.CommandEvent;
 import org.hamster.commands.impl.CommandQueue;
@@ -22,6 +19,7 @@ private var _failedNumber:int;
 
 private function extract():void
 {
+	Properties;
 	var startIndex:int = int(startIndexInput.text);
 	var endIndex:int = int(endIndexInput.text);
 	var cmdArray:Array = new Array();
@@ -38,6 +36,14 @@ private function extract():void
 	
 	var cq:CommandQueue = new CommandQueue(cmdArray);
 	cq.execute();
+}
+
+private function selectKnownCollection():void
+{
+	var meta:CardCollectionMeta = CardCollectionMeta(collComboBox.selectedItem);
+	startIndexInput.text = meta.fromIndex.toString();
+	endIndexInput.text = meta.toIndex.toString();
+	collectionNameInput.text = meta.name;
 }
 
 private function cmdResultHandler(evt:CommandEvent):void

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="completeHandler()">
 <mx:Script source="CardListContainerAs.as" />
-	<mx:DataGrid id="dataGrid" dataProvider="{DS.selectedCards}" rowHeight="55" width="100%" itemClick="selectChangedHandler()">
+	<mx:DataGrid id="dataGrid" dataProvider="{DS.selectedCards}" rowCount="4"
+		rowHeight="45" width="100%" itemClick="selectChangedHandler()">
 		<mx:columns>
 			<mx:DataGridColumn headerText="{this.resourceManager.getString('main', 'buildContainer.list.title1')}" 
 				itemRenderer="noorg.magic.controls.renderer.CardListSelectRenderer" width="40"/>

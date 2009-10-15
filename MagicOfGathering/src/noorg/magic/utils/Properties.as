@@ -1,5 +1,7 @@
 package noorg.magic.utils
 {
+	import mx.collections.ArrayCollection;
+	
 	public class Properties
 	{
 		public static var databasePath:String;
@@ -7,7 +9,6 @@ package noorg.magic.utils
 		
 		[Bindable]
 		public static var locales:Array;
-		
 		public static function get defaultLocale():String
 		{
 			if (locales != null && locales.length > 0) {
@@ -18,6 +19,9 @@ package noorg.magic.utils
 		
 		[Bindable]
 		public static var cardNum:int;
+		
+		[Bindable]
+		public static var knownCardCollections:Array = new Array();
 
 	}
 }
