@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml" height="50" xmlns:unit="noorg.magic.controls.unit.*"
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml" height="45" xmlns:unit="noorg.magic.controls.unit.*"
 	 creationComplete="completeHandler()"  verticalAlign="middle" horizontalAlign="center">
 	<mx:Script source="CardListImageRendererAs.as" />
-	<unit:CardUnit id="mainCardUnit" height="50" width="36"/>
+	<unit:CardUnit id="mainCardUnit" height="40" width="28"/>
 </mx:Box>

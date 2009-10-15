@@ -5,6 +5,9 @@
 
 	<mx:Form x="10" y="10" paddingBottom="7" paddingTop="7" paddingLeft="7" paddingRight="7">
 		<mx:Label text="{resourceManager.getString('main', 'loadContainer.title')}" fontWeight="bold" fontSize="12" />
+		<mx:FormItem label="{resourceManager.getString('main', 'loadContainer.knownCollections')}">
+			<mx:ComboBox id="collComboBox" dataProvider="{Properties.knownCardCollections}" change="selectKnownCollection()"></mx:ComboBox>
+		</mx:FormItem>
 		<mx:FormItem label="{resourceManager.getString('main', 'loadContainer.startIndex')}" direction="horizontal">
 			<mx:TextInput id="startIndexInput" restrict="[0-9]" />
 		</mx:FormItem>

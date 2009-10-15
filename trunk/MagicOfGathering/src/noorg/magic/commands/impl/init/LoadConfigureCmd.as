@@ -5,9 +5,9 @@ package noorg.magic.commands.impl.init
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 	
-	import mx.resources.ResourceBundle;
 	import mx.resources.ResourceManager;
 	
+	import noorg.magic.models.CardCollectionMeta;
 	import noorg.magic.utils.Properties;
 	
 	import org.hamster.commands.AbstractCommand;
@@ -50,6 +50,15 @@ package noorg.magic.commands.impl.init
 			
 			// game configuration
 			Properties.cardNum = xml.game.child("card-num")[0];
+			
+			// load known collection information
+			for each (var knownCollXML:XML in xml.collections.children()) {
+				var cardCollMeta:CardCollectionMeta = new CardCollectionMeta();
+				cardCollMeta.name = knownCollXML.@name;
+				cardCollMeta.fromIndex = knownCollXML.@from;
+				cardCollMeta.toIndex = knownCollXML.attribute("to");
+				Properties.knownCardCollections.push(cardCollMeta);
+			}
 
 			super.result(null);
 		}
