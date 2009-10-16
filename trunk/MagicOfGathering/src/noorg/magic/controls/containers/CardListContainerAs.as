@@ -34,3 +34,8 @@ private function addCardHandler(evt:CardEvent):void
 		card.isSelected = true;
 	}
 }
+
+private function saveCollection():void
+{
+	
+}
