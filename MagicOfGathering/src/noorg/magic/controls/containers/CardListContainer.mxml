@@ -16,5 +16,9 @@
 				itemRenderer="noorg.magic.controls.renderer.CardListCountRenderer" width="70"/>
 		</mx:columns>
 	</mx:DataGrid>
-	<mx:Label width="100%" textAlign="right" text="{DS.selectedNum} / {Properties.cardNum}" />
+	<mx:HBox>
+		<mx:Button label="{this.resourceManager.getString('main','buildContainer.save')}" click="saveCollection()"
+		<mx:Label width="100%" textAlign="right" text="{DS.selectedNum} / {Properties.cardNum}" />
+	</mx:HBox>
+	
 </mx:VBox>
