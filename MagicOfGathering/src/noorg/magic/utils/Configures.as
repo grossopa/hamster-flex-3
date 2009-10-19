@@ -45,5 +45,11 @@ package noorg.magic.utils
 			}
 			return result;
 		}
+		
+		public static function getUserSaveMetaFileByCollection(name:String):File
+		{
+			var result:File = new File(getUserSaveFolderByCollection(name).nativePath + File.separator + "meta.xml");
+			return result;
+		}
 	}
 }

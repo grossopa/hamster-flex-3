@@ -1,4 +1,5 @@
 // ActionScript file
+import noorg.magic.commands.CommandWrapper;
 import noorg.magic.events.CardEvent;
 import noorg.magic.models.Card;
 import noorg.magic.services.DataService;
@@ -37,5 +38,5 @@ private function addCardHandler(evt:CardEvent):void
 
 private function saveCollection():void
 {
-	
+	CommandWrapper.saveCollection("abc");
 }

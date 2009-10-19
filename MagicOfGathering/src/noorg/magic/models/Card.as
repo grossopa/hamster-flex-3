@@ -9,6 +9,7 @@ package noorg.magic.models
 		public var imgUrl:String;
 		public var imgPath:String;
 		public var oracleText:String;
+		public var collection:String;
 		
 		// for extended usage
 		public var isSelected:Boolean;
@@ -36,6 +37,14 @@ package noorg.magic.models
 		{
 			var xml:XML = new XML(<card pid={pid} name={name} url={imgUrl}>{oracleText}</card>);
 			return xml;
+		}
+		
+		public function toUserXML():XML
+		{
+			var xml:XML = new XML(<card pid={pid} name={name} url={imgUrl} 
+					collection={collection} count={count} is-selected={isSelected}
+					img-path={imgPath}>{oracleText}</card>);
+			return xml;			
 		}
 		
 		public function toXMLString():String
