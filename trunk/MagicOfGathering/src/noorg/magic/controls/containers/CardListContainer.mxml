@@ -4,7 +4,9 @@
 	<mx:Script source="CardListContainerAs.as" />
 
 	<mx:HBox>
-		<mx:Button label="{this.resourceManager.getString('main','buildContainer.save')}" click="saveCollection()" />
+		<mx:ComboBox id="ownCollComboBox" dataProvider="{}" />
+		<mx:TextInput id="collNameTextInput" />
+		<mx:Button label="{this.resourceManager.getString('main','buildContainer.save')}" click="saveCollectionHandler()" />
 		<mx:Label width="100%" textAlign="right" text="{DS.selectedNum} / {Properties.cardNum}" />
 	</mx:HBox>
 
