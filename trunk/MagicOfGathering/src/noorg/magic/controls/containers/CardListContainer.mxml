@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="completeHandler()">
-<mx:Script source="CardListContainerAs.as" />
+
+	<mx:Script source="CardListContainerAs.as" />
+
+	<mx:HBox>
+		<mx:Button label="{this.resourceManager.getString('main','buildContainer.save')}" click="saveCollection()" />
+		<mx:Label width="100%" textAlign="right" text="{DS.selectedNum} / {Properties.cardNum}" />
+	</mx:HBox>
+
 	<mx:DataGrid id="dataGrid" dataProvider="{DS.selectedCards}" rowCount="4"
 		rowHeight="45" width="100%" itemClick="selectChangedHandler()">
 		<mx:columns>
@@ -16,9 +23,5 @@
 				itemRenderer="noorg.magic.controls.renderer.CardListCountRenderer" width="70"/>
 		</mx:columns>
 	</mx:DataGrid>
-	<mx:HBox>
-		<mx:Button label="{this.resourceManager.getString('main','buildContainer.save')}" click="saveCollection()"
-		<mx:Label width="100%" textAlign="right" text="{DS.selectedNum} / {Properties.cardNum}" />
-	</mx:HBox>
 	
 </mx:VBox>
