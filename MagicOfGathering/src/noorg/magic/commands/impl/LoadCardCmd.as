@@ -41,6 +41,7 @@ package noorg.magic.commands.impl
 			card = new Card();
 			card.decodeXML(new XML(fs.readUTFBytes(fs.bytesAvailable)));
 			card.imgPath = file.nativePath.replace(/.xml$/, ".jpg");
+			card.collection = this.collectionName;
 			fs.close();
 			
 			this.result(null);

@@ -21,14 +21,14 @@ package noorg.magic.commands.impl
 		public function SaveUserCardCollCmd()
 		{
 			super();
-			
 		}
 		
 		override public function execute():void
 		{
 			var xml:XML = new XML(<saved-collection name={name}></saved-collection>);
+					
 			for each (var card:Card in cards) {
-				xml.appendChild(card.toXML());
+				xml.appendChild(card.toUserXML());
 			}
 			
 			var file:File = Configures.getUserSaveMetaFileByCollection(name);

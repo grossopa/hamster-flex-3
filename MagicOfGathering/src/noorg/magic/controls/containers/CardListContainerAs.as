@@ -1,10 +1,14 @@
 // ActionScript file
 import noorg.magic.commands.CommandWrapper;
+import noorg.magic.commands.impl.SaveUserCardCollCmd;
 import noorg.magic.events.CardEvent;
 import noorg.magic.models.Card;
 import noorg.magic.services.DataService;
 import noorg.magic.services.EventService;
+import noorg.magic.utils.GlobalUtil;
 import noorg.magic.utils.Properties;
+
+import org.hamster.commands.events.CommandEvent;
 
 private const DS:DataService = DataService.getInstance();
 private const ES:EventService = EventService.getInstance();
@@ -33,10 +37,22 @@ private function addCardHandler(evt:CardEvent):void
 	if (!DS.selectedCards.contains(card)) {
 		DS.selectedCards.addItem(card);
 		card.isSelected = true;
+		card.count = 1;
 	}
 }
 
-private function saveCollection():void
+private function saveCollectionHandler():void
 {
-	CommandWrapper.saveCollection("abc");
+	if (collNameTextInput.text == null || collNameTextInput.text.length == 0) {
+		return;
+	}
+	GlobalUtil.popUpMask(resourceManager.getString("main", "buildContainer.saving"), this);
+	var cmd:SaveUserCardCollCmd = CommandWrapper.saveCollection(collNameTextInput.text);
+	cmd.addEventListener(CommandEvent.COMMAND_RESULT, saveResultHandler);
+}
+
+private function saveResultHandler(evt:CommandEvent):void
+{
+	var cmd:SaveUserCardCollCmd = SaveUserCardCollCmd(evt.currentTarget);
+	GlobalUtil.removePopUpMask();
 }
