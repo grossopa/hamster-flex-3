@@ -33,6 +33,18 @@ package noorg.magic.models
 			this.oracleText = xml.toString();
 		}
 		
+		public function decodeUserXML(xml:XML):void
+		{
+			this.pid = xml.@pid;
+			this.name = xml.@name;
+			this.imgUrl = xml.@url;
+			this.collection = xml.@collection;
+			this.count = xml.@count;
+			this.isSelected = xml.attribute("is-selected");
+			this.imgPath = xml.attribute("img-path");
+			this.oracleText = xml;
+		}
+		
 		public function toXML():XML
 		{
 			var xml:XML = new XML(<card pid={pid} name={name} url={imgUrl}>{oracleText}</card>);

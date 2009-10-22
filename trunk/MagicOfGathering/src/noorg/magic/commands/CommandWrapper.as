@@ -7,6 +7,7 @@ package noorg.magic.commands
 	import noorg.magic.commands.impl.GetCardFromWebCmd;
 	import noorg.magic.commands.impl.GetImageToFileCmd;
 	import noorg.magic.commands.impl.LoadCardCmd;
+	import noorg.magic.commands.impl.LoadUserCollCmd;
 	import noorg.magic.commands.impl.SaveUserCardCollCmd;
 	import noorg.magic.models.Card;
 	import noorg.magic.services.DataService;
@@ -41,6 +42,14 @@ package noorg.magic.commands
 			return cmd;
 		}
 		
+		public static function loadUserColl(name:String):LoadUserCollCmd
+		{
+			var loadUserCollCmd:LoadUserCollCmd = new LoadUserCollCmd();
+			loadUserCollCmd.name = name;
+			loadUserCollCmd.execute();
+			return loadUserCollCmd;
+		}
+		
 		public static function saveCollection(collectionName:String, cards:ArrayCollection = null):SaveUserCardCollCmd
 		{
 			var cmd:SaveUserCardCollCmd = new SaveUserCardCollCmd();
@@ -52,6 +61,8 @@ package noorg.magic.commands
 			cmd.execute();
 			return cmd;
 		}
+		
+		
 
 	}
 }
