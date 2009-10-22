@@ -16,11 +16,23 @@ package noorg.magic.services
 			return _instance;
 		}
 		
+		/**
+		 * all card collections
+		 */
 		[Bindable]
 		public var cardCollections:ArrayCollection = new ArrayCollection();
 		
+		/**
+		 * current selected cards for build container
+		 */
 		[Bindable]
 		public var selectedCards:ArrayCollection = new ArrayCollection();
+		
+		/**
+		 * user saved cards name list
+		 */
+		[Bindable]
+		public var userCollNames:ArrayCollection = new ArrayCollection();
 		
 		[Bindable]
 		public var selectedNum:int;

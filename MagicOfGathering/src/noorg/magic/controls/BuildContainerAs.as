@@ -5,6 +5,7 @@ import mx.collections.ArrayCollection;
 import mx.events.ListEvent;
 
 import noorg.magic.commands.impl.LoadCardsCmd;
+import noorg.magic.commands.impl.LoadUserCollListCmd;
 import noorg.magic.controls.renderer.CardRenderer;
 import noorg.magic.events.CardEvent;
 import noorg.magic.models.Card;
@@ -42,16 +43,19 @@ private function completeHandler():void
 	for each (var collection:String in collNames) {
 		var loadCardCmd:LoadCardsCmd = new LoadCardsCmd();
 		loadCardCmd.collectionName = collection;
-		loadCardCmd.addEventListener(CommandEvent.COMMAND_RESULT, loadCardCompletedHandler);
+		loadCardCmd.addEventListener(CommandEvent.COMMAND_RESULT, loadCardCompleteHandler);
 		cmdQueue.cmdArray.push(loadCardCmd);
 	}
-	cmdQueue.addEventListener(CommandEvent.COMMAND_RESULT, loadCardsCompletedHandler);
+	var loadListCmd:LoadUserCollListCmd = new LoadUserCollListCmd();
+	loadListCmd.addEventListener(CommandEvent.COMMAND_RESULT, loadListCompleteHandler);
+	cmdQueue.cmdArray.push(loadListCmd);
+	cmdQueue.addEventListener(CommandEvent.COMMAND_RESULT, loadCardsCompleteHandler);
 	cmdQueue.execute();
 	
 	GlobalUtil.popUpMask(resourceManager.getString("main", "buildContainer.loadCard"), this);
 }
 
-private function loadCardCompletedHandler(evt:CommandEvent):void
+private function loadCardCompleteHandler(evt:CommandEvent):void
 {
 	var cmd:LoadCardsCmd = LoadCardsCmd(evt.currentTarget);
 	
@@ -61,10 +65,16 @@ private function loadCardCompletedHandler(evt:CommandEvent):void
 	DS.cardCollections.addItem(cardColl);
 }
 
-private function loadCardsCompletedHandler(evt:CommandEvent):void
+private function loadCardsCompleteHandler(evt:CommandEvent):void
 {
 	GlobalUtil.removePopUpMask();
 	collectionChanged();
+}
+
+private function loadListCompleteHandler(evt:CommandEvent):void
+{
+	var cmd:LoadUserCollListCmd = LoadUserCollListCmd(evt.currentTarget);
+	DS.userCollNames = new ArrayCollection(cmd.names);
 }
 
 private function collectionChanged():void
