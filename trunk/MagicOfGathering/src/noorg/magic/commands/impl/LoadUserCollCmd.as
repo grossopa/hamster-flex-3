@@ -44,7 +44,7 @@ package noorg.magic.commands.impl
 				cards.addItem(card);
 			}
 			
-			this.result();
+			this.result(null);
 		}
 		
 	}

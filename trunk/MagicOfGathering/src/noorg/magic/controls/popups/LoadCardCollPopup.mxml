@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="400" height="200" layout="horizontal" 
+	label="{this.resourceManager.getString('main', 'load') + this.resourceManager.getString('main','loadCardCollPopup.loadList')}"
+	verticalAlign="middle">
+	<mx:Script source="LoadCardCollPopupAs.as" />
+	<mx:Label text="{this.resourceManager.getString('main','loadCardCollPopup.loadList')}" />
+	<mx:ComboBox id="collNameComboBox" dataProvider="{DS.userCollNames}" />
+	<mx:Button label="{this.resourceManager.getString('main','load')}" click="loadCardHandler()" />
+	<mx:Button label="{this.resourceManager.getString('main','cancel')}" click="cancelHandler()" />
+</mx:Panel>
