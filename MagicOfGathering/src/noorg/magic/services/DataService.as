@@ -3,6 +3,7 @@ package noorg.magic.services
 	import mx.collections.ArrayCollection;
 	
 	import noorg.magic.models.Card;
+	import noorg.magic.models.Player;
 	
 	public class DataService
 	{
@@ -47,5 +48,12 @@ package noorg.magic.services
 			}
 			selectedNum = result;
 		}
+		
+		
+		/**
+		 * for play
+		 */
+		public var playerRed:Player;
+		public var playerBlue:Player;
 	}
 }

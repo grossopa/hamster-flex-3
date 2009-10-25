@@ -1,7 +1,7 @@
 // ActionScript file
 import noorg.magic.commands.CommandWrapper;
-import noorg.magic.commands.impl.LoadUserCollCmd;
 import noorg.magic.commands.impl.SaveUserCardCollCmd;
+import noorg.magic.controls.popups.LoadCardCollPopup;
 import noorg.magic.events.CardEvent;
 import noorg.magic.models.Card;
 import noorg.magic.services.DataService;
@@ -32,18 +32,18 @@ private function cardSelectionChangedHandler(evt:CardEvent):void
 	this.dataGrid.selectedItem = card;
 }
 
-private function ownCollSelectedHandler():void
-{
-	GlobalUtil.popUpMask(resourceManager.getString("main", "buildContainer.saving"), this);
-	var cmd:LoadUserCollCmd = CommandWrapper.loadUserColl(
-			ownCollComboBox.selectedItem as String);
-	cmd.addEventListener(CommandEvent.COMMAND_RESULT, loadUserCollCompleteHandler);
-}
-
-private function loadUserCollCompleteHandler(evt:CommandEvent):void
-{
-	
-}
+//private function ownCollSelectedHandler():void
+//{
+//	GlobalUtil.popUpMask(resourceManager.getString("main", "buildContainer.saving"), this);
+//	var cmd:LoadUserCollCmd = CommandWrapper.loadUserColl(
+//			ownCollComboBox.selectedItem as String);
+//	cmd.addEventListener(CommandEvent.COMMAND_RESULT, loadUserCollCompleteHandler);
+//}
+//
+//private function loadUserCollCompleteHandler(evt:CommandEvent):void
+//{
+//	
+//}
 
 private function addCardHandler(evt:CardEvent):void
 {
@@ -69,4 +69,9 @@ private function saveResultHandler(evt:CommandEvent):void
 {
 	var cmd:SaveUserCardCollCmd = SaveUserCardCollCmd(evt.currentTarget);
 	GlobalUtil.removePopUpMask();
+}
+
+private function popupLoadHandler():void
+{
+	GlobalUtil.createPopup(LoadCardCollPopup);
 }

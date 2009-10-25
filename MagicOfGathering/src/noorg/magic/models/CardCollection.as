@@ -10,7 +10,7 @@ package noorg.magic.models
 		public function toString():String
 		{
 			return this.name;
-		}	
+		}
 
 	}
 }

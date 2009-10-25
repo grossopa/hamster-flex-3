@@ -3,6 +3,7 @@ package noorg.magic.utils
 	import flash.display.DisplayObject;
 	
 	import mx.core.Application;
+	import mx.core.IFlexDisplayObject;
 	import mx.managers.PopUpManager;
 	
 	import noorg.magic.controls.masks.ProcessMask;
@@ -29,6 +30,21 @@ package noorg.magic.utils
 		public static function get app():MagicOfGathering
 		{
 			return MagicOfGathering(Application.application);
+		}
+		
+		public static function createPopup(className:Class, parent:DisplayObject = null):IFlexDisplayObject
+		{
+			if (parent == null) {
+				parent = app;
+			}
+			var obj:IFlexDisplayObject = PopUpManager.createPopUp(parent, className, true);
+			PopUpManager.centerPopUp(obj);
+			return obj;
+		}
+		
+		public static function removePopup(obj:IFlexDisplayObject):void
+		{
+			PopUpManager.removePopUp(obj);
 		}
 
 	}
