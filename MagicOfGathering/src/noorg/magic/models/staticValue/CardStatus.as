@@ -3,6 +3,7 @@ package noorg.magic.models.staticValue
 	public class CardStatus
 	{
 		public static const GALLERY:int = 0;
+		
 		public static const HAND:int = 1;
 		
 		public static const PLAY:int = 2;

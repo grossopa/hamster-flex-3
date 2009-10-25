@@ -7,6 +7,7 @@ package noorg.magic.models
 			super();
 		}
 		
+		public var location:int;
 		public var status:int;
 		
 	}
