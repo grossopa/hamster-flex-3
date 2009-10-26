@@ -37,7 +37,6 @@ package noorg.magic.models
 			return _status;
 		}
 		
-		
 		public function PlayCard()
 		{
 			super();

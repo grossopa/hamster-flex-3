@@ -7,9 +7,7 @@ import noorg.magic.commands.impl.init.InitializeDatabaseCmd;
 import noorg.magic.commands.impl.init.LoadConfigureCmd;
 import noorg.magic.pojos.DCard;
 import noorg.magic.services.HTTPServices;
-import noorg.magic.utils.Properties;
 
-import org.hamster.commands.events.CommandEvent;
 import org.hamster.commands.impl.CommandQueue;
 
 private const RS:IResourceManager = ResourceManager.getInstance();
