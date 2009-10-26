@@ -2,49 +2,49 @@ package noorg.magic.models
 {
 	import mx.collections.ArrayCollection;
 	
+	import noorg.magic.events.PlayCardEvent;
+	import noorg.magic.models.staticValue.CardLocation;
+	import noorg.magic.models.staticValue.CardStatus;
+	
 	public class PlayerCardColl
 	{
-		public static const typeCount:int
-		
 		public function PlayerCardColl(cardColl:ArrayCollection)
 		{
 			this.cardColl = cardColl;
+			
+			for (var i:int = 0; i < CardLocation.TYPE_COUNT; i++) {
+				locationArrays.addItem(new ArrayCollection());
+			}
+			
+			for (var i:int = 0; i < CardStatus.TYPE_COUNT; i++) {
+				statusArrays.addItem(new ArrayCollection());
+			}
+			
+			for each (var card:PlayCard in this.cardColl) {
+				registCardListener(card);
+				this.getLocationArray(card.location).addItem(card);
+				this.getStatusArray(card.status).addItem(card);
+			}
 		}
 		
+		[ReadOnly]
 		public var cardColl:ArrayCollection;
 		
 		[Bindable]
 		public const cardStack:ArrayCollection = new ArrayCollection();
 		
-//		public static const GALLERY:int = 0;
-//		public static const HAND:int = 1;
-//		public static const ARTIFACT:int = 2;
-//		public static const ARTIFACT_ENHANCEMENT:int = 21;
-//		public static const CREATURE:int = 3;
-//		public static const CREATURE_ENHANCEMENT:int = 31;
-//		public static const MAGIC:int = 4;
-//		public static const MAGIC_ENHANCEMENT:int = 41;
-//		public static const GRAVEYARD:int = 5;
+		public const locationArrays:ArrayCollection = new ArrayCollection();
+		public const statusArrays:ArrayCollection = new ArrayCollection();
 		
-//		[Bindable]
-//		public const cardsInGallery:ArrayCollection = new ArrayCollection();
-//		[Bindable]
-//		public const cardsInHand:ArrayCollection = new ArrayCollection();
-//		[Bindable]
-//		public const cardsInArtifact:ArrayCollection = new ArrayCollection();
-//		[Bindable]
-//		public const cardsInArtifactEnhancement:ArrayCollection = new ArrayCollection();
-//		[Bindable]
-//		public const cardsInCreature:ArrayCollection = new ArrayCollection();
-//		[Bindable]
-//		public const cardsInCreatureEnhancement:ArrayCollection = new ArrayCollection();
-//		[Bindable]
-//		public const cardsInMagic:ArrayCollection = new ArrayCollection();
-//		[Bindable]
-//		public const cardsInMagicEnhancement:ArrayCollection = new ArrayCollection();
-//		[Bindable]
-//		public const cardsInGraveyard:ArrayCollection = new ArrayCollection();
+		public function getLocationArray(type:int):ArrayCollection
+		{
+			return ArrayCollection(this.locationArrays[type]);
+		}
 		
+		public function getStatusArray(type:int):ArrayCollection
+		{
+			return ArrayCollection(this.statusArrays[type]);
+		}
 		
 		public function shuffleCard(isNewCardStack = false):void
 		{
@@ -70,15 +70,31 @@ package noorg.magic.models
 			}
 		}
 		
+		private function cardLocationChangedHandler(evt:PlayCardEvent):void
+		{
+			var originArr:ArrayCollection = this.getLocationArray(evt.originLocation);
+			var newArr:ArrayCollection = this.getLocationArray(evt.newLocation);
+			newArr.addItem(originArr.removeItemAt(originArr.getItemIndex(evt.currentTarget)));
+		}
+		
+		private function cardStatusChangedHandler(evt:PlayCardEvent):void
+		{
+			var originArr:ArrayCollection = this.getStatusArray(evt.originStatus);
+			var newArr:ArrayCollection = this.getStatusArray(evt.newStatus);
+			newArr.addItem(originArr.removeItemAt(originArr.getItemIndex(evt.currentTarget)));			
+		}
+		
 		private function registCardListener(card:PlayCard):void
 		{
-			
+			card.addEventListener(PlayCardEvent.LOCATION_CHANGED, cardLocationChangedHandler);
+			card.addEventListener(PlayCardEvent.STATUS_CHANGED, cardStatusChangedHandler);
 		}
 		
 		private function unregistCardListener(card:PlayCard):void
 		{
-			
+			card.removeEventListener(PlayCardEvent.LOCATION_CHANGED, cardLocationChangedHandler);
+			card.removeEventListener(PlayCardEvent.STATUS_CHANGED, cardStatusChangedHandler);
 		}
-
+		
 	}
 }

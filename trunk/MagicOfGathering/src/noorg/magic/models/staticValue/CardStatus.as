@@ -12,6 +12,8 @@ package noorg.magic.models.staticValue
 		
 		public static const GRAVEYARD:int = 5;
 		public static const OUT_OF_PLAY:int = 6;
+		
+		public static const TYPE_COUNT:int = 7;
 
 	}
 }
