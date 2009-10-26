@@ -1,8 +1,8 @@
 package noorg.magic.models
 {
-	import flash.utils.ByteArray;
+	import noorg.magic.models.base.AbstractModelSupport;
 	
-	public class Card
+	public class Card extends AbstractModelSupport
 	{
 		public var pid:int;
 		public var name:String;
