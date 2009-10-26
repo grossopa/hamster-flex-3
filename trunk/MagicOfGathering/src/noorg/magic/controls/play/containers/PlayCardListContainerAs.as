@@ -31,6 +31,17 @@ public function refreshItemList():void
 	}
 }
 
+
+private function registCardListener(card:PlayCard):void
+{
+	
+}
+
+private function unregistCardListener(card:PlayCard):void
+{
+	
+}
+
 private function moveLeftHandler():void
 {
 	
