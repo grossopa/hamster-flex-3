@@ -39,7 +39,11 @@ public function refreshItemList():void
 private function cardCollectionChangedHandler(evt:CollectionEvent):void
 {
 	if (evt.kind == CollectionEventKind.ADD) {
-		
+		for each (var card:PlayCard in this.curCards) {
+			for each (var child:PlayCardUnit in this.mainHBox.getChildren()) {
+			
+			}
+		}
 	} else if (evt.kind == CollectionEventKind.REMOVE) {
 		
 	}
