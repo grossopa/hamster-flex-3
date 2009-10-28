@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
-	creationComplete="completeHandler()">
+	creationComplete="completeHandler()" xmlns:containers="noorg.magic.controls.play.containers.*">
 
 	<mx:Script source="PlayMainViewAs.as" />
 	<mx:VBox id="mainContainer" width="100%">
