@@ -3,7 +3,9 @@
 	creationComplete="completeHandler()" xmlns:containers="noorg.magic.controls.play.containers.*">
 
 	<mx:Script source="PlayMainViewAs.as" />
-	<mx:VBox id="mainContainer" width="100%">
+	<mx:VBox id="mainContainer" width="100%" creationPolicy="all">
+		<containers:GalleryContainer id="playerGallery" />
+		<containers:PlayCardListContainer id="handList" />
 	</mx:VBox>
 	
 	<mx:Button id="downButton" click="moveDownHandler()" horizontalCenter="0" bottom="5" />

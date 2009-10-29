@@ -6,6 +6,7 @@ package noorg.magic.utils
 	import noorg.magic.models.CardCollection;
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
+	import noorg.magic.models.PlayerCardColl;
 	import noorg.magic.models.staticValue.CardStatus;
 	
 	public class ModelFactory
@@ -19,6 +20,10 @@ package noorg.magic.utils
 			for each (var card:Card in cardColl.cards) {
 				player.cardColl.cards.addItem(createPlayCard(card));
 			}
+			
+			player.playerCardColl = new PlayerCardColl(player.cardColl.cards);
+			player.playerCardColl.shuffleCard(true);
+			
 			return player;
 		}
 		
