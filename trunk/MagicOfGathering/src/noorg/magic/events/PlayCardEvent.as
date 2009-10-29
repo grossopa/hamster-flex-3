@@ -1,11 +1,17 @@
 package noorg.magic.events
 {
 	import flash.events.Event;
+	
+	import noorg.magic.models.PlayCard;
 
 	public class PlayCardEvent extends Event
 	{
+		public static const DRAW_CARD:String = "PlayCardEventDrawCard";
+		
 		public static const LOCATION_CHANGED:String = "PlayCardEventLocationChanged";
 		public static const STATUS_CHANGED:String = "PlayCardEventStatusChanged";
+		
+		public var card:PlayCard;
 		
 		public var originLocation:int = -1;
 		public var newLocation:int = -1;

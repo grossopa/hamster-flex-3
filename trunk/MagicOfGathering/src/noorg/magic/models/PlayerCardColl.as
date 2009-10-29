@@ -3,10 +3,12 @@ package noorg.magic.models
 	import mx.collections.ArrayCollection;
 	
 	import noorg.magic.events.PlayCardEvent;
+	import noorg.magic.models.base.AbstractModelSupport;
 	import noorg.magic.models.staticValue.CardLocation;
 	import noorg.magic.models.staticValue.CardStatus;
+	import noorg.magic.utils.CommonArrayUtil;
 	
-	public class PlayerCardColl
+	public class PlayerCardColl extends AbstractModelSupport
 	{
 		public function PlayerCardColl(cardColl:ArrayCollection)
 		{
@@ -16,7 +18,7 @@ package noorg.magic.models
 				locationArrays.addItem(new ArrayCollection());
 			}
 			
-			for (var i:int = 0; i < CardStatus.TYPE_COUNT; i++) {
+			for (i = 0; i < CardStatus.TYPE_COUNT; i++) {
 				statusArrays.addItem(new ArrayCollection());
 			}
 			
@@ -31,7 +33,7 @@ package noorg.magic.models
 		public var cardColl:ArrayCollection;
 		
 		[Bindable]
-		public const cardStack:ArrayCollection = new ArrayCollection();
+		public var cardStack:ArrayCollection = new ArrayCollection();
 		
 		public const locationArrays:ArrayCollection = new ArrayCollection();
 		public const statusArrays:ArrayCollection = new ArrayCollection();
@@ -46,7 +48,7 @@ package noorg.magic.models
 			return ArrayCollection(this.statusArrays[type]);
 		}
 		
-		public function shuffleCard(isNewCardStack = false):void
+		public function shuffleCard(isNewCardStack:Boolean = false):void
 		{
 			if (isNewCardStack) {
 				cardStack.removeAll();
@@ -55,8 +57,8 @@ package noorg.magic.models
 				}
 			}
 			
-			for(i = 0; i < length; i++) {  
-				j = int(Math.random() * length);
+			for(var i:int = 0; i < length; i++) {  
+				var j:int = int(Math.random() * length);
 				CommonArrayUtil.swapArray(cardStack, i, j);
 			}
 		}
@@ -66,7 +68,12 @@ package noorg.magic.models
 			if (this.cardStack.length == 0) {
 				return null;
 			} else {
-				return PlayCard(this.cardStack.removeItemAt(this.cardStack.length - 1));
+				var disEvt:PlayCardEvent = new PlayCardEvent(PlayCardEvent.DRAW_CARD);
+				var card:PlayCard = PlayCard(this.cardStack.removeItemAt(this.cardStack.length - 1));
+				disEvt.card = card;
+				this.dispatchEvent(disEvt);
+				this.getLocationArray(CardLocation.HAND).addItem(card);
+				return card;
 			}
 		}
 		

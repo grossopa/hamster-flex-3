@@ -16,5 +16,12 @@ package noorg.magic.events
 			super(type, bubbles, cancelable);
 		}
 		
+		override public function clone():Event
+		{
+			var result:CardEvent = new CardEvent(type, bubbles, cancelable);
+			result.card = card;
+			return result;
+		}
+		
 	}
 }

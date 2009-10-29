@@ -1,14 +1,15 @@
 package noorg.magic.models
 {
-	import mx.collections.ArrayCollection;
+	import noorg.magic.models.base.AbstractModelSupport;
 	
-	import noorg.magic.utils.CommonArrayUtil;
-	
-	public class Player
+	public class Player extends AbstractModelSupport
 	{
 		public var name:String;
 		
 		public var cardColl:CardCollection;
+		public var playerCardColl:PlayerCardColl;
+		
+		
 		
 	}
 }

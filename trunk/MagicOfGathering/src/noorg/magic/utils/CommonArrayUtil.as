@@ -11,18 +11,18 @@ package noorg.magic.utils
 			}
 			
 			for(i = 0; i < length; i++) {  
-				j = int(Math.random() * length);
+				var j:int = int(Math.random() * length);
 				swapArray(source, i, j);
 			}
 			return source;
 		}
 		
-		public static function swapArray(item:Array, index1:int, index2:int):void
+		public static function swapArray(item:Object, index1:int, index2:int):void
 		{
 			var temp:Object = item[index1];
 			item[index1] = item[index2];
 			item[index2] = temp;
 		}
-
+		
 	}
 }
