@@ -5,7 +5,11 @@
 	<mx:Script source="PlayMainViewAs.as" />
 	<mx:VBox id="mainContainer" width="100%" creationPolicy="all">
 		<containers:GalleryContainer id="playerGallery" />
-		<containers:PlayCardListContainer id="handList" />
+		<containers:PlayCardListContainer id="creatureList" 
+			label="{resourceManager.getString('main', 'play.creatureList.title')}" />
+		<containers:PlayCardListContainer id="handList" 
+			label="{resourceManager.getString('main', 'play.handList.title')}" />
+
 	</mx:VBox>
 	
 	<mx:Button id="downButton" click="moveDownHandler()" horizontalCenter="0" bottom="5" />

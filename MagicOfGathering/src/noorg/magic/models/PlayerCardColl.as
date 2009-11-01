@@ -56,7 +56,7 @@ package noorg.magic.models
 					cardStack.addItem(card);
 				}
 			}
-			
+			var length:int = cardStack.length;
 			for(var i:int = 0; i < length; i++) {  
 				var j:int = int(Math.random() * length);
 				CommonArrayUtil.swapArray(cardStack, i, j);

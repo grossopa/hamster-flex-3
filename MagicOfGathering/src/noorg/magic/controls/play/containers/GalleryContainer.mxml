@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
-	width="{Constants.CARD_WIDTH * 2}" height="{Constants.CARD_HEIGHT}" creationComplete="completeHandler()">
+	width="{Constants.PLAY_CARD_WIDTH * 2}" height="{Constants.PLAY_CARD_HEIGHT}" 
+	creationComplete="completeHandler()">
 	<mx:Script source="GalleryContainerAs.as" />
-	<mx:Image width="{Constants.CARD_WIDTH}" height="{Constants.CARD_HEIGHT}" buttonMode="true"
+	<mx:Image width="{Constants.PLAY_CARD_WIDTH}" height="{Constants.PLAY_CARD_HEIGHT}" buttonMode="true"
 		source="@Embed(source='noorg/magic/assets/cards/back.png')" verticalCenter="0" 
 		click="backClickHandler()"/>
 </mx:Canvas>

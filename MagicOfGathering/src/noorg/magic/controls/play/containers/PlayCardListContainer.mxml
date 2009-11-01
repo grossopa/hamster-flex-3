@@ -2,7 +2,18 @@
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%"
 	verticalScrollPolicy="off" horizontalScrollPolicy="off">
 	<mx:Script source="PlayCardListContainerAs.as" />
-	<mx:HBox id="mainHBox" />
+	<mx:VBox width="100%">
+		<mx:HBox width="100%">
+			<mx:Label text="{this.label}" />
+			<mx:Label text="{this.cardColl.length}" />
+		</mx:HBox>
+		<mx:HorizontalList id="mainContainer" itemRenderer="noorg.magic.controls.play.unit.PlayCardUnit"
+			width="100%" height="{Constants.PLAY_CARD_HEIGHT}" dataProvider="{this.cardColl}" 
+			dragEnabled="true" dragEnter="listDragEnterHandler(event)"/>
+	</mx:VBox>
+	
 	<mx:Button verticalCenter="0" left="5" label="&lt;" click="moveLeftHandler()" />
-	<mx:Button verticalCenter="0" right="5" label="&gt;" click="moveRightHandler()" />
+	<mx:Button verticalCenter="0" right="5" label="&gt;" click="moveRightHandler()" />		
+
+
 </mx:Canvas>
