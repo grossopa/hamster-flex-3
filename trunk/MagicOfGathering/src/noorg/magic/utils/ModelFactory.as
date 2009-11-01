@@ -18,7 +18,9 @@ package noorg.magic.utils
 			player.cardColl.name = cardColl.name;
 			player.cardColl.cards = new ArrayCollection();
 			for each (var card:Card in cardColl.cards) {
-				player.cardColl.cards.addItem(createPlayCard(card));
+				for (var i:int = 0; i < card.count; i++) {
+					player.cardColl.cards.addItem(createPlayCard(card));
+				}
 			}
 			
 			player.playerCardColl = new PlayerCardColl(player.cardColl.cards);

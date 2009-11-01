@@ -4,7 +4,11 @@ package noorg.magic.utils
 	{
 		public static const CARD_WIDTH:Number = 226;
 		public static const CARD_HEIGHT:Number = 311;
+		
 		public static const CARD_RATIO:Number = new Number(CARD_HEIGHT / CARD_WIDTH);
+		
+		public static const PLAY_CARD_WIDTH:Number = CARD_WIDTH / 2;
+		public static const PLAY_CARD_HEIGHT:Number = CARD_HEIGHT / 2;
 		
 		
 		public static const DEFAULT_GAP:int = 5;
