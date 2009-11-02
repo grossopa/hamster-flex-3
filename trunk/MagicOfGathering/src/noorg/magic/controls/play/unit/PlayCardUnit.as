@@ -30,15 +30,15 @@ package noorg.magic.controls.play.unit
 			this.width = Constants.PLAY_CARD_WIDTH;
 			this.height = Constants.PLAY_CARD_HEIGHT;
 			
-			//this.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+			this.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 		}
 		
-//		private function mouseDownHandler(evt:MouseEvent):void
-//		{
-//			var ds:DragSource = new DragSource();
-//			ds.addData({"x":evt.localX, "y":evt.localY}, "xy");
-//			DragManager.doDrag(this, ds, evt, this);
-//		}
+		private function mouseDownHandler(evt:MouseEvent):void
+		{
+			var ds:DragSource = new DragSource();
+			ds.addData({"x":evt.localX, "y":evt.localY}, "xy");
+			DragManager.doDrag(this, ds, evt, this);
+		}
 		
 		
 	}

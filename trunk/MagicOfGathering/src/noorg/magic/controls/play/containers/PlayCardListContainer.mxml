@@ -9,7 +9,7 @@
 		</mx:HBox>
 		<mx:HorizontalList id="mainContainer" itemRenderer="noorg.magic.controls.play.unit.PlayCardUnit"
 			width="100%" height="{Constants.PLAY_CARD_HEIGHT}" dataProvider="{this.cardColl}" 
-			dragEnabled="true" dragEnter="listDragEnterHandler(event)"/>
+			dragEnter="listDragEnterHandler(event)" itemClick="itemClickHandler(event)" />
 	</mx:VBox>
 	
 	<mx:Button verticalCenter="0" left="5" label="&lt;" click="moveLeftHandler()" />
