@@ -4,9 +4,11 @@ package noorg.magic.utils
 	
 	import mx.core.Application;
 	import mx.core.IFlexDisplayObject;
+	import mx.managers.CursorManager;
 	import mx.managers.PopUpManager;
 	
 	import noorg.magic.controls.masks.ProcessMask;
+	import noorg.magic.controls.play.unit.PlayCardUnit;
 	
 	public class GlobalUtil
 	{
@@ -46,6 +48,6 @@ package noorg.magic.utils
 		{
 			PopUpManager.removePopUp(obj);
 		}
-
+		
 	}
 }

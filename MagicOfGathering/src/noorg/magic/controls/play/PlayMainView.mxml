@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
-	creationComplete="completeHandler()" xmlns:containers="noorg.magic.controls.play.containers.*">
+	creationComplete="completeHandler()" mouseMove="mouseMoveHandler(event)"
+	xmlns:containers="noorg.magic.controls.play.containers.*" xmlns:unit="noorg.magic.controls.play.unit.*">
 
 	<mx:Script source="PlayMainViewAs.as" />
 	<mx:VBox id="mainContainer" width="100%" creationPolicy="all">
@@ -14,4 +15,7 @@
 	
 	<mx:Button id="downButton" click="moveDownHandler()" horizontalCenter="0" bottom="5" />
 	<mx:Button id="upButton" click="moveUpHandler()" horizontalCenter="0" top="5" />
+	
+	<!--<unit:PlayCardUnit id="dragCardUnit" visible="false" x="-1000"
+		width="{Constants.PLAY_CARD_WIDTH}" height="{Constants.PLAY_CARD_HEIGHT}" />-->
 </mx:Canvas>

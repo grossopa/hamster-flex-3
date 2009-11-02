@@ -4,7 +4,9 @@ package noorg.magic.services
 	import flash.events.IEventDispatcher;
 	
 	import noorg.magic.events.CardEvent;
+	import noorg.magic.events.PlayCardEvent;
 	import noorg.magic.models.Card;
+	import noorg.magic.models.PlayCard;
 
 	public class EventService extends EventDispatcher
 	{
@@ -35,6 +37,17 @@ package noorg.magic.services
 			var cardEvent:CardEvent = new CardEvent(CardEvent.ADD);
 			cardEvent.card = card;
 			_instance.dispatchEvent(cardEvent);
+		}
+		
+		
+		/**
+		 * For play
+		 */
+		public function dragPlayCard(playCard:PlayCard):void
+		{
+			var playCardEvent:PlayCardEvent = new PlayCardEvent(PlayCardEvent.DRAW_CARD);
+			playCardEvent.card = playCard;
+			_instance.dispatchEvent(playCardEvent);
 		}
 		
 	}
