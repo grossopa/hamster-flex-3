@@ -3,12 +3,15 @@ package noorg.magic.controls.play.unit
 	import flash.events.MouseEvent;
 	
 	import mx.containers.HBox;
+	import mx.controls.Image;
 	import mx.core.DragSource;
 	import mx.managers.DragManager;
 	
 	import noorg.magic.controls.unit.CardUnit;
 	import noorg.magic.models.Card;
 	import noorg.magic.utils.Constants;
+	
+	import org.hamster.utils.ImageUtil;
 
 	public class PlayCardUnit extends CardUnit
 	{
@@ -37,7 +40,8 @@ package noorg.magic.controls.play.unit
 		{
 			var ds:DragSource = new DragSource();
 			ds.addData({"x":evt.localX, "y":evt.localY}, "xy");
-			DragManager.doDrag(this, ds, evt, this);
+			var snapshot:Image = ImageUtil.toImage(mainImage, true);
+			DragManager.doDrag(this, ds, evt, snapshot);
 		}
 		
 		

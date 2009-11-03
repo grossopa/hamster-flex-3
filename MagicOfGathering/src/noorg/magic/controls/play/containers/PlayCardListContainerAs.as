@@ -11,8 +11,6 @@ import noorg.magic.utils.Constants;Constants;
 
 private const ES:EventService = EventService.getInstance();
 
-public var locationType:int;
-
 private var _cardColl:ArrayCollection;
 
 public function set cardColl(value:ArrayCollection):void
@@ -30,6 +28,14 @@ private function listDragEnterHandler(evt:DragEvent):void
 {
 	DragManager.acceptDragDrop(mainContainer);
 	// var playCard:PlayCard = PlayCard(PlayCardUnit(evt).card);
+}
+
+private function listDragDropHandler(evt:DragEvent):void
+{
+	if (evt.dragInitiator is PlayCardUnit) {
+		var playCard:PlayCard = PlayCard(PlayCardUnit(evt.dragInitiator).card);
+		playCard.location = locationType;
+	}
 }
 
 private function moveLeftHandler():void

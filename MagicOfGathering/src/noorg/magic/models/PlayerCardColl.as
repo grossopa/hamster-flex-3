@@ -72,7 +72,7 @@ package noorg.magic.models
 				var card:PlayCard = PlayCard(this.cardStack.removeItemAt(this.cardStack.length - 1));
 				disEvt.card = card;
 				this.dispatchEvent(disEvt);
-				this.getLocationArray(CardLocation.HAND).addItem(card);
+				card.location = CardLocation.HAND;
 				return card;
 			}
 		}
