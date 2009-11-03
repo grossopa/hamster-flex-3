@@ -1,7 +1,13 @@
 // ActionScript file
+import mx.controls.Image;
+import mx.core.DragSource;
+import mx.managers.DragManager;
+
 import noorg.magic.models.PlayCard;
 import noorg.magic.models.Player;
-import noorg.magic.utils.Constants;Constants;
+import noorg.magic.utils.Constants;
+
+import org.hamster.utils.ImageUtil;Constants;
 
 private var _player:Player;
 

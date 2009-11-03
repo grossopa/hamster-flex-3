@@ -6,9 +6,9 @@
 	<mx:Script source="PlayMainViewAs.as" />
 	<mx:VBox id="mainContainer" width="100%" creationPolicy="all">
 		<containers:GalleryContainer id="playerGallery" />
-		<containers:PlayCardListContainer id="creatureList" 
+		<containers:PlayCardListContainer id="creatureList" locationType="{CardLocation.CREATURE}"
 			label="{resourceManager.getString('main', 'play.creatureList.title')}" />
-		<containers:PlayCardListContainer id="handList" 
+		<containers:PlayCardListContainer id="handList" locationType="{CardLocation.HAND}"
 			label="{resourceManager.getString('main', 'play.handList.title')}" />
 
 	</mx:VBox>

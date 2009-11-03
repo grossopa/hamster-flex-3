@@ -5,5 +5,5 @@
 	<mx:Script source="GalleryContainerAs.as" />
 	<mx:Image width="{Constants.PLAY_CARD_WIDTH}" height="{Constants.PLAY_CARD_HEIGHT}" buttonMode="true"
 		source="@Embed(source='noorg/magic/assets/cards/back.png')" verticalCenter="0" 
-		click="backClickHandler()"/>
+		click="backClickHandler()" />
 </mx:Canvas>

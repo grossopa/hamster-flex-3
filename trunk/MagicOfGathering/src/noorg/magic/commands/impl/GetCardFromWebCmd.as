@@ -52,7 +52,6 @@ package noorg.magic.commands.impl
 			var imageSuffix:String = "' border=0>";
 			var imageEndIndex:int = str.indexOf(imageSuffix, imageStartIndex);
 			card.imgUrl = str.substring(imageStartIndex + imagePrefix.length, imageEndIndex);
-			trace(card.getBaseInfo());
 						
 			super.result(data);
 		}
