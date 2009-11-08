@@ -2,8 +2,11 @@ package noorg.magic.services
 {
 	import mx.collections.ArrayCollection;
 	
+	import noorg.magic.controls.play.unit.PlayCardUnit;
 	import noorg.magic.models.Card;
+	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
+	import noorg.magic.utils.MapCollector;
 	
 	public class DataService
 	{
@@ -55,5 +58,18 @@ package noorg.magic.services
 		 */
 		public var playerRed:Player;
 		public var playerBlue:Player;
+		
+		private var _playCardMap:MapCollector = new MapCollector();
+		
+		public function getPlayCardUnitByCard(playCard:PlayCard):PlayCardUnit
+		{
+			var result:PlayCardUnit = PlayCardUnit(_playCardMap.getValue(playCard));
+			if (result == null) {
+				result = new PlayCardUnit();
+				result.card = playCard;
+				_playCardMap.put(playCard, result);
+			}
+			return result;
+		}
 	}
 }

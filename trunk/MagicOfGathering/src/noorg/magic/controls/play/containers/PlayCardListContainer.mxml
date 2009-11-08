@@ -14,9 +14,8 @@
 			<mx:Label text="{this.label}" />
 			<mx:Label text="{this.cardColl.length}" />
 		</mx:HBox>
-		<mx:HorizontalList id="mainContainer" paddingTop="0" paddingBottom="0"
-			itemRenderer="noorg.magic.controls.play.unit.PlayCardUnit" 
-			width="100%" height="{Constants.PLAY_CARD_HEIGHT}" dataProvider="{this.cardColl}" 
+		<mx:HBox id="mainContainer" paddingTop="0" paddingBottom="0"
+			width="100%" height="{Constants.PLAY_CARD_HEIGHT}" backgroundColor="gray"
 			dragEnter="listDragEnterHandler(event)" dragDrop="listDragDropHandler(event)" />
 			<!--dragEnabled="true" dropEnabled="true" dragEnter="listDragEnterHandler(event)" dragDrop="listDragDropHandler(event)"-->
 	</mx:VBox>

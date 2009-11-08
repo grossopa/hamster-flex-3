@@ -24,7 +24,8 @@ package noorg.magic.utils
 		
 		public function getValue(key:Object):Object
 		{
-			return _values.getItemAt(_keys.getItemIndex(key));
+			var index:int = _keys.getItemIndex(key);
+			return index == -1 ? null : _values.getItemAt(index);
 		}
 		
 		public function removeByKey(key:Object):Object

@@ -7,6 +7,7 @@ package noorg.magic.utils
 	import mx.managers.PopUpManager;
 	
 	import noorg.magic.controls.masks.ProcessMask;
+	import noorg.magic.controls.popups.CardDetailPopup;
 	import noorg.magic.models.PlayCard;
 	
 	public class GlobalUtil
@@ -48,9 +49,10 @@ package noorg.magic.utils
 			PopUpManager.removePopUp(obj);
 		}
 		
-		public static function showDetail(card:PlayCard):void
+		public static function showDetailPopup(playCard:PlayCard):void
 		{
-			
+			var obj:CardDetailPopup = createPopup(CardDetailPopup) as CardDetailPopup;
+			obj.playCard = playCard;
 		}
 		
 	}

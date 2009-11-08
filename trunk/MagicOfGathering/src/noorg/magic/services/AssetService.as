@@ -17,6 +17,9 @@ package noorg.magic.services
 		
 		[Embed(source='noorg/magic/assets/icons/icon_detail.png')]
 		public const IconDetail:Class;
+		
+		[Embed(source='noorg/magic/assets/icons/icon_tag.png')]
+		public const IconTag:Class;
 
 	}
 }
