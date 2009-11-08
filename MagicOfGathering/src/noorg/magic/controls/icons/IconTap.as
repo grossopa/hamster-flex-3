@@ -4,9 +4,9 @@ package noorg.magic.controls.icons
 	
 	import mx.events.FlexEvent;
 	
-	public class IconTag extends IconBase
+	public class IconTap extends IconBase
 	{
-		public function IconTag()
+		public function IconTap()
 		{
 			super();
 		}
@@ -15,7 +15,7 @@ package noorg.magic.controls.icons
 		{
 			super.completeHandler(evt);
 			
-			var bm:Bitmap = new AS.IconTag;
+			var bm:Bitmap = new AS.IconTap;
 			this.graphics.beginBitmapFill(bm.bitmapData);
 			this.graphics.drawRect(0, 0, 20, 20);
 			this.graphics.endFill();

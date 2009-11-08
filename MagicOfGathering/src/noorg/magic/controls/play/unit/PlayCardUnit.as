@@ -8,7 +8,7 @@ package noorg.magic.controls.play.unit
 	import mx.managers.DragManager;
 	
 	import noorg.magic.controls.icons.IconDetail;
-	import noorg.magic.controls.icons.IconTag;
+	import noorg.magic.controls.icons.IconTap;
 	import noorg.magic.controls.unit.CardUnit;
 	import noorg.magic.events.PlayCardDragEvent;
 	import noorg.magic.events.PlayCardEvent;
@@ -24,7 +24,7 @@ package noorg.magic.controls.play.unit
 	{
 		
 		private var iconDetail:IconDetail;
-		private var iconTag:IconTag;
+		private var iconTap:IconTap;
 			
 		override public function set card(value:Card):void
 		{
@@ -42,6 +42,8 @@ package noorg.magic.controls.play.unit
 			this.height = Constants.PLAY_CARD_HEIGHT;
 			
 			this.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+			this.addEventListener(MouseEvent.ROLL_OVER, rollOverHandler);
+			this.addEventListener(MouseEvent.ROLL_OUT, rollOutHandler);
 		//	this.addEventListener(DragEvent.DRAG_ENTER, dragEnterHandler);
 		//	this.addEventListener(DragEvent.DRAG_DROP, dragDropHandler);
 		}
@@ -53,14 +55,16 @@ package noorg.magic.controls.play.unit
 			iconDetail = new IconDetail();
 			iconDetail.x = 2;
 			iconDetail.y = 2;
+			iconDetail.visible = false;
 			iconDetail.addEventListener(MouseEvent.CLICK, detailClickHandler);
 			this.addChild(iconDetail);
 			
-			iconTag = new IconTag();
-			iconTag.x = 4 + Constants.ICON_WIDTH;
-			iconTag.y = 2;
-			iconTag.addEventListener(MouseEvent.CLICK, tagClickHandler);
-			this.addChild(iconTag);
+			iconTap = new IconTap();
+			iconTap.x = 4 + Constants.ICON_WIDTH;
+			iconTap.y = 2;
+			iconTap.visible = false;
+			iconTap.addEventListener(MouseEvent.CLICK, tagClickHandler);
+			this.addChild(iconTap);
 		}
 		
 		private function detailClickHandler(evt:MouseEvent):void
@@ -85,11 +89,16 @@ package noorg.magic.controls.play.unit
 		private function statusChangedHandler(evt:PlayCardEvent):void
 		{
 			if (evt.newStatus == CardStatus.PLAY_TAGGED) {
-				this.iconTag.alpha = 0.5;
-				this.alpha = 0.5;
+				this.width = Constants.PLAY_CARD_HEIGHT;
+				this.mainImage.width = this.width;
+				this.mainImage.validateNow();
+				this.mainImage.rotation = 90;
+				this.mainImage.x = Constants.PLAY_CARD_HEIGHT;
 			} else {
-				this.iconTag.alpha = 1;
-				this.alpha = 1;
+				this.width = Constants.PLAY_CARD_WIDTH;
+				this.mainImage.width = this.width;
+				this.mainImage.rotation = 0;
+				this.mainImage.x = 0;
 			}
 		}
 		
@@ -99,6 +108,18 @@ package noorg.magic.controls.play.unit
 			ds.addData({"x":evt.localX, "y":evt.localY}, "xy");
 			var snapshot:Image = ImageUtil.toImage(mainImage, true);
 			DragManager.doDrag(this, ds, evt, snapshot);
+		}
+		
+		private function rollOverHandler(evt:MouseEvent):void
+		{
+			this.iconDetail.visible = true;
+			this.iconTap.visible = true;
+		}
+		
+		private function rollOutHandler(evt:MouseEvent):void
+		{
+			this.iconDetail.visible = false;
+			this.iconTap.visible = false;			
 		}
 		
 		private function dragEnterHandler(evt:DragEvent):void
