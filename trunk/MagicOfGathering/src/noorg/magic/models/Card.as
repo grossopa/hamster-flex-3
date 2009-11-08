@@ -15,16 +15,6 @@ package noorg.magic.models
 		public var isSelected:Boolean;
 		public var count:int;
 		
-//		public function toString():String
-//		{
-//			return '[pid:'+ pid + ', name:' + name + ", imgUrl:" + imgUrl + ", oracleText:" + oracleText + "]";
-//		}
-//		
-//		public function getBaseInfo():String
-//		{
-//			return '[pid:'+ pid + ', name:' + name + ", imgUrl:" + imgUrl + ']';
-//		}
-		
 		public function decodeXML(xml:XML):void
 		{
 			this.pid = xml.@pid;

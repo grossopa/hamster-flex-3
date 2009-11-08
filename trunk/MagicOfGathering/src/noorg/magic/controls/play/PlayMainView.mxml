@@ -7,8 +7,10 @@
 	<mx:VBox id="mainContainer" width="100%" creationPolicy="all">
 		<containers:GalleryContainer id="playerGallery" />
 		<containers:PlayCardListContainer id="creatureList" locationType="{CardLocation.CREATURE}"
+			 width="100%"
 			label="{resourceManager.getString('main', 'play.creatureList.title')}" />
 		<containers:PlayCardListContainer id="handList" locationType="{CardLocation.HAND}"
+			 width="100%"
 			label="{resourceManager.getString('main', 'play.handList.title')}" />
 
 	</mx:VBox>

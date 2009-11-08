@@ -122,12 +122,16 @@ private function listDragDropHandler(evt:DragEvent):void
 
 private function moveLeftHandler():void
 {
-	
+	if (mainContainer.horizontalScrollPosition <= 0) {
+		mainContainer.horizontalScrollPosition = 0;
+	} else {
+		mainContainer.horizontalScrollPosition -= Constants.DEFAULT_GAP + Constants.PLAY_CARD_WIDTH;
+	}
 }
 
 private function moveRightHandler():void
 {
-	
+	mainContainer.horizontalScrollPosition += Constants.DEFAULT_GAP + Constants.PLAY_CARD_WIDTH;
 }
 
 override protected function updateDisplayList(uw:Number, uh:Number):void
