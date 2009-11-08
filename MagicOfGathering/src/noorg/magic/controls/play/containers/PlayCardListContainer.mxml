@@ -15,10 +15,10 @@
 			<mx:Label text="{this.cardColl.length}" />
 		</mx:HBox>
 		<mx:HorizontalList id="mainContainer" paddingTop="0" paddingBottom="0"
-			itemRenderer="noorg.magic.controls.play.unit.PlayCardUnit" dragEnabled="true" dropEnabled="true"
+			itemRenderer="noorg.magic.controls.play.unit.PlayCardUnit" 
 			width="100%" height="{Constants.PLAY_CARD_HEIGHT}" dataProvider="{this.cardColl}" 
 			dragEnter="listDragEnterHandler(event)" dragDrop="listDragDropHandler(event)" />
-			<!--dragEnter="listDragEnterHandler(event)" dragDrop="listDragDropHandler(event)"-->
+			<!--dragEnabled="true" dropEnabled="true" dragEnter="listDragEnterHandler(event)" dragDrop="listDragDropHandler(event)"-->
 	</mx:VBox>
 
 	<mx:Image id="insertLine" width="5" height="100%" visible="false" />

@@ -2,14 +2,15 @@ package noorg.magic.controls.play.unit
 {
 	import flash.events.MouseEvent;
 	
-	import mx.containers.HBox;
 	import mx.controls.Image;
 	import mx.core.DragSource;
 	import mx.events.DragEvent;
 	import mx.managers.DragManager;
 	
+	import noorg.magic.controls.icons.IconDetail;
 	import noorg.magic.controls.unit.CardUnit;
 	import noorg.magic.events.PlayCardDragEvent;
+	import noorg.magic.events.PlayCardEvent;
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.utils.Constants;
 	
@@ -17,8 +18,9 @@ package noorg.magic.controls.play.unit
 
 	public class PlayCardUnit extends CardUnit
 	{
-		private var _child_hBox:HBox;
 		
+		private var iconDetail:IconDetail;
+			
 		override public function set data(value:Object):void
 		{
 			this.card = PlayCard(value);
@@ -36,8 +38,25 @@ package noorg.magic.controls.play.unit
 			this.height = Constants.PLAY_CARD_HEIGHT;
 			
 			this.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
-			this.addEventListener(DragEvent.DRAG_ENTER, dragEnterHandler);
-			this.addEventListener(DragEvent.DRAG_DROP, dragDropHandler);
+		//	this.addEventListener(DragEvent.DRAG_ENTER, dragEnterHandler);
+		//	this.addEventListener(DragEvent.DRAG_DROP, dragDropHandler);
+		}
+		
+		override protected function createChildren():void
+		{
+			super.createChildren();
+			
+			iconDetail = new IconDetail();
+			iconDetail.width = Constants.ICON_WIDTH;
+			iconDetail.height = Constants.ICON_HEIGHT;
+			iconDetail.addEventListener(MouseEvent.CLICK, detailClickHandler);
+		}
+		
+		private function detailClickHandler(evt:MouseEvent):void
+		{
+			var disEvt:PlayCardEvent = new PlayCardEvent(PlayCardEvent.SHOW_DETAIL, true);
+			disEvt.card = PlayCard(this.card);
+			this.dispatchEvent(disEvt);
 		}
 		
 		private function mouseDownHandler(evt:MouseEvent):void

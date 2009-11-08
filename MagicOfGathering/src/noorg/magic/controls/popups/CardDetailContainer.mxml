@@ -2,7 +2,7 @@
 <mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:models="noorg.magic.models.*" 
 	xmlns:unit="noorg.magic.controls.unit.*" height="311"
 	 creationComplete="completeHandler()">
-	<mx:Script source="CardDetailPopupAs.as" />
+	<mx:Script source="CardDetailContainerAs.as" />
 	<unit:CardUnit id="mainCardImg" width="{Constants.CARD_WIDTH}" height="{Constants.CARD_HEIGHT}" />
 	<mx:VBox width="100%" height="100%">
 		<mx:Label text="{_name}" fontWeight="bold" fontSize="13" />

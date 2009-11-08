@@ -8,6 +8,8 @@ package noorg.magic.events
 	{
 		public static const DRAW_CARD:String = "PlayCardEventDrawCard";
 		
+		public static const SHOW_DETAIL:String = "PlayCardEventShowDetail";
+		
 		public static const LOCATION_CHANGED:String = "PlayCardEventLocationChanged";
 		public static const STATUS_CHANGED:String = "PlayCardEventStatusChanged";
 		
