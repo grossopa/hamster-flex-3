@@ -2,7 +2,7 @@
 <mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" minWidth="800" minHeight="600" width="800" height="600" backgroundColor="white"
  	initialize="init()" applicationComplete="appCompleteHandler()" 
  	xmlns:controls="noorg.magic.controls.*"
- 	xmlns:ns1="org.hamster.components.chrometab.*">
+ 	xmlns:ns1="org.hamster.components.chrometab.*" xmlns:icons="noorg.magic.controls.icons.*">
 	<mx:Script source="MagicOfGatheringAs.as" />
 	
 	<mx:Metadata>

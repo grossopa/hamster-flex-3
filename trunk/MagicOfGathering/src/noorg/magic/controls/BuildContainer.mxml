@@ -10,7 +10,7 @@
 				 itemDoubleClick="cardDoubleClickHandler(event)" />
 		</mx:VBox>
 		<mx:VBox>
-			<popups:CardDetailPopup id="detailPopup" width="100%" />
+			<popups:CardDetailContainer id="detailPopup" width="100%" />
 			<containers:CardListContainer id="cardListContainer" width="100%" />
 		</mx:VBox>
 	</mx:HDividedBox>
