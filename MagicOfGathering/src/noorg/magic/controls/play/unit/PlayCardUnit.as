@@ -8,11 +8,15 @@ package noorg.magic.controls.play.unit
 	import mx.managers.DragManager;
 	
 	import noorg.magic.controls.icons.IconDetail;
+	import noorg.magic.controls.icons.IconTag;
 	import noorg.magic.controls.unit.CardUnit;
 	import noorg.magic.events.PlayCardDragEvent;
 	import noorg.magic.events.PlayCardEvent;
+	import noorg.magic.models.Card;
 	import noorg.magic.models.PlayCard;
+	import noorg.magic.models.staticValue.CardStatus;
 	import noorg.magic.utils.Constants;
+	import noorg.magic.utils.GlobalUtil;
 	
 	import org.hamster.utils.ImageUtil;
 
@@ -20,15 +24,15 @@ package noorg.magic.controls.play.unit
 	{
 		
 		private var iconDetail:IconDetail;
+		private var iconTag:IconTag;
 			
-		override public function set data(value:Object):void
+		override public function set card(value:Card):void
 		{
-			this.card = PlayCard(value);
-		}
-		
-		override public function get data():Object
-		{
-			return this.card;
+			if (super.card != null) {
+				super.card.removeEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
+			}
+			super.card = PlayCard(value);
+			super.card.addEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
 		}
 		
 		public function PlayCardUnit()
@@ -47,16 +51,46 @@ package noorg.magic.controls.play.unit
 			super.createChildren();
 			
 			iconDetail = new IconDetail();
-			iconDetail.width = Constants.ICON_WIDTH;
-			iconDetail.height = Constants.ICON_HEIGHT;
+			iconDetail.x = 2;
+			iconDetail.y = 2;
 			iconDetail.addEventListener(MouseEvent.CLICK, detailClickHandler);
+			this.addChild(iconDetail);
+			
+			iconTag = new IconTag();
+			iconTag.x = 4 + Constants.ICON_WIDTH;
+			iconTag.y = 2;
+			iconTag.addEventListener(MouseEvent.CLICK, tagClickHandler);
+			this.addChild(iconTag);
 		}
 		
 		private function detailClickHandler(evt:MouseEvent):void
 		{
-			var disEvt:PlayCardEvent = new PlayCardEvent(PlayCardEvent.SHOW_DETAIL, true);
-			disEvt.card = PlayCard(this.card);
-			this.dispatchEvent(disEvt);
+			//var disEvt:PlayCardEvent = new PlayCardEvent(PlayCardEvent.SHOW_DETAIL, true);
+			//disEvt.card = PlayCard(this.card);
+			//this.dispatchEvent(disEvt);
+			
+			GlobalUtil.showDetailPopup(PlayCard(this.card));
+		}
+		
+		private function tagClickHandler(evt:MouseEvent):void
+		{
+			var playCard:PlayCard = PlayCard(this.card);
+			if (playCard.status != CardStatus.PLAY_TAGGED) {
+				playCard.status = CardStatus.PLAY_TAGGED;
+			} else {
+				playCard.status = CardStatus.PLAY;
+			}
+		}
+		
+		private function statusChangedHandler(evt:PlayCardEvent):void
+		{
+			if (evt.newStatus == CardStatus.PLAY_TAGGED) {
+				this.iconTag.alpha = 0.5;
+				this.alpha = 0.5;
+			} else {
+				this.iconTag.alpha = 1;
+				this.alpha = 1;
+			}
 		}
 		
 		private function mouseDownHandler(evt:MouseEvent):void

@@ -38,7 +38,6 @@ package noorg.magic.utils
 			result.imgPath = card.imgPath;
 			result.imgUrl = card.imgUrl;
 			result.pid = card.pid;
-			result.status = CardStatus.GALLERY;
 			result.oracleText = card.oracleText;
 			result.isSelected = true;
 			return result;
