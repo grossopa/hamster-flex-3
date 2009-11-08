@@ -2,7 +2,6 @@ package noorg.magic.events
 {
 	import flash.events.Event;
 	
-	import noorg.magic.controls.play.unit.PlayCardUnit;
 	import noorg.magic.models.PlayCard;
 
 	public class PlayCardEvent extends Event

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%"
-	verticalScrollPolicy="off" horizontalScrollPolicy="off">
+	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	creationComplete="completeHandler()">
 	
 	<mx:Script>
 		<![CDATA[
@@ -14,11 +15,13 @@
 			<mx:Label text="{this.cardColl.length}" />
 		</mx:HBox>
 		<mx:HorizontalList id="mainContainer" paddingTop="0" paddingBottom="0"
-			itemRenderer="noorg.magic.controls.play.unit.PlayCardUnit"
+			itemRenderer="noorg.magic.controls.play.unit.PlayCardUnit" dragEnabled="true" dropEnabled="true"
 			width="100%" height="{Constants.PLAY_CARD_HEIGHT}" dataProvider="{this.cardColl}" 
-			dragEnter="listDragEnterHandler(event)" dragDrop="listDragDropHandler(event)"
-			itemClick="itemClickHandler(event)" />
+			dragEnter="listDragEnterHandler(event)" dragDrop="listDragDropHandler(event)" />
+			<!--dragEnter="listDragEnterHandler(event)" dragDrop="listDragDropHandler(event)"-->
 	</mx:VBox>
+
+	<mx:Image id="insertLine" width="5" height="100%" visible="false" />
 	
 	<mx:Button verticalCenter="0" left="5" label="&lt;" click="moveLeftHandler()" />
 	<mx:Button verticalCenter="0" right="5" label="&gt;" click="moveRightHandler()" />		
