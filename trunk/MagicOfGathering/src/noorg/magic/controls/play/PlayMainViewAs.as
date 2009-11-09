@@ -30,6 +30,7 @@ public function set player(value:Player):void
 private function setPlayer(value:Player):void
 {
 	this.playerGallery.player = value;
+	this.hpContainer.player = value;
 	handList.cardColl = player.playerCardColl.getLocationArray(CardLocation.HAND);
 	creatureList.cardColl = player.playerCardColl.getLocationArray(CardLocation.CREATURE);
 }

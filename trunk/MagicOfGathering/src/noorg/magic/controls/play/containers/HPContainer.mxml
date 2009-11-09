@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="170" height="68"
-	verticalScrollPolicy="off" horizontalScrollPolicy="off">
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="150" height="60"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off" buttonMode="true"
+	click="clickHandler(event)"
+	creationComplete="completeHandler()">
 	<mx:Script source="HPContainerAs.as" />
 </mx:Canvas>

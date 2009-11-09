@@ -5,7 +5,11 @@
 
 	<mx:Script source="PlayMainViewAs.as" />
 	<mx:VBox id="mainContainer" width="100%" creationPolicy="all">
-		<containers:GalleryContainer id="playerGallery" />
+		<mx:HBox>
+			<containers:GalleryContainer id="playerGallery" />
+			<containers:HPContainer id="hpContainer" />
+		</mx:HBox>
+		
 		<containers:PlayCardListContainer id="creatureList" locationType="{CardLocation.CREATURE}"
 			 width="100%"
 			label="{resourceManager.getString('main', 'play.creatureList.title')}" />
