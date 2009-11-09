@@ -20,6 +20,12 @@ package noorg.magic.services
 		
 		[Embed(source='noorg/magic/assets/icons/icon_tap.png')]
 		public const IconTap:Class;
+		
+		[Embed(source='noorg/magic/assets/others/hp_damaged.png')]
+		public const HPDamaged:Class;
+		
+		[Embed(source='noorg/magic/assets/others/hp_health.png')]
+		public const HPHealth:Class;
 
 	}
 }
