@@ -26,6 +26,9 @@ package noorg.magic.services
 		
 		[Embed(source='noorg/magic/assets/others/hp_health.png')]
 		public const HPHealth:Class;
+		
+		[Embed(source='noorg/magic/assets/cards/back.png')]
+		public const CardBack:Class;
 
 	}
 }

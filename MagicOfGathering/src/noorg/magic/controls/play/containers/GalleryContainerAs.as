@@ -1,13 +1,10 @@
 // ActionScript file
-import mx.controls.Image;
-import mx.core.DragSource;
-import mx.managers.DragManager;
-
 import noorg.magic.models.PlayCard;
 import noorg.magic.models.Player;
-import noorg.magic.utils.Constants;
+import noorg.magic.services.AssetService;
+import noorg.magic.utils.Constants;Constants;
 
-import org.hamster.utils.ImageUtil;Constants;
+private static const AS:AssetService = AssetService.getInstance();
 
 private var _player:Player;
 

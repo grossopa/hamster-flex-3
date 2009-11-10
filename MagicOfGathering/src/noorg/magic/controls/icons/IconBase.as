@@ -12,6 +12,8 @@ package noorg.magic.controls.icons
 	{
 		public const AS:AssetService = AssetService.getInstance();
 		
+		public var isEnabled:Boolean = true;
+		
 		public function IconBase()
 		{
 			super();

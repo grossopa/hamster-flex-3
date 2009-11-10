@@ -7,6 +7,7 @@
 	<mx:VBox id="mainContainer" width="100%" creationPolicy="all">
 		<mx:HBox>
 			<containers:GalleryContainer id="playerGallery" />
+			<containers:GraveyardContainer id="graveyard" />
 			<containers:HPContainer id="hpContainer" />
 		</mx:HBox>
 		
