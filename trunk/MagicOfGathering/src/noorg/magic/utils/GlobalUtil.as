@@ -8,7 +8,9 @@ package noorg.magic.utils
 	
 	import noorg.magic.controls.masks.ProcessMask;
 	import noorg.magic.controls.popups.CardDetailPopup;
+	import noorg.magic.controls.popups.GraveyardDetailPopup;
 	import noorg.magic.models.PlayCard;
+	import noorg.magic.models.Player;
 	
 	public class GlobalUtil
 	{
@@ -53,6 +55,12 @@ package noorg.magic.utils
 		{
 			var obj:CardDetailPopup = createPopup(CardDetailPopup) as CardDetailPopup;
 			obj.playCard = playCard;
+		}
+		
+		public static function showGraveyardDetailPopup(player:Player):void
+		{
+			var obj:GraveyardDetailPopup = createPopup(GraveyardDetailPopup) as GraveyardDetailPopup;
+			obj.player = player;
 		}
 		
 	}
