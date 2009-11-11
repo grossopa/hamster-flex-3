@@ -8,6 +8,7 @@ package noorg.magic.controls.play.unit
 	import mx.managers.DragManager;
 	
 	import noorg.magic.controls.icons.IconDetail;
+	import noorg.magic.controls.icons.IconManager;
 	import noorg.magic.controls.icons.IconTap;
 	import noorg.magic.controls.unit.CardUnit;
 	import noorg.magic.events.PlayCardDragEvent;
@@ -22,9 +23,9 @@ package noorg.magic.controls.play.unit
 
 	public class PlayCardUnit extends CardUnit
 	{
-		
-		private var iconDetail:IconDetail;
-		private var iconTap:IconTap;
+		protected const iconManager:IconManager = new IconManager();
+		protected var iconDetail:IconDetail;
+		protected var iconTap:IconTap;
 			
 		override public function set card(value:Card):void
 		{
@@ -52,19 +53,24 @@ package noorg.magic.controls.play.unit
 		{
 			super.createChildren();
 			
+			createIcon();
+		}
+		
+		protected function createIcon():void
+		{
 			iconDetail = new IconDetail();
-			iconDetail.x = 2;
-			iconDetail.y = 2;
 			iconDetail.visible = false;
 			iconDetail.addEventListener(MouseEvent.CLICK, detailClickHandler);
 			this.addChild(iconDetail);
 			
 			iconTap = new IconTap();
-			iconTap.x = 4 + Constants.ICON_WIDTH;
-			iconTap.y = 2;
 			iconTap.visible = false;
-			iconTap.addEventListener(MouseEvent.CLICK, tagClickHandler);
+			iconTap.addEventListener(MouseEvent.CLICK, tapClickHandler);
 			this.addChild(iconTap);
+			
+			this.iconManager.iconArrColl.addItem(iconDetail);
+			this.iconManager.iconArrColl.addItem(iconTap);
+			this.iconManager.refreshLocation();
 		}
 		
 		private function detailClickHandler(evt:MouseEvent):void
@@ -76,7 +82,7 @@ package noorg.magic.controls.play.unit
 			GlobalUtil.showDetailPopup(PlayCard(this.card));
 		}
 		
-		private function tagClickHandler(evt:MouseEvent):void
+		private function tapClickHandler(evt:MouseEvent):void
 		{
 			var playCard:PlayCard = PlayCard(this.card);
 			if (playCard.status != CardStatus.PLAY_TAGGED) {
@@ -112,14 +118,12 @@ package noorg.magic.controls.play.unit
 		
 		private function rollOverHandler(evt:MouseEvent):void
 		{
-			this.iconDetail.visible = true;
-			this.iconTap.visible = true;
+			this.iconManager.showIcon();
 		}
 		
 		private function rollOutHandler(evt:MouseEvent):void
 		{
-			this.iconDetail.visible = false;
-			this.iconTap.visible = false;			
+			this.iconManager.hideIcon();
 		}
 		
 		private function dragEnterHandler(evt:DragEvent):void

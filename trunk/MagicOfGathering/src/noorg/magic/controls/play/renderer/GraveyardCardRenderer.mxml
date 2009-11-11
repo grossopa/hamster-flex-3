@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
-	width="{Constants.PLAY_CARD_WIDTH}" height="{Constants.PLAY_CARD_HEIGHT}" 
-	xmlns:unit="noorg.magic.controls.play.unit.*"
-	 creationComplete="completeHandler()">
+<unit:PlayCardUnit xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:unit="noorg.magic.controls.play.unit.*">
 	<mx:Script source="GraveyardCardRendererAs.as" />
-	
-	<unit:PlayCardUnit id="playCardUnit" />
-</mx:Canvas>
+</unit:PlayCardUnit>

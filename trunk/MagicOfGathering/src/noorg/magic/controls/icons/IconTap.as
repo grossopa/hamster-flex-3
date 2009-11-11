@@ -4,6 +4,8 @@ package noorg.magic.controls.icons
 	
 	import mx.events.FlexEvent;
 	
+	import noorg.magic.utils.Constants;
+	
 	public class IconTap extends IconBase
 	{
 		public function IconTap()
@@ -14,11 +16,7 @@ package noorg.magic.controls.icons
 		override protected function completeHandler(evt:FlexEvent):void
 		{
 			super.completeHandler(evt);
-			
-			var bm:Bitmap = new AS.IconTap;
-			this.graphics.beginBitmapFill(bm.bitmapData);
-			this.graphics.drawRect(0, 0, 20, 20);
-			this.graphics.endFill();
+			drawIcon(AS.IconTap);
 		}
 		
 	}
