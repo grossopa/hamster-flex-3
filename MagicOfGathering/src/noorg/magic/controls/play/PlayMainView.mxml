@@ -10,13 +10,14 @@
 			<containers:GraveyardContainer id="graveyard" />
 			<containers:HPContainer id="hpContainer" />
 		</mx:HBox>
-		
+		<containers:PlayCardListContainer id="creatureList" locationType="{CardLocation.MAGIC}"
+			 width="100%" label="{resourceManager.getString('main', 'play.magicList.title')}" />		
 		<containers:PlayCardListContainer id="creatureList" locationType="{CardLocation.CREATURE}"
-			 width="100%"
-			label="{resourceManager.getString('main', 'play.creatureList.title')}" />
+			 width="100%" label="{resourceManager.getString('main', 'play.creatureList.title')}" />
+		<containers:PlayCardListContainer id="creatureList" locationType="{CardLocation.ARTIFACT}"
+			 width="100%" label="{resourceManager.getString('main', 'play.artifactList.title')}" />
 		<containers:PlayCardListContainer id="handList" locationType="{CardLocation.HAND}"
-			 width="100%"
-			label="{resourceManager.getString('main', 'play.handList.title')}" />
+			 width="100%" label="{resourceManager.getString('main', 'play.handList.title')}" />
 
 	</mx:VBox>
 	

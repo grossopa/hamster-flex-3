@@ -14,9 +14,9 @@ public function set player(value:Player):void
 {
 	this._player = value;
 	
-	if (this._cardColl != null) {
-		this._cardColl.removeEventListener(CollectionEvent.COLLECTION_CHANGE, cardCollChangeHandler);
-	}
+//	if (this._cardColl != null) {
+//		this._cardColl.removeEventListener(CollectionEvent.COLLECTION_CHANGE, cardCollChangeHandler);
+//	}
 	this._cardColl = value.playerCardColl.getLocationArray(CardLocation.GRAVEYARD);
 }
 
@@ -25,10 +25,10 @@ public function get player():Player
 	return this._player;
 }
 
-private function cardCollChangeHandler(evt:CollectionEvent):void
-{
-	
-}
+//private function cardCollChangeHandler(evt:CollectionEvent):void
+//{
+//	
+//}
 
 private function closeHandler():void
 {
