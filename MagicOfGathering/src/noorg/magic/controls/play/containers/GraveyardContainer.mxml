@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="{Constants.PLAY_CARD_WIDTH}" height="{Constants.PLAY_CARD_HEIGHT}">
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="{Constants.PLAY_CARD_WIDTH}" height="{Constants.PLAY_CARD_HEIGHT}"
+	 creationComplete="completeHandler()">
 	<mx:Script source="GraveyardContainerAs.as" />
 	
-	<mx:Image width="{Constants.PLAY_CARD_WIDTH}" height="{Constants.PLAY_CARD_HEIGHT}"
+	<mx:Image id="mainImage" width="{Constants.PLAY_CARD_WIDTH}" height="{Constants.PLAY_CARD_HEIGHT}"
 		buttonMode="true" source="{_source}" doubleClickEnabled="true"
+		maintainAspectRatio="false"
 		doubleClick="imageDoubleClickHandler()"
 		dragEnter="imageDragEnterHandler(event)" dragDrop="imageDragDropHandler(event)"
 		verticalCenter="0" />

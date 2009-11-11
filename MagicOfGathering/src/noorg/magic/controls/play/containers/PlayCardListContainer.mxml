@@ -11,7 +11,7 @@
 	<mx:Script source="PlayCardListContainerAs.as" />
 	<mx:VBox width="100%">
 		<mx:HBox width="100%">
-			<mx:Label text="{this.label}" />
+			<mx:Label text="{this.label}" height="20" />
 			<mx:Label text="{this.cardColl.length}" />
 		</mx:HBox>
 		<mx:HBox id="mainContainer" paddingTop="0" paddingBottom="0" horizontalGap="{Constants.DEFAULT_GAP}"

@@ -7,8 +7,8 @@ package noorg.magic.utils
 		
 		public static const CARD_RATIO:Number = new Number(CARD_HEIGHT / CARD_WIDTH);
 		
-		public static const PLAY_CARD_WIDTH:Number = CARD_WIDTH / 2;
-		public static const PLAY_CARD_HEIGHT:Number = CARD_HEIGHT / 2;
+		public static const PLAY_CARD_WIDTH:Number = CARD_WIDTH / 3;
+		public static const PLAY_CARD_HEIGHT:Number = CARD_HEIGHT / 3;
 		
 		public static const ICON_WIDTH:int = 20;
 		public static const ICON_HEIGHT:int = 20;

@@ -13,13 +13,13 @@ import noorg.magic.services.AssetService;
 import noorg.magic.utils.Constants;
 import noorg.magic.utils.GlobalUtil;Constants;
 
-private static const AS:AssetService = AssetService.getInstance();
+private const AS:AssetService = AssetService.getInstance();
 
 private var _player:Player;
 private var _cardColl:ArrayCollection;
 
 [Bindable]
-private var _source:Object = AS.CardBack;
+private var _source:Object;
 
 public function set player(value:Player):void
 {
@@ -36,10 +36,15 @@ public function get player():Player
 	return this._player;
 }
 
+private function completeHandler():void
+{
+	refreshTopCard();
+}
+
 public function refreshTopCard():void
 {
-	if (_cardColl.length == 0) {
-		_source = AS.CardBack;
+	if (_cardColl == null || _cardColl.length == 0) {
+		_source = new AS.CardBack;
 	} else {
 		_source = PlayCard(_cardColl[_cardColl.length - 1]).imgPath;
 	}
