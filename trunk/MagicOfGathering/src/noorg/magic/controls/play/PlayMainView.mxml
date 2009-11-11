@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
 	creationComplete="completeHandler()" mouseMove="mouseMoveHandler(event)"
+	horizontalScrollPolicy="off"
 	xmlns:containers="noorg.magic.controls.play.containers.*" xmlns:unit="noorg.magic.controls.play.unit.*">
 
 	<mx:Script source="PlayMainViewAs.as" />
 	<mx:VBox id="mainContainer" width="100%" creationPolicy="all">
 		<mx:HBox>
 			<containers:GalleryContainer id="playerGallery" />
-			<containers:GraveyardContainer id="graveyard" />
+			<containers:GraveyardContainer id="graveyard" backgroundColor="black" 
+				width="{Constants.PLAY_CARD_WIDTH}" height="{Constants.PLAY_CARD_HEIGHT}" />
 			<containers:HPContainer id="hpContainer" />
 		</mx:HBox>
-		<containers:PlayCardListContainer id="creatureList" locationType="{CardLocation.MAGIC}"
+		<containers:PlayCardListContainer id="magicList" locationType="{CardLocation.MAGIC}"
 			 width="100%" label="{resourceManager.getString('main', 'play.magicList.title')}" />		
 		<containers:PlayCardListContainer id="creatureList" locationType="{CardLocation.CREATURE}"
 			 width="100%" label="{resourceManager.getString('main', 'play.creatureList.title')}" />
-		<containers:PlayCardListContainer id="creatureList" locationType="{CardLocation.ARTIFACT}"
+		<containers:PlayCardListContainer id="artifactList" locationType="{CardLocation.ARTIFACT}"
 			 width="100%" label="{resourceManager.getString('main', 'play.artifactList.title')}" />
 		<containers:PlayCardListContainer id="handList" locationType="{CardLocation.HAND}"
 			 width="100%" label="{resourceManager.getString('main', 'play.handList.title')}" />

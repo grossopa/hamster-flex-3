@@ -32,6 +32,8 @@ private function setPlayer(value:Player):void
 	this.playerGallery.player = value;
 	this.graveyard.player = value;
 	this.hpContainer.player = value;
+	artifactList.cardColl = player.playerCardColl.getLocationArray(CardLocation.ARTIFACT);
+	magicList.cardColl = player.playerCardColl.getLocationArray(CardLocation.MAGIC);
 	handList.cardColl = player.playerCardColl.getLocationArray(CardLocation.HAND);
 	creatureList.cardColl = player.playerCardColl.getLocationArray(CardLocation.CREATURE);
 }
