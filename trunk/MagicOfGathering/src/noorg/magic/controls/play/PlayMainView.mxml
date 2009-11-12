@@ -4,28 +4,73 @@
 	horizontalScrollPolicy="off"
 	xmlns:containers="noorg.magic.controls.play.containers.*" xmlns:unit="noorg.magic.controls.play.unit.*">
 
+	<mx:Script>
+		<![CDATA[
+			import noorg.magic.services.AssetService;
+			import noorg.magic.models.staticValue.MagicType;MagicType;
+			import noorg.magic.utils.Constants;Constants;
+			private static const AS:AssetService = AssetService.getInstance();
+		]]>
+	</mx:Script>
 	<mx:Script source="PlayMainViewAs.as" />
-	<mx:VBox id="mainContainer" width="100%" creationPolicy="all">
-		<mx:HBox>
-			<containers:GalleryContainer id="playerGallery" />
-			<containers:GraveyardContainer id="graveyard" backgroundColor="black" 
-				width="{Constants.PLAY_CARD_WIDTH}" height="{Constants.PLAY_CARD_HEIGHT}" />
-			<containers:HPContainer id="hpContainer" />
-		</mx:HBox>
+	<mx:VBox id="mainContainer" width="100%" creationPolicy="all" verticalGap="0">
 		<containers:PlayCardListContainer id="magicList" locationType="{CardLocation.MAGIC}"
-			 width="100%" label="{resourceManager.getString('main', 'play.magicList.title')}" />		
+			 width="100%" label="{resourceManager.getString('main', 'play.magicList.title')}" />	
+		<mx:HRule width="100%" />	
 		<containers:PlayCardListContainer id="creatureList" locationType="{CardLocation.CREATURE}"
 			 width="100%" label="{resourceManager.getString('main', 'play.creatureList.title')}" />
+		<mx:HRule width="100%" />
 		<containers:PlayCardListContainer id="artifactList" locationType="{CardLocation.ARTIFACT}"
 			 width="100%" label="{resourceManager.getString('main', 'play.artifactList.title')}" />
+		<mx:HRule width="100%" />
+		<containers:PlayCardListContainer id="landList" locationType="{CardLocation.LAND}"
+			 width="100%" label="{resourceManager.getString('main', 'play.landList.title')}" />
+		<mx:HRule width="100%" />
 		<containers:PlayCardListContainer id="handList" locationType="{CardLocation.HAND}"
 			 width="100%" label="{resourceManager.getString('main', 'play.handList.title')}" />
+		<mx:HRule width="100%" />
+		<mx:HBox borderStyle="solid" borderColor="gray" borderThickness="1">
+			<mx:VBox verticalGap="4" horizontalAlign="center" verticalAlign="middle">
+				<mx:Label text="{this.resourceManager.getString('main','gallery')}" styleName="galleryTitle" />
+				<mx:HRule width="100%" />
+				<containers:GalleryContainer id="playerGallery" />
+			</mx:VBox>
+			<mx:VRule height="100%" />
+			<mx:VBox verticalGap="4" horizontalAlign="center" verticalAlign="middle">
+				<mx:Label text="{this.resourceManager.getString('main','graveyard')}" styleName="galleryTitle" />
+				<mx:HRule width="100%" />
+				<containers:GraveyardContainer id="graveyard" />
+			</mx:VBox>
+			<mx:VRule height="100%" />
+			<mx:VBox verticalGap="4" horizontalAlign="center" verticalAlign="middle">
+				<mx:Label text="{this.resourceManager.getString('main','hp')}" styleName="galleryTitle" />
+				<mx:HRule width="100%" />
+				<containers:HPContainer id="hpContainer" />
+			</mx:VBox>
+			<mx:VRule height="100%" />
+			<mx:VBox verticalGap="4" horizontalAlign="center" verticalAlign="middle">
+				<mx:Label text="{this.resourceManager.getString('main','magicPool')}" styleName="galleryTitle" />
+				<mx:HRule width="100%" />
+				<containers:MagicPoolContainer id="magicWhiteContainer"
+					magicType="{MagicType.WHITE}" magicIcon="{AS.IconMagicPointWhite}" />
+				<containers:MagicPoolContainer id="magicBlueContainer" 
+					magicType="{MagicType.BLUE}" magicIcon="{AS.IconMagicPointBlue}"/>
+				<containers:MagicPoolContainer id="magicBlackContainer" 
+					magicType="{MagicType.BLACK}" magicIcon="{AS.IconMagicPointBlack}"/>
+				<containers:MagicPoolContainer id="magicRedContainer"
+					magicType="{MagicType.RED}" magicIcon="{AS.IconMagicPointRed}"/>
+				<containers:MagicPoolContainer id="magicGreenContainer" 
+					magicType="{MagicType.GREEN}" magicIcon="{AS.IconMagicPointGreen}"/>
+				<containers:MagicPoolContainer id="magicColorlessContainer" 
+					magicType="{MagicType.COLORLESS}" magicIcon="{AS.IconMagicPointColorless}"/>
+			</mx:VBox>
+		</mx:HBox>
 
 	</mx:VBox>
 	
-	<mx:Button id="downButton" click="moveDownHandler()" horizontalCenter="0" bottom="5" />
+<!--	<mx:Button id="downButton" click="moveDownHandler()" horizontalCenter="0" bottom="5" />
 	<mx:Button id="upButton" click="moveUpHandler()" horizontalCenter="0" top="5" />
 	
-	<!--<unit:PlayCardUnit id="dragCardUnit" visible="false" x="-1000"
+	<unit:PlayCardUnit id="dragCardUnit" visible="false" x="-1000"
 		width="{Constants.PLAY_CARD_WIDTH}" height="{Constants.PLAY_CARD_HEIGHT}" />-->
 </mx:Canvas>

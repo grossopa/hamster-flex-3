@@ -21,11 +21,15 @@ package noorg.magic.utils
 		 */
 		public static const PLAY_MOVE_GAP:Number = 311;
 		
+		public static const MAGIC_ICON_WIDTH:Number = 15;
+		public static const MAGIC_ICON_HEIGHT:Number = 15;
+		
 		public static const RED:Number = 0xFF2E2E;
 		public static const GREEN:Number = 0x00AA00;
 		public static const BLUE:Number = 0x005AFF;
 		public static const BLACK:Number = 0x000000;
 		public static const WHITE:Number = 0xAAAAAA;
+		public static const COLORLESS:Number = 0x7F7F7F;
 
 	}
 }

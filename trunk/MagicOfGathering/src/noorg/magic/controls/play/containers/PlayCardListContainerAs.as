@@ -10,12 +10,16 @@ import mx.managers.DragManager;
 import noorg.magic.controls.play.unit.PlayCardUnit;
 import noorg.magic.events.PlayCardDragEvent;
 import noorg.magic.models.PlayCard;
+import noorg.magic.services.AssetService;
 import noorg.magic.services.DataService;
 import noorg.magic.services.EventService;
 import noorg.magic.utils.Constants;Constants;
 
+private const AS:AssetService = AssetService.getInstance();
 private const DS:DataService = DataService.getInstance();
 private const ES:EventService = EventService.getInstance();
+
+private var _isListHide:Boolean;
 
 private var _cardColl:ArrayCollection;
 
@@ -79,6 +83,27 @@ private function completeHandler():void
 {
 	mainContainer.addEventListener(PlayCardDragEvent.DRAG_ENTER, itemDragEnterHandler);
 	mainContainer.addEventListener(PlayCardDragEvent.DRAG_DROP, itemDragDropHandler);
+	
+	this.listVisibleBtn.source = AS.BtnListHide;
+}
+
+private function listVisibleBtnClickHandler():void
+{
+	if (_isListHide) {
+		_isListHide = false;
+		this.listVisibleBtn.source = AS.BtnListHide;
+		this.height = Constants.PLAY_CARD_HEIGHT;
+		mainContainer.visible = true;
+		moveLeftBtn.visible = true;
+		moveRightBtn.visible = true;
+	} else {
+		_isListHide = true;
+		this.listVisibleBtn.source = AS.BtnListExpand;
+		this.height = 20;
+		mainContainer.visible = false;
+		moveLeftBtn.visible = false;
+		moveRightBtn.visible = false;
+	}
 }
 
 private function itemDragEnterHandler(evt:PlayCardDragEvent):void

@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300">
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="completeHandler()"
+	width="{Constants.MAGIC_ICON_WIDTH * (ICON_COUNT + 2)}" height="{Constants.MAGIC_ICON_HEIGHT}"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off">
+	<mx:Script source="MagicPoolContainerAs.as" />
 	
+	<mx:Label id="magicCountLabel" text=" x {_magicCount}" 
+		x="{Constants.MAGIC_ICON_WIDTH}" visible="false" />
+	<mx:Image id="arrowUp" source="@Embed(source='noorg/magic/assets/magicPool/arrow_up.png')"
+		buttonMode="true" click="arrowUpClickHandler()" right="{Constants.MAGIC_ICON_WIDTH}" />
+	<mx:Image id="arrowDown" source="@Embed(source='noorg/magic/assets/magicPool/arrow_down.png')" 
+		buttonMode="true" click="arrowDownClickHandler()" right="0" />
 </mx:Canvas>
