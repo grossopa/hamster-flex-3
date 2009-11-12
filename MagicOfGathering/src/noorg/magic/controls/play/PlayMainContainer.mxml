@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" 
+	verticalScrollPolicy="off" horizontalScrollPolicy="off" xmlns:components="org.hamster.components.*">
+	<mx:Script source="PlayMainContainerAs.as" />
+	<components:AdvancedViewStack id="mainViewStack" width="100%" height="100%">
+	</components:AdvancedViewStack>
+</mx:Canvas>

@@ -9,8 +9,8 @@ import noorg.magic.services.AssetService;
 private static const ICON_WIDTH:int = 15;
 private static const ICON_HEIGHT:int = 15;
 private static const COLUMN_COUNT:int = 10;
-private static const ROW_COUNT:int = 4;
-private static const ALL_COUNT:int = 40;
+private static const ROW_COUNT:int = 7;
+private static const ALL_COUNT:int = 70;
 
 private const AS:AssetService = AssetService.getInstance();
 
@@ -19,10 +19,10 @@ private var _player:Player;
 public function set player(value:Player):void
 {
 	if (this._player != null) {
-		this._player.removeEventListener(PlayerEvent.HP_CHANGED, hpChangedHandler);
+		this._player.removeEventListener(PlayerEvent.HP_CHANGE, hpChangeHandler);
 	}
 	this._player = value;
-	this._player.addEventListener(PlayerEvent.HP_CHANGED, hpChangedHandler);
+	this._player.addEventListener(PlayerEvent.HP_CHANGE, hpChangeHandler);
 	if (this.initialized) {
 		redraw();
 	}
@@ -44,7 +44,7 @@ private function completeHandler():void
 	redraw();
 }
 
-private function hpChangedHandler(evt:PlayerEvent):void
+private function hpChangeHandler(evt:PlayerEvent):void
 {
 	redraw();
 }

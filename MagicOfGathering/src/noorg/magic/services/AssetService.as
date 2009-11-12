@@ -32,6 +32,30 @@ package noorg.magic.services
 		
 		[Embed(source='noorg/magic/assets/cards/back.png')]
 		public const CardBack:Class;
+		
+		[Embed(source='noorg/magic/assets/magicPool/icon_magicPointBlack.png')]
+		public const IconMagicPointBlack:Class;
+		
+		[Embed(source='noorg/magic/assets/magicPool/icon_magicPointBlue.png')]
+		public const IconMagicPointBlue:Class;
+	
+		[Embed(source='noorg/magic/assets/magicPool/icon_magicPointGreen.png')]
+		public const IconMagicPointGreen:Class;
+		
+		[Embed(source='noorg/magic/assets/magicPool/icon_magicPointWhite.png')]
+		public const IconMagicPointWhite:Class;
+		
+		[Embed(source='noorg/magic/assets/magicPool/icon_magicPointRed.png')]
+		public const IconMagicPointRed:Class;
+		
+		[Embed(source='noorg/magic/assets/magicPool/icon_magicPointColorless.png')]
+		public const IconMagicPointColorless:Class;
+		
+		[Embed(source='noorg/magic/assets/icons/btn_list_expand.png')]
+		public const BtnListExpand:Class;
+		
+		[Embed(source='noorg/magic/assets/icons/btn_list_hide.png')]
+		public const BtnListHide:Class;
 
 	}
 }

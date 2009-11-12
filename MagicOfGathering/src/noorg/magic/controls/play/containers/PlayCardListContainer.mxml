@@ -9,21 +9,25 @@
 		]]>
 	</mx:Script>
 	<mx:Script source="PlayCardListContainerAs.as" />
-	<mx:VBox width="100%">
-		<mx:HBox width="100%">
-			<mx:Label text="{this.label}" height="20" />
-			<mx:Label text="{this.cardColl.length}" />
-		</mx:HBox>
+	<mx:HBox width="100%" horizontalGap="0">
+		<mx:Canvas width="120">
+			<mx:Label text="{this.label}" />
+			<mx:Image id="listVisibleBtn" click="listVisibleBtnClickHandler()" 
+				right="0" width="20" height="20" buttonMode="true" />
+			<mx:Label y="20" text="{this.resourceManager.getString('main', 'play.list.count')}" />
+			<mx:Label y="20" text="{this.cardColl.length}" right="0" />
+		</mx:Canvas>
 		<mx:HBox id="mainContainer" paddingTop="0" paddingBottom="0" horizontalGap="{Constants.DEFAULT_GAP}"
-			width="{this.width}" height="{Constants.PLAY_CARD_HEIGHT}" backgroundColor="gray"
+			width="{this.width - 120}" height="{Constants.PLAY_CARD_HEIGHT}" 
+		 	backgroundAlpha="0.1" backgroundColor="gray"
 			horizontalScrollPolicy="off" verticalScrollPolicy="off"
 			dragEnter="listDragEnterHandler(event)" dragDrop="listDragDropHandler(event)" />
 			<!--dragEnabled="true" dropEnabled="true" dragEnter="listDragEnterHandler(event)" dragDrop="listDragDropHandler(event)"-->
-	</mx:VBox>
+	</mx:HBox>
 
 	<mx:Image id="insertLine" width="5" height="100%" visible="false" />
 	
-	<mx:Button verticalCenter="0" left="5" label="&lt;" click="moveLeftHandler()" />
-	<mx:Button verticalCenter="0" right="5" label="&gt;" click="moveRightHandler()" />		
+	<mx:Button id="moveLeftBtn" verticalCenter="0" left="5" label="&lt;" click="moveLeftHandler()" />
+	<mx:Button id="moveRightBtn" verticalCenter="0" right="5" label="&gt;" click="moveRightHandler()" />		
 
 </mx:Canvas>

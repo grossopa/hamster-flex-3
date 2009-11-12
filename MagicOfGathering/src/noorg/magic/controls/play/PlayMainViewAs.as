@@ -2,14 +2,11 @@
 import flash.events.MouseEvent;
 import flash.geom.Point;
 
-import mx.managers.CursorManager;
-
 import noorg.magic.events.PlayCardEvent;
 import noorg.magic.models.Player;
 import noorg.magic.models.staticValue.CardLocation;
 import noorg.magic.services.DataService;
 import noorg.magic.services.EventService;
-import noorg.magic.utils.Constants;
 
 private const DS:DataService = DataService.getInstance();
 private const ES:EventService = EventService.getInstance();
@@ -32,6 +29,15 @@ private function setPlayer(value:Player):void
 	this.playerGallery.player = value;
 	this.graveyard.player = value;
 	this.hpContainer.player = value;
+	
+	this.magicWhiteContainer.player = value;
+	this.magicBlueContainer.player = value;
+	this.magicBlackContainer.player = value;
+	this.magicColorlessContainer.player = value;
+	this.magicGreenContainer.player = value;
+	this.magicRedContainer.player = value;
+	
+	landList.cardColl = player.playerCardColl.getLocationArray(CardLocation.LAND);
 	artifactList.cardColl = player.playerCardColl.getLocationArray(CardLocation.ARTIFACT);
 	magicList.cardColl = player.playerCardColl.getLocationArray(CardLocation.MAGIC);
 	handList.cardColl = player.playerCardColl.getLocationArray(CardLocation.HAND);
@@ -69,12 +75,12 @@ private function mouseMoveHandler(evt:MouseEvent):void
 //	}
 }
 
-private function moveDownHandler():void
-{
-	
-}
-
-private function moveUpHandler():void
-{
-	
-}
+//private function moveDownHandler():void
+//{
+//	
+//}
+//
+//private function moveUpHandler():void
+//{
+//	
+//}
