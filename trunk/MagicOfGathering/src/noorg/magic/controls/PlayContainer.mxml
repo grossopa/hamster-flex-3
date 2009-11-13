@@ -4,7 +4,7 @@
 	<mx:Script source="PlayContainerAs.as" />
 	<mx:ViewStack id="mainViewStack" width="100%" height="100%">
 		<step:PrepareStep id="prepareView" width="100%" height="100%" />
-		<play:PlayMainView id="playMainView" width="100%" height="100%" />
+		<play:PlayMainContainer id="mainContainer" width="100%" height="100%" />
 	</mx:ViewStack>
 	
 </mx:Canvas>

@@ -14,21 +14,18 @@
 	</mx:Script>
 	<mx:Script source="PlayMainViewAs.as" />
 	<mx:VBox id="mainContainer" width="100%" creationPolicy="all" verticalGap="0">
+	
 		<containers:PlayCardListContainer id="magicList" locationType="{CardLocation.MAGIC}"
 			 width="100%" label="{resourceManager.getString('main', 'play.magicList.title')}" />	
-		<mx:HRule width="100%" />	
 		<containers:PlayCardListContainer id="creatureList" locationType="{CardLocation.CREATURE}"
 			 width="100%" label="{resourceManager.getString('main', 'play.creatureList.title')}" />
-		<mx:HRule width="100%" />
 		<containers:PlayCardListContainer id="artifactList" locationType="{CardLocation.ARTIFACT}"
 			 width="100%" label="{resourceManager.getString('main', 'play.artifactList.title')}" />
-		<mx:HRule width="100%" />
 		<containers:PlayCardListContainer id="landList" locationType="{CardLocation.LAND}"
 			 width="100%" label="{resourceManager.getString('main', 'play.landList.title')}" />
-		<mx:HRule width="100%" />
 		<containers:PlayCardListContainer id="handList" locationType="{CardLocation.HAND}"
 			 width="100%" label="{resourceManager.getString('main', 'play.handList.title')}" />
-		<mx:HRule width="100%" />
+		
 		<mx:HBox borderStyle="solid" borderColor="gray" borderThickness="1">
 			<mx:VBox verticalGap="4" horizontalAlign="center" verticalAlign="middle">
 				<mx:Label text="{this.resourceManager.getString('main','gallery')}" styleName="galleryTitle" />
@@ -67,10 +64,4 @@
 		</mx:HBox>
 
 	</mx:VBox>
-	
-<!--	<mx:Button id="downButton" click="moveDownHandler()" horizontalCenter="0" bottom="5" />
-	<mx:Button id="upButton" click="moveUpHandler()" horizontalCenter="0" top="5" />
-	
-	<unit:PlayCardUnit id="dragCardUnit" visible="false" x="-1000"
-		width="{Constants.PLAY_CARD_WIDTH}" height="{Constants.PLAY_CARD_HEIGHT}" />-->
 </mx:Canvas>

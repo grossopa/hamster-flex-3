@@ -49,9 +49,11 @@ public function get player():Player
 	return _player;
 }
 
-private function completeHandler():void
+protected function completeHandler():void
 {
-	setPlayer(player);
+	if (player != null) {
+		setPlayer(player);
+	}
 	
 	ES.addEventListener(PlayCardEvent.DRAW_CARD, dragCardHandler);
 	

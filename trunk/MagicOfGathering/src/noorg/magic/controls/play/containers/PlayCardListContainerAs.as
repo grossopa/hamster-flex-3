@@ -92,7 +92,7 @@ private function listVisibleBtnClickHandler():void
 	if (_isListHide) {
 		_isListHide = false;
 		this.listVisibleBtn.source = AS.BtnListHide;
-		this.height = Constants.PLAY_CARD_HEIGHT;
+		this.height = Constants.PLAY_CARD_HEIGHT + 1;
 		mainContainer.visible = true;
 		moveLeftBtn.visible = true;
 		moveRightBtn.visible = true;
@@ -125,11 +125,7 @@ private function itemDragEnterHandler(evt:PlayCardDragEvent):void
 
 private function itemDragDropHandler(evt:PlayCardDragEvent):void
 {
-	trace (this.cardColl.length);
-	
 	evt.playCard.location = locationType;
-	
-	trace (this.cardColl.length);
 }
 
 private function listDragEnterHandler(evt:DragEvent):void
@@ -168,4 +164,10 @@ override protected function updateDisplayList(uw:Number, uh:Number):void
 	g.beginFill(0x192476);
 	g.drawRect(0, 0, insertLine.width, insertLine.height);
 	g.endFill();
+	
+	graphics.clear();
+	graphics.moveTo(0, uh - 1);
+	graphics.lineStyle(1, 0x7f7f7f, 0.5);
+	graphics.lineTo(uw, uh - 1);
+	
 }
