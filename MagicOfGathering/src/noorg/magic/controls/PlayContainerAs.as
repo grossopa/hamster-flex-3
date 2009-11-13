@@ -13,5 +13,5 @@ private function completeHandler():void
 private function stepFinishHandler(evt:StepCtrlEvent):void
 {
 	this.mainViewStack.selectedIndex = 1;
-	playMainView.player = DS.playerRed;
+	mainContainer.players = [DS.playerRed, DS.playerBlue];
 }

@@ -56,6 +56,9 @@ package noorg.magic.services
 		
 		[Embed(source='noorg/magic/assets/icons/btn_list_hide.png')]
 		public const BtnListHide:Class;
+		
+		[Embed(source='noorg/magic/assets/icons/btn_ctrl_switchPlayer.png')]
+		public const BtnSwitchPlayer:Class;
 
 	}
 }
