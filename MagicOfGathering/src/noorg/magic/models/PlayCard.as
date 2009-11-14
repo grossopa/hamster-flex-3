@@ -1,11 +1,16 @@
 package noorg.magic.models
 {
+	import mx.collections.ArrayCollection;
+	import mx.events.CollectionEvent;
+	
 	import noorg.magic.events.PlayCardEvent;
 	
 	public class PlayCard extends Card
 	{
 		private var _location:int;
 		private var _status:int;
+		
+		public const enhancementCards:ArrayCollection = new ArrayCollection();
 		
 		public function set location(value:int):void
 		{
@@ -40,8 +45,14 @@ package noorg.magic.models
 		public function PlayCard()
 		{
 			super();
+			
+			//this.enhancementCards.addEventListener(CollectionEvent.COLLECTION_CHANGE, enhancementCardChangeHandler);
 		}
 		
+		//protected function enhancementCardChangeHandler(evt:CollectionEvent):void
+		//{
+		//	
+		//}
 		
 
 		

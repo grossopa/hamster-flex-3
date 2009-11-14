@@ -10,16 +10,6 @@ import noorg.magic.utils.Constants;Constants;
 protected var iconReturnHand:IconReturnHand;
 protected var iconReturnField:IconReturnField;
 
-override public function set data(value:Object):void
-{
-	this.card = PlayCard(value);
-}
-
-override public function get data():Object
-{
-	return this.card;
-}
-
 override protected function createIcon():void
 {
 	super.createIcon();

@@ -24,6 +24,12 @@ package noorg.magic.services
 		[Embed(source='noorg/magic/assets/icons/icon_returnHand.png')]
 		public const IconReturnHand:Class;
 		
+		[Embed(source='noorg/magic/assets/icons/icon_enhancement.png')]
+		public const IconEnhancement:Class;
+		
+		[Embed(source='noorg/magic/assets/icons/icon_revert.png')]
+		public const IconRevert:Class;
+		
 		[Embed(source='noorg/magic/assets/others/hp_damaged.png')]
 		public const HPDamaged:Class;
 		
@@ -59,6 +65,9 @@ package noorg.magic.services
 		
 		[Embed(source='noorg/magic/assets/icons/btn_ctrl_switchPlayer.png')]
 		public const BtnSwitchPlayer:Class;
+		
+		[Embed(source='noorg/magic/assets/drag/drag_enhancement.png')]
+		public const DragEnhancement:Class;
 
 	}
 }

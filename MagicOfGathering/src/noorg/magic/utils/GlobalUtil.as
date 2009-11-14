@@ -63,5 +63,10 @@ package noorg.magic.utils
 			obj.player = player;
 		}
 		
+		public static function showEnhancementPopup(card:PlayCard):void
+		{
+			
+		}
+		
 	}
 }
