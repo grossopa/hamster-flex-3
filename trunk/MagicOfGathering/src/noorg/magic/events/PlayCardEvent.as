@@ -12,6 +12,7 @@ package noorg.magic.events
 		
 		public static const LOCATION_CHANGED:String = "PlayCardEventLocationChanged";
 		public static const STATUS_CHANGED:String = "PlayCardEventStatusChanged";
+		public static const ENHANCE_CHANGE:String = "PlayCardEventEnhanceChange";
 		
 		public var card:PlayCard;
 		

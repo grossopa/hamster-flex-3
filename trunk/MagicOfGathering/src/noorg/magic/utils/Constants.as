@@ -24,6 +24,9 @@ package noorg.magic.utils
 		public static const MAGIC_ICON_WIDTH:Number = 15;
 		public static const MAGIC_ICON_HEIGHT:Number = 15;
 		
+		public static const DRAG_MASK_WIDTH:Number = PLAY_CARD_WIDTH / 3;
+		public static const DRAG_MASK_HEIGHT:Number = PLAY_CARD_HEIGHT / 3;
+		
 		public static const RED:Number = 0xFF2E2E;
 		public static const GREEN:Number = 0x00AA00;
 		public static const BLUE:Number = 0x005AFF;
