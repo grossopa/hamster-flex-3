@@ -14,6 +14,11 @@ public static const DS:DataService = DataService.getInstance();
 
 public var player:Player;
 
+private function completeHandler():void
+{
+	this.colorPicker.selectedColor = uint(Math.random() * 256 * 256 * 256);
+}
+
 public function load():void
 {
 	var collCmd:LoadUserCollCmd = new LoadUserCollCmd();
