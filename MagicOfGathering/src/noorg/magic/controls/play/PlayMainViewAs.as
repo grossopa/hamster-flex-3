@@ -28,6 +28,8 @@ private function setPlayer(value:Player):void
 {
 	this.playerGallery.player = value;
 	this.graveyard.player = value;
+	this.outOfPlay.cardLocation = CardLocation.OUT;
+	this.outOfPlay.player = value;
 	this.hpContainer.player = value;
 	
 	this.magicWhiteContainer.player = value;

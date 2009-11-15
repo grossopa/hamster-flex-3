@@ -12,6 +12,7 @@ package noorg.magic.controls.play.unit
 	import noorg.magic.controls.icons.IconManager;
 	import noorg.magic.controls.icons.IconTap;
 	import noorg.magic.controls.masks.drag.DragMaskEnhancement;
+	import noorg.magic.controls.masks.drag.DragMaskManager;
 	import noorg.magic.controls.unit.CardUnit;
 	import noorg.magic.events.PlayCardDragEvent;
 	import noorg.magic.events.PlayCardEvent;
@@ -26,6 +27,7 @@ package noorg.magic.controls.play.unit
 	public class PlayCardUnit extends CardUnit
 	{
 		protected const iconManager:IconManager = new IconManager();
+		protected const dragMaskManager:DragMaskManager = new DragMaskManager();
 		
 		protected var iconDetail:IconDetail;
 		protected var iconTap:IconTap;
@@ -66,8 +68,9 @@ package noorg.magic.controls.play.unit
 			this.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 			this.addEventListener(MouseEvent.ROLL_OVER, rollOverHandler);
 			this.addEventListener(MouseEvent.ROLL_OUT, rollOutHandler);
-		//	this.addEventListener(DragEvent.DRAG_ENTER, dragEnterHandler);
-		//	this.addEventListener(DragEvent.DRAG_DROP, dragDropHandler);
+			this.addEventListener(DragEvent.DRAG_ENTER, dragEnterHandler);
+			this.addEventListener(DragEvent.DRAG_EXIT, dragExitHandler);
+			this.addEventListener(DragEvent.DRAG_DROP, dragDropHandler);
 		}
 		
 		override protected function createChildren():void
@@ -81,9 +84,12 @@ package noorg.magic.controls.play.unit
 		protected function createDragMask():void
 		{
 			this.dragMaskEnhancement = new DragMaskEnhancement();
-			this.dragMaskEnhancement.addEventListener(DragEvent.DRAG_ENTER, maskEnhancementDragEnterHandler);
+			dragMaskEnhancement.visible = false;
+		//	this.dragMaskEnhancement.addEventListener(DragEvent.DRAG_ENTER, maskEnhancementDragEnterHandler);
 			this.dragMaskEnhancement.addEventListener(DragEvent.DRAG_DROP, maskEnhancementDragDropHandler);
 			this.addChild(dragMaskEnhancement);
+			
+			dragMaskManager.maskColl.addItem(dragMaskEnhancement);
 		}
 		
 		protected function createIcon():void
@@ -105,6 +111,7 @@ package noorg.magic.controls.play.unit
 			
 			this.iconManager.iconArrColl.addItem(iconDetail);
 			this.iconManager.iconArrColl.addItem(iconTap);
+			this.iconManager.iconArrColl.addItem(iconEnhancement);
 			this.iconManager.refreshLocation();
 		}
 		
@@ -127,13 +134,13 @@ package noorg.magic.controls.play.unit
 			}
 		}
 		
-		private function maskEnhancementDragEnterHandler(evt:DragEvent):void
-		{
-			if (evt.dragInitiator is PlayCardUnit) {
-				DragManager.acceptDragDrop(this.dragMaskEnhancement);
-			}
-		}
-		
+//		private function maskEnhancementDragEnterHandler(evt:DragEvent):void
+//		{
+//			if (evt.dragInitiator is PlayCardUnit) {
+//				DragManager.acceptDragDrop(this.dragMaskEnhancement);
+//			}
+//		}
+//		
 		private function maskEnhancementDragDropHandler(evt:DragEvent):void
 		{
 			if (evt.dragInitiator is PlayCardUnit) {
@@ -144,7 +151,7 @@ package noorg.magic.controls.play.unit
 		
 		private function enhancementClickHandler(evt:MouseEvent):void
 		{
-			
+			GlobalUtil.showEnhancementPopup(this.playCard);
 		}
 		
 		private function statusChangedHandler(evt:PlayCardEvent):void
@@ -188,21 +195,32 @@ package noorg.magic.controls.play.unit
 		
 		private function dragEnterHandler(evt:DragEvent):void
 		{
-			if (evt.dragInitiator is PlayCardUnit) {
+			if (evt.dragInitiator is PlayCardUnit && evt.dragInitiator != this) {
 				DragManager.acceptDragDrop(this);
-				var disEvt:PlayCardDragEvent = new PlayCardDragEvent(PlayCardDragEvent.DRAG_ENTER, true);
-				disEvt.enterLeftSide = evt.localX <= this.width;
-				disEvt.playCard = PlayCard(this.card);
-				this.dispatchEvent(disEvt);
+				
+				this.dragMaskManager.showMask();
+				
+//				var disEvt:PlayCardDragEvent = new PlayCardDragEvent(PlayCardDragEvent.DRAG_ENTER, true);
+//				disEvt.enterLeftSide = evt.localX <= this.width;
+//				disEvt.playCard = PlayCard(this.card);
+//				this.dispatchEvent(disEvt);
 			}
+		}
+		
+		private function dragExitHandler(evt:DragEvent):void
+		{
+			if (evt.dragInitiator is PlayCardUnit) {
+				this.dragMaskManager.hideMask();
+			}			
 		}
 		
 		private function dragDropHandler(evt:DragEvent):void
 		{
-			var disEvt:PlayCardDragEvent = new PlayCardDragEvent(PlayCardDragEvent.DRAG_DROP, true);
-			disEvt.enterLeftSide = evt.localX <= this.width;
-			disEvt.playCard = PlayCard(this.card);
-			this.dispatchEvent(disEvt);			
+			this.dragMaskManager.hideMask();
+//			var disEvt:PlayCardDragEvent = new PlayCardDragEvent(PlayCardDragEvent.DRAG_DROP, true);
+//			disEvt.enterLeftSide = evt.localX <= this.width;
+//			disEvt.playCard = PlayCard(this.card);
+//			this.dispatchEvent(disEvt);			
 		}
 		
 		

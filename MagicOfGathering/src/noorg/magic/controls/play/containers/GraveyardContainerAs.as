@@ -18,6 +18,8 @@ private const AS:AssetService = AssetService.getInstance();
 private var _player:Player;
 private var _cardColl:ArrayCollection;
 
+public var cardLocation:int = CardLocation.GRAVEYARD;
+
 [Bindable]
 private var _source:Object;
 
@@ -27,7 +29,7 @@ public function set player(value:Player):void
 	if (_cardColl != null) {
 		_cardColl.removeEventListener(CollectionEvent.COLLECTION_CHANGE, cardCollChangeHandler);
 	}
-	_cardColl = player.playerCardColl.getLocationArray(CardLocation.GRAVEYARD);
+	_cardColl = player.playerCardColl.getLocationArray(cardLocation);
 	_cardColl.addEventListener(CollectionEvent.COLLECTION_CHANGE, cardCollChangeHandler);
 }
 
@@ -57,7 +59,7 @@ private function cardCollChangeHandler(evt:CollectionEvent):void
 
 private function imageDoubleClickHandler():void
 {
-	GlobalUtil.showGraveyardDetailPopup(this.player);
+	GlobalUtil.showGraveyardDetailPopup(this.player, this.cardLocation);
 }
 
 private function imageDragEnterHandler(evt:DragEvent):void
@@ -71,7 +73,7 @@ private function imageDragDropHandler(evt:DragEvent):void
 {
 	if (evt.dragInitiator is PlayCardUnit) {
 		var unit:PlayCardUnit = PlayCardUnit(evt.dragInitiator);
-		PlayCard(unit.card).location = CardLocation.GRAVEYARD;
+		PlayCard(unit.card).location = cardLocation;
 	}
 }
 

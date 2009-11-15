@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical"
 	verticalScrollPolicy="off" horizontalScrollPolicy="off"
-	width="600" height="400">
+	width="600" height="400" title="{this.resourceManager.getString('main','graveyardPopup.label')}">
 	<mx:Script source="GraveyardDetailPopupAs.as" />
 	<mx:TileList id="mainContainer" dataProvider="{_cardColl}" width="100%" height="100%"
 		 itemRenderer="noorg.magic.controls.play.renderer.GraveyardCardRenderer" />

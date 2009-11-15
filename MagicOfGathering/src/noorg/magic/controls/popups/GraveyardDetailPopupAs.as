@@ -1,6 +1,5 @@
 // ActionScript file
 import mx.collections.ArrayCollection;
-import mx.events.CollectionEvent;
 
 import noorg.magic.models.Player;
 import noorg.magic.models.staticValue.CardLocation;
@@ -10,6 +9,8 @@ import noorg.magic.utils.GlobalUtil;
 private var _cardColl:ArrayCollection;
 private var _player:Player;
 
+public var cardLocation:int;
+
 public function set player(value:Player):void
 {
 	this._player = value;
@@ -17,7 +18,7 @@ public function set player(value:Player):void
 //	if (this._cardColl != null) {
 //		this._cardColl.removeEventListener(CollectionEvent.COLLECTION_CHANGE, cardCollChangeHandler);
 //	}
-	this._cardColl = value.playerCardColl.getLocationArray(CardLocation.GRAVEYARD);
+	this._cardColl = value.playerCardColl.getLocationArray(cardLocation);
 }
 
 public function get player():Player

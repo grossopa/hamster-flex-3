@@ -26,11 +26,15 @@ package noorg.magic.controls.play.renderer
 			iconRevert.visible = false;
 			iconRevert.addEventListener(MouseEvent.CLICK, iconRevertClickHandler);
 			this.addChild(iconRevert);
+			
+			this.iconManager.iconArrColl.addItem(iconRevert);
 		}
 		
 		private function iconRevertClickHandler(evt:MouseEvent):void
 		{
-			this.dispatchEvent(new PlayCardEvent(PlayCardEvent.ENHANCE_CHANGE, true);
+			var disEvt:PlayCardEvent = new PlayCardEvent(PlayCardEvent.ENHANCE_CHANGE, true);
+			disEvt.card = this.playCard;
+			this.dispatchEvent(disEvt);
 		}
 		
 	}
