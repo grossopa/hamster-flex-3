@@ -7,7 +7,6 @@ package noorg.magic.utils
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
 	import noorg.magic.models.PlayerCardColl;
-	import noorg.magic.models.staticValue.CardStatus;
 	
 	public class ModelFactory
 	{
@@ -19,7 +18,7 @@ package noorg.magic.utils
 			player.cardColl.cards = new ArrayCollection();
 			for each (var card:Card in cardColl.cards) {
 				for (var i:int = 0; i < card.count; i++) {
-					player.cardColl.cards.addItem(createPlayCard(card));
+					player.cardColl.cards.addItem(createPlayCard(card, player));
 				}
 			}
 			
@@ -29,9 +28,9 @@ package noorg.magic.utils
 			return player;
 		}
 		
-		public static function createPlayCard(card:Card):PlayCard
+		public static function createPlayCard(card:Card, ownPlayer:Player):PlayCard
 		{
-			var result:PlayCard = new PlayCard();
+			var result:PlayCard = new PlayCard(ownPlayer);
 			result.name = card.name;
 			result.collection = card.collection;
 			result.count = card.count;

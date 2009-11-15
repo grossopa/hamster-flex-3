@@ -8,6 +8,8 @@ package noorg.magic.events
 		public static const PREVIOUS:String = "StepCtrlEventPrevious";
 		public static const FINISH:String = "StepCtrlEventFinish";
 		
+		public static const LOAD_COMPLETE:String = "StepCtrlEventLoadComplete";
+		
 		public function StepCtrlEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);

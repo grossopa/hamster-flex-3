@@ -1,7 +1,6 @@
 package noorg.magic.models
 {
 	import mx.collections.ArrayCollection;
-	import mx.events.CollectionEvent;
 	
 	import noorg.magic.events.PlayCardEvent;
 	
@@ -9,6 +8,7 @@ package noorg.magic.models
 	{
 		private var _location:int;
 		private var _status:int;
+		private var _player:Player;
 		
 		public const enhancementCards:ArrayCollection = new ArrayCollection();
 		
@@ -42,10 +42,15 @@ package noorg.magic.models
 			return _status;
 		}
 		
-		public function PlayCard()
+		public function get player():Player
+		{
+			return _player;
+		}
+		
+		public function PlayCard(player:Player)
 		{
 			super();
-			
+			_player = player;
 			//this.enhancementCards.addEventListener(CollectionEvent.COLLECTION_CHANGE, enhancementCardChangeHandler);
 		}
 		
