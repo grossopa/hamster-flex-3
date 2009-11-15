@@ -52,6 +52,9 @@ package noorg.magic.controls.play.unit
 			}
 			super.card = PlayCard(value);
 			super.card.addEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
+			this.setStyle("borderStyle", "solid");
+			this.setStyle("borderColor", playCard.player.color);
+			this.setStyle("borderThickness", 1);
 		}
 		
 		public function get playCard():PlayCard

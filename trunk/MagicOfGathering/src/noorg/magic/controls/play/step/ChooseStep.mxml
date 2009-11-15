@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+	xmlns:step="noorg.magic.controls.play.step.*"
+	creationComplete="completeHandler()">
 	<mx:Script source="ChooseStepAs.as" />
-	<mx:HBox>
-		<mx:Label text="{this.resourceManager.getString('main', 'player') + 1}" />
-		<mx:ComboBox id="player1ComboBox" dataProvider="{DS.userCollNames}" />
-	</mx:HBox>
-	<mx:HBox>
-		<mx:Label text="{this.resourceManager.getString('main', 'player') + 2}" />
-		<mx:ComboBox id="player2ComboBox" dataProvider="{DS.userCollNames}" />
-	</mx:HBox>
+	<step:PlayerConfContainer id="playerConf1" />
+	<step:PlayerConfContainer id="playerConf2" />
 	<mx:Button label="{this.resourceManager.getString('main', 'next')}" click="goNextHandler()" />
 </mx:VBox>
