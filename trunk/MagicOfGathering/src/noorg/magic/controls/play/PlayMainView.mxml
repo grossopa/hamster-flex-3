@@ -6,6 +6,7 @@
 
 	<mx:Script>
 		<![CDATA[
+			import noorg.magic.models.staticValue.CardLocation;
 			import noorg.magic.services.AssetService;
 			import noorg.magic.models.staticValue.MagicType;MagicType;
 			import noorg.magic.utils.Constants;Constants;
@@ -37,6 +38,12 @@
 				<mx:Label text="{this.resourceManager.getString('main','graveyard')}" styleName="galleryTitle" />
 				<mx:HRule width="100%" />
 				<containers:GraveyardContainer id="graveyard" />
+			</mx:VBox>
+			<mx:VRule height="100%" />
+			<mx:VBox verticalGap="4" horizontalAlign="center" verticalAlign="middle">
+				<mx:Label text="{this.resourceManager.getString('main','outOfPlay')}" styleName="galleryTitle" />
+				<mx:HRule width="100%" />
+				<containers:GraveyardContainer id="outOfPlay" cardLocation="{CardLocation.OUT}" />
 			</mx:VBox>
 			<mx:VRule height="100%" />
 			<mx:VBox verticalGap="4" horizontalAlign="center" verticalAlign="middle">

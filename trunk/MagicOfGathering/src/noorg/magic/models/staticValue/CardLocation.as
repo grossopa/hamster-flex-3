@@ -13,7 +13,8 @@ package noorg.magic.models.staticValue
 		public static const MAGIC:int 					= 8;
 		public static const MAGIC_ENHANCEMENT:int 		= 9;
 		public static const GRAVEYARD:int 				= 10;
+		public static const OUT:int						= 11;
 		
-		public static const TYPE_COUNT:int = 11;
+		public static const TYPE_COUNT:int = 12;
 	}
 }

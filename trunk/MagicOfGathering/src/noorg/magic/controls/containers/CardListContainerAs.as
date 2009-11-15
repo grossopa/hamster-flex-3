@@ -29,7 +29,9 @@ private function selectChangedHandler():void
 private function cardSelectionChangedHandler(evt:CardEvent):void
 {
 	var card:Card = evt.card;
-	this.dataGrid.selectedItem = card;
+	if (DS.selectedCards.contains(card)) {
+		this.dataGrid.selectedItem = card;
+	}
 }
 
 //private function ownCollSelectedHandler():void

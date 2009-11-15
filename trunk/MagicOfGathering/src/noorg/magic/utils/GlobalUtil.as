@@ -8,6 +8,7 @@ package noorg.magic.utils
 	
 	import noorg.magic.controls.masks.ProcessMask;
 	import noorg.magic.controls.popups.CardDetailPopup;
+	import noorg.magic.controls.popups.EnhancementPopup;
 	import noorg.magic.controls.popups.GraveyardDetailPopup;
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
@@ -57,15 +58,18 @@ package noorg.magic.utils
 			obj.playCard = playCard;
 		}
 		
-		public static function showGraveyardDetailPopup(player:Player):void
+		public static function showGraveyardDetailPopup(player:Player, cardLocation:int):void
 		{
 			var obj:GraveyardDetailPopup = createPopup(GraveyardDetailPopup) as GraveyardDetailPopup;
+			obj.cardLocation = cardLocation;
 			obj.player = player;
+			
 		}
 		
-		public static function showEnhancementPopup(card:PlayCard):void
+		public static function showEnhancementPopup(playCard:PlayCard):void
 		{
-			
+			var obj:EnhancementPopup = createPopup(EnhancementPopup) as EnhancementPopup;
+			obj.playCard = playCard;
 		}
 		
 	}
