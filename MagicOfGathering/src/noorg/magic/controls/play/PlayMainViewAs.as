@@ -26,6 +26,7 @@ public function set player(value:Player):void
 
 private function setPlayer(value:Player):void
 {
+	this.playUtil.player = value;
 	this.playerGallery.player = value;
 	this.graveyard.player = value;
 	this.outOfPlay.cardLocation = CardLocation.OUT;

@@ -28,6 +28,13 @@
 			 width="100%" label="{resourceManager.getString('main', 'play.handList.title')}" />
 		
 		<mx:HBox borderStyle="solid" borderColor="gray" borderThickness="1">
+		
+			<mx:VBox verticalGap="4" horizontalAlign="center" verticalAlign="middle">
+				<mx:Label text="{this.resourceManager.getString('main','play.playUtil.title')}" styleName="galleryTitle" />
+				<mx:HRule width="100%" />
+				<containers:PlayUtilContainer id="playUtil" />
+			</mx:VBox>
+			<mx:VRule height="100%" />
 			<mx:VBox verticalGap="4" horizontalAlign="center" verticalAlign="middle">
 				<mx:Label text="{this.resourceManager.getString('main','gallery')}" styleName="galleryTitle" />
 				<mx:HRule width="100%" />
