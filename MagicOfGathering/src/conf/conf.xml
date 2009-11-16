@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configure>
+	<database>
+		<path>resource/magic.db</path>
+		<password>MagicOfGathering0-0-1</password>
+	</database>
+	<locales>
+		<locale>zh_CN</locale>
+		<locale>en_US</locale>
+	</locales>
+	<game>
+		<card-num>140</card-num>
+	</game>
+	<collections>
+		<collection name="(none)" from="0" to="0" />
+		<collection name="10th Edition" from="122719" to="123085" />
+	</collections>
+</configure>
