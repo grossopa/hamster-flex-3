@@ -2,16 +2,17 @@ package noorg.magic.utils
 {
 	import flash.display.Graphics;
 	
-	import mx.skins.RectangularBorder;
-	
-	public class CommonGraphicsUtil
+	/**
+	 * clockwised drawing sequence.
+	 */
+	public class TipArrowUtil
 	{
 		public static const LEFT:uint = 0x0001;
 		public static const TOP:uint = 0x0010;
 		public static const RIGHT:uint = 0x0100;
 		public static const BOTTOM:uint = 0X1000;
 		
-		public function CommonGraphicsUtil()
+		public function TipArrowUtil()
 		{
 		}
 		
@@ -31,17 +32,24 @@ package noorg.magic.utils
 		 * 
 		 */
 		public static function drawTipRect(g:Graphics, x:Number, y:Number, 
-									width:Number, height:Number, 
-									tipWidth:Number, tipHeight:Number,
-									tipDistanceLeft:Number, tipDistanceTop:Number,
-									tipDistanceRight:Number, tipDistanceBottom:Number,
-									directions:uint):void
+									width:Number, height:Number,
+									iTipArrowArray:Array):void
 		{
-			var ddd:RectangularBorder
-			var isLeft:Boolean 		= (LEFT 	& directions) != 0;
-			var isTop:Boolean 		= (TOP 		& directions) != 0;
-			var isRight:Boolean 	= (RIGHT 	& directions) != 0;
-			var isBottom:Boolean 	= (BOTTOM 	& directions) != 0;
+			var isLeft:Boolean;
+			var isTop:Boolean;
+			var isRight:Boolean;
+			var isBottom:Boolean;
+			var iTipArrow:ITipArrow;
+			
+			// firstly, we should find the max height and detect directions
+			var tipHeight:Number = 0;
+			for each (iTipArrow in iTipArrowArray) {
+				tipHeight = Math.max(tipHeight, iTipArrow.tipHeight);
+				isLeft   = isLeft   || (iTipArrow.arrowDirection == LEFT);
+				isTop    = isTop    || (iTipArrow.arrowDirection == TOP);
+				isRight  = isRight  || (iTipArrow.arrowDirection == RIGHT);
+				isBottom = isBottom || (iTipArrow.arrowDirection == BOTTOM);
+			}			
 			
 			// ensure tip width & height is not larger than width & height
 			// ingore first
@@ -70,38 +78,67 @@ package noorg.magic.utils
 			var lbx:Number = ltx;
 			var lby:Number = rby;
 			
+			var sx:Number;
+			var sy:Number;
+			var ex:Number;
+			var ey:Number;
+			
 			g.moveTo(ltx, lty);
 			
-			if (isTop) {
-				g.lineTo(x + tipDistanceTop, 				y + tipHeight);
-				g.lineTo(x + tipDistanceTop + tipWidth / 2, y);
-				g.lineTo(x + tipDistanceTop + tipWidth, 	y + tipHeight);
+			// draw top
+			for each (iTipArrow in iTipArrowArray) {
+				if (iTipArrow.arrowDirection == TOP) {
+					sx = x + iTipArrow.distanceA;
+					sy = lty;
+					ex = x + iTipArrow.distanceB;
+					ey = lty;
+					g.lineTo(sx, sy);
+					iTipArrow.drawTip(g, sx, sy, ex, ey);
+					g.lineTo(ex, ey);
+				}
 			}
-			
 			g.lineTo(rtx, rty);
 			
-			if (isRight) {
-				g.lineTo(x + width - tipHeight, y + tipDistanceRight);
-				g.lineTo(x + width, 			y + tipDistanceRight + tipWidth / 2);
-				g.lineTo(x + width - tipHeight, y + tipDistanceRight + tipWidth);
+			// draw right
+			for each (iTipArrow in iTipArrowArray) {
+				if (iTipArrow.arrowDirection == RIGHT) {
+					sx = rtx;
+					sy = y + iTipArrow.distanceA;
+					ex = rtx;
+					ey = y + iTipArrow.distanceB;
+					g.lineTo(sx, sy);
+					iTipArrow.drawTip(g, sx, sy, ex, ey);
+					g.lineTo(ex, ey);
+				}
 			}
-			
 			g.lineTo(rbx, rby);
 			
-			if (isBottom) {
-				g.lineTo(x + tipDistanceBottom + tipWidth, 		y + height - tipHeight);
-				g.lineTo(x + tipDistanceBottom + tipWidth / 2, 	y + height);
-				g.lineTo(x + tipDistanceBottom, 				y + height - tipHeight);
+			// draw bottom
+			for each (iTipArrow in iTipArrowArray) {
+				if (iTipArrow.arrowDirection == BOTTOM) {
+					sx = x + iTipArrow.distanceB;
+					sy = lby;
+					ex = x + iTipArrow.distanceA;
+					ey = lby;
+					g.lineTo(sx, sy);
+					iTipArrow.drawTip(g, sx, sy, ex, ey);
+					g.lineTo(ex, ey);
+				}
 			}
-			
 			g.lineTo(lbx, lby);
 			
-			if (isLeft) {
-				g.lineTo(x + tipHeight, y + tipDistanceLeft + tipWidth);
-				g.lineTo(x, 			y + tipDistanceLeft + tipWidth / 2);
-				g.lineTo(x + tipHeight, y + tipDistanceLeft);
+			// draw left
+			for each (iTipArrow in iTipArrowArray) {
+				if (iTipArrow.arrowDirection == LEFT) {
+					sx = lbx;
+					sy = y + iTipArrow.distanceB;
+					ex = lbx;
+					ey = y + iTipArrow.distanceA;
+					g.lineTo(sx, sy);
+					iTipArrow.drawTip(g, sx, sy, ex, ey);
+					g.lineTo(ex, ey);
+				}
 			}
-			
 			g.lineTo(ltx, lty);
 			
 		}
@@ -111,24 +148,31 @@ package noorg.magic.utils
 	     *
 	     */
 		public static function drawTipRoundRectComplex(g:Graphics, x:Number, y:Number, 
-								  width:Number, height:Number, 
+								  width:Number, height:Number, iTipArrowArray:Array,
 	                              topLeftRadius:Number, topRightRadius:Number, 
-	                              bottomLeftRadius:Number, bottomRightRadius:Number,
-	                              tipWidth:Number, tipHeight:Number,
-								  tipDistanceLeft:Number, tipDistanceTop:Number,
-								  tipDistanceRight:Number, tipDistanceBottom:Number,
-								  directions:uint):void
+	                              bottomLeftRadius:Number, bottomRightRadius:Number):void
 		{
 			
-			var isLeft:Boolean 		= (LEFT 	& directions) != 0;
-			var isTop:Boolean 		= (TOP 		& directions) != 0;
-			var isRight:Boolean 	= (RIGHT 	& directions) != 0;
-			var isBottom:Boolean 	= (BOTTOM 	& directions) != 0;
+			var isLeft:Boolean;
+			var isTop:Boolean;
+			var isRight:Boolean;
+			var isBottom:Boolean;
+			var tipHeight:Number = 0;
 			
+			for each (iTipArrow in iTipArrowArray) {
+				tipHeight = Math.max(tipHeight, iTipArrow.tipHeight);
+				isLeft   = isLeft   || (iTipArrow.arrowDirection == LEFT);
+				isTop    = isTop    || (iTipArrow.arrowDirection == TOP);
+				isRight  = isRight  || (iTipArrow.arrowDirection == RIGHT);
+				isBottom = isBottom || (iTipArrow.arrowDirection == BOTTOM);
+			}	
 			
-			var xw:Number = x + width;
-			var yh:Number = y + height;
-	
+			var sx:Number;
+			var sy:Number;
+			var ex:Number;
+			var ey:Number;
+			var iTipArrow:ITipArrow;
+			
 			// Make sure none of the radius values are greater than w/h.
 			// These are all inlined to avoid function calling overhead
 			var minSize:Number = width < height ? width * 2 : height * 2;
@@ -163,13 +207,16 @@ package noorg.magic.utils
 			g.curveTo(rbx - s, rby, rbx - bottomRightRadius, rby);
 	
 			// draw bottom
-			a = bottomLeftRadius * 0.292893218813453;
-			s = bottomLeftRadius * 0.585786437626905;
-			
-			if (isBottom) {
-				g.lineTo(lbx + bottomLeftRadius + tipDistanceBottom + tipWidth, 	lby);
-				g.lineTo(lbx + bottomLeftRadius + tipDistanceBottom + tipWidth / 2, lby + tipHeight);
-				g.lineTo(lbx + bottomLeftRadius + tipDistanceBottom, 				lby);
+			for each (iTipArrow in iTipArrowArray) {
+				if (iTipArrow.arrowDirection == BOTTOM) {
+					sx = x + iTipArrow.distanceB;
+					sy = rby;
+					ex = x + iTipArrow.distanceA;
+					ey = rby;
+					g.lineTo(sx, sy);
+					iTipArrow.drawTip(g, sx, sy, ex, ey);
+					g.lineTo(ex, ey);
+				}
 			}
 			g.lineTo(lbx + bottomLeftRadius, lby);
 			
@@ -181,10 +228,16 @@ package noorg.magic.utils
 			g.curveTo(lbx, 	   lby - s, lbx,     lby - bottomLeftRadius);
 			
 			// draw left
-			if (isLeft) {
-				g.lineTo(lbx, 			  lty + topLeftRadius + tipDistanceLeft + tipWidth);
-				g.lineTo(lbx - tipHeight, lty + topLeftRadius + tipDistanceLeft + tipWidth / 2);
-				g.lineTo(lbx, 			  lty + topLeftRadius + tipDistanceLeft);
+			for each (iTipArrow in iTipArrowArray) {
+				if (iTipArrow.arrowDirection == LEFT) {
+					sx = lbx;
+					sy = y + iTipArrow.distanceB;
+					ex = lbx;
+					ey = y + iTipArrow.distanceA;
+					g.lineTo(sx, sy);
+					iTipArrow.drawTip(g, sx, sy, ex, ey);
+					g.lineTo(ex, ey);
+				}
 			}
 			g.lineTo(ltx, lty + topLeftRadius);		
 	
@@ -196,10 +249,16 @@ package noorg.magic.utils
 			g.curveTo(ltx + s, lty, ltx + topLeftRadius, lty);
 			
 			// draw top
-			if (isTop) {
-				g.lineTo(ltx + topLeftRadius + tipDistanceTop, 				  lty);
-				g.lineTo(ltx + topLeftRadius + tipDistanceTop + tipWidth / 2, lty - tipHeight);
-				g.lineTo(ltx + topLeftRadius + tipDistanceTop + tipWidth, 	  lty);
+			for each (iTipArrow in iTipArrowArray) {
+				if (iTipArrow.arrowDirection == TOP) {
+					sx = x + iTipArrow.distanceA;
+					sy = lty;
+					ex = x + iTipArrow.distanceB;
+					ey = lty;
+					g.lineTo(sx, sy);
+					iTipArrow.drawTip(g, sx, sy, ex, ey);
+					g.lineTo(ex, ey);
+				}
 			}
 			g.lineTo(rtx - topRightRadius, rty);
 	
@@ -211,12 +270,17 @@ package noorg.magic.utils
 			g.curveTo(rtx, rty + s, rtx, rty + topRightRadius);
 			
 			// draw right
-			
-			if (isRight) {
-				g.lineTo(rtx, 				rty + topRightRadius + tipDistanceRight);
-				g.lineTo(rtx + tipHeight, 	rty + topRightRadius + tipDistanceRight + tipWidth / 2);
-				g.lineTo(rtx, 				rty + topRightRadius + tipDistanceRight + tipWidth);
-			}
+			for each (iTipArrow in iTipArrowArray) {
+				if (iTipArrow.arrowDirection == RIGHT) {
+					sx = rtx;
+					sy = y + iTipArrow.distanceA;
+					ex = rtx;
+					ey = y + iTipArrow.distanceB;
+					g.lineTo(sx, sy);
+					iTipArrow.drawTip(g, sx, sy, ex, ey);
+					g.lineTo(ex, ey);
+				}
+			}			
 			g.lineTo(rbx, rby - bottomRightRadius);
 		}
 

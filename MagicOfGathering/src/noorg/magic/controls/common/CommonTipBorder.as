@@ -7,7 +7,7 @@ package noorg.magic.controls.common
 	import mx.skins.halo.ApplicationBackground;
 	import mx.utils.GraphicsUtil;
 	
-	import noorg.magic.utils.CommonGraphicsUtil;
+	import noorg.magic.utils.TipArrowUtil;
 	
 	public class CommonTipBorder extends Border
 	{
@@ -70,7 +70,7 @@ package noorg.magic.controls.common
 			if (!cornerRadius)
 			{
 				// g.drawRect(x, y, width, height);
-				CommonGraphicsUtil.drawTipRect(g, x, y, width, height, 
+				TipArrowUtil.drawTipRect(g, x, y, width, height, 
 						tipWidth, tipHeight,
 						tipDistanceLeft, tipDistanceTop, tipDistanceRight, tipDistanceBottom,
 						directions);
