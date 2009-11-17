@@ -11,7 +11,8 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="MagicOfGathering.mxml"/>
+    <!--<application path="MagicOfGathering.mxml"/>-->
+    <application path="MGTest.mxml"/>
   </applications>
   <modules/>
   <buildCSSFiles/>

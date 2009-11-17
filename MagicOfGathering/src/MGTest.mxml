@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" cornerRadius="20"
+	 backgroundImage="@Embed(source='noorg/magic/assets/cards/back.png')"
+	 applicationComplete="appCompleteHandler()" width="800" height="600">
+	 <mx:Script source="app.as" />
+	 
+	 <mx:Image id="mainImg" width="500" height="400" x="100" y="100" />
+</mx:WindowedApplication>
