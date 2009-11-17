@@ -1,11 +1,11 @@
 // ActionScript file
 			import flash.display.GradientType;
 			import flash.display.Graphics;
-			import flash.display.SpreadMethod;
 			import flash.filters.GlowFilter;
 			import flash.geom.Matrix;
 			
-			import noorg.magic.utils.CommonGraphicsUtil;
+			import noorg.magic.utils.TipArrowImpl;
+			import noorg.magic.utils.TipArrowUtil;
 			
 			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
 			{
@@ -23,11 +23,27 @@
 				//CommonGraphicsUtil.drawTipRect(g, 0, 0, this.mainImg.width, this.mainImg.height,
 				//							   20, 40, 
 				//							   60, 50, 70, 150, 0x1000);
-				CommonGraphicsUtil.drawTipRoundRectComplex(g, 
-						0, 0, this.mainImg.width, this.mainImg.height,
-						5, 10, 15, 20, 
-						30, 50, 
-						40, 50, 60, 40, 0x1000);
+//				TipArrowUtil.drawTipRoundRectComplex(g, 
+//						0, 0, this.mainImg.width, this.mainImg.height,
+//						5, 10, 15, 20, 
+//						30, 50, 
+//						40, 50, 60, 40, 0x1000);
+//				TipArrowUtil.drawTipRect(g, 0, 0, this.mainImg.width, this.mainImg.height,
+//						[
+//						new TipArrowImpl(TipArrowUtil.LEFT, 10, 20, 12, 8), 
+//						//new TipArrowImpl(TipArrowUtil.TOP, 400, 420, 440, 40),
+//						//new TipArrowImpl(TipArrowUtil.RIGHT, 40, 80, 70, 30),
+//						//new TipArrowImpl(TipArrowUtil.RIGHT, 300, 350, 310, 40),
+//						new TipArrowImpl(TipArrowUtil.BOTTOM, 10, 20, 12, 8)
+//						]);
+				TipArrowUtil.drawTipRoundRectComplex(g, 0, 0, this.mainImg.width, this.mainImg.height,
+						[
+						//	new TipArrowImpl(TipArrowUtil.LEFT, 170, 240, 130, 70),
+						//	new TipArrowImpl(TipArrowUtil.RIGHT, 170, 240, 130, 70),
+						//	new TipArrowImpl(TipArrowUtil.TOP, 170, 240, 130, 70),
+							new TipArrowImpl(TipArrowUtil.BOTTOM, 170, 240, 130, 70),
+							new TipArrowImpl(TipArrowUtil.TOP, 270, 350, 130, 40)
+						], 10, 20, 30, 40);
 				g.endFill();
 			}
 			private function appCompleteHandler():void
