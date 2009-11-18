@@ -1,8 +1,13 @@
 // ActionScript file
 			import flash.display.GradientType;
 			import flash.display.Graphics;
+			import flash.events.MouseEvent;
 			import flash.filters.GlowFilter;
 			import flash.geom.Matrix;
+			
+			import mx.core.DragSource;
+			import mx.core.IUIComponent;
+			import mx.managers.DragManager;
 			
 			import noorg.magic.utils.TipArrowImpl;
 			import noorg.magic.utils.TipArrowUtil;
@@ -50,3 +55,15 @@
 			{
 				mainImg.filters = [new GlowFilter(0x7f7f7f, 1, 12, 12, 2, 3)];
 			}
+	
+private function deHandler():void
+{
+	DragManager.acceptDragDrop(this);
+}	
+			
+private function mdHandler(evt:MouseEvent):void
+{
+	var ds:DragSource = new DragSource();
+	ds.addData(evt.currentTarget, "img");
+	DragManager.doDrag(IUIComponent(evt.currentTarget), ds, evt);
+}
