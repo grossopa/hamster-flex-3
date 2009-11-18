@@ -1,5 +1,6 @@
 // ActionScript file
 import flash.display.Graphics;
+import flash.events.MouseEvent;
 
 import mx.collections.ArrayCollection;
 import mx.events.CollectionEvent;
@@ -13,7 +14,8 @@ import noorg.magic.models.PlayCard;
 import noorg.magic.services.AssetService;
 import noorg.magic.services.DataService;
 import noorg.magic.services.EventService;
-import noorg.magic.utils.Constants;Constants;
+import noorg.magic.utils.Constants;
+import noorg.magic.utils.GlobalUtil;Constants;
 
 private const AS:AssetService = AssetService.getInstance();
 private const DS:DataService = DataService.getInstance();
@@ -51,6 +53,8 @@ private function collectionChangedHandler(evt:CollectionEvent):void
 			}
 			if (!hasIt) {
 				var unit:PlayCardUnit = DS.getPlayCardUnitByCard(playCard);
+				unit.addEventListener(MouseEvent.ROLL_OUT, unitRollOutHandler);
+				unit.addEventListener(MouseEvent.ROLL_OVER, unitRollOverHandler);
 				this.mainContainer.addChild(unit);
 			}
 		}
@@ -65,6 +69,8 @@ private function collectionChangedHandler(evt:CollectionEvent):void
 				}
 			}
 			if (!hasIt) {
+				playCardUnit.removeEventListener(MouseEvent.ROLL_OUT, unitRollOutHandler);
+				playCardUnit.removeEventListener(MouseEvent.ROLL_OVER, unitRollOverHandler);
 				this.mainContainer.removeChild(playCardUnit);
 			}
 		}		
@@ -153,6 +159,22 @@ private function moveLeftHandler():void
 private function moveRightHandler():void
 {
 	mainContainer.horizontalScrollPosition += Constants.DEFAULT_GAP + Constants.PLAY_CARD_WIDTH;
+}
+
+private function unitRollOutHandler(evt:MouseEvent):void
+{
+	var unit:PlayCardUnit = PlayCardUnit(evt.currentTarget);
+	if (DS.isAutoShowCardDetail) {
+		GlobalUtil.hideCardDetailTip();
+	}
+}
+
+private function unitRollOverHandler(evt:MouseEvent):void
+{
+	var unit:PlayCardUnit = PlayCardUnit(evt.currentTarget);
+	if (DS.isAutoShowCardDetail) {
+		GlobalUtil.showCardDetailTip(unit);
+	}
 }
 
 override protected function updateDisplayList(uw:Number, uh:Number):void

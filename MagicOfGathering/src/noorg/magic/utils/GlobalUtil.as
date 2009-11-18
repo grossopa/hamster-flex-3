@@ -1,15 +1,18 @@
 package noorg.magic.utils
 {
 	import flash.display.DisplayObject;
+	import flash.geom.Point;
 	
 	import mx.core.Application;
 	import mx.core.IFlexDisplayObject;
 	import mx.managers.PopUpManager;
 	
 	import noorg.magic.controls.masks.ProcessMask;
+	import noorg.magic.controls.play.unit.PlayCardUnit;
 	import noorg.magic.controls.popups.CardDetailPopup;
 	import noorg.magic.controls.popups.EnhancementPopup;
 	import noorg.magic.controls.popups.GraveyardDetailPopup;
+	import noorg.magic.controls.popups.tips.CardDetailTip;
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
 	
@@ -70,6 +73,33 @@ package noorg.magic.utils
 		{
 			var obj:EnhancementPopup = createPopup(EnhancementPopup) as EnhancementPopup;
 			obj.playCard = playCard;
+		}
+		
+		public static function showCardDetailTip(playCardUnit:PlayCardUnit):void
+		{
+			var tip:CardDetailTip = app.cardDetailTip;
+			var gPoint:Point = playCardUnit.localToGlobal(new Point());
+			var tempX:Number;
+			if (gPoint.y < tip.height) {
+				tip.tipArrow.arrowDirection = TipArrowUtil.TOP;
+				tip.y = gPoint.y + playCardUnit.height;
+				
+			} else {
+				tip.tipArrow.arrowDirection = TipArrowUtil.BOTTOM;
+				tip.y = gPoint.y - tip.height;
+			}
+			tempX = gPoint.x - (tip.width - playCardUnit.width) / 2;
+			tempX = Math.max(0, tempX);
+			tempX = Math.min(app.width, tempX);
+			tip.x = tempX;
+			
+			app.cardDetailTip.showTip(playCardUnit);
+			
+		}
+		
+		public static function hideCardDetailTip():void
+		{
+			app.cardDetailTip.hideTip();
 		}
 		
 	}
