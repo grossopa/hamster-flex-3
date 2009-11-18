@@ -52,9 +52,10 @@ package noorg.magic.controls.play.unit
 			}
 			super.card = PlayCard(value);
 			super.card.addEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
-			this.setStyle("borderStyle", "solid");
-			this.setStyle("borderColor", playCard.player.color);
-			this.setStyle("borderThickness", 1);
+//			this.setStyle("borderStyle", "outset");
+//			this.setStyle("borderColor", playCard.player.color);
+//			this.setStyle("borderThickness", 3);
+//			this.setStyle("cornerRadius", 3);
 		}
 		
 		public function get playCard():PlayCard
@@ -181,9 +182,7 @@ package noorg.magic.controls.play.unit
 		private function mouseDownHandler(evt:MouseEvent):void
 		{
 			var ds:DragSource = new DragSource();
-			ds.addData({"x":evt.localX, "y":evt.localY}, "xy");
-			var snapshot:Image = ImageUtil.toImage(mainImage, true);
-			DragManager.doDrag(this, ds, evt, snapshot);
+			DragManager.doDrag(this, ds, evt, this.mainImage);
 		}
 		
 		private function rollOverHandler(evt:MouseEvent):void
