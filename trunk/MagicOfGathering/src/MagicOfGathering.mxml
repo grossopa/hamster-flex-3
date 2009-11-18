@@ -2,7 +2,7 @@
 <mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" minWidth="800" minHeight="600" width="800" height="600" backgroundColor="white"
  	initialize="init()" applicationComplete="appCompleteHandler()" 
  	xmlns:controls="noorg.magic.controls.*"
- 	xmlns:ns1="org.hamster.components.chrometab.*" xmlns:icons="noorg.magic.controls.icons.*">
+ 	xmlns:ns1="org.hamster.components.chrometab.*" xmlns:icons="noorg.magic.controls.icons.*" xmlns:tips="noorg.magic.controls.popups.tips.*">
 	<mx:Script source="MagicOfGatheringAs.as" />
 	
 	<mx:Metadata>
@@ -17,4 +17,6 @@
 		<controls:PlayContainer  label="{resourceManager.getString('main', 'playContainer.label')}" id="playContainer" />
 	</mx:ViewStack>
 	
+	<!-- Tips which should not be popup by PopupManager -->
+	<tips:CardDetailTip id="cardDetailTip" />
 </mx:WindowedApplication>

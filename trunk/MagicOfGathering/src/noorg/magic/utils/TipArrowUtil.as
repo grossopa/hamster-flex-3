@@ -69,12 +69,14 @@ package noorg.magic.utils
 //				tipHeight = height - tipDistanceRight;
 //			}
 			
-			var ltx:Number = isLeft 	? x + tipHeight 			: x;
-			var lty:Number = isTop 		? y + tipHeight 			: y;
-			var rtx:Number = isRight 	? x + width - tipHeight 	: x + width;
+			
+			// define the positions
+			var ltx:Number = isLeft   ? x + tipHeight 		   : x;
+			var lty:Number = isTop 	  ? y + tipHeight 		   : y;
+			var rtx:Number = isRight  ? x + width - tipHeight  : x + width;
 			var rty:Number = lty;
 			var rbx:Number = rtx;
-			var rby:Number = isBottom 	? y + height - tipHeight 	: y + height;
+			var rby:Number = isBottom ? y + height - tipHeight : y + height;
 			var lbx:Number = ltx;
 			var lby:Number = rby;
 			
@@ -83,6 +85,7 @@ package noorg.magic.utils
 			var ex:Number;
 			var ey:Number;
 			
+			// go to start point
 			g.moveTo(ltx, lty);
 			
 			// draw top

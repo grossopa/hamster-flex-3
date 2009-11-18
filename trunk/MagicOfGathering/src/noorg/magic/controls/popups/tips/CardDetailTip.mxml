@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TipBase xmlns="noorg.magic.controls.popups.tips.*" xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="{Constants.CARD_WIDTH + TipBase.CORNER_RADIUS}" height="{Constants.CARD_HEIGHT + TipBase.CORNER_RADIUS + TipBase.TIP_HEIGHT}" xmlns:unit="noorg.magic.controls.unit.*"
+	creationComplete="completeHandler()">
+	<mx:Script source="CardDetailTipAs.as" />
+	
+	<unit:CardUnit id="mainCardUnit" x="{TipBase.CORNER_RADIUS / 2}" y="{TipBase.CORNER_RADIUS / 2}" />
+	
+</TipBase>

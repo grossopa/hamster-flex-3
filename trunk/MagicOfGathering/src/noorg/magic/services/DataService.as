@@ -71,5 +71,11 @@ package noorg.magic.services
 			}
 			return result;
 		}
+		
+		/**
+		 * user configurations
+		 */
+		[Bindable] 
+		public var isAutoShowCardDetail:Boolean = true;
 	}
 }

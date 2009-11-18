@@ -30,6 +30,9 @@ package noorg.magic.utils
 		function get distanceB():Number;
 		function set tipHeight(value:Number):void;
 		function get tipHeight():Number;
+		/**
+		 * draw tip method. 
+		 */
 		function drawTip(g:Graphics, startX:Number, startY:Number,
 				endX:Number, endY:Number):void;
 	}
