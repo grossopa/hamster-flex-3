@@ -29,6 +29,11 @@ package noorg.magic.controls.popups.tips
 			return this.height + TIP_HEIGHT;
 		}
 		
+		public function get widthWithTip():Number
+		{
+			return this.width + TIP_HEIGHT;
+		}
+		
 		override protected function updateDisplayList(uw:Number, uh:Number):void
 		{
 			super.updateDisplayList(uw, uh);
@@ -43,7 +48,7 @@ package noorg.magic.controls.popups.tips
 			tipArrow.distanceB = uw - 2 * TIP_WIDTH >> 1;
 			tipArrow.distanceC = uw >> 1;
 			TipArrowUtil.drawTipRoundRectComplex(graphics, 0, 0, uw, uh, [tipArrow], 
-					CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS);
+					CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, false);
 			graphics.endFill();
 		}
 		

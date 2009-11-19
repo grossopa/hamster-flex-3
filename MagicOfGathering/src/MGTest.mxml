@@ -4,9 +4,9 @@
 	 applicationComplete="appCompleteHandler()" width="800" height="600" xmlns:tips="noorg.magic.controls.popups.tips.*">
 	 <mx:Script source="app.as" />
 	 
-	 <mx:Canvas backgroundColor="0x000000" id="mainImg" width="100" height="100" x="200" y="100" dropShadowEnabled="true" mouseDown="mdHandler(event)"/>
+	 <mx:Canvas backgroundColor="0x000000"  visible="false"  id="mainImg" width="100" height="100" x="200" y="100" dropShadowEnabled="true" mouseDown="mdHandler(event)"/>
 	 
-	 <tips:TipBase id="tipBase" width="300" height="200" x="100" y="100"  visible="false" 
+	 <tips:TipBase id="tipBase" width="200" height="200" x="100" y="100" 
 	 	>
 	 	<mx:Canvas width="100%" height="100%" backgroundColor="0xFF0000" backgroundAlpha="0.3" />
 	 </tips:TipBase>

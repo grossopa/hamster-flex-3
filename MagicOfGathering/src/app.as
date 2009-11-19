@@ -41,14 +41,14 @@
 //						//new TipArrowImpl(TipArrowUtil.RIGHT, 300, 350, 310, 40),
 //						new TipArrowImpl(TipArrowUtil.BOTTOM, 10, 20, 12, 8)
 //						]);
-				TipArrowUtil.drawTipRoundRectComplex(g, 0, 0, this.mainImg.width, this.mainImg.height,
+				TipArrowUtil.drawTipRoundRectComplex(g, 0, 0, this.tipBase.width, this.tipBase.height,
 						[
 						//	new TipArrowImpl(TipArrowUtil.LEFT, 170, 240, 130, 70),
 						//	new TipArrowImpl(TipArrowUtil.RIGHT, 170, 240, 130, 70),
 						//	new TipArrowImpl(TipArrowUtil.TOP, 170, 240, 130, 70),
 							new TipArrowImpl(TipArrowUtil.BOTTOM, 170, 240, 130, 70),
 							new TipArrowImpl(TipArrowUtil.TOP, 270, 350, 130, 40)
-						], 10, 20, 30, 40);
+						], 10, 20, 30, 40, false);
 				g.endFill();
 			}
 			private function appCompleteHandler():void

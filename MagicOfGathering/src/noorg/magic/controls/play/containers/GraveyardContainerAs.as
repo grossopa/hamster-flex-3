@@ -73,7 +73,7 @@ private function imageDragDropHandler(evt:DragEvent):void
 {
 	if (evt.dragInitiator is PlayCardUnit) {
 		var unit:PlayCardUnit = PlayCardUnit(evt.dragInitiator);
-		PlayCard(unit.card).location = cardLocation;
+		PlayCard(unit.card).setLocation(cardLocation);
 	}
 }
 

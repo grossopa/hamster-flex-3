@@ -79,19 +79,40 @@ package noorg.magic.utils
 		{
 			var tip:CardDetailTip = app.cardDetailTip;
 			var gPoint:Point = playCardUnit.localToGlobal(new Point());
-			var tempX:Number;
-			if (gPoint.y < tip.height) {
-				tip.tipArrow.arrowDirection = TipArrowUtil.TOP;
-				tip.y = gPoint.y + playCardUnit.height;
-				
-			} else {
+			var doneFlag:Boolean = false;
+			
+			if (gPoint.y > tip.heightWithTip) {
 				tip.tipArrow.arrowDirection = TipArrowUtil.BOTTOM;
-				tip.y = gPoint.y - tip.height;
+				tip.x = gPoint.x - (tip.width - playCardUnit.width) / 2;
+				tip.y = gPoint.y - tip.heightWithTip;
+				// to ensure LEFT/RIGHT is a acceptable position, else continue.
+				doneFlag = tip.x > 0 && app.width - tip.x - tip.width > 0;
 			}
-			tempX = gPoint.x - (tip.width - playCardUnit.width) / 2;
-			tempX = Math.max(0, tempX);
-			tempX = Math.min(app.width, tempX);
-			tip.x = tempX;
+			
+			if (!doneFlag && app.height - gPoint.y > tip.heightWithTip) {
+				tip.tipArrow.arrowDirection = TipArrowUtil.TOP;
+				tip.x = gPoint.x - (tip.width - playCardUnit.width) / 2;
+				tip.y = gPoint.y + playCardUnit.height + tip.heightWithTip - tip.height;
+				doneFlag = tip.x > 0 && app.width - tip.x - tip.width > 0;
+			}
+			
+			if (!doneFlag && gPoint.x > tip.widthWithTip) {
+				tip.tipArrow.arrowDirection = TipArrowUtil.RIGHT;
+				tip.x = gPoint.x - tip.widthWithTip;
+				tip.y = gPoint.y - playCardUnit.height / 2;
+				doneFlag = tip.y > 0 && app.height - tip.y - tip.height > 0;
+			}
+			
+			if (!doneFlag && app.width - gPoint.x > tip.widthWithTip) {
+				tip.tipArrow.arrowDirection = TipArrowUtil.LEFT;
+				tip.x = gPoint.x + playCardUnit.width + tip.widthWithTip - tip.width;
+				tip.y = gPoint.y - playCardUnit.height / 2;
+				if (tip.y < 0) {
+					tip.y = 0;
+				} else if (tip.y > app.height - tip.height) {
+					tip.y = app.height + tip.height;
+				}
+			}
 			
 			app.cardDetailTip.showTip(playCardUnit);
 			
