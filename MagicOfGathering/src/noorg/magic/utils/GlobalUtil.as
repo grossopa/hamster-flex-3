@@ -89,7 +89,7 @@ package noorg.magic.utils
 				doneFlag = tip.x > 0 && app.width - tip.x - tip.width > 0;
 			}
 			
-			if (!doneFlag && app.height - gPoint.y > tip.heightWithTip) {
+			if (!doneFlag && app.height - gPoint.y - playCardUnit.height > tip.heightWithTip) {
 				tip.tipArrow.arrowDirection = TipArrowUtil.TOP;
 				tip.x = gPoint.x - (tip.width - playCardUnit.width) / 2;
 				tip.y = gPoint.y + playCardUnit.height + tip.heightWithTip - tip.height;
@@ -99,18 +99,18 @@ package noorg.magic.utils
 			if (!doneFlag && gPoint.x > tip.widthWithTip) {
 				tip.tipArrow.arrowDirection = TipArrowUtil.RIGHT;
 				tip.x = gPoint.x - tip.widthWithTip;
-				tip.y = gPoint.y - playCardUnit.height / 2;
-				doneFlag = tip.y > 0 && app.height - tip.y - tip.height > 0;
+				tip.y = gPoint.y - playCardUnit.height;
+				doneFlag = tip.y > 0 && app.height - tip.y - tip.heightWithTip > 0;
 			}
 			
-			if (!doneFlag && app.width - gPoint.x > tip.widthWithTip) {
+			if (!doneFlag && app.width - gPoint.x - playCardUnit.width > tip.widthWithTip) {
 				tip.tipArrow.arrowDirection = TipArrowUtil.LEFT;
 				tip.x = gPoint.x + playCardUnit.width + tip.widthWithTip - tip.width;
-				tip.y = gPoint.y - playCardUnit.height / 2;
+				tip.y = gPoint.y - playCardUnit.height;
 				if (tip.y < 0) {
 					tip.y = 0;
-				} else if (tip.y > app.height - tip.height) {
-					tip.y = app.height + tip.height;
+				} else if (tip.y >= app.height - tip.height) {
+					tip.y = app.height - tip.height;
 				}
 			}
 			
