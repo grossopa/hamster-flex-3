@@ -31,7 +31,7 @@ override protected function createIcon():void
 
 private function iconReturnHandClickHandler(evt:MouseEvent):void
 {
-	PlayCard(card).location = CardLocation.HAND;
+	PlayCard(card).setLocation(CardLocation.HAND);
 }
 
 private function iconReturnFieldClickHandler(evt:MouseEvent):void

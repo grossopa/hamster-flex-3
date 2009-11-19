@@ -63,11 +63,20 @@ package noorg.magic.services
 		[Embed(source='noorg/magic/assets/icons/btn_list_hide.png')]
 		public const BtnListHide:Class;
 		
+		[Embed(source='noorg/magic/assets/icons/btn_scrollRight.png')]
+		public const BtnScrollRight:Class;
+		
+		[Embed(source='noorg/magic/assets/icons/btn_scrollLeft.png')]
+		public const BtnScrollLeft:Class;
+		
 		[Embed(source='noorg/magic/assets/icons/btn_ctrl_switchPlayer.png')]
 		public const BtnSwitchPlayer:Class;
 		
 		[Embed(source='noorg/magic/assets/drag/drag_enhancement.png')]
 		public const DragEnhancement:Class;
+	
+		[Embed(source='noorg/magic/assets/drag/drag_insertArrow.png')]
+		public const DragInsertArrow:Class;
 
 	}
 }

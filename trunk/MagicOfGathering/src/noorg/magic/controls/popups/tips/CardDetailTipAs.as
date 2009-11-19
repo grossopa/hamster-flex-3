@@ -19,9 +19,7 @@ public function set card(value:Card):void
 	if (this.initialized) {
 		mainCardUnit.card = value;
 		if (this.tipArrow.arrowDirection == TipArrowUtil.TOP) {
-			mainCardUnit.y = TipBase.CORNER_RADIUS / 2 + TipBase.TIP_HEIGHT;
 		} else {
-			mainCardUnit.y = TipBase.CORNER_RADIUS / 2;
 		}
 		this.invalidateDisplayList();
 	}

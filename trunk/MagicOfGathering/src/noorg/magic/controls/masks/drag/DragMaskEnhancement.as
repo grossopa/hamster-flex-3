@@ -7,7 +7,7 @@ package noorg.magic.controls.masks.drag
 		public function DragMaskEnhancement()
 		{
 			super();
-			this.source = AS.DragEnhancement;
+			this.iconSource = AS.DragEnhancement;
 		}
 		
 	}

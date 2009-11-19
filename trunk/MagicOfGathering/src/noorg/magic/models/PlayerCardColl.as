@@ -24,7 +24,7 @@ package noorg.magic.models
 			
 			for each (var card:PlayCard in this.cardColl) {
 				registCardListener(card);
-				this.getLocationArray(card.location).addItem(card);
+				this.getLocationArray(card.getLocation()).addItem(card);
 				this.getStatusArray(card.status).addItem(card);
 			}
 		}
@@ -72,7 +72,7 @@ package noorg.magic.models
 				var card:PlayCard = PlayCard(this.cardStack.removeItemAt(this.cardStack.length - 1));
 				disEvt.card = card;
 				this.dispatchEvent(disEvt);
-				card.location = CardLocation.HAND;
+				card.setLocation(CardLocation.HAND);
 				return card;
 			}
 		}
@@ -81,7 +81,11 @@ package noorg.magic.models
 		{
 			var originArr:ArrayCollection = this.getLocationArray(evt.originLocation);
 			var newArr:ArrayCollection = this.getLocationArray(evt.newLocation);
-			newArr.addItem(originArr.removeItemAt(originArr.getItemIndex(evt.currentTarget)));
+			if (evt.index == -1) {
+				newArr.addItem(originArr.removeItemAt(originArr.getItemIndex(evt.currentTarget)));
+			} else {
+				newArr.addItemAt(originArr.removeItemAt(originArr.getItemIndex(evt.currentTarget)), evt.index);
+			}
 		}
 		
 		private function cardStatusChangedHandler(evt:PlayCardEvent):void

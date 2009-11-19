@@ -12,17 +12,17 @@ package noorg.magic.models
 		
 		public const enhancementCards:ArrayCollection = new ArrayCollection();
 		
-		public function set location(value:int):void
+		public function setLocation(value:int, index:int = -1):void
 		{
 			var locationEvt:PlayCardEvent = new PlayCardEvent(PlayCardEvent.LOCATION_CHANGED);
-			locationEvt.originLocation = this.location;
+			locationEvt.originLocation = this._location;
+			locationEvt.index = index;
 			_location = value;
-			locationEvt.newLocation = this.location;
+			locationEvt.newLocation = this._location;
 			this.dispatchEvent(locationEvt);
 		}
 		
-		[Bindable]
-		public function get location():int
+		public function getLocation():int
 		{
 			return _location;
 		}

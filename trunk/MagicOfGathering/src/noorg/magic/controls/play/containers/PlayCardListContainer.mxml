@@ -25,9 +25,11 @@
 			<!--dragEnabled="true" dropEnabled="true" dragEnter="listDragEnterHandler(event)" dragDrop="listDragDropHandler(event)"-->
 	</mx:HBox>
 
-	<mx:Image id="insertLine" width="5" height="100%" visible="false" />
-	
-	<mx:Button id="moveLeftBtn" verticalCenter="0" left="5" label="&lt;" click="moveLeftHandler()" />
-	<mx:Button id="moveRightBtn" verticalCenter="0" right="5" label="&gt;" click="moveRightHandler()" />		
+	<mx:Image id="moveLeftBtn" width="20" height="100%" x="{mainContainer.x}" alpha="0.01"
+		rollOver="btnLeftRollOverHandler(event)" rollOut="btnLeftRollOutHandler(event)" 
+		click="moveLeftHandler()" />
+	<mx:Image id="moveRightBtn" width="20" height="100%" right="0" alpha="0.01"
+		rollOver="btnRightRollOverHandler(event)" rollOut="btnRightRollOverHandler(event)" 
+		click="moveRightHandler()" />		
 
 </mx:Canvas>

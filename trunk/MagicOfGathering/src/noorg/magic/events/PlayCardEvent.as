@@ -18,6 +18,7 @@ package noorg.magic.events
 		
 		public var originLocation:int = -1;
 		public var newLocation:int = -1;
+		public var index:int;
 		
 		public var originStatus:int = -1;
 		public var newStatus:int = -1;

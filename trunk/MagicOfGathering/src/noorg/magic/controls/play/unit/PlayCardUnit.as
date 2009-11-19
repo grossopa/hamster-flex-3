@@ -1,8 +1,9 @@
 package noorg.magic.controls.play.unit
 {
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
+	import flash.text.TextField;
 	
-	import mx.controls.Image;
 	import mx.core.DragSource;
 	import mx.events.DragEvent;
 	import mx.managers.DragManager;
@@ -12,17 +13,16 @@ package noorg.magic.controls.play.unit
 	import noorg.magic.controls.icons.IconManager;
 	import noorg.magic.controls.icons.IconTap;
 	import noorg.magic.controls.masks.drag.DragMaskEnhancement;
+	import noorg.magic.controls.masks.drag.DragMaskInsertArrow;
 	import noorg.magic.controls.masks.drag.DragMaskManager;
 	import noorg.magic.controls.unit.CardUnit;
-	import noorg.magic.events.PlayCardDragEvent;
 	import noorg.magic.events.PlayCardEvent;
 	import noorg.magic.models.Card;
 	import noorg.magic.models.PlayCard;
+	import noorg.magic.models.Player;
 	import noorg.magic.models.staticValue.CardStatus;
 	import noorg.magic.utils.Constants;
 	import noorg.magic.utils.GlobalUtil;
-	
-	import org.hamster.utils.ImageUtil;
 
 	public class PlayCardUnit extends CardUnit
 	{
@@ -34,6 +34,8 @@ package noorg.magic.controls.play.unit
 		protected var iconEnhancement:IconEnhancement;
 		
 		protected var dragMaskEnhancement:DragMaskEnhancement;
+		protected var dragMaskInsertLeft:DragMaskInsertArrow;
+		protected var dragMaskInsertRight:DragMaskInsertArrow;
 		
 		override public function set data(value:Object):void
 		{
@@ -52,6 +54,7 @@ package noorg.magic.controls.play.unit
 			}
 			super.card = PlayCard(value);
 			super.card.addEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
+		//	this.filters = [new GlowFilter(playCard.player.color, 1, 5, 5, 2, 3, true)];
 //			this.setStyle("borderStyle", "outset");
 //			this.setStyle("borderColor", playCard.player.color);
 //			this.setStyle("borderThickness", 3);
@@ -61,6 +64,11 @@ package noorg.magic.controls.play.unit
 		public function get playCard():PlayCard
 		{
 			return PlayCard(this.card);
+		}
+		
+		public function get player():Player
+		{
+			return this.playCard.player;
 		}
 		
 		public function PlayCardUnit()
@@ -87,13 +95,30 @@ package noorg.magic.controls.play.unit
 		
 		protected function createDragMask():void
 		{
-			this.dragMaskEnhancement = new DragMaskEnhancement();
+			dragMaskEnhancement = new DragMaskEnhancement();
 			dragMaskEnhancement.visible = false;
-		//	this.dragMaskEnhancement.addEventListener(DragEvent.DRAG_ENTER, maskEnhancementDragEnterHandler);
-			this.dragMaskEnhancement.addEventListener(DragEvent.DRAG_DROP, maskEnhancementDragDropHandler);
-			this.addChild(dragMaskEnhancement);
+			dragMaskEnhancement.addEventListener(DragEvent.DRAG_DROP, maskEnhancementDragDropHandler);
+			addChild(dragMaskEnhancement);
+			
+			dragMaskInsertLeft = new DragMaskInsertArrow();
+			dragMaskInsertLeft.visible = false;
+			dragMaskInsertLeft.isLeft = true;
+			dragMaskInsertLeft.x = 0;
+			dragMaskInsertLeft.y = Constants.DRAG_MASK_HEIGHT;
+			dragMaskInsertLeft.addEventListener(DragEvent.DRAG_DROP, maskLeftDragDropHandler);
+			addChild(dragMaskInsertLeft);
+			
+			dragMaskInsertRight = new DragMaskInsertArrow();
+			dragMaskInsertRight.visible = false;
+			dragMaskInsertRight.isLeft = false;
+			dragMaskInsertRight.x = Constants.DRAG_MASK_WIDTH * 2;
+			dragMaskInsertRight.y = Constants.DRAG_MASK_HEIGHT;
+			dragMaskInsertRight.addEventListener(DragEvent.DRAG_DROP, maskRightDragDropHandler);
+			addChild(dragMaskInsertRight);
 			
 			dragMaskManager.maskColl.addItem(dragMaskEnhancement);
+			dragMaskManager.maskColl.addItem(dragMaskInsertLeft);
+			dragMaskManager.maskColl.addItem(dragMaskInsertRight);
 		}
 		
 		protected function createIcon():void
@@ -121,10 +146,6 @@ package noorg.magic.controls.play.unit
 		
 		private function detailClickHandler(evt:MouseEvent):void
 		{
-			//var disEvt:PlayCardEvent = new PlayCardEvent(PlayCardEvent.SHOW_DETAIL, true);
-			//disEvt.card = PlayCard(this.card);
-			//this.dispatchEvent(disEvt);
-			
 			GlobalUtil.showDetailPopup(PlayCard(this.card));
 		}
 		
@@ -138,18 +159,32 @@ package noorg.magic.controls.play.unit
 			}
 		}
 		
-//		private function maskEnhancementDragEnterHandler(evt:DragEvent):void
-//		{
-//			if (evt.dragInitiator is PlayCardUnit) {
-//				DragManager.acceptDragDrop(this.dragMaskEnhancement);
-//			}
-//		}
-//		
 		private function maskEnhancementDragDropHandler(evt:DragEvent):void
 		{
 			if (evt.dragInitiator is PlayCardUnit) {
 				var unit:PlayCardUnit = PlayCardUnit(evt.dragInitiator);
 				this.playCard.enhancementCards.addItem(unit.playCard);
+			}			
+		}
+		
+		private function maskLeftDragDropHandler(evt:DragEvent):void
+		{
+			if (evt.dragInitiator is PlayCardUnit) {
+				var unit:PlayCardUnit = PlayCardUnit(evt.dragInitiator);
+				var index:int = this.player.playerCardColl.getLocationArray(
+						this.playCard.getLocation()).getItemIndex(this.playCard);
+				unit.playCard.setLocation(this.playCard.getLocation(), index);
+			}
+			
+		}
+		
+		private function maskRightDragDropHandler(evt:DragEvent):void
+		{
+			if (evt.dragInitiator is PlayCardUnit) {
+				var unit:PlayCardUnit = PlayCardUnit(evt.dragInitiator);
+				var index:int = this.player.playerCardColl.getLocationArray(
+						this.playCard.getLocation()).getItemIndex(this.playCard);
+				unit.playCard.setLocation(this.playCard.getLocation(), index + 1);
 			}			
 		}
 		
@@ -182,7 +217,8 @@ package noorg.magic.controls.play.unit
 		private function mouseDownHandler(evt:MouseEvent):void
 		{
 			var ds:DragSource = new DragSource();
-			DragManager.doDrag(this, ds, evt, this.mainImage);
+			var p:Point = this.globalToLocal(new Point(evt.stageX, evt.stageY));
+			DragManager.doDrag(this, ds, evt, this.mainImage,p.x + 10, p.y - this.height / 2);
 		}
 		
 		private function rollOverHandler(evt:MouseEvent):void
@@ -202,10 +238,11 @@ package noorg.magic.controls.play.unit
 				
 				this.dragMaskManager.showMask();
 				
-//				var disEvt:PlayCardDragEvent = new PlayCardDragEvent(PlayCardDragEvent.DRAG_ENTER, true);
-//				disEvt.enterLeftSide = evt.localX <= this.width;
-//				disEvt.playCard = PlayCard(this.card);
-//				this.dispatchEvent(disEvt);
+				var unit:PlayCardUnit = PlayCardUnit(evt.dragInitiator);
+				if (unit.player != this.player) {
+					this.dragMaskInsertLeft.visible = false;
+					this.dragMaskInsertRight.visible = false;
+				}
 			}
 		}
 		
@@ -219,10 +256,6 @@ package noorg.magic.controls.play.unit
 		private function dragDropHandler(evt:DragEvent):void
 		{
 			this.dragMaskManager.hideMask();
-//			var disEvt:PlayCardDragEvent = new PlayCardDragEvent(PlayCardDragEvent.DRAG_DROP, true);
-//			disEvt.enterLeftSide = evt.localX <= this.width;
-//			disEvt.playCard = PlayCard(this.card);
-//			this.dispatchEvent(disEvt);			
 		}
 		
 		

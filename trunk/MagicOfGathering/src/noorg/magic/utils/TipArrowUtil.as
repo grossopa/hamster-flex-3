@@ -17,23 +17,11 @@ package noorg.magic.utils
 		}
 		
 		/**
-		 * @g Graphics Object
-		 * @x
-		 * @y
-		 * @width
-		 * @height
-		 * @tipWidth
-		 * @tipHeight
-		 * @tipDistanceLeft paddingTop of tips in LEFT
-		 * @tipDistanceTop paddingLeft of tips in TOP
-		 * @tipDistanceRight paddingTop of tips in RIGHT
-		 * @tipDistanceBottom paddingLeft of tips in BOTTOM
-		 * @directions LEFT|TOP|RIGHT|BOTTOM, we can have more than one tip arrow
 		 * 
 		 */
 		public static function drawTipRect(g:Graphics, x:Number, y:Number, 
 									width:Number, height:Number,
-									iTipArrowArray:Array):void
+									iTipArrowArray:Array, inside:Boolean = true):void
 		{
 			var isLeft:Boolean;
 			var isTop:Boolean;
@@ -71,12 +59,12 @@ package noorg.magic.utils
 			
 			
 			// define the positions
-			var ltx:Number = isLeft   ? x + tipHeight 		   : x;
-			var lty:Number = isTop 	  ? y + tipHeight 		   : y;
-			var rtx:Number = isRight  ? x + width - tipHeight  : x + width;
+			var ltx:Number = isLeft   && inside ? x + tipHeight 		 : x;
+			var lty:Number = isTop 	  && inside ? y + tipHeight 		 : y;
+			var rtx:Number = isRight  && inside ? x + width - tipHeight  : x + width;
 			var rty:Number = lty;
 			var rbx:Number = rtx;
-			var rby:Number = isBottom ? y + height - tipHeight : y + height;
+			var rby:Number = isBottom && inside ? y + height - tipHeight : y + height;
 			var lbx:Number = ltx;
 			var lby:Number = rby;
 			
@@ -153,7 +141,8 @@ package noorg.magic.utils
 		public static function drawTipRoundRectComplex(g:Graphics, x:Number, y:Number, 
 								  width:Number, height:Number, iTipArrowArray:Array,
 	                              topLeftRadius:Number, topRightRadius:Number, 
-	                              bottomLeftRadius:Number, bottomRightRadius:Number):void
+	                              bottomLeftRadius:Number, bottomRightRadius:Number,
+	                              inside:Boolean = true):void
 		{
 			
 			var isLeft:Boolean;
@@ -184,12 +173,13 @@ package noorg.magic.utils
 			bottomLeftRadius = bottomLeftRadius < minSize ? bottomLeftRadius : minSize;
 			bottomRightRadius = bottomRightRadius < minSize ? bottomRightRadius : minSize;
 	
-			var ltx:Number = isLeft 	? x + tipHeight 			: x;
-			var lty:Number = isTop 		? y + tipHeight 			: y;
-			var rtx:Number = isRight 	? x + width - tipHeight 	: x + width;
+			// define the positions
+			var ltx:Number = isLeft   && inside ? x + tipHeight 		 : x;
+			var lty:Number = isTop 	  && inside ? y + tipHeight 		 : y;
+			var rtx:Number = isRight  && inside ? x + width - tipHeight  : x + width;
 			var rty:Number = lty;
 			var rbx:Number = rtx;
-			var rby:Number = isBottom 	? y + height - tipHeight 	: y + height;
+			var rby:Number = isBottom && inside ? y + height - tipHeight : y + height;
 			var lbx:Number = ltx;
 			var lby:Number = rby;
 			
@@ -248,8 +238,8 @@ package noorg.magic.utils
 			a = topLeftRadius * 0.292893218813453;
 			s = topLeftRadius * 0.585786437626905;
 			
-			g.curveTo(ltx, lty + s, ltx + a, lty + a);
-			g.curveTo(ltx + s, lty, ltx + topLeftRadius, lty);
+			g.curveTo(ltx, 	   lty + s, ltx + a,             lty + a);
+			g.curveTo(ltx + s, lty,     ltx + topLeftRadius, lty);
 			
 			// draw top
 			for each (iTipArrow in iTipArrowArray) {
