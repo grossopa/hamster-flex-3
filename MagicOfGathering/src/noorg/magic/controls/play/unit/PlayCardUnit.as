@@ -2,12 +2,12 @@ package noorg.magic.controls.play.unit
 {
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
-	import flash.text.TextField;
 	
 	import mx.core.DragSource;
 	import mx.events.DragEvent;
 	import mx.managers.DragManager;
 	
+	import noorg.magic.controls.icons.IconCardQuickMenu;
 	import noorg.magic.controls.icons.IconDetail;
 	import noorg.magic.controls.icons.IconEnhancement;
 	import noorg.magic.controls.icons.IconManager;
@@ -21,17 +21,22 @@ package noorg.magic.controls.play.unit
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
 	import noorg.magic.models.staticValue.CardStatus;
+	import noorg.magic.services.MenuService;
 	import noorg.magic.utils.Constants;
 	import noorg.magic.utils.GlobalUtil;
 
 	public class PlayCardUnit extends CardUnit
 	{
+		public static const menuService:MenuService = MenuService.getInstance();
+		
 		protected const iconManager:IconManager = new IconManager();
 		protected const dragMaskManager:DragMaskManager = new DragMaskManager();
 		
 		protected var iconDetail:IconDetail;
 		protected var iconTap:IconTap;
 		protected var iconEnhancement:IconEnhancement;
+		
+		protected var iconQuickMenu:IconCardQuickMenu;
 		
 		protected var dragMaskEnhancement:DragMaskEnhancement;
 		protected var dragMaskInsertLeft:DragMaskInsertArrow;
@@ -77,7 +82,6 @@ package noorg.magic.controls.play.unit
 			this.width = Constants.PLAY_CARD_WIDTH;
 			this.height = Constants.PLAY_CARD_HEIGHT;
 			
-			this.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 			this.addEventListener(MouseEvent.ROLL_OVER, rollOverHandler);
 			this.addEventListener(MouseEvent.ROLL_OUT, rollOutHandler);
 			this.addEventListener(DragEvent.DRAG_ENTER, dragEnterHandler);
@@ -91,6 +95,8 @@ package noorg.magic.controls.play.unit
 			
 			createDragMask();
 			createIcon();
+			
+			this.mainImage.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 		}
 		
 		protected function createDragMask():void
@@ -138,9 +144,17 @@ package noorg.magic.controls.play.unit
 			iconEnhancement.addEventListener(MouseEvent.CLICK, enhancementClickHandler);
 			this.addChild(iconEnhancement);
 			
+			iconQuickMenu = new IconCardQuickMenu();
+			iconQuickMenu.visible = false;
+			iconQuickMenu.x = this.width - iconQuickMenu.width;
+			iconQuickMenu.y = this.height - iconQuickMenu.height;
+			iconQuickMenu.addEventListener(MouseEvent.CLICK, openQuickMenuHandler);
+			this.addChild(iconQuickMenu);
+			
 			this.iconManager.iconArrColl.addItem(iconDetail);
 			this.iconManager.iconArrColl.addItem(iconTap);
 			this.iconManager.iconArrColl.addItem(iconEnhancement);
+			this.iconManager.iconArrColl.addItem(iconQuickMenu);
 			this.iconManager.refreshLocation();
 		}
 		
@@ -165,6 +179,12 @@ package noorg.magic.controls.play.unit
 				var unit:PlayCardUnit = PlayCardUnit(evt.dragInitiator);
 				this.playCard.enhancementCards.addItem(unit.playCard);
 			}			
+		}
+		
+		private function openQuickMenuHandler(evt:MouseEvent):void
+		{
+			var pos:Point = this.localToGlobal(new Point());
+			menuService.showPlayCardMenu(this, pos.x, pos.y);
 		}
 		
 		private function maskLeftDragDropHandler(evt:DragEvent):void

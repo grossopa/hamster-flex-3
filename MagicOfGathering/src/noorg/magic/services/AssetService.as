@@ -69,6 +69,9 @@ package noorg.magic.services
 		[Embed(source='noorg/magic/assets/icons/btn_scrollLeft.png')]
 		public const BtnScrollLeft:Class;
 		
+		[Embed(source='noorg/magic/assets/icons/icon_cardQuickMenu.png')]
+		public const IconCardQuickMenu:Class;
+		
 		[Embed(source='noorg/magic/assets/icons/btn_ctrl_switchPlayer.png')]
 		public const BtnSwitchPlayer:Class;
 		

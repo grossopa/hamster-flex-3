@@ -34,7 +34,7 @@ package noorg.magic.controls.icons
 			var nextY:int = top;
 			
 			for each (var icon:IconBase in this.iconArrColl) {
-				if (icon.isEnabled == true) {
+				if (icon.isEnabled == true && icon.isAutoTypeset) {
 					icon.x = nextX;
 					icon.y = nextY;
 					nextX += Constants.ICON_WIDTH + ICON_GAP;

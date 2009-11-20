@@ -13,6 +13,10 @@ package noorg.magic.utils
 		public static const ICON_WIDTH:int = 20;
 		public static const ICON_HEIGHT:int = 20;
 		
+		public static const MENU_ITEM_WIDTH:int = 100;
+		public static const MENU_ITEM_HEIGHT:int = 20;
+		public static const MENU_ITEM_LINE_HEIGHT:int = 3;
+		
 		
 		public static const DEFAULT_GAP:int = 5;
 		
