@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="25" alpha="0.05" 
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="25" alpha="0.01" 
 	backgroundColor="white" backgroundAlpha="0.8" borderStyle="solid" borderColor="gray" borderThickness="1"
 	rollOver="rollOverHandler()" rollOut="rollOutHandler()"
 	verticalScrollPolicy="off" horizontalScrollPolicy="off" creationComplete="completeHandler()">

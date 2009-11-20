@@ -24,6 +24,10 @@ package noorg.magic.controls.menus
 			this.height = 200;
 			this.setStyle("verticalGap", 0);
 			this.setStyle("backgroundColor", 0xFFFFFF);
+			this.setStyle("borderStyle", "solid");
+			this.setStyle("borderThickness", 1);
+			this.setStyle("borderColor", 0x000000);
+			
 			this.verticalScrollPolicy = ScrollPolicy.OFF;
 			this.horizontalScrollPolicy = ScrollPolicy.OFF;
 			

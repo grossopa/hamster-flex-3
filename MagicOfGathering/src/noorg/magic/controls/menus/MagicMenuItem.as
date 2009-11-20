@@ -25,7 +25,7 @@ package noorg.magic.controls.menus
 		private var _bgFade:Fade;
 		private var _labelColor:Number = 0x000000;
 		
-		public var highlightColor:Number = 0x9A60FF;
+		public var highlightColor:Number = 0xCA60FF;
 		
 		public var clickData:Object;
 		public var clickFunction:Function;
