@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" cornerRadius="20"
-	 backgroundImage="@Embed(source='noorg/magic/assets/cards/back.png')" dragEnter="deHandler()"
-	 applicationComplete="appCompleteHandler()" width="800" height="600" xmlns:tips="noorg.magic.controls.popups.tips.*">
-	 <mx:Script source="app.as" />
-	 
-	 <mx:Canvas backgroundColor="0x000000"  visible="false"  id="mainImg" width="100" height="100" x="200" y="100" dropShadowEnabled="true" mouseDown="mdHandler(event)"/>
-	 
-	 <tips:TipBase id="tipBase" width="200" height="200" x="100" y="100" 
-	 	>
-	 	<mx:Canvas width="100%" height="100%" backgroundColor="0xFF0000" backgroundAlpha="0.3" />
-	 </tips:TipBase>
+	 backgroundImage="@Embed(source='noorg/magic/assets/cards/back.png')" xmlns:tips="noorg.magic.controls.popups.tips.*">
+
 </mx:WindowedApplication>

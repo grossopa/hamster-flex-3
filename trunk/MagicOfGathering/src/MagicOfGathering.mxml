@@ -4,11 +4,13 @@
  	xmlns:controls="noorg.magic.controls.*"
  	xmlns:ns1="org.hamster.components.chrometab.*" xmlns:icons="noorg.magic.controls.icons.*" xmlns:tips="noorg.magic.controls.popups.tips.*">
 	<mx:Script source="MagicOfGatheringAs.as" />
-	
+	<mx:Script>
+		<![CDATA[
+		]]>
+	</mx:Script>
 	<mx:Metadata>
 		[ResourceBundle("main")]
 	</mx:Metadata>
-	
 	<ns1:ChromeTab id="chromeTab" width="100%" height="24" canCloseTab="false" canAddTab="false" />
 	<mx:ViewStack id="mainViewStack" width="100%" height="100%" y="24" selectedIndex="2">
 		<controls:InitContainer  label="{resourceManager.getString('main', 'initContainer.label')}" id="initContainer" />

@@ -115,7 +115,6 @@ package noorg.magic.utils
 			}
 			
 			app.cardDetailTip.showTip(playCardUnit);
-			
 		}
 		
 		public static function hideCardDetailTip():void

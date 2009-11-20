@@ -3,7 +3,6 @@ package noorg.magic.controls.icons
 	import flash.display.Bitmap;
 	
 	import mx.core.UIComponent;
-	import mx.events.FlexEvent;
 	
 	import noorg.magic.services.AssetService;
 	import noorg.magic.utils.Constants;
@@ -13,6 +12,7 @@ package noorg.magic.controls.icons
 		public static const AS:AssetService = AssetService.getInstance();
 		
 		public var isEnabled:Boolean = true;
+		public var isAutoTypeset:Boolean = true;
 		
 		public function IconBase()
 		{
@@ -21,13 +21,6 @@ package noorg.magic.controls.icons
 			this.width = Constants.ICON_WIDTH;
 			this.height = Constants.ICON_HEIGHT;
 			this.buttonMode = true;
-			
-			this.addEventListener(FlexEvent.CREATION_COMPLETE, completeHandler);
-		}
-		
-		protected function completeHandler(evt:FlexEvent):void
-		{
-			this.removeEventListener(FlexEvent.CREATION_COMPLETE, completeHandler);
 			drawBackground();
 		}
 		
@@ -35,7 +28,7 @@ package noorg.magic.controls.icons
 		{
 			var bm:Bitmap = new srcImg;
 			this.graphics.beginBitmapFill(bm.bitmapData);
-			this.graphics.drawRect(0, 0, Constants.ICON_WIDTH , Constants.ICON_HEIGHT);
+			this.graphics.drawRect(0, 0, this.width, this.height);
 			this.graphics.endFill();
 		}
 		
