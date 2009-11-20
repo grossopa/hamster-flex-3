@@ -47,7 +47,7 @@ private function rollOutHandler():void
 {
 	fade.stop();
 	fade.alphaFrom = this.alpha;
-	fade.alphaTo = 0.05;
+	fade.alphaTo = 0.01;
 	fade.duration = this.alpha * FADE_DURATION;
 	fade.play();	
 }
