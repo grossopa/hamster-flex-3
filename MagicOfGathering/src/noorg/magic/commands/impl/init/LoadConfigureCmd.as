@@ -1,10 +1,12 @@
 package noorg.magic.commands.impl.init
 {
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 	
+	import mx.controls.Alert;
 	import mx.resources.ResourceManager;
 	
 	import noorg.magic.models.CardCollectionMeta;
@@ -27,6 +29,7 @@ package noorg.magic.commands.impl.init
 			file = new File(CONF_XML);
 			var fs:FileStream = new FileStream();
 			fs.addEventListener(Event.COMPLETE, loadCompleteHandler);
+			fs.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
 			fs.openAsync(file, FileMode.READ);
 		}
 		
@@ -61,6 +64,11 @@ package noorg.magic.commands.impl.init
 			}
 
 			super.result(null);
+		}
+		
+		private function ioErrorHandler(evt:Event):void
+		{
+			Alert.show(evt.toString());
 		}
 		
 		override public function fault(info:Object):void

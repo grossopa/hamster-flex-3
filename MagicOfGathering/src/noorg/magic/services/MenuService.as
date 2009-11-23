@@ -51,15 +51,17 @@ package noorg.magic.services
 				menuContainer.addMenuItem(item);
 			}
 			
+			if (stageX + menuContainer.width > GlobalUtil.app.width) {
+				stageX = GlobalUtil.app.width - menuContainer.width;
+			}
+			
 			menuContainer.x = stageX;
 			menuContainer.y = stageY;
 			menuContainer.showMenu();
-			trace(menuContainer.numChildren);
 		}
 		
 		public function hideMenu():void
 		{
-			// GlobalUtil.app.removeChild(menuContainer);
 			menuContainer.visible = false;
 		}
 		
