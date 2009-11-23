@@ -3,12 +3,13 @@ import noorg.magic.commands.impl.init.CreateSchemaCmd;
 import noorg.magic.commands.impl.init.InitializeDatabaseCmd;
 import noorg.magic.commands.impl.init.LoadConfigureCmd;
 import noorg.magic.pojos.DCard;
+import noorg.magic.services.DataService;
 import noorg.magic.services.i18n.ResourceService;
-import noorg.magic.utils.Properties;
 
 import org.hamster.commands.impl.CommandQueue;
 
 private const RS:ResourceService = ResourceService.getInstance();
+private const DS:DataService = DataService.getInstance();
 
 private function localeChanged():void
 {
@@ -23,4 +24,9 @@ private function initDatabase():void
 	_csCardCmd.pojo = new DCard();
 	var cmdQueue:CommandQueue = new CommandQueue([_lcCmd, _idCmd, _csCardCmd]);
 	cmdQueue.execute();	
+}
+
+private function showDetailTipChange():void
+{
+	DS.isAutoShowCardDetail = this.showCardDetailTipCheckBox.selected;
 }

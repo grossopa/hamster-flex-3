@@ -17,19 +17,21 @@
 			<mx:Label y="20" text="{this.resourceManager.getString('main', 'play.list.count')}" />
 			<mx:Label y="20" text="{this.cardColl.length}" right="0" />
 		</mx:Canvas>
+		<mx:Image id="moveLeftBtn" width="20" height="100%" x="{mainContainer.x}" alpha="0.01"
+			rollOver="btnLeftRollOverHandler(event)" rollOut="btnLeftRollOutHandler(event)" 
+			click="moveLeftHandler()" />
 		<mx:HBox id="mainContainer" paddingTop="0" paddingBottom="0" horizontalGap="{Constants.DEFAULT_GAP}"
-			width="{this.width - 120}" height="{Constants.PLAY_CARD_HEIGHT}" 
+			width="{this.width - 160}" height="{Constants.PLAY_CARD_HEIGHT}" 
 		 	backgroundAlpha="0.1" backgroundColor="gray"
 			horizontalScrollPolicy="off" verticalScrollPolicy="off"
 			dragEnter="listDragEnterHandler(event)" dragDrop="listDragDropHandler(event)" />
+		<mx:Image id="moveRightBtn" width="20" height="100%" right="0" alpha="0.01"
+			rollOver="btnRightRollOverHandler(event)" rollOut="btnRightRollOutHandler(event)" 
+			click="moveRightHandler()" />	
 			<!--dragEnabled="true" dropEnabled="true" dragEnter="listDragEnterHandler(event)" dragDrop="listDragDropHandler(event)"-->
 	</mx:HBox>
 
-	<mx:Image id="moveLeftBtn" width="20" height="100%" x="{mainContainer.x}" alpha="0.01"
-		rollOver="btnLeftRollOverHandler(event)" rollOut="btnLeftRollOutHandler(event)" 
-		click="moveLeftHandler()" />
-	<mx:Image id="moveRightBtn" width="20" height="100%" right="0" alpha="0.01"
-		rollOver="btnRightRollOverHandler(event)" rollOut="btnRightRollOutHandler(event)" 
-		click="moveRightHandler()" />		
+
+	
 
 </mx:Canvas>
