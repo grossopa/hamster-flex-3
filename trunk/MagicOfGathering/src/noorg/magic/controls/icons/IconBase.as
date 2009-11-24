@@ -21,6 +21,7 @@ package noorg.magic.controls.icons
 			this.width = Constants.ICON_WIDTH;
 			this.height = Constants.ICON_HEIGHT;
 			this.buttonMode = true;
+			
 			drawBackground();
 		}
 		
