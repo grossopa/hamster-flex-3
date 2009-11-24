@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" backgroundGradientColors="[0x777777, 0xffffff]"
+	xmlns:viewStack="org.hamster.components.viewStack.*" applicationComplete="completeHandler()">
+	<mx:Script source="main.as" />
+	<mx:Script>
+		<![CDATA[
+			
+		]]>
+	</mx:Script>
+	<mx:HBox>
+		<mx:Button click="beginAni()" label="gogogo"/>
+	</mx:HBox>
+	
+	<!--backgroundImage="@Embed(source='org/hamster/assets/test.jpg')" -->
+	<mx:Canvas id="canvas" width="500" height="500" 
+		/>
+</mx:Application>
