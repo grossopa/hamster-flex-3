@@ -20,6 +20,7 @@ package org.hamster.effects.effectInstance
 	{
 		protected var _bitmapDataList:Array;
 		protected var _bdDrawList:Array;
+		protected var _bdDraw:BitmapData;
 		protected var _bdParentSnapshot:BitmapData;
 		protected var _mDraw:Matrix = new Matrix();
 		protected var _smallWidth:Number;
@@ -48,6 +49,8 @@ package org.hamster.effects.effectInstance
 		{
 			// create Snapshot first
 			createSnapshot();
+			
+			_bdDraw = new BitmapData(uiTarget.width, uiTarget.height, true, 0x00);
 		}
 		
 		protected function createSnapshot():void
@@ -72,7 +75,7 @@ package org.hamster.effects.effectInstance
 			beginPlay();
 		}
 		
-		private function beginPlay():void
+		protected function beginPlay():void
 		{
 			// begin play
 			super.play();

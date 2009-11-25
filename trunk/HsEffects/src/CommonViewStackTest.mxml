@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" backgroundGradientColors="[0x777777, 0xffffff]"
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" backgroundGradientColors="[0x777777, 0x000000]"
 	xmlns:viewStack="org.hamster.components.viewStack.*" applicationComplete="completeHandler()">
 	<mx:Script source="main.as" />
 	<mx:Script>
@@ -7,11 +7,16 @@
 			
 		]]>
 	</mx:Script>
-	<mx:HBox>
-		<mx:Button click="beginAni()" label="gogogo"/>
-	</mx:HBox>
+	<mx:Image id="bgCanvas" width="100%" height="100%" />
+	<mx:VBox>
+	
+		<mx:HBox>
+			<mx:Button click="beginAni()" label="gogogo"/>
+			<mx:Button click="beginAni2()" label="gogogo"/>
+		</mx:HBox>
 	
 	<!--backgroundImage="@Embed(source='org/hamster/assets/test.jpg')" -->
-	<mx:Canvas id="canvas" width="500" height="500" 
-		/>
+		<mx:Canvas id="canvas" width="500" height="500" 
+			/>
+	</mx:VBox>
 </mx:Application>
