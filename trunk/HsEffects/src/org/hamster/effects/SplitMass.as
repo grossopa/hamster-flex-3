@@ -15,8 +15,6 @@ package org.hamster.effects
 		public var startPoint:Point;
 		public var startPoints:Array;
 		
-		
-		
 		public function SplitMass(target:Object=null)
 		{
 			super(target);
@@ -24,13 +22,14 @@ package org.hamster.effects
 			this.instanceClass = SplitMassInstance;
 		}
 		
-		override public function createInstance(target:Object=null):IEffectInstance
+		override protected function initInstance(instance:IEffectInstance):void
 		{
-			var inst:SplitMassInstance = SplitMassInstance(super.createInstance(target));
+			super.initInstance(instance);
+			
+			var inst:SplitMassInstance = SplitMassInstance(instance);
 			inst.aniType = this.aniType;
 			inst.startPoint = this.startPoint;
 			inst.startPoints = this.startPoints;
-			return inst;
 		}
 		
 	}

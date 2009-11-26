@@ -5,38 +5,34 @@ package org.hamster.effects.effectInstance
 	import flash.geom.Point;
 	
 	import mx.core.UIComponent;
-	import mx.core.mx_internal;
-	import mx.effects.Tween;
-	import mx.effects.easing.Linear;
 	import mx.effects.effectClasses.TweenEffectInstance;
-	
-	use namespace mx_internal;
 	
 	public class RainDropInstance extends TweenEffectInstance
 	{
-		
-		public static const LEFT:uint = 0;
-		public static const RIGHT:uint = 1;
-		
 		private var _bmDraw:BitmapData;
+		
 		private var _startDelayList:Array;
 		private var _startXList:Array;
+		/**
+		 * x bound
+		 * y speed
+		 */
 		private var _boundList:Array;
 		private var _pointList:Array;
 		private var _bmDrawIndexList:Array;
 		
 		private var _dropPercent:Number;
+		private var _maxBdHeight:Number = 0;
 		
 		public var bitmapDataList:Array;
 		
 		public var intervalDuration:Number;
 		public var dropDuration:Number;
 		
-		public var windFrom:Number;
-		public var windTo:Number;
+		public var wind:Number;
 		
 		public var rockHorizontal:Number;
-		public var rockSpeed:Number = 0;
+		public var rockSpeed:Number;
 		
 		
 		public function get uiTarget():UIComponent
@@ -47,7 +43,6 @@ package org.hamster.effects.effectInstance
 		public function RainDropInstance(target:Object)
 		{
 			super(target);
-			
 		}
 		
 		override public function play():void
@@ -56,10 +51,6 @@ package org.hamster.effects.effectInstance
 			_pointList = new Array();
 			_bmDrawIndexList = new Array();
 			_startXList = new Array();
-			/**
-			 * x bound
-			 * y direction
-			 */
 			_boundList = new Array();
 			
 			var count:int = int(this.duration / intervalDuration);
@@ -69,13 +60,15 @@ package org.hamster.effects.effectInstance
 				_startDelayList.push(i / count);
 				var xValue:Number = Math.random() * uiTarget.width;
 				_startXList.push(xValue);
-				
+				var bound:Number = 0;
 				if (!isNaN(this.rockHorizontal) && this.rockHorizontal > 0) {
-					var bound:Number = Math.random() * this.rockHorizontal;
-//					if (bound < 20) {
-//						bound = 0;
-//					}
-					var pb:Point = new Point(bound, i % 2);
+					bound = Math.random() * this.rockHorizontal;
+					
+					if (bound < 3) {
+						bound = 3;
+					}
+					
+					var pb:Point = new Point(bound, (0.5 - Math.random()) * bound);
 					_boundList.push(pb);
 				}
 				
@@ -83,17 +76,13 @@ package org.hamster.effects.effectInstance
 				_bmDrawIndexList.push(Math.random() * this.bitmapDataList.length);
 			}
 			
-			super.play();
-			
-			var tween:Tween;
-			if(this.playReversed) {
-				tween = new Tween(this, 1, 0, duration);
-				tween.easingFunction = Linear.easeNone;
-			} else {
-				tween= new Tween(this, 0, 1, duration);
-				tween.easingFunction = Linear.easeNone;
+			for each (var bd:BitmapData in this.bitmapDataList) {
+				_maxBdHeight = Math.max(_maxBdHeight, bd.height);
 			}
 			
+			super.play();
+			
+			tween = createTween(this, 0, 1, duration);
 		}
 		
 		override public function onTweenUpdate(value:Object):void
@@ -113,49 +102,39 @@ package org.hamster.effects.effectInstance
 				var percent:Number = (numValue - startDelay) / _dropPercent;
 				
 				
-				if (percent > 1.2) {
+				if (percent > 1) {
 					continue;
 				}
 				
 				var startX:Number = Number(_startXList[i]);
 				var bound:Point = Point(this._boundList[i]);
+				var dist:Number = Math.abs(startX - point.x);
 				
 				if (!isNaN(this.rockHorizontal) && this.rockHorizontal != 0 && bound.x != 0) {
 					var isChanged:Boolean = false;
-					if (bound.y == RIGHT && (point.x - startX > bound.x)) {
-						bound.y = LEFT;
-						isChanged = true;
-					} else if (bound.y == LEFT && (startX - point.x > bound.x)) {
-						bound.y = RIGHT;
-						isChanged = true;
+					
+					if (bound.y >= bound.x) {
+						bound.y -= this.rockSpeed;
+					} else if (bound.y <= -bound.x) {
+						bound.y += this.rockSpeed;
 					}
 					
-					var dist:Number = Math.max(2, bound.x - Math.abs(startX - point.x));
-					
-					if (!isChanged && dist == 2) {
-						dist = 100;
-						if (bound.y == RIGHT) {
-							bound.y = LEFT;
-						} else if (bound.y == LEFT) {
-							bound.y = RIGHT;
-						}						
+					if (point.x > startX) {
+						bound.y -= this.rockSpeed;
+					} else if (point.x < startX) {
+						bound.y += this.rockSpeed;
 					}
 					
-					if (bound.y == RIGHT) {
-						point.x = point.x + dist * 0.03;
-					} else {
-						point.x = point.x - dist * 0.03;
-					}
-						//dist = bound.x - startX + point.x;
-						//point.x = point.x - dist * 0.02;					
-					//}
+					point.x += bound.y;
 				}
 				
-				point.y = percent * uiTarget.height - 80;
+				point.x += wind;
+				point.y = percent * (uiTarget.height + _maxBdHeight * 2) - _maxBdHeight;
 				
 				var bd:BitmapData = BitmapData(this.bitmapDataList[int(_bmDrawIndexList[i])]);
 				_bmDraw.copyPixels(bd,bd.rect, point, null, null, true);
 			}
+			
 			_bmDraw.unlock();
 			
 			var g:Graphics = this.uiTarget.graphics;

@@ -4,9 +4,11 @@ import com.flashdynamix.utils.SWFProfiler;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.geom.Matrix;
+import flash.geom.Point;
 
 import mx.core.UIComponent;
 import mx.core.mx_internal;
+import mx.effects.easing.Bounce;
 import mx.effects.easing.Linear;
 import mx.events.ChildExistenceChangedEvent;
 
@@ -38,15 +40,21 @@ private function overlayCreatedHandler(evt:ChildExistenceChangedEvent):void
 }
 
 private function beginAni():void
-{
+{	
 	var split:SplitMass = new SplitMass(this.canvas);
 	split.columnCount = 100;
 	split.rowCount = 100;
-//	split.zoomFrom = 0.3;
-//	split.zoomTo = 1;
-	//split.aniType = SplitShowImage.FROM_POINTS;
+	split.startPoint = new Point(this.canvas.width / 2, this.canvas.height / 2);
+//	split.aniType = SplitMass.FROM_POINTS;
+//	split.startPoints = [
+//			new Point(this.canvas.width / 4 ,    this.canvas.height / 4), 
+//			new Point(this.canvas.width / 4 * 3, this.canvas.height / 4), 
+//			new Point(this.canvas.width / 4 * 3, this.canvas.height / 4 * 3), 
+//			new Point(this.canvas.width / 4 ,    this.canvas.height / 4 * 3)
+//	];
 	split.duration = 5000;
-	split.play(null);	
+	split.easingFunction = Linear.easeNone;
+	split.play();	
 }
 
 private function beginAni2():void
@@ -54,19 +62,21 @@ private function beginAni2():void
 	var bm:Bitmap = new snow_flake();
 	var m:Matrix = new Matrix();
 	m.scale(0.3, 0.3);
-	var bd:BitmapData = new BitmapData(0.3 * bm.width, 0.3 * bm.height, true, 0x00);
-	var bd2:BitmapData = new BitmapData(0.5 * bm.width, 0.5 * bm.height, true, 0x00);
-	bd.draw(bm.bitmapData, m);
 	var m2:Matrix = new Matrix();
-	m2.scale(0.5, 0.5);
+	m2.scale(0.4, 0.4);
+	var bd:BitmapData = new BitmapData(0.3 * bm.width, 0.3 * bm.height, true, 0x00);
+	var bd2:BitmapData = new BitmapData(0.4 * bm.width, 0.4 * bm.height, true, 0x00);
+	bd.draw(bm.bitmapData, m);
 	bd2.draw(bm.bitmapData, m2);
 	var drop:RainDrop = new RainDrop(bgCanvas);
-	drop.duration = 30000;
-	drop.dropDuration = 5000;
+	drop.rockHorizontal = 5;
+	drop.rockSpeed = 0.01;
+	drop.duration = 60000;
+	drop.dropDuration = 8000;
+	drop.intervalDuration = 50;
 	drop.easingFunction = Linear.easeNone;
 	drop.bitmapDataList = [bd, bd2];
 	drop.play();
-	
 }
 
 override protected function updateDisplayList(uw:Number, uh:Number):void
