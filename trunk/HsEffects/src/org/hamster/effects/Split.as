@@ -23,6 +23,7 @@ package org.hamster.effects
 			super.initInstance(instance);
 			
 			var inst:SplitInstance = SplitInstance(instance);
+			inst.startDelay = this.startDelay;
 			inst.columnCount = this.columnCount;
 			inst.rowCount = rowCount;
 		}

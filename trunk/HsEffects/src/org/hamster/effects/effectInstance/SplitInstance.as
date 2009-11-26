@@ -66,7 +66,7 @@ package org.hamster.effects.effectInstance
 					overlayCreatedHandler);
 					
 			_overlay = UIComponent(evt.relatedObject);
-			
+			_overlay.visible = true;
 			beginPlay();
 		}
 		
@@ -103,7 +103,6 @@ package org.hamster.effects.effectInstance
 			for (i = 0; i < uiTarget.numChildren; i++) {
 				uiTarget.getChildAt(i).visible = false;
 			}
-			
 			tween = createTween(this, 0, 1, duration);
 		}
 		
@@ -115,10 +114,14 @@ package org.hamster.effects.effectInstance
 			super.onTweenUpdate(value);
 		}
 		
+//		override public function finishEffect():void
+//		{
+//			this.onTweenEnd(null);
+//			super.finishEffect();
+//		}
+		
 		override public function onTweenEnd(value:Object):void
 		{
-			super.onTweenEnd(value);
-			
 			// clean
 			UIComponent(target).mx_internal::removeOverlay();
 			
@@ -126,15 +129,13 @@ package org.hamster.effects.effectInstance
 			for (var i:int = 0; i < uiTarget.numChildren; i++) {
 				uiTarget.getChildAt(i).visible = true;
 			}
-			
-			this._bitmapDataList = new Array();
-			this._bdDrawList = new Array();
-			
+			uiTarget.validateNow();
 			// gc
 			try {
 				new LocalConnection().connect("justforgc");
 				new LocalConnection().connect("justforgc");
 			} catch (e:Error) { }
+			super.onTweenEnd(value);
 		}
 	}
 }

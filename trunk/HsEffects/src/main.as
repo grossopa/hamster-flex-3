@@ -3,14 +3,17 @@ import com.flashdynamix.utils.SWFProfiler;
 
 import flash.display.Bitmap;
 import flash.display.BitmapData;
+import flash.events.TimerEvent;
 import flash.geom.Matrix;
 import flash.geom.Point;
+import flash.utils.Timer;
 
 import mx.core.UIComponent;
 import mx.core.mx_internal;
 import mx.effects.easing.Bounce;
 import mx.effects.easing.Linear;
 import mx.events.ChildExistenceChangedEvent;
+import mx.events.EffectEvent;
 
 import org.hamster.effects.RainDrop;
 import org.hamster.effects.SplitMass;
@@ -45,7 +48,52 @@ private function beginAni():void
 	split.columnCount = 100;
 	split.rowCount = 100;
 	split.startPoint = new Point(this.canvas.width / 2, this.canvas.height / 2);
-//	split.aniType = SplitMass.FROM_POINTS;
+	split.aniType = SplitMass.FROM_POINTS;
+	
+//	var pa:Array = new Array();
+//	for (var i:int = 0; i < 10000; i++) {
+//		pa.push(new Point(-10, Math.random() * this.canvas.height));
+//		pa.push(new Point(this.canvas.width + 10, Math.random() * this.canvas.height));
+//	}
+//	split.startPoints = pa;
+	
+	
+//	split.startPoints = [
+//			new Point(this.canvas.width / 4 ,    this.canvas.height / 4), 
+//			new Point(this.canvas.width / 4 * 3, this.canvas.height / 4), 
+//			new Point(this.canvas.width / 4 * 3, this.canvas.height / 4 * 3), 
+//			new Point(this.canvas.width / 4 ,    this.canvas.height / 4 * 3)
+//	];
+	split.addEventListener(EffectEvent.EFFECT_END, effEndHandler);
+	split.duration = 5000;Bounce;
+	split.easingFunction = Bounce.easeIn;
+	split.play(null);
+}
+
+private function effEndHandler(evt:EffectEvent):void
+{
+	var timer:Timer = new Timer(3000, 1);
+	timer.addEventListener(TimerEvent.TIMER, timerCompleteHandler);
+	timer.start();
+
+}
+
+private function timerCompleteHandler(evt:TimerEvent):void
+{
+	var split:SplitMass = new SplitMass(this.canvas);
+	split.columnCount = 100;
+	split.rowCount = 100;
+	// split.startPoint = new Point(this.canvas.width / 2, this.canvas.height / 2);
+	split.aniType = SplitMass.FROM_POINTS;
+	
+	var pa:Array = new Array();
+	for (var i:int = 0; i < 5000; i++) {
+		pa.push(new Point(-10, Math.random() * this.canvas.height));
+		pa.push(new Point(this.canvas.width + 10, Math.random() * this.canvas.height));
+	}
+	split.startPoints = pa;
+	
+	
 //	split.startPoints = [
 //			new Point(this.canvas.width / 4 ,    this.canvas.height / 4), 
 //			new Point(this.canvas.width / 4 * 3, this.canvas.height / 4), 
@@ -53,8 +101,8 @@ private function beginAni():void
 //			new Point(this.canvas.width / 4 ,    this.canvas.height / 4 * 3)
 //	];
 	split.duration = 5000;
-	split.easingFunction = Linear.easeNone;
-	split.play();	
+	split.easingFunction =  Bounce.easeOut;
+	split.play(null, true);		
 }
 
 private function beginAni2():void
