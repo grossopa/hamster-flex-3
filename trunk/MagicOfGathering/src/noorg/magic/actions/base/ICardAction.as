@@ -3,7 +3,7 @@ package noorg.magic.actions.base
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
 	
-	public interface ICardAct
+	public interface ICardAction
 	{
 		function set player(value:Player):void;
 		function get player():Player;
@@ -17,5 +17,8 @@ package noorg.magic.actions.base
 		function get actType():String;
 		
 		function execute():void;
+		
+		function decodeXML(xml:XML):void;
+		function encodeXML():XML;
 	}
 }

@@ -2,7 +2,8 @@ package noorg.magic.models
 {
 	import mx.collections.ArrayCollection;
 	
-	import noorg.magic.actions.base.ICardAct;
+	import noorg.magic.actions.ActionManager;
+	import noorg.magic.actions.base.ICardAction;
 	import noorg.magic.events.PlayCardEvent;
 	
 	public class PlayCard extends Card
@@ -10,7 +11,7 @@ package noorg.magic.models
 		private var _location:int;
 		private var _status:int;
 		private var _player:Player;
-		private var _actions:Array;
+		private var _actionManager:ActionManager;
 		
 		public const enhancementCards:ArrayCollection = new ArrayCollection();
 		
@@ -56,13 +57,13 @@ package noorg.magic.models
 			//this.enhancementCards.addEventListener(CollectionEvent.COLLECTION_CHANGE, enhancementCardChangeHandler);
 		}
 		
-		public function getAction(type:String):ICardAct
+		public function getAction(type:String):ICardAction
 		{
-			for each (var cardAct:ICardAct in this._actions) {
-				if (cardAct.actType == type) {
-					return cardAct;
-				}
-			}
+//			for each (var cardAct:ICardAction in this._actions) {
+//				if (cardAct.actType == type) {
+//					return cardAct;
+//				}
+//			}
 			return null;
 		}
 		

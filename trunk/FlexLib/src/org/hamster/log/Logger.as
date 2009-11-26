@@ -1,7 +1,5 @@
 package org.hamster.log
 {
-	import org.hamster.debug.Assert;
-	
 	import mx.formatters.DateFormatter;
 	
 	/**
