@@ -18,14 +18,13 @@ package org.hamster.effects
 			this.instanceClass = SplitInstance;
 		}
 		
-		override public function createInstance(target:Object=null):IEffectInstance
+		override protected function initInstance(instance:IEffectInstance):void
 		{
-			var inst:SplitInstance = SplitInstance(super.createInstance(target));
+			super.initInstance(instance);
 			
+			var inst:SplitInstance = SplitInstance(instance);
 			inst.columnCount = this.columnCount;
 			inst.rowCount = rowCount;
-			
-			return inst;
 		}
 		
 	}

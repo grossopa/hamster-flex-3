@@ -1,7 +1,6 @@
 package org.hamster.effects.effectInstance
 {
 	import flash.display.BitmapData;
-	import flash.display.Graphics;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -9,7 +8,6 @@ package org.hamster.effects.effectInstance
 	
 	import mx.core.UIComponent;
 	import mx.core.mx_internal;
-	import mx.effects.Tween;
 	import mx.effects.effectClasses.TweenEffectInstance;
 	import mx.events.ChildExistenceChangedEvent;
 	import mx.graphics.RoundedRectangle;
@@ -21,19 +19,16 @@ package org.hamster.effects.effectInstance
 		protected var _bitmapDataList:Array;
 		protected var _bdDrawList:Array;
 		protected var _bdDraw:BitmapData;
-		protected var _bdParentSnapshot:BitmapData;
 		protected var _mDraw:Matrix = new Matrix();
 		protected var _smallWidth:Number;
 		protected var _smallHeight:Number;
 		protected var _overlay:UIComponent;
 		protected var _destPoint:Point = new Point();
 		protected var _zeroPoint:Point = new Point();
+		private var _preBackgroundAlpha:Number = 1;
 		
-		public var needDrawBackground:Boolean = true;
 		public var rowCount:uint = 3;
 		public var columnCount:uint = 3;
-		
-		
 		
 		public function get uiTarget():UIComponent
 		{
@@ -102,22 +97,14 @@ package org.hamster.effects.effectInstance
 				}
 			}
 			
-			// take a snapshot of parent container
-			uiTarget.visible = false;
-			uiTarget.validateProperties();
-			var tmp:BitmapData = new BitmapData(uiTarget.parent.width, uiTarget.parent.height, true, 0x00);
-			tmp.draw(uiTarget.parent);
-			_bdParentSnapshot = new BitmapData(uiTarget.width, uiTarget.height, true, 0x00);
-			_bdParentSnapshot.copyPixels(tmp, 
-					new Rectangle(uiTarget.x, uiTarget.y, uiTarget.width, uiTarget.height),
-					new Point());
-			uiTarget.visible = true;
-			
-			if(this.playReversed) {
-				new Tween(this, 1, 0, duration);
-			} else {
-				new Tween(this, 0, 1, duration);
+			// I have to set visibility of all children of UIComponent to false
+			_preBackgroundAlpha = Number(uiTarget.getStyle("backgroundAlpha"));
+			uiTarget.setStyle("backgroundAlpha", 0);
+			for (i = 0; i < uiTarget.numChildren; i++) {
+				uiTarget.getChildAt(i).visible = false;
 			}
+			
+			tween = createTween(this, 0, 1, duration);
 		}
 		
 		/**
@@ -126,17 +113,6 @@ package org.hamster.effects.effectInstance
 		override public function onTweenUpdate(value:Object):void
 		{  
 			super.onTweenUpdate(value);
-			var g:Graphics = this._overlay.graphics;
-			
-			g.clear();
-			if (needDrawBackground) {
-				var mat:Matrix = new Matrix();
-				mat.createBox(1, 1, 0, uiTarget.x, uiTarget.y);
-				g.beginBitmapFill(this._bdParentSnapshot, mat);
-				g.drawRect(0, 0, uiTarget.width, uiTarget.height);
-				g.endFill();
-			}
-			
 		}
 		
 		override public function onTweenEnd(value:Object):void
@@ -145,6 +121,11 @@ package org.hamster.effects.effectInstance
 			
 			// clean
 			UIComponent(target).mx_internal::removeOverlay();
+			
+			uiTarget.setStyle("backgroundAlpha", this._preBackgroundAlpha);
+			for (var i:int = 0; i < uiTarget.numChildren; i++) {
+				uiTarget.getChildAt(i).visible = true;
+			}
 			
 			this._bitmapDataList = new Array();
 			this._bdDrawList = new Array();

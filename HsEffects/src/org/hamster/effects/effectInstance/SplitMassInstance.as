@@ -21,13 +21,12 @@ package org.hamster.effects.effectInstance
 		public function SplitMassInstance(target:Object)
 		{
 			super(target);
-			
-			this.needDrawBackground = false;
 		}
 		
 		override protected function beginPlay():void
 		{
 			super.beginPlay();
+			
 			var isAutoCreate:Boolean;
 			if (aniType == SplitMass.FROM_POINTS && startPoints == null) {
 				startPoints = new Array();
@@ -41,18 +40,12 @@ package org.hamster.effects.effectInstance
 					if (isAutoCreate) {
 						startPoints.push(new Point(Math.random() * uiTarget.width, 0));
 					}
-					
 				}
 			}
 			
 			if (startPoint == null) {
 				startPoint = new Point();
 			}
-			
-			var g:Graphics = this._overlay.graphics;
-			g.beginBitmapFill(this._bdParentSnapshot);
-			g.drawRect(0, 0, uiTarget.width, uiTarget.height);
-			g.endFill();
 		}
 		
 		
@@ -61,9 +54,9 @@ package org.hamster.effects.effectInstance
 			super.onTweenUpdate(value);
 			
 			var numValue:Number = Number(value);
-			this._bdDraw.lock();
 			
-			this._bdDraw.copyPixels(this._bdParentSnapshot, _bdParentSnapshot.rect, _zeroPoint);
+			this._bdDraw = new BitmapData(uiTarget.width, uiTarget.height, true, 0x00);
+			this._bdDraw.lock();
 			
 			for (var i:int = 0; i < this.columnCount; i++) {
 				for (var j:int = 0; j < this.rowCount; j++) {
@@ -77,7 +70,7 @@ package org.hamster.effects.effectInstance
 					if (this.aniType == SplitMass.FROM_ONE_POINT) {
 						sp = startPoint;
 					} else {
-						sp = Point(this.startPoints[index]);
+						sp = Point(this.startPoints[index % this.startPoints.length]);
 					}
 					var percent:Number = Math.min((numValue - startDelay) / UNIT_DURATION, 1);
 					
@@ -91,6 +84,7 @@ package org.hamster.effects.effectInstance
 			this._bdDraw.unlock();
 			
 			var g:Graphics = this._overlay.graphics;
+			g.clear();
 			g.beginBitmapFill(_bdDraw);
 			g.drawRect(0, 0, uiTarget.width, uiTarget.height);
 			g.endFill();
