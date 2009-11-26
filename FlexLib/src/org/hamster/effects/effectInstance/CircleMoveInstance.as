@@ -1,7 +1,5 @@
 package org.hamster.effects.effectInstance
 {
-	import org.hamster.errors.TodoError;
-	
 	/**
 	 * @author Jack Yin grossopaforever@gmail.com
 	 * 

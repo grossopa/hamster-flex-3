@@ -3,7 +3,7 @@ package noorg.magic.actions.base
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
 	
-	public class CardActBase implements ICardAct
+	public class CardActionBase implements ICardAction
 	{
 		private var _player:Player;
 		private var _targetPlayer:Player;
@@ -57,7 +57,7 @@ package noorg.magic.actions.base
 			return this._actType;
 		}
 		
-		public function CardActBase()
+		public function CardActionBase()
 		{
 		}
 		
@@ -67,6 +67,16 @@ package noorg.magic.actions.base
 		public function execute():void
 		{
 			
+		}
+		
+		public function decodeXML(xml:XML):void
+		{
+			
+		}
+		
+		public function encodeXML():XML
+		{
+			return null;
 		}
 
 	}

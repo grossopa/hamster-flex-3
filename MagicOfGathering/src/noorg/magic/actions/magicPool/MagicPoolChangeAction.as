@@ -1,10 +1,10 @@
 package noorg.magic.actions.magicPool
 {
-	import noorg.magic.actions.base.CardActBase;
+	import noorg.magic.actions.base.CardActionBase;
 	import noorg.magic.models.staticValue.ActionType;
 	import noorg.magic.utils.Constants;
 
-	public class MagicPoolChangeAction extends CardActBase
+	public class MagicPoolChangeAction extends CardActionBase
 	{
 		public var color:Number = Constants.COLORLESS;
 		public var valueBy:int;
@@ -12,6 +12,7 @@ package noorg.magic.actions.magicPool
 		public function MagicPoolChangeAction()
 		{
 			super();
+			
 			this._actType = ActionType.GENERATE_MAGIC;
 		}
 		
@@ -51,6 +52,17 @@ package noorg.magic.actions.magicPool
 			}
 		}
 		
+		override public function decodeXML(xml:XML):void
+		{
+			this.color = xml.attribute("color");
+			this.valueBy = xml.attribute("value-by");
+		}
+		
+		override public function encodeXML():XML
+		{
+			return new XML(<action type={this.actType} color={this.color}
+					value-by={this.valueBy}></action>);
+		}
 		
 	}
 }
