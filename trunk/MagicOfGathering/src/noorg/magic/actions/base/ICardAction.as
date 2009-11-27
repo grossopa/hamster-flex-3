@@ -14,11 +14,16 @@ package noorg.magic.actions.base
 		function set targetPlayCard(value:PlayCard):void;
 		function get targetPlayCard():PlayCard;
 		
+		function set affectTargets(value:int):void;
+		function get affectTargets():int;
 		function get actType():String;
+		function get editableAttributes():Array;
 		
 		function execute():void;
 		
 		function decodeXML(xml:XML):void;
 		function encodeXML():XML;
+		
+		function clone():ICardAction;
 	}
 }

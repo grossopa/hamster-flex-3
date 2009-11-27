@@ -1,4 +1,5 @@
 // ActionScript file
+import noorg.magic.controls.unit.actions.ActionEditorBase;
 import noorg.magic.models.Card;
 import noorg.magic.utils.Constants;
 
@@ -34,4 +35,26 @@ private function completeHandler():void
 	if (card != null) {
 		this.mainCardImg.card = card;
 	}
+}
+
+private function editCardHandler():void
+{
+	this.mainViewStack.selectedIndex = 1;
+}
+
+private function viewStackChangedHandler():void
+{
+	if (this.mainViewStack.selectedIndex == 1) {
+		cardEditContainer.removeAllChildren();
+	}
+}
+
+private function addActionHandler():void
+{
+	var obj:Object = actionTypeComboBox.selectedItem;
+	var actionEditor:ActionEditorBase = new ActionEditorBase();
+	actionEditor.card = this.card;
+	actionEditor.setActionClass(Class(obj.data));
+	this.cardEditContainer.addChild(actionEditor);
+	
 }
