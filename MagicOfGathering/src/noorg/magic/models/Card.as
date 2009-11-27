@@ -1,5 +1,7 @@
 package noorg.magic.models
 {
+	import noorg.magic.actions.ActionManager;
+	import noorg.magic.actions.base.ICardAction;
 	import noorg.magic.models.base.AbstractModelSupport;
 	
 	public class Card extends AbstractModelSupport
@@ -14,6 +16,18 @@ package noorg.magic.models
 		// for extended usage
 		public var isSelected:Boolean;
 		public var count:int;
+		
+		private var _actionManager:ActionManager = new ActionManager();
+		
+		public function addAction(iCardAction:ICardAction):void
+		{
+			this._actionManager.actionList.push(iCardAction);
+		}
+		
+		public function getAction(index:int):ICardAction
+		{
+			return ICardAction(this._actionManager.actionList[index]);
+		}
 		
 		public function decodeXML(xml:XML):void
 		{

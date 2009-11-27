@@ -1,6 +1,8 @@
 package noorg.magic.actions.magicPool
 {
 	import noorg.magic.actions.base.CardActionBase;
+	import noorg.magic.actions.base.ICardAction;
+	import noorg.magic.models.ActionAttribute;
 	import noorg.magic.models.staticValue.ActionType;
 	import noorg.magic.utils.Constants;
 
@@ -13,7 +15,7 @@ package noorg.magic.actions.magicPool
 		{
 			super();
 			
-			this._actType = ActionType.GENERATE_MAGIC;
+			this._actType = ActionType.MAGIC_POOL_CHANGE;
 		}
 		
 		override public function execute():void
@@ -52,8 +54,20 @@ package noorg.magic.actions.magicPool
 			}
 		}
 		
+		override public function get editableAttributes():Array
+		{
+			var colorObj:ActionAttribute = new ActionAttribute("color", 
+					ActionAttribute.TYPE_LIST,
+					[Constants.WHITE, Constants.BLACK, Constants.BLUE, 
+					Constants.RED, Constants.GREEN, Constants.COLORLESS]);
+			var valueByObj:ActionAttribute = new ActionAttribute("valueBy", ActionAttribute.TYPE_INT);
+			return [colorObj, valueByObj];
+		}
+		
 		override public function decodeXML(xml:XML):void
 		{
+			super.decodeXML(xml);
+			
 			this.color = xml.attribute("color");
 			this.valueBy = xml.attribute("value-by");
 		}
@@ -61,7 +75,16 @@ package noorg.magic.actions.magicPool
 		override public function encodeXML():XML
 		{
 			return new XML(<action type={this.actType} color={this.color}
-					value-by={this.valueBy}></action>);
+					value-by={this.valueBy} affect-targets={this.affectTargets}></action>);
+		}
+		
+		override public function clone():ICardAction
+		{
+			var result:MagicPoolChangeAction = new MagicPoolChangeAction();
+			result.affectTargets = this.affectTargets;
+			result.color = this.color;
+			result.valueBy = this.valueBy;
+			return result;
 		}
 		
 	}

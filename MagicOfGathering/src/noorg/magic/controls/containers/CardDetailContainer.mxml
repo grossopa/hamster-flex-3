@@ -2,11 +2,32 @@
 <mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:models="noorg.magic.models.*" 
 	xmlns:unit="noorg.magic.controls.unit.*" height="311"
 	 creationComplete="completeHandler()">
+	<mx:Script>
+		<![CDATA[
+			import noorg.magic.models.staticValue.ActionType;
+		]]>
+	</mx:Script>
 	<mx:Script source="CardDetailContainerAs.as" />
 	<unit:CardUnit id="mainCardImg" width="{Constants.CARD_WIDTH}" height="{Constants.CARD_HEIGHT}" />
-	<mx:VBox width="100%" height="100%">
-		<mx:Label text="{_name}" fontWeight="bold" fontSize="13" />
-		<mx:Spacer height="10" width="100%" />
-		<mx:TextArea text="{_descrption}" backgroundAlpha="0" editable="false" width="100%" height="100%" borderStyle="none" />
-	</mx:VBox>
+	<mx:ViewStack id="mainViewStack" width="100%" height="100%" change="viewStackChangedHandler()">
+		<mx:VBox width="100%" height="100%">
+			<mx:Label text="{_name}" fontWeight="bold" fontSize="13" />
+			<mx:Spacer height="10" width="100%" />
+			<mx:TextArea text="{_descrption}" backgroundAlpha="0" 
+				editable="false" width="100%" height="100%" borderStyle="none" />
+			<mx:HBox width="100%" height="100%" verticalAlign="bottom">
+				<mx:Button label="{this.resourceManager.getString('main', 'edit')}" click="editCardHandler()" />
+			</mx:HBox>
+		</mx:VBox>
+		<mx:VBox width="100%" height="100%">
+			<mx:HBox width="100%" height="80">
+				<mx:ComboBox id="actionTypeComboBox" dataProvider="{ActionType.actionTypes}" />
+				<mx:Button label="{this.resourceManager.getString('main', 'action.edit.addAction')}" 
+					click="addActionHandler()" />
+			</mx:HBox>
+			<mx:VBox id="cardEditContainer" >
+				
+			</mx:VBox>
+		</mx:VBox>
+	</mx:ViewStack>
 </mx:HBox>

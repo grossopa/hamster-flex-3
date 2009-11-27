@@ -11,11 +11,17 @@ package noorg.magic.actions
 		
 		public function ActionManager()
 		{
+			actionList = new Array();
 		}
 		
 		public function getAction(index:int):ICardAction
 		{
 			return ICardAction(actionList[index]);
+		}
+		
+		public function get length():int
+		{
+			return actionList.length;
 		}
 
 	}

@@ -10,7 +10,18 @@ package noorg.magic.actions.base
 		private var _playCard:PlayCard;
 		private var _targetPlayCard:PlayCard;
 		
+		private var _affectTargets:int;
 		protected var _actType:String;
+		
+		public function set affectTargets(value:int):void
+		{
+			this._affectTargets = value;
+		}
+		
+		public function get affectTargets():int
+		{
+			return this._affectTargets;
+		}
 		
 		public function set player(value:Player):void
 		{
@@ -57,6 +68,11 @@ package noorg.magic.actions.base
 			return this._actType;
 		}
 		
+		public function get editableAttributes():Array
+		{
+			return [];
+		}
+		
 		public function CardActionBase()
 		{
 		}
@@ -71,10 +87,15 @@ package noorg.magic.actions.base
 		
 		public function decodeXML(xml:XML):void
 		{
-			
+			this.affectTargets = xml.attribute("affect_targets");
 		}
 		
 		public function encodeXML():XML
+		{
+			return null;
+		}
+		
+		public function clone():ICardAction
 		{
 			return null;
 		}

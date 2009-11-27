@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" height="100" verticalAlign="middle"
+	creationComplete="completeHandler()">
+
+	<mx:Script>
+		<![CDATA[
+			import noorg.magic.models.staticValue.ActionTargetType;
+		]]>
+	</mx:Script>
+	<mx:Script source="ActionEditorBaseAs.as" />
+	
+	<mx:Label text="{this._action.actType}" width="100" />
+	
+	<mx:VBox verticalGap="0" width="80">
+		<mx:CheckBox label="{this.resourceManager.getString('main', 'action.edit.self')}" 
+			change="targetChangedHandler(event, ActionTargetType.SELF)" height="15" />
+		<mx:CheckBox label="{this.resourceManager.getString('main', 'action.edit.targetPlayer')}"
+			change="targetChangedHandler(event, ActionTargetType.TARGET_PLAYER)" height="15" />
+		<mx:CheckBox label="{this.resourceManager.getString('main', 'action.edit.targetPlayers')}"
+			change="targetChangedHandler(event, ActionTargetType.TARGET_PLAYERS)" height="15" />
+		<mx:CheckBox label="{this.resourceManager.getString('main', 'action.edit.selfCard')}"
+			change="targetChangedHandler(event, ActionTargetType.SELF_CARD)" height="15" />
+		<mx:CheckBox label="{this.resourceManager.getString('main', 'action.edit.targetCard')}"
+			change="targetChangedHandler(event, ActionTargetType.TARGET_CARD)" height="15" />
+		<mx:CheckBox label="{this.resourceManager.getString('main', 'action.edit.targetCards')}"
+			change="targetChangedHandler(event, ActionTargetType.TARGET_CARDS)" height="15" />
+	</mx:VBox>
+	
+</mx:HBox>
