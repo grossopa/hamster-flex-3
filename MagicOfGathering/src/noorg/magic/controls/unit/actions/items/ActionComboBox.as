@@ -1,14 +1,14 @@
 package noorg.magic.controls.unit.actions.items
 {
-	import mx.controls.NumericStepper;
+	import mx.controls.ComboBox;
 	
 	import noorg.magic.models.ActionAttribute;
 
-	public class ActionNumStepper extends NumericStepper implements IActionEditorItem
+	public class ActionComboBox extends ComboBox implements IActionEditorItem
 	{
 		private var _actionAttribute:ActionAttribute;
 		
-		public function ActionNumStepper()
+		public function ActionComboBox()
 		{
 			super();
 		}
@@ -25,7 +25,7 @@ package noorg.magic.controls.unit.actions.items
 		
 		public function get actionValue():Object
 		{
-			return this.value;
+			return this.selectedItem;
 		}
 		
 	}

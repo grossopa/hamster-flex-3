@@ -56,5 +56,9 @@ private function addActionHandler():void
 	actionEditor.card = this.card;
 	actionEditor.setActionClass(Class(obj.data));
 	this.cardEditContainer.addChild(actionEditor);
+}
+
+private function saveToFileHandler():void
+{
 	
 }

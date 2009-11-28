@@ -12,7 +12,7 @@ package noorg.magic.models
 		public var imgPath:String;
 		public var oracleText:String;
 		public var collection:String;
-		
+		public var magicPool:MagicPool = new MagicPool();
 		// for extended usage
 		public var isSelected:Boolean;
 		public var count:int;
@@ -47,6 +47,8 @@ package noorg.magic.models
 			this.isSelected = xml.attribute("is-selected");
 			this.imgPath = xml.attribute("img-path");
 			this.oracleText = xml;
+			
+			this.magicPool.decodeString(xml.attribute("magic"));
 		}
 		
 		public function toXML():XML

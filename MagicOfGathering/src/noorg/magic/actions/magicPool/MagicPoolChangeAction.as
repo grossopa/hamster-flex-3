@@ -8,7 +8,7 @@ package noorg.magic.actions.magicPool
 
 	public class MagicPoolChangeAction extends CardActionBase
 	{
-		public var color:Number = Constants.COLORLESS;
+		public var color:String = Constants.COLORLESS;
 		public var valueBy:int;
 		
 		public function MagicPoolChangeAction()

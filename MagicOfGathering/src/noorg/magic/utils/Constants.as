@@ -31,12 +31,19 @@ package noorg.magic.utils
 		public static const DRAG_MASK_WIDTH:Number = PLAY_CARD_WIDTH / 3;
 		public static const DRAG_MASK_HEIGHT:Number = PLAY_CARD_HEIGHT / 3;
 		
-		public static const RED:Number = 0xFF2E2E;
-		public static const GREEN:Number = 0x00AA00;
-		public static const BLUE:Number = 0x005AFF;
-		public static const BLACK:Number = 0x000000;
-		public static const WHITE:Number = 0xAAAAAA;
-		public static const COLORLESS:Number = 0x7F7F7F;
+		public static const RED_COLOR:Number 		= 0xFF2E2E;
+		public static const GREEN_COLOR:Number 		= 0x00AA00;
+		public static const BLUE_COLOR:Number 		= 0x005AFF;
+		public static const BLACK_COLOR:Number 		= 0x000000;
+		public static const WHITE_COLOR:Number 		= 0xAAAAAA;
+		public static const COLORLESS_COLOR:Number 	= 0x7F7F7F;
+		
+		public static const RED:String			= "red";
+		public static const GREEN:String 		= "green";
+		public static const BLUE:String 		= "blue";
+		public static const BLACK:String 		= "black";
+		public static const WHITE:String 		= "white";
+		public static const COLORLESS:String 	= "colorless";
 
 	}
 }
