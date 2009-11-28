@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="90" height="15">
+	<mx:Script>
+		<![CDATA[
+			import noorg.magic.utils.Constants;
+		]]>
+	</mx:Script>
+	<mx:Script source="MagicCostEditorUnitAs.as" />
+	<mx:Label text="{redValue}" width="15" height="15" textAlign="center"
+		click="clickHandler(Constants.RED, 1)" 
+		rightClick="clickHandler(Constants.RED, -1)" />
+	<mx:Label x="15" text="{greenValue}" width="15" height="15" textAlign="center"
+		click="clickHandler(Constants.GREEN, 1)" 
+		rightClick="clickHandler(Constants.GREEN, -1)" />
+	<mx:Label x="30" text="{blueValue}" width="15" height="15" textAlign="center"
+		click="clickHandler(Constants.BLUE, 1)" 
+		rightClick="clickHandler(Constants.BLUE, -1)" />
+	<mx:Label x="45" text="{whiteValue}" width="15" height="15" textAlign="center"
+		click="clickHandler(Constants.WHITE, 1)" 
+		rightClick="clickHandler(Constants.WHITE, -1)" />
+	<mx:Label x="60" text="{blackValue}" width="15" height="15" textAlign="center"
+		click="clickHandler(Constants.BLACK, 1)" 
+		rightClick="clickHandler(Constants.BLACK, -1)" />
+	<mx:Label x="75" text="{colorlessValue}" width="15" height="15" textAlign="center"
+		click="clickHandler(Constants.COLORLESS, 1)" 
+		rightClick="clickHandler(Constants.COLORLESS, -1)" />
+</mx:Canvas>

@@ -2,12 +2,13 @@
 import flash.events.Event;
 
 import mx.controls.CheckBox;
-import mx.controls.ComboBox;
 import mx.controls.NumericStepper;
 import mx.events.ListEvent;
 import mx.events.NumericStepperEvent;
 
 import noorg.magic.actions.base.ICardAction;
+import noorg.magic.controls.unit.actions.items.ActionComboBox;
+import noorg.magic.controls.unit.actions.items.ActionNumStepper;
 import noorg.magic.models.ActionAttribute;
 import noorg.magic.models.Card;
 
@@ -56,39 +57,40 @@ private function targetChangedHandler(evt:Event, value:int):void
 public function addMoreAttributes(actionAttribute:ActionAttribute, limit:Object = null):void
 {
 	if (actionAttribute.type == ActionAttribute.TYPE_INT) {
-		var numStepper:NumericStepper = new NumericStepper();
-		numStepper.data = actionAttribute;
-		numStepper.width = 40;
+		var numStepper:ActionNumStepper = new ActionNumStepper();
+		numStepper.actionAttribute = actionAttribute;
+		numStepper.width = 50;
 		numStepper.stepSize = 1;
+		numStepper.minimum = -20;
+		numStepper.maximum = 20;
 		numStepper.addEventListener(NumericStepperEvent.CHANGE, numStepperChangeHandler);
-		this.addChild(numStepper);
+		mainContainer.addChild(numStepper);
 	} else if (actionAttribute.type == ActionAttribute.TYPE_LIST) {
-		var comboBox:ComboBox = new ComboBox();
-		comboBox.width = 60;
-		comboBox.data = actionAttribute;
+		var comboBox:ActionComboBox = new ActionComboBox();
+		comboBox.width = 80;
+		comboBox.actionAttribute = actionAttribute;
 		comboBox.dataProvider = actionAttribute.listData;
+		comboBox.rowCount = actionAttribute.listData.length;
 		comboBox.addEventListener(ListEvent.CHANGE, comboBoxChangedHandler);
-		this.addChild(comboBox);
+		mainContainer.addChild(comboBox);
 	} else if (actionAttribute.type == ActionAttribute.TYPE_STRING) {
 		
 	}
-	
-	
 }
 
 private function comboBoxChangedHandler(evt:ListEvent):void
 {
-	var comboBox:ComboBox = ComboBox(evt.currentTarget);
-	var att:ActionAttribute = comboBox.data as ActionAttribute;
+	var comboBox:ActionComboBox = ActionComboBox(evt.currentTarget);
+	var att:ActionAttribute = comboBox.actionAttribute;
 	var obj:Object = Object(this.action);
-	obj[att.name] = comboBox.value;
+	obj[att.name] = comboBox.actionValue;
 }
 
 private function numStepperChangeHandler(evt:NumericStepperEvent):void
 {
-	var numStepper:NumericStepper = NumericStepper(evt.currentTarget);
-	var att:ActionAttribute = numStepper.data as ActionAttribute;
+	var numStepper:ActionNumStepper = ActionNumStepper(evt.currentTarget);
+	var att:ActionAttribute = numStepper.actionAttribute;
 	var obj:Object = Object(this.action);
-	obj[att.name] = numStepper.value;
+	obj[att.name] = numStepper.actionValue;
 }
 
