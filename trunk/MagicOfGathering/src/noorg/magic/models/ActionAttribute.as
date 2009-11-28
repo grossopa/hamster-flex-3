@@ -6,8 +6,11 @@ package noorg.magic.models
 		public static const TYPE_LIST:String 	= "typeList";
 		public static const TYPE_STRING:String 	= "typeString";
 		
+		[Bindable]
 		public var name:String;
+		[Bindable]
 		public var type:String;
+		[Bindable]
 		public var listData:Array;
 		
 		public function ActionAttribute(name:String, type:String, listData:Array = null)

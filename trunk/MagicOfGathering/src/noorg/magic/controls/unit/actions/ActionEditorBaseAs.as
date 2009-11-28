@@ -1,14 +1,13 @@
 // ActionScript file
+import flash.display.Graphics;
 import flash.events.Event;
 
 import mx.controls.CheckBox;
-import mx.controls.NumericStepper;
 import mx.events.ListEvent;
-import mx.events.NumericStepperEvent;
 
 import noorg.magic.actions.base.ICardAction;
 import noorg.magic.controls.unit.actions.items.ActionComboBox;
-import noorg.magic.controls.unit.actions.items.ActionNumStepper;
+import noorg.magic.controls.unit.actions.items.ActionEditorNumStepperUnit;
 import noorg.magic.models.ActionAttribute;
 import noorg.magic.models.Card;
 
@@ -57,13 +56,8 @@ private function targetChangedHandler(evt:Event, value:int):void
 public function addMoreAttributes(actionAttribute:ActionAttribute, limit:Object = null):void
 {
 	if (actionAttribute.type == ActionAttribute.TYPE_INT) {
-		var numStepper:ActionNumStepper = new ActionNumStepper();
+		var numStepper:ActionEditorNumStepperUnit = new ActionEditorNumStepperUnit();
 		numStepper.actionAttribute = actionAttribute;
-		numStepper.width = 50;
-		numStepper.stepSize = 1;
-		numStepper.minimum = -20;
-		numStepper.maximum = 20;
-		numStepper.addEventListener(NumericStepperEvent.CHANGE, numStepperChangeHandler);
 		mainContainer.addChild(numStepper);
 	} else if (actionAttribute.type == ActionAttribute.TYPE_LIST) {
 		var comboBox:ActionComboBox = new ActionComboBox();
@@ -86,11 +80,15 @@ private function comboBoxChangedHandler(evt:ListEvent):void
 	obj[att.name] = comboBox.actionValue;
 }
 
-private function numStepperChangeHandler(evt:NumericStepperEvent):void
+override protected function updateDisplayList(uw:Number, uh:Number):void
 {
-	var numStepper:ActionNumStepper = ActionNumStepper(evt.currentTarget);
-	var att:ActionAttribute = numStepper.actionAttribute;
-	var obj:Object = Object(this.action);
-	obj[att.name] = numStepper.actionValue;
+	super.updateDisplayList(uw, uh);
+	
+	var g:Graphics = this.graphics;
+	g.lineStyle(1, 0x7F7F7F, 1);
+	g.moveTo(0, 0);
+	g.lineTo(0, uh);
+	g.lineTo(uw, uh);
+	g.lineTo(uw, 0);
+	g.lineTo(0, 0);
 }
-
