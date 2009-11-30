@@ -59,11 +59,6 @@ package noorg.magic.controls.play.unit
 			}
 			super.card = PlayCard(value);
 			super.card.addEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
-		//	this.filters = [new GlowFilter(playCard.player.color, 1, 5, 5, 2, 3, true)];
-//			this.setStyle("borderStyle", "outset");
-//			this.setStyle("borderColor", playCard.player.color);
-//			this.setStyle("borderThickness", 3);
-//			this.setStyle("cornerRadius", 3);
 		}
 		
 		public function get playCard():PlayCard

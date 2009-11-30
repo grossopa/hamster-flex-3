@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100" height="70" 
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100" height="100%" 
 	implements="noorg.magic.controls.unit.actions.items.IActionEditorItem"
 	verticalScrollPolicy="off" horizontalScrollPolicy="off">
 	<mx:Script source="ActionEditorNumStepperUnitAs.as" />
-	<mx:Text text="{this._actionAttribute.name}" height="15"  />
-	<mx:NumericStepper id="numStepper" width="100" y="25" 
+	<mx:Text text="{this._actionAttribute.name}" height="15" x="5" />
+	<mx:NumericStepper id="numStepper" width="90" y="25" x="5"
 		stepSize="1" minimum="-20" maximum="20"/>
 </mx:Canvas>

@@ -1,39 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties version="1">
   <includeClasses>
-    <classEntry path="org.hamster.effects.effectInstance.SinMoveInstance"/>
-    <classEntry path="org.hamster.frameworks.undo.UndoCommandHistoryManager"/>
+    <classEntry path="org.hamster.commands.AbstractCommand"/>
     <classEntry path="org.hamster.commands.AbstractCommandWrapper"/>
-    <classEntry path="org.hamster.effects.effectInstance.AbstractCurveMoveInstance"/>
-    <classEntry path="org.hamster.effects.ArchimedesSpiralMove"/>
-    <classEntry path="org.hamster.components.chrometab.events.ChromeTabEvent"/>
-    <classEntry path="org.hamster.effects.NikeMove"/>
-    <classEntry path="org.hamster.components.chrometab.ITabExtraAction"/>
-    <classEntry path="org.hamster.utils.SkewUtil"/>
-    <classEntry path="org.hamster.utils.MathExtendUtil"/>
-    <classEntry path="org.hamster.effects.effectInstance.SkewEffectInstance"/>
-    <classEntry path="org.hamster.commands.events.CommandEvent"/>
-    <classEntry path="org.hamster.commands.ICommandWrapper"/>
-    <classEntry path="org.hamster.utils.ImageUtil"/>
-    <classEntry path="org.hamster.utils.GraphicsExtendUtil"/>
-    <classEntry path="org.hamster.effects.SinMove"/>
-    <classEntry path="org.hamster.effects.AbstractCurveMove"/>
-    <classEntry path="org.hamster.effects.EllipseMove"/>
-    <classEntry path="org.hamster.effects.effectInstance.CircleMoveInstance"/>
-    <classEntry path="org.hamster.components.chrometab.ChromeTab"/>
-    <classEntry path="org.hamster.utils.VersionUtil"/>
-    <classEntry path="org.hamster.log.LoggerModel"/>
-    <classEntry path="org.hamster.log.LoggerPanel"/>
     <classEntry path="org.hamster.commands.ICommand"/>
-    <classEntry path="org.hamster.effects.effectInstance.ArchimedesSpiralMoveInstance"/>
+    <classEntry path="org.hamster.commands.ICommandWrapper"/>
+    <classEntry path="org.hamster.commands.events.CommandEvent"/>
+    <classEntry path="org.hamster.commands.impl.CommandQueue"/>
+    <classEntry path="org.hamster.components.chrometab.ChromeTab"/>
+    <classEntry path="org.hamster.components.chrometab.ITabExtraAction"/>
+    <classEntry path="org.hamster.components.chrometab.events.ChromeTabEvent"/>
+    <classEntry path="org.hamster.components.chrometab.unit.ChromeTabUnit"/>
+    <classEntry path="org.hamster.effects.AbstractCurveMove"/>
+    <classEntry path="org.hamster.effects.ArchimedesSpiralMove"/>
+    <classEntry path="org.hamster.effects.CircleMove"/>
+    <classEntry path="org.hamster.effects.EllipseMove"/>
+    <classEntry path="org.hamster.effects.NikeMove"/>
+    <classEntry path="org.hamster.effects.SinMove"/>
     <classEntry path="org.hamster.effects.SkewEffect"/>
+    <classEntry path="org.hamster.effects.effectInstance.AbstractCurveMoveInstance"/>
+    <classEntry path="org.hamster.effects.effectInstance.ArchimedesSpiralMoveInstance"/>
+    <classEntry path="org.hamster.effects.effectInstance.CircleMoveInstance"/>
     <classEntry path="org.hamster.effects.effectInstance.EllipseMoveInstance"/>
     <classEntry path="org.hamster.effects.effectInstance.NikeMoveInstance"/>
-    <classEntry path="org.hamster.commands.impl.CommandQueue"/>
-    <classEntry path="org.hamster.effects.CircleMove"/>
-    <classEntry path="org.hamster.commands.AbstractCommand"/>
-    <classEntry path="org.hamster.components.chrometab.unit.ChromeTabUnit"/>
+    <classEntry path="org.hamster.effects.effectInstance.SinMoveInstance"/>
+    <classEntry path="org.hamster.effects.effectInstance.SkewEffectInstance"/>
+    <classEntry path="org.hamster.frameworks.services.EventService"/>
+    <classEntry path="org.hamster.frameworks.undo.IUndoCommand"/>
+    <classEntry path="org.hamster.frameworks.undo.IUndoCommandManager"/>
+    <classEntry path="org.hamster.frameworks.undo.UndoCommandHistoryManager"/>
+    <classEntry path="org.hamster.log.Logger"/>
+    <classEntry path="org.hamster.log.LoggerModel"/>
+    <classEntry path="org.hamster.log.LoggerPanel"/>
+    <classEntry path="org.hamster.networks.service.HTTPServiceLocator"/>
+    <classEntry path="org.hamster.utils.GraphicsExtendUtil"/>
+    <classEntry path="org.hamster.utils.ImageUtil"/>
+    <classEntry path="org.hamster.utils.MathExtendUtil"/>
+    <classEntry path="org.hamster.utils.SkewUtil"/>
+    <classEntry path="org.hamster.utils.StringUtil"/>
+    <classEntry path="org.hamster.utils.VersionUtil"/>
   </includeClasses>
-  <includeResources/>
+  <includeResources>
+    <resourceEntry destPath="org/hamster/components/chrometab/assets/new_tab.png" sourcePath="org/hamster/components/chrometab/assets/new_tab.png"/>
+    <resourceEntry destPath="org/hamster/components/chrometab/assets/tab_unselected.png" sourcePath="org/hamster/components/chrometab/assets/tab_unselected.png"/>
+    <resourceEntry destPath="org/hamster/components/chrometab/assets/tab_selected.png" sourcePath="org/hamster/components/chrometab/assets/tab_selected.png"/>
+  </includeResources>
   <namespaceManifests/>
 </flexLibProperties>

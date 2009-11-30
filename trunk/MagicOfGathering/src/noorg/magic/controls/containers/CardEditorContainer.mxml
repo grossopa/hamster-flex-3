@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" 
+	xmlns:unit="noorg.magic.controls.unit.*" creationComplete="completeHandler()">
+	<mx:Script source="CardEditorContainerAs.as" />
+	<mx:Script>
+		<![CDATA[
+			import noorg.magic.models.staticValue.ActionType;
+		]]>
+	</mx:Script>
+	<mx:HBox>
+		<mx:ComboBox id="actionTypeComboBox" dataProvider="{ActionType.actionTypes}" />
+		<mx:Button label="{this.resourceManager.getString('main', 'action.edit.addAction')}" 
+			click="addActionHandler()" />
+		<mx:Button label="{this.resourceManager.getString('main', 'action.edit.saveToFile')}" 
+			click="saveToFileHandler()" />
+	</mx:HBox>
+	<mx:HBox verticalAlign="middle">
+		<mx:Label text="{this.resourceManager.getString('main','card.edit.magicPoolLabel')}" />
+		<unit:MagicCostEditorUnit id="magicCostEditorUnit" />
+	</mx:HBox>
+</mx:VBox>

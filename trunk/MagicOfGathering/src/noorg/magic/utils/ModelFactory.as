@@ -39,6 +39,7 @@ package noorg.magic.utils
 			result.pid = card.pid;
 			result.oracleText = card.oracleText;
 			result.isSelected = true;
+			result.actionManager = card.actionManager.clone();
 			return result;
 		}
 

@@ -1,5 +1,4 @@
 // ActionScript file
-import flash.display.DisplayObject;
 import flash.display.Graphics;
 
 import noorg.magic.models.ActionAttribute;
@@ -10,17 +9,29 @@ private var _actionAttribute:ActionAttribute;
 public function set actionAttribute(value:ActionAttribute):void
 {
 	this._actionAttribute = value;
+	if (this.initialized) {
+		this.comboBox.dataProvider = value.listData;
+		this.comboBox.rowCount = value.listData.length;
+	}
 }
 		
 public function get actionAttribute():ActionAttribute
 {
 	return this._actionAttribute;
+	
 }
 		
 public function get actionValue():Object
 {
-	return this.numStepper.value;
+	return this.comboBox.selectedItem;
 }
+
+private function completeHandler():void
+{
+	this.comboBox.dataProvider = actionAttribute.listData;
+	this.comboBox.rowCount = actionAttribute.listData.length;	
+}
+
 
 override protected function updateDisplayList(uw:Number, uh:Number):void
 {
