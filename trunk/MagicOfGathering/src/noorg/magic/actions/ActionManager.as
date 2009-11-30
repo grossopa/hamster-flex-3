@@ -22,6 +22,11 @@ package noorg.magic.actions
 		
 		public var actionList:Array;
 		
+		public function execute(index:int):void
+		{
+			this.getAction(index).execute();
+		}
+		
 		public function ActionManager()
 		{
 			actionList = new Array();
@@ -30,6 +35,11 @@ package noorg.magic.actions
 		public function removeAllActions():void
 		{
 			this.actionList = new Array();
+		}
+		
+		public function addAction(iCardAction:ICardAction):uint
+		{
+			return this.actionList.push(iCardAction);
 		}
 		
 		public function getAction(index:int):ICardAction

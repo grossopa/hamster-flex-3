@@ -20,6 +20,10 @@ public function set card(value:Card):void
 	this._name = value.name;
 	this._descrption = value.oracleText;
 	
+	if (this.initialized) {
+		this.mainViewStack.selectedIndex = 0;
+	}
+	
 	if (this.mainCardImg != null) {
 		this.mainCardImg.card = value;
 	}

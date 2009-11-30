@@ -3,6 +3,7 @@ package noorg.magic.actions.magicPool
 	import noorg.magic.actions.base.CardActionBase;
 	import noorg.magic.actions.base.ICardAction;
 	import noorg.magic.models.ActionAttribute;
+	import noorg.magic.models.Player;
 	import noorg.magic.models.staticValue.ActionType;
 	import noorg.magic.utils.Constants;
 
@@ -10,6 +11,11 @@ package noorg.magic.actions.magicPool
 	{
 		public var color:String = Constants.COLORLESS;
 		public var valueBy:int;
+		
+		override public function get targetPlayer():Player
+		{
+			return this.player;
+		}
 		
 		public function MagicPoolChangeAction()
 		{

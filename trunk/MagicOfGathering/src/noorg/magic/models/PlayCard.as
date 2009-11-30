@@ -2,7 +2,6 @@ package noorg.magic.models
 {
 	import mx.collections.ArrayCollection;
 	
-	import noorg.magic.actions.ActionManager;
 	import noorg.magic.actions.base.ICardAction;
 	import noorg.magic.events.PlayCardEvent;
 	
@@ -53,6 +52,14 @@ package noorg.magic.models
 		{
 			super();
 			_player = player;
+		}
+		
+		public function executeAction(index:int):void
+		{
+			var iCardAction:ICardAction = this.getAction(index);
+			iCardAction.player = this.player;
+			iCardAction.playCard = this;
+			iCardAction.execute();
 		}
 		
 		
