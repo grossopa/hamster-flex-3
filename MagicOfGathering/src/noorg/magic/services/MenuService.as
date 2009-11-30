@@ -6,6 +6,7 @@ package noorg.magic.services
 	import mx.resources.IResourceManager;
 	import mx.resources.ResourceManager;
 	
+	import noorg.magic.actions.base.ICardAction;
 	import noorg.magic.controls.menus.MagicMenuContainer;
 	import noorg.magic.controls.menus.MagicMenuItem;
 	import noorg.magic.controls.play.unit.PlayCardUnit;
@@ -92,8 +93,14 @@ package noorg.magic.services
 		public function showPlayCardMenu(playCardUnit:PlayCardUnit, stageX:Number, stageY:Number):void
 		{
 			var resourceManager:IResourceManager = ResourceManager.getInstance();
-			
+			var menuList:Array = [];
 			this.playCardUnit = playCardUnit;
+			
+			for each (var action:ICardAction in playCardUnit.playCard.actionList) {
+				var actionMenu:MagicMenuItem = this.getMenuItem(action.actType, 
+					executeActionHandler, action, action.descriptionString);
+				menuList.push(actionMenu);
+			}
 			
 			var toHandMenu:MagicMenuItem = this.getMenuItem(TO_HAND, 
 					changeLocationHandler, CardLocation.HAND, 
@@ -116,15 +123,28 @@ package noorg.magic.services
 			var toOutMenu:MagicMenuItem = this.getMenuItem(TO_OUT,
 					changeLocationHandler, CardLocation.OUT,
 					resourceManager.getString('main', 'menu.toOut'));
+					
+			 menuList.push(toHandMenu);
+			 menuList.push(toLandMenu);
+			 menuList.push(toCreatureMenu);
+			 menuList.push(toArtifactMenu);
+			 menuList.push(toMagicMenu);
+			 menuList.push(toGraveyardMenu);
+			 menuList.push(toOutMenu);
+			 
 			
-			this.showMenu([toHandMenu, toLandMenu, 
-					toCreatureMenu, toArtifactMenu, 
-					toMagicMenu, toGraveyardMenu, toOutMenu], stageX + playCardUnit.width, stageY + playCardUnit.height);
+			this.showMenu(menuList, stageX + playCardUnit.width, stageY + playCardUnit.height);
 		}
 		
 		public function changeLocationHandler(clickData:Object):void
 		{
 			playCardUnit.playCard.setLocation(int(clickData));
+		}
+		
+		public function executeActionHandler(clickData:Object):void
+		{
+			var action:ICardAction = ICardAction(clickData);
+			action.execute();
 		}
 		
 		private function appClickHandler(evt:MouseEvent):void

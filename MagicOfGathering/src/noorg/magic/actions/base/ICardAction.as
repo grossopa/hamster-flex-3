@@ -18,6 +18,7 @@ package noorg.magic.actions.base
 		function get affectTargets():int;
 		function get actType():String;
 		function get editableAttributes():Array;
+		function get descriptionString():String;
 		
 		function execute():void;
 		

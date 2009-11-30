@@ -7,6 +7,7 @@
 	<property name="APP_SRC" value="${APP_ROOT}/src"/>
 
 	<property name="HS_EFFECTS" value="${basedir}/HsEffects" />
+	<property name="HS_MAINLIB" value="${basedir}/FlexLib" />
 
 	<tstamp>
 		<format property="BUILD_TIME" pattern="MM/dd/yyyy HH:mm" locale="en"/>
@@ -26,7 +27,9 @@
     
 	<target name="copySrc" depends="clean">
 		<copy todir="${APP_SRC}">
-			<fileset dir="${HS_EFFECTS}/src" excludes="*.mxml, *.as, **/*.jpg, **/*.png">
+			<fileset dir="${HS_EFFECTS}/src" excludes="*.mxml, *.as">
+			</fileset>
+			<fileset dir="${HS_MAINLIB}/src" excludes="*.mxml, *.as">
 			</fileset>
 		</copy>
 	</target>

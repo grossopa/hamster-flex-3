@@ -1,5 +1,8 @@
 package noorg.magic.actions.base
 {
+	import mx.resources.IResourceManager;
+	import mx.resources.ResourceManager;
+	
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
 	
@@ -12,6 +15,14 @@ package noorg.magic.actions.base
 		
 		private var _affectTargets:int;
 		protected var _actType:String;
+		
+		private var _resourceManager:IResourceManager = ResourceManager.getInstance();
+		
+		protected function get resourceManager():IResourceManager
+		{
+			return this._resourceManager;
+		}
+		
 		
 		public function set affectTargets(value:int):void
 		{
@@ -71,6 +82,11 @@ package noorg.magic.actions.base
 		public function get editableAttributes():Array
 		{
 			return [];
+		}
+		
+		public function get descriptionString():String
+		{
+			return "";
 		}
 		
 		public function CardActionBase()

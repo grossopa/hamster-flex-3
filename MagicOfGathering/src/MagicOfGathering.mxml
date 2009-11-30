@@ -10,9 +10,10 @@
 	</mx:Script>
 	<mx:Metadata>
 		[ResourceBundle("main")]
+		[ResourceBundle("action")]
 	</mx:Metadata>
 	<ns1:ChromeTab id="chromeTab" width="100%" height="24" canCloseTab="false" canAddTab="false" />
-	<mx:ViewStack id="mainViewStack" width="100%" height="100%" y="24" selectedIndex="2">
+	<mx:ViewStack id="mainViewStack" width="100%" height="100%" y="24">
 		<controls:InitContainer  label="{resourceManager.getString('main', 'initContainer.label')}" id="initContainer" />
 		<controls:LoadContainer  label="{resourceManager.getString('main', 'loadContainer.label')}" id="loadContainer" />
 		<controls:BuildContainer label="{resourceManager.getString('main', 'buildContainer.label')}" id="buildContainer" />

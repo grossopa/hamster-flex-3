@@ -64,6 +64,19 @@ package noorg.magic.actions.magicPool
 			return [colorObj, valueByObj];
 		}
 		
+		override public function get descriptionString():String
+		{
+			if (this.valueBy >= 0) {
+				return this.resourceManager.getString('action', 
+						'cardAction.MagicPoolChange.generate', 
+						[this.valueBy, this.resourceManager.getString('main', this.color)]);
+			} else {
+				return this.resourceManager.getString('action', 
+						'cardAction.MagicPoolChange.remove', 
+						[this.valueBy, this.resourceManager.getString('main', this.color)]);
+			}
+		}
+		
 		override public function decodeXML(xml:XML):void
 		{
 			super.decodeXML(xml);
@@ -74,7 +87,7 @@ package noorg.magic.actions.magicPool
 		
 		override public function encodeXML():XML
 		{
-			return new XML(<action type={this.actType} color={this.color}
+			return new XML(<action act-type={this.actType} color={this.color}
 					value-by={this.valueBy} affect-targets={this.affectTargets}></action>);
 		}
 		

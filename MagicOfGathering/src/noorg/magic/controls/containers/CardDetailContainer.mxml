@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:models="noorg.magic.models.*" 
 	xmlns:unit="noorg.magic.controls.unit.*" height="311"
-	 creationComplete="completeHandler()">
+	 creationComplete="completeHandler()" xmlns:containers="noorg.magic.controls.containers.*">
 	<mx:Script>
 		<![CDATA[
 			import noorg.magic.models.staticValue.ActionType;
@@ -19,18 +19,6 @@
 				<mx:Button label="{this.resourceManager.getString('main', 'edit')}" click="editCardHandler()" />
 			</mx:HBox>
 		</mx:VBox>
-		<mx:VBox width="100%" height="100%">
-			<mx:HBox width="100%">
-				<mx:ComboBox id="actionTypeComboBox" dataProvider="{ActionType.actionTypes}" />
-				<mx:Button label="{this.resourceManager.getString('main', 'action.edit.addAction')}" 
-					click="addActionHandler()" />
-				<mx:Button label="{this.resourceManager.getString('main', 'action.edit.saveToFile')}" 
-					click="saveToFileHandler()" />
-				<unit:MagicCostEditorUnit />
-			</mx:HBox>
-			<mx:VBox id="cardEditContainer" >
-				
-			</mx:VBox>
-		</mx:VBox>
+		<containers:CardEditorContainer id="cardEditorContainer" />
 	</mx:ViewStack>
 </mx:HBox>
