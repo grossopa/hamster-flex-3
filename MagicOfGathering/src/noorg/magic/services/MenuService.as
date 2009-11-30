@@ -10,6 +10,7 @@ package noorg.magic.services
 	import noorg.magic.controls.menus.MagicMenuContainer;
 	import noorg.magic.controls.menus.MagicMenuItem;
 	import noorg.magic.controls.play.unit.PlayCardUnit;
+	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.staticValue.CardLocation;
 	import noorg.magic.utils.GlobalUtil;
 	
@@ -96,9 +97,12 @@ package noorg.magic.services
 			var menuList:Array = [];
 			this.playCardUnit = playCardUnit;
 			
-			for each (var action:ICardAction in playCardUnit.playCard.actionList) {
+			var playCard:PlayCard = this.playCardUnit.playCard;
+			
+			for (var i:int = 0; i < playCard.actionList.length; i++) {
+				var action:ICardAction = playCard.getAction(i);
 				var actionMenu:MagicMenuItem = this.getMenuItem(action.actType, 
-					executeActionHandler, action, action.descriptionString);
+					executeActionHandler, i, action.descriptionString);
 				menuList.push(actionMenu);
 			}
 			
@@ -143,13 +147,17 @@ package noorg.magic.services
 		
 		public function executeActionHandler(clickData:Object):void
 		{
-			var action:ICardAction = ICardAction(clickData);
-			action.execute();
+			var index:int = int(clickData);
+			this.playCardUnit.playCard.executeAction(index);
+			
+			appClickHandler(null);	
 		}
 		
 		private function appClickHandler(evt:MouseEvent):void
 		{
 			if (this.menuContainer.visible == true && !this.menuContainer.isPlaying) {
+				this.menuContainer.x = 0;
+				this.menuContainer.y = 0;
 				this.menuContainer.hideMenu();
 			}
 			

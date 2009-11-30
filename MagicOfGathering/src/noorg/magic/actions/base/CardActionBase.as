@@ -51,6 +51,9 @@ package noorg.magic.actions.base
 		
 		public function get targetPlayer():Player
 		{
+			if (this._targetPlayer == null) {
+				return this.player;
+			}
 			return this._targetPlayer;
 		}
 		

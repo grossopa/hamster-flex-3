@@ -36,7 +36,7 @@ package noorg.magic.models
 		
 		public function addAction(iCardAction:ICardAction):void
 		{
-			this._actionManager.actionList.push(iCardAction);
+			this._actionManager.addAction(iCardAction);
 		}
 		
 		public function getAction(index:int):ICardAction

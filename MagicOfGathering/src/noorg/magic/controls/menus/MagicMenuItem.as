@@ -6,6 +6,7 @@ package noorg.magic.controls.menus
 	import mx.containers.Canvas;
 	import mx.controls.Image;
 	import mx.controls.Label;
+	import mx.core.ScrollPolicy;
 	import mx.effects.Fade;
 	import mx.effects.easing.Linear;
 	
@@ -86,6 +87,9 @@ package noorg.magic.controls.menus
 			this.width = Constants.MENU_ITEM_WIDTH;
 			
 			this.mouseChildren = false;
+			
+			this.verticalScrollPolicy = ScrollPolicy.OFF;
+			this.horizontalScrollPolicy = ScrollPolicy.OFF;
 			
 			this.addEventListener(MouseEvent.ROLL_OVER, rollOverHandler);
 			this.addEventListener(MouseEvent.ROLL_OUT, rollOutHandler);
