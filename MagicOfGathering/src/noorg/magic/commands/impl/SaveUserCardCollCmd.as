@@ -35,15 +35,17 @@ package noorg.magic.commands.impl
 			var fs:FileStream = new FileStream();
 			fs.openAsync(file, FileMode.WRITE);
 			fs.writeUTFBytes(xml.toXMLString());
-			fs.addEventListener(Event.COMPLETE, completeHandler);
-		}
-		
-		private function completeHandler(evt:Event):void
-		{
-			var fs:FileStream = FileStream(evt.currentTarget);
 			fs.close();
 			this.result(null);
+		//	fs.addEventListener(Event.COMPLETE, completeHandler);
 		}
+		
+//		private function completeHandler(evt:Event):void
+//		{
+//			var fs:FileStream = FileStream(evt.currentTarget);
+//			fs.close();
+//			this.result(null);
+//		}
 		
 	}
 }
