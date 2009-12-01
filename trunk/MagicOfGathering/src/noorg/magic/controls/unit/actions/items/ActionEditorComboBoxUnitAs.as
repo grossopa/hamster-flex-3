@@ -1,10 +1,22 @@
 // ActionScript file
 import flash.display.Graphics;
 
+import noorg.magic.actions.base.ICardAction;
 import noorg.magic.models.ActionAttribute;
 
 [Bindable]
 private var _actionAttribute:ActionAttribute;
+
+private var _ownAction:ICardAction;
+public function set action(value:ICardAction):void
+{
+	this._ownAction = value;
+}
+
+public function get action():ICardAction
+{
+	return this._ownAction;
+}
 		
 public function set actionAttribute(value:ActionAttribute):void
 {
@@ -29,7 +41,10 @@ public function get actionValue():Object
 private function completeHandler():void
 {
 	this.comboBox.dataProvider = actionAttribute.listData;
-	this.comboBox.rowCount = actionAttribute.listData.length;	
+	this.comboBox.rowCount = actionAttribute.listData.length;
+	this.comboBox.selectedItem = Object(this.action)[this.actionAttribute.name];
+	
+	trace ( Object(this.action)[this.actionAttribute.name]);
 }
 
 

@@ -106,7 +106,7 @@ package noorg.magic.actions.base
 		
 		public function decodeXML(xml:XML):void
 		{
-			this.affectTargets = xml.attribute("affect_targets");
+			this.affectTargets = xml.attribute("affect-targets");
 		}
 		
 		public function encodeXML():XML

@@ -14,6 +14,11 @@ import noorg.magic.models.ActionAttribute;
 [Bindable]
 private var _action:ICardAction;
 
+public function set action(value:ICardAction):void
+{
+	this._action = value;
+}
+
 public function setActionClass(value:Class):void
 {
 	_action = new value();
@@ -37,6 +42,12 @@ public function getActionClone():ICardAction
 
 private function completeHandler():void
 {
+	var i:int = 1;
+	for each (var checkBox:CheckBox in this.targetCheckBoxList.getChildren()) {
+		checkBox.selected = (this._action.affectTargets & i) != 0;
+		i = i << 1;
+	}
+	
 	// name ,type, listData
 	for each (var actionAttribute:ActionAttribute in _action.editableAttributes) {
 		this.addMoreAttributes(actionAttribute);
@@ -47,10 +58,12 @@ private function addMoreAttributes(actionAttribute:ActionAttribute, limit:Object
 {
 	if (actionAttribute.type == ActionAttribute.TYPE_INT) {
 		var numStepper:ActionEditorNumStepperUnit = new ActionEditorNumStepperUnit();
+		numStepper.action = this._action;
 		numStepper.actionAttribute = actionAttribute;
 		mainContainer.addChild(numStepper);
 	} else if (actionAttribute.type == ActionAttribute.TYPE_LIST) {
 		var comboBox:ActionEditorComboBoxUnit = new ActionEditorComboBoxUnit();
+		comboBox.action = this._action;
 		comboBox.actionAttribute = actionAttribute;
 		mainContainer.addChild(comboBox);
 	} else if (actionAttribute.type == ActionAttribute.TYPE_STRING) {
