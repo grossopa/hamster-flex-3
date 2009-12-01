@@ -14,7 +14,8 @@
 	<mx:HBox id="mainContainer" width="100%" height="100%" 
 		verticalScrollPolicy="off" horizontalScrollPolicy="off">
 	
-		<mx:VBox verticalGap="0" width="110" verticalScrollPolicy="off" horizontalScrollPolicy="off" 
+		<mx:VBox id="targetCheckBoxList" verticalGap="0" width="110"
+			verticalScrollPolicy="off" horizontalScrollPolicy="off" 
 			paddingLeft="5" paddingRight="5" paddingTop="5">
 			<mx:CheckBox label="{this.resourceManager.getString('main', 'action.edit.self')}" 
 				change="targetChangedHandler(event, ActionTargetType.SELF)" height="15" />

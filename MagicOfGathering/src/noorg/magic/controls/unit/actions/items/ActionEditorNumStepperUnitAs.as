@@ -1,11 +1,22 @@
 // ActionScript file
-import flash.display.DisplayObject;
 import flash.display.Graphics;
 
+import noorg.magic.actions.base.ICardAction;
 import noorg.magic.models.ActionAttribute;
 
 [Bindable]
 private var _actionAttribute:ActionAttribute;
+
+private var _ownAction:ICardAction;
+public function set action(value:ICardAction):void
+{
+	this._ownAction = value;
+}
+
+public function get action():ICardAction
+{
+	return this._ownAction;
+}
 		
 public function set actionAttribute(value:ActionAttribute):void
 {
@@ -20,6 +31,11 @@ public function get actionAttribute():ActionAttribute
 public function get actionValue():Object
 {
 	return this.numStepper.value;
+}
+
+private function completeHandler():void
+{
+	this.numStepper.value = Object(this.action)[this.actionAttribute.name];
 }
 
 override protected function updateDisplayList(uw:Number, uh:Number):void

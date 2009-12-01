@@ -17,7 +17,14 @@ package noorg.magic.models
 		public var isSelected:Boolean;
 		public var count:int;
 		
+		/**
+		 * card detail information
+		 */
 		private var _actionManager:ActionManager = new ActionManager();
+		/**
+		 * creature, enchantment, instant, artifact, land, sorcery
+		 */
+		private var _type:int;
 		
 		public function set actionManager(value:ActionManager):void
 		{
@@ -27,6 +34,16 @@ package noorg.magic.models
 		public function get actionManager():ActionManager
 		{
 			return _actionManager;
+		}
+		
+		public function set type(value:int):void
+		{
+			this._type = value;
+		}
+		
+		public function get type():int
+		{
+			return this._type;
 		}
 		
 		public function get actionList():Array
@@ -54,6 +71,7 @@ package noorg.magic.models
 			this.pid = xml.@pid;
 			this.name = xml.@name;
 			this.imgUrl = xml.@url;
+			this.type = xml.@type;
 			this.oracleText = xml.attribute("oracle-text");
 			this.magicPool.decodeString(xml.attribute("magic-cost"));
 			
@@ -74,7 +92,7 @@ package noorg.magic.models
 		
 		public function toXML():XML
 		{
-			var xml:XML = new XML(<card pid={pid} name={name} url={imgUrl} 
+			var xml:XML = new XML(<card pid={pid} name={name} url={imgUrl} type={type}
 					magic-cost={this.magicPool.encodeString()} oracle-text={oracleText}>
 					</card>);
 			xml.appendChild(this._actionManager.encodeXML());

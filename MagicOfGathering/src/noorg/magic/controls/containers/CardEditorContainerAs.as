@@ -29,7 +29,7 @@ public function get card():Card
 
 private function completeHandler():void
 {
-	
+	validateActionList();
 }
 
 private function validateActionList():void
@@ -42,16 +42,16 @@ private function validateActionList():void
 		}
 	}
 	
-//	for each (var action:ICardAction in this.card.actionList) {
-//		this.addAction(
-//	}
+	for each (var action:ICardAction in this.card.actionList) {
+		this.addAction(action);
+	}
 }
 
 public function addAction(action:ICardAction = null):void
 {
 	var obj:Object = actionTypeComboBox.selectedItem;
 	var actionEditor:ActionEditorBase = new ActionEditorBase();
-	actionEditor.setActionClass(Class(obj.data));
+	actionEditor.action = action;
 	this.addChild(actionEditor);	
 }
 
