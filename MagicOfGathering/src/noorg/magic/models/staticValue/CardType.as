@@ -35,6 +35,18 @@ package noorg.magic.models.staticValue
 			
 			return _list;
 		}
+		
+		public static function getIndexOfValue(value:Object):int
+		{
+			for (var i:int = 0; i < dataProviderList.length; i++) {
+				var dpi:DataProviderItem = DataProviderItem(dataProviderList[i]);
+				if (dpi.value == value) {
+					return i;
+				}
+			}
+			
+			return -1;
+		}
 
 	}
 }

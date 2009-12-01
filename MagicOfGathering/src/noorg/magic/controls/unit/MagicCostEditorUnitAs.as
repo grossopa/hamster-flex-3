@@ -4,6 +4,7 @@ import flash.display.BitmapData;
 import flash.display.Graphics;
 import flash.geom.Point;
 
+import noorg.magic.models.MagicPool;
 import noorg.magic.services.AssetService;
 import noorg.magic.utils.Constants;
 
@@ -21,6 +22,25 @@ public var whiteValue:int;
 public var blackValue:int;
 [Bindable]
 public var colorlessValue:int;
+
+private var _magicPool:MagicPool;
+
+public function set magicPool(value:MagicPool):void
+{
+	_magicPool = value;
+	
+	this.redValue = value.red;
+	this.greenValue = value.green;
+	this.blueValue = value.blue;
+	this.whiteValue = value.white;
+	this.blackValue = value.black;
+	this.colorlessValue = value.colorless;
+}
+
+public function get magicPool():MagicPool
+{
+	return _magicPool;
+}
 
 public function clickHandler(type:String, value:int):void
 {
@@ -56,6 +76,22 @@ public function clickHandler(type:String, value:int):void
 			break;
 		}
 	}
+}
+
+public function validateMagicPool():MagicPool
+{
+	if (_magicPool == null) {
+		_magicPool = new MagicPool();
+	}
+	
+	_magicPool.black = this.blackValue;
+	_magicPool.blue = this.blueValue;
+	_magicPool.green = this.greenValue;
+	_magicPool.red = this.redValue;
+	_magicPool.white = this.whiteValue;
+	_magicPool.colorless = this.colorlessValue;
+	
+	return _magicPool;
 }
 
 override protected function updateDisplayList(uw:Number, uh:Number):void

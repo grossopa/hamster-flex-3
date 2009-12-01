@@ -2,13 +2,14 @@
 import flash.display.DisplayObject;
 
 import mx.controls.Alert;
-import mx.core.IUIComponent;
 
 import noorg.magic.actions.base.ICardAction;
 import noorg.magic.commands.impl.SaveDetailToFileCmd;
 import noorg.magic.controls.unit.actions.ActionEditorBase;
 import noorg.magic.controls.unit.actions.IActionEditor;
 import noorg.magic.models.Card;
+import noorg.magic.models.staticValue.CardType;
+import noorg.magic.models.utils.DataProviderItem;
 
 import org.hamster.commands.events.CommandEvent;
 
@@ -18,7 +19,7 @@ public function set card(value:Card):void
 {
 	this._card = value;
 	if (this.initialized) {
-		validateActionList();
+		validateCardProperties();
 	}
 }
 
@@ -29,12 +30,16 @@ public function get card():Card
 
 private function completeHandler():void
 {
-	validateActionList();
+	validateCardProperties();
 }
 
-private function validateActionList():void
+private function validateCardProperties():void
 {
 	var childList:Array = this.getChildren();
+	
+	this.magicCostEditorUnit.magicPool = this.card.magicPool;
+	
+	this.cardTypeComboBox.selectedIndex = CardType.getIndexOfValue(this.card.type);
 	
 	for each (var child:DisplayObject in childList) {
 		if (child is IActionEditor) {
@@ -66,6 +71,9 @@ private function addActionHandler():void
 private function saveToFileHandler():void
 {
 	this.card.removeAllActions();
+	
+	this.magicCostEditorUnit.validateMagicPool();
+	this.card.type = int(this.cardTypeComboBox.selectedItem.value);
 	
 	for each (var child:DisplayObject in this.getChildren()) {
 		if (child is IActionEditor) {
