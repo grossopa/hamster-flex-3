@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Image xmlns:mx="http://www.adobe.com/2006/mxml" width="64" height="64" scaleX="0.5" scaleY="0.5"
+	 rollOver="rollHandler(event)" rollOut="rollHandler(event)" click="clickHandler()">
+
+	<mx:Script>
+		<![CDATA[
+			import noorg.mycard.controls.popup.DetailPopup;
+			import mx.managers.PopUpManager;
+			public var url:String;
+			public var text:String;
+		
+			private function rollHandler(event:MouseEvent):void
+			{
+                if (parallel.isPlaying) {
+                    parallel.reverse();
+                } else {
+                    parallel.play([this], event.type == MouseEvent.ROLL_OUT ? true : false);
+                }
+			}
+			
+			private function clickHandler():void
+			{
+				if (url != null && url != "") {
+					navigateToURL(new URLRequest(url), "_blank");
+				} else {
+					var dp:DetailPopup = PopUpManager.createPopUp(this.parent, DetailPopup, true) as DetailPopup;
+					dp.text = this.text;
+					PopUpManager.centerPopUp(dp);
+				}
+			}
+		]]>
+	</mx:Script>
+	<mx:Parallel id="parallel" duration="250">
+		<mx:Zoom zoomWidthTo="1" zoomHeightTo="1" zoomWidthFrom=".5" zoomHeightFrom=".5"  />
+		<mx:Glow alphaFrom="0" alphaTo="1" blurXTo="20" blurYTo="20" blurXFrom="0" blurYFrom="0" color="white" />
+	</mx:Parallel>
+</mx:Image>

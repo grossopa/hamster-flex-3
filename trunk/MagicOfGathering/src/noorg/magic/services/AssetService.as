@@ -12,6 +12,9 @@ package noorg.magic.services
 			return _instance;
 		}
 		
+		[Embed(source='noorg/magic/assets/common/common_delete.png')]
+		public const CommonDelete:Class;
+		
 		[Embed(source='noorg/magic/assets/icons/icon_bg.png')]
 		public const IconBackground:Class;
 		

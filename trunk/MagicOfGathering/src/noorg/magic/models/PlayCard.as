@@ -4,12 +4,15 @@ package noorg.magic.models
 	
 	import noorg.magic.actions.base.ICardAction;
 	import noorg.magic.events.PlayCardEvent;
+	import noorg.magic.events.PlayerEvent;
 	
 	public class PlayCard extends Card
 	{
 		private var _location:int;
 		private var _status:int;
 		private var _player:Player;
+		
+		public var isPoolEnough:Boolean = false;
 		
 		public const enhancementCards:ArrayCollection = new ArrayCollection();
 		
@@ -52,7 +55,10 @@ package noorg.magic.models
 		{
 			super();
 			_player = player;
+			
+			_player.addEventListener(PlayerEvent.MAGIC_CHANGE, magicPoolChangedHandler);
 		}
+		
 		
 		public function executeAction(index:int):void
 		{

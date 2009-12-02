@@ -21,6 +21,7 @@ package noorg.magic.actions.base
 		function get descriptionString():String;
 		
 		function execute():void;
+		function afterExecute():void;
 		
 		function decodeXML(xml:XML):void;
 		function encodeXML():XML;

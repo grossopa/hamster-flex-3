@@ -6,11 +6,19 @@
 
 	<mx:Script>
 		<![CDATA[
+			import noorg.magic.services.AssetService;
 			import noorg.magic.models.staticValue.ActionTargetType;
+			
+			public static const AS:AssetService = AssetService.getInstance();
 		]]>
 	</mx:Script>
 	<mx:Script source="ActionEditorBaseAs.as" />
-	<mx:Label text="{this._action.actType}" height="17" />
+	<mx:HBox>
+		<mx:Label text="{this._action.actType}" height="17" />
+		<mx:Image source="{AS.CommonDelete}" buttonMode="true" width="15" height="15" 
+			click="deleteActionHandler()" />
+	</mx:HBox>
+	
 	<mx:HBox id="mainContainer" width="100%" height="100%" 
 		verticalScrollPolicy="off" horizontalScrollPolicy="off">
 	

@@ -104,6 +104,14 @@ package noorg.magic.actions.base
 			
 		}
 		
+		/**
+		 * after execute, then do something
+		 */
+		public function afterExecute():void
+		{
+			
+		}
+		
 		public function decodeXML(xml:XML):void
 		{
 			this.affectTargets = xml.attribute("affect-targets");
