@@ -36,6 +36,20 @@ package noorg.magic.models.staticValue
 			return _list;
 		}
 		
+		public static function getDefaultLocation(type:int):int
+		{
+			if ((CREATURE & type) != 0) {
+				return CardLocation.CREATURE;
+			} else if ((ENCHANTMENT & type) != 0 || (INSTANT & type) != 0 || (SORCERY & type) != 0) {
+				return CardLocation.MAGIC;
+			} else if ((ARTIFACT & type) != 0) {
+				return CardLocation.ARTIFACT;
+			} else if ((LAND & type) != 0) {
+				return CardLocation.LAND;
+			}
+			return CardLocation.GRAVEYARD;
+		}
+		
 		public static function getIndexOfValue(value:Object):int
 		{
 			for (var i:int = 0; i < dataProviderList.length; i++) {

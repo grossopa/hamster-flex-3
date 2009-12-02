@@ -5,10 +5,13 @@ package noorg.magic.models.staticValue
 	public class ActionType
 	{
 		public static const MAGIC_POOL_CHANGE:String = "MagicPoolChange";
+		public static const CAST_CARD:String = "CastCard";
 		
 		public static function get actionTypes():Array
 		{
-			return  [{label:"MAGIC_POOL_CHANGE", data:MagicPoolChangeAction}];
+			return  [
+						{label:"Magic Pool Change", data:MagicPoolChangeAction}
+					];
 		}
 	}
 }

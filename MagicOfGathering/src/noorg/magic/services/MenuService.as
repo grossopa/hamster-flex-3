@@ -16,6 +16,8 @@ package noorg.magic.services
 	
 	public class MenuService
 	{
+		public static const CAST:String = "cast";
+		
 		public static const TO_HAND:String = "toHand";
 		public static const TO_GALLERY:String ="toGallery";
 		public static const TO_LAND:String = "toLand";
@@ -106,6 +108,14 @@ package noorg.magic.services
 				menuList.push(actionMenu);
 			}
 			
+			var castMenu:MagicMenuItem;
+			if (this.playCardUnit.playCard.getLocation() == CardLocation.HAND) {
+				castMenu = this.getMenuItem(CAST,
+						castHandler, null,
+						resourceManager.getString('main', 'menu.cast'));
+					
+			}
+			
 			var toHandMenu:MagicMenuItem = this.getMenuItem(TO_HAND, 
 					changeLocationHandler, CardLocation.HAND, 
 					resourceManager.getString('main', 'menu.toHand'));
@@ -127,17 +137,26 @@ package noorg.magic.services
 			var toOutMenu:MagicMenuItem = this.getMenuItem(TO_OUT,
 					changeLocationHandler, CardLocation.OUT,
 					resourceManager.getString('main', 'menu.toOut'));
-					
-			 menuList.push(toHandMenu);
-			 menuList.push(toLandMenu);
-			 menuList.push(toCreatureMenu);
-			 menuList.push(toArtifactMenu);
-			 menuList.push(toMagicMenu);
-			 menuList.push(toGraveyardMenu);
-			 menuList.push(toOutMenu);
+			
+			
+			if (castMenu != null) {
+				menuList.push(castMenu);
+			}
+			menuList.push(toHandMenu);
+			menuList.push(toLandMenu);
+			menuList.push(toCreatureMenu);
+			menuList.push(toArtifactMenu);
+			menuList.push(toMagicMenu);
+			menuList.push(toGraveyardMenu);
+			menuList.push(toOutMenu);
 			 
 			
 			this.showMenu(menuList, stageX + playCardUnit.width, stageY + playCardUnit.height);
+		}
+		
+		public function castHandler(clickData:Object):void
+		{
+			this.playCardUnit.playCard.cast();
 		}
 		
 		public function changeLocationHandler(clickData:Object):void
