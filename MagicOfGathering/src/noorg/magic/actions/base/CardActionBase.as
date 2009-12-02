@@ -59,7 +59,7 @@ package noorg.magic.actions.base
 		
 		public function set playCard(value:PlayCard):void
 		{
-			this._playCard;
+			this._playCard = value;
 		}
 		
 		public function get playCard():PlayCard

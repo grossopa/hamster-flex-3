@@ -34,7 +34,7 @@ package noorg.magic.utils
 			result.name = card.name;
 			result.type = card.type;
 			if (result.type != 0) {
-				trace ("type != 0");
+				trace (result.type);
 			}
 			result.collection = card.collection;
 			result.count = card.count;
