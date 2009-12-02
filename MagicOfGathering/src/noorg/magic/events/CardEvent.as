@@ -8,6 +8,7 @@ package noorg.magic.events
 	{
 		public static const SELECT_CHANGED:String = "cardSelectChanged";
 		public static const ADD:String = "addCard";
+		public static const DELETE_ACTION:String = "CardEventDeleteAction";
 		
 		public var card:Card;
 		

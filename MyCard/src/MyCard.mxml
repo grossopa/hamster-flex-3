@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off" height="100%" width="100%"
+	backgroundColor="0x000000" backgroundGradientColors="[]"
+	xmlns:unit="noorg.mycard.controls.unit.*">
+
+	<mx:Script source="MyCardAs.as" />
+	
+	<mx:HBox id="mainContainer" width="100%" height="100%" verticalAlign="middle" verticalCenter="0"
+		verticalScrollPolicy="off" horizontalScrollPolicy="off" horizontalAlign="center">
+		<unit:CardListUnit source="@Embed(source='noorg/mycard/assets/google_wave.png')"
+			text="grossopaforever@googlewave.com" toolTip="Google Wave" />
+		<unit:CardListUnit source="@Embed(source='noorg/mycard/assets/google_reader.png')" 
+			text="http://www.google.com/reader/shared/02593025965960351490" toolTip="Google Reader" />
+		<unit:CardListUnit source="@Embed(source='noorg/mycard/assets/google_code.png')" 
+			text="http://code.google.com/p/hamster-flex-3/" toolTip="Google Code" />
+		<unit:CardListUnit source="@Embed(source='noorg/mycard/assets/gmail.png')" 
+			text="grossopaforever@gmail.com" toolTip="GMail" />
+		<unit:CardListUnit source="@Embed(source='noorg/mycard/assets/twitter.png')" 
+			text="http://twitter.com/zeshuoyin" toolTip="Twitter" />
+		<unit:CardListUnit source="@Embed(source='noorg/mycard/assets/msn.png')"
+			text="grossopaforever@hotmail.com" toolTip="MSN" />
+		<unit:CardListUnit source="@Embed(source='noorg/mycard/assets/qq.png')"
+			text="441485059" toolTip="QQ" />
+		<unit:CardListUnit source="@Embed(source='noorg/mycard/assets/baidu.png')"
+			text="http://hi.baidu.com/grossopa" toolTip="Baidu"/>
+		<unit:CardListUnit source="@Embed(source='noorg/mycard/assets/kaixin001.png')"
+			text="http://www.kaixin001.com/home/?uid=60789480" toolTip="Kaixin001"/>
+	</mx:HBox>
+	
+	<mx:filters>
+		<mx:GlowFilter inner="true" blurX="3" blurY="3" color="0xFFFFFF" quality="3" />
+	</mx:filters>
+	
+</mx:Application>

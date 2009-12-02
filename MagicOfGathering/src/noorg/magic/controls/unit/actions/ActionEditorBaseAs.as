@@ -9,6 +9,7 @@ import noorg.magic.actions.base.ICardAction;
 import noorg.magic.controls.unit.actions.items.ActionEditorComboBoxUnit;
 import noorg.magic.controls.unit.actions.items.ActionEditorNumStepperUnit;
 import noorg.magic.controls.unit.actions.items.IActionEditorItem;
+import noorg.magic.events.CardEvent;
 import noorg.magic.models.ActionAttribute;
 
 [Bindable]
@@ -80,6 +81,11 @@ private function targetChangedHandler(evt:Event, value:int):void
 	} else {
 		_action.affectTargets = _action.affectTargets ^ value;
 	}
+}
+
+private function deleteActionHandler():void
+{
+	this.parent.removeChild(this);
 }
 
 override protected function updateDisplayList(uw:Number, uh:Number):void

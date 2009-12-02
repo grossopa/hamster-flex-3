@@ -5,6 +5,7 @@ package noorg.magic.actions.magicPool
 	import noorg.magic.models.ActionAttribute;
 	import noorg.magic.models.Player;
 	import noorg.magic.models.staticValue.ActionType;
+	import noorg.magic.models.staticValue.CardStatus;
 	import noorg.magic.utils.Constants;
 
 	public class MagicPoolChangeAction extends CardActionBase
@@ -58,6 +59,13 @@ package noorg.magic.actions.magicPool
 					break;
 				}
 			}
+			
+			afterExecute();
+		}
+		
+		override public function afterExecute():void
+		{
+			this.playCard.status = CardStatus.PLAY_TAGGED;
 		}
 		
 		override public function get editableAttributes():Array
