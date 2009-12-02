@@ -62,7 +62,7 @@ private function saveCollectionHandler():void
 	if (collNameTextInput.text == null || collNameTextInput.text.length == 0) {
 		return;
 	}
-	GlobalUtil.popUpMask(resourceManager.getString("main", "buildContainer.saving"));
+	// GlobalUtil.popUpMask(resourceManager.getString("main", "buildContainer.saving"));
 	var cmd:SaveUserCardCollCmd = CommandWrapper.saveCollection(collNameTextInput.text);
 	cmd.addEventListener(CommandEvent.COMMAND_RESULT, saveResultHandler);
 }

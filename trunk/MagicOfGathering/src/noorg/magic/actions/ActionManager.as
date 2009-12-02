@@ -2,6 +2,7 @@ package noorg.magic.actions
 {
 	import noorg.magic.actions.base.ICardAction;
 	import noorg.magic.actions.magicPool.MagicPoolChangeAction;
+	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.staticValue.ActionType;
 	import noorg.magic.utils.MapCollector;
 	
@@ -19,7 +20,7 @@ package noorg.magic.actions
 			return Class(actionMap.getValue(actType));
 		}
 				
-		
+		public var playCard:PlayCard;
 		public var actionList:Array;
 		
 		public function execute(index:int):void
@@ -39,6 +40,10 @@ package noorg.magic.actions
 		
 		public function addAction(iCardAction:ICardAction):uint
 		{
+			iCardAction.playCard = this.playCard;
+			if (this.playCard != null) {
+				iCardAction.player = this.playCard.player;
+			}
 			return this.actionList.push(iCardAction);
 		}
 		

@@ -57,6 +57,8 @@ package noorg.magic.models
 		{
 			super();
 			_player = player;
+			
+			this.actionManager.playCard = this;
 			magicPoolChangedHandler(null);
 			_player.addEventListener(PlayerEvent.MAGIC_CHANGE, magicPoolChangedHandler);
 		}
