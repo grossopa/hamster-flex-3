@@ -66,7 +66,7 @@ private function beginAni():void
 //	];
 	split.addEventListener(EffectEvent.EFFECT_END, effEndHandler);
 	split.duration = 5000;Bounce;
-	split.easingFunction = Bounce.easeIn;
+	//split.easingFunction = Bounce.easeIn;
 	split.play(null);
 }
 
@@ -101,7 +101,7 @@ private function timerCompleteHandler(evt:TimerEvent):void
 //			new Point(this.canvas.width / 4 ,    this.canvas.height / 4 * 3)
 //	];
 	split.duration = 5000;
-	split.easingFunction =  Bounce.easeOut;
+	//split.easingFunction =  Bounce.easeOut;
 	split.play(null, true);		
 }
 
@@ -119,9 +119,9 @@ private function beginAni2():void
 	var drop:RainDrop = new RainDrop(bgCanvas);
 	drop.rockHorizontal = 5;
 	drop.rockSpeed = 0.01;
-	drop.duration = 60000;
-	drop.dropDuration = 8000;
-	drop.intervalDuration = 50;
+	drop.duration = 120000;
+	drop.dropDuration = 10000;
+	drop.intervalDuration = 100;
 	drop.easingFunction = Linear.easeNone;
 	drop.bitmapDataList = [bd, bd2];
 	drop.play();
