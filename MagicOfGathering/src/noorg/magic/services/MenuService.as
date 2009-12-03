@@ -12,6 +12,7 @@ package noorg.magic.services
 	import noorg.magic.controls.play.unit.PlayCardUnit;
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.staticValue.CardLocation;
+	import noorg.magic.models.staticValue.CardType;
 	import noorg.magic.utils.GlobalUtil;
 	
 	public class MenuService
@@ -46,6 +47,8 @@ package noorg.magic.services
 		
 		public const menuContainer:MagicMenuContainer = new MagicMenuContainer();
 		public const menuItemArray:ArrayCollection = new ArrayCollection();
+		
+		public var playCardUnit:PlayCardUnit;
 		
 		public function showMenu(items:Array, stageX:Number, stageY:Number):void
 		{
@@ -92,7 +95,7 @@ package noorg.magic.services
 			return item;
 		}
 		
-		public var playCardUnit:PlayCardUnit;
+		
 		public function showPlayCardMenu(playCardUnit:PlayCardUnit, stageX:Number, stageY:Number):void
 		{
 			var resourceManager:IResourceManager = ResourceManager.getInstance();
@@ -102,54 +105,71 @@ package noorg.magic.services
 			var playCard:PlayCard = this.playCardUnit.playCard;
 			
 			for (var i:int = 0; i < playCard.actionList.length; i++) {
-				var action:ICardAction = playCard.getAction(i);
-				var actionMenu:MagicMenuItem = this.getMenuItem(action.actType, 
-					executeActionHandler, i, action.descriptionString);
-				menuList.push(actionMenu);
+				if (this.playCardUnit.playCard.getLocation() != CardLocation.HAND) {
+					var action:ICardAction = playCard.getAction(i);
+					var actionMenu:MagicMenuItem = this.getMenuItem(action.actType, 
+						executeActionHandler, i, action.descriptionString);
+					menuList.push(actionMenu);
+				}
 			}
 			
-			var castMenu:MagicMenuItem;
 			if (this.playCardUnit.playCard.getLocation() == CardLocation.HAND) {
-				castMenu = this.getMenuItem(CAST,
+				var castMenu:MagicMenuItem = this.getMenuItem(CAST,
 						castHandler, null,
 						resourceManager.getString('main', 'menu.cast'));
-					
+				menuList.push(castMenu);
 			}
 			
-			var toHandMenu:MagicMenuItem = this.getMenuItem(TO_HAND, 
-					changeLocationHandler, CardLocation.HAND, 
-					resourceManager.getString('main', 'menu.toHand'));
-			var toLandMenu:MagicMenuItem = this.getMenuItem(TO_LAND,
-					changeLocationHandler, CardLocation.LAND, 
-					resourceManager.getString('main', 'menu.toLand'));
-			var toCreatureMenu:MagicMenuItem = this.getMenuItem(TO_CREATURE,
-					changeLocationHandler, CardLocation.CREATURE, 
-					resourceManager.getString('main', 'menu.toCreature'));
-			var toArtifactMenu:MagicMenuItem = this.getMenuItem(TO_ARTIFACT,
-					changeLocationHandler, CardLocation.ARTIFACT,
-					resourceManager.getString('main', 'menu.toArtifact'));
-			var toMagicMenu:MagicMenuItem = this.getMenuItem(TO_MAGIC,
-					changeLocationHandler, CardLocation.MAGIC,
-					resourceManager.getString('main', 'menu.toMagic'));
+			var defaultLoc:int = CardType.getDefaultLocation(this.playCardUnit.playCard.type);
+			
+			if (this.playCardUnit.playCard.getLocation() != CardLocation.HAND) {
+				var toHandMenu:MagicMenuItem = this.getMenuItem(TO_HAND, 
+						changeLocationHandler, CardLocation.HAND, 
+						resourceManager.getString('main', 'menu.toHand'));
+				menuList.push(toHandMenu);
+			}
+			
+			if (defaultLoc == CardLocation.ARTIFACT 
+					&& this.playCardUnit.playCard.getLocation() != CardLocation.ARTIFACT) {
+				var toArtifactMenu:MagicMenuItem = this.getMenuItem(TO_ARTIFACT,
+						changeLocationHandler, CardLocation.ARTIFACT,
+						resourceManager.getString('main', 'menu.toArtifact'));
+				menuList.push(toArtifactMenu);	
+			}
+			
+			if (defaultLoc == CardLocation.LAND 
+					&& this.playCardUnit.playCard.getLocation() != CardLocation.LAND) {
+				var toLandMenu:MagicMenuItem = this.getMenuItem(TO_LAND,
+						changeLocationHandler, CardLocation.LAND, 
+						resourceManager.getString('main', 'menu.toLand'));
+				menuList.push(toLandMenu);	
+			}
+			
+			if (defaultLoc == CardLocation.CREATURE 
+					&& this.playCardUnit.playCard.getLocation() != CardLocation.CREATURE) {
+				var toCreatureMenu:MagicMenuItem = this.getMenuItem(TO_CREATURE,
+						changeLocationHandler, CardLocation.CREATURE, 
+						resourceManager.getString('main', 'menu.toCreature'));
+				menuList.push(toCreatureMenu);	
+			}
+			
+			if (defaultLoc == CardLocation.MAGIC 
+					&& this.playCardUnit.playCard.getLocation() != CardLocation.MAGIC) {
+				var toMagicMenu:MagicMenuItem = this.getMenuItem(TO_MAGIC,
+						changeLocationHandler, CardLocation.MAGIC,
+						resourceManager.getString('main', 'menu.toMagic'));
+				menuList.push(toMagicMenu);	
+			}
+			
 			var toGraveyardMenu:MagicMenuItem = this.getMenuItem(TO_GRAVEYARD,
 					changeLocationHandler, CardLocation.GRAVEYARD,
 					resourceManager.getString('main', 'menu.toGraveyard'));
+			menuList.push(toGraveyardMenu);	
+				
 			var toOutMenu:MagicMenuItem = this.getMenuItem(TO_OUT,
 					changeLocationHandler, CardLocation.OUT,
 					resourceManager.getString('main', 'menu.toOut'));
-			
-			
-			if (castMenu != null) {
-				menuList.push(castMenu);
-			}
-			menuList.push(toHandMenu);
-			menuList.push(toLandMenu);
-			menuList.push(toCreatureMenu);
-			menuList.push(toArtifactMenu);
-			menuList.push(toMagicMenu);
-			menuList.push(toGraveyardMenu);
 			menuList.push(toOutMenu);
-			 
 			
 			this.showMenu(menuList, stageX + playCardUnit.width, stageY + playCardUnit.height);
 		}

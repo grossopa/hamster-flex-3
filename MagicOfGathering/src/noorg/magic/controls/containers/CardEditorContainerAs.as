@@ -33,6 +33,12 @@ private function completeHandler():void
 	validateCardProperties();
 }
 
+private function cardTypeChangeHandler():void
+{
+	typePropertiesContainer.removeAllChildren();
+	
+}
+
 private function validateCardProperties():void
 {
 	var childList:Array = this.getChildren();

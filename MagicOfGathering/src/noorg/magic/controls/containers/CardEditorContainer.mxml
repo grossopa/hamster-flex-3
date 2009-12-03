@@ -19,6 +19,9 @@
 		<mx:Label text="{this.resourceManager.getString('main','card.edit.magicPoolLabel')}" />
 		<unit:MagicCostEditorUnit id="magicCostEditorUnit" />
 		<mx:ComboBox id="cardTypeComboBox" dataProvider="{CardType.dataProviderList}" 
-			rowCount="{CardType.dataProviderList.length}" />
+			rowCount="{CardType.dataProviderList.length}" change="cardTypeChangeHandler()" />
 	</mx:HBox>
+	<mx:VBox id="typePropertiesContainer" verticalGap="0">
+		
+	</mx:VBox>
 </mx:VBox>

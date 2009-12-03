@@ -1,5 +1,6 @@
 package noorg.magic.controls.play.unit
 {
+	import flash.display.Graphics;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
@@ -56,9 +57,12 @@ package noorg.magic.controls.play.unit
 		{
 			if (super.card != null) {
 				super.card.removeEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
+				super.card.removeEventListener(PlayCardEvent.POOL_ENOUGH_STATUS_CHANGE, poolEnoughStatusChangeHandler);
 			}
 			super.card = PlayCard(value);
 			super.card.addEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
+			super.card.addEventListener(PlayCardEvent.POOL_ENOUGH_STATUS_CHANGE, poolEnoughStatusChangeHandler);
+
 		}
 		
 		public function get playCard():PlayCard
@@ -212,15 +216,31 @@ package noorg.magic.controls.play.unit
 		{
 			if (evt.newStatus == CardStatus.PLAY_TAGGED) {
 				this.width = Constants.PLAY_CARD_HEIGHT;
-				this.mainImage.width = this.width;
+				iconQuickMenu.x = this.width - iconQuickMenu.width;
+				iconQuickMenu.y = Constants.PLAY_CARD_WIDTH - iconQuickMenu.height;
+				this.mainImage.width = this.height;
 				this.mainImage.validateNow();
 				this.mainImage.rotation = 90;
 				this.mainImage.x = Constants.PLAY_CARD_HEIGHT;
 			} else {
 				this.width = Constants.PLAY_CARD_WIDTH;
+				iconQuickMenu.x = this.width - iconQuickMenu.width;
+				iconQuickMenu.y = this.height - iconQuickMenu.height;
 				this.mainImage.width = this.width;
 				this.mainImage.rotation = 0;
 				this.mainImage.x = 0;
+			}
+		}
+		
+		private function poolEnoughStatusChangeHandler(evt:PlayCardEvent):void
+		{
+			var g:Graphics = this.mainImageOverlay.graphics;
+			g.clear();
+			
+			if (evt.isPoolEnough) {
+				g.beginFill(0x000000, 0.5);
+				g.drawRect(0, 0, this.mainImageOverlay.width, this.mainImageOverlay.height);
+				g.endFill();
 			}
 		}
 		
