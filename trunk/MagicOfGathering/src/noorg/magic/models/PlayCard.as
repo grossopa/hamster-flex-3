@@ -12,9 +12,7 @@ package noorg.magic.models
 		private var _location:int;
 		private var _status:int;
 		private var _player:Player;
-		
-		[Bindable]
-		public var isPoolEnough:Boolean = false;
+		private var _isPoolEnough:Boolean;
 		
 		public const enhancementCards:ArrayCollection = new ArrayCollection();
 		
@@ -51,6 +49,21 @@ package noorg.magic.models
 		public function get player():Player
 		{
 			return _player;
+		}
+		
+		public function set isPoolEnough(value:Boolean):void
+		{
+			if (this._isPoolEnough != value) {
+				this._isPoolEnough = value;
+				var disEvt:PlayCardEvent = new PlayCardEvent(PlayCardEvent.POOL_ENOUGH_STATUS_CHANGE);
+				disEvt.isPoolEnough = this.isPoolEnough;
+				this.dispatchEvent(disEvt);
+			}
+		}
+		
+		public function get isPoolEnough():Boolean
+		{
+			return this._isPoolEnough;
 		}
 		
 		public function PlayCard(player:Player)

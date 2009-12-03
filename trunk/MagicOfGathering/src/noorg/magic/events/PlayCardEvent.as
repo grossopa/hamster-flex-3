@@ -13,15 +13,19 @@ package noorg.magic.events
 		public static const LOCATION_CHANGED:String = "PlayCardEventLocationChanged";
 		public static const STATUS_CHANGED:String = "PlayCardEventStatusChanged";
 		public static const ENHANCE_CHANGE:String = "PlayCardEventEnhanceChange";
+		public static const POOL_ENOUGH_STATUS_CHANGE:String = "PlayCardEventPoolEnoughStatusChange";
 		
 		public var card:PlayCard;
 		
 		public var originLocation:int = -1;
 		public var newLocation:int = -1;
+		
 		public var index:int;
 		
 		public var originStatus:int = -1;
 		public var newStatus:int = -1;
+		
+		public var isPoolEnough:Boolean;
 		
 		public function PlayCardEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
