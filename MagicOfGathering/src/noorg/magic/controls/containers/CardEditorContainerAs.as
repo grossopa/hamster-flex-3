@@ -48,7 +48,10 @@ private function showCardProperties():void
 	
 	this.magicCostEditorUnit.magicPool = this.card.magicPool;
 	
-	this.cardTypeComboBox.selectedIndex = CardType.getIndexOfValue(this.card.type.type);
+	if (this.card.type != null) {
+		this.cardTypeComboBox.selectedIndex = 
+				CardType.getIndexOfValue(this.card.type.type);
+	}
 	
 	for each (var child:DisplayObject in childList) {
 		if (child is IActionEditor) {

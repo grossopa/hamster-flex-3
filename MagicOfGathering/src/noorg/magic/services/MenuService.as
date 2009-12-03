@@ -119,8 +119,12 @@ package noorg.magic.services
 						resourceManager.getString('main', 'menu.cast'));
 				menuList.push(castMenu);
 			}
-			
-			var defaultLoc:int = CardType.getDefaultLocation(this.playCardUnit.playCard.type.type);
+			if (this.playCardUnit.playCard.type != null) {
+				var defaultLoc:int = CardType.getDefaultLocation(
+				this.playCardUnit.playCard.type.type);
+			} else {
+				defaultLoc = CardLocation.CREATURE;
+			}
 			
 			if (this.playCardUnit.playCard.getLocation() != CardLocation.HAND) {
 				var toHandMenu:MagicMenuItem = this.getMenuItem(TO_HAND, 
