@@ -1,8 +1,10 @@
 package noorg.magic.models
 {
-	import noorg.magic.actions.ActionManager;
-	import noorg.magic.actions.base.ICardAction;
+	import noorg.magic.models.actions.ActionManager;
+	import noorg.magic.models.actions.base.ICardAction;
 	import noorg.magic.models.base.AbstractModelSupport;
+	import noorg.magic.models.staticValue.CardType;
+	import noorg.magic.models.types.base.ICardType;
 	
 	public class Card extends AbstractModelSupport
 	{
@@ -21,10 +23,17 @@ package noorg.magic.models
 		 * card detail information
 		 */
 		private var _actionManager:ActionManager = new ActionManager();
-		/**
-		 * creature, enchantment, instant, artifact, land, sorcery
-		 */
-		private var _type:int;
+		private var _cardType:ICardType;
+		
+		public function set type(value:ICardType):void
+		{
+			this._cardType = value;
+		}
+		
+		public function get type():ICardType
+		{
+			return this._cardType;
+		}
 		
 		public function set actionManager(value:ActionManager):void
 		{
@@ -34,16 +43,6 @@ package noorg.magic.models
 		public function get actionManager():ActionManager
 		{
 			return _actionManager;
-		}
-		
-		public function set type(value:int):void
-		{
-			this._type = value;
-		}
-		
-		public function get type():int
-		{
-			return this._type;
 		}
 		
 		public function get actionList():Array
@@ -71,9 +70,15 @@ package noorg.magic.models
 			this.pid = xml.@pid;
 			this.name = xml.@name;
 			this.imgUrl = xml.@url;
-			this.type = xml.@type;
 			this.oracleText = xml.attribute("oracle-text");
 			this.magicPool.decodeString(xml.attribute("magic-cost"));
+			
+			if (xml.elements("type")[0] != null) {
+				var typeName:int = xml.elements("type")[0].attribute("name");
+				var cls:Class = CardType.getType(typeName);
+				this.type = new cls();
+				this.type.decodeXML(xml.elements("type")[0]);
+			}
 			
 			if (xml.elements("actions")[0] != null) {
 				this.actionManager.decodeXML(xml.elements("actions")[0]);
@@ -92,9 +97,10 @@ package noorg.magic.models
 		
 		public function toXML():XML
 		{
-			var xml:XML = new XML(<card pid={pid} name={name} url={imgUrl} type={type}
+			var xml:XML = new XML(<card pid={pid} name={name} url={imgUrl}
 					magic-cost={this.magicPool.encodeString()} oracle-text={oracleText}>
 					</card>);
+			xml.appendChild(this.type.encodeXML());
 			xml.appendChild(this._actionManager.encodeXML());
 			return xml;
 		}

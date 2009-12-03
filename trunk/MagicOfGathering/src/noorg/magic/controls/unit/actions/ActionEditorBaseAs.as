@@ -5,7 +5,7 @@ import flash.events.Event;
 
 import mx.controls.CheckBox;
 
-import noorg.magic.actions.base.ICardAction;
+import noorg.magic.models.actions.base.ICardAction;
 import noorg.magic.controls.unit.actions.items.ActionEditorComboBoxUnit;
 import noorg.magic.controls.unit.actions.items.ActionEditorNumStepperUnit;
 import noorg.magic.controls.unit.actions.items.IActionEditorItem;

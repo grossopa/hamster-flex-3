@@ -3,7 +3,9 @@ package noorg.magic.models.staticValue
 	import mx.resources.IResourceManager;
 	import mx.resources.ResourceManager;
 	
+	import noorg.magic.models.types.TypeCreature;
 	import noorg.magic.models.utils.DataProviderItem;
+	import noorg.magic.utils.MapCollector;
 	
 	public class CardType
 	{
@@ -61,6 +63,18 @@ package noorg.magic.models.staticValue
 			
 			return -1;
 		}
-
+		
+		public static var typeMap:MapCollector;
+		
+		public static function getType(cardType:int):Class
+		{
+			if (typeMap == null) {
+				typeMap = new MapCollector();
+				typeMap.put(CardType.CREATURE, TypeCreature);
+			}
+			
+			return Class(typeMap.getValue(cardType));
+		}
+				
 	}
 }

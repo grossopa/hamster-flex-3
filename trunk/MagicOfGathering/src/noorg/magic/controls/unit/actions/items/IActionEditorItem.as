@@ -1,6 +1,6 @@
 package noorg.magic.controls.unit.actions.items
 {
-	import noorg.magic.actions.base.ICardAction;
+	import noorg.magic.models.actions.base.ICardAction;
 	import noorg.magic.models.ActionAttribute;
 	
 	public interface IActionEditorItem

@@ -6,7 +6,7 @@ package noorg.magic.services
 	import mx.resources.IResourceManager;
 	import mx.resources.ResourceManager;
 	
-	import noorg.magic.actions.base.ICardAction;
+	import noorg.magic.models.actions.base.ICardAction;
 	import noorg.magic.controls.menus.MagicMenuContainer;
 	import noorg.magic.controls.menus.MagicMenuItem;
 	import noorg.magic.controls.play.unit.PlayCardUnit;
@@ -120,7 +120,7 @@ package noorg.magic.services
 				menuList.push(castMenu);
 			}
 			
-			var defaultLoc:int = CardType.getDefaultLocation(this.playCardUnit.playCard.type);
+			var defaultLoc:int = CardType.getDefaultLocation(this.playCardUnit.playCard.type.type);
 			
 			if (this.playCardUnit.playCard.getLocation() != CardLocation.HAND) {
 				var toHandMenu:MagicMenuItem = this.getMenuItem(TO_HAND, 
