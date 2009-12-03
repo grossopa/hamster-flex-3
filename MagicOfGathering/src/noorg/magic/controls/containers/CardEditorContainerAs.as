@@ -3,13 +3,13 @@ import flash.display.DisplayObject;
 
 import mx.controls.Alert;
 
-import noorg.magic.actions.base.ICardAction;
 import noorg.magic.commands.impl.SaveDetailToFileCmd;
 import noorg.magic.controls.unit.actions.ActionEditorBase;
 import noorg.magic.controls.unit.actions.IActionEditor;
+import noorg.magic.controls.unit.types.ITypeEditor;
 import noorg.magic.models.Card;
+import noorg.magic.models.actions.base.ICardAction;
 import noorg.magic.models.staticValue.CardType;
-import noorg.magic.models.utils.DataProviderItem;
 
 import org.hamster.commands.events.CommandEvent;
 
@@ -19,7 +19,7 @@ public function set card(value:Card):void
 {
 	this._card = value;
 	if (this.initialized) {
-		validateCardProperties();
+		showCardProperties();
 	}
 }
 
@@ -30,22 +30,25 @@ public function get card():Card
 
 private function completeHandler():void
 {
-	validateCardProperties();
+	showCardProperties();
 }
 
 private function cardTypeChangeHandler():void
 {
-	typePropertiesContainer.removeAllChildren();
+	this.cardTypeViewStack.selectedChild = this.creatureTypeEditor;
+	this.creatureTypeEditor.initType();
 	
 }
 
-private function validateCardProperties():void
+private function showCardProperties():void
 {
 	var childList:Array = this.getChildren();
 	
+	ITypeEditor(this.cardTypeViewStack.selectedChild).showTypeProperties();
+	
 	this.magicCostEditorUnit.magicPool = this.card.magicPool;
 	
-	this.cardTypeComboBox.selectedIndex = CardType.getIndexOfValue(this.card.type);
+	this.cardTypeComboBox.selectedIndex = CardType.getIndexOfValue(this.card.type.type);
 	
 	for each (var child:DisplayObject in childList) {
 		if (child is IActionEditor) {
@@ -79,7 +82,8 @@ private function saveToFileHandler():void
 	this.card.removeAllActions();
 	
 	this.magicCostEditorUnit.validateMagicPool();
-	this.card.type = int(this.cardTypeComboBox.selectedItem.value);
+	this.card.type = ITypeEditor(this.cardTypeViewStack.selectedChild).getTypeClone();
+// 	this.card.type = int(this.cardTypeComboBox.selectedItem.value);
 	
 	for each (var child:DisplayObject in this.getChildren()) {
 		if (child is IActionEditor) {

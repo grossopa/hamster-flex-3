@@ -2,7 +2,7 @@ package noorg.magic.models
 {
 	import mx.collections.ArrayCollection;
 	
-	import noorg.magic.actions.base.ICardAction;
+	import noorg.magic.models.actions.base.ICardAction;
 	import noorg.magic.events.PlayCardEvent;
 	import noorg.magic.events.PlayerEvent;
 	import noorg.magic.models.staticValue.CardType;
@@ -114,7 +114,7 @@ package noorg.magic.models
 			player.magicRed 		-= this.magicPool.red;
 			player.magicWhite 		-= this.magicPool.white;
 			
-			this.setLocation(CardType.getDefaultLocation(this.type));
+			this.setLocation(CardType.getDefaultLocation(this.type.type));
 		}
 		
 		

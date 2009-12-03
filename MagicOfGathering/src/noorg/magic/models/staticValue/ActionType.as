@@ -1,6 +1,6 @@
 package noorg.magic.models.staticValue
 {
-	import noorg.magic.actions.magicPool.MagicPoolChangeAction;
+	import noorg.magic.models.actions.magicPool.MagicPoolChangeAction;
 	
 	public class ActionType
 	{

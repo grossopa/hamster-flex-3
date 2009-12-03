@@ -1,7 +1,7 @@
 // ActionScript file
 import flash.display.Graphics;
 
-import noorg.magic.actions.base.ICardAction;
+import noorg.magic.models.actions.base.ICardAction;
 import noorg.magic.models.ActionAttribute;
 
 [Bindable]
