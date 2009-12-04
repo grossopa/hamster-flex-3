@@ -4,13 +4,13 @@ package noorg.magic.models.types
 	import noorg.magic.models.types.base.CardTypeBase;
 	import noorg.magic.models.types.base.ICardType;
 
-	public class TypeLand extends CardTypeBase
+	public class TypeInstant extends CardTypeBase
 	{
-		public function TypeLand()
+		public function TypeInstant()
 		{
 			super();
 			
-			this.type = CardType.LAND;
+			this.type = CardType.INSTANT;
 		}
 		
 		override public function get defaultActions():Array
@@ -35,7 +35,7 @@ package noorg.magic.models.types
 		
 		override public function clone():ICardType
 		{
-			var result:TypeLand = new TypeLand();
+			var result:TypeInstant = new TypeInstant();
 			result.card = this.card;
 			return result;
 		}

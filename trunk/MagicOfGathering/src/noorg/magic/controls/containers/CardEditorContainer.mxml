@@ -22,6 +22,11 @@
 			rowCount="{CardType.dataProviderList.length}" change="cardTypeChangeHandler()" />
 	</mx:HBox>
 	<mx:ViewStack id="cardTypeViewStack">
-		<items:CreatureTypeEditor id="creatureTypeEditor" />
+		<items:TypeArtifactEditor id="typeArtifaceEditor" />
+		<items:TypeCreatureEditor id="typeCreatureEditor" />
+		<items:TypeEnchantmentEditor id="typeEnchantmentEditor" />
+		<items:TypeInstantEditor id="typeInstantEditor" />
+		<items:TypeLandEditor id="typeLandEditor" />
+		<items:TypeSorceryEditor id="typeSorceryEditor" />
 	</mx:ViewStack>
 </mx:VBox>

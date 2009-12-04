@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="68"
 	verticalScrollPolicy="off" horizontalScrollPolicy="off"
-	 creationComplete="completeHandler()"
+	creationComplete="completeHandler()"
 	implements="noorg.magic.controls.unit.types.ITypeEditor">
-	<mx:Script source="CreatureTypeEditorAs.as" />
+	<mx:Script source="TypeCreatureEditorAs.as" />
 	
 	<mx:Label text="{this.resourceManager.getString('main', 'type.creature.attack')}" width="100" />
 	<mx:NumericStepper id="attackNumStepper" height="20"  x="100"
