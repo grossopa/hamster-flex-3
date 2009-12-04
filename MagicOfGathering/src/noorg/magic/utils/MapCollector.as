@@ -22,6 +22,16 @@ package noorg.magic.utils
 			}
 		}
 		
+		public function getKeyIndex(key:Object):int
+		{
+			return _keys.getItemIndex(key);	
+		}
+		
+		public function getValueIndex(value:Object):int
+		{
+			return _values.getItemIndex(value);
+		}
+		
 		public function getValue(key:Object):Object
 		{
 			var index:int = _keys.getItemIndex(key);

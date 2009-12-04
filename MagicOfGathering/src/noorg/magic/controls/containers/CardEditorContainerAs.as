@@ -1,4 +1,5 @@
 // ActionScript file
+
 import flash.display.DisplayObject;
 
 import mx.controls.Alert;
@@ -35,23 +36,31 @@ private function completeHandler():void
 
 private function cardTypeChangeHandler():void
 {
-	this.cardTypeViewStack.selectedChild = this.creatureTypeEditor;
-	this.creatureTypeEditor.initType();
-	
+	var index:int = this.cardTypeComboBox.selectedIndex;
+	this.cardTypeViewStack.selectedIndex = index;
+	if (this.card.type != null 
+			&& CardType.typeMap.getKeyIndex(this.card.type.type) == index) {
+		ITypeEditor(this.cardTypeViewStack.selectedChild).cardType = this.card.type;
+		ITypeEditor(this.cardTypeViewStack.selectedChild).showTypeProperties();
+	} else {
+		ITypeEditor(this.cardTypeViewStack.selectedChild).initType();
+	}
 }
 
 private function showCardProperties():void
 {
 	var childList:Array = this.getChildren();
 	
-	ITypeEditor(this.cardTypeViewStack.selectedChild).showTypeProperties();
+	var selIndex:int;
+	if (this.card.type != null) {
+		selIndex = CardType.typeMap.getKeyIndex(this.card.type.type);
+		this.cardTypeComboBox.selectedIndex = selIndex;
+	} else {
+		selIndex = 0;
+		this.cardTypeComboBox.selectedIndex = selIndex;
+	}
 	
 	this.magicCostEditorUnit.magicPool = this.card.magicPool;
-	
-	if (this.card.type != null) {
-		this.cardTypeComboBox.selectedIndex = 
-				CardType.getIndexOfValue(this.card.type.type);
-	}
 	
 	for each (var child:DisplayObject in childList) {
 		if (child is IActionEditor) {
@@ -86,7 +95,6 @@ private function saveToFileHandler():void
 	
 	this.magicCostEditorUnit.validateMagicPool();
 	this.card.type = ITypeEditor(this.cardTypeViewStack.selectedChild).getTypeClone();
-// 	this.card.type = int(this.cardTypeComboBox.selectedItem.value);
 	
 	for each (var child:DisplayObject in this.getChildren()) {
 		if (child is IActionEditor) {

@@ -3,6 +3,7 @@ package noorg.magic.models.staticValue
 	import mx.resources.IResourceManager;
 	import mx.resources.ResourceManager;
 	
+	import noorg.magic.models.types.TypeArtifact;
 	import noorg.magic.models.types.TypeCreature;
 	import noorg.magic.models.utils.DataProviderItem;
 	import noorg.magic.utils.MapCollector;
@@ -26,10 +27,10 @@ package noorg.magic.models.staticValue
 			if (_list == null || _previousLocale != _resourceManager.localeChain[0]) {
 				_previousLocale = _resourceManager.localeChain[0];
 				_list = [
+					new DataProviderItem(_resourceManager.getString('main', 'type.artifact'), 		ARTIFACT),
 					new DataProviderItem(_resourceManager.getString('main', 'type.creature'), 		CREATURE),
 					new DataProviderItem(_resourceManager.getString('main', 'type.enchantment'), 	ENCHANTMENT),
 					new DataProviderItem(_resourceManager.getString('main', 'type.instant'), 		INSTANT),
-					new DataProviderItem(_resourceManager.getString('main', 'type.artifact'), 		ARTIFACT),
 					new DataProviderItem(_resourceManager.getString('main', 'type.land'), 			LAND),
 					new DataProviderItem(_resourceManager.getString('main', 'type.sorcery'), 		SORCERY)
 				];
@@ -70,7 +71,12 @@ package noorg.magic.models.staticValue
 		{
 			if (typeMap == null) {
 				typeMap = new MapCollector();
+				typeMap.put(CardType.ARTIFACT, TypeArtifact);
 				typeMap.put(CardType.CREATURE, TypeCreature);
+				typeMap.put(CardType.ENCHANTMENT, TypeArtifact);
+				typeMap.put(CardType.INSTANT, TypeCreature);
+				typeMap.put(CardType.LAND, TypeArtifact);
+				typeMap.put(CardType.SORCERY, TypeCreature);
 			}
 			
 			return Class(typeMap.getValue(cardType));
