@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" 
-	xmlns:unit="noorg.magic.controls.unit.*" creationComplete="completeHandler()" xmlns:items="noorg.magic.controls.unit.types.items.*">
+	xmlns:unit="noorg.magic.controls.unit.*" creationComplete="completeHandler()"
+	xmlns:items="noorg.magic.controls.unit.types.items.*">
 	<mx:Script source="CardEditorContainerAs.as" />
 	<mx:Script>
 		<![CDATA[
@@ -21,7 +22,7 @@
 		<mx:ComboBox id="cardTypeComboBox" dataProvider="{CardType.dataProviderList}" 
 			rowCount="{CardType.dataProviderList.length}" change="cardTypeChangeHandler()" />
 	</mx:HBox>
-	<mx:ViewStack id="cardTypeViewStack" backgroundColor="0x999999">
+	<mx:ViewStack id="cardTypeViewStack">
 		<items:TypeArtifactEditor id="typeArtifaceEditor" />
 		<items:TypeCreatureEditor id="typeCreatureEditor" />
 		<items:TypeEnchantmentEditor id="typeEnchantmentEditor" />

@@ -27,11 +27,15 @@ public function initType():void
 
 public function showTypeProperties():void
 {
-	this.attackNumStepper.value = this._typeCreature.attack;
-	this.defenseNumStepper.value = this._typeCreature.defense;
-	this.flyingCheckBox.selected = this._typeCreature.isFlying;
-	this.reachCheckBox.selected = this._typeCreature.isReach;
-	this.firstStrikeCheckBox.selected = this._typeCreature.isFirstStrike;
+	if (this.initialized) {
+		this.attackNumStepper.value = this._typeCreature.attack;
+		this.defenseNumStepper.value = this._typeCreature.defense;
+		this.flyingCheckBox.selected = this._typeCreature.isFlying;
+		this.reachCheckBox.selected = this._typeCreature.isReach;
+		this.firstStrikeCheckBox.selected = this._typeCreature.isFirstStrike;
+	} else {
+		this.callLater(showTypeProperties);
+	}
 }
 
 public function validateTypeProperties():void

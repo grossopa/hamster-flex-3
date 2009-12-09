@@ -36,15 +36,7 @@ private function completeHandler():void
 
 private function cardTypeChangeHandler():void
 {
-	var index:int = this.cardTypeComboBox.selectedIndex;
-	this.cardTypeViewStack.selectedIndex = index;
-	if (this.card.type != null 
-			&& CardType.typeMap.getKeyIndex(this.card.type.type) == index) {
-		ITypeEditor(this.cardTypeViewStack.selectedChild).cardType = this.card.type;
-		ITypeEditor(this.cardTypeViewStack.selectedChild).showTypeProperties();
-	} else {
-		ITypeEditor(this.cardTypeViewStack.selectedChild).initType();
-	}
+	showTypeProperties();
 }
 
 private function showCardProperties():void
@@ -55,6 +47,7 @@ private function showCardProperties():void
 	if (this.card.type != null) {
 		selIndex = CardType.typeMap.getKeyIndex(this.card.type.type);
 		this.cardTypeComboBox.selectedIndex = selIndex;
+		showTypeProperties();
 	} else {
 		selIndex = 0;
 		this.cardTypeComboBox.selectedIndex = selIndex;
@@ -71,6 +64,19 @@ private function showCardProperties():void
 	for each (var action:ICardAction in this.card.actionList) {
 		this.addAction(action);
 	}
+}
+
+private function showTypeProperties():void
+{
+	var index:int = this.cardTypeComboBox.selectedIndex;
+	this.cardTypeViewStack.selectedIndex = index;
+	if (this.card.type != null 
+			&& CardType.typeMap.getKeyIndex(this.card.type.type) == index) {
+		ITypeEditor(this.cardTypeViewStack.selectedChild).cardType = this.card.type;
+		ITypeEditor(this.cardTypeViewStack.selectedChild).showTypeProperties();
+	} else {
+		ITypeEditor(this.cardTypeViewStack.selectedChild).initType();
+	}	
 }
 
 public function addAction(action:ICardAction = null):void

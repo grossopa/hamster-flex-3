@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="68"
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100"
 	verticalScrollPolicy="off" horizontalScrollPolicy="off"
 	creationComplete="completeHandler()"
 	implements="noorg.magic.controls.unit.types.ITypeEditor">
@@ -12,11 +12,11 @@
 	<mx:NumericStepper id="defenseNumStepper" y="24" height="20" x="100" 
 		width="45" stepSize="1" minimum="0" maximum="20" />
 		
-	<mx:CheckBox id="flyingCheckBox" height="20"  x="200" width="45" labelPlacement="right"
+	<mx:CheckBox id="flyingCheckBox" height="20"  x="200" labelPlacement="right"
 		label="{this.resourceManager.getString('main', 'type.creature.flying')}" />
-	<mx:CheckBox id="reachCheckBox" y="24" height="20" x="200" width="45" labelPlacement="right"
+	<mx:CheckBox id="reachCheckBox" y="24" height="20" x="200" labelPlacement="right"
 		label="{this.resourceManager.getString('main', 'type.creature.reach')}" />
-	<mx:CheckBox id="firstStrikeCheckBox" y="48" height="20" x="200" width="45" labelPlacement="right"
+	<mx:CheckBox id="firstStrikeCheckBox" y="48" height="20" x="200" labelPlacement="right"
 		label="{this.resourceManager.getString('main', 'type.creature.firstStrike')}" />
 
 </mx:Canvas>
