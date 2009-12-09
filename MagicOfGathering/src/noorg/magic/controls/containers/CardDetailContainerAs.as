@@ -1,5 +1,6 @@
 // ActionScript file
-import noorg.magic.controls.unit.actions.ActionEditorBase;
+import mx.controls.Button;
+
 import noorg.magic.models.Card;
 import noorg.magic.utils.Constants;
 
@@ -27,6 +28,8 @@ public function set card(value:Card):void
 	if (this.mainCardImg != null) {
 		this.mainCardImg.card = value;
 	}
+	
+	this.editCardButton.visible = true;
 }
 
 public function get card():Card

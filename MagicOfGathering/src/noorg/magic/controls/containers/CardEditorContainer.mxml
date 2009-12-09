@@ -21,7 +21,7 @@
 		<mx:ComboBox id="cardTypeComboBox" dataProvider="{CardType.dataProviderList}" 
 			rowCount="{CardType.dataProviderList.length}" change="cardTypeChangeHandler()" />
 	</mx:HBox>
-	<mx:ViewStack id="cardTypeViewStack">
+	<mx:ViewStack id="cardTypeViewStack" backgroundColor="0x999999">
 		<items:TypeArtifactEditor id="typeArtifaceEditor" />
 		<items:TypeCreatureEditor id="typeCreatureEditor" />
 		<items:TypeEnchantmentEditor id="typeEnchantmentEditor" />

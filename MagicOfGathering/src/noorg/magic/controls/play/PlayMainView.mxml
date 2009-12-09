@@ -24,7 +24,7 @@
 			 width="100%" label="{resourceManager.getString('main', 'play.artifactList.title')}" />
 		<containers:PlayCardListContainer id="landList" locationType="{CardLocation.LAND}"
 			 width="100%" label="{resourceManager.getString('main', 'play.landList.title')}" />
-		<containers:PlayCardListContainer id="handList" locationType="{CardLocation.HAND}"
+		<containers:PlayCardListContainer id="handList" locationType="{CardLocation.HAND}" backgroundColor="0x333333"
 			 width="100%" label="{resourceManager.getString('main', 'play.handList.title')}" />
 		
 		<mx:HBox borderStyle="solid" borderColor="gray" borderThickness="1">
