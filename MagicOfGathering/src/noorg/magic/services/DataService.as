@@ -77,5 +77,7 @@ package noorg.magic.services
 		 */
 		[Bindable] 
 		public var isAutoShowCardDetail:Boolean = true;
+		[Bindable]
+		public var isAnimationEnabled:Boolean = true;
 	}
 }
