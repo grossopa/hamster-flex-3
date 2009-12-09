@@ -16,7 +16,8 @@
 			<mx:TextArea text="{_descrption}" backgroundAlpha="0" 
 				editable="false" width="100%" height="100%" borderStyle="none" />
 			<mx:HBox width="100%" height="100%" verticalAlign="bottom">
-				<mx:Button label="{this.resourceManager.getString('main', 'edit')}" click="editCardHandler()" />
+				<mx:Button id="editCardButton" label="{this.resourceManager.getString('main', 'edit')}" 
+					click="editCardHandler()" visible="false" />
 			</mx:HBox>
 		</mx:VBox>
 		<containers:CardEditorContainer id="cardEditorContainer" />
