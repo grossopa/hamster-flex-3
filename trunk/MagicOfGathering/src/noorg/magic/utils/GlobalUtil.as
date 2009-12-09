@@ -66,7 +66,6 @@ package noorg.magic.utils
 			var obj:GraveyardDetailPopup = createPopup(GraveyardDetailPopup) as GraveyardDetailPopup;
 			obj.cardLocation = cardLocation;
 			obj.player = player;
-			
 		}
 		
 		public static function showEnhancementPopup(playCard:PlayCard):void
