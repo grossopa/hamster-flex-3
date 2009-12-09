@@ -50,6 +50,9 @@ public function get mainContainerHScrollBarPos():Number
 
 public function set cardColl(value:ArrayCollection):void
 {
+	if (_cardColl != null) {
+		_cardColl.removeEventListener(CollectionEvent.COLLECTION_CHANGE, collectionChangedHandler);
+	}
 	_cardColl = value;
 	_cardColl.addEventListener(CollectionEvent.COLLECTION_CHANGE, collectionChangedHandler);
 }
