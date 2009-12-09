@@ -237,7 +237,7 @@ package noorg.magic.controls.play.unit
 			var g:Graphics = this.mainImageOverlay.graphics;
 			g.clear();
 			
-			if (evt.isPoolEnough) {
+			if (!evt.isPoolEnough) {
 				g.beginFill(0x000000, 0.5);
 				g.drawRect(0, 0, this.mainImageOverlay.width, this.mainImageOverlay.height);
 				g.endFill();

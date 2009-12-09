@@ -29,5 +29,5 @@ public function validateTypeProperties():void
 
 public function getTypeClone():ICardType
 {
-	return null;
+	return this.cardType.clone();
 }
