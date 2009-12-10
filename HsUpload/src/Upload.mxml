@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" 
+	xmlns:upload="org.hamster.upload.*"
+	applicationComplete="appCompleteHandler()" xmlns:controls="org.hamster.upload.controls.*">
+	 
+	<mx:Script source="UploadAs.as" /> 
+	 
+	<mx:Button id="commonUpload" label="Upload" click="uploadHandler()" />
+	<controls:UploadContainer id="uploadContainer" />
+</mx:Application>

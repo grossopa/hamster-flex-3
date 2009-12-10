@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="200" height="175" 
+	verticalScrollPolicy="off" horizontalScrollPolicy="off">
+
+	<mx:Script source="UploadUnitAs.as" />
+	
+	<mx:Image id="mainImage" width="200" height="150" source="{_source}" 
+		verticalAlign="middle" horizontalAlign="center" />
+	<mx:Label id="uploadProgressLabel" text="{_uploadProgress}" width="100%" y="70" visible="false" />
+	<mx:HBox id="bottomList" height="25" width="100%" verticalAlign="middle" y="150">
+		<mx:Label text="{_fileSize}" left="10" />
+		<mx:Image buttonMode="true" source="@Embed(source='org/hamster/upload/assets/icon_delete.png')" 
+			width="18" height="18" click="deleteHandler()" right="10" />
+	</mx:HBox>
+</mx:Canvas>
