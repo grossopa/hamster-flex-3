@@ -1,5 +1,7 @@
 package org.hamster.upload.models
 {
+	import flash.events.EventDispatcher;
+	
 	public class UploadTaskStatus
 	{
 		public static const NOT_START:int = 0;
