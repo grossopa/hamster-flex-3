@@ -6,10 +6,8 @@
 	
 	<mx:Image id="mainImage" width="200" height="150" source="{_source}" 
 		verticalAlign="middle" horizontalAlign="center" />
-	<mx:Label id="uploadProgressLabel" text="{_uploadProgress}" width="100%" y="70" visible="false" />
-	<mx:HBox id="bottomList" height="25" width="100%" verticalAlign="middle" y="150">
-		<mx:Label text="{_fileSize}" left="10" />
-		<mx:Image buttonMode="true" source="@Embed(source='org/hamster/upload/assets/icon_delete.png')" 
-			width="18" height="18" click="deleteHandler()" right="10" />
-	</mx:HBox>
+	<mx:Label id="uploadProgressLabel" text="{_uploadProgress}" width="100%" y="70" visible="false" color="white" />
+	<mx:Label text="{_fileSize}" left="10" y="150" color="white"/>
+	<mx:Image buttonMode="true" source="@Embed(source='org/hamster/upload/assets/icon_delete.png')" 
+			width="18" height="18" click="deleteHandler()" y="150" right="10" />
 </mx:Canvas>

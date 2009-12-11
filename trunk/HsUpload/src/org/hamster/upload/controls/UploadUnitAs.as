@@ -1,6 +1,9 @@
 // ActionScript file
 import flash.events.DataEvent;
+import flash.events.Event;
+import flash.events.IOErrorEvent;
 import flash.events.ProgressEvent;
+import flash.events.SecurityErrorEvent;
 
 import org.hamster.upload.events.HsUploadEvent;
 import org.hamster.upload.models.UploadFile;
@@ -101,4 +104,16 @@ private function fileFinishedHandler(evt:HsUploadEvent):void
 private function fileErrorHandler(evt:HsUploadEvent):void
 {
 	trace("[" + toString() + ".fileErrorHandler] " + evt.evt.toString());	
+}
+
+override protected function updateDisplayList(uw:Number, uh:Number):void
+{
+	super.updateDisplayList(uw, uh);
+	
+	this.graphics.clear();
+	
+	this.graphics.lineStyle(1, 0x7F7F7F);
+	this.graphics.beginFill(0x000000);
+	this.graphics.drawRect(0, 0, uw, uh);
+	this.graphics.endFill();
 }

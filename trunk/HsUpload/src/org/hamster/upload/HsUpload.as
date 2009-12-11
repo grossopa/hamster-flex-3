@@ -96,7 +96,6 @@ package org.hamster.upload
 		///////////////////////
 		// private functions //
 		///////////////////////
-
 		
 		private function selectedFilesHandler(evt:Event):void
 		{
@@ -136,6 +135,7 @@ package org.hamster.upload
 			var file:IUploadFile = evt.uploadFile;
 			var urlReq:URLRequest = new URLRequest(url);
 			urlReq.method = URLRequestMethod.POST;
+		//	urlReq.contentType = "multipart/form-data";
 			file.file.upload(urlReq);
 		}
 		
@@ -232,7 +232,6 @@ package org.hamster.upload
 			file.removeEventListener(HsUploadEvent.FILE_DELETE, fileDeleteHandler);
 			file.removeEventListener(HsUploadEvent.FILE_ERROR, fileErrorHandler);	
 		}
-		
 		
 		private function findNextFile():IUploadFile
 		{
