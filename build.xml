@@ -9,7 +9,6 @@
 
 	<property name="HS_EFFECTS" value="${basedir}/HsEffects" />
   <property name="HS_UPLOAD" value="${basedir}/HsUpload" />
-	<property name="HS_MAINLIB" value="${basedir}/FlexLib" />
 
 	<tstamp>
 		<format property="BUILD_TIME" pattern="MM/dd/yyyy HH:mm" locale="en"/>
@@ -18,17 +17,20 @@
   <taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
 
   <target name="clean">
+    <delete dir="${APP_ROOT}" />
+	</target>
+    
+	<target name="prepare" depends="clean">
+  
     <echo message="*******************************************************"/>
     <echo message="BUILD_TIME = ${BUILD_TIME}"/>
     <echo message="Project: ${HS_EFFECTS}"/>
     <echo message="Project: ${HS_UPLOAD}"/>
     <echo message="*******************************************************"/>
-    <delete dir="${APP_ROOT}" />
+    
     <mkdir dir="${APP_ROOT}" />
     <mkdir dir="${APP_ROOT}/src" />
-	</target>
     
-	<target name="copySrc" depends="clean">
 		<copy todir="${APP_SRC}">
 			<fileset dir="${HS_EFFECTS}/src" excludes="*.mxml, *.as" includes="**/*" />
       <fileset dir="${HS_UPLOAD}/src" excludes="*.mxml, *.as" includes="**/*" />
