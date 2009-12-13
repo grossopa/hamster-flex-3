@@ -5,6 +5,10 @@ package noorg.magic.models.staticValue
 	
 	import noorg.magic.models.types.TypeArtifact;
 	import noorg.magic.models.types.TypeCreature;
+	import noorg.magic.models.types.TypeEnchantment;
+	import noorg.magic.models.types.TypeInstant;
+	import noorg.magic.models.types.TypeLand;
+	import noorg.magic.models.types.TypeSorcery;
 	import noorg.magic.models.utils.DataProviderItem;
 	import noorg.magic.utils.MapCollector;
 	
@@ -65,20 +69,24 @@ package noorg.magic.models.staticValue
 			return -1;
 		}
 		
-		public static var typeMap:MapCollector;
+		public static var _typeMap:MapCollector;
+		
+		public static function get typeMap():MapCollector
+		{
+			if (_typeMap == null) {
+				_typeMap = new MapCollector();
+				_typeMap.put(CardType.ARTIFACT, TypeArtifact);
+				_typeMap.put(CardType.CREATURE, TypeCreature);
+				_typeMap.put(CardType.ENCHANTMENT, TypeEnchantment);
+				_typeMap.put(CardType.INSTANT, TypeInstant);
+				_typeMap.put(CardType.LAND, TypeLand);
+				_typeMap.put(CardType.SORCERY, TypeSorcery);
+			}
+			return _typeMap;
+		}
 		
 		public static function getType(cardType:int):Class
 		{
-			if (typeMap == null) {
-				typeMap = new MapCollector();
-				typeMap.put(CardType.ARTIFACT, TypeArtifact);
-				typeMap.put(CardType.CREATURE, TypeCreature);
-				typeMap.put(CardType.ENCHANTMENT, TypeArtifact);
-				typeMap.put(CardType.INSTANT, TypeCreature);
-				typeMap.put(CardType.LAND, TypeArtifact);
-				typeMap.put(CardType.SORCERY, TypeCreature);
-			}
-			
 			return Class(typeMap.getValue(cardType));
 		}
 				
