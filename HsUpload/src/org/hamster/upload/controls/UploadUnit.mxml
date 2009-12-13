@@ -15,7 +15,7 @@ import org.hamster.upload.events.HsUploadEvent;
 import org.hamster.upload.models.UploadFile;
 import org.hamster.upload.models.UploadFileStatus;
 
-[Embed(source='org/hamster/upload/assets/loading.swf')]
+[Embed(source='/org/hamster/upload/assets/loading.swf')]
 private const loadingSwf:Class;
 
 [Bindable]
@@ -131,6 +131,6 @@ override protected function updateDisplayList(uw:Number, uh:Number):void
 		verticalAlign="middle" horizontalAlign="center" />
 	<mx:Label id="uploadProgressLabel" text="{_uploadProgress}" width="100%" y="70" visible="false" color="white" />
 	<mx:Label text="{_fileSize}" left="10" y="154" color="white"/>
-	<mx:Image buttonMode="true" source="@Embed(source='org/hamster/upload/assets/icon_delete.png')" 
+	<mx:Image buttonMode="true" source="@Embed(source='/org/hamster/upload/assets/icon_delete.png')" 
 		width="18" height="18" click="deleteHandler()" y="154" right="10" />
 </mx:Canvas>
