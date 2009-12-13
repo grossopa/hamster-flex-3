@@ -1,5 +1,4 @@
 // ActionScript file
-import mx.core.Application;
 import mx.resources.IResourceManager;
 import mx.resources.ResourceManager;
 
