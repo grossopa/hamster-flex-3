@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- mySimpleBuild.xml -->
 <project name="My App Builder" basedir="." default="build-swc">
+
+  <!-- properties -->
   <property environment="env" />
-  
 	<property name="FLEX_HOME" value="${env.FLEX_HOME}"/>
 	<property name="APP_ROOT" value="${basedir}/ant-bin"/>
 	<property name="APP_SRC" value="${APP_ROOT}/src"/>
-
+  <!-- project list -->
 	<property name="HS_EFFECTS" value="${basedir}/HsEffects" />
   <property name="HS_UPLOAD" value="${basedir}/HsUpload" />
+  <property name="HS_IMAGECROPPER" value="${basedir}/HsImageCropper" />
 
+  <!-- time stamp -->
 	<tstamp>
 		<format property="BUILD_TIME" pattern="MM/dd/yyyy HH:mm" locale="en"/>
 	</tstamp>
 
+  <!-- flex ant task lib -->
   <taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
 
+  <!-- clean -->
   <target name="clean">
     <delete dir="${APP_ROOT}" />
 	</target>
     
+  <!-- prepare to build -->
 	<target name="prepare" depends="clean">
   
     <echo message="*******************************************************"/>
     <echo message="BUILD_TIME = ${BUILD_TIME}"/>
     <echo message="Project: ${HS_EFFECTS}"/>
     <echo message="Project: ${HS_UPLOAD}"/>
+    <echo message="Project: ${HS_IMAGECROPPER}"/>
     <echo message="*******************************************************"/>
     
     <mkdir dir="${APP_ROOT}" />
@@ -34,19 +41,20 @@
 		<copy todir="${APP_SRC}">
 			<fileset dir="${HS_EFFECTS}/src" excludes="*.mxml, *.as" includes="**/*" />
       <fileset dir="${HS_UPLOAD}/src" excludes="*.mxml, *.as" includes="**/*" />
+      <fileset dir="${HS_IMAGECROPPER}/src" excludes="*.mxml, *.as" includes="**/*" />
 		</copy>
 	</target>
 
-	<target name="build-swc" depends="copySrc">
+  <!-- build -->
+	<target name="build-swc" depends="prepare">
   
 		<fileset dir="${APP_SRC}" id="src.files">
 			<include name="**/**" />
+      <exclude name="**/*As.as" />
 		</fileset>
 
-    <pathconvert
-      property="evaFramework_classes"
-      pathsep=" " dirsep="."
-      refid="src.files">
+    <pathconvert property="evaFramework_classes"
+      pathsep=" " dirsep="." refid="src.files">
       <map from="\" to="/"/>
       <map from="${APP_SRC}/" to=""/>
       <mapper>
@@ -56,6 +64,7 @@
       </mapper>
     </pathconvert>
 
+    <echo message="${evaFramework_classes}" />
 		<compc output="${APP_ROOT}/hamster.swc" include-classes="${evaFramework_classes}">
 			<source-path path-element="${APP_SRC}" /> 
 		</compc>

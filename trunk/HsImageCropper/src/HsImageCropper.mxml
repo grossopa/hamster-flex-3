@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical"
+	creationComplete="completeHandler()" xmlns:imageCropper="org.hamster.imageCropper.*">
+	<mx:Script source="HsImageCropperAs.as" />
+	<mx:Button click="showRect()" label="rect" />
+	<imageCropper:HsImageCropper id="cropper"  width="700" height="500"/>
+</mx:Application>
