@@ -11,6 +11,7 @@
 	<property name="HS_EFFECTS" value="${basedir}/HsEffects" />
   <property name="HS_UPLOAD" value="${basedir}/HsUpload" />
   <property name="HS_IMAGECROPPER" value="${basedir}/HsImageCropper" />
+  <property name="HS_TIP" value="${basedir}/HsTip" />
 
   <!-- time stamp -->
 	<tstamp>
@@ -33,6 +34,7 @@
     <echo message="Project: ${HS_EFFECTS}"/>
     <echo message="Project: ${HS_UPLOAD}"/>
     <echo message="Project: ${HS_IMAGECROPPER}"/>
+    <echo message="Project: ${HS_TIP}"/>
     <echo message="*******************************************************"/>
     
     <mkdir dir="${APP_ROOT}" />
@@ -42,6 +44,7 @@
 			<fileset dir="${HS_EFFECTS}/src" excludes="*.mxml, *.as" includes="**/*" />
       <fileset dir="${HS_UPLOAD}/src" excludes="*.mxml, *.as" includes="**/*" />
       <fileset dir="${HS_IMAGECROPPER}/src" excludes="*.mxml, *.as" includes="**/*" />
+      <fileset dir="${HS_TIP}/src" excludes="*.mxml, *.as" includes="**/*" />
 		</copy>
 	</target>
 

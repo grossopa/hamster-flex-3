@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" backgroundColor="0x000000" xmlns:controls="org.hamster.controls.*">
+	<mx:Script>
+		<![CDATA[
+			import org.hamster.graphics.tip.ITipArrow;
+			import org.hamster.graphics.tip.TipArrowImpl;
+			import org.hamster.graphics.tip.TipUtil;
+			
+			
+			
+			override protected function updateDisplayList(uw:Number, uh:Number):void
+			{
+				super.updateDisplayList(uw, uh);
+				
+				var g:Graphics = this.tip1.graphics;
+				g.clear();
+				g.lineStyle(3, 0x7F7F7F, 1);
+				g.beginFill(0xFFFFFF);
+				var iTipArrow:ITipArrow = new TipArrowImpl(TipUtil.BOTTOM, 50, 70, 40, 20);
+				TipUtil.drawTipRoundRectComplex(g, 0, 0, 500, 300, [iTipArrow], 15, 15, 15, 15);
+				g.endFill();
+			}
+		]]>
+	</mx:Script>
+	<mx:Canvas id="tip1" x="20" y="20" width="500" height="300" />
+		
+	<controls:TipWindow id="tip2" x="20" y="400" width="400" height="400" >
+		<mx:Label text="Click me to change fill color" />
+	</controls:TipWindow>
+</mx:Application>
