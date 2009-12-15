@@ -7,11 +7,6 @@
 	<property name="FLEX_HOME" value="${env.FLEX_HOME}"/>
 	<property name="APP_ROOT" value="${basedir}/ant-bin"/>
 	<property name="APP_SRC" value="${APP_ROOT}/src"/>
-  <!-- project list -->
-	<property name="HS_EFFECTS" value="${basedir}/HsEffects" />
-  <property name="HS_UPLOAD" value="${basedir}/HsUpload" />
-  <property name="HS_IMAGECROPPER" value="${basedir}/HsImageCropper" />
-  <property name="HS_TIP" value="${basedir}/HsTip" />
 
   <!-- time stamp -->
 	<tstamp>
@@ -31,20 +26,16 @@
   
     <echo message="*******************************************************"/>
     <echo message="BUILD_TIME = ${BUILD_TIME}"/>
-    <echo message="Project: ${HS_EFFECTS}"/>
-    <echo message="Project: ${HS_UPLOAD}"/>
-    <echo message="Project: ${HS_IMAGECROPPER}"/>
-    <echo message="Project: ${HS_TIP}"/>
     <echo message="*******************************************************"/>
     
     <mkdir dir="${APP_ROOT}" />
     <mkdir dir="${APP_ROOT}/src" />
     
 		<copy todir="${APP_SRC}">
-			<fileset dir="${HS_EFFECTS}/src" excludes="*.mxml, *.as" includes="**/*" />
-      <fileset dir="${HS_UPLOAD}/src" excludes="*.mxml, *.as" includes="**/*" />
-      <fileset dir="${HS_IMAGECROPPER}/src" excludes="*.mxml, *.as" includes="**/*" />
-      <fileset dir="${HS_TIP}/src" excludes="*.mxml, *.as" includes="**/*" />
+			<fileset dir="HsEffects/src" excludes="*.mxml, *.as" includes="**/*" />
+      <fileset dir="HsUpload/src" excludes="*.mxml, *.as" includes="**/*" />
+      <fileset dir="HsImageCropper/src" excludes="*.mxml, *.as" includes="**/*" />
+      <fileset dir="HsTip/src" excludes="*.mxml, *.as" includes="**/*" />
 		</copy>
 	</target>
 
