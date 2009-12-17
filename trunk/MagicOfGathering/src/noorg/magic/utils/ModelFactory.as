@@ -32,6 +32,7 @@ package noorg.magic.utils
 		{
 			var result:PlayCard = new PlayCard(ownPlayer);
 			result.name = card.name;
+			result.magicPool = card.magicPool.clone();
 			if (card.type != null) {
 				result.type = card.type.clone();
 			}

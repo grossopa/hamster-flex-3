@@ -113,7 +113,8 @@ package noorg.magic.services
 				}
 			}
 			
-			if (this.playCardUnit.playCard.getLocation() == CardLocation.HAND) {
+			if (this.playCardUnit.playCard.getLocation() == CardLocation.HAND
+					&& this.playCardUnit.playCard.isPoolEnough) {
 				var castMenu:MagicMenuItem = this.getMenuItem(CAST,
 						castHandler, null,
 						resourceManager.getString('main', 'menu.cast'));

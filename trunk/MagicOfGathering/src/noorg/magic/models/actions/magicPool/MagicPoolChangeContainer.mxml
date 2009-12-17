@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BaseActionContainer xmlns="noorg.magic.models.actions.base.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" width="600" height="{Constants.CARD_HEIGHT}">
+	<mx:Script>
+		<![CDATA[
+			import noorg.magic.utils.Constants;Constants;
+		]]>
+	</mx:Script>
+	<mx:Script source="MagicPoolChangeContainerAs.as" />
+	<mx:Image id="mainCard" width="{Constants.CARD_WIDTH}" height="{Constants.CARD_HEIGHT}" />
+	<mx:VBox width="100%" height="100%" x="330">
+		<mx:Label text="{resourceManager.getString('main','')}" />
+	</mx:VBox>
+	
+</BaseActionContainer>

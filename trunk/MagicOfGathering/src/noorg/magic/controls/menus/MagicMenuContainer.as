@@ -3,11 +3,11 @@ package noorg.magic.controls.menus
 	import mx.containers.VBox;
 	import mx.core.ScrollPolicy;
 	import mx.effects.Resize;
-	import mx.effects.easing.Bounce;
+	import mx.effects.easing.Linear;
 
 	public class MagicMenuContainer extends VBox
 	{
-		public static const RESIZE_DURATION:Number = 1000;
+		public static const RESIZE_DURATION:Number = 250;
 		
 		private var _resize:Resize;
 		
@@ -32,7 +32,7 @@ package noorg.magic.controls.menus
 			this.horizontalScrollPolicy = ScrollPolicy.OFF;
 			
 			_resize = new Resize(this);
-			_resize.easingFunction = Bounce.easeOut;
+			_resize.easingFunction = Linear.easeNone;
 			_resize.duration = RESIZE_DURATION;
 			_resize.heightFrom = 0;
 		}

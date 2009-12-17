@@ -14,7 +14,7 @@ package noorg.magic.models
 		public var imgPath:String;
 		public var oracleText:String;
 		public var collection:String;
-		public var magicPool:MagicPool = new MagicPool();
+		
 		// for extended usage
 		public var isSelected:Boolean;
 		public var count:int;
@@ -22,8 +22,19 @@ package noorg.magic.models
 		/**
 		 * card detail information
 		 */
+		private var _magicPool:MagicPool = new MagicPool();
 		private var _actionManager:ActionManager = new ActionManager();
 		private var _cardType:ICardType;
+		
+		public function set magicPool(value:MagicPool):void
+		{
+			this._magicPool = value;
+		}
+		
+		public function get magicPool():MagicPool
+		{
+			return this._magicPool;
+		}
 		
 		public function set type(value:ICardType):void
 		{

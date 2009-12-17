@@ -28,6 +28,11 @@ package noorg.magic.models
 					+ black + "," + white + "," + colorless;
 		}
 		
+		public function get allCount():int
+		{
+			return red + blue + green + black + white + colorless;
+		}
+		
 		public function clone():MagicPool
 		{
 			var result:MagicPool = new MagicPool();

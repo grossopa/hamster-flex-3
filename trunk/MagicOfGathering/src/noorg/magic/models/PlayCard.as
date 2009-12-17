@@ -2,9 +2,9 @@ package noorg.magic.models
 {
 	import mx.collections.ArrayCollection;
 	
-	import noorg.magic.models.actions.base.ICardAction;
 	import noorg.magic.events.PlayCardEvent;
 	import noorg.magic.events.PlayerEvent;
+	import noorg.magic.models.actions.base.ICardAction;
 	import noorg.magic.models.staticValue.CardType;
 	
 	public class PlayCard extends Card
@@ -15,6 +15,13 @@ package noorg.magic.models
 		private var _isPoolEnough:Boolean;
 		
 		public const enhancementCards:ArrayCollection = new ArrayCollection();
+		
+		override public function set magicPool(value:MagicPool):void
+		{
+			super.magicPool = value;
+			
+			this.magicPoolChangedHandler(null);
+		} 
 		
 		public function setLocation(value:int, index:int = -1):void
 		{
@@ -72,7 +79,6 @@ package noorg.magic.models
 			_player = player;
 			
 			this.actionManager.playCard = this;
-			magicPoolChangedHandler(null);
 			_player.addEventListener(PlayerEvent.MAGIC_CHANGE, magicPoolChangedHandler);
 		}
 		
@@ -98,7 +104,8 @@ package noorg.magic.models
 				this.isPoolEnough = false;
 				return;
 			}
-			if (this.magicPool.colorless > player.magicColorless) {
+			
+			if (this.magicPool.allCount > this.player.magicAllCount) {
 				this.isPoolEnough = false;
 				return;
 			}
