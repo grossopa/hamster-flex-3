@@ -3,7 +3,6 @@
 	verticalScrollPolicy="off" horizontalScrollPolicy="off">
 	<mx:Script source="CardUnitAs.as" />
 	
-	<mx:UIComponent id="mainImageOverlay" width="100%" height="100%" visible="false" />
 	<mx:Image id="mainImage" source="{_source}" width="100%" height="100%" />
-	
+	<mx:UIComponent id="mainImageOverlay" width="100%" height="100%" />
 </mx:Canvas>

@@ -33,11 +33,13 @@ package noorg.magic.models
 		
 		public function set magicRed(value:int):void
 		{
-			this._magicRed = value;
-			var disEvt:PlayerEvent = new PlayerEvent(PlayerEvent.MAGIC_CHANGE);
-			disEvt.magicType = MagicType.RED;
-			disEvt.magicCount = value;
-			this.dispatchEvent(disEvt);
+			if (this._magicRed != value) {
+				this._magicRed = value;
+				var disEvt:PlayerEvent = new PlayerEvent(PlayerEvent.MAGIC_CHANGE);
+				disEvt.magicType = MagicType.RED;
+				disEvt.magicCount = value;
+				this.dispatchEvent(disEvt);
+			}
 		}
 		
 		public function get magicRed():int
@@ -47,11 +49,13 @@ package noorg.magic.models
 		
 		public function set magicGreen(value:int):void
 		{
-			this._magicGreen = value;
-			var disEvt:PlayerEvent = new PlayerEvent(PlayerEvent.MAGIC_CHANGE);
-			disEvt.magicType = MagicType.GREEN;
-			disEvt.magicCount = value;
-			this.dispatchEvent(disEvt);
+			if (this._magicGreen != value) {
+				this._magicGreen = value;
+				var disEvt:PlayerEvent = new PlayerEvent(PlayerEvent.MAGIC_CHANGE);
+				disEvt.magicType = MagicType.GREEN;
+				disEvt.magicCount = value;
+				this.dispatchEvent(disEvt);
+			}
 		}
 		
 		public function get magicGreen():int
@@ -61,11 +65,13 @@ package noorg.magic.models
 		
 		public function set magicBlue(value:int):void
 		{
-			this._magicBlue = value;
-			var disEvt:PlayerEvent = new PlayerEvent(PlayerEvent.MAGIC_CHANGE);
-			disEvt.magicType = MagicType.BLUE;
-			disEvt.magicCount = value;
-			this.dispatchEvent(disEvt);
+			if (this._magicBlue != value) {
+				this._magicBlue = value;
+				var disEvt:PlayerEvent = new PlayerEvent(PlayerEvent.MAGIC_CHANGE);
+				disEvt.magicType = MagicType.BLUE;
+				disEvt.magicCount = value;
+				this.dispatchEvent(disEvt);
+			}
 		}
 		
 		public function get magicBlue():int
@@ -75,11 +81,13 @@ package noorg.magic.models
 		
 		public function set magicBlack(value:int):void
 		{
-			this._magicBlack = value;
-			var disEvt:PlayerEvent = new PlayerEvent(PlayerEvent.MAGIC_CHANGE);
-			disEvt.magicType = MagicType.BLACK;
-			disEvt.magicCount = value;
-			this.dispatchEvent(disEvt);
+			if (this._magicBlack != value) {
+				this._magicBlack = value;
+				var disEvt:PlayerEvent = new PlayerEvent(PlayerEvent.MAGIC_CHANGE);
+				disEvt.magicType = MagicType.BLACK;
+				disEvt.magicCount = value;
+				this.dispatchEvent(disEvt);
+			}
 		}
 		
 		public function get magicBlack():int
@@ -89,11 +97,13 @@ package noorg.magic.models
 		
 		public function set magicWhite(value:int):void
 		{
-			this._magicWhite = value;
-			var disEvt:PlayerEvent = new PlayerEvent(PlayerEvent.MAGIC_CHANGE);
-			disEvt.magicType = MagicType.WHITE;
-			disEvt.magicCount = value;
-			this.dispatchEvent(disEvt);
+			if (this._magicWhite != value) {
+				this._magicWhite = value;
+				var disEvt:PlayerEvent = new PlayerEvent(PlayerEvent.MAGIC_CHANGE);
+				disEvt.magicType = MagicType.WHITE;
+				disEvt.magicCount = value;
+				this.dispatchEvent(disEvt);
+			}
 		}
 		
 		public function get magicWhite():int
@@ -103,16 +113,24 @@ package noorg.magic.models
 		
 		public function set magicColorless(value:int):void
 		{
-			this._magicColorless = value;
-			var disEvt:PlayerEvent = new PlayerEvent(PlayerEvent.MAGIC_CHANGE);
-			disEvt.magicType = MagicType.COLORLESS;
-			disEvt.magicCount = value;
-			this.dispatchEvent(disEvt);
+			if (this._magicColorless != value) {
+				this._magicColorless = value;
+				var disEvt:PlayerEvent = new PlayerEvent(PlayerEvent.MAGIC_CHANGE);
+				disEvt.magicType = MagicType.COLORLESS;
+				disEvt.magicCount = value;
+				this.dispatchEvent(disEvt);
+			}
 		}
 		
 		public function get magicColorless():int
 		{
 			return this._magicColorless;
+		}
+		
+		public function get magicAllCount():int
+		{
+			return this.magicBlack + this.magicBlue + this.magicColorless
+					+ this.magicGreen + this.magicRed + this.magicWhite;
 		}
 		
 		

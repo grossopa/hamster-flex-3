@@ -6,6 +6,7 @@ package noorg.magic.controls.play.unit
 	
 	import mx.core.DragSource;
 	import mx.events.DragEvent;
+	import mx.events.FlexEvent;
 	import mx.managers.DragManager;
 	
 	import noorg.magic.controls.icons.IconCardQuickMenu;
@@ -62,7 +63,6 @@ package noorg.magic.controls.play.unit
 			super.card = PlayCard(value);
 			super.card.addEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
 			super.card.addEventListener(PlayCardEvent.POOL_ENOUGH_STATUS_CHANGE, poolEnoughStatusChangeHandler);
-
 		}
 		
 		public function get playCard():PlayCard
@@ -81,6 +81,7 @@ package noorg.magic.controls.play.unit
 			this.width = Constants.PLAY_CARD_WIDTH;
 			this.height = Constants.PLAY_CARD_HEIGHT;
 			
+			this.addEventListener(FlexEvent.CREATION_COMPLETE, creationCompleteHandler);
 			this.addEventListener(MouseEvent.ROLL_OVER, rollOverHandler);
 			this.addEventListener(MouseEvent.ROLL_OUT, rollOutHandler);
 			this.addEventListener(DragEvent.DRAG_ENTER, dragEnterHandler);
@@ -96,6 +97,21 @@ package noorg.magic.controls.play.unit
 			createIcon();
 			
 			this.mainImage.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+			
+			this.mainImageOverlay.visible = true;
+		}
+		
+		protected function creationCompleteHandler(evt:FlexEvent):void
+		{
+			this.removeEventListener(FlexEvent.CREATION_COMPLETE, creationCompleteHandler);
+			
+//			var g:Graphics = this.mainImageOverlay.graphics;
+//			g.clear();
+//			if (!this.playCard.isPoolEnough) {
+//				g.beginFill(0x000000, 0.5);
+//				g.drawRect(0, 0, this.mainImageOverlay.width, this.mainImageOverlay.height);
+//				g.endFill();
+//			}
 		}
 		
 		protected function createDragMask():void
@@ -230,18 +246,13 @@ package noorg.magic.controls.play.unit
 				this.mainImage.rotation = 0;
 				this.mainImage.x = 0;
 			}
+			
+			this.invalidateDisplayList();
 		}
 		
 		private function poolEnoughStatusChangeHandler(evt:PlayCardEvent):void
 		{
-			var g:Graphics = this.mainImageOverlay.graphics;
-			g.clear();
-			
-			if (!evt.isPoolEnough) {
-				g.beginFill(0x000000, 0.5);
-				g.drawRect(0, 0, this.mainImageOverlay.width, this.mainImageOverlay.height);
-				g.endFill();
-			}
+			this.invalidateDisplayList();
 		}
 		
 		public function addEnhancementCard(playCard:PlayCard):void
@@ -293,6 +304,21 @@ package noorg.magic.controls.play.unit
 			this.dragMaskManager.hideMask();
 		}
 		
+		override protected function updateDisplayList(uw:Number, uh:Number):void
+		{
+			super.updateDisplayList(uw, uh);
+			
+			var g:Graphics = this.mainImageOverlay.graphics;
+			
+			g.clear();
+			trace ("redraw" + this.playCard.isPoolEnough);
+			if (!this.playCard.isPoolEnough) {
+				g.beginFill(0x000000, 0.5);
+				g.drawRect(0, 0, this.mainImageOverlay.width, this.mainImageOverlay.height);
+				g.endFill();
+			}
+			
+		}
 		
 	}
 }

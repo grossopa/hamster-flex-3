@@ -101,6 +101,14 @@ package noorg.magic.models.actions.base
 		 */
 		public function execute():void
 		{
+			this.validateChanges();
+		}
+		
+		/**
+		 * override this function and write changes function here;
+		 */
+		protected function validateChanges():void
+		{
 			
 		}
 		
