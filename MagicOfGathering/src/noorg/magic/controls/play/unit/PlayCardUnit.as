@@ -22,6 +22,7 @@ package noorg.magic.controls.play.unit
 	import noorg.magic.models.Card;
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
+	import noorg.magic.models.staticValue.CardLocation;
 	import noorg.magic.models.staticValue.CardStatus;
 	import noorg.magic.services.MenuService;
 	import noorg.magic.utils.Constants;
@@ -104,14 +105,6 @@ package noorg.magic.controls.play.unit
 		protected function creationCompleteHandler(evt:FlexEvent):void
 		{
 			this.removeEventListener(FlexEvent.CREATION_COMPLETE, creationCompleteHandler);
-			
-//			var g:Graphics = this.mainImageOverlay.graphics;
-//			g.clear();
-//			if (!this.playCard.isPoolEnough) {
-//				g.beginFill(0x000000, 0.5);
-//				g.drawRect(0, 0, this.mainImageOverlay.width, this.mainImageOverlay.height);
-//				g.endFill();
-//			}
 		}
 		
 		protected function createDragMask():void
@@ -311,8 +304,7 @@ package noorg.magic.controls.play.unit
 			var g:Graphics = this.mainImageOverlay.graphics;
 			
 			g.clear();
-			trace ("redraw" + this.playCard.isPoolEnough);
-			if (!this.playCard.isPoolEnough) {
+			if (!this.playCard.isPoolEnough && this.playCard.getLocation() == CardLocation.HAND) {
 				g.beginFill(0x000000, 0.5);
 				g.drawRect(0, 0, this.mainImageOverlay.width, this.mainImageOverlay.height);
 				g.endFill();

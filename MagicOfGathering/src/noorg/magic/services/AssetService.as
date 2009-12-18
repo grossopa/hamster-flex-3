@@ -42,6 +42,9 @@ package noorg.magic.services
 		[Embed(source='noorg/magic/assets/cards/back.png')]
 		public const CardBack:Class;
 		
+		//////////////////
+		// icon related //
+		//////////////////
 		[Embed(source='noorg/magic/assets/magicPool/icon_magicPointBlack.png')]
 		public const IconMagicPointBlack:Class;
 		
@@ -59,6 +62,26 @@ package noorg.magic.services
 		
 		[Embed(source='noorg/magic/assets/magicPool/icon_magicPointColorless.png')]
 		public const IconMagicPointColorless:Class;
+		
+		[Embed(source='noorg/magic/assets/magicPool/icon_magicPointBlack_30.png')]
+		public const IconMagicPointBlack_30:Class;
+		
+		[Embed(source='noorg/magic/assets/magicPool/icon_magicPointBlue_30.png')]
+		public const IconMagicPointBlue_30:Class;
+	
+		[Embed(source='noorg/magic/assets/magicPool/icon_magicPointGreen_30.png')]
+		public const IconMagicPointGreen_30:Class;
+		
+		[Embed(source='noorg/magic/assets/magicPool/icon_magicPointWhite_30.png')]
+		public const IconMagicPointWhite_30:Class;
+		
+		[Embed(source='noorg/magic/assets/magicPool/icon_magicPointRed_30.png')]
+		public const IconMagicPointRed_30:Class;
+		
+		[Embed(source='noorg/magic/assets/magicPool/icon_magicPointColorless_30.png')]
+		public const IconMagicPointColorless_30:Class;
+		
+		
 		
 		[Embed(source='noorg/magic/assets/icons/btn_list_expand.png')]
 		public const BtnListExpand:Class;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" width="500" height="400">
+	<mx:Script source="PayColorlessContainerAs.as" />
+	<mx:Canvas id="requiredPayContainer" height="30" width="100%"
+		verticalScrollPolicy="off" horizontalScrollPolicy="off"
+		click="requiredClickHandler(event)">
+	</mx:Canvas>
+	<mx:Canvas id="playerMagicContainer" height="180" y="220" width="100%"
+		verticalScrollPolicy="off" horizontalScrollPolicy="off"
+		click="playerClickHandler(event)">
+	</mx:Canvas>
+</mx:Panel>
