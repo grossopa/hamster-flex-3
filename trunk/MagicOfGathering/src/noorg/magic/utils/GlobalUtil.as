@@ -5,9 +5,11 @@ package noorg.magic.utils
 	
 	import mx.core.Application;
 	import mx.core.IFlexDisplayObject;
+	import mx.core.UIComponent;
 	import mx.managers.PopUpManager;
 	
 	import noorg.magic.controls.masks.ProcessMask;
+	import noorg.magic.controls.play.action.PayColorlessContainer;
 	import noorg.magic.controls.play.unit.PlayCardUnit;
 	import noorg.magic.controls.popups.CardDetailPopup;
 	import noorg.magic.controls.popups.EnhancementPopup;
@@ -19,6 +21,7 @@ package noorg.magic.utils
 	public class GlobalUtil
 	{
 		public static var curMask:ProcessMask;
+		public static var curPopup:UIComponent;
 		
 		public static function popUpMask(text:String, target:DisplayObject = null):void
 		{
@@ -50,8 +53,11 @@ package noorg.magic.utils
 			return obj;
 		}
 		
-		public static function removePopup(obj:IFlexDisplayObject):void
+		public static function removePopup(obj:IFlexDisplayObject = null):void
 		{
+			if (obj == null) {
+				obj = curPopup;
+			}
 			PopUpManager.removePopUp(obj);
 		}
 		
@@ -120,6 +126,14 @@ package noorg.magic.utils
 		{
 			app.cardDetailTip.hideTip();
 		}
+		
+		public static function popupPayColorlessContainer(playCard:PlayCard):void
+		{
+			var container:PayColorlessContainer = GlobalUtil.createPopup(PayColorlessContainer) as PayColorlessContainer;
+			container.setPlayer(playCard.player, playCard);
+			curPopup = container;
+		}
+		
 		
 	}
 }

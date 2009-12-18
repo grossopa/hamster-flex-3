@@ -6,6 +6,7 @@ package noorg.magic.models
 	import noorg.magic.events.PlayerEvent;
 	import noorg.magic.models.actions.base.ICardAction;
 	import noorg.magic.models.staticValue.CardType;
+	import noorg.magic.utils.GlobalUtil;
 	
 	public class PlayCard extends Card
 	{
@@ -114,14 +115,19 @@ package noorg.magic.models
 		
 		public function cast():void
 		{
-			player.magicBlack 		-= this.magicPool.black;
-			player.magicBlue 		-= this.magicPool.blue;
-			player.magicColorless 	-= this.magicPool.colorless;
-			player.magicGreen 		-= this.magicPool.green;
-			player.magicRed 		-= this.magicPool.red;
-			player.magicWhite 		-= this.magicPool.white;
+			if (this.magicPool.colorless == 0) {
+				player.magicBlack 		-= this.magicPool.black;
+				player.magicBlue 		-= this.magicPool.blue;
+			//	player.magicColorless 	-= this.magicPool.colorless;
+				player.magicGreen 		-= this.magicPool.green;
+				player.magicRed 		-= this.magicPool.red;
+				player.magicWhite 		-= this.magicPool.white;
+				
+				this.setLocation(CardType.getDefaultLocation(this.type.type));
+			} else {
+				GlobalUtil.popupPayColorlessContainer(this);
+			}
 			
-			this.setLocation(CardType.getDefaultLocation(this.type.type));
 		}
 		
 		
