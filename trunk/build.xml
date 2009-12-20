@@ -37,16 +37,12 @@
       <fileset dir="HsImageCropper/src" excludes="*.mxml, *.as" includes="**/*" />
       <fileset dir="HsTip/src" excludes="*.mxml, *.as" includes="**/*" />
 		</copy>
-	</target>
-
-  <!-- build -->
-	<target name="build-swc" depends="prepare">
-  
-		<fileset dir="${APP_SRC}" id="src.files">
+    
+ 		<fileset dir="${APP_SRC}" id="src.files">
 			<include name="**/**" />
       <exclude name="**/*As.as" />
-		</fileset>
-
+		</fileset>   
+    
     <pathconvert property="evaFramework_classes"
       pathsep=" " dirsep="." refid="src.files">
       <map from="\" to="/"/>
@@ -57,11 +53,32 @@
         </chainedmapper>
       </mapper>
     </pathconvert>
+	</target>
 
+  <!-- build -->
+	<target name="build-swc" depends="prepare">
+  
     <echo message="${evaFramework_classes}" />
 		<compc output="${APP_ROOT}/hamster.swc" include-classes="${evaFramework_classes}">
 			<source-path path-element="${APP_SRC}" /> 
 		</compc>
     
 	</target>
+  
+  <!-- build doc -->
+  <target name="doc" depends="prepare">
+    <exec executable="${FLEX_HOME}/bin/asDoc.exe">
+      <arg value="-source-path" />
+      <arg value="${APP_SRC}" />
+      <arg value="-doc-sources" />
+      <arg value="${APP_SRC}" />
+      <arg value="-main-title" />
+      <arg value="Hamster Flex API Documentation" />
+      <arg value="-window-title" />
+      <arg value="Hamster Flex API Documentation" />
+      <arg value="-output" />
+      <arg value="api-doc" />
+    </exec>
+  </target>
+
 </project>
