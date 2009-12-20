@@ -14,32 +14,87 @@ package org.hamster.effects.effectInstance
 	
 	use namespace mx_internal;
 	
+	/**
+	 * <p>Instance class of <code>org.hamster.effects.Split</code>.</p>
+	 * 
+	 */
 	public class SplitInstance extends TweenEffectInstance
 	{
+		/**
+		 * origin bitmap data list, sub classes should use
+		 * this array for drawing.
+		 */
 		protected var _bitmapDataList:Array;
+		
+		/**
+		 * bitmap data list for drawing, sub classes should
+		 * use this list to finish drawing work to avoid
+		 * new operation.
+		 */
 		protected var _bdDrawList:Array;
+		
+		/**
+		 * temporary bitmap palette, use <code>BitmapData.copyPixels</code>
+		 * to copy pixels to _bdDraw rather than using new operation.
+		 */
 		protected var _bdDraw:BitmapData;
-		protected var _mDraw:Matrix = new Matrix();
+		
+		/**
+		 * width of each block, don't set manually.
+		 */
 		protected var _smallWidth:Number;
+		
+		/**
+		 * height of each block, don't set manually.
+		 */
 		protected var _smallHeight:Number;
+		
+		/**
+		 * reference overlay of target.
+		 */
 		protected var _overlay:UIComponent;
+		
+		/**
+		 * temporary object for each <code>copyPixels</code> operation.
+		 */
 		protected var _destPoint:Point = new Point();
-		protected var _zeroPoint:Point = new Point();
+		
+		/**
+		 * store background alpha value of target.
+		 */
 		private var _preBackgroundAlpha:Number = 1;
 		
+		/**
+		 * row count of blocks
+		 */
 		public var rowCount:uint = 3;
+		
+		/**
+		 * column count of blocks
+		 */
 		public var columnCount:uint = 3;
 		
+		/**
+		 * return target as <code>UIComponent</code>
+		 */
 		public function get uiTarget():UIComponent
 		{
 			return UIComponent(target);
 		}
 		
+		/**
+		 * constructor
+		 */
 		public function SplitInstance(target:Object)
 		{
 			super(target);
 		}
 		
+		/**
+		 * Create snapshot of target and palette. Please note that
+		 * super.play() is not called in this function, it will be called in
+		 * <code>overlayCreatedHandler</code>.
+		 */
 		override public function play():void
 		{
 			// create Snapshot first
@@ -48,6 +103,9 @@ package org.hamster.effects.effectInstance
 			_bdDraw = new BitmapData(uiTarget.width, uiTarget.height, true, 0x00);
 		}
 		
+		/**
+		 * create overlay of target.
+		 */
 		protected function createSnapshot():void
 		{
 			_bitmapDataList = new Array();
@@ -60,6 +118,9 @@ package org.hamster.effects.effectInstance
 			uiTarget.mx_internal::addOverlay(0xffffff, targetArea);
 		}
 		
+		/**
+		 * Overlay of target is created.
+		 */
 		private function overlayCreatedHandler(evt:ChildExistenceChangedEvent):void
 		{
 			uiTarget.removeEventListener(ChildExistenceChangedEvent.OVERLAY_CREATED,
@@ -70,6 +131,10 @@ package org.hamster.effects.effectInstance
 			beginPlay();
 		}
 		
+		/**
+		 * Initialize origin bitmapData list, temporary bitmapData list
+		 * and start play effect.
+		 */
 		protected function beginPlay():void
 		{
 			// begin play
@@ -107,19 +172,16 @@ package org.hamster.effects.effectInstance
 		}
 		
 		/**
-		 * override this function to make your own animations
+		 * Override this function in sub class
 		 */
 		override public function onTweenUpdate(value:Object):void
 		{  
 			super.onTweenUpdate(value);
 		}
 		
-//		override public function finishEffect():void
-//		{
-//			this.onTweenEnd(null);
-//			super.finishEffect();
-//		}
-		
+		/**
+		 * after tween effect end, clean overlay and reverse target.
+		 */
 		override public function onTweenEnd(value:Object):void
 		{
 			// clean
@@ -130,11 +192,13 @@ package org.hamster.effects.effectInstance
 				uiTarget.getChildAt(i).visible = true;
 			}
 			uiTarget.validateNow();
+			
 			// gc
 			try {
 				new LocalConnection().connect("justforgc");
 				new LocalConnection().connect("justforgc");
 			} catch (e:Error) { }
+			
 			super.onTweenEnd(value);
 		}
 	}
