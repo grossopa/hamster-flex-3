@@ -1,5 +1,5 @@
 // ActionScript file
-import flash.display.BitmapData;
+import flash.display.Bitmap;
 import flash.display.Graphics;
 import flash.events.MouseEvent;
 
@@ -22,6 +22,7 @@ public static const BITMAP_CLASSES:Array = [
 											];
 
 private var _player:Player;
+private var _playCard:PlayCard;
 
 private var _requiredColorlessCount:int;
 private var _requiredColorlessArray:ArrayCollection = new ArrayCollection();
@@ -31,6 +32,8 @@ private var _playerMagicPool:MagicPool = new MagicPool();
 public function setPlayer(value:Player, card:PlayCard):void
 {
 	this._player = value;
+	this._playCard = card;
+	
 	_requiredColorlessArray = new ArrayCollection();
 	_playerMagicPool.white = _player.magicWhite - card.magicPool.white;
 	_playerMagicPool.blue = _player.magicBlue - card.magicPool.blue;
@@ -38,6 +41,8 @@ public function setPlayer(value:Player, card:PlayCard):void
 	_playerMagicPool.red = _player.magicRed - card.magicPool.red;
 	_playerMagicPool.green = _player.magicGreen - card.magicPool.green;
 	_playerMagicPool.colorless = 0;
+	
+	this.invalidateDisplayList();
 }
 
 public function get player():Player
@@ -47,7 +52,7 @@ public function get player():Player
 
 private function requiredClickHandler(evt:MouseEvent):void
 {
-	var index:int = evt.localX % 30;
+	var index:int = int(evt.localX / 30);
 	if (index > _requiredColorlessArray.length) {
 		return;
 	} else {
@@ -92,8 +97,7 @@ private function requiredClickHandler(evt:MouseEvent):void
 
 private function playerClickHandler(evt:MouseEvent):void
 {
-	var index:int = evt.localX % 30;
-	_requiredColorlessArray.removeItemAt(index);
+	var index:int = int(evt.localY / 30);
 	switch (index) {
 		case 0:
 		{
@@ -145,7 +149,7 @@ private function playerClickHandler(evt:MouseEvent):void
 		}
 	}
 	
-	if (this.player.magicColorless == this._requiredColorlessArray.length + 1) {
+	if (this._playCard.magicPool.colorless == this._requiredColorlessArray.length) {
 		// take effect
 		this.player.magicBlack = this._playerMagicPool.black;
 		this.player.magicBlue = this._playerMagicPool.blue;
@@ -153,6 +157,7 @@ private function playerClickHandler(evt:MouseEvent):void
 		this.player.magicGreen = this._playerMagicPool.green;
 		this.player.magicRed = this._playerMagicPool.red;
 		this.player.magicWhite = this._playerMagicPool.white;
+		
 		GlobalUtil.removePopup(this);
 	}
 	this.invalidateDisplayList();
@@ -167,9 +172,9 @@ override protected function updateDisplayList(uw:Number, uh:Number):void
 	
 	for (var i:int = 0; i < this._requiredColorlessArray.length; i++) {
 		var index:int = int(_requiredColorlessArray[i]);
-		var bitmapData:BitmapData = new BITMAP_CLASSES[index]();
-		rg.beginBitmapFill(bitmapData);
-		rg.drawRect(i * bitmapData.width, y, bitmapData.width, bitmapData.height);
+		var bitmap:Bitmap = new BITMAP_CLASSES[index]();
+		rg.beginBitmapFill(bitmap.bitmapData);
+		rg.drawRect(i * bitmap.width, 0, bitmap.width, bitmap.height);
 		rg.endFill();
 	}
 	
@@ -188,8 +193,8 @@ private function drawMagicGraphic(g:Graphics, className:Class, y:int, count:int)
 	if (count == 0) {
 		return;
 	}
-	var bitmapData:BitmapData = new className();
-	g.beginBitmapFill(bitmapData);
-	g.drawRect(0, y, bitmapData.width * count, bitmapData.height);
+	var bitmap:Bitmap = new className();
+	g.beginBitmapFill(bitmap.bitmapData);
+	g.drawRect(0, y, bitmap.width * count, bitmap.height);
 	g.endFill();
 }
