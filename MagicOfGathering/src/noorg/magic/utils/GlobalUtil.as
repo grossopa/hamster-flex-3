@@ -9,11 +9,11 @@ package noorg.magic.utils
 	import mx.managers.PopUpManager;
 	
 	import noorg.magic.controls.masks.ProcessMask;
-	import noorg.magic.controls.play.action.PayColorlessContainer;
+	import noorg.magic.controls.play.popups.EnhancementPopup;
+	import noorg.magic.controls.play.popups.GraveyardDetailPopup;
+	import noorg.magic.controls.play.popups.actions.PayColorlessPopup;
 	import noorg.magic.controls.play.unit.PlayCardUnit;
 	import noorg.magic.controls.popups.CardDetailPopup;
-	import noorg.magic.controls.popups.EnhancementPopup;
-	import noorg.magic.controls.popups.GraveyardDetailPopup;
 	import noorg.magic.controls.popups.tips.CardDetailTip;
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
@@ -129,7 +129,7 @@ package noorg.magic.utils
 		
 		public static function popupPayColorlessContainer(playCard:PlayCard):void
 		{
-			var container:PayColorlessContainer = GlobalUtil.createPopup(PayColorlessContainer) as PayColorlessContainer;
+			var container:PayColorlessPopup = GlobalUtil.createPopup(PayColorlessPopup) as PayColorlessPopup;
 			container.setPlayer(playCard.player, playCard);
 			curPopup = container;
 		}
