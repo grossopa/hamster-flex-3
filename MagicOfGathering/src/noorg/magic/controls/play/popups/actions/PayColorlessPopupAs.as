@@ -8,7 +8,9 @@ import mx.collections.ArrayCollection;
 import noorg.magic.models.MagicPool;
 import noorg.magic.models.PlayCard;
 import noorg.magic.models.Player;
+import noorg.magic.models.actions.base.ICardAction;
 import noorg.magic.services.AssetService;
+import noorg.magic.utils.Constants;
 import noorg.magic.utils.GlobalUtil;
 
 public static const AS:AssetService = AssetService.getInstance();
@@ -23,16 +25,18 @@ public static const BITMAP_CLASSES:Array = [
 
 private var _player:Player;
 private var _playCard:PlayCard;
+private var _action:ICardAction;
 
 private var _requiredColorlessCount:int;
 private var _requiredColorlessArray:ArrayCollection = new ArrayCollection();
 private var _playerMagicPool:MagicPool = new MagicPool();
 
 
-public function setPlayer(value:Player, card:PlayCard):void
+public function setPlayer(value:Player, card:PlayCard, action:ICardAction = null):void
 {
 	this._player = value;
 	this._playCard = card;
+	this._action = action;
 	
 	_requiredColorlessArray = new ArrayCollection();
 	_playerMagicPool.white = _player.magicWhite - card.magicPool.white;
@@ -158,6 +162,13 @@ private function playerClickHandler(evt:MouseEvent):void
 		this.player.magicRed = this._playerMagicPool.red;
 		this.player.magicWhite = this._playerMagicPool.white;
 		
+		// action is null, then directly do cast
+		if (_action == null) {
+			this._playCard.cast(true);
+		} else {
+			// _action.execute()
+		}
+		
 		GlobalUtil.removePopup(this);
 	}
 	this.invalidateDisplayList();
@@ -180,21 +191,35 @@ override protected function updateDisplayList(uw:Number, uh:Number):void
 	
 	var pg:Graphics = this.playerMagicContainer.graphics;
 	pg.clear();
-	drawMagicGraphic(pg, AS.IconMagicPointWhite_30, 	0,   _playerMagicPool.white);
-	drawMagicGraphic(pg, AS.IconMagicPointBlue_30, 		30,  _playerMagicPool.blue);
-	drawMagicGraphic(pg, AS.IconMagicPointBlack_30, 	60,  _playerMagicPool.black);
-	drawMagicGraphic(pg, AS.IconMagicPointRed_30, 		90,  _playerMagicPool.red);
-	drawMagicGraphic(pg, AS.IconMagicPointGreen_30, 	120, _playerMagicPool.green);
-	drawMagicGraphic(pg, AS.IconMagicPointColorless_30, 150, _playerMagicPool.colorless);
+	drawMagicGraphic(pg, AS.IconMagicPointWhite_30, 	0,   
+			_playerMagicPool.white, 	Constants.WHITE_COLOR);
+	drawMagicGraphic(pg, AS.IconMagicPointBlue_30, 		30,  
+			_playerMagicPool.blue, 		Constants.BLUE_COLOR);
+	drawMagicGraphic(pg, AS.IconMagicPointBlack_30, 	60, 
+			 _playerMagicPool.black, 	Constants.BLACK_COLOR);
+	drawMagicGraphic(pg, AS.IconMagicPointRed_30, 		90,  
+			_playerMagicPool.red, 		Constants.RED_COLOR);
+	drawMagicGraphic(pg, AS.IconMagicPointGreen_30, 	120, 
+			_playerMagicPool.green, 	Constants.GREEN_COLOR);
+	drawMagicGraphic(pg, AS.IconMagicPointColorless_30, 150, 
+			_playerMagicPool.colorless, Constants.COLORLESS_COLOR);
 }
 
-private function drawMagicGraphic(g:Graphics, className:Class, y:int, count:int):void
+private function drawMagicGraphic(g:Graphics, className:Class, y:int, 
+		count:int, bgColor:int):void
 {
 	if (count == 0) {
 		return;
 	}
+	
+	g.beginFill(bgColor, 0.3);
+	g.drawRect(0, y, this.width, 30);
+	g.endFill();
+	
 	var bitmap:Bitmap = new className();
 	g.beginBitmapFill(bitmap.bitmapData);
 	g.drawRect(0, y, bitmap.width * count, bitmap.height);
 	g.endFill();
+	
+
 }

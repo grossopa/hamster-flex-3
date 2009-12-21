@@ -113,23 +113,26 @@ package noorg.magic.models
 			this.isPoolEnough = true;
 		}
 		
-		public function cast():void
+		public function cast(paid:Boolean = false):void
 		{
-			if (this.magicPool.colorless == 0) {
-				player.magicBlack 		-= this.magicPool.black;
-				player.magicBlue 		-= this.magicPool.blue;
-			//	player.magicColorless 	-= this.magicPool.colorless;
-				player.magicGreen 		-= this.magicPool.green;
-				player.magicRed 		-= this.magicPool.red;
-				player.magicWhite 		-= this.magicPool.white;
-				
-				this.setLocation(CardType.getDefaultLocation(this.type.type));
+			if (!paid) {
+				if (this.magicPool.colorless == 0) {
+					player.magicBlack 		-= this.magicPool.black;
+					player.magicBlue 		-= this.magicPool.blue;
+				//	player.magicColorless 	-= this.magicPool.colorless;
+					player.magicGreen 		-= this.magicPool.green;
+					player.magicRed 		-= this.magicPool.red;
+					player.magicWhite 		-= this.magicPool.white;
+					
+					this.setLocation(CardType.getDefaultLocation(this.type.type));
+				} else {
+					GlobalUtil.popupPayColorlessContainer(this);
+				}
 			} else {
-				GlobalUtil.popupPayColorlessContainer(this);
+				this.setLocation(CardType.getDefaultLocation(this.type.type));
 			}
 			
 		}
-		
 		
 		public function executeAction(index:int):void
 		{
