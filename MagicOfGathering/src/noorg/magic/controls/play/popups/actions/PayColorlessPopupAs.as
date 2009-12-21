@@ -208,13 +208,13 @@ override protected function updateDisplayList(uw:Number, uh:Number):void
 private function drawMagicGraphic(g:Graphics, className:Class, y:int, 
 		count:int, bgColor:int):void
 {
-	if (count == 0) {
-		return;
-	}
-	
 	g.beginFill(bgColor, 0.3);
 	g.drawRect(0, y, this.width, 30);
 	g.endFill();
+	
+	if (count == 0) {
+		return;
+	}
 	
 	var bitmap:Bitmap = new className();
 	g.beginBitmapFill(bitmap.bitmapData);
