@@ -6,13 +6,17 @@ package org.hamster.effects.effectInstance
 	
 	import org.hamster.effects.SplitMass;
 	
+	/**
+	 * <p>Instance class of <code>org.hamster.effects.SplitMass</code>.</p>
+	 */
 	public class SplitMassInstance extends SplitInstance
 	{
+		/**
+		 * <p>Block animation duration percent, the actual duration value is 
+		 * duration * UNIT_DURATION.</p>
+		 */
 		public static const UNIT_DURATION:Number = 0.3;
 		
-		/**
-		 * properties from SplitShowImage
-		 */
 		public var aniType:String;
 		public var startPoint:Point;
 		public var startPoints:Array;
