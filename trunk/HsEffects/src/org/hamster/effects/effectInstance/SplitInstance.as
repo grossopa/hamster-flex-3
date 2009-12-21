@@ -16,7 +16,6 @@ package org.hamster.effects.effectInstance
 	
 	/**
 	 * <p>Instance class of <code>org.hamster.effects.Split</code>.</p>
-	 * 
 	 */
 	public class SplitInstance extends TweenEffectInstance
 	{

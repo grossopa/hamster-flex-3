@@ -6,7 +6,7 @@ package org.hamster.effects
 	import org.hamster.effects.effectInstance.SplitInstance;
 
 	/**
-	 * <p>This is a abstract bitmapData-based effect class</p>
+	 * <p>This is a abstract bitmapData-based effect class.</p>
 	 * 
 	 * <p>It will directly do some operations on UIComponent overlay,
 	 * so this effect cannot work with Dissolve or other effects
