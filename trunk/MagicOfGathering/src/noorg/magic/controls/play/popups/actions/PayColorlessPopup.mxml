@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" width="500" height="260"
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" width="500" height="320"
 	title="{this.resourceManager.getString('main','payColorlessPopup.label')}">
 	<mx:Script source="PayColorlessPopupAs.as" />
+	<mx:Label text="{this.resourceManager.getString('main','payColorlessPopup.payLabel')}" />
+	<mx:HRule />
 	<mx:Canvas id="requiredPayContainer" height="30" width="100%"
 		verticalScrollPolicy="off" horizontalScrollPolicy="off"
 		click="requiredClickHandler(event)">
 	</mx:Canvas>
+	<mx:HRule />
+	<mx:Label text="{this.resourceManager.getString('main','payColorlessPopup.playerLabel')}" />
+	<mx:HRule />
 	<mx:Canvas id="playerMagicContainer" height="180" width="100%"
 		verticalScrollPolicy="off" horizontalScrollPolicy="off"
 		click="playerClickHandler(event)">
