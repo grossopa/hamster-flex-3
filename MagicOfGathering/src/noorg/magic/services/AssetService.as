@@ -33,6 +33,9 @@ package noorg.magic.services
 		[Embed(source='noorg/magic/assets/icons/icon_revert.png')]
 		public const IconRevert:Class;
 		
+		[Embed(source='noorg/magic/assets/icons/actions/action_magicPoolChange.png')]
+		public const ActionMagicPoolChange:Class;
+		
 		[Embed(source='noorg/magic/assets/others/hp_damaged.png')]
 		public const HPDamaged:Class;
 		

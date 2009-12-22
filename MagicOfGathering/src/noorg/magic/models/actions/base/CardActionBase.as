@@ -1,20 +1,27 @@
 package noorg.magic.models.actions.base
 {
+	import flash.display.BitmapData;
+	
 	import mx.resources.IResourceManager;
 	import mx.resources.ResourceManager;
 	
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
+	import noorg.magic.services.AssetService;
 	
 	public class CardActionBase implements ICardAction
 	{
+		public static const AS:AssetService = AssetService.getInstance();
+		
 		private var _player:Player;
 		private var _targetPlayer:Player;
 		private var _playCard:PlayCard;
 		private var _targetPlayCard:PlayCard;
 		
 		private var _affectTargets:int;
+		
 		protected var _actType:String;
+		protected var _iconBitmapData:BitmapData;
 		
 		private var _resourceManager:IResourceManager = ResourceManager.getInstance();
 		
@@ -90,6 +97,11 @@ package noorg.magic.models.actions.base
 		public function get descriptionString():String
 		{
 			return "";
+		}
+		
+		public function get iconBitmapData():BitmapData
+		{
+			return this._iconBitmapData;
 		}
 		
 		public function CardActionBase()

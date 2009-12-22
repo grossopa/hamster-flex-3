@@ -1,5 +1,7 @@
 package noorg.magic.models.actions.base
 {
+	import flash.display.BitmapData;
+	
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
 	
@@ -27,5 +29,7 @@ package noorg.magic.models.actions.base
 		function encodeXML():XML;
 		
 		function clone():ICardAction;
+		
+		function get iconBitmapData():BitmapData;
 	}
 }

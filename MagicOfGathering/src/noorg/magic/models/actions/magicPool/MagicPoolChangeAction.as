@@ -1,9 +1,11 @@
 package noorg.magic.models.actions.magicPool
 {
-	import noorg.magic.models.actions.base.CardActionBase;
-	import noorg.magic.models.actions.base.ICardAction;
+	import flash.display.Bitmap;
+	
 	import noorg.magic.models.ActionAttribute;
 	import noorg.magic.models.Player;
+	import noorg.magic.models.actions.base.CardActionBase;
+	import noorg.magic.models.actions.base.ICardAction;
 	import noorg.magic.models.staticValue.ActionType;
 	import noorg.magic.models.staticValue.CardStatus;
 	import noorg.magic.utils.Constants;
@@ -23,6 +25,7 @@ package noorg.magic.models.actions.magicPool
 			super();
 			
 			this._actType = ActionType.MAGIC_POOL_CHANGE;
+			this._iconBitmapData = Bitmap(new AS.ActionMagicPoolChange()).bitmapData;
 		}
 		
 		override public function execute():void
