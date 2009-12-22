@@ -1,0 +1,1 @@
+1. 保证所有地牌的第一个action为主要的magicPoolChangeAction。

@@ -3,6 +3,7 @@ import mx.collections.ArrayCollection;
 
 import noorg.magic.models.PlayCard;
 import noorg.magic.models.Player;
+import noorg.magic.models.staticValue.CardLocation;
 import noorg.magic.models.staticValue.CardStatus;
 
 private var _player:Player;
@@ -25,4 +26,16 @@ private function untapAll():void
 	for each (var playCard:PlayCard in tappedArr) {
 		playCard.status = CardStatus.PLAY;
 	}
+}
+
+private function tapAllLand():void
+{
+	var landArr:ArrayCollection = this._player.playerCardColl
+			.getLocationArray(CardLocation.LAND);
+	for each (var playCard:PlayCard in landArr) {
+		// PROMISE: 1
+		if (playCard.status != CardStatus.PLAY_TAGGED) {
+			playCard.executeAction(0);
+		}
+	}	
 }

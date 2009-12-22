@@ -4,5 +4,7 @@
 	<mx:Script source="PlayUtilContainerAs.as" />
 	
 	<common:CommonButton text="{this.resourceManager.getString('main','play.untapAll')}"
-		 click="untapAll()" />
+		click="untapAll()" />
+	<common:CommonButton text="{this.resourceManager.getString('main','play.tapAllLand')}"
+		click="tapAllLand()" />
 </mx:VBox>
