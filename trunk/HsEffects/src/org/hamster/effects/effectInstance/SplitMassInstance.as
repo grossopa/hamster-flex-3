@@ -13,20 +13,49 @@ package org.hamster.effects.effectInstance
 	{
 		/**
 		 * <p>Block animation duration percent, the actual duration value is 
-		 * duration * UNIT_DURATION.</p>
+		 * <code>duration</code> * <code>UNIT_DURATION</code>.</p>
 		 */
 		public static const UNIT_DURATION:Number = 0.3;
 		
+		/**
+		 * <p>Animation type, possible values are <code>FROM_ONE_POINT</code> and <code>FROM_POINTS</code>.</p>
+		 * 
+		 * <p>Default value is <code>FROM_ONE_POINT</code>.</p>
+		 */
 		public var aniType:String;
+		
+		/**
+		 * <p>Start point value.  You should specify this value before play if use FROM_ONE_POINT</p>.
+		 */
 		public var startPoint:Point;
+		
+		/**
+		 * <p>Start points value array. If you use FROM_POINTS and leave it empty, the instance class
+		 * will auto create a random points array whose length is equals to 
+		 * <code>rowCount</code> * <code>columnCount</code>.</p>
+		 */
 		public var startPoints:Array;
+		
+		/**
+		 * <p>stores start delay percent value of each block.</p>
+		 * 
+		 * <p>It contains a list of random numbers range from 0 to 1, and <code>length</code> equals
+		 * <code>rowCount</code> * <code>columnCount</code>,
+		 * 
+		 */
 		private var _startDelayList:Array;
 		
+		/**
+		 * constructor
+		 */
 		public function SplitMassInstance(target:Object)
 		{
 			super(target);
 		}
 		
+		/**
+		 * override
+		 */
 		override protected function beginPlay():void
 		{
 			super.beginPlay();
@@ -52,7 +81,9 @@ package org.hamster.effects.effectInstance
 			}
 		}
 		
-		
+		/**
+		 * override
+		 */
 		override public function onTweenUpdate(value:Object):void
 		{
 			super.onTweenUpdate(value);

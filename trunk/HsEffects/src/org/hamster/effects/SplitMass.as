@@ -10,6 +10,9 @@ package org.hamster.effects
 	 * <p>A bitmap animation to split UIComponent object into blocks 
 	 * and do move with different directions.</p>
 	 * 
+	 * @see org.hamster.effects.effectInstance.Split
+	 * @see org.hamster.effects.effectInstance.SplitInstance
+	 * @see org.hamster.effects.effectInstance.SplitMassInstance
 	 */
 	public class SplitMass extends Split
 	{

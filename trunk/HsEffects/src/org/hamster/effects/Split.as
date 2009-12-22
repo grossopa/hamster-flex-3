@@ -44,7 +44,7 @@ package org.hamster.effects
 		}
 		
 		/**
-		 * initialize instance.
+		 * override
 		 */
 		override protected function initInstance(instance:IEffectInstance):void
 		{

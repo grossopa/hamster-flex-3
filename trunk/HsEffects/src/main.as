@@ -15,13 +15,13 @@ import mx.effects.easing.Linear;
 import mx.events.ChildExistenceChangedEvent;
 import mx.events.EffectEvent;
 
-import org.hamster.effects.RainDrop;
+import org.hamster.effects.SnowFalling;
 import org.hamster.effects.SplitMass;
 use namespace mx_internal;
 
 private var overlayUI:UIComponent;
 
-[Embed(source="org/hamster/assets/snowflake.png")]
+[Embed(source="../test/org/hamster/assets/snowflake.png")]
 private var snow_flake:Class;
 
 private function leftHandler():void
@@ -116,7 +116,7 @@ private function beginAni2():void
 	var bd2:BitmapData = new BitmapData(0.4 * bm.width, 0.4 * bm.height, true, 0x00);
 	bd.draw(bm.bitmapData, m);
 	bd2.draw(bm.bitmapData, m2);
-	var drop:RainDrop = new RainDrop(bgCanvas);
+	var drop:SnowFalling = new SnowFalling(bgCanvas);
 	drop.rockHorizontal = 5;
 	drop.rockSpeed = 0.01;
 	drop.duration = 120000;
