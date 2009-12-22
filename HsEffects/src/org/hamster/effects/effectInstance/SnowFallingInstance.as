@@ -5,25 +5,63 @@ package org.hamster.effects.effectInstance
 	import flash.geom.Point;
 	
 	import mx.core.UIComponent;
+	import mx.effects.Move;
 	import mx.effects.effectClasses.TweenEffectInstance;
 	
-	public class RainDropInstance extends TweenEffectInstance
+	/**
+	 * <p>Instance class of SnowFalling.</p>
+	 */
+	public class SnowFallingInstance extends TweenEffectInstance
 	{
+		/**
+		 * @private
+		 */
 		private var _bmDraw:BitmapData;
 		
-		private var _startDelayList:Array;
-		private var _startXList:Array;
 		/**
+		 * @private
+		 * stores a list of start delay value.
+		 */
+		private var _startDelayList:Array;
+		
+		/**
+		 * @private
+		 * stores a list of start x value.
+		 */
+		private var _startXList:Array;
+		
+		/**
+		 * @private
 		 * x bound
 		 * y speed
 		 */
 		private var _boundList:Array;
+		
+		/**
+		 * @private
+		 */
 		private var _pointList:Array;
+		
+		/**
+		 * @private
+		 */
 		private var _bmDrawIndexList:Array;
 		
+		/**
+		 * @private
+		 */
 		private var _dropPercent:Number;
+		
+		/**
+		 * @private
+		 */
 		private var _maxBdHeight:Number = 0;
 		
+		/**
+		 * Stores a list of bitmapData.
+		 * 
+		 * @See org.hamster.effects.SnowFalling
+		 */
 		public var bitmapDataList:Array;
 		
 		public var intervalDuration:Number;
@@ -37,10 +75,11 @@ package org.hamster.effects.effectInstance
 		
 		public function get uiTarget():UIComponent
 		{
+			var ddd:Move
 			return UIComponent(target);
 		}
 		
-		public function RainDropInstance(target:Object)
+		public function SnowFallingInstance(target:Object)
 		{
 			super(target);
 		}

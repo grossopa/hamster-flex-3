@@ -17,7 +17,7 @@
 	
 	<!--backgroundImage="@Embed(source='org/hamster/assets/test.jpg')" -->
 		<mx:Canvas id="canvas" width="500" height="500" x="200" y="100" visible="false"
-			backgroundImage="@Embed(source='org/hamster/assets/test.jpg')"
+			backgroundImage="@Embed(source='../test/org/hamster/assets/test.jpg')"
 			/>
 	</mx:Canvas>
 </mx:Application>
