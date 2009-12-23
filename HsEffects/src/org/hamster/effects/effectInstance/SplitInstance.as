@@ -15,66 +15,72 @@ package org.hamster.effects.effectInstance
 	use namespace mx_internal;
 	
 	/**
-	 * <p>Instance class of <code>org.hamster.effects.Split</code>.</p>
+	 * This is an abstract class so you must also extend this class if you extend
+	 * <code>Split</code>. This class is instance class of <code>Split</code>.
+	 * 
+	 * @see org.hamster.effects.Split
 	 */
 	public class SplitInstance extends TweenEffectInstance
 	{
 		/**
-		 * origin bitmap data list, sub classes should use
-		 * this array for drawing.
+		 * 
+		 */
+		
+		/**
+		 * Origin bitmap data list, stores all blocks of target UIComponent.
 		 */
 		protected var _bitmapDataList:Array;
 		
 		/**
-		 * bitmap data list for drawing, sub classes should
+		 * Bitmap data list for drawing, sub classes should
 		 * use this list to finish drawing work to avoid
 		 * new operation.
 		 */
 		protected var _bdDrawList:Array;
 		
 		/**
-		 * temporary bitmap palette, use <code>BitmapData.copyPixels</code>
-		 * to copy pixels to _bdDraw rather than using new operation.
+		 * Main bitmap palette, use <code>BitmapData.copyPixels</code>
+		 * to copy pixels to _bdDraw rather than using new operation for performance.
 		 */
 		protected var _bdDraw:BitmapData;
 		
 		/**
-		 * width of each block, don't set manually.
+		 * Width of each block, don't set manually.
 		 */
 		protected var _smallWidth:Number;
 		
 		/**
-		 * height of each block, don't set manually.
+		 * Height of each block, don't set manually.
 		 */
 		protected var _smallHeight:Number;
 		
 		/**
-		 * reference overlay of target.
+		 * Overlay of target UIComponent.
 		 */
 		protected var _overlay:UIComponent;
 		
 		/**
-		 * temporary object for each <code>copyPixels</code> operation.
+		 * Temporary object for each <code>copyPixels</code> operation.
 		 */
 		protected var _destPoint:Point = new Point();
 		
 		/**
-		 * store background alpha value of target.
+		 * Stores background alpha value of target.
 		 */
 		private var _preBackgroundAlpha:Number = 1;
 		
 		/**
-		 * row count of blocks
+		 * Row count of blocks
 		 */
 		public var rowCount:uint = 3;
 		
 		/**
-		 * column count of blocks
+		 * Column count of blocks
 		 */
 		public var columnCount:uint = 3;
 		
 		/**
-		 * return target as <code>UIComponent</code>
+		 * Return target as <code>UIComponent</code>.
 		 */
 		public function get uiTarget():UIComponent
 		{
@@ -82,7 +88,7 @@ package org.hamster.effects.effectInstance
 		}
 		
 		/**
-		 * constructor
+		 * @private
 		 */
 		public function SplitInstance(target:Object)
 		{
@@ -103,7 +109,7 @@ package org.hamster.effects.effectInstance
 		}
 		
 		/**
-		 * create overlay of target.
+		 * Create overlay of target.
 		 */
 		protected function createSnapshot():void
 		{
