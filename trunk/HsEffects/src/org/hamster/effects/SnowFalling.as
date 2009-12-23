@@ -10,17 +10,17 @@ package org.hamster.effects
 	 * This is a bitmap-based effect of snow falling.
 	 * 
 	 * <p>The target is a bitmap animation container, the effect instance will
-	 * draw bitmapData on the canvas, so it's recommended that you create a new
+	 * draw bitmapData on the canvas, so it's recommended that you create an
 	 * empty UIComponent and play effect on it.</p>
 	 * 
 	 * <p>You must specify the bitmapDataList before play, put different bitmapData
 	 * into <code>bitmapDataList</code>.</p>
 	 * 
 	 * @see org.hamster.effects.effectInstance.SnowFallingInstance
+	 * @includeExample examples/SnowFallingExample.mxml
 	 */
 	public class SnowFalling extends TweenEffect
 	{
-		
 		/**
 		 * Contains a list of bitmapData.
 		 * 
@@ -78,7 +78,7 @@ package org.hamster.effects
 		public var rockSpeed:Number = 0;
 		
 		/**
-		 * constructor
+		 * @private
 		 */
 		public function SnowFalling(target:Object=null)
 		{
@@ -89,7 +89,7 @@ package org.hamster.effects
 		}
 		
 		/**
-		 * override
+		 * @private
 		 */
 		override protected function initInstance(instance:IEffectInstance):void
 		{
@@ -108,7 +108,7 @@ package org.hamster.effects
 		}
 		
 		/**
-		 * override
+		 * @private
 		 */
 		override public function play(targets:Array=null, playReversedFromEnd:Boolean=false):Array
 		{

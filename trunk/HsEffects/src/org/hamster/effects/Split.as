@@ -6,7 +6,8 @@ package org.hamster.effects
 	import org.hamster.effects.effectInstance.SplitInstance;
 
 	/**
-	 * <p>This is a abstract bitmapData-based effect class.</p>
+	 * This is a abstract bitmapData-based effect class. You may extend this class to implement
+	 * you own split animation.
 	 * 
 	 * <p>It will directly do some operations on UIComponent overlay,
 	 * so this effect cannot work with Dissolve or other effects
@@ -25,16 +26,32 @@ package org.hamster.effects
 	public class Split extends TweenEffect
 	{
 		/**
-		 * row number of blocks
+		 * Row number of blocks.
+		 * 
+		 * <p>The value should be larger than 0. In my test, the flash player will be hard to
+		 * redraw when <code>rowCount</code> * <code>columnCount</code> is larger than 10000.<p>
+		 * 
+		 * <p>There is an issue when you have to set the value as 10 * 2x + 10 when the value is very big.
+		 * Otherwise some mistery line will appear between each block.</p>
+		 * 
+		 * <p>Default value is 3</p>
 		 */
 		public var rowCount:uint = 3;
 		/**
-		 * column number of blocks
+		 * Column number of blocks.
+		 * 
+		 * <p>The value should be larger than 0. In my test, the flash player will be hard to
+		 * redraw when <code>rowCount</code> * <code>columnCount</code> is larger than 10000.<p>
+		 * 
+		 * <p>There is an issue when you have to set the value as 10 * 2x + 10 when the value is very big.
+		 * Otherwise some mistery line will appear between each block.</p>
+		 * 
+		 * <p>Default value is 3</p>
 		 */
 		public var columnCount:uint = 3;
 		
 		/**
-		 * constructor 
+		 * @private
 		 */
 		public function Split(target:Object=null)
 		{
@@ -44,7 +61,7 @@ package org.hamster.effects
 		}
 		
 		/**
-		 * override
+		 * @private
 		 */
 		override protected function initInstance(instance:IEffectInstance):void
 		{
