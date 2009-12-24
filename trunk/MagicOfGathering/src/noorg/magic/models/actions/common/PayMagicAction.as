@@ -1,7 +1,10 @@
 package noorg.magic.models.actions.common
 {
+	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
 	import noorg.magic.models.actions.base.CardActionBase;
+	import noorg.magic.models.actions.base.ICardAction;
+	import noorg.magic.utils.GlobalUtil;
 
 	/**
 	 * common action to handle all types of cast actions.
@@ -16,10 +19,6 @@ package noorg.magic.models.actions.common
 		public var white:int;
 		public var colorless:int;
 		
-		/**
-		 * should not be called other side, just let 
-		 * the view class call it.
-		 */
 		public var payRed:int;
 		public var payGreen:int;
 		public var payBlue:int;
@@ -27,8 +26,33 @@ package noorg.magic.models.actions.common
 		public var payWhite:int;
 		public var payColorless:int;
 		
+		private var _targetAction:ICardAction;
 		
-		public var player:Player;
+		/**
+		 * cast
+		 */
+		override public function set playCard(value:PlayCard):void
+		{
+			super.playCard = value;
+			if (this.playCard != null) {
+				this.red = playCard.magicPool.red;
+				this.green = playCard.magicPool.green;
+				this.blue = playCard.magicPool.blue;
+				this.black = playCard.magicPool.black;
+				this.white = playCard.magicPool.white;
+				this.colorless = playCard.magicPool.colorless;
+			}
+		}
+		
+		public function set targetAction(value:ICardAction):void
+		{
+			this._targetAction = value;
+		}
+		
+		public function get targetAction():ICardAction
+		{
+			return this._targetAction;
+		}
 		
 		public function PayMagicAction()
 		{
@@ -62,7 +86,7 @@ package noorg.magic.models.actions.common
 			
 			if (colorless > 0) {
 				// let user choose how to allocate magics
-				
+				GlobalUtil.popupPayColorlessContainer(this);
 			} else {
 				// directly validate changes
 				validateChanges();

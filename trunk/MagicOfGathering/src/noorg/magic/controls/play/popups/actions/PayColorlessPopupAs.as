@@ -8,7 +8,7 @@ import mx.collections.ArrayCollection;
 import noorg.magic.models.MagicPool;
 import noorg.magic.models.PlayCard;
 import noorg.magic.models.Player;
-import noorg.magic.models.actions.base.ICardAction;
+import noorg.magic.models.actions.common.PayMagicAction;
 import noorg.magic.services.AssetService;
 import noorg.magic.utils.Constants;
 import noorg.magic.utils.GlobalUtil;
@@ -25,25 +25,25 @@ public static const BITMAP_CLASSES:Array = [
 
 private var _player:Player;
 private var _playCard:PlayCard;
-private var _action:ICardAction;
+private var _action:PayMagicAction;
 
 private var _requiredColorlessCount:int;
 private var _requiredColorlessArray:ArrayCollection = new ArrayCollection();
 private var _playerMagicPool:MagicPool = new MagicPool();
 
 
-public function setPlayer(value:Player, card:PlayCard, action:ICardAction = null):void
+public function setPayAction(payMagicAction:PayMagicAction):void
 {
-	this._player = value;
-	this._playCard = card;
-	this._action = action;
+	this._player = payMagicAction.player;
+	this._playCard = payMagicAction.playCard;
+	this._action = payMagicAction;
 	
 	_requiredColorlessArray = new ArrayCollection();
-	_playerMagicPool.white = _player.magicWhite - card.magicPool.white;
-	_playerMagicPool.blue = _player.magicBlue - card.magicPool.blue;
-	_playerMagicPool.black = _player.magicBlack - card.magicPool.black;
-	_playerMagicPool.red = _player.magicRed - card.magicPool.red;
-	_playerMagicPool.green = _player.magicGreen - card.magicPool.green;
+	_playerMagicPool.white = _player.magicWhite - _action.white;
+	_playerMagicPool.blue = _player.magicBlue 	- _action.blue;
+	_playerMagicPool.black = _player.magicBlack - _action.black;
+	_playerMagicPool.red = _player.magicRed 	- _action.red;
+	_playerMagicPool.green = _player.magicGreen - _action.green;
 	_playerMagicPool.colorless = 0;
 	
 	this.invalidateDisplayList();
@@ -163,9 +163,11 @@ private function playerClickHandler(evt:MouseEvent):void
 		this.player.magicWhite = this._playerMagicPool.white;
 		
 		// action is null, then directly do cast
-		if (_action == null) {
-			this._playCard.cast(true);
+		if (_action.targetAction == null) {
+			_action.playCard.cast(true);
+			// this._playCard.cast(true);
 		} else {
+			_action.targetAction.execute();
 			// _action.execute()
 		}
 		

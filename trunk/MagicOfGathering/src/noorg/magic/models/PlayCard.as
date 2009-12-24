@@ -5,8 +5,8 @@ package noorg.magic.models
 	import noorg.magic.events.PlayCardEvent;
 	import noorg.magic.events.PlayerEvent;
 	import noorg.magic.models.actions.base.ICardAction;
+	import noorg.magic.models.actions.common.PayMagicAction;
 	import noorg.magic.models.staticValue.CardType;
-	import noorg.magic.utils.GlobalUtil;
 	
 	public class PlayCard extends Card
 	{
@@ -126,7 +126,7 @@ package noorg.magic.models
 					
 					this.setLocation(CardType.getDefaultLocation(this.type.type));
 				} else {
-					GlobalUtil.popupPayColorlessContainer(this);
+					this.payMagic(null);
 				}
 			} else {
 				this.setLocation(CardType.getDefaultLocation(this.type.type));
@@ -140,6 +140,15 @@ package noorg.magic.models
 			iCardAction.player = this.player;
 			iCardAction.playCard = this;
 			iCardAction.execute();
+		}
+		
+		private var _payMagicAction:PayMagicAction = new PayMagicAction();
+		private function payMagic(targetAction:ICardAction = null):void
+		{
+			_payMagicAction.playCard = this;
+			_payMagicAction.player = this.player;
+			_payMagicAction.targetAction = targetAction;
+			_payMagicAction.execute();
 		}
 		
 		

@@ -17,6 +17,7 @@ package noorg.magic.utils
 	import noorg.magic.controls.popups.tips.CardDetailTip;
 	import noorg.magic.models.PlayCard;
 	import noorg.magic.models.Player;
+	import noorg.magic.models.actions.common.PayMagicAction;
 	
 	public class GlobalUtil
 	{
@@ -127,10 +128,10 @@ package noorg.magic.utils
 			app.cardDetailTip.hideTip();
 		}
 		
-		public static function popupPayColorlessContainer(playCard:PlayCard):void
+		public static function popupPayColorlessContainer(payMagicAction:PayMagicAction):void
 		{
 			var container:PayColorlessPopup = GlobalUtil.createPopup(PayColorlessPopup) as PayColorlessPopup;
-			container.setPlayer(playCard.player, playCard);
+			container.setPayAction(payMagicAction);
 			curPopup = container;
 		}
 		
