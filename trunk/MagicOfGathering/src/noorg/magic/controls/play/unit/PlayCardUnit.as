@@ -10,7 +10,7 @@ package noorg.magic.controls.play.unit
 	import mx.managers.DragManager;
 	
 	import noorg.magic.controls.icons.IconCardQuickMenu;
-	import noorg.magic.controls.icons.IconDetail;
+	import noorg.magic.controls.icons.IconCast;
 	import noorg.magic.controls.icons.IconEnhancement;
 	import noorg.magic.controls.icons.IconManager;
 	import noorg.magic.controls.icons.IconTap;
@@ -35,7 +35,8 @@ package noorg.magic.controls.play.unit
 		protected const iconManager:IconManager = new IconManager();
 		protected const dragMaskManager:DragMaskManager = new DragMaskManager();
 		
-		protected var iconDetail:IconDetail;
+	//	protected var iconDetail:IconDetail;
+		protected var iconCast:IconCast;
 		protected var iconTap:IconTap;
 		protected var iconEnhancement:IconEnhancement;
 		
@@ -60,10 +61,12 @@ package noorg.magic.controls.play.unit
 			if (super.card != null) {
 				super.card.removeEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
 				super.card.removeEventListener(PlayCardEvent.POOL_ENOUGH_STATUS_CHANGE, poolEnoughStatusChangeHandler);
+				super.card.removeEventListener(PlayCardEvent.LOCATION_CHANGED, locationChangedHandler);
 			}
 			super.card = PlayCard(value);
 			super.card.addEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
 			super.card.addEventListener(PlayCardEvent.POOL_ENOUGH_STATUS_CHANGE, poolEnoughStatusChangeHandler);
+			super.card.addEventListener(PlayCardEvent.LOCATION_CHANGED, locationChangedHandler);
 		}
 		
 		public function get playCard():PlayCard
@@ -137,10 +140,15 @@ package noorg.magic.controls.play.unit
 		
 		protected function createIcon():void
 		{
-			iconDetail = new IconDetail();
-			iconDetail.visible = false;
-			iconDetail.addEventListener(MouseEvent.CLICK, detailClickHandler);
-			this.addChild(iconDetail);
+//			iconDetail = new IconDetail();
+//			iconDetail.visible = false;
+//			iconDetail.addEventListener(MouseEvent.CLICK, detailClickHandler);
+//			this.addChild(iconDetail);
+
+			iconCast = new IconCast();
+			iconCast.visible = false;
+			iconCast.addEventListener(MouseEvent.CLICK, castClickHandler);
+			this.addChild(iconCast);
 			
 			iconTap = new IconTap();
 			iconTap.visible = false;
@@ -159,16 +167,25 @@ package noorg.magic.controls.play.unit
 			iconQuickMenu.addEventListener(MouseEvent.CLICK, openQuickMenuHandler);
 			this.addChild(iconQuickMenu);
 			
-			this.iconManager.iconArrColl.addItem(iconDetail);
+			//this.iconManager.iconArrColl.addItem(iconDetail);
+			this.iconManager.iconArrColl.addItem(iconCast);
 			this.iconManager.iconArrColl.addItem(iconTap);
 			this.iconManager.iconArrColl.addItem(iconEnhancement);
 			this.iconManager.iconArrColl.addItem(iconQuickMenu);
+			
+			locationChangedHandler(null);
+			
 			this.iconManager.refreshLocation();
 		}
 		
 		private function detailClickHandler(evt:MouseEvent):void
 		{
 			GlobalUtil.showDetailPopup(PlayCard(this.card));
+		}
+		
+		private function castClickHandler(evt:MouseEvent):void
+		{
+			this.playCard.cast();
 		}
 		
 		private function tapClickHandler(evt:MouseEvent):void
@@ -243,6 +260,19 @@ package noorg.magic.controls.play.unit
 			this.invalidateDisplayList();
 		}
 		
+		private function locationChangedHandler(evt:PlayCardEvent):void
+		{
+			if (this.playCard.getLocation() == CardLocation.HAND) {
+				this.iconTap.isEnabled = false;
+				this.iconEnhancement.isEnabled = false;
+				this.iconCast.isEnabled = this.playCard.isPoolEnough;
+			} else {
+				this.iconTap.isEnabled = true;
+				this.iconCast.isEnabled = false;
+				this.iconEnhancement.isEnabled = true;
+			}
+		}
+		
 		private function poolEnoughStatusChangeHandler(evt:PlayCardEvent):void
 		{
 			this.invalidateDisplayList();
@@ -262,6 +292,7 @@ package noorg.magic.controls.play.unit
 		
 		private function rollOverHandler(evt:MouseEvent):void
 		{
+			this.iconManager.refreshLocation();
 			this.iconManager.showIcon();
 		}
 		
