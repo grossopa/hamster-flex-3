@@ -143,6 +143,7 @@ package noorg.magic.models
 		}
 		
 		private var _payMagicAction:PayMagicAction = new PayMagicAction();
+		
 		private function payMagic(targetAction:ICardAction = null):void
 		{
 			_payMagicAction.playCard = this;
