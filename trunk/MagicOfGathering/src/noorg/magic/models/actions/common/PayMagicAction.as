@@ -19,13 +19,6 @@ package noorg.magic.models.actions.common
 		public var white:int;
 		public var colorless:int;
 		
-		public var payRed:int;
-		public var payGreen:int;
-		public var payBlue:int;
-		public var payBlack:int;
-		public var payWhite:int;
-		public var payColorless:int;
-		
 		private var _targetAction:ICardAction;
 		
 		/**
@@ -61,29 +54,6 @@ package noorg.magic.models.actions.common
 		
 		override public function execute():void
 		{
-			var count:int = 0;
-			if (player.magicRed > 0) {
-				count++;
-			}
-			if (player.magicGreen > 0) {
-				count++;
-			}
-			if (player.magicBlue > 0) {
-				count++;
-			}
-			if (player.magicBlack > 0) {
-				count++;
-			}
-			if (player.magicWhite > 0) {
-				count++;
-			}
-			
-			payRed = red;
-			payBlue = blue;
-			payGreen = green;
-			payBlack = black;
-			payWhite = white;
-			
 			if (colorless > 0) {
 				// let user choose how to allocate magics
 				GlobalUtil.popupPayColorlessContainer(this);
@@ -95,12 +65,12 @@ package noorg.magic.models.actions.common
 		
 		override protected function validateChanges():void
 		{
-			player.magicRed -= payRed;
-			player.magicBlue -= payBlue;
-			player.magicGreen -= payGreen;
-			player.magicBlack -= payBlack;
-			player.magicWhite -= payWhite;
-			player.magicColorless -= payColorless;
+			player.magicRed -= red;
+			player.magicBlue -= blue;
+			player.magicGreen -= green;
+			player.magicBlack -= black;
+			player.magicWhite -= white;
+			player.magicColorless -= colorless;
 		}
 		
 		override public function afterExecute():void
