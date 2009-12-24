@@ -18,18 +18,6 @@ package org.hamster.effects.effectInstance
 		public static const UNIT_DURATION:Number = 0.3;
 		
 		/**
-		 * <p>Animation type, possible values are <code>FROM_ONE_POINT</code> and <code>FROM_POINTS</code>.</p>
-		 * 
-		 * <p>Default value is <code>FROM_ONE_POINT</code>.</p>
-		 */
-		public var aniType:String;
-		
-		/**
-		 * <p>Start point value.  You should specify this value before play if use FROM_ONE_POINT</p>.
-		 */
-		public var startPoint:Point;
-		
-		/**
 		 * <p>Start points value array. If you use FROM_POINTS and leave it empty, the instance class
 		 * will auto create a random points array whose length is equals to 
 		 * <code>rowCount</code> * <code>columnCount</code>.</p>
@@ -61,7 +49,7 @@ package org.hamster.effects.effectInstance
 			super.beginPlay();
 			
 			var isAutoCreate:Boolean;
-			if (aniType == SplitMass.FROM_POINTS && startPoints == null) {
+			if (startPoints == null || startPoints.length == 0) {
 				startPoints = new Array();
 				isAutoCreate = true;
 			}
@@ -74,10 +62,6 @@ package org.hamster.effects.effectInstance
 						startPoints.push(new Point(Math.random() * uiTarget.width, 0));
 					}
 				}
-			}
-			
-			if (startPoint == null) {
-				startPoint = new Point();
 			}
 		}
 		
@@ -102,11 +86,7 @@ package org.hamster.effects.effectInstance
 					}
 					var bd:BitmapData = BitmapData(this._bitmapDataList[index]);
 					var sp:Point;
-					if (this.aniType == SplitMass.FROM_ONE_POINT) {
-						sp = startPoint;
-					} else {
-						sp = Point(this.startPoints[index % this.startPoints.length]);
-					}
+					sp = Point(this.startPoints[index % this.startPoints.length]);
 					var percent:Number = Math.min((numValue - startDelay) / UNIT_DURATION, 1);
 					
 					
