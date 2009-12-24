@@ -21,6 +21,9 @@ package noorg.magic.services
 		[Embed(source='noorg/magic/assets/icons/icon_detail.png')]
 		public const IconDetail:Class;
 		
+		[Embed(source='noorg/magic/assets/icons/icon_cast.png')]
+		public const IconCast:Class;		
+		
 		[Embed(source='noorg/magic/assets/icons/icon_tap.png')]
 		public const IconTap:Class;
 		
