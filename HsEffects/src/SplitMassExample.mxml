@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+	<mx:Script>
+		<![CDATA[
+			import mx.effects.easing.Bounce;
+			import mx.effects.easing.Linear;
+			import org.hamster.effects.SplitMass;
+			private function beginSplitMassHandler(reverse:Boolean):void
+			{
+				var splitMass:SplitMass = new SplitMass(massCanvas);
+				splitMass.rowCount = 100;
+				splitMass.columnCount = 100;
+				splitMass.startPoints = [new Point(0,0), new Point(500, 0), new Point(0, 500), new Point(500, 500)];
+				splitMass.easingFunction = Linear.easeNone;
+				splitMass.duration = 2000;
+				splitMass.play(null, reverse);
+			}
+		]]>
+	</mx:Script>
+	<mx:Button click="beginSplitMassHandler(false)" label="split mass" />
+	<mx:Button click="beginSplitMassHandler(true)" label="reverse" x="100" />
+	<mx:Canvas id="massCanvas" width="500" height="500" y="30" x="50" 
+		verticalScrollPolicy="off" horizontalScrollPolicy="off" backgroundColor="0x7F7F7F">
+		<mx:Image source="@Embed(source='/org/hamster/assets/splitmass.jpg')" 
+			width="200" height="200" x="150" />
+		<mx:TextArea text="FML" width="350" height="350" y="150" />
+	</mx:Canvas>
+</mx:Application>

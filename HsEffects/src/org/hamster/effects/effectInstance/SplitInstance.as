@@ -1,7 +1,7 @@
 package org.hamster.effects.effectInstance
 {
 	import flash.display.BitmapData;
-	import flash.geom.Matrix;
+	import flash.display.Graphics;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.net.LocalConnection;
@@ -21,11 +21,7 @@ package org.hamster.effects.effectInstance
 	 * @see org.hamster.effects.Split
 	 */
 	public class SplitInstance extends TweenEffectInstance
-	{
-		/**
-		 * 
-		 */
-		
+	{		
 		/**
 		 * Origin bitmap data list, stores all blocks of target UIComponent.
 		 */
@@ -68,6 +64,11 @@ package org.hamster.effects.effectInstance
 		 * Stores background alpha value of target.
 		 */
 		private var _preBackgroundAlpha:Number = 1;
+		
+		/**
+		 * Visibility of all children.
+		 */
+		private var _preChildVisibleList:Array;
 		
 		/**
 		 * Row count of blocks
@@ -147,6 +148,7 @@ package org.hamster.effects.effectInstance
 			
 			this._bitmapDataList = new Array();
 			this._bdDrawList = new Array();
+			this._preChildVisibleList = new Array();
 			
 			var bdTarget:BitmapData = new BitmapData(uiTarget.width, uiTarget.height, true, 0x00);
 			bdTarget.draw(uiTarget);
@@ -171,13 +173,21 @@ package org.hamster.effects.effectInstance
 			_preBackgroundAlpha = Number(uiTarget.getStyle("backgroundAlpha"));
 			uiTarget.setStyle("backgroundAlpha", 0);
 			for (i = 0; i < uiTarget.numChildren; i++) {
+				_preChildVisibleList.push(uiTarget.getChildAt(i).visible);
 				uiTarget.getChildAt(i).visible = false;
 			}
+			
+			// fix twinkling issue
+			var g:Graphics = this._overlay.graphics;
+			g.beginBitmapFill(bdTarget);
+			g.drawRect(0, 0, uiTarget.width, uiTarget.height);
+			g.endFill();
+			
 			tween = createTween(this, 0, 1, duration);
 		}
 		
 		/**
-		 * Override this function in sub class
+		 * Override this function in sub classes.
 		 */
 		override public function onTweenUpdate(value:Object):void
 		{  
@@ -185,7 +195,7 @@ package org.hamster.effects.effectInstance
 		}
 		
 		/**
-		 * after tween effect end, clean overlay and reverse target.
+		 * After tween effect end, clean overlay and reset target.
 		 */
 		override public function onTweenEnd(value:Object):void
 		{
@@ -194,7 +204,7 @@ package org.hamster.effects.effectInstance
 			
 			uiTarget.setStyle("backgroundAlpha", this._preBackgroundAlpha);
 			for (var i:int = 0; i < uiTarget.numChildren; i++) {
-				uiTarget.getChildAt(i).visible = true;
+				uiTarget.getChildAt(i).visible = _preChildVisibleList[i] as Boolean;
 			}
 			uiTarget.validateNow();
 			
