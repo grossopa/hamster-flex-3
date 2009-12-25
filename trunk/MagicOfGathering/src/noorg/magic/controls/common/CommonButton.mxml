@@ -6,6 +6,8 @@
 	<mx:Script source="CommonButtonAs.as" />
 	<mx:Script>
 		<![CDATA[
+			import mx.controls.Button;
+			import mx.core.IButton;
 			public function set text(value:String):void
 			{
 				_text = value;
