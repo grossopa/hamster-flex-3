@@ -27,6 +27,7 @@ private var _player:Player;
 private var _playCard:PlayCard;
 private var _action:PayMagicAction;
 
+[Bindable]
 private var _requiredColorlessCount:int;
 private var _requiredColorlessArray:ArrayCollection = new ArrayCollection();
 private var _playerMagicPool:MagicPool = new MagicPool();
@@ -45,7 +46,7 @@ public function setPayAction(payMagicAction:PayMagicAction):void
 	_playerMagicPool.red = _player.magicRed 	- _action.red;
 	_playerMagicPool.green = _player.magicGreen - _action.green;
 	_playerMagicPool.colorless = 0;
-	
+	_requiredColorlessCount = this._action.colorless;
 	this.invalidateDisplayList();
 }
 
@@ -95,7 +96,6 @@ private function requiredClickHandler(evt:MouseEvent):void
 			}
 		}
 	}
-	
 	this.invalidateDisplayList();
 }
 

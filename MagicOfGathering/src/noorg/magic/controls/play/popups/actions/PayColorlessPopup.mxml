@@ -9,7 +9,8 @@
 		click="requiredClickHandler(event)">
 	</mx:Canvas>
 	<mx:HRule />
-	<mx:Label text="{this.resourceManager.getString('main','payColorlessPopup.playerLabel')}" />
+	<mx:Label text="{this.resourceManager.getString('main','payColorlessPopup.playerLabel') + ' ' 
+			+ _requiredColorlessCount}" />
 	<mx:HRule />
 	<mx:Canvas id="playerMagicContainer" height="180" width="100%"
 		verticalScrollPolicy="off" horizontalScrollPolicy="off"

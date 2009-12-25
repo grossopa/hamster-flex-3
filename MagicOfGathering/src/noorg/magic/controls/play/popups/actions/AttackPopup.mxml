@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" width="800" height="600"
+	layout="horizontal">
+	<mx:VBox id="mainContainer" width="100%" height="100%">
+	</mx:VBox>
+	<mx:VBox id="informationBar" width="200" height="100%">
+	</mx:VBox>
+</mx:Panel>
