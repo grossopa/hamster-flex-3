@@ -2,7 +2,7 @@
 <mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" minWidth="800" minHeight="600" width="800" height="600" backgroundColor="white"
  	initialize="init()" applicationComplete="appCompleteHandler()" 
  	xmlns:controls="noorg.magic.controls.*"
- 	xmlns:ns1="org.hamster.components.chrometab.*" xmlns:icons="noorg.magic.controls.icons.*" xmlns:tips="noorg.magic.controls.popups.tips.*" xmlns:masks="noorg.magic.controls.masks.*">
+ 	xmlns:icons="noorg.magic.controls.icons.*" xmlns:tips="noorg.magic.controls.popups.tips.*" xmlns:masks="noorg.magic.controls.masks.*">
 	<mx:Script source="MagicOfGatheringAs.as" />
 	<mx:Script>
 		<![CDATA[
@@ -12,7 +12,7 @@
 		[ResourceBundle("main")]
 		[ResourceBundle("action")]
 	</mx:Metadata>
-	<ns1:ChromeTab id="chromeTab" width="100%" height="24" canCloseTab="false" canAddTab="false" />
+	<mx:TabBar id="mainTab" width="100%" height="24" />
 	<mx:ViewStack id="mainViewStack" width="100%" height="100%" y="24">
 		<controls:InitContainer  label="{resourceManager.getString('main', 'initContainer.label')}" id="initContainer" />
 		<controls:LoadContainer  label="{resourceManager.getString('main', 'loadContainer.label')}" id="loadContainer" />

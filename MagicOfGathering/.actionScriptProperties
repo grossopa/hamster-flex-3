@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties mainApplicationPath="MagicOfGathering.mxml" version="3">
-  <compiler additionalCompilerArguments="-locale=zh_CN,en_US" copyDependentFiles="true" enableModuleDebug="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersion="9.0.124" htmlPlayerVersionCheck="true" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" useApolloConfig="true" verifyDigests="true" warn="true">
+  <compiler additionalCompilerArguments="-locale=zh_CN,en_US" copyDependentFiles="true" enableModuleDebug="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersion="9.0.124" htmlPlayerVersionCheck="true" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" useApolloConfig="true" verifyDigests="false" warn="true">
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" linkType="1" path="locale/{locale}"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="1">
-      <libraryPathEntry kind="4" path=""/>
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
+      <libraryPathEntry kind="4" path=""/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
@@ -20,6 +20,3 @@
   </modules>
   <buildCSSFiles/>
 </actionScriptProperties>
-
-<!--<module application="src/MagicOfGathering.mxml" destPath="noorg/magic/controls/modules/MenuModule.swf" optimize="true" sourcePath="src/noorg/magic/controls/modules/MenuModule.mxml"/>-->
- 

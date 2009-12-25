@@ -153,8 +153,8 @@ package org.hamster.effects.effectInstance
 			var bdTarget:BitmapData = new BitmapData(uiTarget.width, uiTarget.height, true, 0x00);
 			bdTarget.draw(uiTarget);
 			
-			_smallWidth = bdTarget.width / columnCount;
-			_smallHeight = bdTarget.height / rowCount;
+			_smallWidth = Math.ceil(bdTarget.width / columnCount);
+			_smallHeight = Math.ceil(bdTarget.height / rowCount);
 			
 			for (var i:int = 0; i < columnCount; i++) {
 				for(var j:int = 0; j < rowCount; j++) {

@@ -5,7 +5,7 @@ package noorg.magic.commands.impl
 	import noorg.magic.models.Card;
 	
 	import org.hamster.commands.AbstractCommand;
-	import org.hamster.networks.service.HTTPServiceLocator;
+	import org.hamster.services.HTTPServiceLocator;
 
 	public class GetCardFromWebCmd extends AbstractCommand
 	{

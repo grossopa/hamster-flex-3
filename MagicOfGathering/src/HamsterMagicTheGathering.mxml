@@ -2,5 +2,4 @@
 <mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
 	 applicationComplete="appCompleteHandler()" width="1000" height="700">
 	<mx:Script source="HamsterMagicTheGatheringAs.as" />
-	<mx:Button click="gc()" />
 </mx:WindowedApplication>
