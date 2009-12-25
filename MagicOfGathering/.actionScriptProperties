@@ -13,7 +13,13 @@
   <applications>
     <application path="MagicOfGathering.mxml"/>
     <application path="MGTest.mxml"/>
+    <application path="HamsterMagicTheGathering.mxml"/>
   </applications>
-  <modules/>
+  <modules>
+    <module application="src/MagicOfGathering.mxml" destPath="noorg/magic/controls/modules/MenuModule.swf" optimize="true" sourcePath="src/noorg/magic/controls/modules/MenuModule.mxml"/>
+  </modules>
   <buildCSSFiles/>
 </actionScriptProperties>
+
+<!--<module application="src/MagicOfGathering.mxml" destPath="noorg/magic/controls/modules/MenuModule.swf" optimize="true" sourcePath="src/noorg/magic/controls/modules/MenuModule.mxml"/>-->
+ 
