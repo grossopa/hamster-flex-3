@@ -27,6 +27,5 @@ private function loadReadyHandler(evt:ModuleEvent):void
 	
 	var obj:DisplayObject = evt.module.factory.create() as DisplayObject;
 	this.addChild(obj); 
-	obj.addEventListener("startGame", aa, false, 0, true);
 }
 

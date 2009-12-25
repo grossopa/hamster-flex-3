@@ -36,6 +36,7 @@
       <fileset dir="HsUpload/src" excludes="*.mxml, *.as" includes="**/*" />
       <fileset dir="HsImageCropper/src" excludes="*.mxml, *.as" includes="**/*" />
       <fileset dir="HsTip/src" excludes="*.mxml, *.as" includes="**/*" />
+      <fileset dir="HsFramework/src" excludes="*.mxml, *.as" includes="**/*" />
 		</copy>
     
  		<fileset dir="${APP_SRC}" id="src.files">

@@ -18,8 +18,9 @@ private function init():void
 
 private function appCompleteHandler():void
 {
+	mainTab.dataProvider = this.mainViewStack;
+	
 	new HTTPServices();
-	chromeTab.viewStack = this.mainViewStack;
 	var ldCmd:LoadConfigureCmd = new LoadConfigureCmd();
 	ldCmd.execute();
 }
