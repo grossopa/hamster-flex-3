@@ -4,6 +4,16 @@
 	backgroundImage="@Embed(source='/noorg/magic/assets/pics/menu_background.jpg')"
 	creationComplete="completeHandler()">
 	<mx:Script source="MenuModuleAs.as" />
-	<menu:CommonMenuButton id="startGameBtn" label="Start" right="10" bottom="90" click="startGameHandler()" />
-	<menu:CommonMenuButton id="settingsBtn" label="Settings" right="10" bottom="20" />
+	<mx:Metadata>
+		[ResourceBundle("module_menu")]
+	</mx:Metadata>
+	<menu:CommonMenuButton id="startGameBtn" 
+		label="{this.resourceManager.getString('module_menu', 'start')}" 
+		right="10" bottom="160" click="startGameHandler()" />
+	<menu:CommonMenuButton id="settingsBtn" 
+		label="{this.resourceManager.getString('module_menu', 'settings')}" 
+		right="10" bottom="90" />
+	<menu:CommonMenuButton id="configCardBtn" 
+		label="{this.resourceManager.getString('module_menu', 'configureCard')}" 
+		right="10" bottom="20" />
 </mx:Module>
