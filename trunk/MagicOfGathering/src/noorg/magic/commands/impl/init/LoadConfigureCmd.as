@@ -69,11 +69,8 @@ package noorg.magic.commands.impl.init
 		private function ioErrorHandler(evt:Event):void
 		{
 			Alert.show(evt.toString());
-		}
-		
-		override public function fault(info:Object):void
-		{
 			
+			super.fault(null);
 		}
 		
 	}

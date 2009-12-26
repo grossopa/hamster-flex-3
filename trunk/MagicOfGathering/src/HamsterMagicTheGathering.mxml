@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
-	 applicationComplete="appCompleteHandler()" width="1000" height="700">
+	applicationComplete="appCompleteHandler()" width="1000" height="700"
+	backgroundColor="black">
 	<mx:Script source="HamsterMagicTheGatheringAs.as" />
+	<mx:Metadata>
+		[ResourceBundle("main")]
+		[ResourceBundle("action")]
+	</mx:Metadata>
 </mx:WindowedApplication>
