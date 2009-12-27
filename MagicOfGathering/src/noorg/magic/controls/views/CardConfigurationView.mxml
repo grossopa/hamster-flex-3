@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="completeHandler()" 
+<BaseView xmlns="noorg.magic.controls.views.base.*" creationComplete="completeHandler()"
+	xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" 
 	xmlns:containers="noorg.magic.controls.containers.*">
-	<mx:Script source="BuildContainerAs.as" />
+	<mx:Script source="CardConfigurationViewAs.as" />
 	<mx:HDividedBox x="0" y="0" width="{this.width}" height="{this.height}" paddingTop="3" paddingLeft="3" paddingRight="3" paddingBottom="3">
 		<mx:VBox height="100%" width="280">
 			<mx:ComboBox id="collectionComboBox" dataProvider="{DS.cardCollections}" change="collectionChanged()"/>
@@ -14,4 +15,4 @@
 			<containers:CardListContainer id="cardListContainer" width="100%" />
 		</mx:VBox>
 	</mx:HDividedBox>
-</mx:Canvas>
+</BaseView>

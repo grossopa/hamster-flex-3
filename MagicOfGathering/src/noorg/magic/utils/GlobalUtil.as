@@ -26,9 +26,9 @@ package noorg.magic.utils
 		
 		public static function popUpMask(text:String, target:DisplayObject = null):void
 		{
-			if (target == null) {
-				target = app;
-			}
+//			if (target == null) {
+//				target = app;
+//			}
 			curMask = PopUpManager.createPopUp(target, ProcessMask, true) as ProcessMask;
 			curMask.text = text;
 			PopUpManager.centerPopUp(curMask);
@@ -46,9 +46,9 @@ package noorg.magic.utils
 		
 		public static function createPopup(className:Class, parent:DisplayObject = null):IFlexDisplayObject
 		{
-			if (parent == null) {
-				parent = app;
-			}
+//			if (parent == null) {
+//				parent = app;
+//			}
 			var obj:IFlexDisplayObject = PopUpManager.createPopUp(parent, className, true);
 			PopUpManager.centerPopUp(obj);
 			return obj;
