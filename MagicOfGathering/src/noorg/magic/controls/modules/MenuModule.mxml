@@ -2,7 +2,7 @@
 <mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" 
 	layout="absolute" width="100%" height="100%" xmlns:menu="noorg.magic.controls.common.buttons.menu.*"
 	backgroundImage="@Embed(source='/noorg/magic/assets/pics/menu_background.jpg')"
-	creationComplete="completeHandler()">
+	creationComplete="completeHandler()" xmlns:popup="noorg.magic.controls.common.buttons.popup.*">
 	<mx:Script source="MenuModuleAs.as" />
 	<mx:Metadata>
 		[ResourceBundle("module_menu")]
@@ -12,7 +12,7 @@
 		right="10" bottom="160" click="startGameHandler()" />
 	<menu:CommonMenuButton id="settingsBtn" 
 		label="{this.resourceManager.getString('module_menu', 'settings')}" 
-		right="10" bottom="90" />
+		right="10" bottom="90" click="popupSettingsHandler()" />
 	<menu:CommonMenuButton id="configCardBtn" 
 		label="{this.resourceManager.getString('module_menu', 'configureCard')}" 
 		right="10" bottom="20" />

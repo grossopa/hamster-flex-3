@@ -4,9 +4,13 @@ import flash.events.TimerEvent;
 import flash.geom.Point;
 import flash.utils.Timer;
 
+import mx.containers.Canvas;
 import mx.effects.Fade;
 import mx.effects.Parallel;
-import mx.effects.easing.Linear;
+import mx.managers.PopUpManager;
+
+import noorg.magic.controls.common.popup.BasePopup;
+import noorg.magic.controls.popups.SettingsPopup;
 
 import org.hamster.effects.SplitMass;
 
@@ -50,4 +54,10 @@ private function timerHandler(evt:TimerEvent):void
 	
 	parallel.duration = 8000;
 	parallel.play();
+}
+
+private function popupSettingsHandler():void
+{
+	var pop:SettingsPopup = PopUpManager.createPopUp(this, SettingsPopup, true) as SettingsPopup;
+	PopUpManager.centerPopUp(pop);
 }
