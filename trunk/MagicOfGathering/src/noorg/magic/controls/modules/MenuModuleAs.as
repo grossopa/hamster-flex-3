@@ -4,13 +4,12 @@ import flash.events.TimerEvent;
 import flash.geom.Point;
 import flash.utils.Timer;
 
-import mx.containers.Canvas;
 import mx.effects.Fade;
 import mx.effects.Parallel;
 import mx.managers.PopUpManager;
 
-import noorg.magic.controls.common.popup.BasePopup;
 import noorg.magic.controls.popups.SettingsPopup;
+import noorg.magic.controls.views.CardConfigurationView;
 
 import org.hamster.effects.SplitMass;
 
@@ -60,4 +59,11 @@ private function popupSettingsHandler():void
 {
 	var pop:SettingsPopup = PopUpManager.createPopUp(this, SettingsPopup, true) as SettingsPopup;
 	PopUpManager.centerPopUp(pop);
+}
+
+private function switchCardConfView():void
+{
+	var cardConf:CardConfigurationView = new CardConfigurationView();
+	this.addChild(cardConf);
+	cardConf.showView();
 }

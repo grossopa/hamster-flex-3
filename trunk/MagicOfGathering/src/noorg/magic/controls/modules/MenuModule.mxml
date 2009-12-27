@@ -15,5 +15,5 @@
 		right="10" bottom="90" click="popupSettingsHandler()" />
 	<menu:CommonMenuButton id="configCardBtn" 
 		label="{this.resourceManager.getString('module_menu', 'configureCard')}" 
-		right="10" bottom="20" />
+		right="10" bottom="20" click="switchCardConfView()" />
 </mx:Module>
