@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" width="400" height="600">
-	
-</mx:Panel>
+<BasePopup xmlns="noorg.magic.controls.common.popup.*" 
+	label="{this.resourceManager.getString('component','settingsPopup.label')}"
+	xmlns:mx="http://www.adobe.com/2006/mxml" width="300" height="400">
+	<mx:Script source="SettingsPopupAs.as" />
+	<mx:VBox width="100%" height="100%" y="27" x="10">
+		<mx:ComboBox id="localeComboBox" change="localeChanged()" selectedIndex="0"
+			dataProvider="{Properties.locales}" />
+		<mx:CheckBox id="showCardDetailTipCheckBox" change="showDetailTipChange()" selected="true"
+			label="{resourceManager.getString('main','initContainer.showCardDetailTip')}" />
+	</mx:VBox>
+</BasePopup>
