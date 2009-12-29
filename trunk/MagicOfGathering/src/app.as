@@ -1,28 +1,28 @@
 // ActionScript file
-			import flash.display.GradientType;
-			import flash.display.Graphics;
-			import flash.events.MouseEvent;
-			import flash.filters.GlowFilter;
-			import flash.geom.Matrix;
+import flash.display.GradientType;
+import flash.display.Graphics;
+import flash.events.MouseEvent;
+import flash.filters.GlowFilter;
+import flash.geom.Matrix;
 			
-			import mx.core.DragSource;
-			import mx.core.IUIComponent;
-			import mx.managers.DragManager;
+import mx.core.DragSource;
+import mx.core.IUIComponent;
+import mx.managers.DragManager;
 			
-			import noorg.magic.utils.TipArrowImpl;
-			import noorg.magic.utils.TipArrowUtil;
+import noorg.magic.utils.TipArrowImpl;
+import noorg.magic.utils.TipArrowUtil;
 			
-			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
-			{
-				super.updateDisplayList(unscaledWidth, unscaledHeight);
+override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+{
+	super.updateDisplayList(unscaledWidth, unscaledHeight);
 				
-				var g:Graphics = this.mainImg.graphics;
-				var m:Matrix = new Matrix();
-				m.rotate(Math.PI / 2);
-				g.clear();
-				g.endFill();
-				g.beginGradientFill(GradientType.LINEAR, [0x000000, 0x7f7f7f, 0xffffff],
-									[1,1, 1], [0x00,0x7f ,0xFF], m);
+	var g:Graphics = this.mainImg.graphics;
+	var m:Matrix = new Matrix();
+	m.rotate(Math.PI / 2);
+	g.clear();
+	g.endFill();
+	g.beginGradientFill(GradientType.LINEAR, [0x000000, 0x7f7f7f, 0xffffff],
+						[1,1, 1], [0x00,0x7f ,0xFF], m);
 				g.lineStyle(3);
 				//g.lineStyle(1);
 				//CommonGraphicsUtil.drawTipRect(g, 0, 0, this.mainImg.width, this.mainImg.height,

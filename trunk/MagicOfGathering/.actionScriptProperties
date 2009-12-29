@@ -1,22 +1,31 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <actionScriptProperties mainApplicationPath="MagicOfGathering.mxml" version="3">
-  <compiler additionalCompilerArguments="-locale=zh_CN,en_US" copyDependentFiles="true" enableModuleDebug="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersion="9.0.124" htmlPlayerVersionCheck="true" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" useApolloConfig="true" verifyDigests="false" warn="true">
-    <compilerSourcePath>
-      <compilerSourcePathEntry kind="1" linkType="1" path="locale/{locale}"/>
-    </compilerSourcePath>
-    <libraryPath defaultLinkType="1">
-      <libraryPathEntry kind="1" linkType="1" path="libs"/>
-      <libraryPathEntry kind="4" path=""/>
-    </libraryPath>
-    <sourceAttachmentPath/>
-  </compiler>
-  <applications>
-    <application path="MagicOfGathering.mxml"/>
-    <application path="MGTest.mxml"/>
-    <application path="HamsterMagicTheGathering.mxml"/>
-  </applications>
-  <modules>
-    <module application="src/MagicOfGathering.mxml" destPath="noorg/magic/controls/modules/MenuModule.swf" optimize="true" sourcePath="src/noorg/magic/controls/modules/MenuModule.mxml"/>
-  </modules>
-  <buildCSSFiles/>
+<compiler additionalCompilerArguments="-locale=zh_CN,en_US" copyDependentFiles="true" enableModuleDebug="true" flexSDK="Flex 3.5" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersion="9.0.124" htmlPlayerVersionCheck="true" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" useApolloConfig="true" verifyDigests="false" warn="true">
+<compilerSourcePath>
+<compilerSourcePathEntry kind="1" linkType="1" path="locale/{locale}"/>
+</compilerSourcePath>
+<libraryPath defaultLinkType="1">
+<libraryPathEntry kind="1" linkType="1" path="libs"/>
+<libraryPathEntry kind="4" path="">
+<modifiedEntries>
+<libraryPathEntry kind="3" linkType="4" path="${PROJECT_FRAMEWORKS}/libs/framework.swc" useDefaultLinkType="true">
+<crossDomainRsls>
+<crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="framework_3.2.0.3958.swz"/>
+<crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="framework_3.2.0.3958.swf"/>
+</crossDomainRsls>
+</libraryPathEntry>
+</modifiedEntries>
+</libraryPathEntry>
+</libraryPath>
+<sourceAttachmentPath/>
+</compiler>
+<applications>
+<application path="MagicOfGathering.mxml"/>
+<application path="MGTest.mxml"/>
+<application path="HamsterMagicTheGathering.mxml"/>
+</applications>
+<modules>
+<module application="src/MagicOfGathering.mxml" destPath="noorg/magic/controls/modules/MenuModule.swf" optimize="true" sourcePath="src/noorg/magic/controls/modules/MenuModule.mxml"/>
+</modules>
+<buildCSSFiles/>
 </actionScriptProperties>
