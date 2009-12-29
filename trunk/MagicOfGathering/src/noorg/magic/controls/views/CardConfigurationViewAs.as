@@ -10,6 +10,23 @@ private const ES:EventService = EventService.getInstance();
 
 private function completeHandler():void
 {
-	var ddd:TabBar;
-	ddd.dataProvider
+}
+
+private function goNextView():void
+{
+	if (mainViewStack.selectedIndex < mainViewStack.numChildren - 1) {
+		mainViewStack.selectedIndex++;
+	}
+}
+
+private function goPreviousView():void
+{
+	if (mainViewStack.selectedIndex > 0) {
+		mainViewStack.selectedIndex--;
+	}	
+}
+
+private function closeView():void
+{
+	this.hideView();
 }

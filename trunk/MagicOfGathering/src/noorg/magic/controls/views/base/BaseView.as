@@ -54,7 +54,7 @@ package noorg.magic.controls.views.base
 		{
 			_showEffect.removeEventListener(TweenEvent.TWEEN_END, showEffEndHandler);
 			
-			this.visible = false;
+			this.parent.removeChild(this);
 		}
 		
 		override protected function createChildren():void

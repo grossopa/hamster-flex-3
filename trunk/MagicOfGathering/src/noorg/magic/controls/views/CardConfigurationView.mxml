@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <BaseView xmlns="noorg.magic.controls.views.base.*" creationComplete="completeHandler()"
 	xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" backgroundColor="0xFFFFFF"
-	xmlns:containers="noorg.magic.controls.containers.*" xmlns:views="noorg.magic.controls.views.*">
+	xmlns:containers="noorg.magic.controls.containers.*" xmlns:views="noorg.magic.controls.views.*" xmlns:view="noorg.magic.controls.common.buttons.view.*" xmlns:popup="noorg.magic.controls.common.buttons.popup.*">
 	<mx:Script source="CardConfigurationViewAs.as" />
-	<mx:ViewStack width="100%" height="100%">
+	<mx:ViewStack id="mainViewStack" width="100%" height="100%">
 		<views:LoadCardView id="loadCardView" />
 		<views:BuildCardView id="buildCardView" />
 	</mx:ViewStack>
+	
+	<view:PreviousViewButton id="previousBtn" right="120" y="5"
+		click="goPreviousView()" />
+	<view:NextViewButton id="nextBtn" right="80" y="5" 
+		click="goNextView()" />
+	<popup:CommonPopupCloseButton id="closeBtn" right="40" y="5"
+		click="closeView()" />
 </BaseView>
