@@ -10,7 +10,7 @@
 		<mx:Label width="100%" textAlign="right" text="{DS.selectedNum} / {Properties.cardNum}" />
 	</mx:HBox>
 
-	<mx:DataGrid id="dataGrid" dataProvider="{DS.selectedCards}" rowCount="4"
+	<mx:DataGrid id="dataGrid" dataProvider="{DS.selectedCards}" rowCount="6"
 		rowHeight="45" width="100%" itemClick="selectChangedHandler()">
 		<mx:columns>
 			<mx:DataGridColumn headerText="{this.resourceManager.getString('main', 'buildContainer.list.title1')}" 

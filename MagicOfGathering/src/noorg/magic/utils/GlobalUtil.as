@@ -49,7 +49,7 @@ package noorg.magic.utils
 //			if (parent == null) {
 //				parent = app;
 //			}
-			var obj:IFlexDisplayObject = PopUpManager.createPopUp(parent, className, true);
+			var obj:IFlexDisplayObject = PopUpManager.createPopUp(Application.application as UIComponent, className, true);
 			PopUpManager.centerPopUp(obj);
 			return obj;
 		}
