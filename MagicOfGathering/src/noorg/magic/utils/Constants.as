@@ -44,6 +44,8 @@ package noorg.magic.utils
 		public static const BLACK:String 		= "black";
 		public static const WHITE:String 		= "white";
 		public static const COLORLESS:String 	= "colorless";
-
+		
+		public static const MODULE_MENU:String = "/noorg/magic/controls/modules/MenuModule.swf";
+		public static const MODULE_PLAY:String = "/noorg/magic/controls/modules/PlayModule.swf";
 	}
 }

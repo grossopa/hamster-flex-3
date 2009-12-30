@@ -9,10 +9,12 @@ import mx.modules.ModuleManager;
 import noorg.magic.commands.impl.LoadCardsCmd;
 import noorg.magic.commands.impl.LoadUserCollListCmd;
 import noorg.magic.commands.impl.init.LoadConfigureCmd;
+import noorg.magic.events.GameFlowEvent;
 import noorg.magic.models.CardCollection;
 import noorg.magic.services.DataService;
 import noorg.magic.services.HTTPServices;
-import noorg.magic.utils.Configures;
+import noorg.magic.utils.FileUtil;
+import noorg.magic.utils.Constants;
 
 import org.hamster.commands.events.CommandEvent;
 import org.hamster.commands.impl.CommandQueue;
@@ -25,7 +27,7 @@ private function appCompleteHandler():void
 {
 	new HTTPServices();
 	
-	var folders:Array = Configures.getCardFolder().getDirectoryListing();
+	var folders:Array = FileUtil.getCardFolder().getDirectoryListing();
 	var collNames:Array = new Array();
 	DS.cardCollections = new ArrayCollection();
 	
@@ -75,16 +77,35 @@ private function loadListCompleteHandler(evt:CommandEvent):void
 
 private function queueCompleteHandler(evt:CommandEvent):void
 {
-	_moduleInfo = ModuleManager.getModule("/noorg/magic/controls/modules/MenuModule.swf");
-	_moduleInfo.addEventListener(ModuleEvent.READY, loadReadyHandler);
+	_moduleInfo = ModuleManager.getModule(Constants.MODULE_MENU);
+	_moduleInfo.addEventListener(ModuleEvent.READY, menuModuleReadyHandler);
 	_moduleInfo.load();
 }
 
-private function loadReadyHandler(evt:ModuleEvent):void
+private function menuModuleReadyHandler(evt:ModuleEvent):void
 {
-	_moduleInfo.removeEventListener(ModuleEvent.READY, loadReadyHandler);
+	_moduleInfo.removeEventListener(ModuleEvent.READY, menuModuleReadyHandler);
+	var menuModule:DisplayObject = evt.module.factory.create() as DisplayObject;
+	menuModule.addEventListener(GameFlowEvent.START_GAME, startGameHandler);
+	this.addChild(menuModule); 
+}
+
+private function startGameHandler(evt:GameFlowEvent):void
+{
+	var menuModule:DisplayObject = DisplayObject(evt.currentTarget);
+	menuModule.removeEventListener(GameFlowEvent.START_GAME, startGameHandler);
+	this.removeChild(menuModule);
 	
-	var obj:DisplayObject = evt.module.factory.create() as DisplayObject;
-	this.addChild(obj); 
+	_moduleInfo = ModuleManager.getModule(Constants.MODULE_PLAY);
+	_moduleInfo.addEventListener(ModuleEvent.READY, playModuleReadyHandler);
+	_moduleInfo.load();
+}
+
+private function playModuleReadyHandler(evt:ModuleEvent):void
+{
+	_moduleInfo.removeEventListener(ModuleEvent.READY, playModuleReadyHandler);
+	var playModule:DisplayObject = evt.module.factory.create() as DisplayObject;
+	// menuModule.addEventListener(GameFlowEvent.START_GAME, startGameHandler);
+	this.addChild(playModule); 
 }
 

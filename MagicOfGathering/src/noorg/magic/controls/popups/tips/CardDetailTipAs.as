@@ -3,10 +3,10 @@ import mx.effects.Fade;
 import mx.events.EffectEvent;
 
 import noorg.magic.controls.play.unit.PlayCardUnit;
-import noorg.magic.controls.popups.tips.TipBase;
 import noorg.magic.models.Card;
 import noorg.magic.utils.Constants;
-import noorg.magic.utils.TipArrowUtil;Constants;
+
+import org.hamster.graphics.tip.TipUtil;
 
 public static const FADE_DURATION:Number = 250;
 
@@ -18,7 +18,7 @@ public function set card(value:Card):void
 	this._card = card;
 	if (this.initialized) {
 		mainCardUnit.card = value;
-		if (this.tipArrow.arrowDirection == TipArrowUtil.TOP) {
+		if (this.tipArrow.arrowDirection == TipUtil.TOP) {
 		} else {
 		}
 		this.invalidateDisplayList();

@@ -2,8 +2,20 @@ package noorg.magic.utils
 {
 	import flash.filesystem.File;
 	
-	public class Configures
+	public class FileUtil
 	{
+		public static const ILLEGAL_CHARACTERS:Array = [':','*','/','|','\\','?','"','<','>'];
+		
+		public static function isFileNameLegal(name:String):Boolean
+		{
+			for each (var char:String in ILLEGAL_CHARACTERS) {
+				if (name.indexOf(char) != -1) {
+					return false;
+				}
+			}
+			return true;
+		}
+		
 		public static function getCardFolder():File
 		{
 			var result:File = new File(File.applicationDirectory.nativePath + File.separator + "card");

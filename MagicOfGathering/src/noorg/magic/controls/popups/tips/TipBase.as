@@ -6,15 +6,15 @@ package noorg.magic.controls.popups.tips
 	
 	import mx.containers.Canvas;
 	
-	import noorg.magic.utils.TipArrowImpl;
-	import noorg.magic.utils.TipArrowUtil;
+	import org.hamster.graphics.tip.TipArrowImpl;
+	import org.hamster.graphics.tip.TipUtil;
 
 	public class TipBase extends Canvas
 	{
 		public static const TIP_WIDTH:Number = 30;
 		public static const TIP_HEIGHT:Number = 40;
 		public static const CORNER_RADIUS:Number = 15;
-		public const tipArrow:TipArrowImpl = new TipArrowImpl(TipArrowUtil.BOTTOM, 40, 80, 60, TIP_HEIGHT);
+		public const tipArrow:TipArrowImpl = new TipArrowImpl(TipUtil.BOTTOM, 40, 80, 60, TIP_HEIGHT);
 		
 		public function TipBase()
 		{
@@ -47,7 +47,7 @@ package noorg.magic.controls.popups.tips
 			tipArrow.distanceA = uw - 4 * TIP_WIDTH >> 1;
 			tipArrow.distanceB = uw - 2 * TIP_WIDTH >> 1;
 			tipArrow.distanceC = uw >> 1;
-			TipArrowUtil.drawTipRoundRectComplex(graphics, 0, 0, uw, uh, [tipArrow], 
+			TipUtil.drawTipRoundRectComplex(graphics, 0, 0, uw, uh, [tipArrow], 
 					CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, false);
 			graphics.endFill();
 		}

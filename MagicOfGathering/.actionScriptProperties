@@ -26,6 +26,7 @@
 </applications>
 <modules>
 <module application="src/MagicOfGathering.mxml" destPath="noorg/magic/controls/modules/MenuModule.swf" optimize="true" sourcePath="src/noorg/magic/controls/modules/MenuModule.mxml"/>
+<module application="src/MagicOfGathering.mxml" destPath="noorg/magic/controls/modules/PlayModule.swf" optimize="true" sourcePath="src/noorg/magic/controls/modules/PlayModule.mxml"/>
 </modules>
 <buildCSSFiles/>
 </actionScriptProperties>

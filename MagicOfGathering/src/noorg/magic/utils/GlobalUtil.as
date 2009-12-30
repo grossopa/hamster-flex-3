@@ -19,6 +19,8 @@ package noorg.magic.utils
 	import noorg.magic.models.Player;
 	import noorg.magic.models.actions.common.PayMagicAction;
 	
+	import org.hamster.graphics.tip.TipUtil;
+	
 	public class GlobalUtil
 	{
 		public static var curMask:ProcessMask;
@@ -88,7 +90,7 @@ package noorg.magic.utils
 			var doneFlag:Boolean = false;
 			
 			if (gPoint.y > tip.heightWithTip) {
-				tip.tipArrow.arrowDirection = TipArrowUtil.BOTTOM;
+				tip.tipArrow.arrowDirection = TipUtil.BOTTOM;
 				tip.x = gPoint.x - (tip.width - playCardUnit.width) / 2;
 				tip.y = gPoint.y - tip.heightWithTip;
 				// to ensure LEFT/RIGHT is a acceptable position, else continue.
@@ -96,21 +98,21 @@ package noorg.magic.utils
 			}
 			
 			if (!doneFlag && app.height - gPoint.y - playCardUnit.height > tip.heightWithTip) {
-				tip.tipArrow.arrowDirection = TipArrowUtil.TOP;
+				tip.tipArrow.arrowDirection = TipUtil.TOP;
 				tip.x = gPoint.x - (tip.width - playCardUnit.width) / 2;
 				tip.y = gPoint.y + playCardUnit.height + tip.heightWithTip - tip.height;
 				doneFlag = tip.x > 0 && app.width - tip.x - tip.width > 0;
 			}
 			
 			if (!doneFlag && gPoint.x > tip.widthWithTip) {
-				tip.tipArrow.arrowDirection = TipArrowUtil.RIGHT;
+				tip.tipArrow.arrowDirection = TipUtil.RIGHT;
 				tip.x = gPoint.x - tip.widthWithTip;
 				tip.y = gPoint.y - playCardUnit.height;
 				doneFlag = tip.y > 0 && app.height - tip.y - tip.heightWithTip > 0;
 			}
 			
 			if (!doneFlag && app.width - gPoint.x - playCardUnit.width > tip.widthWithTip) {
-				tip.tipArrow.arrowDirection = TipArrowUtil.LEFT;
+				tip.tipArrow.arrowDirection = TipUtil.LEFT;
 				tip.x = gPoint.x + playCardUnit.width + tip.widthWithTip - tip.width;
 				tip.y = gPoint.y - playCardUnit.height;
 				if (tip.y < 0) {

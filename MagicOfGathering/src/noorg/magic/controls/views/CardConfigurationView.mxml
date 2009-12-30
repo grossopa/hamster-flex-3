@@ -8,10 +8,7 @@
 		<views:BuildCardView id="buildCardView" />
 	</mx:ViewStack>
 	
-	<view:PreviousViewButton id="previousBtn" right="120" y="5"
-		click="goPreviousView()" />
-	<view:NextViewButton id="nextBtn" right="80" y="5" 
-		click="goNextView()" />
-	<popup:CommonPopupCloseButton id="closeBtn" right="40" y="5"
-		click="closeView()" />
+	<view:PreviousViewButton id="previousBtn" right="85" y="5" click="goPreviousView()" />
+	<view:NextViewButton id="nextBtn" right="45" y="5" click="goNextView()" />
+	<popup:CommonPopupCloseButton id="closeBtn" right="5" y="5" click="closeView()" />
 </BaseView>

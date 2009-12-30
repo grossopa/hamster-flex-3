@@ -2,7 +2,7 @@ package noorg.magic.commands.impl
 {
 	import flash.filesystem.File;
 	
-	import noorg.magic.utils.Configures;
+	import noorg.magic.utils.FileUtil;
 	
 	import org.hamster.commands.events.CommandEvent;
 	import org.hamster.commands.impl.CommandQueue;
@@ -23,7 +23,7 @@ package noorg.magic.commands.impl
 			this.cmdArray = new Array();
 			this.cards = new Array();
 			
-			var folder:File = Configures.getCardFolderByCollection(collectionName);
+			var folder:File = FileUtil.getCardFolderByCollection(collectionName);
 			var files:Array = folder.getDirectoryListing();
 			cards = new Array();
 			for each (var file:File in files) {
