@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <BaseView xmlns="noorg.magic.controls.views.base.*" creationComplete="completeHandler()"
 	xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" backgroundColor="0xFFFFFF"
-	xmlns:containers="noorg.magic.controls.containers.*" xmlns:views="noorg.magic.controls.views.*" xmlns:view="noorg.magic.controls.common.buttons.view.*" xmlns:popup="noorg.magic.controls.common.buttons.popup.*">
+	xmlns:containers="noorg.magic.controls.containers.*" xmlns:views="noorg.magic.controls.views.*"
+	xmlns:view="noorg.magic.controls.common.buttons.view.*" xmlns:popup="noorg.magic.controls.common.buttons.popup.*"
+	 backgroundImage="@Embed(source='/noorg/magic/assets/pics/cardConf_background.png')">
 	<mx:Script source="CardConfigurationViewAs.as" />
 	<mx:ViewStack id="mainViewStack" width="100%" height="100%">
 		<views:LoadCardView id="loadCardView" />

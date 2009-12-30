@@ -43,6 +43,7 @@
  		<fileset dir="${APP_SRC}" id="src.files">
 			<include name="**/**" />
       <exclude name="**/*As.as" />
+      <exclude name="**/*Example.mxml" />
 		</fileset>   
     
     <pathconvert property="evaFramework_classes"

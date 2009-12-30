@@ -28,10 +28,7 @@ package noorg.magic.utils
 		
 		public static function popUpMask(text:String, target:DisplayObject = null):void
 		{
-//			if (target == null) {
-//				target = app;
-//			}
-			curMask = PopUpManager.createPopUp(target, ProcessMask, true) as ProcessMask;
+			curMask = PopUpManager.createPopUp(Application.application as UIComponent, ProcessMask, true) as ProcessMask;
 			curMask.text = text;
 			PopUpManager.centerPopUp(curMask);
 		}

@@ -14,8 +14,8 @@ Button {
 }
 
 TextInput {
-  backgroundColor : #4FC0FF;
-  backgroundAlpha : 0.1;
+  backgroundColor : #FFEFEF;
+  backgroundAlpha : 1;
   borderThickness : 1;
   borderStyle : solid;
   
@@ -23,6 +23,6 @@ TextInput {
 
 global {
   fontSize : 11;	
-  fillAlphas : 0.1, 0.3;
-  fillColors : #4FC0FF, #4FC0FF;
+  fillAlphas : 1, 1;
+  fillColors : #FFEFEF, #FFEFEF;
 }
