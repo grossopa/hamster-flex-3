@@ -21,6 +21,13 @@ package noorg.magic.controls.common.buttons.base
 		private var _drawMode:String;
 		private var _isChanged:Boolean = true;
 		
+		override public function set enabled(value:Boolean):void
+		{
+			super.enabled = value;
+			
+			this._isChanged = true;
+		}
+		
 		protected function set overImage(value:Class):void
 		{
 			this._overImageClass = value;
