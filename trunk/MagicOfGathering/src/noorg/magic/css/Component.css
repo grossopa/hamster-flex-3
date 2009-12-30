@@ -25,4 +25,6 @@ global {
   fontSize : 11;	
   fillAlphas : 1, 1;
   fillColors : #FFEFEF, #FFEFEF;
+  selectionColor : #FFDFDF;
+  rollOverColor : #FFEFEF;
 }
