@@ -2,7 +2,7 @@ package noorg.magic.commands.impl
 {
 	import flash.filesystem.File;
 	
-	import noorg.magic.utils.Configures;
+	import noorg.magic.utils.FileUtil;
 	
 	import org.hamster.commands.AbstractCommand;
 
@@ -18,7 +18,7 @@ package noorg.magic.commands.impl
 		override public function execute():void
 		{
 			names = new Array();
-			var folder:File = Configures.getUserSaveFolder();
+			var folder:File = FileUtil.getUserSaveFolder();
 			var files:Array = folder.getDirectoryListing();
 			for each (var file:File in files) {
 				names.push(file.name);

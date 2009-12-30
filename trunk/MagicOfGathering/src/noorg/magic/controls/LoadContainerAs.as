@@ -2,7 +2,7 @@
 import noorg.magic.commands.CommandWrapper;
 import noorg.magic.commands.impl.GetCardFromWebCmd;
 import noorg.magic.models.CardCollectionMeta;
-import noorg.magic.utils.Configures;
+import noorg.magic.utils.FileUtil;
 import noorg.magic.utils.Properties;
 
 import org.hamster.commands.events.CommandEvent;
@@ -56,7 +56,7 @@ private function cmdResultHandler(evt:CommandEvent):void
 	cmd.removeEventListener(CommandEvent.COMMAND_RESULT, cmdResultHandler);
 	cmd.removeEventListener(CommandEvent.COMMAND_FAULT, cmdFaultHandler);
 	
-	CommandWrapper.imgToFile(cmd.card, Configures.getCardFolderByCollection(collectionNameInput.text));
+	CommandWrapper.imgToFile(cmd.card, FileUtil.getCardFolderByCollection(collectionNameInput.text));
 }
 
 private function cmdFaultHandler(evt:CommandEvent):void
@@ -69,5 +69,5 @@ private function cmdFaultHandler(evt:CommandEvent):void
 	cmd.removeEventListener(CommandEvent.COMMAND_RESULT, cmdResultHandler);
 	cmd.removeEventListener(CommandEvent.COMMAND_FAULT, cmdFaultHandler);
 	
-	CommandWrapper.imgToFile(cmd.card, Configures.getCardFolderByCollection(collectionNameInput.text));
+	CommandWrapper.imgToFile(cmd.card, FileUtil.getCardFolderByCollection(collectionNameInput.text));
 }

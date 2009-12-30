@@ -8,7 +8,7 @@ package noorg.magic.commands.impl
 	import mx.collections.ArrayCollection;
 	
 	import noorg.magic.models.Card;
-	import noorg.magic.utils.Configures;
+	import noorg.magic.utils.FileUtil;
 	
 	import org.hamster.commands.AbstractCommand;
 
@@ -26,7 +26,7 @@ package noorg.magic.commands.impl
 		override public function execute():void
 		{
 			cards = new ArrayCollection();
-			var file:File = Configures.getUserSaveMetaFileByCollection(name);
+			var file:File = FileUtil.getUserSaveMetaFileByCollection(name);
 			var fs:FileStream = new FileStream();
 			fs.addEventListener(Event.COMPLETE, loadCompleteHandler);
 			fs.openAsync(file, FileMode.READ);

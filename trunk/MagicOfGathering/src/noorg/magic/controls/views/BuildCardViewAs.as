@@ -13,7 +13,7 @@ import noorg.magic.models.Card;
 import noorg.magic.models.CardCollection;
 import noorg.magic.services.DataService;
 import noorg.magic.services.EventService;
-import noorg.magic.utils.Configures;
+import noorg.magic.utils.FileUtil;
 import noorg.magic.utils.GlobalUtil;
 
 import org.hamster.commands.events.CommandEvent;
@@ -29,7 +29,7 @@ private function completeHandler():void
 {
 	ES.addEventListener(CardEvent.SELECT_CHANGED, cardSelectionChangedHandler);
 	
-	var folders:Array = Configures.getCardFolder().getDirectoryListing();
+	var folders:Array = FileUtil.getCardFolder().getDirectoryListing();
 	var collNames:Array = new Array();
 	DS.cardCollections = new ArrayCollection();
 	

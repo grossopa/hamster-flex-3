@@ -6,7 +6,8 @@ package noorg.magic.models
 	import noorg.magic.models.base.AbstractModelSupport;
 	import noorg.magic.models.staticValue.CardLocation;
 	import noorg.magic.models.staticValue.CardStatus;
-	import noorg.magic.utils.CommonArrayUtil;
+	
+	import org.hamster.common.utils.ArrayUtil;
 	
 	public class PlayerCardColl extends AbstractModelSupport
 	{
@@ -59,7 +60,7 @@ package noorg.magic.models
 			var length:int = cardStack.length;
 			for(var i:int = 0; i < length; i++) {  
 				var j:int = int(Math.random() * length);
-				CommonArrayUtil.swapArray(cardStack, i, j);
+				ArrayUtil.swap(cardStack, i, j);
 			}
 		}
 		

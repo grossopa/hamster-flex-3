@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" cornerRadius="20"
-	 backgroundImage="@Embed(source='noorg/magic/assets/cards/back.png')" xmlns:tips="noorg.magic.controls.popups.tips.*">
-
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" 
+	xmlns:tips="noorg.magic.controls.popups.tips.*" backgroundColor="white">
+	<mx:Script source="MGTestAs.as" />
+	<mx:Metadata>
+		[ResourceBundle("main")]
+		[ResourceBundle("action")]
+		[ResourceBundle("component")]
+	</mx:Metadata>
+	<mx:Style source="/noorg/magic/css/Component.css" />
+	<mx:ComboBox dataProvider="{['the one', 'two']}" />
+	<mx:Button label="lalala" />
+	<mx:TextInput text="asdf das d" />
 </mx:WindowedApplication>

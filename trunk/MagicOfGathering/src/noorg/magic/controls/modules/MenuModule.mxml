@@ -7,7 +7,7 @@
 	<mx:Metadata>
 		[ResourceBundle("module_menu")]
 	</mx:Metadata>
-	<menu:CommonMenuButton id="startGameBtn" 
+	<menu:CommonMenuButton id="startGameBtn"
 		label="{this.resourceManager.getString('module_menu', 'start')}" 
 		right="10" bottom="160" click="startGameHandler()" />
 	<menu:CommonMenuButton id="settingsBtn" 
