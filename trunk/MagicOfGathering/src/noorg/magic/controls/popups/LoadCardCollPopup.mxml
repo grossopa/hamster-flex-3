@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" 
-	width="400" height="200" layout="horizontal" 
-	label="{this.resourceManager.getString('main', 'load') + this.resourceManager.getString('main','loadCardCollPopup.loadList')}"
+	width="330" height="100" layout="horizontal" 
+	title="{this.resourceManager.getString('main', 'load') + this.resourceManager.getString('main','loadCardCollPopup.loadList')}"
 	verticalAlign="middle">
 	<mx:Script source="LoadCardCollPopupAs.as" />
 	<mx:Label text="{this.resourceManager.getString('main','loadCardCollPopup.loadList')}" />

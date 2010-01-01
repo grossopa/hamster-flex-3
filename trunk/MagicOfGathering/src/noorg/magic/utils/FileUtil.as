@@ -12,7 +12,7 @@ package noorg.magic.utils
 				if (name.indexOf(char) != -1) {
 					return false;
 				}
-			}
+			} 
 			return true;
 		}
 		

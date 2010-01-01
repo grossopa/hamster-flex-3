@@ -38,9 +38,9 @@ package noorg.magic.utils
 			PopUpManager.removePopUp(curMask);
 		}
 		
-		public static function get app():MagicOfGathering
+		public static function get app():HamsterMagicTheGathering
 		{
-			return MagicOfGathering(Application.application);
+			return HamsterMagicTheGathering(Application.application);
 		}
 		
 		public static function createPopup(className:Class, parent:DisplayObject = null):IFlexDisplayObject
@@ -83,6 +83,7 @@ package noorg.magic.utils
 		public static function showCardDetailTip(playCardUnit:PlayCardUnit):void
 		{
 			var tip:CardDetailTip = app.cardDetailTip;
+			app.setChildIndex(tip, app.numChildren - 1);
 			var gPoint:Point = playCardUnit.localToGlobal(new Point());
 			var doneFlag:Boolean = false;
 			
