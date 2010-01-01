@@ -23,7 +23,7 @@ package noorg.magic.controls.play.buttons
 			this._overImage.bitmapData.draw(bm, null, null, BlendMode.OVERLAY);
 			this._normalImage.bitmapData.draw(bm, null, null, BlendMode.OVERLAY);
 			this._downImage.bitmapData.draw(bm, null, null, BlendMode.OVERLAY);
-			this.invalidateDisplayList();			
+			this.invalidateDisplayList();
 		}
 
 		public function PlayMenuPlayerButton()
@@ -36,14 +36,6 @@ package noorg.magic.controls.play.buttons
 			this.overImage 		= OVER_PNG;
 			this.downImage 		= DOWN_PNG;
 			this.normalImage 	= NORMAL_PNG;
-			
-			this.addEventListener(FlexEvent.CREATION_COMPLETE, completeHandler);
-		}
-		
-		private function completeHandler(evt:FlexEvent):void
-		{
-			this.removeEventListener(FlexEvent.CREATION_COMPLETE, completeHandler);
-	
 		}
 		
 	}

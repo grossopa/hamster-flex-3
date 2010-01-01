@@ -2,7 +2,6 @@
 import flash.events.MouseEvent;
 
 import mx.events.DragEvent;
-import mx.managers.DragManager;
 
 import noorg.magic.controls.play.unit.PlayCardUnit;
 import noorg.magic.events.PlayMenuEvent;
@@ -47,7 +46,7 @@ private function switchPlayer2Handler(evt:PlayMenuEvent):void
 
 private function leaveHandler(evt:PlayMenuEvent):void
 {
-	
+	this.dispatchEvent(new PlayMenuEvent(PlayMenuEvent.LEAVE));
 }
 
 private function upDragEnterHandler(evt:DragEvent):void

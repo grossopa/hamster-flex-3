@@ -13,8 +13,8 @@ import noorg.magic.events.GameFlowEvent;
 import noorg.magic.models.CardCollection;
 import noorg.magic.services.DataService;
 import noorg.magic.services.HTTPServices;
-import noorg.magic.utils.FileUtil;
 import noorg.magic.utils.Constants;
+import noorg.magic.utils.FileUtil;
 
 import org.hamster.commands.events.CommandEvent;
 import org.hamster.commands.impl.CommandQueue;
@@ -105,7 +105,18 @@ private function playModuleReadyHandler(evt:ModuleEvent):void
 {
 	_moduleInfo.removeEventListener(ModuleEvent.READY, playModuleReadyHandler);
 	var playModule:DisplayObject = evt.module.factory.create() as DisplayObject;
-	// menuModule.addEventListener(GameFlowEvent.START_GAME, startGameHandler);
+	playModule.addEventListener(GameFlowEvent.QUIT_GAME, quitGameHandler);
 	this.addChild(playModule); 
+}
+
+private function quitGameHandler(evt:GameFlowEvent):void
+{
+	var menuModule:DisplayObject = DisplayObject(evt.currentTarget);
+	menuModule.removeEventListener(GameFlowEvent.QUIT_GAME, quitGameHandler);
+	this.removeChild(menuModule);
+	
+	_moduleInfo = ModuleManager.getModule(Constants.MODULE_MENU);
+	_moduleInfo.addEventListener(ModuleEvent.READY, menuModuleReadyHandler);
+	_moduleInfo.load();
 }
 
