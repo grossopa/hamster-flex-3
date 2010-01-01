@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="35" 
+	xmlns:buttons="noorg.magic.controls.play.buttons.*"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off" creationComplete="completeHandler()">
+	<mx:Script source="PlayMenuContainerAs.as" />
+	<buttons:PlayMenuPlayerButton id="playerButton1" x="5" click="playBtn1ClickHandler()" />
+	<buttons:PlayMenuPlayerButton id="playerButton2" x="45" click="playBtn2ClickHandler()" />
+	<buttons:PlayMenuLeaveButton id="leaveButton" right="5" click="leaveBtnClickHandler()" />	
+</mx:Canvas>
