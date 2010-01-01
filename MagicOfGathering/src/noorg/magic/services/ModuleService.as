@@ -19,16 +19,5 @@ package noorg.magic.services
 		{
 		}
 		
-		public var moduleInfo:IModuleInfo;
-		
-		public function load(url:String):void
-		{
-			if (moduleInfo != null) {
-				moduleInfo.unload();
-			}
-			moduleInfo = ModuleManager.getModule(url);
-			moduleInfo.load();
-		}
-
 	}
 }

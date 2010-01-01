@@ -2,11 +2,10 @@
 <mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" 
 	layout="absolute" width="100%" height="100%" creationComplete="completeHandler()" 
 	xmlns:step="noorg.magic.controls.play.step.*" xmlns:play="noorg.magic.controls.play.*"
-	backgroundColor="0xffffff">
+	backgroundColor="0xffffff" xmlns:tips="noorg.magic.controls.popups.tips.*">
 	<mx:Script source="PlayModuleAs.as" />
 	<mx:ViewStack id="mainViewStack" width="100%" height="100%">
 		<step:PrepareStep id="prepareView" width="100%" height="100%" />
 		<play:PlayMainContainer id="mainContainer" width="100%" height="100%" />
 	</mx:ViewStack>
-	
 </mx:Module>

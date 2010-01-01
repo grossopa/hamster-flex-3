@@ -20,13 +20,13 @@
 <sourceAttachmentPath/>
 </compiler>
 <applications>
-<application path="MagicOfGathering.mxml"/>
-<application path="MGTest.mxml"/>
+<!--<application path="MagicOfGathering.mxml"/>
+<application path="MGTest.mxml"/> -->
 <application path="HamsterMagicTheGathering.mxml"/>
 </applications>
 <modules>
-<module application="src/MagicOfGathering.mxml" destPath="noorg/magic/controls/modules/MenuModule.swf" optimize="true" sourcePath="src/noorg/magic/controls/modules/MenuModule.mxml"/>
-<module application="src/MagicOfGathering.mxml" destPath="noorg/magic/controls/modules/PlayModule.swf" optimize="true" sourcePath="src/noorg/magic/controls/modules/PlayModule.mxml"/>
+<module application="src/HamsterMagicTheGathering.mxml" destPath="noorg/magic/controls/modules/MenuModule.swf" optimize="true" sourcePath="src/noorg/magic/controls/modules/MenuModule.mxml"/>
+<module application="src/HamsterMagicTheGathering.mxml" destPath="noorg/magic/controls/modules/PlayModule.swf" optimize="true" sourcePath="src/noorg/magic/controls/modules/PlayModule.mxml"/>
 </modules>
 <buildCSSFiles/>
 </actionScriptProperties>

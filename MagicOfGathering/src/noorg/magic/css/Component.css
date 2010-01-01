@@ -14,17 +14,20 @@ Button {
 }
 
 TextInput {
-  backgroundColor : #FFEFEF;
+  backgroundColor : #EFEFFF;
   backgroundAlpha : 1;
   borderThickness : 1;
   borderStyle : solid;
-  
+}
+
+NumericStepper {
+	cornerRadius : 0;	
 }
 
 global {
   fontSize : 11;	
   fillAlphas : 1, 1;
-  fillColors : #FFEFEF, #FFEFEF;
-  selectionColor : #FFDFDF;
-  rollOverColor : #FFEFEF;
+  fillColors : #EFEFFF, #EFEFFF;
+  selectionColor : #CFCFFF;
+  rollOverColor : #DFDFFF;
 }
