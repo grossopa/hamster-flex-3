@@ -2,15 +2,18 @@
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" 
 	verticalScrollPolicy="off" horizontalScrollPolicy="off" 
 	xmlns:components="org.hamster.components.*" xmlns:buttons="noorg.magic.controls.play.buttons.*"
-	 creationComplete="completeHandler()" xmlns:play="noorg.magic.controls.play.*">
+	 creationComplete="completeHandler()" xmlns:play="noorg.magic.controls.play.*" xmlns:containers="noorg.magic.controls.play.containers.*">
 	<mx:Script source="PlayMainContainerAs.as" />
-	<mx:ViewStack id="mainViewStack" width="100%" height="100%" >
+	
+	<containers:PlayMenuContainer id="playMenuContainer" />
+	
+	<mx:ViewStack id="mainViewStack" width="100%" height="100%" y="35" >
 		<play:PlayMainView id="mainView" />
 		<play:PlayMainViewOpposite id="mainViewOpposite" />
 	</mx:ViewStack>
 	
-	<buttons:SwitchPlayerBtn id="switchPlayerBtnUp" isUpArrow="true" 
+	<!--<buttons:SwitchPlayerBtn id="switchPlayerBtnUp" isUpArrow="true" 
 		dragEnter="upDragEnterHandler(event)" dragDrop="upDragDropHandler(event)" />
 	<buttons:SwitchPlayerBtn id="switchPlayerBtnDown" isUpArrow="false" bottom="0"
-		dragEnter="downDragEnterHandler(event)" dragDrop="downDragDropHandler(event)" />
+		dragEnter="downDragEnterHandler(event)" dragDrop="downDragDropHandler(event)" />-->
 </mx:Canvas>

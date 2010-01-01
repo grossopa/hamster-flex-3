@@ -36,7 +36,7 @@ public function loadCompleteHandler(evt:CommandEvent):void
 	cardColl.cards = collCmd.cards;
 	
 	this.player = ModelFactory.createPlayer(cardColl);
-	this.player.color = Number(this.colorPicker.value);
+	this.player.color = Number(this.colorPicker.selectedColor);
 	
 	this.dispatchEvent(new StepCtrlEvent(StepCtrlEvent.LOAD_COMPLETE));
 }
