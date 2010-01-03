@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+	<mx:Script>
+		<![CDATA[
+			import org.hamster.effects.WaterDissolve;
+			
+			private function doEff():void
+			{
+				var pd:WaterDissolve = new WaterDissolve(mainCanvas);
+				pd.duration = 5000;
+				pd.play(null, false);
+			}
+		]]>
+	</mx:Script>
+
+	<mx:Canvas id="mainCanvas" width="600" height="400" backgroundColor="0x7F7F7F">
+		<mx:Label text="The quick brown fox jumps over the lazy dog." fontSize="20" />
+		<mx:Image source="@Embed(source='../test/org/hamster/assets/splitmass.jpg')" 
+			width="300" height="300" y="100" />
+	</mx:Canvas>
+	
+	<mx:Button y="300" label="test" click="doEff()" />
+</mx:Application>
