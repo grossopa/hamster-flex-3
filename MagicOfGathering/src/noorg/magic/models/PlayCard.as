@@ -6,6 +6,7 @@ package noorg.magic.models
 	import noorg.magic.events.PlayerEvent;
 	import noorg.magic.models.actions.base.ICardAction;
 	import noorg.magic.models.actions.common.PayMagicAction;
+	import noorg.magic.models.staticValue.CardLocation;
 	import noorg.magic.models.staticValue.CardType;
 	
 	public class PlayCard extends Card
@@ -124,12 +125,20 @@ package noorg.magic.models
 					player.magicRed 		-= this.magicPool.red;
 					player.magicWhite 		-= this.magicPool.white;
 					
-					this.setLocation(CardType.getDefaultLocation(this.type.type));
+					if (this.type != null) {
+						this.setLocation(CardType.getDefaultLocation(this.type.type));
+					} else {
+						this.setLocation(CardLocation.CREATURE);
+					}
 				} else {
 					this.payMagic(null);
 				}
 			} else {
-				this.setLocation(CardType.getDefaultLocation(this.type.type));
+				if (this.type != null) {
+					this.setLocation(CardType.getDefaultLocation(this.type.type));
+				} else {
+					this.setLocation(CardLocation.CREATURE);
+				}
 			}
 			
 		}
