@@ -1,4 +1,7 @@
 // ActionScript file
+import mx.managers.PopUpManager;
+
+import noorg.magic.controls.popups.SettingsPopup;
 import noorg.magic.events.PlayMenuEvent;
 import noorg.magic.services.DataService;
 
@@ -23,4 +26,10 @@ private function playBtn2ClickHandler():void
 private function leaveBtnClickHandler():void
 {
 	this.dispatchEvent(new PlayMenuEvent(PlayMenuEvent.LEAVE));
+}
+
+private function popupSettingsHandler():void
+{
+	var pop:SettingsPopup = PopUpManager.createPopUp(this, SettingsPopup, true) as SettingsPopup;
+	PopUpManager.centerPopUp(pop);
 }
