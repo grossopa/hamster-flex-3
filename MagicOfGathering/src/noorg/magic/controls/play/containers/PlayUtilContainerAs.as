@@ -1,6 +1,11 @@
 // ActionScript file
-import mx.collections.ArrayCollection;
+import flash.display.DisplayObject;
 
+import mx.collections.ArrayCollection;
+import mx.core.Application;
+import mx.managers.PopUpManager;
+
+import noorg.magic.controls.play.popups.actions.AttackPopup;
 import noorg.magic.models.PlayCard;
 import noorg.magic.models.Player;
 import noorg.magic.models.staticValue.CardLocation;
@@ -38,4 +43,11 @@ private function tapAllLand():void
 			playCard.executeAction(0);
 		}
 	}	
+}
+
+private function beginAttack():void
+{
+	var attPopup:AttackPopup = PopUpManager.createPopUp(Application.application as DisplayObject, AttackPopup, true) as AttackPopup;
+	attPopup.setPlayers(this.player, this.player);
+	PopUpManager.centerPopUp(attPopup);
 }

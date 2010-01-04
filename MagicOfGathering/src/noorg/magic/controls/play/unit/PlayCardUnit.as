@@ -46,6 +46,8 @@ package noorg.magic.controls.play.unit
 		protected var dragMaskInsertLeft:DragMaskInsertArrow;
 		protected var dragMaskInsertRight:DragMaskInsertArrow;
 		
+		public var dragEnabled:Boolean = true;
+		
 		override public function set data(value:Object):void
 		{
 			this.card = PlayCard(value);
@@ -173,7 +175,9 @@ package noorg.magic.controls.play.unit
 			this.iconManager.iconArrColl.addItem(iconEnhancement);
 			this.iconManager.iconArrColl.addItem(iconQuickMenu);
 			
-			locationChangedHandler(null);
+			if (this.playCard != null) {
+				locationChangedHandler(null);
+			}
 			
 			this.iconManager.refreshLocation();
 		}
@@ -285,9 +289,11 @@ package noorg.magic.controls.play.unit
 		
 		private function mouseDownHandler(evt:MouseEvent):void
 		{
-			var ds:DragSource = new DragSource();
-			var p:Point = this.globalToLocal(new Point(evt.stageX, evt.stageY));
-			DragManager.doDrag(this, ds, evt, this.mainImage,p.x + 10, p.y - this.height / 2);
+			if (dragEnabled) {
+				var ds:DragSource = new DragSource();
+				var p:Point = this.globalToLocal(new Point(evt.stageX, evt.stageY));
+				DragManager.doDrag(this, ds, evt, this.mainImage,p.x + 10, p.y - this.height / 2);
+			}
 		}
 		
 		private function rollOverHandler(evt:MouseEvent):void

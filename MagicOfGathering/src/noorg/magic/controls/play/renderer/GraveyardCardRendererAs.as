@@ -15,7 +15,9 @@ override protected function createIcon():void
 	super.createIcon();
 	
 	this.iconTap.isEnabled = false;
-	
+	this.iconCast.isEnabled = false;
+	this.iconEnhancement.isEnabled = false;
+		
 	iconReturnHand = new IconReturnHand();
 	iconReturnHand.visible = false;
 	iconReturnHand.addEventListener(MouseEvent.CLICK, iconReturnHandClickHandler);
