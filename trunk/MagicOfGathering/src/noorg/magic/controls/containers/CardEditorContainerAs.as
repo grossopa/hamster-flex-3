@@ -51,6 +51,7 @@ private function showCardProperties():void
 	} else {
 		selIndex = 0;
 		this.cardTypeComboBox.selectedIndex = selIndex;
+		cardTypeViewStack.selectedIndex = 0;
 	}
 	
 	this.magicCostEditorUnit.magicPool = this.card.magicPool;

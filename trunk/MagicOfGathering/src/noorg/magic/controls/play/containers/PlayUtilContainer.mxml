@@ -7,4 +7,6 @@
 		click="untapAll()" />
 	<common:CommonButton text="{this.resourceManager.getString('main','play.tapAllLand')}"
 		click="tapAllLand()" />
+	<common:CommonButton text="{this.resourceManager.getString('main','play.attack')}"
+		click="beginAttack()" />
 </mx:VBox>

@@ -28,7 +28,6 @@
 		<mx:Image id="moveRightBtn" width="20" height="100%" right="0" alpha="0.01"
 			rollOver="btnRightRollOverHandler(event)" rollOut="btnRightRollOutHandler(event)" 
 			click="moveRightHandler()" />	
-			<!--dragEnabled="true" dropEnabled="true" dragEnter="listDragEnterHandler(event)" dragDrop="listDragDropHandler(event)"-->
 	</mx:HBox>
 
 

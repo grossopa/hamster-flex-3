@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" width="800" height="600"
-	layout="horizontal">
-	<mx:VBox id="mainContainer" width="100%" height="100%">
-	</mx:VBox>
-	<mx:VBox id="informationBar" width="200" height="100%">
-	</mx:VBox>
+	layout="vertical">
+	<mx:Script source="AttackPopupAs.as" />
+	<mx:Script>
+		<![CDATA[
+			import noorg.magic.utils.Constants;
+		]]>
+	</mx:Script>
+	<mx:HorizontalList id="attackCardList" width="100%" height="{Constants.PLAY_CARD_HEIGHT}"
+		itemRenderer="noorg.magic.controls.play.renderer.AttackDefCardRenderer" borderStyle="none"
+		dragEnabled="true" dataProvider="{attackerCreatureList}" paddingTop="0" paddingBottom="0"
+		itemClick="attackCardClickHandler(event)" />
+	<mx:HBox width="100%" height="20">
+		<mx:Label text="{this.resourceManager.getString('main', 'attackPopup.attackCard')}" 
+			width="{Constants.PLAY_CARD_WIDTH}" />
+		<mx:Label text="{this.resourceManager.getString('main', 'attackPopup.defenseCard')}" />
+	</mx:HBox>
+	<mx:VBox id="attackDefBox" width="100%" height="100%" />
+	<mx:HorizontalList id="defenseCardList" width="100%" height="{Constants.PLAY_CARD_HEIGHT}"
+		itemRenderer="noorg.magic.controls.play.renderer.AttackDefCardRenderer" borderStyle="none"
+		dataProvider="{defenseCreatureList}" paddingTop="0" paddingBottom="0" />
 </mx:Panel>

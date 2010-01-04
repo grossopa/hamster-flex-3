@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="{Constants.PLAY_CARD_HEIGHT}"
+	xmlns:containers="noorg.magic.controls.containers.*" 
+	xmlns:unit="noorg.magic.controls.unit.*" 
+	xmlns:unit1="noorg.magic.controls.play.unit.*">
+	
+	<mx:Script source="AttackDefUnitAs.as" />
+	<mx:Script>
+		<![CDATA[
+			import noorg.magic.utils.Constants;
+		]]>
+	</mx:Script>
+	<mx:Image id="attackerCardImage" width="{Constants.PLAY_CARD_WIDTH}" height="{Constants.PLAY_CARD_HEIGHT}"
+		 source="{_attackImgSource}" />
+	<mx:HRule height="100%" />
+	<mx:HorizontalList id="defenseCardList" x="{Constants.PLAY_CARD_WIDTH + 10}" width="100%" 
+		height="{Constants.PLAY_CARD_HEIGHT}"
+		itemRenderer="noorg.magic.controls.play.renderer.AttackDefCardRenderer"
+		dragEnabled="true" dataProvider="{defCardList}" borderStyle="none" 
+		dragEnter="defDragEnterHandler(event)" dragDrop="defDragDropHandler(event)"/>
+		
+	
+</mx:Canvas>
