@@ -8,8 +8,8 @@
 		]]>
 	</mx:Script>
 	<mx:HorizontalList id="attackCardList" width="100%" height="{Constants.PLAY_CARD_HEIGHT}"
-		itemRenderer="noorg.magic.controls.play.renderer.AttackDefCardRenderer" borderStyle="none"
-		dragEnabled="true" dataProvider="{attackerCreatureList}" paddingTop="0" paddingBottom="0"
+		itemRenderer="noorg.magic.controls.play.renderer.AttCardRenderer" borderStyle="none"
+		dataProvider="{attackerCreatureList}" paddingTop="0" paddingBottom="0"
 		itemClick="attackCardClickHandler(event)" />
 	<mx:HBox width="100%" height="20">
 		<mx:Label text="{this.resourceManager.getString('main', 'attackPopup.attackCard')}" 
@@ -18,6 +18,6 @@
 	</mx:HBox>
 	<mx:VBox id="attackDefBox" width="100%" height="100%" />
 	<mx:HorizontalList id="defenseCardList" width="100%" height="{Constants.PLAY_CARD_HEIGHT}"
-		itemRenderer="noorg.magic.controls.play.renderer.AttackDefCardRenderer" borderStyle="none"
+		itemRenderer="noorg.magic.controls.play.renderer.DefCardRenderer" borderStyle="none"
 		dataProvider="{defenseCreatureList}" paddingTop="0" paddingBottom="0" />
 </mx:Panel>

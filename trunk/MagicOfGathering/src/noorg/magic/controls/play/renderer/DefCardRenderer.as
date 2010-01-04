@@ -6,11 +6,11 @@ package noorg.magic.controls.play.renderer
 	import noorg.magic.controls.play.unit.PlayCardUnit;
 	import noorg.magic.events.PlayCardEvent;
 
-	public class AttackDefCardRenderer extends PlayCardUnit
+	public class DefCardRenderer extends PlayCardUnit
 	{
 		protected var iconRevert:IconRevert;
 		
-		public function AttackDefCardRenderer()
+		public function DefCardRenderer()
 		{
 			super();
 		}
