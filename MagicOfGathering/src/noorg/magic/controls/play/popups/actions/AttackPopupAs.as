@@ -3,6 +3,7 @@ import mx.collections.ArrayCollection;
 import mx.events.ListEvent;
 
 import noorg.magic.controls.play.popups.actions.attack.AttackDefUnit;
+import noorg.magic.events.PlayCardAttackEvent;
 import noorg.magic.models.PlayCard;
 import noorg.magic.models.Player;
 import noorg.magic.models.staticValue.CardLocation;
@@ -50,5 +51,20 @@ private function attackCardClickHandler(evt:ListEvent):void
 	
 	var newAttDefUnit:AttackDefUnit = new AttackDefUnit();
 	newAttDefUnit.attackerPlayCard = playCard;
+	newAttDefUnit.addEventListener(PlayCardAttackEvent.REMOVE_ATTACKER, removeAttackerHandler);
+	newAttDefUnit.addEventListener(PlayCardAttackEvent.REMOVE_DEFENDER, removeDefenderHandler);
 	this.attackDefBox.addChild(newAttDefUnit);
+}
+
+private function removeAttackerHandler(evt:PlayCardAttackEvent):void
+{
+	var curTarget:AttackDefUnit = AttackDefUnit(evt.currentTarget);
+	curTarget.removeEventListener(PlayCardAttackEvent.REMOVE_ATTACKER, removeAttackerHandler);
+	curTarget.removeEventListener(PlayCardAttackEvent.REMOVE_DEFENDER, removeDefenderHandler);
+	this.attackDefBox.removeChild(curTarget);
+}
+
+private function removeDefenderHandler(evt:PlayCardAttackEvent):void
+{
+	
 }
