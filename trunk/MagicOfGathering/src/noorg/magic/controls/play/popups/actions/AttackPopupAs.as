@@ -37,6 +37,10 @@ public function setPlayers(attacker:Player, defender:Player):void
 			this.defenseCreatureList.addItem(playCard);
 		}
 	}
+	
+	this.attackCardList.setStyle("backgroundColor", _attacker.color);
+	this.defenseCardList.setStyle("backgroundColor", _defender.color);
+	
 }
 
 private function attackCardClickHandler(evt:ListEvent):void
@@ -49,22 +53,35 @@ private function attackCardClickHandler(evt:ListEvent):void
 		}
 	}
 	
+	this.attackerCreatureList.removeItemAt(this.attackerCreatureList.getItemIndex(playCard));
+	
 	var newAttDefUnit:AttackDefUnit = new AttackDefUnit();
 	newAttDefUnit.attackerPlayCard = playCard;
+	newAttDefUnit.addEventListener(PlayCardAttackEvent.ADD_DEFENDER, addDefenderHandler);
 	newAttDefUnit.addEventListener(PlayCardAttackEvent.REMOVE_ATTACKER, removeAttackerHandler);
 	newAttDefUnit.addEventListener(PlayCardAttackEvent.REMOVE_DEFENDER, removeDefenderHandler);
 	this.attackDefBox.addChild(newAttDefUnit);
 }
 
+private function addDefenderHandler(evt:PlayCardAttackEvent):void
+{
+	this.defenseCreatureList.removeItemAt(this.defenseCreatureList.getItemIndex(evt.playCard));
+}
+
 private function removeAttackerHandler(evt:PlayCardAttackEvent):void
 {
 	var curTarget:AttackDefUnit = AttackDefUnit(evt.currentTarget);
+	curTarget.removeEventListener(PlayCardAttackEvent.ADD_DEFENDER, addDefenderHandler);
 	curTarget.removeEventListener(PlayCardAttackEvent.REMOVE_ATTACKER, removeAttackerHandler);
 	curTarget.removeEventListener(PlayCardAttackEvent.REMOVE_DEFENDER, removeDefenderHandler);
 	this.attackDefBox.removeChild(curTarget);
+	
+	this.attackerCreatureList.addItem(curTarget.attackerPlayCard);
+	this.defenseCreatureList.addAll(evt.relatedCards);
 }
 
 private function removeDefenderHandler(evt:PlayCardAttackEvent):void
 {
-	
+	this.defenseCreatureList.addItem(evt.playCard);
 }
+

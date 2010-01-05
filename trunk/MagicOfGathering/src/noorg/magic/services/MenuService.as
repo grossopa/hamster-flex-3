@@ -54,6 +54,10 @@ package noorg.magic.services
 		{
 			menuContainer.removeAllMenuItems();
 			
+			if (!GlobalUtil.app.contains(menuContainer)) {
+				GlobalUtil.app.addChild(menuContainer);
+			}
+			
 			for each (var item:MagicMenuItem in items) {
 				menuContainer.addMenuItem(item);
 			}
