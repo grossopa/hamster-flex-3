@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" width="800" height="600"
-	layout="vertical">
+	layout="vertical" verticalGap="0">
 	<mx:Script source="AttackPopupAs.as" />
 	<mx:Script>
 		<![CDATA[
 			import noorg.magic.utils.Constants;
 		]]>
 	</mx:Script>
-	<mx:HorizontalList id="attackCardList" width="100%" height="{Constants.PLAY_CARD_HEIGHT}"
-		itemRenderer="noorg.magic.controls.play.renderer.AttCardRenderer" borderStyle="none"
-		dataProvider="{attackerCreatureList}" paddingTop="0" paddingBottom="0"
-		itemClick="attackCardClickHandler(event)" />
-	<mx:HBox width="100%" height="20">
+	<mx:HBox width="100%" height="{Constants.PLAY_CARD_HEIGHT + 2}">
+		<mx:Image width="104" height="104" source="/noorg/magic/assets/pics/attack_bg.jpg" /> 
+		<mx:HorizontalList id="attackCardList" width="100%" height="100%"
+			itemRenderer="noorg.magic.controls.play.renderer.AttCardRenderer" borderStyle="none"
+			dataProvider="{attackerCreatureList}" paddingTop="0" paddingBottom="0"
+			backgroundAlpha="0.6" itemClick="attackCardClickHandler(event)" />		
+	</mx:HBox>
+
+	<mx:HBox width="100%">
 		<mx:Label text="{this.resourceManager.getString('main', 'attackPopup.attackCard')}" 
 			width="{Constants.PLAY_CARD_WIDTH}" />
 		<mx:Label text="{this.resourceManager.getString('main', 'attackPopup.defenseCard')}" />
 	</mx:HBox>
+	
 	<mx:VBox id="attackDefBox" width="100%" height="100%" />
-	<mx:HorizontalList id="defenseCardList" width="100%" height="{Constants.PLAY_CARD_HEIGHT}"
-		itemRenderer="noorg.magic.controls.play.renderer.DefCardRenderer" borderStyle="none"
-		dataProvider="{defenseCreatureList}" paddingTop="0" paddingBottom="0" />
+	
+	<mx:HBox width="100%" height="{Constants.PLAY_CARD_HEIGHT + 2}">
+		<mx:Image width="104" height="104" source="/noorg/magic/assets/pics/defense_bg.jpg" /> 
+		<mx:HorizontalList id="defenseCardList" width="100%" height="100%"
+			itemRenderer="noorg.magic.controls.play.renderer.DefCardRenderer" borderStyle="none"
+			backgroundAlpha="0.6" dataProvider="{defenseCreatureList}" paddingTop="0" paddingBottom="0" />
+	</mx:HBox>
 </mx:Panel>

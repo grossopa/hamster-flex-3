@@ -2,6 +2,8 @@ package noorg.magic.events
 {
 	import flash.events.Event;
 	
+	import mx.collections.ArrayCollection;
+	
 	import noorg.magic.models.PlayCard;
 
 	public class PlayCardAttackEvent extends Event
@@ -12,7 +14,7 @@ package noorg.magic.events
 		public static const REMOVE_DEFENDER:String = "PlayCardAttackEventRemoveDefender";
 		
 		public var playCard:PlayCard;
-		public var relatedCard:PlayCard;
+		public var relatedCards:ArrayCollection;
 		
 		public function PlayCardAttackEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{

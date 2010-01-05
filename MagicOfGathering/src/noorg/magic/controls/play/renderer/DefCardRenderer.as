@@ -4,7 +4,6 @@ package noorg.magic.controls.play.renderer
 	
 	import noorg.magic.controls.icons.IconRevert;
 	import noorg.magic.controls.play.unit.PlayCardUnit;
-	import noorg.magic.events.PlayCardEvent;
 
 	public class DefCardRenderer extends PlayCardUnit
 	{
@@ -27,7 +26,6 @@ package noorg.magic.controls.play.renderer
 			this.dragMaskInsertLeft.isEnabled = false;
 			this.dragMaskInsertRight.isEnabled = false;
 			this.dragMaskEnhancement.isEnabled = false;
-			
 //			iconRevert = new IconRevert();
 //			iconRevert.addEventListener(MouseEvent.CLICK, iconRevertClickHandler);
 //			this.addChild(iconRevert);
