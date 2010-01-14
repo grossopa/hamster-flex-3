@@ -11,7 +11,7 @@ package noorg.magic.controls.common.popup
 	import mx.utils.GraphicsUtil;
 	
 	import noorg.magic.controls.common.buttons.popup.CommonPopupCloseButton;
-
+ 
 	public class BasePopup extends Canvas
 	{
 		private var _closeButton:CommonPopupCloseButton;
