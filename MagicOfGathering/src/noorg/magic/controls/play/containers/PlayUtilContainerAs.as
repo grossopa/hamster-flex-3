@@ -10,6 +10,7 @@ import noorg.magic.models.PlayCard;
 import noorg.magic.models.Player;
 import noorg.magic.models.staticValue.CardLocation;
 import noorg.magic.models.staticValue.CardStatus;
+import noorg.magic.services.DataService;
 
 private var _player:Player;
 
@@ -47,7 +48,14 @@ private function tapAllLand():void
 
 private function beginAttack():void
 {
+	var defPlayer:Player;
+	var ds:DataService = DataService.getInstance();
+	if (ds.playerRed == player) {
+		defPlayer = ds.playerBlue;
+	} else {
+		defPlayer = ds.playerRed;
+	}
 	var attPopup:AttackPopup = PopUpManager.createPopUp(Application.application as DisplayObject, AttackPopup, true) as AttackPopup;
-	attPopup.setPlayers(this.player, this.player);
+	attPopup.setPlayers(this.player, defPlayer);
 	PopUpManager.centerPopUp(attPopup);
 }

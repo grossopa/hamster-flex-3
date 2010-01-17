@@ -10,6 +10,7 @@ import noorg.magic.controls.play.renderer.AttCardRenderer;
 import noorg.magic.controls.play.renderer.DefCardRenderer;
 import noorg.magic.events.PlayCardAttackEvent;
 import noorg.magic.models.PlayCard;
+import noorg.magic.models.staticValue.CardLocation;
 import noorg.magic.models.types.TypeCreature;
 
 private var _attackerCard:PlayCard;
@@ -22,6 +23,11 @@ private var _attackNum:int = 0;
 
 [Bindable]
 private var _attackImgSource:Object;
+
+public function get attackNum():int
+{
+	return this._attackNum;
+}
 
 public function set attackerPlayCard(value:PlayCard):void
 {
@@ -87,6 +93,29 @@ private function defItemClickHandler(evt:ListEvent):void
 	this.dispatchEvent(disEvt);
 	
 	validateResult();
+}
+
+public function applyResult():void
+{
+	var isBlocked:Boolean = false;
+	
+	var attackerPower:int = TypeCreature(this.attackerPlayCard.type).attack;
+	var attackerLife:int = TypeCreature(this.attackerPlayCard.type).defense;	
+	
+	for each (var playCard:PlayCard in this.defCardList) {
+		isBlocked = true;
+		attackerPower -= TypeCreature(playCard.type).defense;
+		attackerLife -= TypeCreature(playCard.type).attack;
+		if (attackerPower >= 0) {
+			playCard.setLocation(CardLocation.GRAVEYARD);
+		}
+	}
+	
+	_attackNum = isBlocked ? 0 : attackerPower;
+	
+	if (attackerLife <= 0) {
+		this.attackerPlayCard.setLocation(CardLocation.GRAVEYARD);
+	}
 }
 
 private function validateResult():void

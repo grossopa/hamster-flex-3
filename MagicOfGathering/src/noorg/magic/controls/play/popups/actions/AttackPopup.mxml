@@ -29,7 +29,8 @@
 			itemRenderer="noorg.magic.controls.play.renderer.DefCardRenderer" borderStyle="none"
 			backgroundAlpha="0.6" dataProvider="{defenseCreatureList}" paddingTop="0" paddingBottom="0" />
 		<mx:VBox width="40" height="100%">
-			
+			<mx:Image source="@Embed(source='/noorg/magic/assets/icons/attackPopup/attack_OK.png')" 
+				click="attackOKHandler()" width="35" height="25" buttonMode="true" />
 		</mx:VBox>
 	</mx:HBox>
 </mx:Panel>

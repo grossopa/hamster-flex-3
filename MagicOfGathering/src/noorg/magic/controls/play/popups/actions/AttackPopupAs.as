@@ -1,6 +1,7 @@
 // ActionScript file
 import mx.collections.ArrayCollection;
 import mx.events.ListEvent;
+import mx.managers.PopUpManager;
 
 import noorg.magic.controls.play.popups.actions.attack.AttackDefUnit;
 import noorg.magic.events.PlayCardAttackEvent;
@@ -83,5 +84,16 @@ private function removeAttackerHandler(evt:PlayCardAttackEvent):void
 private function removeDefenderHandler(evt:PlayCardAttackEvent):void
 {
 	this.defenseCreatureList.addItem(evt.playCard);
+}
+
+private function attackOKHandler():void
+{
+	var totalAttNum:int = 0;
+	for each (var child:AttackDefUnit in attackDefBox.getChildren()) {
+		child.applyResult();
+		totalAttNum += child.attackNum;
+	}
+	this._defender.hp -= totalAttNum;
+	PopUpManager.removePopUp(this);
 }
 
