@@ -151,6 +151,7 @@ package noorg.magic.models
 			xml.@["collection"] = this.collection;
 			xml.@["count"] = this.count;
 			xml.@["is-selected"] = this.isSelected;
+			xml.@["img-path"] = this.imgPath;
 			return xml;			
 		}
 		

@@ -8,6 +8,7 @@ private const ES:EventService = EventService.getInstance();
 
 private function completeHandler():void
 {
+	DS.selectedCards.removeAll();
 	validateBtnEnable();
 }
 
