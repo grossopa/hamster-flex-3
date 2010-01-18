@@ -11,7 +11,7 @@ package noorg.magic.commands.impl
 
 	public class LoadCardCmd extends AbstractCommand
 	{
-		public var collectionName:String;
+		public var collection:String;
 		public var card:Card;
 		
 		public var file:File;
@@ -41,7 +41,7 @@ package noorg.magic.commands.impl
 			card = new Card();
 			card.decodeXML(new XML(fs.readUTFBytes(fs.bytesAvailable)));
 			card.imgPath = file.nativePath.replace(/.xml$/, ".jpg");
-			card.collection = this.collectionName;
+			card.collection = this.collection;
 			fs.close();
 			
 			this.result(null);

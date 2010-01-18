@@ -36,7 +36,7 @@ package noorg.magic.commands
 		public static function loadCard(collectionName:String, file:File):LoadCardCmd
 		{
 			var cmd:LoadCardCmd = new LoadCardCmd();
-			cmd.collectionName = collectionName;
+			cmd.collection = collectionName;
 			cmd.file = file;
 			cmd.execute();
 			return cmd;
