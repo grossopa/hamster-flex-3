@@ -30,15 +30,20 @@ package noorg.magic.commands.impl
             _file = FileUtil.getCardInfoByPid(collection, pid);
             var fs:FileStream = new FileStream();
             fs.addEventListener(Event.COMPLETE, loadCompleteHandler);
-            fs.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
-            fs.openAsync(_file, FileMode.READ);			
+            //fs.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+            //TODO: strange....
+            fs.open(_file, FileMode.READ);
+            this.xml = new XML(fs.readUTFBytes(fs.bytesAvailable));
+            fs.close();
+			this.result(null);
 		}
 		
 		private function loadCompleteHandler(evt:Event):void
 		{
+			trace(fs.bytesAvailable);
 			var fs:FileStream = FileStream(evt.currentTarget);
-			fs.removeEventListener(Event.COMPLETE, loadCompleteHandler);
-            fs.removeEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+			//fs.removeEventListener(Event.COMPLETE, loadCompleteHandler);
+            //fs.removeEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
             this.xml = new XML(fs.readUTFBytes(fs.bytesAvailable));
             fs.close();
 			

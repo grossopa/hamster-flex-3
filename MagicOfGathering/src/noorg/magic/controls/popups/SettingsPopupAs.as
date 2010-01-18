@@ -1,4 +1,6 @@
 // ActionScript file
+import mx.collections.ArrayCollection;
+
 import noorg.magic.services.DataService;
 import noorg.magic.utils.Properties;Properties;
 

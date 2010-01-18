@@ -33,9 +33,9 @@ package noorg.magic.models.types
 		{
 			this.attack = xml.@attack;
 			this.defense = xml.@defense;
-			this.isFlying = xml.attribute("is-flying") as String == "true";
-			this.isReach = xml.attribute("isReach") as String == "true";
-			this.isFirstStrike = xml.attribute("is-first-strike") as String == "true";
+			this.isFlying = xml.attribute("is-flying") == "true";
+			this.isReach = xml.attribute("is-reach") == "true";
+			this.isFirstStrike = xml.attribute("is-first-strike") == "true";
 		}
 		
 		override public function encodeXML():XML
