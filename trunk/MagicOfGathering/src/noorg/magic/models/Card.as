@@ -1,10 +1,13 @@
 package noorg.magic.models
 {
+	import noorg.magic.commands.impl.LoadCardXMLCmd;
 	import noorg.magic.models.actions.ActionManager;
 	import noorg.magic.models.actions.base.ICardAction;
 	import noorg.magic.models.base.AbstractModelSupport;
 	import noorg.magic.models.staticValue.CardType;
 	import noorg.magic.models.types.base.ICardType;
+	
+	import org.hamster.commands.events.CommandEvent;
 	
 	public class Card extends AbstractModelSupport
 	{
@@ -98,12 +101,34 @@ package noorg.magic.models
 		
 		public function decodeUserXML(xml:XML):void
 		{
-			this.decodeXML(xml);
-			
 			this.collection = xml.@collection;
+			this.pid = xml.@pid;
 			this.count = xml.@count;
 			this.isSelected = xml.attribute("is-selected");
 			this.imgPath = xml.attribute("img-path");
+			
+			var cmd:LoadCardXMLCmd = new LoadCardXMLCmd();
+			cmd.collection = this.collection;
+			cmd.pid = this.pid;
+			cmd.addEventListener(CommandEvent.COMMAND_RESULT, loadCardXMLCompleteHandler);
+			cmd.addEventListener(CommandEvent.COMMAND_FAULT, loadCardXMLFailedHandler);
+			cmd.execute();
+		}
+		
+		private function loadCardXMLCompleteHandler(evt:CommandEvent):void
+		{
+			var cmd:LoadCardXMLCmd = LoadCardXMLCmd(evt.currentTarget);
+            cmd.removeEventListener(CommandEvent.COMMAND_RESULT, loadCardXMLCompleteHandler);
+            cmd.removeEventListener(CommandEvent.COMMAND_FAULT, loadCardXMLFailedHandler);
+			var xml:XML = cmd.xml;
+			this.decodeXML(xml);
+		}
+		
+		private function loadCardXMLFailedHandler(evt:CommandEvent):void
+		{
+            var cmd:LoadCardXMLCmd = LoadCardXMLCmd(evt.currentTarget);
+            cmd.removeEventListener(CommandEvent.COMMAND_RESULT, loadCardXMLCompleteHandler);
+            cmd.removeEventListener(CommandEvent.COMMAND_FAULT, loadCardXMLFailedHandler);			
 		}
 		
 		public function toXML():XML
@@ -120,13 +145,12 @@ package noorg.magic.models
 		
 		public function toUserXML():XML
 		{
-			var xml:XML = this.toXML();
-			
+			// var xml:XML = this.toXML();
+			var xml:XML = new XML(<card></card>);
+			xml.@["pid"] = this.pid;
 			xml.@["collection"] = this.collection;
 			xml.@["count"] = this.count;
 			xml.@["is-selected"] = this.isSelected;
-			xml.@["img-path"] = this.imgPath;
-			
 			return xml;			
 		}
 		

@@ -29,7 +29,7 @@ package noorg.magic.commands.impl
 			for each (var file:File in files) {
 				if (!file.isDirectory && file.name.indexOf(".xml") != -1) {
 					var cmd:LoadCardCmd = new LoadCardCmd();
-					cmd.collectionName = this.collectionName;
+					cmd.collection = this.collectionName;
 					cmd.file = file;
 					cmd.addEventListener(CommandEvent.COMMAND_RESULT, loadCardCompleteHandler);
 					this.cmdArray.push(cmd);
