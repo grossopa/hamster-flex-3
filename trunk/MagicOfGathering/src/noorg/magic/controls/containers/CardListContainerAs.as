@@ -1,4 +1,6 @@
 // ActionScript file
+import mx.controls.Alert;
+
 import noorg.magic.commands.CommandWrapper;
 import noorg.magic.commands.impl.SaveUserCardCollCmd;
 import noorg.magic.controls.popups.LoadCardCollPopup;
@@ -62,15 +64,17 @@ private function saveCollectionHandler():void
 	if (collNameTextInput.text == null || collNameTextInput.text.length == 0) {
 		return;
 	}
-	// GlobalUtil.popUpMask(resourceManager.getString("main", "buildContainer.saving"));
+	//GlobalUtil.popUpMask(resourceManager.getString("main", "buildContainer.saving"));
 	var cmd:SaveUserCardCollCmd = CommandWrapper.saveCollection(collNameTextInput.text);
-	cmd.addEventListener(CommandEvent.COMMAND_RESULT, saveResultHandler);
+	//cmd.addEventListener(CommandEvent.COMMAND_RESULT, saveResultHandler);
+	Alert.show(this.resourceManager.getString("main", "buildContainer.saveSuccess"));
 }
 
 private function saveResultHandler(evt:CommandEvent):void
 {
 	var cmd:SaveUserCardCollCmd = SaveUserCardCollCmd(evt.currentTarget);
 	GlobalUtil.removePopUpMask();
+	//Alert.show(this.resourceManager.getString("main", "buildContainer.saveSuccess");
 }
 
 private function popupLoadHandler():void
