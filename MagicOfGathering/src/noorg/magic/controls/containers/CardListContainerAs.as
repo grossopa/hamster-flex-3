@@ -19,8 +19,9 @@ private const ES:EventService = EventService.getInstance();
 private function completeHandler():void
 {
 	Properties;
-	ES.addEventListener(CardEvent.SELECT_CHANGED, cardSelectionChangedHandler);
-	ES.addEventListener(CardEvent.ADD, addCardHandler);
+	ES.addEventListener(CardEvent.SELECT_CHANGED, cardSelectionChangedHandler, false, 0, true);
+	ES.addEventListener(CardEvent.ADD, addCardHandler, false, 0, true);
+	ES.addEventListener(CardEvent.REMOVE, removeCardHandler, false, 0, true);
 }
 
 private function selectChangedHandler():void
@@ -59,6 +60,16 @@ private function addCardHandler(evt:CardEvent):void
 	}
 }
 
+private function removeCardHandler(evt:CardEvent):void
+{
+	var card:Card = evt.card;
+	if (DS.selectedCards.contains(card)) {
+		DS.selectedCards.removeItemAt(DS.selectedCards.getItemIndex(card));
+		card.isSelected = false;
+		card.count = 0;
+	}
+}
+
 private function saveCollectionHandler():void
 {
 	if (collNameTextInput.text == null || collNameTextInput.text.length == 0) {
@@ -67,6 +78,9 @@ private function saveCollectionHandler():void
 	//GlobalUtil.popUpMask(resourceManager.getString("main", "buildContainer.saving"));
 	var cmd:SaveUserCardCollCmd = CommandWrapper.saveCollection(collNameTextInput.text);
 	//cmd.addEventListener(CommandEvent.COMMAND_RESULT, saveResultHandler);
+	if (!DS.userCollNames.contains(collNameTextInput.text)) {
+		DS.userCollNames.addItem(collNameTextInput.text)
+	}
 	Alert.show(this.resourceManager.getString("main", "buildContainer.saveSuccess"));
 }
 

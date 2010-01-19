@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="113" height="156" 
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="113" height="156" 
 	paddingLeft="3" paddingRight="3" paddingTop="2" paddingBottom="2"
-	 creationComplete="completeHandler()" doubleClickEnabled="true">
+	rollOver="rollOverHandler()" rollOut="rollOutHandler()"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	creationComplete="completeHandler()" doubleClickEnabled="true">
 	<mx:Script source="CardRendererAs.as" />
-	
 	<mx:Image source="{_imgPath}" width="100%" height="100%" maintainAspectRatio="false" />
-</mx:VBox>
+	<mx:Image id="addCardIcon" width="30" height="30" click="addCardHandler()" visible="false" buttonMode="true"
+		source="@Embed(source='noorg/magic/assets/icons/cardConf/icon_addCard.png')"  />
+</mx:Canvas>

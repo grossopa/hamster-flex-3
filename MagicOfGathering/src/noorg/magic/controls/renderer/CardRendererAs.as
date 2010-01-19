@@ -1,12 +1,13 @@
 // ActionScript file
-import flash.events.MouseEvent;
-
 import noorg.magic.models.Card;
+import noorg.magic.services.EventService;
 
 private var _card:Card;
 
 [Bindable]
 private var _imgPath:String;
+
+private const ES:EventService = EventService.getInstance();
 
 override public function set data(value:Object):void
 {
@@ -24,4 +25,19 @@ override public function get data():Object
 private function completeHandler():void
 {
 	//this.addEventListener(MouseEvent.MOUSE_DOWN
+}
+
+private function rollOverHandler():void
+{
+	this.addCardIcon.visible = true;
+}
+
+private function rollOutHandler():void
+{
+	this.addCardIcon.visible = false;
+}
+
+private function addCardHandler():void
+{
+	ES.addCard(_card);
 }

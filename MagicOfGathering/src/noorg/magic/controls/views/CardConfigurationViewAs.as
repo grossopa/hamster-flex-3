@@ -4,7 +4,6 @@ import noorg.magic.services.DataService;
 import noorg.magic.services.EventService;
 
 private const DS:DataService = DataService.getInstance();
-private const ES:EventService = EventService.getInstance();
 
 private function completeHandler():void
 {

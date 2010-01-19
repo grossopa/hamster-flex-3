@@ -17,6 +17,9 @@ public static function popup(card:Card):void
 
 public function set card(value:Card):void
 {
+	if (value == null) {
+		return;
+	}
 	this._card = value;
 	this._name = value.name;
 	this._descrption = value.oracleText;

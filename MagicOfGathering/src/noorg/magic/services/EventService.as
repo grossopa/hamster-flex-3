@@ -39,6 +39,13 @@ package noorg.magic.services
 			_instance.dispatchEvent(cardEvent);
 		}
 		
+		public function removeSelectedCard(card:Card):void
+		{
+			var cardEvent:CardEvent = new CardEvent(CardEvent.REMOVE);
+			cardEvent.card = card;
+			_instance.dispatchEvent(cardEvent);
+		}
+		
 		
 		/**
 		 * For play
