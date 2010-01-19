@@ -74,6 +74,11 @@ package org.hamster.effects.effectInstance
 			
 			var numValue:Number = Number(value);
 			
+			// uiTarget is not valid.
+			if (uiTarget.width == 0 || uiTarget.height == 0) {
+				return;
+			}
+			
 			this._bdDraw = new BitmapData(uiTarget.width, uiTarget.height, true, 0x00);
 			this._bdDraw.lock();
 			

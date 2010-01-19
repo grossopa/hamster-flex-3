@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml" verticalAlign="middle" horizontalAlign="center">
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" verticalAlign="middle" horizontalAlign="center"
+	direction="horizontal" verticalScrollPolicy="off" horizontalScrollPolicy="off" horizontalGap="3">
 	<mx:Script source="CardListSelectRendererAs.as" />
+	<mx:Image source="@Embed(source='/noorg/magic/assets/icons/cardConf/icon_removeCard.png')"
+		width="15" height="15" buttonMode="true" click="removeCardHandler()" />
 	<mx:CheckBox id="mainCheckBox" change="selectChangedHandler()" selected="{_selected}" 
 		width="20" height="20" />
-</mx:Box>
+</mx:HBox>

@@ -27,7 +27,7 @@ private var _curColl:ArrayCollection;
 
 private function completeHandler():void
 {
-	ES.addEventListener(CardEvent.SELECT_CHANGED, cardSelectionChangedHandler);
+	ES.addEventListener(CardEvent.SELECT_CHANGED, cardSelectionChangedHandler, false, 0, true);
 	
 	var folders:Array = FileUtil.getCardFolder().getDirectoryListing();
 	var collNames:Array = new Array();
@@ -50,6 +50,7 @@ private function completeHandler():void
 	var loadListCmd:LoadUserCollListCmd = new LoadUserCollListCmd();
 	loadListCmd.addEventListener(CommandEvent.COMMAND_RESULT, loadListCompleteHandler);
 	cmdQueue.cmdArray.push(loadListCmd);
+	
 	cmdQueue.addEventListener(CommandEvent.COMMAND_RESULT, loadCardsCompleteHandler);
 	cmdQueue.execute();
 	

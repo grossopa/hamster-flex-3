@@ -6,7 +6,7 @@
 		<mx:VBox height="100%" width="280">
 			<mx:ComboBox id="collectionComboBox" dataProvider="{DS.cardCollections}" change="collectionChanged()"/>
 			<mx:TileList width="100%" height="100%" itemRenderer="noorg.magic.controls.renderer.CardRenderer"
-				 dataProvider="{_curColl}"  columnWidth="120" rowHeight="160" itemClick="cardClickHandler(event)"
+				 dataProvider="{_curColl}" columnWidth="120" rowHeight="160" itemClick="cardClickHandler(event)"
 				 itemDoubleClick="cardDoubleClickHandler(event)" />
 		</mx:VBox>
 		<mx:VBox>
