@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="250" height="150"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off">
+	
+	<mx:Script source="OperationFaultTipAs.as" />
+	
+	<mx:Image source="@Embed(source='/noorg/magic/assets/pics/operationFault.png')"
+	    width="75" height="75" y="37" x="10" />
+	<mx:TextArea editable="false" backgroundAlpha="0" borderStyle="none" text="{_mainText}"
+	    x="100" y="10" width="250" height="130" fontSize="12" fontWeight="bold" />
+</mx:Canvas>

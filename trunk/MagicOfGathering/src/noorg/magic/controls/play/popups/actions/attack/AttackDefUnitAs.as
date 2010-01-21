@@ -11,6 +11,7 @@ import noorg.magic.controls.play.renderer.DefCardRenderer;
 import noorg.magic.events.PlayCardAttackEvent;
 import noorg.magic.models.PlayCard;
 import noorg.magic.models.staticValue.CardLocation;
+import noorg.magic.models.staticValue.CardStatus;
 import noorg.magic.models.types.TypeCreature;
 
 private var _attackerCard:PlayCard;
@@ -115,6 +116,8 @@ public function applyResult():void
 	
 	if (attackerLife <= 0) {
 		this.attackerPlayCard.setLocation(CardLocation.GRAVEYARD);
+	} else {
+		this.attackerPlayCard.status = CardStatus.PLAY_TAGGED;
 	}
 }
 
