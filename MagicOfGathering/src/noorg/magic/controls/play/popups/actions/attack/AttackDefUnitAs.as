@@ -57,6 +57,7 @@ private function defDragEnterHandler(evt:DragEvent):void
 				return;
 			}
 		}
+		
 		var attType:TypeCreature = TypeCreature(this.attackerPlayCard.type);
         var defType:TypeCreature = TypeCreature(playCard.type);
         if (attType.isFlying && (!defType.isReach || !defType.isFlying)) {
