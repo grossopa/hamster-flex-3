@@ -1,6 +1,7 @@
 // ActionScript file
 import mx.effects.Fade;
 import mx.events.EffectEvent;
+import mx.managers.PopUpManager;
 
 
 [Bindable]
@@ -30,4 +31,5 @@ public function clickHandler():void
 private function effEndHandler(evt:EffectEvent):void
 {
 	this.visible = false;
+	PopUpManager.removePopUp(this);
 }
