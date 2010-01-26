@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+	creationComplete="completeHandler()">
+	<mx:Script source="PathConfViewAs.as" />
+
+	<mx:TextInput id="nameInput" width="150" />
+	<mx:HBox width="100%">
+		<mx:TextInput id="pathInput" width="400" />
+		<mx:Button label="Browse" click="browsePath()" />
+	</mx:HBox>
+	<mx:HBox width="100%">
+		<mx:TextInput id="savePathInput" width="400" />
+		<mx:Button label="Browse" click="browseSavePath()" />
+	</mx:HBox>
+	
+	<mx:TextInput id="includesInput" width="200" />
+	<mx:TextInput id="excludesInput" width="200" />
+	
+	<mx:Button label="add" click="addHandler()" />
+	<mx:DataGrid id="mainDataGrid" dataProvider="{_gameArray}" width="100%">
+		<mx:columns>
+			<mx:DataGridColumn headerText="Column 1" dataField="name" width="100"/>
+			<mx:DataGridColumn headerText="Column 2" dataField="path"/>
+			<mx:DataGridColumn headerText="Column 3" dataField="savePath"/>
+			<mx:DataGridColumn headerText="Column 4" dataField="includes"/>
+			<mx:DataGridColumn headerText="Column 5" dataField="excludes"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:HBox width="100%">
+		<mx:Button label="Remove Selected" click="removeSelectedItemHandler()" />
+		<mx:Button label="Save" click="saveToFileHandler()" />
+	</mx:HBox>
+</mx:VBox>

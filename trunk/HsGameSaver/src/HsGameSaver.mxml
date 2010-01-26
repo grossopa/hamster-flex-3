@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
+	applicationComplete="completeHandler()" xmlns:views="org.hamster.gamesaver.controls.views.*"
+	backgroundColor="#DDDDDD">
+	<mx:Metadata>
+		[ResourceBundle("main")]
+	</mx:Metadata>
+	<mx:Style source="/org/hamster/gamesaver/css/Main.css" />
+	<mx:Script source="HsGameSaverAs.as" />
+	<views:PathConfView id="pathConfView" width="100%" height="100%" />
+</mx:WindowedApplication>

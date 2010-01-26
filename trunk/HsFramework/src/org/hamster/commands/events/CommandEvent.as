@@ -4,8 +4,8 @@ package org.hamster.commands.events
 
 	public class CommandEvent extends Event
 	{
-		public static const COMMAND_RESULT:String = "Command_Result";
-		public static const COMMAND_FAULT:String = "Command_Fault";
+		public static const COMMAND_RESULT:String = "CommandEventCommandResult";
+		public static const COMMAND_FAULT:String = "CommandEventCommandFault";
 		
 		public function CommandEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{

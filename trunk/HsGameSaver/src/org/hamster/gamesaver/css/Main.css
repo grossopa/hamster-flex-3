@@ -1,0 +1,16 @@
+global {
+	fontSize : 11;
+}
+
+.h1 {
+	fontSize : 14;
+	fontWeight : bold;
+}
+
+/*@font-face {
+	src:local("Arial");  //嵌入本机字体
+	fontFamily: ArialFont;  //字体的别名
+	fontStyle:  normal;   //默认normal，正常，可选值：italic | oblique | normal
+	fontWeight: normal;   //默认normal，正常，可选值：bold | heavy | normal
+	flashType: true;    //默认true，添加文本的额外信息，使得文本抗锯齿，平滑显示
+}*/
