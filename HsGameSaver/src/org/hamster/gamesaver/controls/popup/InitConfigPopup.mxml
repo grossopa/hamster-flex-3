@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" width="500" height="500"
+	creationComplete="completeHandler()"
+	title="{this.resourceManager.getString('main','popup.initConfigPopup.title')}">
+	<mx:Script source="InitConfigPopupAs.as" />
+	<mx:Label id="headerLabel" width="100%" styleName="h1" />
+	<mx:HRule />
+	<mx:ViewStack id="mainStack" width="100%" height="100%" change="mainStackChangeHandler()">
+		<mx:VBox width="100%" height="100%" 
+			label="{this.resourceManager.getString('main','popup.initConfigPopup.addDrives')}">
+				<!--<mx:Label text="{this.resourceManager.getString('main','')}" />-->
+				<mx:TextInput id="driveInput" restrict="A-Z" maxChars="1" />
+				<mx:Button label="{this.resourceManager.getString('main','add')}" click="addDriveHandler()" />
+		</mx:VBox>
+	</mx:ViewStack>
+	<mx:HRule />
+	<mx:HBox horizontalAlign="right" width="100%">
+		<mx:Button id="previousButton" 
+			label="{this.resourceManager.getString('main','popup.initConfigPopup.previousButton')}" />
+		<mx:Button id="nextButton" 
+			label="{this.resourceManager.getString('main','popup.initConfigPopup.nextButton')}" />
+		<mx:Button id="finishButton" 
+			label="{this.resourceManager.getString('main','popup.initConfigPopup.finishButton')}" />
+	</mx:HBox>
+</mx:Panel>

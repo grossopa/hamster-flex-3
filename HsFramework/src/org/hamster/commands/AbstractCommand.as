@@ -7,6 +7,20 @@ package org.hamster.commands
 	
 	import org.hamster.commands.events.CommandEvent;
 	
+	/**
+	 *  Dispatched when the command is done.
+	 *
+	 *  @eventType org.hamster.commands.events.CommandEvent.COMMAND_RESULT
+	 */
+	[Event(name="commandResult", type="org.hamster.commands.events.CommandEvent")]
+	
+	/**
+	 *  Dispatched when the command is failed.
+	 *
+	 *  @eventType org.hamster.commands.events.CommandEvent.COMMAND_FAULT
+	 */
+	[Event(name="commandFault", type="org.hamster.commands.events.CommandEvent")]
+	
 	public class AbstractCommand extends EventDispatcher implements ICommand
 	{
 		/**
