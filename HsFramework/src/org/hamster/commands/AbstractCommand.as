@@ -8,7 +8,8 @@ package org.hamster.commands
 	import org.hamster.commands.events.CommandEvent;
 	
 	/**
-	 *  Dispatched when the command is done.
+	 *  Dispatched when the command is done. Sub-classes should call <code>super.result(data)</code>
+	 *  to dispatch this event or override this function and dispatch manually.
 	 *
 	 *  @eventType org.hamster.commands.events.CommandEvent.COMMAND_RESULT
 	 */
@@ -25,7 +26,7 @@ package org.hamster.commands
 	{
 		/**
 		 * some ugly design of ActionScript 3 use Responder instead of IResponder
-		 * as function parameter.  so this command provide a way of using serf as
+		 * as function parameter.  so this command provide a way of using self as
 		 * Responder.
 		 */
 		private var _fnResponder:flash.net.Responder;

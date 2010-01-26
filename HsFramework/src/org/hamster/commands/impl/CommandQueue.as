@@ -9,8 +9,21 @@ package org.hamster.commands.impl
 	
 	public class CommandQueue extends AbstractCommandWrapper implements ICommand
 	{
+		/**
+		 * If this property is set to <code>true</code>, then once a command
+		 * is failed during execute, then the Queue is stopped and dispatch
+		 * a CommandEvent.COMMAND_FAULT event.
+		 *
+		 * <p>Default value is <code>false</code>.
+		 */
 		public var failedThenQuit:Boolean;
 		
+		/**
+		 * Constructor
+		 * 
+		 * @param cmdArray ICommand Array.
+		 * @param failedThenQuit
+		 */
 		public function CommandQueue(cmdArray:Array, failedThenQuit:Boolean = false)
 		{
 			this.cmdArray = cmdArray;
