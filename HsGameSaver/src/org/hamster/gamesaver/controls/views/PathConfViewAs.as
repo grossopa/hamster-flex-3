@@ -6,7 +6,7 @@ import mx.collections.ArrayCollection;
 import mx.controls.Alert;
 
 import org.hamster.commands.events.CommandEvent;
-import org.hamster.gamesaver.commands.LoadUserDataCmd;
+import org.hamster.gamesaver.commands.GenerateZipCmd;
 import org.hamster.gamesaver.commands.SaveUserDataCmd;
 import org.hamster.gamesaver.models.Game;
 import org.hamster.gamesaver.services.DataService;
@@ -97,9 +97,22 @@ private function saveToFileHandler():void
 	cmd.execute();
 }
 
+private function zipFileHandler():void
+{
+	var cmd:GenerateZipCmd = new GenerateZipCmd();
+	cmd.games = DS.gameArray.toArray();
+	cmd.addEventListener(CommandEvent.COMMAND_RESULT, zipCompleteHandler);
+	cmd.execute();
+}
+
 private function saveCompleteHandler(evt:CommandEvent):void
 {
 	Alert.show("success");
+}
+
+private function zipCompleteHandler(evt:CommandEvent):void
+{
+	Alert.show("zip success");
 }
 
 private function faultHandler(evt:CommandEvent):void
