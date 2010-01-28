@@ -9,7 +9,6 @@ package org.hamster.gamesaver.commands
 	
 	import mx.formatters.DateFormatter;
 	
-	import org.aszip.saving.Method;
 	import org.hamster.commands.AbstractCommand;
 	import org.hamster.commands.events.CommandEvent;
 	import org.hamster.commands.impl.CommandQueue;
@@ -53,14 +52,20 @@ package org.hamster.gamesaver.commands
 			var queue:CommandQueue = CommandQueue(evt.currentTarget);
 			//var asZip:ASZip = new ASZip(CompressionMethod.GZIP);
 			var fZip:FZip = new FZip();
-			for each (var game:Game in games) {
-			//	asZip.addDirectory(game.name);
-			}
+			
+//			for (var i:int = 0; i < games.length; i++) {
+//				var game:Game = Game(games[i]);
+//				var copyCmd:CopyFileAndReadCmd = CopyFileAndReadCmd(queue.cmdArray[i]);
+//				if (copyCmd.copiedFile.data != null) {
+//					fZip.addFile(game.name + "/" + copyCmd.copiedFile.name, 
+//							copyCmd.copiedFile.data);  
+//				}
+//			}
 
 			for each (var copyCmd:CopyFileAndReadCmd in queue.cmdArray) {
 				var file:File = copyCmd.copiedFile;
 				if (file.data != null) {
-					fZip.addFile(file.name, file.data);  
+					fZip.addFile(copyCmd.targetFolder.name + "/" + file.name, file.data);  
 					//asZip.addFile(file.data,  file.name);
 				}
 			}
@@ -68,7 +73,7 @@ package org.hamster.gamesaver.commands
 			var zipFileByteArray:ByteArray = new ByteArray();
 			fZip.serialize(zipFileByteArray);
 			var df:DateFormatter = new DateFormatter();
-			df.formatString = "YYYYMMDD_J,NN,SS";
+			df.formatString = "YYYYMMDD_JNNSS";
 			if (targetZipFolder == null) {
 				targetZipFolder = new File(File.applicationDirectory.nativePath);
 			} else if (!targetZipFolder.isDirectory) {

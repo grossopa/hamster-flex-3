@@ -65,14 +65,14 @@ package org.hamster.gamesaver.models
 			
 			this.includes = new Array();
 			var includesXML:XML = xml.child("includes")[0];
-			for each (childXML in includesXML) {
+			for each (childXML in includesXML.children()) {
 				s = childXML;
 				this.includes.push(s);
 			}
 			
 			this.excludes = new Array();
 			var excludesXML:XML = xml.child("excludes")[0];
-			for each (childXML in excludesXML) {
+			for each (childXML in excludesXML.children()) {
 				s = childXML;
 				this.excludes.push(s);
 			}	
