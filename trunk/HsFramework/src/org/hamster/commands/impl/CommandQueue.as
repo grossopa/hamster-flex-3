@@ -31,7 +31,7 @@ package org.hamster.commands.impl
 			this.cmdArray = cmdArray;
 			this.failedThenQuit = failedThenQuit;
 		}
-		
+		 
 		/**
 		 * Execute commands one by one. After finished, a 
 		 * <code>CommandEvent.COMMAND_RESULT</code> event is dispatched.
@@ -69,8 +69,8 @@ package org.hamster.commands.impl
 		{
 			var cmd:ICommand = ICommand(evt.currentTarget);
 			removeListener(cmd);
-			
-			if (cmdArray.length == _curIndex + 1) {
+			_curIndex++;
+			if (cmdArray.length == _curIndex) {
 				this.result(null);
 			} else {
 				this.executeNext(ICommand(cmdArray[_curIndex]));
@@ -87,7 +87,7 @@ package org.hamster.commands.impl
 			_curIndex++;
 			if (this.failedThenQuit) {
 				this.fault(null);
-			} else if (cmdArray.length == _curIndex + 1) {
+			} else if (cmdArray.length == _curIndex) {
 				this.result(null);
 			} else {
 				this.executeNext(ICommand(cmdArray[_curIndex]));

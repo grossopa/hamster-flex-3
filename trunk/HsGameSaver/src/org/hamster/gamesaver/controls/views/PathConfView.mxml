@@ -29,5 +29,6 @@
 	<mx:HBox width="100%">
 		<mx:Button label="Remove Selected" click="removeSelectedItemHandler()" />
 		<mx:Button label="Save" click="saveToFileHandler()" />
+		<mx:Button label="Zip" click="zipFileHandler()" />
 	</mx:HBox>
 </mx:VBox>
