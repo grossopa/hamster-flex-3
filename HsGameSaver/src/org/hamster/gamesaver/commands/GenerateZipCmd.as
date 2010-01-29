@@ -22,6 +22,12 @@ package org.hamster.gamesaver.commands
 		
 		public var targetZipFolder:File;
 		
+		private var _targetZipFile:File;
+		
+		public function get targetZipFile():File {
+			return this._targetZipFile;
+		}
+		
 		public function GenerateZipCmd()
 		{
 			super();
@@ -37,6 +43,27 @@ package org.hamster.gamesaver.commands
 				var saveFolder:File = new File(game.savePath);
 				var files:Array = saveFolder.getDirectoryListing();
 				for each (var file:File in files) {
+					var jump:Boolean = false;
+					if (game.excludes != null) {
+						for each (var exStr:String in game.excludes) {
+							if (file.name.toLowerCase().indexOf(exStr.toLowerCase(), file.name.length - exStr.length) >= 0) {
+								jump = true;
+								break;
+							}
+						}
+					}
+					if (game.includes != null) {
+						for each (var inStr:String in game.includes) {
+							if (file.name.toLowerCase().indexOf(inStr.toLowerCase(), file.name.length - inStr.length) < 0) {
+								jump = true;
+								break;
+							}
+						}
+					}
+					
+					if (jump) {
+						continue;
+					}
 					var copyCmd:CopyFileAndReadCmd = new CopyFileAndReadCmd();
 					copyCmd.file = file;
 					copyCmd.targetFolder = targetFolder;
@@ -80,10 +107,10 @@ package org.hamster.gamesaver.commands
 				targetZipFolder = new File(targetZipFolder.parent.nativePath);
 			}
 			
-			var targetZipFile:File = new File(targetZipFolder.nativePath + File.separator + "save_"
+			_targetZipFile = new File(targetZipFolder.nativePath + File.separator + "save_"
 					+ df.format(new Date()) + ".zip");
 			_fs = new FileStream();
-			_fs.openAsync(targetZipFile, FileMode.WRITE);
+			_fs.openAsync(_targetZipFile, FileMode.WRITE);
 			_fs.writeBytes(zipFileByteArray, 0, zipFileByteArray.length);
 			_fs.close();
 			this.result(null);
