@@ -6,7 +6,11 @@ package org.hamster.gamesaver.utils
 	{
 		public static function checkPath(path:String):Boolean
 		{
-			var file:File = new File(path);
+			try {
+				var file:File = new File(path);
+			} catch (e:Error) {
+				return false;
+			}
 			return file.exists;
 		}
 		

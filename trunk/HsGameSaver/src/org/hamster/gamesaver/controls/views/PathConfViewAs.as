@@ -25,7 +25,7 @@ private function completeHandler():void
 private function browsePath():void
 {
 	var file:File = new File();
-	file.browseForDirectory("123");
+	file.browseForDirectory(this.resourceManager.getString('main','pathConfView.browsePath'));
 	file.addEventListener(Event.SELECT, pathSelectedHandler);
 }
 
@@ -33,9 +33,9 @@ private function pathSelectedHandler(evt:Event):void
 {
 	var file:File = File(evt.currentTarget);
 	this.pathInput.text = file.nativePath;
-	if (this.nameInput.text == "") {
-		this.nameInput.text = file.name;
-	}
+//	if (this.nameInput.text == "") {
+//		this.nameInput.text = file.name;
+//	}
 }
 
 private function browseSavePath():void
@@ -47,7 +47,7 @@ private function browseSavePath():void
 		file = new File();
 	}
 	
-	file.browseForDirectory("123");
+	file.browseForDirectory(this.resourceManager.getString('main','pathConfView.browseSavePath'));
 	file.addEventListener(Event.SELECT, savePathSelectedHandler);
 }
 
@@ -63,12 +63,14 @@ private function addHandler():void
 	if (this.nameInput.text == "" 
 			|| this.pathInput.text == ""
 			|| this.savePathInput.text == "") {
-		Alert.show("ddd");
+		Alert.show(this.resourceManager.getString('main','pathConfView.fullfillData'));
+		return;
 	}
 	
 	if (!FileUtil.checkPath(this.pathInput.text)
 			|| !FileUtil.checkPath(this.savePathInput.text)) {
-		Alert.show("eee");		
+		Alert.show(this.resourceManager.getString('main','pathConfView.pathNotAvailable'));
+		return;
 	}
 	newGame.name = this.nameInput.text;
 	newGame.path = this.pathInput.text;
@@ -112,7 +114,8 @@ private function saveCompleteHandler(evt:CommandEvent):void
 
 private function zipCompleteHandler(evt:CommandEvent):void
 {
-	Alert.show("zip success");
+	var cmd:GenerateZipCmd = GenerateZipCmd(evt.currentTarget);
+	Alert.show(this.resourceManager.getString('main', 'pathConfView.zipSuccess', [cmd.targetZipFile.nativePath]));
 }
 
 private function faultHandler(evt:CommandEvent):void
