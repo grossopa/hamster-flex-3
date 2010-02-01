@@ -2,6 +2,7 @@ package org.hamster.gamesaver.commands
 {
 	import deng.fzip.FZip;
 	
+	import flash.events.Event;
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
@@ -130,8 +131,9 @@ package org.hamster.gamesaver.commands
 			_fs = new FileStream();
 			_fs.openAsync(_targetZipFile, FileMode.WRITE);
 			_fs.writeBytes(zipFileByteArray, 0, zipFileByteArray.length);
+			_fs.addEventListener(Event.CLOSE, this.result);
 			_fs.close();
-			this.result(null);
+			
 		}
 		
 		public static function urlencodeGB2312(str:String):String{

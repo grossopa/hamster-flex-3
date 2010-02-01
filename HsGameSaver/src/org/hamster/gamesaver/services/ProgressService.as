@@ -15,6 +15,8 @@ package org.hamster.gamesaver.services
 		public function ProgressService()
 		{
 		}
+		
+		
 
 	}
 }
