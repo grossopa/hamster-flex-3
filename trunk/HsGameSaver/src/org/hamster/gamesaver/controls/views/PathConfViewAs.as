@@ -4,14 +4,15 @@ import flash.filesystem.File;
 
 import mx.collections.ArrayCollection;
 import mx.controls.Alert;
-import mx.managers.PopUpManager;
 
 import org.hamster.commands.events.CommandEvent;
 import org.hamster.gamesaver.commands.GenerateZipCmd;
 import org.hamster.gamesaver.commands.SaveUserDataCmd;
+import org.hamster.gamesaver.events.CommandProgressEvent;
 import org.hamster.gamesaver.models.Game;
 import org.hamster.gamesaver.services.DataService;
 import org.hamster.gamesaver.utils.FileUtil;
+import org.hamster.gamesaver.utils.GlobalUtil;
 
 private static const DS:DataService = DataService.getInstance();
 
@@ -98,6 +99,8 @@ private function saveToFileHandler():void
 	cmd.addEventListener(CommandEvent.COMMAND_FAULT, faultHandler);
 	cmd.xml = DS.getUserDataXML();
 	cmd.execute();
+	
+	
 }
 
 private function zipFileHandler():void
@@ -105,7 +108,16 @@ private function zipFileHandler():void
 	var cmd:GenerateZipCmd = new GenerateZipCmd();
 	cmd.games = DS.gameArray.toArray();
 	cmd.addEventListener(CommandEvent.COMMAND_RESULT, zipCompleteHandler);
+	cmd.addEventListener(CommandProgressEvent.PROGRESS_CHANGE, progressChangeHandler);
 	cmd.execute();
+	
+	GlobalUtil.popupLoadingMask(
+			this.resourceManager.getString('main','pathConfView.generatingZip'));
+}
+
+private function progressChangeHandler(evt:CommandProgressEvent):void
+{
+	GlobalUtil.setProgress(evt.percent);
 }
 
 private function saveCompleteHandler(evt:CommandEvent):void
@@ -115,6 +127,8 @@ private function saveCompleteHandler(evt:CommandEvent):void
 
 private function zipCompleteHandler(evt:CommandEvent):void
 {
+	GlobalUtil.removeLoadingMask();
+	
 	var cmd:GenerateZipCmd = GenerateZipCmd(evt.currentTarget);
 	Alert.show(this.resourceManager.getString('main', 'pathConfView.zipSuccess', [cmd.targetZipFile.nativePath]));
 }
