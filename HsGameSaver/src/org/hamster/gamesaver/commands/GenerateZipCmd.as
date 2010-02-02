@@ -3,17 +3,23 @@ package org.hamster.gamesaver.commands
 	import deng.fzip.FZip;
 	
 	import flash.events.Event;
+	import flash.events.TimerEvent;
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 	import flash.utils.ByteArray;
+	import flash.utils.Timer;
 	
 	import mx.formatters.DateFormatter;
 	
 	import org.hamster.commands.AbstractCommand;
 	import org.hamster.commands.events.CommandEvent;
 	import org.hamster.commands.impl.CommandQueue;
+	import org.hamster.gamesaver.events.CommandProgressEvent;
 	import org.hamster.gamesaver.models.Game;
+	
+	[Event(name="progressChange", 
+			type="org.hamster.gamesaver.events.CommandProgressEvent")]
 
 	public class GenerateZipCmd extends AbstractCommand
 	{
@@ -26,6 +32,9 @@ package org.hamster.gamesaver.commands
 		public var targetZipFolder:File;
 		
 		private var _targetZipFile:File;
+		
+		private var _perCopyCmdPercent:Number;
+		private var _percent:Number;
 		
 		public function get targetZipFile():File {
 			return this._targetZipFile;
@@ -48,6 +57,8 @@ package org.hamster.gamesaver.commands
 						TMP_FOLDER.nativePath + File.separator + game.name 
 						+ File.separator + saveFolder.name, cmdArray);
 			}
+			_percent = 0;
+			_perCopyCmdPercent = 0.9 / queue.cmdArray.length;
 			queue.addEventListener(CommandEvent.COMMAND_RESULT, queueCompleteHandler);
 			queue.execute();
 		}
@@ -86,36 +97,56 @@ package org.hamster.gamesaver.commands
 					var copyCmd:CopyFileAndReadCmd = new CopyFileAndReadCmd();
 					copyCmd.file = file;
 					copyCmd.targetFolder = targetFolder;
-					cmdArray.push(copyCmd);					
+					copyCmd.addEventListener(CommandEvent.COMMAND_RESULT,
+							copyCmdFinishHandler);
+					copyCmd.addEventListener(CommandEvent.COMMAND_FAULT,
+							copyCmdFailHandler);
+					cmdArray.push(copyCmd);				
 				}
 			}
+		}
+		
+		private function copyCmdFinishHandler(evt:CommandEvent):void
+		{
+			var cmd:CopyFileAndReadCmd = CopyFileAndReadCmd(evt.currentTarget);
+			cmd.removeEventListener(CommandEvent.COMMAND_RESULT,
+					copyCmdFinishHandler);
+			cmd.removeEventListener(CommandEvent.COMMAND_FAULT,
+					copyCmdFailHandler);
+			var disEvt:CommandProgressEvent = new CommandProgressEvent(
+					CommandProgressEvent.PROGRESS_CHANGE);
+			this._percent += _perCopyCmdPercent;
+			disEvt.percent = this._percent;
+			this.dispatchEvent(disEvt);
+		}
+		
+		private function copyCmdFailHandler(evt:CommandEvent):void
+		{
+			var cmd:CopyFileAndReadCmd = CopyFileAndReadCmd(evt.currentTarget);
+			cmd.removeEventListener(CommandEvent.COMMAND_RESULT,
+					copyCmdFinishHandler);
+			cmd.removeEventListener(CommandEvent.COMMAND_FAULT,
+					copyCmdFailHandler);
+			var disEvt:CommandProgressEvent = new CommandProgressEvent(
+					CommandProgressEvent.PROGRESS_CHANGE);
+			this._percent += _perCopyCmdPercent;
+			disEvt.percent = this._percent;
+			this.dispatchEvent(disEvt);
 		}
 		
 		private function queueCompleteHandler(evt:CommandEvent):void
 		{
 			var queue:CommandQueue = CommandQueue(evt.currentTarget);
-			//var asZip:ASZip = new ASZip(CompressionMethod.GZIP);
 			var fZip:FZip = new FZip();
 			
-//			for (var i:int = 0; i < games.length; i++) {
-//				var game:Game = Game(games[i]);
-//				var copyCmd:CopyFileAndReadCmd = CopyFileAndReadCmd(queue.cmdArray[i]);
-//				if (copyCmd.copiedFile.data != null) {
-//					fZip.addFile(game.name + "/" + copyCmd.copiedFile.name, 
-//							copyCmd.copiedFile.data);  
-//				}
-//			}
-
 			for each (var copyCmd:CopyFileAndReadCmd in queue.cmdArray) {
 				var file:File = copyCmd.copiedFile;
 				if (file.data != null) {
 					fZip.addFile(copyCmd.targetFolder.nativePath
 							.replace(TMP_FOLDER.nativePath + File.separator, "")
 							.replace("\\","/") + "/" + file.name, file.data);  
-					//asZip.addFile(file.data,  file.name);
 				}
 			}
-			//var zipFileByteArray:ByteArray = asZip.saveZIP(Method.LOCAL);
 			var zipFileByteArray:ByteArray = new ByteArray();
 			fZip.serialize(zipFileByteArray);
 			var df:DateFormatter = new DateFormatter();
@@ -134,18 +165,26 @@ package org.hamster.gamesaver.commands
 			_fs.addEventListener(Event.CLOSE, this.result);
 			_fs.close();
 			
+
 		}
 		
-		public static function urlencodeGB2312(str:String):String{
-			var result:String ="";
-   			var byte:ByteArray =new ByteArray();
-			byte.writeMultiByte(str, "GBK");
-			for(var i:int;i<byte.length;i++){
-				result += String.fromCharCode(byte[i]);
-			}
-			//result = byte.readUTFBytes(byte.bytesAvailable);
-   			return result;
-  		}		
+		override public function result(data:Object):void
+		{
+			var disEvt:CommandProgressEvent = new CommandProgressEvent(
+				CommandProgressEvent.PROGRESS_CHANGE);
+			this._percent = 1;
+			disEvt.percent = this._percent;
+			this.dispatchEvent(disEvt);
+			
+			var timer:Timer = new Timer(500,1);
+			timer.addEventListener(TimerEvent.TIMER, timerHandler);
+			timer.start();			
+		}
+		
+		private function timerHandler(evt:TimerEvent):void
+		{
+			super.result(null);
+		}
 	}
 	
 
