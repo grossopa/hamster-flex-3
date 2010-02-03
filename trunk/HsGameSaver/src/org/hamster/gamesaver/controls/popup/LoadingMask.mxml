@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:ProgressBar xmlns:mx="http://www.adobe.com/2006/mxml" mode="manual">
+<mx:ProgressBar xmlns:mx="http://www.adobe.com/2006/mxml" mode="manual" width="400" height="80">
 	<mx:Script>
 		<![CDATA[
 			import mx.controls.ProgressBarMode;
