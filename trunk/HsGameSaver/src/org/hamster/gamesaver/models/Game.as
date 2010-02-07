@@ -15,6 +15,8 @@ package org.hamster.gamesaver.models
 		public var includes:Array = new Array();
 		public var excludes:Array = new Array();
 		
+		public var includeSubFolder:Boolean;
+		
 		public function parseIncludes(s:String):void
 		{
 			parseString2Array(s, this.includes);
@@ -39,7 +41,8 @@ package org.hamster.gamesaver.models
 		
 		public function encodeXML():XML
 		{
-			var xml:XML = new XML(<game name={this.name} save-path={this.savePath} path={this.path}></game>);
+			var xml:XML = new XML(<game name={this.name} save-path={this.savePath} 
+					path={this.path} include-sub-folder={this.includeSubFolder}></game>);
 			var includesXML:XML = new XML(<includes></includes>);
 			var s:String;
 			for each (s in includes) {
@@ -59,6 +62,8 @@ package org.hamster.gamesaver.models
 			this.path = xml.attribute("path");
 			this.savePath = xml.attribute("save-path");
 			this.name = xml.attribute("name");
+			 
+			this.includeSubFolder = xml.attribute("include-sub-folder") == "true";
 			
 			var childXML:XML;
 			var s:String;

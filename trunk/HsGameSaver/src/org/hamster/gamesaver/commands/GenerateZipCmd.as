@@ -36,6 +36,15 @@ package org.hamster.gamesaver.commands
 		private var _perCopyCmdPercent:Number;
 		private var _percent:Number;
 		
+		private var _failedGameArray:Array;
+		
+		public var isZipEnabled:Boolean = false;
+		
+		public function get failedGameArray():Array
+		{
+			return _failedGameArray;
+		}
+		
 		public function get targetZipFile():File {
 			return this._targetZipFile;
 		}
@@ -47,15 +56,32 @@ package org.hamster.gamesaver.commands
 		
 		override public function execute():void
 		{
+			_failedGameArray = new Array();
 			var cmdArray:Array = new Array();
 			var queue:CommandQueue = new CommandQueue(cmdArray);
+			
+			if (targetZipFolder == null) {
+				targetZipFolder = new File(File.applicationDirectory.nativePath
+						+ File.separator + "save_backup");
+			} else if (!targetZipFolder.isDirectory) {
+				targetZipFolder = new File(targetZipFolder.parent.nativePath
+						+ File.separator + "save_backup");
+			}
+			
 			for each (var game:Game in games) {
 				var saveFolder:File = new File(game.savePath);
-				var files:Array = saveFolder.getDirectoryListing();
-				
-				this.parseFolder(game, saveFolder, 
-						TMP_FOLDER.nativePath + File.separator + game.name 
-						+ File.separator + saveFolder.name, cmdArray);
+				if (!saveFolder.exists || !saveFolder.isDirectory) {
+					_failedGameArray.push(game);
+				} else {
+					var files:Array = saveFolder.getDirectoryListing();
+					
+					this.parseFolder(game, saveFolder, 
+							targetZipFolder.nativePath + File.separator 
+							+ "save_backup"+ File.separator 
+							+ game.name + File.separator
+							+ new File(game.savePath).name, 
+							cmdArray);
+				}
 			}
 			_percent = 0;
 			_perCopyCmdPercent = 0.9 / queue.cmdArray.length;
@@ -71,7 +97,9 @@ package org.hamster.gamesaver.commands
 			
 			for each (var file:File in files) {
 				if (file.isDirectory) {
-					parseFolder(game, file, targetFolderString + File.separator + file.name, cmdArray);
+					if (game.includeSubFolder) {
+						parseFolder(game, file, targetFolderString + File.separator + file.name, cmdArray);
+					}
 				} else {
 					var jump:Boolean = false;
 					if (game.excludes != null) {
@@ -115,6 +143,8 @@ package org.hamster.gamesaver.commands
 					copyCmdFailHandler);
 			var disEvt:CommandProgressEvent = new CommandProgressEvent(
 					CommandProgressEvent.PROGRESS_CHANGE);
+			disEvt.currentCmd = cmd;
+			disEvt.currentResult = "success";
 			this._percent += _perCopyCmdPercent;
 			disEvt.percent = this._percent;
 			this.dispatchEvent(disEvt);
@@ -136,6 +166,10 @@ package org.hamster.gamesaver.commands
 		
 		private function queueCompleteHandler(evt:CommandEvent):void
 		{
+			if (!this.isZipEnabled) {
+				this.result(null);
+				return;
+			}
 			var queue:CommandQueue = CommandQueue(evt.currentTarget);
 			var fZip:FZip = new FZip();
 			
@@ -151,11 +185,6 @@ package org.hamster.gamesaver.commands
 			fZip.serialize(zipFileByteArray);
 			var df:DateFormatter = new DateFormatter();
 			df.formatString = "YYYYMMDD_JNNSS";
-			if (targetZipFolder == null) {
-				targetZipFolder = new File(File.applicationDirectory.nativePath);
-			} else if (!targetZipFolder.isDirectory) {
-				targetZipFolder = new File(targetZipFolder.parent.nativePath);
-			}
 			
 			_targetZipFile = new File(targetZipFolder.nativePath + File.separator + "save_"
 					+ df.format(new Date()) + ".zip");
@@ -176,7 +205,7 @@ package org.hamster.gamesaver.commands
 			disEvt.percent = this._percent;
 			this.dispatchEvent(disEvt);
 			
-			var timer:Timer = new Timer(500,1);
+			var timer:Timer = new Timer(500, 1);
 			timer.addEventListener(TimerEvent.TIMER, timerHandler);
 			timer.start();			
 		}

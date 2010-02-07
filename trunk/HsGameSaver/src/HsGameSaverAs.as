@@ -1,6 +1,5 @@
 // ActionScript file
 import flash.utils.ByteArray;
-import flash.utils.Endian;
 
 import mx.controls.Alert;
 import mx.managers.PopUpManager;
@@ -12,11 +11,9 @@ import org.hamster.gamesaver.services.DataService;
 
 private static const DS:DataService = DataService.getInstance();
 
-private var bb:ByteArray = new ByteArray();
-
 private function completeHandler():void
 {
-	var loadCmd:LoadUserDataCmd = new LoadUserDataCmd();
+ 	var loadCmd:LoadUserDataCmd = new LoadUserDataCmd();
 	loadCmd.addEventListener(CommandEvent.COMMAND_RESULT, loadCompleteHandler);
 	loadCmd.execute();
 	if (false) {
@@ -29,4 +26,5 @@ private function loadCompleteHandler(evt:CommandEvent):void
 {
 	var loadCmd:LoadUserDataCmd = LoadUserDataCmd(evt.currentTarget);
 	DS.setUserDataXML(loadCmd.xml);
+	this.pathConfView.copyPathString = DS.copyPath.nativePath;
 }

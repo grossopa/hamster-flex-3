@@ -15,6 +15,8 @@
 		<mx:Label text="{this.resourceManager.getString('main', 'pathConfView.inputSavePath')}" width="200" />
 		<mx:TextInput id="savePathInput" width="350" />
 		<mx:Button label="Browse" click="browseSavePath()" />
+		<mx:CheckBox id="subFolderCheckBox" 
+			label="{this.resourceManager.getString('main', 'pathConfView.includeSubFolder')}" />
 	</mx:HBox>
 	<mx:HBox>
 		<mx:Label text="{this.resourceManager.getString('main', 'pathConfView.inputIncludes')}" width="200" />
@@ -26,10 +28,10 @@
 	</mx:HBox>
 	
 	<mx:HBox>
-
 		<mx:Button label="{this.resourceManager.getString('main', 'add')}" click="addHandler()" />
 		<mx:Button label="{this.resourceManager.getString('main', 'remove')}" click="removeSelectedItemHandler()" />
 		<mx:Button label="{this.resourceManager.getString('main', 'save')}" click="saveToFileHandler()" />
+		<mx:ComboBox id="localeComboBox" dataProvider="{['zh_CN', 'en_US']}" change="localeChangeHandler()" />
 	</mx:HBox>
 	
 	<mx:DataGrid id="mainDataGrid" dataProvider="{_gameArray}" width="100%">
@@ -37,12 +39,18 @@
 			<mx:DataGridColumn headerText="{this.resourceManager.getString('main', 'pathConfView.column.name')}" dataField="name" width="100"/>
 			<mx:DataGridColumn headerText="{this.resourceManager.getString('main', 'pathConfView.column.path')}" dataField="path"/>
 			<mx:DataGridColumn headerText="{this.resourceManager.getString('main', 'pathConfView.column.savePath')}" dataField="savePath"/>
+			<mx:DataGridColumn headerText="{this.resourceManager.getString('main', 'pathConfView.column.subFolder')}" dataField="includeSubFolder" width="50"/>
 			<mx:DataGridColumn headerText="{this.resourceManager.getString('main', 'pathConfView.column.includes')}" dataField="includes" width="50"/>
 			<mx:DataGridColumn headerText="{this.resourceManager.getString('main', 'pathConfView.column.excludes')}" dataField="excludes" width="50"/>
 		</mx:columns>
 	</mx:DataGrid>
 	<mx:HBox width="100%">
+		<mx:TextInput id="copyPathInput" text="{copyPathString}" />
+		<mx:Button label="{this.resourceManager.getString('main', 'pathConfView.browseCopyPath')}"
+			click="browseCopyPathHandler()" />
+		<mx:CheckBox id="zipCheckBox" change="zipCheckBoxChangeHandler()" enabled="false"
+			 label="{this.resourceManager.getString('main', 'pathConfView.isZipEnabled')}" />
 		<mx:Button label="{this.resourceManager.getString('main', 'pathConfView.zip')}" click="zipFileHandler()" />
 	</mx:HBox>
-	<mx:TextArea width="100%" height="100%" editable="false"/>
+	<mx:TextArea id="logHistory" width="100%" height="100%" editable="false"/>
 </mx:VBox>
