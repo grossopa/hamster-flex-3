@@ -44,15 +44,18 @@ package org.hamster.gamesaver.commands
 				this.fault(null);
 			}
 			_file.addEventListener(Event.COMPLETE, copyCompleteHandler);
+			trace (_targetFolder.nativePath + File.separator + _file.name);
 			_copiedFile = new File(_targetFolder.nativePath + File.separator + _file.name);
 			_file.copyToAsync(_copiedFile, true);
 		}
 		
+		
 		private function copyCompleteHandler(evt:Event):void
 		{
 			_file.removeEventListener(Event.COMPLETE, copyCompleteHandler);
-			_copiedFile.addEventListener(Event.COMPLETE, openCompleteHandler);
-			_copiedFile.load();
+			this.result(null);
+			//_copiedFile.addEventListener(Event.COMPLETE, openCompleteHandler);
+			//_copiedFile.load();
 		}
 		
 		private function openCompleteHandler(evt:Event):void
