@@ -1,12 +1,10 @@
 // ActionScript file
-import flash.utils.ByteArray;
-
-import mx.controls.Alert;
 import mx.managers.PopUpManager;
 
 import org.hamster.commands.events.CommandEvent;
 import org.hamster.gamesaver.commands.LoadUserDataCmd;
 import org.hamster.gamesaver.controls.popup.InitConfigPopup;
+import org.hamster.gamesaver.controls.units.IconButton;
 import org.hamster.gamesaver.services.DataService;
 
 private static const DS:DataService = DataService.getInstance();
@@ -20,6 +18,8 @@ private function completeHandler():void
 		var initConfigPopup:InitConfigPopup = PopUpManager.createPopUp(this, InitConfigPopup, true) as InitConfigPopup;
 		PopUpManager.centerPopUp(initConfigPopup);
 	}
+	
+	var ddd:IconButton;
 }
 
 private function loadCompleteHandler(evt:CommandEvent):void
