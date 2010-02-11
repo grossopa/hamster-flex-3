@@ -90,7 +90,11 @@ package org.hamster.gamesaver.services
 		public function setUserDataXML(xml:XML):void
 		{
 			gameArray.removeAll();
-			copyPath = new File(xml.attribute("copy-path"));
+			try {
+				copyPath = new File(xml.attribute("copy-path"));
+			} catch (e:Error) {
+				
+			}
 			this.zipEnabled = xml.attribute("zip-enabled") as String == "true";
 			var gamesXML:XML = xml.child("games")[0];
 			
