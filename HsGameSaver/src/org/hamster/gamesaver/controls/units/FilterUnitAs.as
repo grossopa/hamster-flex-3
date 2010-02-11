@@ -1,7 +1,10 @@
 // ActionScript file
+import flash.events.Event;
 import flash.text.TextField;
 
 import mx.core.mx_internal;
+
+import org.hamster.gamesaver.events.TextInputEvent;
 
 use namespace mx_internal;
 
@@ -26,6 +29,23 @@ public function get type():String
 	return this._type;
 }
 
+private var _filterText:String;
+
+public function set filterText(value:String):void
+{
+	_filterText = value;
+	
+	if (this.initialized) {
+		this.filterTextInput.text = value;
+		inputFocusOutHandler();
+	}
+}
+
+public function get filterText():String
+{
+	return this._filterText;
+}
+
 private function completeHandler():void
 {
 	if (this.type == null || this.type.length == 0) {
@@ -33,10 +53,22 @@ private function completeHandler():void
 	}
 }
 
-private function typeChangeHandler():void
+private function mouseWheelHandler():void
 {
+	this.type = this.type == INCLUDE ? EXCLUDE : INCLUDE;
+}
+
+private function inputChangeHandler():void
+{
+	_filterText = filterTextInput.text;
 	filterTextInput.width = TextField(filterTextInput.mx_internal::getTextField()).textWidth + 22;
 	this.width = TextField(filterTextInput.mx_internal::getTextField()).textWidth + 47;
+	this.dispatchEvent(new Event(Event.CHANGE));
+}
+
+private function applyChangeHandler(evt:TextInputEvent):void
+{
+	this.dispatchEvent(evt);
 }
 
 private function inputFocusInHandler():void
@@ -48,5 +80,16 @@ private function inputFocusInHandler():void
 private function inputFocusOutHandler():void
 {
 	filterTextInput.width = TextField(filterTextInput.mx_internal::getTextField()).textWidth + 4;
-	this.width = TextField(filterTextInput.mx_internal::getTextField()).textWidth + 29;	
+	this.width = TextField(filterTextInput.mx_internal::getTextField()).textWidth + 29;
+	applyChangeHandler(new TextInputEvent(TextInputEvent.APPLY_CHANGE));
+}
+
+private function deleteSelf():void
+{
+	this.dispatchEvent(new Event("delete"));
+}
+
+private function deleteBtnClickHandler():void
+{
+	deleteSelf();
 }

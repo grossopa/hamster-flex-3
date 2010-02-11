@@ -1,9 +1,14 @@
 package org.hamster.gamesaver.controls.base
 {
 	import flash.events.FocusEvent;
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
 	
 	import mx.controls.TextInput;
-	import mx.skins.Border;
+	
+	import org.hamster.gamesaver.events.TextInputEvent;
+	
+	[Event(name="applyChange", type="org.hamster.gamesaver.events.TextInputEvent")]
 
 	public class BaseTextInput extends TextInput
 	{
@@ -13,6 +18,7 @@ package org.hamster.gamesaver.controls.base
 			
 			this.addEventListener(FocusEvent.FOCUS_IN, _focusInHandler);
 			this.addEventListener(FocusEvent.FOCUS_OUT, _focusOutHandler);
+			this.addEventListener(KeyboardEvent.KEY_UP, _keyUpHandler);
 			
 			this.setStyle("borderStyle", "none");
 			
@@ -29,6 +35,14 @@ package org.hamster.gamesaver.controls.base
 		{
 			this.setStyle("color", 0xFFFFFF);
 			this.setStyle("backgroundAlpha", 0);
+			this.dispatchEvent(new TextInputEvent(TextInputEvent.APPLY_CHANGE));
+		}
+		
+		private function _keyUpHandler(evt:KeyboardEvent):void
+		{
+			if (evt.keyCode == Keyboard.ENTER) {
+				this.stage.focus = null;
+			}
 		}
 		
 		
