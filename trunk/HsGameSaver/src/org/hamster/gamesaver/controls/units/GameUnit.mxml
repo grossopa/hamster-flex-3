@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="600" height="140"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	backgroundImage="@Embed(source='/org/hamster/gamesaver/assets/game_unit/background.png')"
+	xmlns:base="org.hamster.gamesaver.controls.base.*" xmlns:buttons="org.hamster.gamesaver.controls.buttons.*" xmlns:units="org.hamster.gamesaver.controls.units.*">
+	<mx:Script source="GameUnitAs.as" />
+	<mx:Form color="white" width="571" verticalGap="4" 
+		paddingTop="0" paddingLeft="0" paddingRight="0" paddingBottom="0" 
+		x="10" y="10">
+		<mx:FormItem label="{resourceManager.getString('main','name')}" 
+			width="100%" required="true">
+			<base:BaseTextInput id="titleInput" fontWeight="bold" height="20" width="100%" />
+		</mx:FormItem>
+		<mx:FormItem label="{resourceManager.getString('main','path')}"
+			direction="horizontal" width="100%">
+			<base:BaseTextInput id="pathInput" height="20" width="100%"/>
+			<buttons:FolderButton id="pathFolderButton" width="20" height="20" />
+		</mx:FormItem>
+		<mx:FormItem label="{resourceManager.getString('main','savePath')}"
+			direction="horizontal" width="100%" required="true">
+			<base:BaseTextInput id="savePathInput" height="20" width="100%"/>
+			<buttons:FolderButton id="savePathFolderButton" width="20" height="20" />
+		</mx:FormItem>
+		<mx:FormItem label="{resourceManager.getString('main','filters')}"
+			direction="horizontal" width="100%">
+			<buttons:AddButton id="addFilterButton" width="20" height="20" />
+			<mx:HBox id="filterContainer" width="100%" height="20">
+				<units:FilterUnit />
+			</mx:HBox>
+		</mx:FormItem>
+	</mx:Form>
+	<mx:HBox width="100%" horizontalAlign="right" y="100" right="15">
+		<buttons:OkayButton width="30" height="30" />
+		<buttons:DeleteButton width="30" height="30" />
+	</mx:HBox>
+</mx:Canvas>
