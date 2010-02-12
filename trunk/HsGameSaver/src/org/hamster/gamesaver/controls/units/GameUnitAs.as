@@ -1,5 +1,6 @@
 // ActionScript file
 import flash.events.Event;
+import flash.filesystem.File;
 
 import org.hamster.gamesaver.controls.units.FilterUnit;
 import org.hamster.gamesaver.events.TextInputEvent;
@@ -32,7 +33,8 @@ private function filterUnitApplyChangeHandler(evt:TextInputEvent):void
 		var unit1:FilterUnit = FilterUnit(this.filterContainer.getChildAt(i));
 		for (var j:int = i + 1; j < this.filterContainer.numChildren; j++) {
 			var unit2:FilterUnit = FilterUnit(this.filterContainer.getChildAt(j));
-			if (unit1.filterText == unit2.filterText) {
+			if (unit1.filterText == unit2.filterText
+				&& removeArray.indexOf(unit1) < 0) {
 				removeArray.push(unit1);
 			}
 		}
@@ -49,6 +51,35 @@ private function removeFilterUnit(unit:FilterUnit):void
 	unit.removeEventListener("delete", deleteFilterUnitHandler);
 	this.filterContainer.removeChild(unit);	
 }
+
+private function browsePathFolderHandler():void
+{
+	var folder:File = new File();
+	folder.addEventListener(Event.SELECT, pathSelectHandler);
+	folder.browseForDirectory("");
+}
+
+private function pathSelectHandler(evt:Event):void
+{
+	var folder:File = File(evt.currentTarget);
+	folder.removeEventListener(Event.SELECT, pathSelectHandler);
+	this.pathInput.text = folder.nativePath;
+}
+
+private function browseSavePathFolderHandler():void
+{
+	var folder:File = new File();
+	folder.addEventListener(Event.SELECT, savePathSelectHandler);
+	folder.browseForDirectory("");	
+}
+
+private function savePathSelectHandler(evt:Event):void
+{
+	var folder:File = File(evt.currentTarget);
+	folder.removeEventListener(Event.SELECT, savePathSelectHandler);
+	this.savePathInput.text = folder.nativePath;
+}
+
 
 private function deleteFilterUnitHandler(evt:Event):void
 {
