@@ -32,6 +32,7 @@
 	</mx:Form>
 	<mx:HBox width="100%" horizontalAlign="right" y="100" right="15">
 		<buttons:OkayButton width="30" height="30" />
-		<buttons:DeleteButton width="30" height="30" />
+		<buttons:DeleteButton width="30" height="30" 
+			click="deleteClickHandler()"/>
 	</mx:HBox>
 </mx:Canvas>
