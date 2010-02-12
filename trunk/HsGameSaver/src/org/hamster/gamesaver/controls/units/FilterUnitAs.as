@@ -4,6 +4,7 @@ import flash.text.TextField;
 
 import mx.core.mx_internal;
 
+import org.hamster.gamesaver.events.ChildComponentEvent;
 import org.hamster.gamesaver.events.TextInputEvent;
 
 use namespace mx_internal;
@@ -86,7 +87,9 @@ private function inputFocusOutHandler():void
 
 private function deleteSelf():void
 {
-	this.dispatchEvent(new Event("delete"));
+	var disEvt:ChildComponentEvent = 
+			new ChildComponentEvent(ChildComponentEvent.DELETE);
+	this.dispatchEvent(disEvt);
 }
 
 private function deleteBtnClickHandler():void

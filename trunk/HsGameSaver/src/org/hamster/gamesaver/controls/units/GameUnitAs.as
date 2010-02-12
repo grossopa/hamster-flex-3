@@ -3,6 +3,7 @@ import flash.events.Event;
 import flash.filesystem.File;
 
 import org.hamster.gamesaver.controls.units.FilterUnit;
+import org.hamster.gamesaver.events.ChildComponentEvent;
 import org.hamster.gamesaver.events.TextInputEvent;
 import org.hamster.gamesaver.models.Game;
 
@@ -22,7 +23,7 @@ private function addFilterClickHandler():void
 {
 	var newFilterUnit:FilterUnit = new FilterUnit();
 	newFilterUnit.addEventListener(TextInputEvent.APPLY_CHANGE, filterUnitApplyChangeHandler);
-	newFilterUnit.addEventListener("delete", deleteFilterUnitHandler);
+	newFilterUnit.addEventListener(ChildComponentEvent.DELETE, deleteFilterUnitHandler);
 	this.filterContainer.addChild(newFilterUnit);
 }
 
@@ -48,7 +49,7 @@ private function filterUnitApplyChangeHandler(evt:TextInputEvent):void
 private function removeFilterUnit(unit:FilterUnit):void
 {
 	unit.removeEventListener(TextInputEvent.APPLY_CHANGE, filterUnitApplyChangeHandler);
-	unit.removeEventListener("delete", deleteFilterUnitHandler);
+	unit.removeEventListener(ChildComponentEvent.DELETE, deleteFilterUnitHandler);
 	this.filterContainer.removeChild(unit);	
 }
 
@@ -85,5 +86,12 @@ private function deleteFilterUnitHandler(evt:Event):void
 {
 	var unit:FilterUnit = FilterUnit(evt.currentTarget);
 	removeFilterUnit(unit);
+}
+
+private function deleteClickHandler():void
+{
+	var disEvt:ChildComponentEvent = 
+			new ChildComponentEvent(ChildComponentEvent.DELETE);
+	this.dispatchEvent(disEvt);
 }
 
