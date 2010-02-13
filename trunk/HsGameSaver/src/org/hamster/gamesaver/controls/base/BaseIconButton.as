@@ -19,6 +19,12 @@ package org.hamster.gamesaver.controls.base
 		
 		protected var _currentClass:Class;
 		
+		override public function set enabled(value:Boolean):void
+		{
+			this._currentClass = this.normalIcon;
+			super.enabled = value;
+		}
+		
 		public function set normalIcon(value:Class):void
 		{
 			this._normalIcon = value;
@@ -77,7 +83,9 @@ package org.hamster.gamesaver.controls.base
 		protected function rollOverHandler(evt:MouseEvent):void
 		{
 			this._currentClass = this.overIcon;
-			this.filters = [_glowFilter];
+			if (this.enabled) {
+				this.filters = [_glowFilter];
+			}
 			this.invalidateDisplayList();
 		}
 		

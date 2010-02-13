@@ -13,6 +13,7 @@ public static const INCLUDE:String = "include";
 public static const EXCLUDE:String = "exclude";
 
 private var _type:String;
+private var _editable:Boolean;
 
 public function set type(value:String):void
 {
@@ -28,6 +29,17 @@ public function set type(value:String):void
 public function get type():String
 {
 	return this._type;
+}
+
+public function set editable(value:Boolean):void
+{
+	this._editable = value;
+}
+
+[Bindable]
+public function get editable():Boolean
+{
+	return this._editable;
 }
 
 private var _filterText:String;
