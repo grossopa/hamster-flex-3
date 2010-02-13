@@ -48,7 +48,7 @@
 		<mx:TextInput id="copyPathInput" text="{copyPathString}" />
 		<mx:Button label="{this.resourceManager.getString('main', 'pathConfView.browseCopyPath')}"
 			click="browseCopyPathHandler()" />
-		<mx:CheckBox id="zipCheckBox" change="zipCheckBoxChangeHandler()" enabled="false"
+		<mx:CheckBox id="zipCheckBox" change="zipCheckBoxChangeHandler()" enabled="true"
 			 label="{this.resourceManager.getString('main', 'pathConfView.isZipEnabled')}" />
 		<mx:Button label="{this.resourceManager.getString('main', 'pathConfView.zip')}" click="zipFileHandler()" />
 	</mx:HBox>

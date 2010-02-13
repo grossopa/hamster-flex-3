@@ -10,5 +10,5 @@
 	<mx:Style source="/org/hamster/gamesaver/css/Main.css" />
 	<mx:Script source="HsGameSaverAs.as" />
 	<views:PathConfView id="pathConfView" width="100%" height="100%" />
-	<containers:GameContainer />
+	<containers:GameContainer visible="false" />
 </mx:WindowedApplication>

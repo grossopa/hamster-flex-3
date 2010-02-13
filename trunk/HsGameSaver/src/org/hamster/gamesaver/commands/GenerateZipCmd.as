@@ -1,7 +1,5 @@
 package org.hamster.gamesaver.commands
 {
-	import deng.fzip.FZip;
-	
 	import flash.events.Event;
 	import flash.events.TimerEvent;
 	import flash.filesystem.File;
@@ -12,6 +10,8 @@ package org.hamster.gamesaver.commands
 	
 	import mx.formatters.DateFormatter;
 	
+	import org.aszip.saving.Method;
+	import org.aszip.zip.ASZip;
 	import org.hamster.commands.AbstractCommand;
 	import org.hamster.commands.events.CommandEvent;
 	import org.hamster.commands.impl.CommandQueue;
@@ -23,8 +23,6 @@ package org.hamster.gamesaver.commands
 
 	public class GenerateZipCmd extends AbstractCommand
 	{
-		public static const TMP_FOLDER:File = new File(File.applicationDirectory.nativePath + File.separator + "temp");
-		
 		private var _fs:FileStream;
 		
 		public var games:Array;
@@ -166,23 +164,28 @@ package org.hamster.gamesaver.commands
 		
 		private function queueCompleteHandler(evt:CommandEvent):void
 		{
-			if (!this.isZipEnabled) {
-				this.result(null);
-				return;
-			}
+//			if (!this.isZipEnabled) {
+//				this.result(null);
+//				return;
+//			}
 			var queue:CommandQueue = CommandQueue(evt.currentTarget);
-			var fZip:FZip = new FZip();
+			//var fZip:FZip = new FZip();
+			var asZip:ASZip = new ASZip();
 			
 			for each (var copyCmd:CopyFileAndReadCmd in queue.cmdArray) {
 				var file:File = copyCmd.copiedFile;
-				if (file.data != null) {
-					fZip.addFile(copyCmd.targetFolder.nativePath
-							.replace(TMP_FOLDER.nativePath + File.separator, "")
-							.replace("\\","/") + "/" + file.name, file.data);  
+				if (file.data != null && file.exists && file.data.length > 0) {
+					asZip.addFile(file.data, copyCmd.targetFolder.nativePath
+							.replace(targetZipFolder.nativePath + File.separator, "")
+							.replace("\\","/") + "/" + file.name);
+//					fZip.addFile(copyCmd.targetFolder.nativePath
+//							.replace(TMP_FOLDER.nativePath + File.separator, "")
+//							.replace("\\","/") + "/" + file.name, file.data);  
 				}
 			}
 			var zipFileByteArray:ByteArray = new ByteArray();
-			fZip.serialize(zipFileByteArray);
+//			fZip.serialize(zipFileByteArray);
+			zipFileByteArray = asZip.saveZIP(Method.LOCAL);
 			var df:DateFormatter = new DateFormatter();
 			df.formatString = "YYYYMMDD_JNNSS";
 			
