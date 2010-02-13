@@ -9,5 +9,6 @@
 		change="inputChangeHandler()" width="40"
 		applyChange="applyChangeHandler(event)"
 		focusIn="inputFocusInHandler()" focusOut="inputFocusOutHandler()"/>
-	<buttons:DeleteButton width="18" height="18" click="deleteBtnClickHandler()" />
+	<buttons:DeleteButton width="18" height="18" click="deleteBtnClickHandler()"
+		visible="{this.editable}" />
 </mx:HBox>

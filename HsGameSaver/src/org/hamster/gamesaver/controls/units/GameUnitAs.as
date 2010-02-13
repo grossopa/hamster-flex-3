@@ -9,6 +9,21 @@ import org.hamster.gamesaver.models.Game;
 
 private var _game:Game;
 private var _gameChanged:Boolean;
+private var _editable:Boolean;
+
+public function set editable(value:Boolean):void
+{
+	this._editable = value;
+	for each (var filterUnit:FilterUnit in this.filterContainer.getChildren()) {
+		filterUnit.editable = value;
+	}
+}
+
+[Bindable]
+public function get editable():Boolean
+{
+	return this._editable;
+}
 
 public function set game(value:Game):void
 {
@@ -24,6 +39,8 @@ public function get game():Game
 private function completeHandler():void
 {
 	if (_gameChanged) {
+		_gameChanged = false;
+		this.editable = false;
 		this.titleInput.text = game.name;
 		this.pathInput.text = game.path;
 		this.savePathInput.text = game.savePath;
@@ -39,6 +56,9 @@ private function completeHandler():void
 
 private function addFilterClickHandler():void
 {
+	if (!this.editable) {
+		return;
+	}
 	addFilterUnit("", FilterUnit.INCLUDE);
 }
 
@@ -80,6 +100,9 @@ private function removeFilterUnit(unit:FilterUnit):void
 
 private function browsePathFolderHandler():void
 {
+	if (!this.editable) {
+		return;
+	}
 	var folder:File = new File();
 	folder.addEventListener(Event.SELECT, pathSelectHandler);
 	folder.browseForDirectory("");
@@ -94,6 +117,9 @@ private function pathSelectHandler(evt:Event):void
 
 private function browseSavePathFolderHandler():void
 {
+	if (!this.editable) {
+		return;
+	}
 	var folder:File = new File();
 	folder.addEventListener(Event.SELECT, savePathSelectHandler);
 	folder.browseForDirectory("");	
@@ -118,5 +144,15 @@ private function deleteClickHandler():void
 	var disEvt:ChildComponentEvent = 
 			new ChildComponentEvent(ChildComponentEvent.DELETE);
 	this.dispatchEvent(disEvt);
+}
+
+private function editButtonClickHandler():void
+{
+	this.editable = true;
+}
+
+private function okButtonClickHandler():void
+{
+	this.editable = false;
 }
 

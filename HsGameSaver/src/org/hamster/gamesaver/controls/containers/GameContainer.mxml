@@ -8,7 +8,12 @@
 		verticalScrollPolicy="off" horizontalScrollPolicy="off"
 		borderStyle="solid" borderColor="#777777" borderThickness="1">
 		<buttons:AddButton width="40" height="40" click="addGameHandler()" />
+		<buttons:SaveButton width="40" height="40" />
+		<mx:VRule height="90%" width="2" />
 		<buttons:ConfigureButton width="40" height="40" />
+		<mx:VRule height="90%" width="2" />
+		<buttons:CopyButton width="40" height="40" />
+		<buttons:ZipButton width="40" height="40" />
 	</mx:HBox>
 	<mx:VBox id="mainContainer" y="45" width="625" height="555" verticalGap="0" />
 </mx:Canvas>
