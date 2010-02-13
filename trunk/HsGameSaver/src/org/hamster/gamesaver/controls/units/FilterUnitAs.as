@@ -49,6 +49,7 @@ public function get filterText():String
 
 private function completeHandler():void
 {
+	this.filterTextInput.text = this.filterText;
 	if (this.type == null || this.type.length == 0) {
 		this.type = INCLUDE;
 	}
