@@ -8,10 +8,12 @@ import org.hamster.gamesaver.events.TextInputEvent;
 import org.hamster.gamesaver.models.Game;
 
 private var _game:Game;
+private var _gameChanged:Boolean;
 
 public function set game(value:Game):void
 {
 	this._game = value;
+	_gameChanged = true;
 }
 
 public function get game():Game
@@ -19,12 +21,25 @@ public function get game():Game
 	return this._game;
 }
 
+private function completeHandler():void
+{
+	if (_gameChanged) {
+		this.titleInput.text = game.name;
+		this.pathInput.text = game.path;
+		this.savePathInput.text = game.savePath;
+		this.filterContainer.removeAllChildren();
+		for each (var inStr:String in game.includes) {
+			this.addFilterUnit(inStr, FilterUnit.INCLUDE);
+		}
+		for each (var exStr:String in game.excludes) {
+			this.addFilterUnit(exStr, FilterUnit.EXCLUDE);
+		}
+	}
+}
+
 private function addFilterClickHandler():void
 {
-	var newFilterUnit:FilterUnit = new FilterUnit();
-	newFilterUnit.addEventListener(TextInputEvent.APPLY_CHANGE, filterUnitApplyChangeHandler);
-	newFilterUnit.addEventListener(ChildComponentEvent.DELETE, deleteFilterUnitHandler);
-	this.filterContainer.addChild(newFilterUnit);
+	addFilterUnit("", FilterUnit.INCLUDE);
 }
 
 private function filterUnitApplyChangeHandler(evt:TextInputEvent):void
@@ -44,6 +59,16 @@ private function filterUnitApplyChangeHandler(evt:TextInputEvent):void
 	for each (var unit3:FilterUnit in removeArray) {
 		removeFilterUnit(unit3);
 	}
+}
+
+private function addFilterUnit(filterText:String, type:String):void
+{
+	var newFilterUnit:FilterUnit = new FilterUnit();
+	newFilterUnit.filterText = filterText;
+	newFilterUnit.type = type;
+	newFilterUnit.addEventListener(TextInputEvent.APPLY_CHANGE, filterUnitApplyChangeHandler);
+	newFilterUnit.addEventListener(ChildComponentEvent.DELETE, deleteFilterUnitHandler);
+	this.filterContainer.addChild(newFilterUnit);
 }
 
 private function removeFilterUnit(unit:FilterUnit):void

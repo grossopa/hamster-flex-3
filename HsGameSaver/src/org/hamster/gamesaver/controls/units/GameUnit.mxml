@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="600" height="140"
 	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	creationComplete="completeHandler()"
 	backgroundImage="@Embed(source='/org/hamster/gamesaver/assets/game_unit/background.png')"
 	xmlns:base="org.hamster.gamesaver.controls.base.*" xmlns:buttons="org.hamster.gamesaver.controls.buttons.*" xmlns:units="org.hamster.gamesaver.controls.units.*">
 	<mx:Script source="GameUnitAs.as" />
