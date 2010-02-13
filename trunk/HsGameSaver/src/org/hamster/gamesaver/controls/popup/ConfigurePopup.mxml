@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="400" height="300" backgroundColor="#000000"
+	borderColor="0xFFFFFF" borderStyle="solid" borderThickness="2"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off" xmlns:base="org.hamster.gamesaver.controls.base.*" xmlns:buttons="org.hamster.gamesaver.controls.buttons.*">
+	<mx:Script source="ConfigurePopupAs.as" />
+	<mx:Form color="#FFFFFF" labelWidth="100">
+		<mx:FormHeading label="{resourceManager.getString('main','configuration')}" />
+		<mx:FormItem label="{resourceManager.getString('main','language')}"
+			direction="horizontal">
+			<mx:ComboBox id="languageComboBox" 
+				dataProvider="{[{label:'中文', data: 'zh_CN'},{label:'English', data: 'en_US'}]}"
+				change="languageChangeHandler()" />
+		</mx:FormItem>
+		<mx:FormItem label="{resourceManager.getString('','')}"
+			direction="horizontal">
+			<base:BaseTextInput id="targetCopyPathInput" />
+			<buttons:FolderButton id="targetCopyPathButton" width="20" height="20" />
+		</mx:FormItem>
+	</mx:Form>
+	<mx:HBox width="100%" height="30" horizontalAlign="right">
+		<buttons:OkayButton width="30" height="30" click="closeSelfHandler()" />
+	</mx:HBox>
+	
+</mx:VBox>
