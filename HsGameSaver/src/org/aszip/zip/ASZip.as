@@ -20,16 +20,16 @@
 package org.aszip.zip 
 {
 	
-	import flash.accessibility.Accessibility;
-	import flash.utils.ByteArray;
-	import flash.utils.Endian;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestHeader;
 	import flash.net.URLRequestMethod;
 	import flash.net.navigateToURL;
-	import org.aszip.saving.Method;
+	import flash.utils.ByteArray;
+	import flash.utils.Endian;
+	
 	import org.aszip.compression.CompressionMethod;
 	import org.aszip.crc.CRC32;
+	import org.aszip.saving.Method;
 
 	/**
 	* The ASZip class represents a Zip file
@@ -111,7 +111,7 @@ package org.aszip.zip
 		public function addDirectory ( directoryName:String ):void 
 		
 		{
-			
+			var pDirectoryLength:int = this.countStringLength(directoryName);
 			directoryName = directoryName.split ('\\').join ('/');  
 
 			var feedArrayRow:ByteArray = new ByteArray;
@@ -125,9 +125,9 @@ package org.aszip.zip
 			feedArrayRow.writeUnsignedInt (0); 
 			feedArrayRow.writeUnsignedInt (0); 
 			feedArrayRow.writeUnsignedInt (0); 
-			feedArrayRow.writeShort ( directoryName.length * 2 ); 
+			feedArrayRow.writeShort ( pDirectoryLength ); 
 			feedArrayRow.writeShort ( 0 ); 
-			feedArrayRow.writeMultiByte(directoryName, "GBK");
+			feedArrayRow.writeMultiByte(directoryName, "gb18030");
 		//	feedArrayRow.writeUTFBytes ( directoryName );  
 
 			feedArrayRow.writeUnsignedInt ( 0 ); 
@@ -150,7 +150,7 @@ package org.aszip.zip
 			addCentralRecord.writeUnsignedInt ( 0 ); 
 			addCentralRecord.writeUnsignedInt ( 0 ); 
 			addCentralRecord.writeUnsignedInt ( 0 ); 
-			addCentralRecord.writeShort ( directoryName.length  * 2); 
+			addCentralRecord.writeShort ( pDirectoryLength); 
 			addCentralRecord.writeShort ( 0 ); 
 			addCentralRecord.writeShort ( 0 ); 
 			addCentralRecord.writeShort ( 0 ); 
@@ -159,8 +159,8 @@ package org.aszip.zip
 			addCentralRecord.writeUnsignedInt ( this.oldOffset ); 
 			
 			this.oldOffset = newOffset;
-      		addCentralRecord.writeMultiByte(directoryName, "GBK");
-			//addCentralRecord.writeUTFBytes (directoryName);
+      		addCentralRecord.writeMultiByte(directoryName, "gb18030");
+		//	addCentralRecord.writeUTFBytes (directoryName);
 
 			this.nbDirectory.push ( addCentralRecord );
 			this.centralDirectory.writeBytes ( addCentralRecord );
@@ -185,7 +185,7 @@ package org.aszip.zip
 		public function addFile ( pBytes:ByteArray, pDirectory:String ):void
 		
 		{
-			
+			var pDirectoryLength:int = countStringLength(pDirectory);
 			pDirectory = pDirectory.split ('\\').join ('/');
 			
 			var feedArrayRow:ByteArray = new ByteArray;
@@ -227,10 +227,10 @@ package org.aszip.zip
 			feedArrayRow.writeUnsignedInt ( compression );
 			feedArrayRow.writeUnsignedInt ( compressedLength );
 			feedArrayRow.writeUnsignedInt ( uncompressedLength ); 
-			feedArrayRow.writeShort ( pDirectory.length ); 
+			feedArrayRow.writeShort ( pDirectoryLength ); 
 			feedArrayRow.writeShort ( 0 );
-		//	feedArrayRow.writeMultiByte(unescape(pDirectory), "unicode");
-			feedArrayRow.writeUTFBytes ( pDirectory ); 
+			feedArrayRow.writeMultiByte(pDirectory, "unicode");
+			//feedArrayRow.writeUTFBytes ( pDirectory ); 
 			feedArrayRow.writeBytes ( pBytes );  
 			
 			// Data Descriptor
@@ -254,7 +254,7 @@ package org.aszip.zip
 			addCentralRecord.writeUnsignedInt ( compression ); 
 			addCentralRecord.writeUnsignedInt ( compressedLength ); 
 			addCentralRecord.writeUnsignedInt ( uncompressedLength ); 
-			addCentralRecord.writeShort(pDirectory.length); 
+			addCentralRecord.writeShort( pDirectoryLength ); 
 			addCentralRecord.writeShort ( 0 );
 			addCentralRecord.writeShort ( 0 );
 			addCentralRecord.writeShort ( 0 );
@@ -263,8 +263,8 @@ package org.aszip.zip
 
 			addCentralRecord.writeUnsignedInt ( this.oldOffset ); 
 			this.oldOffset = newOffset;
-		//	addCentralRecord.writeMultiByte(pDirectory, "unicode");
-			addCentralRecord.writeUTFBytes (pDirectory);  
+			addCentralRecord.writeMultiByte(pDirectory, "gb18030");
+		//	addCentralRecord.writeUTFBytes (pDirectory);  
 
 			this.nbDirectory.push ( addCentralRecord );
 			this.centralDirectory.writeBytes ( addCentralRecord );
@@ -361,6 +361,24 @@ package org.aszip.zip
 			  return ( (currentDate.getFullYear() - 1980) << 25) | (currentDate.getMonth() << 21) | (currentDate.getDate() << 16) | 
 					   (currentDate.getHours() << 11) | (currentDate.getMinutes() << 5) | (currentDate.getSeconds() >> 1);
 						
+		}
+		
+		/**
+		 * added by zeshuoyin.
+		 * 
+		 * solution for gb18030 string.
+		 */
+		private function countStringLength(s:String):int
+		{
+			var l:int = 0;
+			for (var i:int = 0; i < s.length; i++) {
+				if (s.charCodeAt(i) >= 0 && s.charCodeAt(i) <= 128) {
+					l += 1;
+				} else {
+					l += 2;
+				}
+			}
+			return l;
 		}
 		
 	}
