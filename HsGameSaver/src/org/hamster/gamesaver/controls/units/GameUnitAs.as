@@ -154,5 +154,30 @@ private function editButtonClickHandler():void
 private function okButtonClickHandler():void
 {
 	this.editable = false;
+	applyChanges();
+}
+
+public function applyChanges():void
+{
+	this.editable = false;
+	game.name = this.titleInput.text;
+	game.path = this.pathInput.text;
+	game.savePath = this.savePathInput.text;
+	
+	while (this.game.includes.length > 0) {
+		this.game.includes.pop();
+	}
+	
+	while (this.game.excludes.length > 0) {
+		this.game.excludes.pop();
+	}
+	
+	for each (var filter:FilterUnit in this.filterContainer.getChildren()) {
+		if (filter.type == FilterUnit.INCLUDE) {
+			this.game.includes.push(filter.filterText);
+		} else {
+			this.game.excludes.push(filter.filterText);
+		}
+	}
 }
 

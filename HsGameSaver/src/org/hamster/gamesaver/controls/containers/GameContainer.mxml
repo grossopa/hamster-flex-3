@@ -8,9 +8,9 @@
 		verticalScrollPolicy="off" horizontalScrollPolicy="off"
 		borderStyle="solid" borderColor="#777777" borderThickness="1">
 		<buttons:AddButton width="40" height="40" click="addGameHandler()" />
-		<buttons:SaveButton width="40" height="40" />
+		<buttons:SaveButton width="40" height="40" click="saveButtonClickHandler()" />
 		<mx:VRule height="90%" width="2" />
-		<buttons:ConfigureButton width="40" height="40" />
+		<buttons:ConfigureButton width="40" height="40" click="configureButtonClickHandler()" />
 		<mx:VRule height="90%" width="2" />
 		<buttons:CopyButton width="40" height="40" />
 		<buttons:ZipButton width="40" height="40" />
