@@ -1,5 +1,9 @@
 // ActionScript file
-import org.hamster.gamesaver.utils.GlobalUtil;
+import flash.events.KeyboardEvent;
+import flash.ui.Keyboard;
+
+import mx.core.Application;
+import mx.managers.PopUpManager;
 
 public static const SUCCESS:String = "success";
 public static const FAILED:String = "failed";
@@ -22,7 +26,24 @@ public function set status(value:String):void
 	}
 }
 
+private function completeHandler():void
+{
+	this.stage.addEventListener(KeyboardEvent.KEY_DOWN, 
+			_keyDownHandler, false, 0, true);
+}
+
 private function closeHandler():void
 {
-	GlobalUtil.removeAlert();
+	this.stage.removeEventListener(KeyboardEvent.KEY_DOWN, 
+			_keyDownHandler);
+	PopUpManager.removePopUp(this);
+}
+
+private function _keyDownHandler(evt:KeyboardEvent):void
+{
+	if (evt.keyCode == Keyboard.ESCAPE 
+			|| evt.keyCode == Keyboard.ENTER 
+			|| evt.keyCode == Keyboard.SPACE) {
+		this.closeHandler();			
+	}
 }

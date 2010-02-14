@@ -15,9 +15,11 @@
 		<buttons:CopyButton width="40" height="40" click="generateHandler(false)" />
 		<buttons:ZipButton width="40" height="40" click="generateHandler(true)" />
 		<buttons:WarningButton id="warningButton" width="40" height="40" visible="false" />
+		<mx:VRule height="90%" width="2" />
+		<buttons:HelpButton width="40" height="40" click="helpHandler()" />
 	</mx:HBox>
 	<mx:HBox y="45" verticalAlign="middle" horizontalGap="3">
-		<mx:VBox id="mainContainer" width="620" height="555" verticalGap="0" />
-		<mx:VRule height="95%" />
+		<mx:VBox id="mainContainer" width="620" height="435" verticalGap="0" />
+		<mx:VRule height="95%" visible="false" />
 	</mx:HBox>
 </mx:Canvas>

@@ -64,6 +64,7 @@ package org.hamster.gamesaver.commands
 		
 		private function openCompleteHandler(evt:Event):void
 		{
+			_copiedFile.removeEventListener(Event.COMPLETE, openCompleteHandler);
 			this.result(null);
 		}
 		

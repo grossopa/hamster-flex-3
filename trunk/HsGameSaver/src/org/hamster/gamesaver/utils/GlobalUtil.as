@@ -2,6 +2,7 @@ package org.hamster.gamesaver.utils
 {
 	import mx.core.Application;
 	import mx.managers.PopUpManager;
+	import mx.resources.ResourceManager;
 	
 	import org.hamster.gamesaver.controls.base.BaseAlert;
 	import org.hamster.gamesaver.controls.popup.LoadingMask;
@@ -33,31 +34,28 @@ package org.hamster.gamesaver.utils
 			PopUpManager.removePopUp(loadingMask);
 		}
 		
-		private static var alertTarget:BaseAlert;
-		
 		public static function alert(message:String, title:String = "", 
 				status:String = "success",
 				width:Number = 450, height:Number = 100):void
 		{
-			if (alertTarget == null) {
-				alertTarget = PopUpManager.createPopUp(app, BaseAlert, true) as BaseAlert;
-				alertTarget.message = message;
-				alertTarget.title = title;
-			} else {
-				alertTarget.message += '\n' + message;
-				alertTarget.title += " & " + title;
-			}
+			var alertTarget:BaseAlert;
+			alertTarget = PopUpManager.createPopUp(app, BaseAlert, true) as BaseAlert;
+			alertTarget.message = message;
+			alertTarget.title = title;
 			alertTarget.status = status;
 			alertTarget.width = width;
 			alertTarget.height = height;			
 			PopUpManager.centerPopUp(alertTarget);
 		}
 		
-		public static function removeAlert():void
-		{
-			PopUpManager.removePopUp(alertTarget);
-			alertTarget = null;
+		public static function showHelperPanel():void {
+			var helper:BaseAlert = PopUpManager.createPopUp(app, BaseAlert, true) as BaseAlert;
+			helper.width = 300;
+			helper.height = 300;
+			helper.message = ResourceManager.getInstance().getString('main','helpMessage');
+			helper.title = ResourceManager.getInstance().getString('main','helpTitle');
+			PopUpManager.centerPopUp(helper);
 		}
-
+		
 	}
 }

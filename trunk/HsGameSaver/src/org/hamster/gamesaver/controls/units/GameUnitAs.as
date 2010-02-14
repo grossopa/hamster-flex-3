@@ -6,6 +6,10 @@ import org.hamster.gamesaver.controls.units.FilterUnit;
 import org.hamster.gamesaver.events.ChildComponentEvent;
 import org.hamster.gamesaver.events.TextInputEvent;
 import org.hamster.gamesaver.models.Game;
+import org.hamster.gamesaver.services.DataService;
+import org.hamster.gamesaver.utils.FileUtil;
+
+private static var DS:DataService = DataService.getInstance();
 
 private var _game:Game;
 private var _gameChanged:Boolean;
@@ -46,6 +50,7 @@ private function completeHandler():void
 		this.titleInput.text = game.name;
 		this.pathInput.text = game.path;
 		this.savePathInput.text = game.savePath;
+		this.subFolderCheckBox.selected = game.includeSubFolder;
 		this.filterContainer.removeAllChildren();
 		for each (var inStr:String in game.includes) {
 			this.addFilterUnit(inStr, FilterUnit.INCLUDE);
@@ -85,9 +90,13 @@ private function filterUnitApplyChangeHandler(evt:TextInputEvent):void
 
 private function addFilterUnit(filterText:String, type:String):void
 {
+	if (this.filterContainer.numChildren > 5) {
+		return;
+	}
 	var newFilterUnit:FilterUnit = new FilterUnit();
 	newFilterUnit.filterText = filterText;
 	newFilterUnit.type = type;
+	newFilterUnit.editable = true;
 	newFilterUnit.addEventListener(TextInputEvent.APPLY_CHANGE, filterUnitApplyChangeHandler);
 	newFilterUnit.addEventListener(ChildComponentEvent.DELETE, deleteFilterUnitHandler);
 	this.filterContainer.addChild(newFilterUnit);
@@ -115,6 +124,10 @@ private function pathSelectHandler(evt:Event):void
 	var folder:File = File(evt.currentTarget);
 	folder.removeEventListener(Event.SELECT, pathSelectHandler);
 	this.pathInput.text = folder.nativePath;
+	
+	if (this.titleInput.text == "") {
+		this.titleInput.text = folder.name;
+	}
 }
 
 private function browseSavePathFolderHandler():void
@@ -122,7 +135,13 @@ private function browseSavePathFolderHandler():void
 	if (!this.editable) {
 		return;
 	}
-	var folder:File = new File();
+	var folder:File;
+	if (FileUtil.checkPath(this.pathInput.text)) {
+		folder = new File(this.pathInput.text);
+	} else {
+		folder = new File();
+	}
+	 
 	folder.addEventListener(Event.SELECT, savePathSelectHandler);
 	folder.browseForDirectory("");	
 }
@@ -160,15 +179,24 @@ private function okButtonClickHandler():void
 
 public function applyChanges():Boolean
 {
-	var nameAvail:Boolean = this.titleInput.text.length > 0;
+	var nameAvail:Boolean = this.titleInput.text.length > 0 
+			&& FileUtil.isFileNameLegal(this.titleInput.text);
 	var savePathAvail:Boolean = this.savePathInput.checkFilePath();
 	if (!savePathAvail || !nameAvail) {
 		warningButton.visible = true;
 		this.editable = true;
 		return false;
 	}
+	
+	for each (var g:Game in DS.gameArray) {
+		if (g.name == this.titleInput.text && g != this.game) {
+			this.titleInput.text = DS.autoIncreaseGameName(this.titleInput.text);
+		}
+	}
+	
 	this.editable = false;
 	warningButton.visible = false;
+	game.includeSubFolder = this.subFolderCheckBox.selected;
 	game.name = this.titleInput.text;
 	game.path = this.pathInput.text;
 	game.savePath = this.savePathInput.text;
@@ -188,6 +216,7 @@ public function applyChanges():Boolean
 			this.game.excludes.push(filter.filterText);
 		}
 	}
+	
 	return true;
 }
 

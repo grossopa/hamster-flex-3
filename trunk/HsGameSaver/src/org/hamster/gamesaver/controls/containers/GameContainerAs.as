@@ -128,11 +128,17 @@ private function zipFailedHandler(evt:CommandEvent):void
 			"failed");	
 }
 
+private function helpHandler():void
+{
+	GlobalUtil.showHelperPanel();
+}
+
 public function applyChanges():Boolean
 {
 	var result:Boolean = true;
 	for each (var gameUnit:GameUnit in this.mainContainer.getChildren()) {
 		result = gameUnit.applyChanges() && result;
 	}
+	
 	return result;
 }

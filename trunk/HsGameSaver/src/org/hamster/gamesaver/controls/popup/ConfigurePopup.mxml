@@ -14,7 +14,7 @@
 		<mx:FormItem label="{resourceManager.getString('main','language')}"
 			direction="horizontal">
 			<mx:ComboBox id="languageComboBox" height="20"
-				dataProvider="{[{label:'中文', data: 'zh_CN'},{label:'English', data: 'en_US'}]}"
+				dataProvider="{locales}"
 				change="languageChangeHandler()" />
 		</mx:FormItem>
 		<mx:FormItem label="{resourceManager.getString('main','outputFolder')}"
@@ -22,6 +22,9 @@
 			<base:BaseTextInput id="targetCopyPathInput" width="100%" />
 			<buttons:FolderButton id="targetCopyPathButton" width="20" height="20"
 				 click="browseCopyPathHandler()" />
+		</mx:FormItem>
+		<mx:FormItem label="{resourceManager.getString('main','autoUpdate')}">
+			<mx:Label text="{resourceManager.getString('main','autoUpdateNotSupported')}" />
 		</mx:FormItem>
 	</mx:Form>
 	<mx:HBox width="100%" height="30" horizontalAlign="right" paddingRight="10">
