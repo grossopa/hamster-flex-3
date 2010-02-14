@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off" xmlns:buttons="org.hamster.gamesaver.controls.buttons.*">
+	<mx:Script source="BaseAlertAs.as" />
+	
+	<mx:VBox id="mainContainer" width="100%" height="100%" y="33"
+		borderColor="#ff0000" borderThickness="1" borderStyle="none"
+		backgroundColor="#000000" backgroundAlpha="0.7" horizontalAlign="right">
+		<mx:TextArea id="mainTextArea" text="{message}" width="100%" height="100%"
+			paddingLeft="10" paddingRight="10" paddingTop="3"
+			backgroundAlpha="0" borderStyle="none" color="{stringColor}" />
+	</mx:VBox>
+	<buttons:OkayButton right="10" bottom="10" width="30" height="30" 
+		click="closeHandler()" />	
+	<mx:HBox width="100%" height="34" horizontalGap="0" 
+		verticalScrollPolicy="off" horizontalScrollPolicy="off">
+		<mx:Image source="@Embed(source='/org/hamster/gamesaver/assets/alert_window/left_top.png')"
+			width="11" height="34" maintainAspectRatio="false"/>
+		<mx:Image source="@Embed(source='/org/hamster/gamesaver/assets/alert_window/center_top.png')"
+			 width="100%" height="34" maintainAspectRatio="false" />
+		<mx:Image source="@Embed(source='/org/hamster/gamesaver/assets/alert_window/right_top.png')"
+			width="12" height="34" maintainAspectRatio="false" />
+	</mx:HBox>
+	<mx:Label id="titleLabel" text="{title}" color="{stringColor}"
+		y="5" x="3" fontSize="20" width="100%"/>
+
+	
+</mx:Canvas>

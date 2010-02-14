@@ -1,5 +1,4 @@
 // ActionScript file
-import mx.controls.Alert;
 import mx.core.UIComponent;
 import mx.managers.PopUpManager;
 
@@ -20,12 +19,16 @@ private function addGameHandler():void
 {
 	var newGame:Game = new Game();
 	DS.gameArray.addItem(newGame);
-	addGameUnit(newGame);
+	addGameUnit(newGame, true);
 }
 
 private function saveButtonClickHandler():void
 {
-	applyChanges();
+	if (!this.applyChanges()) {
+		warningButton.visible = true;
+		return;
+	}
+	warningButton.visible = false;
 	
 	var saveCmd:SaveUserDataCmd = new SaveUserDataCmd();
 	saveCmd.xml = DS.getUserDataXML();
@@ -36,12 +39,17 @@ private function saveButtonClickHandler():void
 
 private function saveUserDataSuccessHandler(evt:CommandEvent):void
 {
-	
+	GlobalUtil.alert(
+			resourceManager.getString("main","gameContainer.saveUserDataSuccessMessage"), 
+			resourceManager.getString("main", "gameContainer.saveUserDataSuccessTitle"));
 }
 
 private function saveUserDataFaultHandler(evt:CommandEvent):void
 {
-	
+	GlobalUtil.alert(
+			resourceManager.getString("main","gameContainer.saveUserDataFailedMessage"), 
+			resourceManager.getString("main", "gameContainer.saveUserDataFailedTitle"),
+			"failed");
 }
 
 private function configureButtonClickHandler():void
@@ -51,10 +59,11 @@ private function configureButtonClickHandler():void
 	PopUpManager.centerPopUp(disObj);
 }
 
-public function addGameUnit(game:Game):void
+public function addGameUnit(game:Game, isNewGame:Boolean = false):void
 {
 	var gameUnit:GameUnit = new GameUnit();
 	gameUnit.game = game;
+	gameUnit.editable = isNewGame;
 	gameUnit.addEventListener(ChildComponentEvent.DELETE, gameDeleteHandler);
 	this.mainContainer.addChildAt(gameUnit, 0);	
 }
@@ -76,17 +85,19 @@ private function generateHandler(isZip:Boolean):void
 		return;
 	}
 	warningButton.visible = false;
-	this.saveButtonClickHandler()
+	var saveCmd:SaveUserDataCmd = new SaveUserDataCmd();
+	saveCmd.xml = DS.getUserDataXML();
+	saveCmd.execute();
 	
 	var zipCmd:GenerateZipCmd = new GenerateZipCmd();
 	zipCmd.isZipEnabled = isZip;
 	zipCmd.targetZipFolder = DS.copyPath.clone();
 	zipCmd.games = DS.gameArray.toArray();
 	zipCmd.addEventListener(CommandEvent.COMMAND_RESULT, zipCompleteHandler);
+	zipCmd.addEventListener(CommandEvent.COMMAND_FAULT, zipFailedHandler);
 	zipCmd.addEventListener(CommandProgressEvent.PROGRESS_CHANGE, progressChangeHandler);
 	zipCmd.execute();
-	GlobalUtil.popupLoadingMask(
-			this.resourceManager.getString('main','pathConfView.generatingZip'));
+	GlobalUtil.popupLoadingMask("");
 }
 
 private function progressChangeHandler(evt:CommandProgressEvent):void
@@ -105,7 +116,16 @@ private function zipCompleteHandler(evt:CommandEvent):void
 	} else {
 		result = DS.copyPath.nativePath;
 	}
-	Alert.show(this.resourceManager.getString('main', 'pathConfView.zipSuccess', [result]));
+	GlobalUtil.alert(this.resourceManager.getString('main', 'gameContainer.zipSuccessMessage', [result]),
+			resourceManager.getString("main", "gameContainer.zipSuccessTitle"));
+}
+
+private function zipFailedHandler(evt:CommandEvent):void
+{
+	GlobalUtil.alert(
+			resourceManager.getString("main","gameContainer.zipFailedMessage"), 
+			resourceManager.getString("main", "gameContainer.zipFailedTitle"),
+			"failed");	
 }
 
 public function applyChanges():Boolean
