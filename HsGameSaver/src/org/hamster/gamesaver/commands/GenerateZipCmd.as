@@ -75,7 +75,7 @@ package org.hamster.gamesaver.commands
 					
 					this.parseFolder(game, saveFolder, 
 							targetZipFolder.nativePath + File.separator 
-							+ "save_backup"+ File.separator 
+							+ "save_backup" + File.separator 
 							+ game.name + File.separator
 							+ new File(game.savePath).name, 
 							cmdArray);
@@ -177,7 +177,7 @@ package org.hamster.gamesaver.commands
 				var file:File = copyCmd.copiedFile;
 				if (file.data != null && file.exists && file.data.length > 0) {
 					asZip.addFile(file.data, copyCmd.targetFolder.nativePath
-							.replace(targetZipFolder.nativePath + File.separator, "")
+							.replace(targetZipFolder.nativePath + File.separator + "save_backup" + File.separator, "")
 							.replace("\\","/") + "/" + file.name);
 //					fZip.addFile(copyCmd.targetFolder.nativePath
 //							.replace(TMP_FOLDER.nativePath + File.separator, "")
@@ -190,7 +190,8 @@ package org.hamster.gamesaver.commands
 			var df:DateFormatter = new DateFormatter();
 			df.formatString = "YYYYMMDD_JNNSS";
 			
-			_targetZipFile = new File(targetZipFolder.nativePath + File.separator + "save_"
+			_targetZipFile = new File(targetZipFolder.nativePath + File.separator 
+							+ "save_backup" + File.separator + "save_"
 					+ df.format(new Date()) + ".zip");
 			_fs = new FileStream();
 			_fs.openAsync(_targetZipFile, FileMode.WRITE);

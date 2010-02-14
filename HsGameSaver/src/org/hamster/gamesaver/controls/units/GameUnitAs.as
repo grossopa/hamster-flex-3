@@ -9,13 +9,15 @@ import org.hamster.gamesaver.models.Game;
 
 private var _game:Game;
 private var _gameChanged:Boolean;
-private var _editable:Boolean;
+private var _editable:Boolean = false;
 
 public function set editable(value:Boolean):void
 {
 	this._editable = value;
-	for each (var filterUnit:FilterUnit in this.filterContainer.getChildren()) {
-		filterUnit.editable = value;
+	if (this.initialized) {
+		for each (var filterUnit:FilterUnit in this.filterContainer.getChildren()) {
+			filterUnit.editable = value;
+		}
 	}
 }
 
@@ -40,7 +42,7 @@ private function completeHandler():void
 {
 	if (_gameChanged) {
 		_gameChanged = false;
-		this.editable = false;
+		this.editable = _editable;
 		this.titleInput.text = game.name;
 		this.pathInput.text = game.path;
 		this.savePathInput.text = game.savePath;

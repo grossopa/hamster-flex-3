@@ -19,7 +19,6 @@ ComboBox {
 	selectionColor : #222222;
 	borderColor : #000000;
 	borderThickness : 0;
-	highlightAlphas : 0.8, 0.6;
 	dropdownStyleName : dropdownComboBox;
 	fontWeight : normal;
 }
