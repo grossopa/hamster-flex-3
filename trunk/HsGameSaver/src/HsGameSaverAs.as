@@ -8,6 +8,7 @@ private static const DS:DataService = DataService.getInstance();
 
 private function completeHandler():void
 {
+	//this.setStyle("fontFamily", FZMWFont.fontClass);
 	this.resourceManager.localeChain = ["zh_CN"];
  	var loadCmd:LoadUserDataCmd = new LoadUserDataCmd();
 	loadCmd.addEventListener(CommandEvent.COMMAND_RESULT, loadCompleteHandler);

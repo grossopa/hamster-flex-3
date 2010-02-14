@@ -1,6 +1,7 @@
 global {
 	fontFamily: fzmwFont;
 	fontSize : 14;
+	fontWeight : normal;
 	themeColor : #333333;
 }
 
@@ -27,18 +28,15 @@ ComboBox {
 	borderThickness : 0;
 	dropdownStyleName : dropdownComboBox;
 	fontWeight : normal;
-}
+} 
 
 .dropdownComboBox {
 	backgroundColor: #000000;
 	fontWeight : normal;
 	borderColor : #000000;
-}
+} 
 
 /*@font-face {
-	src:local("Arial");  //嵌入本机字体
-	fontFamily: ArialFont;  //字体的别名
-	fontStyle:  normal;   //默认normal，正常，可选值：italic | oblique | normal
-	fontWeight: normal;   //默认normal，正常，可选值：bold | heavy | normal
-	flashType: true;    //默认true，添加文本的额外信息，使得文本抗锯齿，平滑显示
+	src:url("fonts/FZMWFont.ttf"); 
+	fontFamily: fzmwFont;
 }*/
