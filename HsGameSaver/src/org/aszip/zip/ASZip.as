@@ -111,8 +111,8 @@ package org.aszip.zip
 		public function addDirectory ( directoryName:String ):void 
 		
 		{
-			var pDirectoryLength:int = this.countStringLength(directoryName);
 			directoryName = directoryName.split ('\\').join ('/');  
+			var pDirectoryLength:int = this.countStringLength(directoryName);
 
 			var feedArrayRow:ByteArray = new ByteArray;
 			feedArrayRow.endian = Endian.LITTLE_ENDIAN;
@@ -185,8 +185,8 @@ package org.aszip.zip
 		public function addFile ( pBytes:ByteArray, pDirectory:String ):void
 		
 		{
-			var pDirectoryLength:int = countStringLength(pDirectory);
 			pDirectory = pDirectory.split ('\\').join ('/');
+			var pDirectoryLength:int = countStringLength(pDirectory);
 			
 			var feedArrayRow:ByteArray = new ByteArray;
 			feedArrayRow.endian = Endian.LITTLE_ENDIAN;
@@ -229,7 +229,7 @@ package org.aszip.zip
 			feedArrayRow.writeUnsignedInt ( uncompressedLength ); 
 			feedArrayRow.writeShort ( pDirectoryLength ); 
 			feedArrayRow.writeShort ( 0 );
-			feedArrayRow.writeMultiByte(pDirectory, "unicode");
+			feedArrayRow.writeMultiByte(pDirectory, "gb18030");
 			//feedArrayRow.writeUTFBytes ( pDirectory ); 
 			feedArrayRow.writeBytes ( pBytes );  
 			

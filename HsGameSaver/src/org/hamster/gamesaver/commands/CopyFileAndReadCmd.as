@@ -11,6 +11,8 @@ package org.hamster.gamesaver.commands
 		private var _targetFolder:File;
 		private var _copiedFile:File;
 		
+		public var readData:Boolean = true;
+		
 		public function set file(value:File):void
 		{
 			this._file = value;
@@ -52,8 +54,12 @@ package org.hamster.gamesaver.commands
 		private function copyCompleteHandler(evt:Event):void
 		{
 			_file.removeEventListener(Event.COMPLETE, copyCompleteHandler);
-			_copiedFile.addEventListener(Event.COMPLETE, openCompleteHandler);
-			_copiedFile.load();
+			if (readData) {
+				_copiedFile.addEventListener(Event.COMPLETE, openCompleteHandler);
+				_copiedFile.load();
+			} else {
+				this.result(null);
+			}
 		}
 		
 		private function openCompleteHandler(evt:Event):void
