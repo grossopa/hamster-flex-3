@@ -6,10 +6,19 @@ import mx.managers.PopUpManager;
 import org.hamster.gamesaver.services.DataService;
 
 private var DS:DataService = DataService.getInstance();
+[Bindable]
+private var locales:Array = [{label:'中文', data: 'zh_CN'},{label:'English', data: 'en_US'}]; 
 
 private function completeHandler():void
 {
-	this.languageComboBox.selectedItem = this.resourceManager.localeChain[0];
+	var obj:Object = locales[0];
+	for each (var o:Object in locales) {
+		if (o.data == this.resourceManager.localeChain[0]) {
+			obj = o;
+			break;
+		}
+	}
+	this.languageComboBox.selectedItem = obj;
 	this.targetCopyPathInput.text = DS.copyPath.nativePath;
 }
 

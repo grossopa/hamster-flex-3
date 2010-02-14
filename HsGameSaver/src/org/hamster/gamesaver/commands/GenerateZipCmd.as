@@ -17,6 +17,7 @@ package org.hamster.gamesaver.commands
 	import org.hamster.commands.impl.CommandQueue;
 	import org.hamster.gamesaver.events.CommandProgressEvent;
 	import org.hamster.gamesaver.models.Game;
+	import org.hamster.gamesaver.utils.GlobalUtil;
 	
 	[Event(name="progressChange", 
 			type="org.hamster.gamesaver.events.CommandProgressEvent")]
@@ -151,6 +152,7 @@ package org.hamster.gamesaver.commands
 		
 		private function copyCmdFailHandler(evt:CommandEvent):void
 		{
+			
 			var cmd:CopyFileAndReadCmd = CopyFileAndReadCmd(evt.currentTarget);
 			cmd.removeEventListener(CommandEvent.COMMAND_RESULT,
 					copyCmdFinishHandler);

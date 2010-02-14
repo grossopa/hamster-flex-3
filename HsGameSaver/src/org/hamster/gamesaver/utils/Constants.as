@@ -12,5 +12,9 @@ package org.hamster.gamesaver.utils
 				"W:\\", "X:\\", "Y:\\", "Z:\\"
 		];
 		
+		public static const LOCALES:Array = [
+				"zh_CN", "en_US"
+		];
+		
 	}
 }

@@ -4,6 +4,27 @@ package org.hamster.gamesaver.utils
 	
 	public class FileUtil
 	{
+		/**
+		 * an array contains illegal characters which cannot be used in file name or file path.
+		 */
+		public static const ILLEGAL_CHARACTERS:Array = [':','*','/','|','\\','?','"','<','>'];
+		
+		/**
+		 * Check is file name legal.
+		 * 
+		 * @param name
+		 * @return is legal
+		 */
+		public static function isFileNameLegal(name:String):Boolean
+		{
+			for each (var char:String in ILLEGAL_CHARACTERS) {
+				if (name.indexOf(char) != -1) {
+					return false;
+				}
+			} 
+			return true;
+		}		
+		
 		public static function checkPath(path:String):Boolean
 		{
 			try {

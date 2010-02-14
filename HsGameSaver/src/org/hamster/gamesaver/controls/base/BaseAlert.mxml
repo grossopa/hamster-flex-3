@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300"
-	verticalScrollPolicy="off" horizontalScrollPolicy="off" xmlns:buttons="org.hamster.gamesaver.controls.buttons.*">
+	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	xmlns:buttons="org.hamster.gamesaver.controls.buttons.*"
+	creationComplete="completeHandler()">
 	<mx:Script source="BaseAlertAs.as" />
 	
 	<mx:VBox id="mainContainer" width="100%" height="100%" y="33"
 		borderColor="#ff0000" borderThickness="1" borderStyle="none"
 		backgroundColor="#000000" backgroundAlpha="0.7" horizontalAlign="right">
 		<mx:TextArea id="mainTextArea" text="{message}" width="100%" height="100%"
-			paddingLeft="10" paddingRight="10" paddingTop="3"
+			paddingLeft="10" paddingRight="10" paddingTop="3" editable="false"
 			backgroundAlpha="0" borderStyle="none" color="{stringColor}" />
 	</mx:VBox>
 	<buttons:OkayButton right="10" bottom="10" width="30" height="30" 

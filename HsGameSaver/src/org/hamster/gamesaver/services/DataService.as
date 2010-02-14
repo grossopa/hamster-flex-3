@@ -3,8 +3,10 @@ package org.hamster.gamesaver.services
 	import flash.filesystem.File;
 	
 	import mx.collections.ArrayCollection;
+	import mx.resources.ResourceManager;
 	
 	import org.hamster.gamesaver.models.Game;
+	import org.hamster.gamesaver.utils.Constants;
 	
 	public class DataService
 	{
@@ -75,8 +77,9 @@ package org.hamster.gamesaver.services
 		
 		public function getUserDataXML():XML
 		{
+			var locale:String = String(ResourceManager.getInstance().localeChain[0]);
 			var xml:XML = new XML(<user copy-path={this.copyPath.nativePath}
-					zip-enabled={this.zipEnabled}></user>);
+					zip-enabled={this.zipEnabled} locale={locale}></user>);
 			
 			var gamesXML:XML = new XML(<games></games>);
 			for each (var game:Game in this.gameArray) {
@@ -97,7 +100,11 @@ package org.hamster.gamesaver.services
 			}
 			this.zipEnabled = xml.attribute("zip-enabled") as String == "true";
 			var gamesXML:XML = xml.child("games")[0];
-			
+			var locale:String = xml.attribute("locale");
+			if (Constants.LOCALES.indexOf(locale) < 0) {
+				locale = String(Constants.LOCALES[0]);
+			}
+			ResourceManager.getInstance().localeChain = [locale];
 			for each (var xmlChild:XML in gamesXML.children()) {
 				var game:Game = new Game();
 				game.decodeXML(xmlChild);

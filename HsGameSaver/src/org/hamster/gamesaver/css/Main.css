@@ -9,6 +9,12 @@ global {
 	fontWeight : bold;
 }
 
+CheckBox {
+	textRollOverColor : #FFFFFF;
+	textSelectedColor : #FFFFFF;
+	borderColor : #000000;
+}
+
 ComboBox {
 	cornerRadius : 0;
 	fillAlphas : 0.4, 0.4;
@@ -16,7 +22,7 @@ ComboBox {
 	textRollOverColor : #FFFFFF;
 	textSelectedColor : #FFFFFF;
 	rollOverColor : #666666;
-	selectionColor : #222222;
+	selectionColor : #333333;
 	borderColor : #000000;
 	borderThickness : 0;
 	dropdownStyleName : dropdownComboBox;
@@ -24,8 +30,9 @@ ComboBox {
 }
 
 .dropdownComboBox {
-	backgroundColor: #444444;
+	backgroundColor: #000000;
 	fontWeight : normal;
+	borderColor : #000000;
 }
 
 /*@font-face {

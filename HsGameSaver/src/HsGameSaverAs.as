@@ -21,5 +21,4 @@ private function loadCompleteHandler(evt:CommandEvent):void
 	for each (var game:Game in DS.gameArray) {
 		this.gameContainer.addGameUnit(game);
 	}
-	//this.pathConfView.copyPathString = DS.copyPath.nativePath;
 }
