@@ -8,6 +8,12 @@
 		[ResourceBundle("main")]
 	</mx:Metadata>
 	<mx:Style source="/org/hamster/gamesaver/css/Main.css" />
+	<mx:Script>
+		<![CDATA[
+			[Embed(mimeType='application/x-font', source='org/hamster/gamesaver/assets/fonts/FZMWFont.TTF', fontName='fzmwFont')]
+			private var myFont:Class;
+		]]>
+	</mx:Script>
 	<mx:Script source="HsGameSaverAs.as" />
 	<views:PathConfView id="pathConfView" width="100%" height="100%" />
 	<containers:GameContainer id="gameContainer" width="100%" height="100%" />

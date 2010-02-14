@@ -69,6 +69,9 @@ private function completeHandler():void
 
 private function mouseWheelHandler():void
 {
+	if (!this.editable) {
+		return;
+	}
 	this.type = this.type == INCLUDE ? EXCLUDE : INCLUDE;
 }
 

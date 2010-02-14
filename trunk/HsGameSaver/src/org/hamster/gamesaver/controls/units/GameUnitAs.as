@@ -153,13 +153,20 @@ private function editButtonClickHandler():void
 
 private function okButtonClickHandler():void
 {
-	this.editable = false;
 	applyChanges();
 }
 
-public function applyChanges():void
+public function applyChanges():Boolean
 {
+	var nameAvail:Boolean = this.titleInput.text.length > 0;
+	var savePathAvail:Boolean = this.savePathInput.checkFilePath();
+	if (!savePathAvail || !nameAvail) {
+		warningButton.visible = true;
+		this.editable = true;
+		return false;
+	}
 	this.editable = false;
+	warningButton.visible = false;
 	game.name = this.titleInput.text;
 	game.path = this.pathInput.text;
 	game.savePath = this.savePathInput.text;
@@ -179,5 +186,6 @@ public function applyChanges():void
 			this.game.excludes.push(filter.filterText);
 		}
 	}
+	return true;
 }
 

@@ -31,12 +31,15 @@
 			<mx:HBox id="filterContainer" width="100%" height="20" />
 		</mx:FormItem>
 	</mx:Form>
-	<mx:HBox width="100%" horizontalAlign="right" y="100" right="15">
-		<buttons:EditButton width="30" height="30" visible="{!this.editable}" 
-			click="editButtonClickHandler()" />
-		<buttons:OkayButton width="30" height="30" visible="{this.editable}"
-			click="okButtonClickHandler()" />
+	<mx:Canvas width="100%" y="100" 
+		verticalScrollPolicy="off" horizontalScrollPolicy="off">
+		<buttons:EditButton width="20" height="20" visible="{!this.editable}"
+			click="editButtonClickHandler()" left="20" top="10" />
+		<buttons:OkayButton width="20" height="20" visible="{this.editable}"
+			click="okButtonClickHandler()" left="20" top="10" />
+		<buttons:WarningButton id="warningButton" left="45"
+			width="20" height="20" top="10" visible="false" />
 		<buttons:DeleteButton width="30" height="30" 
-			click="deleteClickHandler()"/>
-	</mx:HBox>
+			click="deleteClickHandler()" right="10"/>
+	</mx:Canvas>
 </mx:Canvas>

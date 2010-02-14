@@ -7,6 +7,7 @@ package org.hamster.gamesaver.controls.base
 	import mx.controls.TextInput;
 	
 	import org.hamster.gamesaver.events.TextInputEvent;
+	import org.hamster.gamesaver.utils.FileUtil;
 	
 	[Event(name="applyChange", type="org.hamster.gamesaver.events.TextInputEvent")]
 
@@ -21,19 +22,17 @@ package org.hamster.gamesaver.controls.base
 			this.addEventListener(KeyboardEvent.KEY_UP, _keyUpHandler);
 			
 			this.setStyle("borderStyle", "none");
-			
+			this.setStyle("color", 0xFFFFFF);
 			_focusOutHandler(null);
 		}
 		
 		private function _focusInHandler(evt:FocusEvent):void
 		{
-			//this.setStyle("color", 0x000000);
 			this.setStyle("backgroundAlpha", 0.3);
 		}
 		
 		private function _focusOutHandler(evt:FocusEvent):void
 		{
-			this.setStyle("color", 0xFFFFFF);
 			this.setStyle("backgroundAlpha", 0);
 			this.dispatchEvent(new TextInputEvent(TextInputEvent.APPLY_CHANGE));
 		}
@@ -45,6 +44,16 @@ package org.hamster.gamesaver.controls.base
 			}
 		}
 		
+		public function checkFilePath():Boolean
+		{
+			var result:Boolean = FileUtil.checkPath(this.text);
+			if (result) {
+				this.setStyle("color", 0xFFFFFF);
+			} else {
+				this.setStyle("color", 0xFF4F4F);
+			}
+			return result;
+		}
 		
 		
 	}

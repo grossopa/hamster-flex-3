@@ -123,6 +123,7 @@ package org.hamster.gamesaver.commands
 					var copyCmd:CopyFileAndReadCmd = new CopyFileAndReadCmd();
 					copyCmd.file = file;
 					copyCmd.targetFolder = targetFolder;
+					copyCmd.readData = this.isZipEnabled;
 					copyCmd.addEventListener(CommandEvent.COMMAND_RESULT,
 							copyCmdFinishHandler);
 					copyCmd.addEventListener(CommandEvent.COMMAND_FAULT,
@@ -164,10 +165,10 @@ package org.hamster.gamesaver.commands
 		
 		private function queueCompleteHandler(evt:CommandEvent):void
 		{
-//			if (!this.isZipEnabled) {
-//				this.result(null);
-//				return;
-//			}
+			if (!this.isZipEnabled) {
+				this.result(null);
+				return;
+			}
 			var queue:CommandQueue = CommandQueue(evt.currentTarget);
 			//var fZip:FZip = new FZip();
 			var asZip:ASZip = new ASZip();
