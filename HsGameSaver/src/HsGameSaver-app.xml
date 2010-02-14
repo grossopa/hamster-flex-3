@@ -24,11 +24,11 @@
 	<name>Hamster Game Saver</name>
 
 	<!-- An application version designator (such as "v1", "2.5", or "Alpha 1"). Required. -->
-	<version>v0.0.1</version>
+	<version>v0.0.2</version>
 
 	<!-- Description, displayed in the AIR application installer.
 	     May have multiple values for each language. See samples or xsd schema file. Optional. -->
-	<description>Game saver is a program to backup your save files of games.</description>
+	<description>Game saver is a program to backup your save files of games.\nv0.0.2 update: Update UI</description>
 
 	<!-- Copyright information. Optional -->
 	<copyright>No copyright</copyright>
