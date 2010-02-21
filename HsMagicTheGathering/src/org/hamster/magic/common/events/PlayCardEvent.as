@@ -2,7 +2,7 @@ package org.hamster.magic.common.events
 {
 	import flash.events.Event;
 	
-	import noorg.magic.models.PlayCard;
+	import org.hamster.magic.common.models.PlayCard;
 
 	public class PlayCardEvent extends Event
 	{

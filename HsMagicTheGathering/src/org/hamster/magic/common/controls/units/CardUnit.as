@@ -1,5 +1,7 @@
 package org.hamster.magic.common.controls.units
 {
+	import flash.filters.GlowFilter;
+	
 	import mx.containers.Canvas;
 	import mx.controls.Image;
 	import mx.core.ScrollPolicy;
@@ -10,19 +12,40 @@ package org.hamster.magic.common.controls.units
 	public class CardUnit extends Canvas
 	{
 		protected static const AS:AssetService = AssetService.getInstance();
+		protected var _glowFilterInner:GlowFilter = new GlowFilter(0xFFFFFF, 0.5, 3, 3, 2, 3);
 		
 		private var _card:Card;
+		private var _selected:Boolean;
 		
 		protected var _mainImage:Image;
 		
 		public function set card(value:Card):void
 		{
 			this._card = value;
+			if (this.initialized) {
+				this._mainImage.source = this._card.imgPath;
+			}
 		}
 		
 		public function get card():Card
 		{
 			return this._card;
+		}
+		
+		public function set selected(value:Boolean):void
+		{
+			this._selected = value;
+			
+			if (this.selected) {
+				this.filters = [_glowFilterInner];
+			} else {
+				this.filters = [];
+			}
+		}
+		
+		public function get selected():Boolean
+		{
+			return this._selected;
 		}
 		
 		protected function get source():Object

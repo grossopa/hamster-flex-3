@@ -2,11 +2,11 @@ package org.hamster.magic.common.models
 {
 	import mx.collections.ArrayCollection;
 	
-	import noorg.magic.models.staticValue.CardLocation;
-	
 	import org.hamster.common.utils.ArrayUtil;
 	import org.hamster.magic.common.events.PlayCardEvent;
 	import org.hamster.magic.common.models.base.AbstractModelSupport;
+	import org.hamster.magic.common.models.utils.CardLocation;
+	import org.hamster.magic.common.models.utils.CardStatus;
 	
 	[Event(name="drawCard", type="org.hamster.magic.common.events.PlayCardEvent")]
 	
@@ -80,7 +80,7 @@ package org.hamster.magic.common.models
 		
 		private function cardLocationChangedHandler(evt:PlayCardEvent):void
 		{
-			var originArr:ArrayCollection = this.getLocationArray(evt.originLocation);
+			var originArr:ArrayCollection = this.getLocationArray(evt.oldLocation);
 			var newArr:ArrayCollection = this.getLocationArray(evt.newLocation);
 			if (evt.index == -1) {
 				newArr.addItem(originArr.removeItemAt(originArr.getItemIndex(evt.currentTarget)));
@@ -91,7 +91,7 @@ package org.hamster.magic.common.models
 		
 		private function cardStatusChangedHandler(evt:PlayCardEvent):void
 		{
-			var originArr:ArrayCollection = this.getStatusArray(evt.originStatus);
+			var originArr:ArrayCollection = this.getStatusArray(evt.oldStatus);
 			var newArr:ArrayCollection = this.getStatusArray(evt.newStatus);
 			newArr.addItem(originArr.removeItemAt(originArr.getItemIndex(evt.currentTarget)));			
 		}
