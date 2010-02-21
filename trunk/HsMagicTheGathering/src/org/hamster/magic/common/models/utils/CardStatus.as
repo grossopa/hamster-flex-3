@@ -1,4 +1,4 @@
-package noorg.magic.models.staticValue
+package org.hamster.magic.common.models.utils
 {
 	public class CardStatus
 	{

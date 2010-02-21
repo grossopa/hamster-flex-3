@@ -1,6 +1,7 @@
 package org.hamster.magic.common.models
 {
-
+	import org.hamster.magic.common.models.base.AbstractModelSupport;
+	
 	public class Player extends AbstractModelSupport
 	{
 		private var _hp:int = 20;

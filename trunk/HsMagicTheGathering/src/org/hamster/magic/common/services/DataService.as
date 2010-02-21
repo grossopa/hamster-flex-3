@@ -2,6 +2,10 @@ package org.hamster.magic.common.services
 {
 	import mx.collections.ArrayCollection;
 	
+	import org.hamster.magic.common.models.PlayCard;
+	import org.hamster.magic.common.utils.MapCollector;
+	import org.hamster.magic.play.controls.units.PlayCardUnit;
+	
 	public class DataService
 	{
 		private static var _instance:DataService;
@@ -53,18 +57,18 @@ package org.hamster.magic.common.services
 //		public var playerRed:Player;
 //		public var playerBlue:Player;
 		
-//		private var _playCardMap:MapCollector = new MapCollector();
+		private var _playCardMap:MapCollector = new MapCollector();
 //		
-//		public function getPlayCardUnitByCard(playCard:PlayCard):PlayCardUnit
-//		{
-//			var result:PlayCardUnit = PlayCardUnit(_playCardMap.getValue(playCard));
-//			if (result == null) {
-//				result = new PlayCardUnit();
-//				result.card = playCard;
-//				_playCardMap.put(playCard, result);
-//			}
-//			return result;
-//		}
+		public function getPlayCardUnitByCard(playCard:PlayCard):PlayCardUnit
+		{
+			var result:PlayCardUnit = PlayCardUnit(_playCardMap.getValue(playCard));
+			if (result == null) {
+				result = new PlayCardUnit();
+				result.card = playCard;
+				_playCardMap.put(playCard, result);
+			}
+			return result;
+		}
 //		
 //		/**
 //		 * user configurations
