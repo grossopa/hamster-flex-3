@@ -14,11 +14,11 @@ package org.hamster.magic.common.services
 			return _instance;
 		}
 		
-//		/**
-//		 * all card collections
-//		 */
-//		[Bindable]
-//		public var cardCollections:ArrayCollection = new ArrayCollection();
+		/**
+		 * all card collections
+		 */
+		[Bindable]
+		public var cardCollections:ArrayCollection = new ArrayCollection();
 //		
 //		/**
 //		 * current selected cards for build container
@@ -26,11 +26,11 @@ package org.hamster.magic.common.services
 //		[Bindable]
 //		public var selectedCards:ArrayCollection = new ArrayCollection();
 //		
-//		/**
-//		 * user saved cards name list
-//		 */
-//		[Bindable]
-//		public var userCollNames:ArrayCollection = new ArrayCollection();
+		/**
+		 * user saved cards name list
+		 */
+		[Bindable]
+		public var userCollNames:ArrayCollection = new ArrayCollection();
 		
 //		[Bindable]
 //		public var selectedNum:int;

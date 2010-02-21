@@ -24,7 +24,7 @@ package org.hamster.magic.common.models
 			this.name = xml.@name;
 			this.imgUrl = xml.@url;
 			this.oracleText = xml.attribute("oracle-text");
-			this.magic.decodeString(xml.attribute("magic-cost");
+			this.magic.decodeString(xml.attribute("magic-cost"));
 			// this.magicPool.decodeString(xml.attribute("magic-cost"));
 			
 //			if (xml.elements("type")[0] != null) {
