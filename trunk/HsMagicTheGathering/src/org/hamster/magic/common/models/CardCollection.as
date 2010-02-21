@@ -4,7 +4,7 @@ package org.hamster.magic.common.models
 	
 	import noorg.magic.models.base.AbstractModelSupport;
 	
-	public class Cards extends AbstractModelSupport
+	public class CardCollection extends AbstractModelSupport
 	{
 		public var name:String;
 		public var cards:ArrayCollection;
