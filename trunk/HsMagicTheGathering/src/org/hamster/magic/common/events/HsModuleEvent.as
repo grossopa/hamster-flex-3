@@ -2,18 +2,18 @@ package org.hamster.magic.common.events
 {
 	import flash.events.Event;
 
-	public class ViewEvent extends Event
+	public class HsModuleEvent extends Event
 	{
 		public static const CLOSE:String = "ViewEventClose";
 		
-		public function ViewEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function HsModuleEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
 		}
 		
 		override public function clone():Event
 		{
-			var result:ViewEvent = new ViewEvent(type, bubbles, cancelable);
+			var result:HsModuleEvent = new HsModuleEvent(type, bubbles, cancelable);
 			return result;
 		}
 		

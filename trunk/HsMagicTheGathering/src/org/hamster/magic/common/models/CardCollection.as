@@ -2,7 +2,7 @@ package org.hamster.magic.common.models
 {
 	import mx.collections.ArrayCollection;
 	
-	import noorg.magic.models.base.AbstractModelSupport;
+	import org.hamster.magic.common.models.base.AbstractModelSupport;
 	
 	public class CardCollection extends AbstractModelSupport
 	{
