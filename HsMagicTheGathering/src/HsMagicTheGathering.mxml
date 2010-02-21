@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
-	
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
+	showStatusBar="false" verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	backgroundColor="#000000"
+	xmlns:views="org.hamster.magic.menu.controls.views.*">
 </mx:WindowedApplication>
