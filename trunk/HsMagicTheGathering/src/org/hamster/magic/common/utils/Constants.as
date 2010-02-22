@@ -47,5 +47,20 @@ package org.hamster.magic.common.utils
 		
 		public static const MENU_MODULE:String = "/org/hamster/magic/menu/MenuModule.swf";
 		public static const PLAY_MODULE:String = "/org/hamster/magic/play/PlayModule.swf";
+		
+		public static const DEFAULT_CONFIG_FILE:XML =
+			<configure>
+				<locales>
+					<locale>zh_CN</locale>
+					<locale>en_US</locale>
+				</locales>
+				<game>
+					<card-num>70</card-num>
+				</game>
+				<collections>
+					<collection name="(none)" from="0" to="0" />
+					<collection name="10th Edition" from="122719" to="123086" />
+				</collections>
+			</configure>;
 	}
 }

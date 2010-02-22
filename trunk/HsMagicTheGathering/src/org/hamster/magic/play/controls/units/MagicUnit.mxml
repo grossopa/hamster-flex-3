@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="30"
 	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	 horizontalGap="4"
 	verticalAlign="middle" horizontalAlign="center" xmlns:items="org.hamster.magic.play.controls.items.*">
 	<mx:Script>
 		<![CDATA[
@@ -8,10 +9,10 @@
 		]]>
 	</mx:Script>
 	<mx:Script source="MagicUnitAs.as" />
-	<items:MagicCircleItem id="magicWhiteImage" width="30" height="30" color="{Constants.WHITE_COLOR}" />
-	<items:MagicCircleItem id="magicBlueImage" width="30" height="30" color="{Constants.BLUE_COLOR}" />
-	<items:MagicCircleItem id="magicBlackImage" width="30" height="30" color="{Constants.BLACK_COLOR}" />
-	<items:MagicCircleItem id="magicRedImage" width="30" height="30" color="{Constants.RED_COLOR}" />
-	<items:MagicCircleItem id="magicGreenImage" width="30" height="30" color="{Constants.GREEN_COLOR}" />
-	<items:MagicCircleItem id="magicColorlessImage" width="30" height="30" color="{Constants.COLORLESS_COLOR}" />
+	<items:MagicCircleItem id="magicWhiteImage" width="25" height="25" color="{Constants.WHITE_COLOR}" />
+	<items:MagicCircleItem id="magicBlueImage" width="25" height="25" color="{Constants.BLUE_COLOR}" />
+	<items:MagicCircleItem id="magicBlackImage" width="25" height="25" color="{Constants.BLACK_COLOR}" />
+	<items:MagicCircleItem id="magicRedImage" width="25" height="25" color="{Constants.RED_COLOR}" />
+	<items:MagicCircleItem id="magicGreenImage" width="25" height="25" color="{Constants.GREEN_COLOR}" />
+	<items:MagicCircleItem id="magicColorlessImage" width="25" height="25" color="{Constants.COLORLESS_COLOR}" />
 </mx:HBox>

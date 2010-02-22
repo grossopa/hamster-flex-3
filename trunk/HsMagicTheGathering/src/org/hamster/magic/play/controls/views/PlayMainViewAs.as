@@ -1,19 +1,9 @@
 // ActionScript file
-import org.hamster.magic.common.models.Player;
+import org.hamster.magic.common.services.DataService;
 
-private var _player:Player;
-
-public function set player(value:Player):void
-{
-	this._player = value;
-}
-
-public function get player():Player
-{
-	return this._player;
-}
+private static const DS:DataService = DataService.getInstance();
 
 private function completeHandler():void
 {
-	
+	player1Container.player = DS.player1;
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
 	showStatusBar="false" verticalScrollPolicy="off" horizontalScrollPolicy="off"
-	backgroundColor="#000000" frameRate="30"
+	backgroundColor="#000000" frameRate="40" width="800" height="600"
 	applicationComplete="appCompleteHandler()"
 	xmlns:views="org.hamster.magic.menu.controls.views.*">
 	<mx:Script source="HsMagicTheGatheringAs.as" />

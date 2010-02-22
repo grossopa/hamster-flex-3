@@ -99,7 +99,7 @@ override protected function updateDisplayList(uw:Number, uh:Number):void
 	bgGraphics.clear();
 	var m:Matrix = new Matrix();
 	m.createGradientBox(uw, uh, Math.PI / 2);
-	bgGraphics.beginGradientFill(GradientType.LINEAR, [0x000000, 0x000000, 0x000000], [0, 0.7, 0], [0x00, 0x7F, 0xFF], m);
+	bgGraphics.beginGradientFill(GradientType.LINEAR, [0xFFFFFF, 0xFFFFFF, 0xFFFFFF], [0, 0.7, 0], [0x00, 0x7F, 0xFF], m);
 	bgGraphics.drawRect(0, 0, uw, uh);
 	bgGraphics.endFill();
 }

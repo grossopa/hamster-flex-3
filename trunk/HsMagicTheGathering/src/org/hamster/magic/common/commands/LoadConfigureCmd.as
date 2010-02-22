@@ -6,11 +6,11 @@ package org.hamster.magic.common.commands
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 	
-	import mx.controls.Alert;
 	import mx.resources.ResourceManager;
 	
 	import org.hamster.commands.AbstractCommand;
 	import org.hamster.magic.common.models.CardCollectionMeta;
+	import org.hamster.magic.common.utils.Constants;
 	import org.hamster.magic.common.utils.Properties;
 
 	public class LoadConfigureCmd extends AbstractCommand
@@ -38,9 +38,9 @@ package org.hamster.magic.common.commands
 			var xml:XML = new XML(fs.readUTFBytes(fs.bytesAvailable));
 			
 			// database configuration
-			Properties.databasePath = xml.database.path;
-			Properties.databasePath = File.applicationDirectory.resolvePath(Properties.databasePath).nativePath;
-			Properties.databasePassword = xml.database.password;
+//			Properties.databasePath = xml.database.path;
+//			Properties.databasePath = File.applicationDirectory.resolvePath(Properties.databasePath).nativePath;
+//			Properties.databasePassword = xml.database.password;
 			
 			// i18n configuration
 			Properties.locales = new Array();
@@ -67,9 +67,12 @@ package org.hamster.magic.common.commands
 		
 		private function ioErrorHandler(evt:Event):void
 		{
-			Alert.show(evt.toString());
+			var fs:FileStream = new FileStream();
+			fs.open(this.file, FileMode.WRITE);
+			fs.writeUTFBytes(Constants.DEFAULT_CONFIG_FILE);
+			fs.close();
 			
-			super.fault(null);
+			super.result(null);
 		}
 		
 	}
