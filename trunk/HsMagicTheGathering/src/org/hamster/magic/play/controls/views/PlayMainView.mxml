@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
-	width="800" height="600" 
+	width="800" height="375" 
 	verticalScrollPolicy="off" horizontalScrollPolicy="off"
-	creationComplete="completeHandler()">
+	creationComplete="completeHandler()" xmlns:units="org.hamster.magic.play.controls.units.*">
+	<mx:Script>
+		<![CDATA[
+			import org.hamster.magic.common.utils.Constants;
+		]]>
+	</mx:Script>
 	<mx:Script source="PlayMainViewAs.as" />
+	<units:PlayCardUnit id="preview" width="{Constants.CARD_WIDTH}" height="{Constants.CARD_HEIGHT}" />
 </mx:Canvas>

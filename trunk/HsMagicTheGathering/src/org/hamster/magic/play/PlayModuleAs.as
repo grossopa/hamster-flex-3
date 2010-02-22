@@ -1,14 +1,12 @@
 // ActionScript file
-import org.hamster.magic.common.models.Magic;
+import flash.events.Event;
 
 private function completeHandler():void
 {
-	var magic:Magic = new Magic();
-	magic.red = 3;
-	magic.blue = 2;
-	magic.green = 0;
-	magic.black = 4;
-	magic.white = 5;
-	magic.colorless = 18;
-	testMagicUnit.magic = magic;
+	prepareView.addEventListener("startGame", startGameHandler);
+}
+
+private function startGameHandler(evt:Event):void
+{
+	mainViewStack.selectedIndex = 1;
 }
