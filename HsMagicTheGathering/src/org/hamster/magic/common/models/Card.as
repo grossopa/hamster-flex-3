@@ -12,11 +12,13 @@ package org.hamster.magic.common.models
 		public var oracleText:String;
 		public var collection:String;
 		
+		public var count:int;
+		public var isSelected:Boolean;
+		
 		/**
 		 * card detail information
 		 */
 		public const magic:Magic = new Magic();
-		
 		
 		public function decodeXML(xml:XML):void
 		{
@@ -39,21 +41,20 @@ package org.hamster.magic.common.models
 //			}
 		}
 		
-//		public function decodeUserXML(xml:XML):void
-//		{
-//			this.collection = xml.@collection;
-//			this.pid = xml.@pid;
-//			this.count = xml.@count;
-//			this.isSelected = xml.attribute("is-selected");
-//			this.imgPath = xml.attribute("img-path");
-//			
+		public function decodeUserXML(xml:XML):void
+		{
+			this.collection = xml.@collection;
+			this.pid = xml.@pid;
+			this.count = xml.@count;
+			this.isSelected = xml.attribute("is-selected") == "true";
+			
 //			var cmd:LoadCardXMLCmd = new LoadCardXMLCmd();
 //			cmd.collection = this.collection;
 //			cmd.pid = this.pid;
 //			cmd.addEventListener(CommandEvent.COMMAND_RESULT, loadCardXMLCompleteHandler);
 //			cmd.addEventListener(CommandEvent.COMMAND_FAULT, loadCardXMLFailedHandler);
 //			cmd.execute();
-//		}
+		}
 		
 //		private function loadCardXMLCompleteHandler(evt:CommandEvent):void
 //		{
@@ -83,17 +84,15 @@ package org.hamster.magic.common.models
 			return xml;
 		}
 		
-//		public function toUserXML():XML
-//		{
-//			// var xml:XML = this.toXML();
-//			var xml:XML = new XML(<card></card>);
-//			xml.@["pid"] = this.pid;
-//			xml.@["collection"] = this.collection;
-//			xml.@["count"] = this.count;
-//			xml.@["is-selected"] = this.isSelected;
-//			xml.@["img-path"] = this.imgPath;
-//			return xml;			
-//		}
+		public function toUserXML():XML
+		{
+			var xml:XML = new XML(<card></card>);
+			xml.@["pid"] = this.pid;
+			xml.@["collection"] = this.collection;
+			xml.@["count"] = this.count;
+			xml.@["is-selected"] = this.isSelected;
+			return xml;			
+		}
 		
 //		public function toXMLString():String
 //		{

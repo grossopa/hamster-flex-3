@@ -1,5 +1,6 @@
 // ActionScript file
 import mx.collections.ArrayCollection;
+import mx.events.ChildExistenceChangedEvent;
 import mx.events.CollectionEvent;
 import mx.events.CollectionEventKind;
 
@@ -26,6 +27,22 @@ public function get cardArray():ArrayCollection
 	return _cardArray;
 }
 
+protected function completeHandler():void
+{
+	this.mainContainer.addEventListener(ChildExistenceChangedEvent.CHILD_ADD, childAddHandler);
+	this.mainContainer.addEventListener(ChildExistenceChangedEvent.CHILD_REMOVE, childRemoveHandler);
+}
+
+private function childAddHandler(evt:ChildExistenceChangedEvent):void
+{
+	
+}
+
+private function childRemoveHandler(evt:ChildExistenceChangedEvent):void
+{
+	
+}
+
 private function collectionChangedHandler(evt:CollectionEvent):void
 {
 	var hasIt:Boolean = false;
@@ -42,8 +59,6 @@ private function collectionChangedHandler(evt:CollectionEvent):void
 			}
 			if (!hasIt) {
 				var unit:PlayCardUnit = DS.getPlayCardUnitByCard(playCard);
-				//unit.addEventListener(MouseEvent.ROLL_OUT, unitRollOutHandler);
-				//unit.addEventListener(MouseEvent.ROLL_OVER, unitRollOverHandler);
 				this.mainContainer.addChild(unit);
 			}
 		}
@@ -58,8 +73,6 @@ private function collectionChangedHandler(evt:CollectionEvent):void
 				}
 			}
 			if (!hasIt) {
-				//playCardUnit.removeEventListener(MouseEvent.ROLL_OUT, unitRollOutHandler);
-				//playCardUnit.removeEventListener(MouseEvent.ROLL_OVER, unitRollOverHandler);
 				this.mainContainer.removeChild(playCardUnit);
 			}
 		}		

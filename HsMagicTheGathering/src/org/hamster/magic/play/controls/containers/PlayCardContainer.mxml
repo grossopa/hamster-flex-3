@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
 	width="100%" height="{Constants.PLAY_CARD_HEIGHT}" 
-	verticalScrollPolicy="off" horizontalScrollPolicy="off">
+	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	creationComplete="completeHandler()">
 	<mx:Script>
 		<![CDATA[
 			import org.hamster.magic.common.utils.Constants;
