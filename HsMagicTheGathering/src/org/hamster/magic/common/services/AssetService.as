@@ -14,6 +14,9 @@ package org.hamster.magic.common.services
 		
 		[Embed(source="/org/hamster/magic/common/assets/card/back.png")]
 		public var CARD_BACK:Class;
+		
+		[Embed(source="/org/hamster/magic/common/assets/items/base_circle.png")]
+		public var BASE_CIRCLE:Class;
 
 	}
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="800" height="600" 
+	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	creationComplete="completeHandler()">
+	<mx:Script source="PlayMainViewAs.as" />
+</mx:Canvas>

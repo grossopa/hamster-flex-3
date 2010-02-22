@@ -46,6 +46,6 @@ package org.hamster.magic.common.utils
 		public static const COLORLESS:String 	= "colorless";
 		
 		public static const MENU_MODULE:String = "/org/hamster/magic/menu/MenuModule.swf";
-		public static const MODULE_PLAY:String = "/noorg/magic/controls/modules/PlayModule.swf";
+		public static const PLAY_MODULE:String = "/org/hamster/magic/play/PlayModule.swf";
 	}
 }

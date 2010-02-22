@@ -8,7 +8,7 @@ package org.hamster.magic.play.controls.utils
 	import org.hamster.magic.common.models.Player;
 	import org.hamster.magic.common.models.PlayerCards;
 	
-	public class ModelFactory
+	public class PlayerFactory
 	{
 		public static function createPlayer(cardColl:CardCollection):Player
 		{
