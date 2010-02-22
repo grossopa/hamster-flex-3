@@ -1,4 +1,8 @@
 // ActionScript file
+import flash.display.GradientType;
+import flash.display.Graphics;
+import flash.geom.Matrix;
+
 import mx.collections.ArrayCollection;
 import mx.events.ChildExistenceChangedEvent;
 import mx.events.CollectionEvent;
@@ -91,4 +95,11 @@ override protected function updateDisplayList(uw:Number, uh:Number):void
 {
 	super.updateDisplayList(uw, uh);
 	
+	var bgGraphics:Graphics = backgroundUIComponent.graphics;
+	bgGraphics.clear();
+	var m:Matrix = new Matrix();
+	m.createGradientBox(uw, uh, Math.PI / 2);
+	bgGraphics.beginGradientFill(GradientType.LINEAR, [0x000000, 0x000000, 0x000000], [0, 0.7, 0], [0x00, 0x7F, 0xFF], m);
+	bgGraphics.drawRect(0, 0, uw, uh);
+	bgGraphics.endFill();
 }

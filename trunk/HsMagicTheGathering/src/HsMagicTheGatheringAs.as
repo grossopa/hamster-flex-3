@@ -12,6 +12,7 @@ import org.hamster.commands.impl.CommandQueue;
 import org.hamster.magic.common.commands.LoadCardsCmd;
 import org.hamster.magic.common.commands.LoadConfigureCmd;
 import org.hamster.magic.common.commands.LoadUserCollListCmd;
+import org.hamster.magic.common.events.HsModuleEvent;
 import org.hamster.magic.common.models.CardCollection;
 import org.hamster.magic.common.services.DataService;
 import org.hamster.magic.common.services.HTTPServices;
@@ -21,6 +22,7 @@ import org.hamster.magic.common.utils.FileUtil;
 private static const DS:DataService = DataService.getInstance();
 
 private var _moduleInfo:IModuleInfo;
+private var _currentModule:DisplayObject;
 
 private function appCompleteHandler():void
 {
@@ -48,6 +50,7 @@ private function appCompleteHandler():void
 		loadCardCmd.addEventListener(CommandEvent.COMMAND_RESULT, loadCardsCompleteHandler);
 		cmdQueue.cmdArray.push(loadCardCmd);
 	}
+	
 	var loadListCmd:LoadUserCollListCmd = new LoadUserCollListCmd();
 	loadListCmd.addEventListener(CommandEvent.COMMAND_RESULT, loadListCompleteHandler);
 	cmdQueue.cmdArray.push(loadListCmd);
@@ -72,6 +75,10 @@ private function loadListCompleteHandler(evt:CommandEvent):void
 	DS.userCollNames = new ArrayCollection(cmd.names);
 }
 
+////////////////////
+// module support //
+////////////////////
+
 private function queueCompleteHandler(evt:CommandEvent):void
 {
 	_moduleInfo = ModuleManager.getModule(Constants.MENU_MODULE);
@@ -82,6 +89,39 @@ private function queueCompleteHandler(evt:CommandEvent):void
 private function menuModuleReadyHandler(evt:ModuleEvent):void
 {
 	_moduleInfo.removeEventListener(ModuleEvent.READY, menuModuleReadyHandler);
-	var menuModule:DisplayObject = evt.module.factory.create() as DisplayObject;
-	this.addChild(menuModule); 
+	_currentModule = evt.module.factory.create() as DisplayObject;
+	_currentModule.addEventListener(HsModuleEvent.CLOSE, menuModuleCloseHandler);
+	this.addChild(_currentModule);
 }
+
+private function menuModuleCloseHandler(evt:HsModuleEvent):void
+{
+	_currentModule.removeEventListener(HsModuleEvent.CLOSE, menuModuleCloseHandler);
+	this.removeChild(_currentModule);
+	
+	_moduleInfo.release();
+	_moduleInfo = ModuleManager.getModule(Constants.PLAY_MODULE);
+	_moduleInfo.addEventListener(ModuleEvent.READY, playModuleReadyHandler);
+	_moduleInfo.load();
+}
+
+private function playModuleReadyHandler(evt:ModuleEvent):void
+{
+	_currentModule.removeEventListener(ModuleEvent.READY, playModuleReadyHandler);
+	_currentModule = evt.module.factory.create() as DisplayObject;
+	_currentModule.addEventListener(HsModuleEvent.CLOSE, playModuleCloseHandler);
+	this.addChild(_currentModule);
+}
+
+private function playModuleCloseHandler(evt:HsModuleEvent):void
+{
+	_currentModule.removeEventListener(HsModuleEvent.CLOSE, playModuleCloseHandler);
+	this.removeChild(_currentModule);
+	_currentModule = null;
+	queueCompleteHandler(null);
+}
+
+///////////////////////////
+// end of module support //
+///////////////////////////
+

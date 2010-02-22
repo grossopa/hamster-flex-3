@@ -3,6 +3,7 @@ package org.hamster.magic.common.services
 	import mx.collections.ArrayCollection;
 	
 	import org.hamster.magic.common.models.PlayCard;
+	import org.hamster.magic.common.models.Player;
 	import org.hamster.magic.common.utils.MapCollector;
 	import org.hamster.magic.play.controls.units.PlayCardUnit;
 	
