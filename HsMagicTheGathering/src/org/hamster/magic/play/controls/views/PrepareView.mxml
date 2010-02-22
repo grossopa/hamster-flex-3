@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="800" height="600" verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	creationComplete="completeHandler()">
+	<mx:Script source="PrepareViewAs.as" />
+	<mx:ComboBox id="player1CardCollComboBox" dataProvider="{userCollNames}" />
+	<mx:ComboBox id="player2CardCollComboBox" dataProvider="{userCollNames}" />
+	<mx:Button label="Start Game" click="startGameHandler()" />
+</mx:VBox>
