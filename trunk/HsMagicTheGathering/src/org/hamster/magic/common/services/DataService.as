@@ -51,11 +51,11 @@ package org.hamster.magic.common.services
 //		}
 		
 		
-//		/**
-//		 * for play
-//		 */
-//		public var playerRed:Player;
-//		public var playerBlue:Player;
+		/**
+		 * for play
+		 */
+		public var player1:Player;
+		public var player2:Player;
 		
 		private var _playCardMap:MapCollector = new MapCollector();
 //		

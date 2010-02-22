@@ -17,7 +17,7 @@ package org.hamster.magic.common.models
 			return this._hp;
 		}
 		
-		public var cards:CardCollection;
+		public var cardCollection:CardCollection;
 		public var playerCards:PlayerCards;
 		
 		
