@@ -1,20 +1,24 @@
 package org.hamster.magic.common.models
 {
+	import org.hamster.magic.common.events.PlayerEvent;
 	import org.hamster.magic.common.models.base.AbstractModelSupport;
 	
+	[Event(name="lifeChange", type="org.hamster.magic.common.events.PlayerEvent")]
+
 	public class Player extends AbstractModelSupport
 	{
-		private var _hp:int = 20;
+		private var _life:int = 20;
+		public const magic:Magic = new Magic();
 		
-		public function set hp(value:int):void
+		public function set life(value:int):void
 		{
-			this._hp = value;
-			// this.dispatchEvent(new PlayerEvent(PlayerEvent.HP_CHANGE));
+			this._life = value;
+			this.dispatchEvent(new PlayerEvent(PlayerEvent.LIFE_CHANGE));
 		}
 		
-		public function get hp():int
+		public function get life():int
 		{
-			return this._hp;
+			return this._life;
 		}
 		
 		public var cardCollection:CardCollection;

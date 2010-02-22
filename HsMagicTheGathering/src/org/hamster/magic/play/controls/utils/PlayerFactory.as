@@ -22,7 +22,7 @@ package org.hamster.magic.play.controls.utils
 				}
 			}
 			
-			player.playerCards = new PlayerCards(player.cardColl.cards);
+			player.playerCards = new PlayerCards(player.cardCollection.cards);
 			player.playerCards.shuffleCard(true);
 			
 			return player;
@@ -32,7 +32,7 @@ package org.hamster.magic.play.controls.utils
 		{
 			var result:PlayCard = new PlayCard(ownPlayer);
 			result.name = card.name;
-			result.magic = card.magic.clone();
+			result.magic.decodeString(card.magic.encodeString());
 //			if (card.type != null) {
 //				result.type = card.type.clone();
 //			}
