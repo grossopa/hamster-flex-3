@@ -14,5 +14,4 @@
 		verticalAlign="middle" horizontalAlign="center" />
 	<mx:HBox id="mainContainer" width="100%" height="{Constants.PLAY_CARD_HEIGHT}"
 		verticalScrollPolicy="off" horizontalScrollPolicy="off" />
-
 </mx:Canvas>

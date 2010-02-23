@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="115" height="115"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off">
+	<mx:Script source="PortraitUnitAs.as" />
+	<mx:Image id="mainImage" width="115" height="115" source="{source}" />
+</mx:Canvas>

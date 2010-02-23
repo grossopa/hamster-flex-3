@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	width="73" height="100" creationComplete="completeHandler()">
+	<mx:Script source="PlayCardPileUnitAs.as" />
+	<mx:Image id="mainImage" width="73" height="100" 
+		horizontalAlign="center" verticalAlign="middle" />
+</mx:Canvas>
