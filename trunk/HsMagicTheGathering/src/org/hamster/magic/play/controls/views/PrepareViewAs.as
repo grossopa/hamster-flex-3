@@ -21,11 +21,11 @@ private function startGameHandler():void
 	var cardColl1:CardCollection;
 	var cardColl2:CardCollection;
 	
-	for each (var cardCollection:CardCollection in DS.cardCollections) {
-		if (cardCollection.name == String(this.player1CardCollComboBox.selectedItem)) {
+	for each (var cardCollection:CardCollection in DS.) {
+		if (cardCollection.name == this.player1CardCollComboBox.selectedItem.toString()) {
 			DS.player1 = PlayerFactory.createPlayer(cardCollection);
 		}
-		if (cardCollection.name == String(this.player2CardCollComboBox.selectedItem)) {
+		if (cardCollection.name == this.player2CardCollComboBox.selectedItem.toString()) {
 			DS.player2 = PlayerFactory.createPlayer(cardCollection);
 		}
 	}
