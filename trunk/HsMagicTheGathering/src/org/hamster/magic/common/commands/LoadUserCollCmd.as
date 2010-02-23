@@ -1,4 +1,4 @@
-package noorg.magic.commands.impl
+package org.hamster.magic.common.commands
 {
 	import flash.events.Event;
 	import flash.filesystem.File;
