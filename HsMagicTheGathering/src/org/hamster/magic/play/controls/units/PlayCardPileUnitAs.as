@@ -1,4 +1,6 @@
 // ActionScript file
+import flash.filters.GlowFilter;
+
 import mx.collections.ArrayCollection;
 import mx.events.CollectionEvent;
 
@@ -6,9 +8,27 @@ import org.hamster.magic.common.models.Card;
 import org.hamster.magic.common.services.AssetService;
 			
 private static var AS:AssetService = AssetService.getInstance();
+private static const GLOW_FILTER:GlowFilter = new GlowFilter(0xFFFFFF, 0.5, 6, 6, 2, 3, true);
 
 private var _playCardArray:ArrayCollection;
 private var _isShowTopCard:Boolean;
+
+private var _isSelected:Boolean;
+
+public function set isSelected(value:Boolean):void
+{
+	this._isSelected = value;
+	if (value) {
+		this.filters = [GLOW_FILTER];
+	} else {
+		this.filters = [];
+	}
+}
+
+public function get isSelected():Boolean
+{
+	return this._isSelected;
+}
 
 public function set playCardArray(value:ArrayCollection):void
 {

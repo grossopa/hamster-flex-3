@@ -12,14 +12,12 @@
 	<units:PlayCardUnit id="preview" 
 		width="{Constants.CARD_WIDTH}" height="{Constants.CARD_HEIGHT}" />
 	
-	
-	<!--  -->
 	<mx:Canvas verticalScrollPolicy="off" horizontalScrollPolicy="off"
 		x="0" y="260" width="100%" height="115">
 		<containers:LifeMagicContainer id="lifeMagicContainer" y="53" />
 		<units:PortraitUnit id="portraitUnit" x="226" y="0" />
-		<mx:ViewStack id="consoleViewStack" width="365" height="115">
-			<units:PlayCardPileUnit id="playCardPileUnit" />
+		<mx:ViewStack id="consoleViewStack" x="341" width="365" height="115">
+			<containers:PlayCardPileContainer id="playCardPileContainer" />
 		</mx:ViewStack>
 	</mx:Canvas>
 	
