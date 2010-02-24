@@ -1,5 +1,7 @@
 package org.hamster.magic.common.models
 {
+	import org.hamster.commands.events.CommandEvent;
+	import org.hamster.magic.common.commands.LoadCardXMLCmd;
 	import org.hamster.magic.common.models.base.AbstractModelSupport;
 	
 	
@@ -48,29 +50,29 @@ package org.hamster.magic.common.models
 			this.count = xml.@count;
 			this.isSelected = xml.attribute("is-selected") == "true";
 			
-//			var cmd:LoadCardXMLCmd = new LoadCardXMLCmd();
-//			cmd.collection = this.collection;
-//			cmd.pid = this.pid;
-//			cmd.addEventListener(CommandEvent.COMMAND_RESULT, loadCardXMLCompleteHandler);
-//			cmd.addEventListener(CommandEvent.COMMAND_FAULT, loadCardXMLFailedHandler);
-//			cmd.execute();
+			var cmd:LoadCardXMLCmd = new LoadCardXMLCmd();
+			cmd.collection = this.collection;
+			cmd.pid = this.pid;
+			cmd.addEventListener(CommandEvent.COMMAND_RESULT, loadCardXMLCompleteHandler);
+			cmd.addEventListener(CommandEvent.COMMAND_FAULT, loadCardXMLFailedHandler);
+			cmd.execute();
 		}
 		
-//		private function loadCardXMLCompleteHandler(evt:CommandEvent):void
-//		{
-//			var cmd:LoadCardXMLCmd = LoadCardXMLCmd(evt.currentTarget);
-//            cmd.removeEventListener(CommandEvent.COMMAND_RESULT, loadCardXMLCompleteHandler);
-//            cmd.removeEventListener(CommandEvent.COMMAND_FAULT, loadCardXMLFailedHandler);
-//			var xml:XML = cmd.xml;
-//			this.decodeXML(xml);
-//		}
-//		
-//		private function loadCardXMLFailedHandler(evt:CommandEvent):void
-//		{
-//            var cmd:LoadCardXMLCmd = LoadCardXMLCmd(evt.currentTarget);
-//            cmd.removeEventListener(CommandEvent.COMMAND_RESULT, loadCardXMLCompleteHandler);
-//            cmd.removeEventListener(CommandEvent.COMMAND_FAULT, loadCardXMLFailedHandler);			
-//		}
+		private function loadCardXMLCompleteHandler(evt:CommandEvent):void
+		{
+			var cmd:LoadCardXMLCmd = LoadCardXMLCmd(evt.currentTarget);
+            cmd.removeEventListener(CommandEvent.COMMAND_RESULT, loadCardXMLCompleteHandler);
+            cmd.removeEventListener(CommandEvent.COMMAND_FAULT, loadCardXMLFailedHandler);
+			var xml:XML = cmd.xml;
+			this.decodeXML(xml);
+		}
+		
+		private function loadCardXMLFailedHandler(evt:CommandEvent):void
+		{
+            var cmd:LoadCardXMLCmd = LoadCardXMLCmd(evt.currentTarget);
+            cmd.removeEventListener(CommandEvent.COMMAND_RESULT, loadCardXMLCompleteHandler);
+            cmd.removeEventListener(CommandEvent.COMMAND_FAULT, loadCardXMLFailedHandler);			
+		}
 		
 		public function toXML():XML
 		{
@@ -91,7 +93,7 @@ package org.hamster.magic.common.models
 			xml.@["collection"] = this.collection;
 			xml.@["count"] = this.count;
 			xml.@["is-selected"] = this.isSelected;
-			return xml;			
+			return xml;
 		}
 		
 //		public function toXMLString():String
