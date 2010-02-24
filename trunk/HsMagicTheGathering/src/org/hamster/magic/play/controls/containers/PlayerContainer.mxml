@@ -28,7 +28,7 @@
 		</mx:ViewStack>
 	</mx:Canvas>
 	
-	<units:PlayCardUnit id="preview" 
+	<units:PlayCardUnit id="previewCardUnit" 
 		width="{Constants.CARD_WIDTH}" height="{Constants.CARD_HEIGHT}" />
 	<mx:Image source="@Embed(source='/org/hamster/magic/play/assets/cards/card_view_border.png')"
 		width="{Constants.CARD_WIDTH}" height="{Constants.CARD_HEIGHT}" />

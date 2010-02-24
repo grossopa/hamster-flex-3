@@ -1,6 +1,10 @@
 // ActionScript file
+import org.hamster.magic.common.events.CardUnitEvent;
 import org.hamster.magic.common.models.Player;
 import org.hamster.magic.common.models.utils.CardLocation;
+import org.hamster.magic.common.services.EventService;
+
+private var ES:EventService = EventService.getInstance();
 
 private var _player:Player;
 
@@ -17,6 +21,8 @@ public function get player():Player
 private function completeHandler():void
 {
 	this.playCardPileContainer.player = this.player;
+	ES.addEventListener(CardUnitEvent.SHOW_DETAIL, showDetailHandler);
+	ES.addEventListener(CardUnitEvent.HIDE_DETAIL, hideDetailHandler);
 }
 
 private function completeHandler2():void
@@ -25,4 +31,14 @@ private function completeHandler2():void
 	artifactContainer.cardArray = this.player.playerCards.getLocationArray(CardLocation.ARTIFACT);
 	landContainer.cardArray = this.player.playerCards.getLocationArray(CardLocation.LAND);
 	handContainer.cardArray = this.player.playerCards.getLocationArray(CardLocation.HAND);
+}
+
+private function showDetailHandler(evt:CardUnitEvent):void
+{
+	previewCardUnit.card = evt.card;
+}
+
+private function hideDetailHandler(evt:CardUnitEvent):void
+{
+	previewCardUnit.card = null;
 }

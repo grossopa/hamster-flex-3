@@ -8,8 +8,6 @@ package org.hamster.magic.common.events
 	{
 		public static const DRAW_CARD:String = "PlayCardEventDrawCard";
 		
-		public static const SHOW_DETAIL:String = "PlayCardEventShowDetail";
-		
 		public static const LOCATION_CHANGED:String = "PlayCardEventLocationChanged";
 		public static const STATUS_CHANGED:String = "PlayCardEventStatusChanged";
 		public static const ENHANCE_CHANGE:String = "PlayCardEventEnhanceChange";
