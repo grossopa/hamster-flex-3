@@ -72,7 +72,6 @@ package org.hamster.magic.common.controls.units
 			_mainImage = new Image();
 			_mainImage.percentWidth = 100;
 			_mainImage.percentHeight = 100;
-			_mainImage.cachePolicy = "on";
 			_mainImage.maintainAspectRatio = true;
 			_mainImage.setStyle("verticalAlign", "middle");
 			_mainImage.setStyle("horizontalAlign", "center");

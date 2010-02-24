@@ -9,10 +9,14 @@ package org.hamster.magic.common.commands
 	
 	import org.hamster.commands.AbstractCommand;
 	import org.hamster.magic.common.models.Card;
+	import org.hamster.magic.common.models.CardCollection;
+	import org.hamster.magic.common.services.DataService;
 	import org.hamster.magic.common.utils.FileUtil;
 
 	public class LoadUserCollCmd extends AbstractCommand
 	{
+		private static const DS:DataService = DataService.getInstance();
+		
 		public var name:String;
 		
 		public var cards:ArrayCollection;
@@ -39,6 +43,16 @@ package org.hamster.magic.common.commands
 			
 			for each (var childXML:XML in xml.children()) {
 				var card:Card = new Card();
+//				for each (var cardCollection:CardCollection in DS.cardCollections) {
+//					if (cardCollection.name == card.collection) {
+//						for each (var sourceCard:Card in cardCollection.cards) {
+//							card.imgPath = sourceCard.imgPath;
+//							card.imgUrl = sourceCard.imgUrl;
+//							card.magic.
+//						}
+//					}
+//				}
+				
 				card.decodeUserXML(childXML);
 				cards.addItem(card);
 			}
