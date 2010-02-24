@@ -23,7 +23,7 @@ package org.hamster.magic.common.controls.units
 		{
 			this._card = value;
 			if (this.initialized) {
-				this._mainImage.source = this._card.imgPath;
+				this._mainImage.source = this.source;
 			}
 		}
 		
@@ -72,7 +72,7 @@ package org.hamster.magic.common.controls.units
 			_mainImage = new Image();
 			_mainImage.percentWidth = 100;
 			_mainImage.percentHeight = 100;
-			_mainImage.maintainAspectRatio = true;
+			_mainImage.maintainAspectRatio = false;
 			_mainImage.setStyle("verticalAlign", "middle");
 			_mainImage.setStyle("horizontalAlign", "center");
 			_mainImage.source = this.source;

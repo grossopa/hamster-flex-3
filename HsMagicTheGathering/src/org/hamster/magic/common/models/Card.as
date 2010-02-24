@@ -29,7 +29,6 @@ package org.hamster.magic.common.models
 			this.imgUrl = xml.@url;
 			this.oracleText = xml.attribute("oracle-text");
 			this.magic.decodeString(xml.attribute("magic-cost"));
-			// this.magicPool.decodeString(xml.attribute("magic-cost"));
 			
 //			if (xml.elements("type")[0] != null) {
 //				var typeName:int = xml.elements("type")[0].attribute("name");
@@ -50,12 +49,12 @@ package org.hamster.magic.common.models
 			this.count = xml.@count;
 			this.isSelected = xml.attribute("is-selected") == "true";
 			
-			var cmd:LoadCardXMLCmd = new LoadCardXMLCmd();
-			cmd.collection = this.collection;
-			cmd.pid = this.pid;
-			cmd.addEventListener(CommandEvent.COMMAND_RESULT, loadCardXMLCompleteHandler);
-			cmd.addEventListener(CommandEvent.COMMAND_FAULT, loadCardXMLFailedHandler);
-			cmd.execute();
+//			var cmd:LoadCardXMLCmd = new LoadCardXMLCmd();
+//			cmd.collection = this.collection;
+//			cmd.pid = this.pid;
+//			cmd.addEventListener(CommandEvent.COMMAND_RESULT, loadCardXMLCompleteHandler);
+//			cmd.addEventListener(CommandEvent.COMMAND_FAULT, loadCardXMLFailedHandler);
+//			cmd.execute();
 		}
 		
 		private function loadCardXMLCompleteHandler(evt:CommandEvent):void

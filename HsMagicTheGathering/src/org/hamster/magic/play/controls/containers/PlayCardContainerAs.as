@@ -1,6 +1,7 @@
 // ActionScript file
 import flash.display.GradientType;
 import flash.display.Graphics;
+import flash.events.MouseEvent;
 import flash.geom.Matrix;
 
 import mx.collections.ArrayCollection;
@@ -10,9 +11,11 @@ import mx.events.CollectionEventKind;
 
 import org.hamster.magic.common.models.PlayCard;
 import org.hamster.magic.common.services.DataService;
+import org.hamster.magic.common.services.EventService;
 import org.hamster.magic.play.controls.units.PlayCardUnit;
 
 private static const DS:DataService = DataService.getInstance();
+private static const ES:EventService = EventService.getInstance();
 
 private var _cardArray:ArrayCollection;
 
@@ -39,12 +42,26 @@ protected function completeHandler():void
 
 private function childAddHandler(evt:ChildExistenceChangedEvent):void
 {
-	
+	var unit:PlayCardUnit = PlayCardUnit(evt.relatedObject);
+	unit.addEventListener(MouseEvent.ROLL_OVER, playCardRollOverHandler);
+	unit.addEventListener(MouseEvent.ROLL_OUT, playCardRollOutHandler);
 }
 
 private function childRemoveHandler(evt:ChildExistenceChangedEvent):void
 {
-	
+	var unit:PlayCardUnit = PlayCardUnit(evt.relatedObject);
+	unit.removeEventListener(MouseEvent.ROLL_OVER, playCardRollOverHandler);
+	unit.removeEventListener(MouseEvent.ROLL_OUT, playCardRollOutHandler);	
+}
+
+private function playCardRollOverHandler(evt:MouseEvent):void
+{
+	ES.showDetail(PlayCardUnit(evt.currentTarget).card);
+}
+
+private function playCardRollOutHandler(evt:MouseEvent):void
+{
+	ES.hideDetail();
 }
 
 private function collectionChangedHandler(evt:CollectionEvent):void

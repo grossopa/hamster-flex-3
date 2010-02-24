@@ -43,17 +43,19 @@ package org.hamster.magic.common.commands
 			
 			for each (var childXML:XML in xml.children()) {
 				var card:Card = new Card();
-//				for each (var cardCollection:CardCollection in DS.cardCollections) {
-//					if (cardCollection.name == card.collection) {
-//						for each (var sourceCard:Card in cardCollection.cards) {
-//							card.imgPath = sourceCard.imgPath;
-//							card.imgUrl = sourceCard.imgUrl;
-//							card.magic.
-//						}
-//					}
-//				}
-				
 				card.decodeUserXML(childXML);
+				for each (var cardCollection:CardCollection in DS.cardCollections) {
+					if (cardCollection.name == card.collection) {
+						for each (var sourceCard:Card in cardCollection.cards) {
+							if (card.pid == sourceCard.pid) {
+								card.imgPath = sourceCard.imgPath;
+								card.decodeXML(sourceCard.toXML());
+								break;
+							}
+						}
+					}
+				}
+				
 				cards.addItem(card);
 			}
 			

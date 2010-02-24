@@ -1,6 +1,9 @@
 // ActionScript file
 import flash.events.MouseEvent;
 
+import mx.controls.Alert;
+
+import org.hamster.magic.common.models.PlayCard;
 import org.hamster.magic.common.models.Player;
 import org.hamster.magic.play.controls.units.PlayCardPileUnit;
 
@@ -27,5 +30,5 @@ private function changeFocusHandler(evt:MouseEvent):void
 
 private function drawButtonClickHandler():void
 {
-	this.player.playerCards.drawCard();
+	var card:PlayCard = this.player.playerCards.drawCard();
 }

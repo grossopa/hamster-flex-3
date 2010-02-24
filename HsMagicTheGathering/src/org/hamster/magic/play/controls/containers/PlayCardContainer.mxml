@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
-	width="100%" height="{Constants.PLAY_CARD_HEIGHT}" 
+	width="100%" height="{Constants.PLAY_CARD_HEIGHT}"
 	verticalScrollPolicy="off" horizontalScrollPolicy="off"
 	creationComplete="completeHandler()">
 	<mx:Script>
@@ -13,5 +13,6 @@
 	<mx:Image id="titleTextImage" right="10" height="100%" 
 		verticalAlign="middle" horizontalAlign="center" />
 	<mx:HBox id="mainContainer" width="100%" height="{Constants.PLAY_CARD_HEIGHT}"
-		verticalScrollPolicy="off" horizontalScrollPolicy="off" />
+		verticalScrollPolicy="off" horizontalScrollPolicy="off"
+		horizontalGap="2" />
 </mx:Canvas>

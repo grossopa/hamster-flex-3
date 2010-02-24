@@ -14,13 +14,6 @@ package org.hamster.magic.common.models
 		
 //		public const enhancementCards:ArrayCollection = new ArrayCollection();
 		
-//		override public function set magicPool(value:MagicPool):void
-//		{
-//			super.magicPool = value;
-//			
-//			this.magicPoolChangedHandler(null);
-//		} 
-		
 		public function setLocation(value:int, index:int = -1):void
 		{
 			var locationEvt:PlayCardEvent = new PlayCardEvent(PlayCardEvent.LOCATION_CHANGED);
