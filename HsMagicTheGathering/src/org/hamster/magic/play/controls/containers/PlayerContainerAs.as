@@ -23,6 +23,8 @@ private function completeHandler():void
 	this.playCardPileContainer.player = this.player;
 	ES.addEventListener(CardUnitEvent.SHOW_DETAIL, showDetailHandler);
 	ES.addEventListener(CardUnitEvent.HIDE_DETAIL, hideDetailHandler);
+	ES.addEventListener(CardUnitEvent.SELECT_CARD, selectCardHandler);
+	ES.addEventListener(CardUnitEvent.UNSELECT_CARD, unselectCardHandler);
 }
 
 private function completeHandler2():void
@@ -41,4 +43,14 @@ private function showDetailHandler(evt:CardUnitEvent):void
 private function hideDetailHandler(evt:CardUnitEvent):void
 {
 	previewCardUnit.card = null;
+}
+
+private function selectCardHandler(evt:CardUnitEvent):void
+{
+	previewCardUnit.card = evt.card;
+}
+
+private function unselectCardHandler(evt:CardUnitEvent):void
+{
+	
 }

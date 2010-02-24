@@ -2,12 +2,15 @@ package org.hamster.magic.common.services
 {
 	import flash.events.EventDispatcher;
 	
+	import org.hamster.magic.common.controls.units.CardUnit;
 	import org.hamster.magic.common.events.CardUnitEvent;
 	import org.hamster.magic.common.models.Card;
 	
 	[Event(name="showDetail", type="org.hamster.magic.common.events.CardUnitEvent")]
 	[Event(name="hideDetail", type="org.hamster.magic.common.events.CardUnitEvent")]
-	
+	[Event(name="selectCard", type="org.hamster.magic.common.events.CardUnitEvent")]
+	[Event(name="unselectCard", type="org.hamster.magic.common.events.CardUnitEvent")]
+
 	public class EventService extends EventDispatcher
 	{
 		private static var _instance:EventService;
@@ -20,8 +23,13 @@ package org.hamster.magic.common.services
 			return _instance;
 		}
 		
+		public var curSelectedCardUnit:CardUnit;
+		
 		public function showDetail(card:Card):void
 		{
+			if (curSelectedCardUnit != null) {
+				return;
+			}
 			var disEvt:CardUnitEvent = new CardUnitEvent(CardUnitEvent.SHOW_DETAIL);
 			disEvt.card = card;
 			this.dispatchEvent(disEvt);			
@@ -29,8 +37,28 @@ package org.hamster.magic.common.services
 		
 		public function hideDetail():void
 		{
+			if (curSelectedCardUnit != null) {
+				return;
+			}
 			var disEvt:CardUnitEvent = new CardUnitEvent(CardUnitEvent.HIDE_DETAIL);
 			this.dispatchEvent(disEvt);
+		}
+		
+		public function selectCard(cardUnit:CardUnit):void
+		{
+			curSelectedCardUnit = cardUnit;
+			
+			var disEvt:CardUnitEvent = new CardUnitEvent(CardUnitEvent.SELECT_CARD);
+			disEvt.card = curSelectedCardUnit.card;
+			this.dispatchEvent(disEvt);				
+		}
+		
+		public function unselectCard():void
+		{
+			curSelectedCardUnit = null;
+			
+			var disEvt:CardUnitEvent = new CardUnitEvent(CardUnitEvent.UNSELECT_CARD);
+			this.dispatchEvent(disEvt);				
 		}
 
 	}

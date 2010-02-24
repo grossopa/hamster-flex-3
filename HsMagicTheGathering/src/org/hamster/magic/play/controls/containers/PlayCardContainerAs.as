@@ -9,6 +9,7 @@ import mx.events.ChildExistenceChangedEvent;
 import mx.events.CollectionEvent;
 import mx.events.CollectionEventKind;
 
+import org.hamster.magic.common.models.Card;
 import org.hamster.magic.common.models.PlayCard;
 import org.hamster.magic.common.services.DataService;
 import org.hamster.magic.common.services.EventService;
@@ -45,13 +46,15 @@ private function childAddHandler(evt:ChildExistenceChangedEvent):void
 	var unit:PlayCardUnit = PlayCardUnit(evt.relatedObject);
 	unit.addEventListener(MouseEvent.ROLL_OVER, playCardRollOverHandler);
 	unit.addEventListener(MouseEvent.ROLL_OUT, playCardRollOutHandler);
+	unit.addEventListener(MouseEvent.CLICK, playCardClickHandler);
 }
 
 private function childRemoveHandler(evt:ChildExistenceChangedEvent):void
 {
 	var unit:PlayCardUnit = PlayCardUnit(evt.relatedObject);
 	unit.removeEventListener(MouseEvent.ROLL_OVER, playCardRollOverHandler);
-	unit.removeEventListener(MouseEvent.ROLL_OUT, playCardRollOutHandler);	
+	unit.removeEventListener(MouseEvent.ROLL_OUT, playCardRollOutHandler);
+	unit.removeEventListener(MouseEvent.CLICK, playCardClickHandler);	
 }
 
 private function playCardRollOverHandler(evt:MouseEvent):void
@@ -62,6 +65,23 @@ private function playCardRollOverHandler(evt:MouseEvent):void
 private function playCardRollOutHandler(evt:MouseEvent):void
 {
 	ES.hideDetail();
+}
+
+private function playCardClickHandler(evt:MouseEvent):void
+{
+	var unit:PlayCardUnit = PlayCardUnit(evt.currentTarget);
+	var curCard:Card = unit.card;
+	if (ES.curSelectedCardUnit != null) {
+		ES.curSelectedCardUnit.selected = false;
+	}	
+	
+	if (ES.curSelectedCardUnit == null 
+			|| curCard != ES.curSelectedCardUnit.card) {
+		ES.selectCard(unit);
+		unit.selected = true;
+	} else {
+		ES.unselectCard();
+	}
 }
 
 private function collectionChangedHandler(evt:CollectionEvent):void

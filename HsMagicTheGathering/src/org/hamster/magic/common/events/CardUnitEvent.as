@@ -8,6 +8,8 @@ package org.hamster.magic.common.events
 	{
 		public static const HIDE_DETAIL:String = "PlayCardEventHideDetail";
 		public static const SHOW_DETAIL:String = "PlayCardEventShowDetail";
+		public static const SELECT_CARD:String = "PlayCardEventSelectCard";
+		public static const UNSELECT_CARD:String = "PlayCardEventUnselectCard";
 		
 		public var card:Card;
 		
