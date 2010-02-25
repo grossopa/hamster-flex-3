@@ -7,9 +7,8 @@ package org.hamster.magic.common.models.action
 		public var steps:Array;
 		public var cost:Magic;
 		public var targets:Array;
-		public var targetsNumber:int;
-		public var affects:Array;
-		
+		public var targetsNumber:int = 1;
+		public var simpleActions:Array;
 		
 		public function CardAction()
 		{
