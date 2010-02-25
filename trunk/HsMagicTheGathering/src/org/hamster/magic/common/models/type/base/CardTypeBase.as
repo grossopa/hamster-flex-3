@@ -1,8 +1,9 @@
 package org.hamster.magic.common.models.type.base
 {
 	import org.hamster.magic.common.models.Card;
+	import org.hamster.magic.common.models.base.AbstractModelSupport;
 
-	public class CardTypeBase implements ICardType
+	public class CardTypeBase extends AbstractModelSupport implements ICardType
 	{
 		private var _type:int;
 		private var _card:Card;

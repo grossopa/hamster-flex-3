@@ -54,7 +54,7 @@ package org.hamster.magic.common.models
 		public function set red(value:int):void
 		{
 			if (value != this.red) {
-				this._red = value;
+				this._red = value < 0 ? 0 : value;
 				dispatchChangeEvent(this.red, value, Constants.RED);
 			}
 		}
@@ -67,7 +67,7 @@ package org.hamster.magic.common.models
 		public function set blue(value:int):void
 		{
 			if (value != this.blue) {
-				this._blue = value;
+				this._blue = value < 0 ? 0 : value;
 				dispatchChangeEvent(this.blue, value, Constants.BLUE);
 			}
 		}
@@ -80,7 +80,7 @@ package org.hamster.magic.common.models
 		public function set green(value:int):void
 		{
 			if (value != this.green) {
-				this._green = value;
+				this._green = value < 0 ? 0 : value;
 				dispatchChangeEvent(this.green, value, Constants.GREEN);
 			}
 		}
@@ -93,7 +93,7 @@ package org.hamster.magic.common.models
 		public function set black(value:int):void
 		{
 			if (value != this.black) {
-				this._black = value;
+				this._black = value < 0 ? 0 : value;
 				dispatchChangeEvent(this.black, value, Constants.BLACK);
 			}
 		}
@@ -106,7 +106,7 @@ package org.hamster.magic.common.models
 		public function set white(value:int):void
 		{
 			if (value != this.white) {
-				this._white = value;
+				this._white = value < 0 ? 0 : value;
 				dispatchChangeEvent(this.white, value, Constants.WHITE);
 			}
 		}
@@ -119,7 +119,7 @@ package org.hamster.magic.common.models
 		public function set colorless(value:int):void
 		{
 			if (value != this.colorless) {
-				this._colorless = value;
+				this._colorless = value < 0 ? 0 : value;
 				dispatchChangeEvent(this.colorless, value, Constants.COLORLESS);
 			}
 		}
