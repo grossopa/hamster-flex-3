@@ -3,6 +3,7 @@ package org.hamster.magic.common.models
 	import org.hamster.commands.events.CommandEvent;
 	import org.hamster.magic.common.commands.LoadCardXMLCmd;
 	import org.hamster.magic.common.models.base.AbstractModelSupport;
+	import org.hamster.magic.common.models.type.base.ICardType;
 	
 	
 	public class Card extends AbstractModelSupport
@@ -16,6 +17,8 @@ package org.hamster.magic.common.models
 		
 		public var count:int;
 		public var isSelected:Boolean;
+		
+		public var type:ICardType;
 		
 		/**
 		 * card detail information

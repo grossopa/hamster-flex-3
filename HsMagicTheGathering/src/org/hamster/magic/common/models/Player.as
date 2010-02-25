@@ -2,10 +2,11 @@ package org.hamster.magic.common.models
 {
 	import org.hamster.magic.common.events.PlayerEvent;
 	import org.hamster.magic.common.models.base.AbstractModelSupport;
+	import org.hamster.magic.common.models.base.ILifeTarget;
 	
 	[Event(name="lifeChange", type="org.hamster.magic.common.events.PlayerEvent")]
 
-	public class Player extends AbstractModelSupport
+	public class Player extends AbstractModelSupport implements ILifeTarget
 	{
 		private var _life:int = 20;
 		public const magic:Magic = new Magic();

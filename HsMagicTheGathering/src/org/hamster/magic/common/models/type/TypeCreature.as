@@ -1,10 +1,12 @@
 package org.hamster.magic.common.models.type
 {
+	import org.hamster.magic.common.events.PlayerEvent;
+	import org.hamster.magic.common.models.base.ILifeTarget;
 	import org.hamster.magic.common.models.type.base.CardTypeBase;
 	import org.hamster.magic.common.models.type.base.ICardType;
 	import org.hamster.magic.common.models.type.utils.CardType;
 	
-	public class TypeCreature extends CardTypeBase
+	public class TypeCreature extends CardTypeBase implements ILifeTarget
 	{
 		public var attack:int;
 		public var defense:int;
@@ -12,11 +14,17 @@ package org.hamster.magic.common.models.type
 		public var isReach:Boolean;
 		public var isFirstStrike:Boolean;
 		
-		public function TypeCreature()
+		private var _life:int;
+		
+		public function set life(value:int):void
 		{
-			super();
-			
-			type = CardType.CREATURE;
+			this._life = value;
+			this.dispatchEvent(new PlayerEvent(PlayerEvent.LIFE_CHANGE));
+		}
+		
+		public function get life():int
+		{
+			return this._life;
 		}
 		
 		override public function get defaultActions():Array
@@ -27,6 +35,17 @@ package org.hamster.magic.common.models.type
 		override public function get attributes():Array
 		{
 			return ["attack", "defense", "isFlying", "isReach", "isFirstStrike"];
+		}		
+		public function TypeCreature()
+		{
+			super();
+			
+			type = CardType.CREATURE;
+		}
+		
+		public function revertLife():void
+		{
+			this.life = this.defense;
 		}
 		
 		override public function decodeXML(xml:XML):void
