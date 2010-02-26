@@ -29,6 +29,7 @@
 <modules>
 <module application="src/HsMagicTheGathering.mxml" destPath="org/hamster/magic/menu/MenuModule.swf" optimize="true" sourcePath="src/org/hamster/magic/menu/MenuModule.mxml"/>
 <module application="src/HsMagicTheGathering.mxml" destPath="org/hamster/magic/play/PlayModule.swf" optimize="true" sourcePath="src/org/hamster/magic/play/PlayModule.mxml"/>
+<module application="src/HsMagicTheGathering.mxml" destPath="org/hamster/magic/configure/ConfigureModule.swf" optimize="true" sourcePath="src/org/hamster/magic/configure/ConfigureModule.mxml"/>
 </modules>
 <buildCSSFiles/>
 </actionScriptProperties>
