@@ -25,6 +25,11 @@ package org.hamster.magic.common.services
 		
 		public var curSelectedCardUnit:CardUnit;
 		
+		override public function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void
+		{
+			super.addEventListener(type, listener, useCapture, priority, true);
+		}
+		
 		public function showDetail(card:Card):void
 		{
 			if (curSelectedCardUnit != null) {

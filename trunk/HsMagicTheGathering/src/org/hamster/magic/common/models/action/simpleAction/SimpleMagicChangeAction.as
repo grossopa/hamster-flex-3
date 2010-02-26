@@ -1,13 +1,12 @@
 package org.hamster.magic.common.models.action.simpleAction
 {
 	import org.hamster.magic.common.models.Magic;
+	import org.hamster.magic.common.models.Player;
 	import org.hamster.magic.common.models.action.simpleAction.base.BaseSimpleAction;
 	import org.hamster.magic.common.models.action.simpleAction.base.ISimpleAction;
 
 	public class SimpleMagicChangeAction extends BaseSimpleAction
 	{
-		public var target:Magic;
-		
 		public const changeValue:Magic = new Magic();
 		
 		public function SimpleMagicChangeAction()
@@ -17,12 +16,19 @@ package org.hamster.magic.common.models.action.simpleAction
 		
 		override public function execute():void
 		{
-			target.red += changeValue.red;
-			target.black += changeValue.black;
-			target.blue += changeValue.blue;
-			target.white += changeValue.white;
-			target.green += changeValue.green;
-			target.colorless += changeValue.colorless;
+			var targetMagic:Magic;
+			if (target is Magic) {
+				targetMagic = Magic(target);
+			} else if (target is Player) {
+				targetMagic = Magic(target.magic);
+			}
+			
+			targetMagic.red += changeValue.red;
+			targetMagic.black += changeValue.black;
+			targetMagic.blue += changeValue.blue;
+			targetMagic.white += changeValue.white;
+			targetMagic.green += changeValue.green;
+			targetMagic.colorless += changeValue.colorless;
 		}
 		
 		override public function clone():ISimpleAction

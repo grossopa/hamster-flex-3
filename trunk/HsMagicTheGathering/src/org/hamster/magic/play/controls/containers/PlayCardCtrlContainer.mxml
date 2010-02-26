@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="365" height="115"
-	verticalScrollPolicy="off" horizontalScrollPolicy="off">
+	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	creationComplete="completeHandler()">
 	<mx:Script source="PlayCardCtrlContainerAs.as" />
 </mx:Canvas>

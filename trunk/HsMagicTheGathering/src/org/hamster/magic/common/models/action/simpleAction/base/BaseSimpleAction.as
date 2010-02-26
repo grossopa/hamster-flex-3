@@ -3,6 +3,18 @@ package org.hamster.magic.common.models.action.simpleAction.base
 	// instance = new _global[myString]();
 	public class BaseSimpleAction implements ISimpleAction
 	{
+		private var _target:Object;
+		
+		public function set target(value:Object):void
+		{
+			this._target = value;
+		}
+		
+		public function get target():Object
+		{
+			return this._target;
+		}
+		
 		public function BaseSimpleAction()
 		{
 		}

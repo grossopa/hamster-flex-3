@@ -14,6 +14,14 @@ package org.hamster.magic.common.models.type
 		public var isReach:Boolean;
 		public var isFirstStrike:Boolean;
 		
+		
+		public var isDoubleStrike:Boolean;
+		public var isHaste:Boolean;
+		public var isTrample:Boolean;
+		public var isVigilance:Boolean;
+		public var isLangwale:Boolean;
+		
+		
 		private var _life:int;
 		
 		public function set life(value:int):void
