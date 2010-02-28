@@ -4,5 +4,8 @@
 	backgroundColor="#000000" frameRate="40" width="800" height="600"
 	applicationComplete="appCompleteHandler()"
 	xmlns:views="org.hamster.magic.menu.controls.views.*">
+	<mx:Metadata>
+		[ResourceBundle("main")]
+	</mx:Metadata> 
 	<mx:Script source="HsMagicTheGatheringAs.as" />
 </mx:WindowedApplication>

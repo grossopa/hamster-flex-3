@@ -25,6 +25,7 @@
 		<units:PortraitUnit id="portraitUnit" x="226" y="0" />
 		<mx:ViewStack id="consoleViewStack" x="341" width="365" height="115">
 			<containers:PlayCardPileContainer id="playCardPileContainer" />
+			<containers:PlayCardCtrlContainer id="playCardCtrlContainer" />
 		</mx:ViewStack>
 	</mx:Canvas>
 	

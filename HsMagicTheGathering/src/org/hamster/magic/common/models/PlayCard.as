@@ -17,6 +17,7 @@ package org.hamster.magic.common.models
 		public function setLocation(value:int, index:int = -1):void
 		{
 			var locationEvt:PlayCardEvent = new PlayCardEvent(PlayCardEvent.LOCATION_CHANGED);
+			locationEvt.card = this;
 			locationEvt.oldLocation = this._location;
 			locationEvt.index = index;
 			_location = value;
@@ -32,6 +33,7 @@ package org.hamster.magic.common.models
 		public function set status(value:int):void
 		{
 			var statusEvt:PlayCardEvent = new PlayCardEvent(PlayCardEvent.STATUS_CHANGED);
+			statusEvt.card = this;
 			statusEvt.oldStatus = this.status;
 			_status = value;
 			statusEvt.newStatus = this.status;

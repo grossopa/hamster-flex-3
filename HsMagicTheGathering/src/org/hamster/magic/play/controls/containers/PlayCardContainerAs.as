@@ -9,8 +9,10 @@ import mx.events.ChildExistenceChangedEvent;
 import mx.events.CollectionEvent;
 import mx.events.CollectionEventKind;
 
+import org.hamster.magic.common.events.PlayCardEvent;
 import org.hamster.magic.common.models.Card;
 import org.hamster.magic.common.models.PlayCard;
+import org.hamster.magic.common.models.utils.CardStatus;
 import org.hamster.magic.common.services.DataService;
 import org.hamster.magic.common.services.EventService;
 import org.hamster.magic.play.controls.units.PlayCardUnit;
@@ -44,6 +46,7 @@ protected function completeHandler():void
 private function childAddHandler(evt:ChildExistenceChangedEvent):void
 {
 	var unit:PlayCardUnit = PlayCardUnit(evt.relatedObject);
+	unit.addEventListener(PlayCardEvent.STATUS_CHANGED, playCardStatusChangedHandler);
 	unit.addEventListener(MouseEvent.ROLL_OVER, playCardRollOverHandler);
 	unit.addEventListener(MouseEvent.ROLL_OUT, playCardRollOutHandler);
 	unit.addEventListener(MouseEvent.CLICK, playCardClickHandler);
@@ -52,9 +55,24 @@ private function childAddHandler(evt:ChildExistenceChangedEvent):void
 private function childRemoveHandler(evt:ChildExistenceChangedEvent):void
 {
 	var unit:PlayCardUnit = PlayCardUnit(evt.relatedObject);
+	unit.removeEventListener(PlayCardEvent.STATUS_CHANGED, playCardStatusChangedHandler);
 	unit.removeEventListener(MouseEvent.ROLL_OVER, playCardRollOverHandler);
 	unit.removeEventListener(MouseEvent.ROLL_OUT, playCardRollOutHandler);
 	unit.removeEventListener(MouseEvent.CLICK, playCardClickHandler);	
+}
+
+private function playCardStatusChangedHandler(evt:PlayCardEvent):void
+{
+	var unit:PlayCardUnit = PlayCardUnit(evt.currentTarget);
+	var playCard:PlayCard = evt.card;
+	if (playCard.status == CardStatus.PLAY_TAPPED) {
+		unit.animationRotateTap();
+		//unit.width = Constants.PLAY_CARD_HEIGHT;
+		//unit.height = Constants.PLAY_CARD_WIDTH;
+		
+	} else {
+		unit.animationRotateUntap();
+	}	
 }
 
 private function playCardRollOverHandler(evt:MouseEvent):void

@@ -36,6 +36,7 @@ private function unselectCardHandler(evt:CardUnitEvent):void
 
 private function tapCardHandler():void
 {
+	this.playCard = PlayCard(ES.curSelectedCardUnit.card);
 	if (this.playCard != null) {
 		this.playCard.status = CardStatus.PLAY_TAPPED;
 	}

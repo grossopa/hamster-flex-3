@@ -28,6 +28,8 @@ private function appCompleteHandler():void
 {
 	new HTTPServices();
 	
+	this.resourceManager.localeChain = ["zh_CN", "en_US"];
+	
 	var folders:Array = FileUtil.getCardFolder().getDirectoryListing();
 	var collNames:Array = new Array();
 	DS.cardCollections = new ArrayCollection();

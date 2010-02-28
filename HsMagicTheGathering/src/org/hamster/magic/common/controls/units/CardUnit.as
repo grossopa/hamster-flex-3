@@ -17,7 +17,12 @@ package org.hamster.magic.common.controls.units
 		private var _card:Card;
 		private var _selected:Boolean;
 		
-		protected var _mainImage:Image;
+		private var _mainImage:Image;
+		
+		protected function get mainImage():Image
+		{
+			return this._mainImage;
+		}
 		
 		public function set card(value:Card):void
 		{
