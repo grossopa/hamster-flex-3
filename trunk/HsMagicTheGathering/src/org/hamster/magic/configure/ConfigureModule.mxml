@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" 
-	layout="absolute" width="800" height="600" 
-	verticalScrollPolicy="off" horizontalScrollPolicy="off">
+	layout="vertical" width="800" height="600" 
+	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	creationComplete="completeHandler()">
 	<mx:Script source="ConfigureModuleAs.as" />
+	<mx:Form width="100%">
+		<mx:FormItem direction="horizontal" label="选择版本">
+			<mx:ComboBox id="cardCollectionNameComboBox" 
+				dataProvider="{cardCollectionNames}"
+				change="cardCollectionChangeHandler()" />
+		</mx:FormItem>
+		<mx:FormItem direction="horizontal" label="自定义套牌">
+			<mx:TextInput id="userCollectionNameInput"
+				 change="inputUserCollNameChangeHandler()" />
+			<mx:Label text="已有套牌" />
+			<mx:ComboBox id="userCollectionComboBox" 
+				dataProvider="{userCollectionNames}"
+				change="userCollectionChangeHandler()" />
+		</mx:FormItem>
+	</mx:Form>
 </mx:Module>

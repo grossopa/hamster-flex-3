@@ -6,6 +6,8 @@ package org.hamster.magic.common.events
 	{
 		public static const CLOSE:String = "ViewEventClose";
 		
+		public var nextModule:String;
+		
 		public function HsModuleEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);

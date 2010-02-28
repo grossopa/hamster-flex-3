@@ -3,6 +3,7 @@ import flash.display.DisplayObject;
 import flash.filesystem.File;
 
 import mx.collections.ArrayCollection;
+import mx.controls.Alert;
 import mx.events.ModuleEvent;
 import mx.modules.IModuleInfo;
 import mx.modules.ModuleManager;
@@ -28,7 +29,7 @@ private function appCompleteHandler():void
 {
 	new HTTPServices();
 	
-	this.resourceManager.localeChain = ["zh_CN", "en_US"];
+	this.resourceManager.localeChain = ["zh_CN"];
 	
 	var folders:Array = FileUtil.getCardFolder().getDirectoryListing();
 	var collNames:Array = new Array();

@@ -47,6 +47,7 @@ package org.hamster.magic.common.utils
 		
 		public static const MENU_MODULE:String = "/org/hamster/magic/menu/MenuModule.swf";
 		public static const PLAY_MODULE:String = "/org/hamster/magic/play/PlayModule.swf";
+		public static const CONFIGURE_MODULE:String = "/org/hamster/magic/play/ConfigureModule.swf";
 		
 		public static const DEFAULT_CONFIG_FILE:XML =
 			<configure>
