@@ -1,6 +1,7 @@
 // ActionScript file
 import org.hamster.magic.common.events.CardUnitEvent;
 import org.hamster.magic.common.models.PlayCard;
+import org.hamster.magic.common.models.utils.CardStatus;
 import org.hamster.magic.common.services.EventService;
 
 private static const ES:EventService = EventService.getInstance();
@@ -31,4 +32,11 @@ private function selectCardHandler(evt:CardUnitEvent):void
 private function unselectCardHandler(evt:CardUnitEvent):void
 {
 	this.playCard = null;
+}
+
+private function tapCardHandler():void
+{
+	if (this.playCard != null) {
+		this.playCard.status = CardStatus.PLAY_TAPPED;
+	}
 }
