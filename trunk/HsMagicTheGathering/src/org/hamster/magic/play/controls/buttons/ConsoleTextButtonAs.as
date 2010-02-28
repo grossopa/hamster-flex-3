@@ -1,12 +1,26 @@
 // ActionScript file
+import mx.controls.Alert;
+
 [Embed(source="/org/hamster/magic/play/assets/buttons/btn_console_background.png")]
 private static var _NORMAL:Class;
 		
 [Embed(source="/org/hamster/magic/play/assets/buttons/btn_console_background_down.png")]
 private static var _DOWN:Class;
 
-[Bindable]
-public var text:String;
+private var _text:String;
+
+public function set text(value:String):void
+{
+	this._text = value;
+	if (this.initialized) {
+		this.mainLabel.text = value;
+	}
+}
+
+public function get text():String
+{
+	return this._text;
+}
 
 private function mouseUpHandler():void
 {
@@ -20,5 +34,6 @@ private function mouseDownHandler():void
 
 private function completeHandler():void
 {
-	this.setStyle("backgroundImage", _NORMAL);	
+	this.setStyle("backgroundImage", _NORMAL);
+	this.mainLabel.text = this.text;
 }

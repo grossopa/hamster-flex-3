@@ -1,6 +1,7 @@
 package org.hamster.magic.play.controls.units
 {
 	import mx.core.mx_internal;
+	import mx.effects.Rotate;
 	
 	import org.hamster.magic.common.controls.units.CardUnit;
 	import org.hamster.magic.common.events.PlayCardEvent;
@@ -9,6 +10,8 @@ package org.hamster.magic.play.controls.units
 	import org.hamster.magic.common.utils.Constants;
 	
 	use namespace mx_internal;
+	
+	[Event(name="statusChanged", type="org.hamster.magic.common.events.PlayCardEvent")]
 
 	public class PlayCardUnit extends CardUnit
 	{
@@ -19,7 +22,14 @@ package org.hamster.magic.play.controls.units
 			}
 			
 			super.card = value;
-			PlayCard(card).addEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
+			if (card != null) {
+				PlayCard(card).addEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
+			}
+		}
+		
+		public function get playCard():PlayCard
+		{
+			return this.card as PlayCard;
 		}
 		
 		public function PlayCardUnit()
@@ -31,7 +41,29 @@ package org.hamster.magic.play.controls.units
 		
 		private function statusChangedHandler(evt:PlayCardEvent):void
 		{
-			
+			this.dispatchEvent(evt);
+		}
+		
+		public function animationRotateTap():void
+		{
+			var rotate:Rotate = new Rotate(this);
+			rotate.angleFrom = 0;
+			rotate.angleTo = -90;
+			rotate.duration = 250;
+			rotate.originX = this.width >> 1;
+			rotate.originY = this.width >> 1;
+			rotate.play();
+		}
+		
+		public function animationRotateUntap():void
+		{
+			var rotate:Rotate = new Rotate(this);
+			rotate.angleFrom = 90;
+			rotate.angleTo = 0;
+			rotate.duration = 250;
+			rotate.originX = this.width >> 1;
+			rotate.originY = this.width >> 1;
+			rotate.play();
 		}
 		
 	}

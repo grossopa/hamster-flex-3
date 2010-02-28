@@ -33,6 +33,8 @@ package org.hamster.magic.common.events
 		override public function clone():Event
 		{
 			var result:PlayCardEvent = new PlayCardEvent(this.type, this.bubbles, this.cancelable);
+			result.card = this.card;
+			result.isPoolEnough = this.isPoolEnough;
 			result.oldLocation = this.oldLocation;
 			result.newLocation = this.newLocation;
 			result.index = this.index;

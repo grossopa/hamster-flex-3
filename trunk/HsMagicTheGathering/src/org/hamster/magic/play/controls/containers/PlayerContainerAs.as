@@ -48,6 +48,7 @@ private function hideDetailHandler(evt:CardUnitEvent):void
 private function selectCardHandler(evt:CardUnitEvent):void
 {
 	previewCardUnit.card = evt.card;
+	this.consoleViewStack.selectedIndex = 1;
 }
 
 private function unselectCardHandler(evt:CardUnitEvent):void
