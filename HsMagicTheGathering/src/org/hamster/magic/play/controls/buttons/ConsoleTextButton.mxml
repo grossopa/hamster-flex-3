@@ -4,6 +4,6 @@
 	creationComplete="completeHandler()"
 	mouseDown="mouseDownHandler()" mouseUp="mouseUpHandler()">
 	<mx:Script source="ConsoleTextButtonAs.as" />
-	<mx:Label id="mainLabel" verticalCenter="0" fontSize="18" color="black" 
+	<mx:Label id="mainLabel" verticalCenter="0" fontSize="16" color="black" fontWeight="bold"
 		horizontalCenter="0" textAlign="center" width="100%" height="100%"/>
 </mx:Canvas>
