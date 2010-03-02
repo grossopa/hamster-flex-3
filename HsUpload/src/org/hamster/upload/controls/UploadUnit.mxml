@@ -18,6 +18,9 @@ import org.hamster.upload.models.UploadFileStatus;
 [Embed(source='/org/hamster/upload/assets/loading.swf')]
 private const loadingSwf:Class;
 
+[Embed(source='/org/hamster/upload/assets/image_error.png')]
+private const imageError:Class;
+
 [Bindable]
 private var _uploadProgress:String;
 [Bindable]
@@ -109,6 +112,8 @@ private function fileFinishedHandler(evt:HsUploadEvent):void
 
 private function fileErrorHandler(evt:HsUploadEvent):void
 {
+	uploadProgressLabel.visible = false;
+	_source = imageError;
 	trace("[" + toString() + ".fileErrorHandler] " + evt.evt.toString());	
 }
 

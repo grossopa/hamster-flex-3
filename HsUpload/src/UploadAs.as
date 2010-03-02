@@ -32,7 +32,6 @@ private function uploadHandler():void
 
 public function appCompleteHandler():void
 {
-	
 	responder = new mx.rpc.Responder(deleteResult, deleteFault);
 	uploadContainer.uploadFiles = hsUpload.files;
 	hsUpload.url = "http://localhost:8000/upload/uploadImage/";
@@ -49,7 +48,7 @@ private function fileDeleteHandler(evt:HsUploadEvent):void
 	var uploadFile:UploadFile = UploadFile(evt.uploadFile);
 	
 	var service:HTTPService = new HTTPService();
-	service.url = "http://localhost:8000/upload/uploadImage/"
+	service.url = "http://localhost:8000/upload/deleteImage/"
 			+ "?fileName=" + uploadFile.name;
 	service.method = URLRequestMethod.POST;
 	service.resultFormat = "text";
@@ -73,6 +72,7 @@ private function fileFinishedHandler(evt:HsUploadEvent):void
 	var dataEvt:DataEvent = DataEvent(evt.evt);
 	var xml:XML = new XML(dataEvt.text);
 	var uploadFile:UploadFile = UploadFile(evt.uploadFile);
+	uploadFile.name = xml.attribute("file-name");
 	uploadFile.url = "http://localhost:8000/upload/uploadImage/"
 			+ "?fileName=" + xml.attribute('file-name');
 }

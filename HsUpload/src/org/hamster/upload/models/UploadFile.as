@@ -6,8 +6,17 @@ package org.hamster.upload.models
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.net.FileReference;
+	import flash.net.URLRequest;
+	import flash.net.URLRequestMethod;
 	
 	import org.hamster.upload.events.HsUploadEvent;
+	
+	[Event(name="fileStart", type="org.hamster.upload.events.HsUploadEvent")]
+	[Event(name="fileProgress", type="org.hamster.upload.events.HsUploadEvent")]
+	[Event(name="fileUploaded", type="org.hamster.upload.events.HsUploadEvent")]
+	[Event(name="fileFinished", type="org.hamster.upload.events.HsUploadEvent")]
+	[Event(name="fileDelete", type="org.hamster.upload.events.HsUploadEvent")]
+	[Event(name="fileError", type="org.hamster.upload.events.HsUploadEvent")]
 	
 	public class UploadFile extends EventDispatcher implements IUploadFile
 	{
@@ -17,6 +26,7 @@ package org.hamster.upload.models
 		private var _file:FileReference;
 		private var _status:int;
 		private var _url:String;
+		
 		/**
 		 * This value will be set to true when
 		 * user clicked delete while the status is UPLOADED but not FINISEHED,
@@ -27,6 +37,8 @@ package org.hamster.upload.models
 		 */
 		private var _isDeleted:Boolean;
 		
+		private var _uploadUrl:String;
+		
 		/**
 		 * file name
 		 */
@@ -36,52 +48,23 @@ package org.hamster.upload.models
 		 */
 		public var url:String;
 		
-		public function set file(value:FileReference):void
-		{
-			if (_file != null) {
-				_file.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
-				_file.removeEventListener(DataEvent.UPLOAD_COMPLETE_DATA, uploadFinishedHandler);
-				_file.removeEventListener(ProgressEvent.PROGRESS, progressHandler);
-				_file.removeEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
-			}
-			
-			this._file = value;
-			this.name = _file.name;
-			
-			_file.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
-			_file.addEventListener(DataEvent.UPLOAD_COMPLETE_DATA, uploadFinishedHandler);
-			_file.addEventListener(ProgressEvent.PROGRESS, progressHandler);
-			_file.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
-		}
-		
-		public function get file():FileReference
-		{
-			return this._file;
-		}
-		
-		public function set status(value:int):void
-		{
-			this._status = value;
-		}
-		
-		public function get status():int
-		{
-			return this._status;
-		}
-		
-		public function set isDeleted(value:Boolean):void
-		{
-			this._isDeleted = value;
-		}
-		
-		public function get isDeleted():Boolean
-		{
-			return this._isDeleted;
-		}
-		
 		public function UploadFile()
 		{
 			status = UploadFileStatus.NOT_START;
+		}
+		
+		public function upload(url:String):void
+		{
+			if (url == null) {
+				url = this.uploadUrl;
+			}
+			var urlReq:URLRequest = new URLRequest(url);
+			urlReq.method = URLRequestMethod.POST;
+		//	urlReq.contentType = "multipart/form-data";
+			file.upload(urlReq);
+			var disEvt:HsUploadEvent = new HsUploadEvent(HsUploadEvent.FILE_START);
+			disEvt.uploadFile = this;
+			this.dispatchEvent(disEvt);			
 		}
 		
 		public function deleteFile():void
@@ -142,6 +125,64 @@ package org.hamster.upload.models
 				this.dispatchEvent(disEvt);				
 			}
 		}
+		
+		/////////////////////
+		// getter / setter //
+		/////////////////////
+		
+		public function set file(value:FileReference):void
+		{
+			if (_file != null) {
+				_file.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+				_file.removeEventListener(DataEvent.UPLOAD_COMPLETE_DATA, uploadFinishedHandler);
+				_file.removeEventListener(ProgressEvent.PROGRESS, progressHandler);
+				_file.removeEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+			}
+			
+			this._file = value;
+			this.name = _file.name;
+			
+			_file.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+			_file.addEventListener(DataEvent.UPLOAD_COMPLETE_DATA, uploadFinishedHandler);
+			_file.addEventListener(ProgressEvent.PROGRESS, progressHandler);
+			_file.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+		}
+		
+		public function get file():FileReference
+		{
+			return this._file;
+		}
+		
+		public function set status(value:int):void
+		{
+			this._status = value;
+		}
+		
+		public function get status():int
+		{
+			return this._status;
+		}
+		
+		public function set isDeleted(value:Boolean):void
+		{
+			this._isDeleted = value;
+		}
+		
+		public function get isDeleted():Boolean
+		{
+			return this._isDeleted;
+		}
+		
+		public function set uploadUrl(value:String):void
+		{
+			this._uploadUrl = value;
+		}
+		
+		public function get uploadUrl():String
+		{
+			return this._uploadUrl;
+		}
+		
 		
 		
 	}

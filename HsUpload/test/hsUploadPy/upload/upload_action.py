@@ -24,6 +24,12 @@ def execute_action(request):
   elif request.method == 'GET':
     print '3'
     return do_get(request)
+    
+def delete_action(request):
+  queryDict = request.GET
+  fileName = queryDict.get('fileName', '')
+  os.remove(settings.UPLOADDIR + fileName)
+  return write_response(fileName)
 
 def do_get(request):
   queryDict = request.GET

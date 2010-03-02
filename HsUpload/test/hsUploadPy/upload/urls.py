@@ -16,4 +16,5 @@ urlpatterns = patterns('upload.upload_action',
     # (r'^admin/', include(admin.site.urls)),
 	#(r'^$','index'),
 	(r'^uploadImage/', 'execute_action'),
+	(r'^deleteImage/', 'delete_action'),
 )
