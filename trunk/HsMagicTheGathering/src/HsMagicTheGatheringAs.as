@@ -78,51 +78,73 @@ private function loadListCompleteHandler(evt:CommandEvent):void
 	DS.userCollNames = new ArrayCollection(cmd.names);
 }
 
+private function queueCompleteHandler(evt:CommandEvent):void
+{
+	this.loadModuleHandler(Constants.MENU_MODULE);
+}
+
 ////////////////////
 // module support //
 ////////////////////
 
-private function queueCompleteHandler(evt:CommandEvent):void
+private function loadModuleHandler(str:String):void
 {
-	_moduleInfo = ModuleManager.getModule(Constants.MENU_MODULE);
-	_moduleInfo.addEventListener(ModuleEvent.READY, menuModuleReadyHandler);
-	_moduleInfo.load();
+	_moduleInfo = ModuleManager.getModule(str);
+	_moduleInfo.addEventListener(ModuleEvent.READY, moduleReadyHandler);
+	_moduleInfo.load();	
 }
 
-private function menuModuleReadyHandler(evt:ModuleEvent):void
+private function moduleReadyHandler(evt:ModuleEvent):void
 {
-	_moduleInfo.removeEventListener(ModuleEvent.READY, menuModuleReadyHandler);
+	_moduleInfo.removeEventListener(ModuleEvent.READY, moduleReadyHandler);
 	_currentModule = evt.module.factory.create() as DisplayObject;
-	_currentModule.addEventListener(HsModuleEvent.CLOSE, menuModuleCloseHandler);
+	_currentModule.addEventListener(HsModuleEvent.CLOSE, moduleCloseHandler);
 	this.addChild(_currentModule);
 }
 
-private function menuModuleCloseHandler(evt:HsModuleEvent):void
+private function moduleCloseHandler(evt:HsModuleEvent):void
 {
-	_currentModule.removeEventListener(HsModuleEvent.CLOSE, menuModuleCloseHandler);
+	_currentModule.removeEventListener(HsModuleEvent.CLOSE, moduleCloseHandler);
 	this.removeChild(_currentModule);
 	
 	_moduleInfo.release();
-	_moduleInfo = ModuleManager.getModule(Constants.PLAY_MODULE);
-	_moduleInfo.addEventListener(ModuleEvent.READY, playModuleReadyHandler);
-	_moduleInfo.load();
+	loadModuleHandler(evt.nextModule);
 }
 
-private function playModuleReadyHandler(evt:ModuleEvent):void
-{
-	_currentModule.removeEventListener(ModuleEvent.READY, playModuleReadyHandler);
-	_currentModule = evt.module.factory.create() as DisplayObject;
-	_currentModule.addEventListener(HsModuleEvent.CLOSE, playModuleCloseHandler);
-	this.addChild(_currentModule);
-}
-
-private function playModuleCloseHandler(evt:HsModuleEvent):void
-{
-	_currentModule.removeEventListener(HsModuleEvent.CLOSE, playModuleCloseHandler);
-	this.removeChild(_currentModule);
-	_currentModule = null;
-	queueCompleteHandler(null);
-}
+//private function menuModuleReadyHandler(evt:ModuleEvent):void
+//{
+//	_moduleInfo.removeEventListener(ModuleEvent.READY, menuModuleReadyHandler);
+//	_currentModule = evt.module.factory.create() as DisplayObject;
+//	_currentModule.addEventListener(HsModuleEvent.CLOSE, menuModuleCloseHandler);
+//	this.addChild(_currentModule);
+//}
+//
+//private function menuModuleCloseHandler(evt:HsModuleEvent):void
+//{
+//	_currentModule.removeEventListener(HsModuleEvent.CLOSE, menuModuleCloseHandler);
+//	this.removeChild(_currentModule);
+//	
+//	_moduleInfo.release();
+//	_moduleInfo = ModuleManager.getModule(Constants.PLAY_MODULE);
+//	_moduleInfo.addEventListener(ModuleEvent.READY, playModuleReadyHandler);
+//	_moduleInfo.load();
+//}
+//
+//private function playModuleReadyHandler(evt:ModuleEvent):void
+//{
+//	_currentModule.removeEventListener(ModuleEvent.READY, playModuleReadyHandler);
+//	_currentModule = evt.module.factory.create() as DisplayObject;
+//	_currentModule.addEventListener(HsModuleEvent.CLOSE, playModuleCloseHandler);
+//	this.addChild(_currentModule);
+//}
+//
+//private function playModuleCloseHandler(evt:HsModuleEvent):void
+//{
+//	_currentModule.removeEventListener(HsModuleEvent.CLOSE, playModuleCloseHandler);
+//	this.removeChild(_currentModule);
+//	_currentModule = null;
+//	queueCompleteHandler(null);
+//}
 
 ///////////////////////////
 // end of module support //

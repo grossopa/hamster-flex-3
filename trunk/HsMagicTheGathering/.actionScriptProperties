@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actionScriptProperties mainApplicationPath="HsMagicTheGathering.mxml" version="3">
-<compiler additionalCompilerArguments="-locale en_US" copyDependentFiles="true" enableModuleDebug="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersion="9.0.124" htmlPlayerVersionCheck="true" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" useApolloConfig="true" verifyDigests="true" warn="true">
+<compiler additionalCompilerArguments="-locale=zh_CN,en_US -allow-source-path-overlap=true" copyDependentFiles="true" enableModuleDebug="true" flexSDK="Flex 3.5" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersion="9.0.124" htmlPlayerVersionCheck="true" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" useApolloConfig="true" verifyDigests="false" warn="true">
 <compilerSourcePath>
 <compilerSourcePathEntry kind="1" linkType="1" path="locale/{locale}"/>
 </compilerSourcePath>
 <libraryPath defaultLinkType="1">
+<libraryPathEntry kind="1" linkType="1" path="libs"/>
 <libraryPathEntry kind="4" path="">
 <modifiedEntries>
 <libraryPathEntry kind="3" linkType="4" path="${PROJECT_FRAMEWORKS}/libs/framework.swc" useDefaultLinkType="true">
 <crossDomainRsls>
-<crossDomainRslEntry autoExtract="true" policyFileUrl="http://fpdownload.adobe.com/pub/swz/crossdomain.xml" rslUrl="http://fpdownload.adobe.com/pub/swz/flex/4.0.0.10485/framework_4.0.0.10485.swz"/>
-<crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="framework_4.0.0.10485.swz"/>
-</crossDomainRsls>
-</libraryPathEntry>
-<libraryPathEntry index="4" kind="3" linkType="4" path="${PROJECT_FRAMEWORKS}/libs/rpc.swc" useDefaultLinkType="true">
-<crossDomainRsls>
-<crossDomainRslEntry autoExtract="true" policyFileUrl="http://fpdownload.adobe.com/pub/swz/crossdomain.xml" rslUrl="http://fpdownload.adobe.com/pub/swz/flex/4.0.0.10485/rpc_4.0.0.10485.swz"/>
-<crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="rpc_4.0.0.10485.swz"/>
+<crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="framework_3.2.0.3958.swz"/>
+<crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="framework_3.2.0.3958.swf"/>
 </crossDomainRsls>
 </libraryPathEntry>
 </modifiedEntries>
 </libraryPathEntry>
-<libraryPathEntry kind="1" linkType="1" path="libs"/>
 </libraryPath>
 <sourceAttachmentPath/>
 </compiler>

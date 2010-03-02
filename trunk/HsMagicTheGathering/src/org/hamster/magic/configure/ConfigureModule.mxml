@@ -2,7 +2,8 @@
 <mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" 
 	layout="vertical" width="800" height="600" 
 	verticalScrollPolicy="off" horizontalScrollPolicy="off"
-	creationComplete="completeHandler()">
+	creationComplete="completeHandler()"  backgroundColor="white" 
+	xmlns:units="org.hamster.magic.common.controls.units.*" xmlns:units1="org.hamster.magic.play.controls.units.*">
 	<mx:Script source="ConfigureModuleAs.as" />
 	<mx:Form width="100%">
 		<mx:FormItem direction="horizontal" label="选择版本">
@@ -19,4 +20,31 @@
 				change="userCollectionChangeHandler()" />
 		</mx:FormItem>
 	</mx:Form>
+	<mx:HorizontalList id="cardHList" width="100%" 
+		height="90" columnWidth="45" rowHeight="70"
+		paddingBottom="5" paddingTop="5" change="selectCardChangeHandler()"
+		itemRenderer="org.hamster.magic.common.controls.units.CardUnit"
+		dataProvider="{cards}" />
+	<mx:HBox width="100%" height="311">
+		<units:CardUnit id="cardViewUnit" width="226" height="311" />
+		<mx:VBox id="cardPropertiesContainer" width="100%" height="100%">
+			<mx:HBox width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off"
+				 verticalAlign="middle" horizontalAlign="center" paddingLeft="5" paddingRight="5">
+				<units1:MagicUnit id="magicUnit" />
+				<mx:ComboBox id="cardTypeComboBox" labelField="name" rowCount="6" 
+					change="cardTypeChangeHandler()" />
+			</mx:HBox>
+			<mx:HDividedBox width="100%" height="100%">
+				<mx:ViewStack id="base" width="200" height="100%" backgroundColor="0x7f7f7f">
+					<mx:VBox id="typeCreatureEditor" width="100%" height="100%">
+						
+					</mx:VBox>
+				</mx:ViewStack>
+				<mx:VBox width="100%" height="100%">
+					
+				</mx:VBox>
+			</mx:HDividedBox>
+		</mx:VBox>
+	</mx:HBox>
+	
 </mx:Module>

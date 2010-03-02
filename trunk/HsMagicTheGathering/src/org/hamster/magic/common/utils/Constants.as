@@ -7,7 +7,7 @@ package org.hamster.magic.common.utils
 		
 		public static const CARD_RATIO:Number = new Number(CARD_HEIGHT / CARD_WIDTH);
 		
-		public static const PLAY_CARD_WIDTH:Number = 45;
+		public static const PLAY_CARD_WIDTH:Number = 44;
 		public static const PLAY_CARD_HEIGHT:Number = 60;
 		
 		public static const ICON_WIDTH:int = 20;
@@ -47,7 +47,7 @@ package org.hamster.magic.common.utils
 		
 		public static const MENU_MODULE:String = "/org/hamster/magic/menu/MenuModule.swf";
 		public static const PLAY_MODULE:String = "/org/hamster/magic/play/PlayModule.swf";
-		public static const CONFIGURE_MODULE:String = "/org/hamster/magic/play/ConfigureModule.swf";
+		public static const CONFIGURE_MODULE:String = "/org/hamster/magic/configure/ConfigureModule.swf";
 		
 		public static const DEFAULT_CONFIG_FILE:XML =
 			<configure>
