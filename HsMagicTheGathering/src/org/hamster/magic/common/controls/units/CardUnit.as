@@ -19,6 +19,12 @@ package org.hamster.magic.common.controls.units
 		
 		private var _mainImage:Image;
 		
+		override public function set data(value:Object):void
+		{
+			super.data = value;
+			this.card = Card(value);
+		}
+		
 		protected function get mainImage():Image
 		{
 			return this._mainImage;
