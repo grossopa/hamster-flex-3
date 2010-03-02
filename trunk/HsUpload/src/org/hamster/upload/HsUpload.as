@@ -1,12 +1,9 @@
 package org.hamster.upload
 {
-	import flash.events.IEventDispatcher;
-	import flash.events.EventDispatcher;
 	import flash.events.Event;
+	import flash.events.EventDispatcher;
 	import flash.net.FileReference;
 	import flash.net.FileReferenceList;
-	import flash.net.URLRequest;
-	import flash.net.URLRequestMethod;
 	
 	import mx.collections.ArrayCollection;
 	
@@ -14,6 +11,17 @@ package org.hamster.upload
 	import org.hamster.upload.models.IUploadFile;
 	import org.hamster.upload.models.UploadFileStatus;
 	import org.hamster.upload.models.UploadTaskStatus;
+	
+	[Event(name="fileStart", type="org.hamster.upload.events.HsUploadEvent")]
+	[Event(name="fileProgress", type="org.hamster.upload.events.HsUploadEvent")]
+	[Event(name="fileUploaded", type="org.hamster.upload.events.HsUploadEvent")]
+	[Event(name="fileFinished", type="org.hamster.upload.events.HsUploadEvent")]
+	[Event(name="fileDelete", type="org.hamster.upload.events.HsUploadEvent")]
+	[Event(name="fileError", type="org.hamster.upload.events.HsUploadEvent")]
+	
+	[Event(name="taskAdd", type="org.hamster.upload.events.HsUploadEvent")]
+	[Event(name="taskStart", type="org.hamster.upload.events.HsUploadEvent")]
+	[Event(name="taskFinished", type="org.hamster.upload.events.HsUploadEvent")]
 
 	public class HsUpload extends EventDispatcher
 	{
@@ -48,12 +56,17 @@ package org.hamster.upload
 			fileRef.addEventListener(Event.SELECT, selectedFilesHandler);
 			this.addEventListener(HsUploadEvent.TASK_ADD, taskAddHandler);
 			this.addEventListener(HsUploadEvent.TASK_START, taskStartHandler);
-			this.addEventListener(HsUploadEvent.FILE_START, fileStartHandler);
+//			this.addEventListener(HsUploadEvent.FILE_START, fileStartHandler);
 		}
 
 		public function set uploadFileClass(value:Class):void
 		{
-			_uploadFileClass = value;
+			if (_uploadFileClass is IUploadFile) {
+				_uploadFileClass = value;
+			} else {
+				throw new Error("uploadFileClass is not IUploadFile!!!");
+			}
+			
 		}
 		
 		public function get uploadFileClass():Class
@@ -84,12 +97,14 @@ package org.hamster.upload
 		{
 			var file:IUploadFile = this.findNextFile();
 			if (file != null) {
-				var disEvt:HsUploadEvent = new HsUploadEvent(HsUploadEvent.FILE_START);
-				disEvt.uploadFile = file;
-				this.dispatchEvent(disEvt);
+				if (file.uploadUrl != null) {
+					file.upload(file.uploadUrl);
+				} else {
+					file.upload(url);
+				}
 			} else {
 				this.dispatchEvent(new HsUploadEvent(HsUploadEvent.TASK_FINISHED));
-			}	
+			}
 		}
 		
 		
@@ -132,11 +147,12 @@ package org.hamster.upload
 		
 		private function fileStartHandler(evt:HsUploadEvent):void
 		{
-			var file:IUploadFile = evt.uploadFile;
-			var urlReq:URLRequest = new URLRequest(url);
-			urlReq.method = URLRequestMethod.POST;
-		//	urlReq.contentType = "multipart/form-data";
-			file.file.upload(urlReq);
+			this.dispatchEvent(evt);
+//			var file:IUploadFile = evt.uploadFile;
+//			var urlReq:URLRequest = new URLRequest(url);
+//			urlReq.method = URLRequestMethod.POST;
+//		//	urlReq.contentType = "multipart/form-data";
+//			file.file.upload(urlReq);
 		}
 		
 		private function fileProgressHandler(evt:HsUploadEvent):void
@@ -217,6 +233,7 @@ package org.hamster.upload
 		
 		private function registerListener(file:IUploadFile):void
 		{
+			file.addEventListener(HsUploadEvent.FILE_START, fileStartHandler);
 			file.addEventListener(HsUploadEvent.FILE_PROGRESS, fileProgressHandler);
 			file.addEventListener(HsUploadEvent.FILE_UPLOADED, fileUploadedHandler);
 			file.addEventListener(HsUploadEvent.FILE_FINISHED, fileFinishedHandler);
@@ -226,6 +243,7 @@ package org.hamster.upload
 		
 		private function unregisterListener(file:IUploadFile):void
 		{
+			file.removeEventListener(HsUploadEvent.FILE_START, fileStartHandler);
 			file.removeEventListener(HsUploadEvent.FILE_PROGRESS, fileProgressHandler);
 			file.removeEventListener(HsUploadEvent.FILE_UPLOADED, fileUploadedHandler);
 			file.removeEventListener(HsUploadEvent.FILE_FINISHED, fileFinishedHandler);
