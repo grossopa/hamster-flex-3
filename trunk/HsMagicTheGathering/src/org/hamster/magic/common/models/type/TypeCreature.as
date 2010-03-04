@@ -19,7 +19,7 @@ package org.hamster.magic.common.models.type
 		public var isHaste:Boolean;
 		public var isTrample:Boolean;
 		public var isVigilance:Boolean;
-		public var isLangwale:Boolean;
+		public var isLandwalk:Boolean;
 		
 		
 		private var _life:int;

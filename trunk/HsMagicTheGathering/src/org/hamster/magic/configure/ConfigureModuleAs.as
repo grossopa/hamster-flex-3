@@ -5,7 +5,7 @@ import org.hamster.magic.common.models.Card;
 import org.hamster.magic.common.models.CardCollection;
 import org.hamster.magic.common.models.type.utils.CardType;
 import org.hamster.magic.common.services.DataService;
-import org.hamster.magic.common.utils.Constants;
+import org.hamster.magic.configure.controls.unit.base.ITypeEditor;
 
 private static const DS:DataService = DataService.getInstance();
 private static const TYPE_ARRAY:Array = [
@@ -25,6 +25,8 @@ public var userCollectionNames:Array;
 
 [Bindable]
 public var cards:ArrayCollection;
+
+private var _currentCard:Card;
 
 private function completeHandler():void
 {
@@ -69,7 +71,15 @@ private function inputUserCollNameChangeHandler():void
 
 private function selectCardChangeHandler():void
 {
-	cardViewUnit.card = this.cardHList.selectedItem as Card;
+	_currentCard = this.cardHList.selectedItem as Card;
+	cardViewUnit.card = _currentCard;
+	
+	if (_currentCard.type == null) {
+		this.baseTypeViewStack.selectedIndex = 0;
+	}
+	
+	ITypeEditor(this.baseTypeViewStack.selectedChild).cardType = this._currentCard.type;
+	
 }
 
 private function cardTypeChangeHandler():void
