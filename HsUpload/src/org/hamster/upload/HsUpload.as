@@ -5,8 +5,6 @@ package org.hamster.upload
 	import flash.net.FileReference;
 	import flash.net.FileReferenceList;
 	
-	import mx.collections.ArrayCollection;
-	
 	import org.hamster.upload.events.HsUploadEvent;
 	import org.hamster.upload.models.IUploadFile;
 	import org.hamster.upload.models.UploadFileStatus;
@@ -44,8 +42,8 @@ package org.hamster.upload
 		public var isAutoControl:Boolean = true;
 		
 		public var fileFliters:Array = new Array();
-		[Bindable]
-		public var files:ArrayCollection = new ArrayCollection();
+		
+		public var files:Array = new Array();
 		
 		private var fileRef:FileReferenceList = new FileReferenceList();
 		

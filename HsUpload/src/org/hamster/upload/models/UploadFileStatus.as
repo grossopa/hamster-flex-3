@@ -1,7 +1,5 @@
 package org.hamster.upload.models
 {
-	import mx.events.IndexChangedEvent;
-	
 	public class UploadFileStatus
 	{
 		public static const NOT_START:int = 0;
