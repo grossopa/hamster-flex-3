@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="30"
 	verticalScrollPolicy="off" horizontalScrollPolicy="off"
-	 horizontalGap="4"
-	verticalAlign="middle" horizontalAlign="center" xmlns:items="org.hamster.magic.play.controls.items.*">
+	horizontalGap="4" verticalAlign="middle" horizontalAlign="center" 
+	xmlns:items="org.hamster.magic.play.controls.items.*">
 	<mx:Script>
 		<![CDATA[
 			import org.hamster.magic.common.utils.Constants;

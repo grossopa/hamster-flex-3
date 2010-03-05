@@ -1,11 +1,23 @@
 // ActionScript file
-import mx.collections.ArrayCollection;
+import flash.events.MouseEvent;
 
+import mx.collections.ArrayCollection;
+import mx.controls.Alert;
+
+import org.hamster.commands.events.CommandEvent;
+import org.hamster.magic.common.commands.SaveDetailToFileCmd;
 import org.hamster.magic.common.models.Card;
 import org.hamster.magic.common.models.CardCollection;
+import org.hamster.magic.common.models.type.TypeArtifact;
+import org.hamster.magic.common.models.type.TypeCreature;
+import org.hamster.magic.common.models.type.TypeEnchantment;
+import org.hamster.magic.common.models.type.TypeInstant;
+import org.hamster.magic.common.models.type.TypeLand;
+import org.hamster.magic.common.models.type.TypeSorcery;
 import org.hamster.magic.common.models.type.utils.CardType;
 import org.hamster.magic.common.services.DataService;
 import org.hamster.magic.configure.controls.unit.base.ITypeEditor;
+import org.hamster.magic.play.controls.items.MagicCircleItem;
 
 private static const DS:DataService = DataService.getInstance();
 private static const TYPE_ARRAY:Array = [
@@ -28,6 +40,17 @@ public var cards:ArrayCollection;
 
 private var _currentCard:Card;
 
+public function set currentCard(value:Card):void
+{
+	this._currentCard = value;
+	this.saveCardButton.enabled = this._currentCard != null;
+}
+
+public function get currentCard():Card
+{
+	return this._currentCard;
+}
+
 private function completeHandler():void
 {
 	cardTypeComboBox.dataProvider = TYPE_ARRAY;
@@ -41,6 +64,28 @@ private function completeHandler():void
 	for each (var name:String in DS.userCollNames) {
 		userCollectionNames.push(name);
 	}
+}
+
+private function magicUnitCompleteHandler():void
+{
+	for each (var child:MagicCircleItem in this.magicUnit.getChildren()) {
+		child.addEventListener(MouseEvent.CLICK, magicUnitItemClickHandler);
+		child.addEventListener(MouseEvent.RIGHT_CLICK, magicUnitRightClickHandler);
+	}
+}
+
+private function magicUnitItemClickHandler(evt:MouseEvent):void
+{
+	var item:MagicCircleItem = MagicCircleItem(evt.currentTarget);
+	item.magicValue += 1;
+	if (item.magicValue >= 20) {
+		item.magicValue = 20;
+	}
+}
+
+private function magicUnitRightClickHandler(evt:MouseEvent):void
+{
+	
 }
 
 private function cardCollectionChangeHandler():void
@@ -71,18 +116,48 @@ private function inputUserCollNameChangeHandler():void
 
 private function selectCardChangeHandler():void
 {
-	_currentCard = this.cardHList.selectedItem as Card;
-	cardViewUnit.card = _currentCard;
+	currentCard = this.cardHList.selectedItem as Card;
+	cardViewUnit.card = currentCard;
 	
-	if (_currentCard.type == null) {
+	if (currentCard.type == null) {
 		this.baseTypeViewStack.selectedIndex = 0;
+	} else {
+		if (currentCard.type is TypeCreature) {
+			this.baseTypeViewStack.selectedIndex = 0;
+		} else if (currentCard.type is TypeArtifact) {
+			this.baseTypeViewStack.selectedIndex = 1;
+		} else if (currentCard.type is TypeEnchantment) {
+			this.baseTypeViewStack.selectedIndex = 2;
+		} else if (currentCard.type is TypeInstant) {
+			this.baseTypeViewStack.selectedIndex = 3;
+		} else if (currentCard.type is TypeSorcery) {
+			this.baseTypeViewStack.selectedIndex = 4;
+		} else if (currentCard.type is TypeLand) {
+			this.baseTypeViewStack.selectedIndex = 5;
+		}
 	}
 	
-	ITypeEditor(this.baseTypeViewStack.selectedChild).cardType = this._currentCard.type;
-	
+	ITypeEditor(this.baseTypeViewStack.selectedChild).cardType = this.currentCard.type;
 }
 
 private function cardTypeChangeHandler():void
 {
-	
+	this.baseTypeViewStack.selectedIndex = this.cardTypeComboBox.selectedIndex;
+}
+
+private function saveCard():void
+{
+	if (this.currentCard != null) {
+		ITypeEditor(this.baseTypeViewStack.selectedChild).validateTypeProperties();
+		this.currentCard.type = ITypeEditor(this.baseTypeViewStack.selectedChild).cardType.clone();
+		var cmd:SaveDetailToFileCmd = new SaveDetailToFileCmd();
+		cmd.card = this.currentCard;
+		cmd.addEventListener(CommandEvent.COMMAND_RESULT, saveCompleteHandler);
+		cmd.execute();
+	}
+}
+
+private function saveCompleteHandler(evt:CommandEvent):void
+{
+	Alert.show("保存成功！");
 }

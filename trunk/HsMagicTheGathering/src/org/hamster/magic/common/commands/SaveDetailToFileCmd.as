@@ -21,7 +21,7 @@ package org.hamster.magic.common.commands
 			var infoFile:File = new File(card.imgPath.replace(/.jpg$/, ".xml"));
 			var infoFs:FileStream = new FileStream();
 			infoFs.openAsync(infoFile, FileMode.WRITE);
-			infoFs.writeUTFBytes(card.toXMLString());
+			infoFs.writeUTFBytes(card.toXML().toString());
 			super.result(null);
 		}
 		

@@ -30,9 +30,10 @@
 		<mx:VBox id="cardPropertiesContainer" width="100%" height="100%">
 			<mx:HBox width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off"
 				verticalAlign="middle" horizontalAlign="center" paddingLeft="5" paddingRight="5">
-				<units1:MagicUnit id="magicUnit" />
+				<units1:MagicUnit id="magicUnit" creationComplete="magicUnitCompleteHandler()" />
 				<mx:ComboBox id="cardTypeComboBox" labelField="name" rowCount="6" 
 					change="cardTypeChangeHandler()" />
+				<mx:Button id="saveCardButton" click="saveCard()" enabled="false" label="保存" />
 			</mx:HBox>
 			<mx:HDividedBox width="100%" height="100%">
 				<mx:ViewStack id="baseTypeViewStack" width="200" height="100%" backgroundColor="0x7f7f7f">

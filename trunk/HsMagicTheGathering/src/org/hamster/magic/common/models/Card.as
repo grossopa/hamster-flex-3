@@ -81,9 +81,9 @@ package org.hamster.magic.common.models
 			var xml:XML = new XML(<card pid={pid} name={name} url={imgUrl}
 					magic-cost={this.magic.encodeString()} oracle-text={oracleText}>
 					</card>);
-//			if (this.type != null) {
-//				xml.appendChild(this.type.encodeXML());
-//			}
+			if (this.type != null) {
+				xml.appendChild(this.type.encodeXML());
+			}
 //			xml.appendChild(this._actionManager.encodeXML());
 			return xml;
 		}
