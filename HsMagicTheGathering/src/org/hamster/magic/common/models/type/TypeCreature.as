@@ -14,7 +14,6 @@ package org.hamster.magic.common.models.type
 		public var isReach:Boolean;
 		public var isFirstStrike:Boolean;
 		
-		
 		public var isDoubleStrike:Boolean;
 		public var isHaste:Boolean;
 		public var isTrample:Boolean;
@@ -63,12 +62,20 @@ package org.hamster.magic.common.models.type
 			this.isFlying = xml.attribute("is-flying") == "true";
 			this.isReach = xml.attribute("is-reach") == "true";
 			this.isFirstStrike = xml.attribute("is-first-strike") == "true";
+			this.isDoubleStrike = xml.attribute("is-double-strike") == "true";
+			this.isHaste = xml.attribute("is-haste") == "true";
+			this.isTrample = xml.attribute("is-trample") == "true";
+			this.isVigilance = xml.attribute("is-vigilance") == "true";
+			this.isLandwalk = xml.attribute("is-landwalk") == "true";
 		}
 		
 		override public function encodeXML():XML
 		{
 			var xml:XML = new XML(<type name={type} attack={attack} defense={defense} 
 					is-flying={isFlying} is-reach={isReach} is-first-strike={isFirstStrike}
+					is-double-strike={isDoubleStrike} is-haste={isHaste}
+					is-trample={isTrample} is-vigilance={isVigilance}
+					is-landwalk={isLandwalk}
 					></type>);
 			return xml;
 		}
@@ -81,6 +88,11 @@ package org.hamster.magic.common.models.type
 			result.isFlying = this.isFlying;
 			result.isReach = this.isReach;
 			result.isFirstStrike = this.isFirstStrike;
+			result.isDoubleStrike = this.isDoubleStrike;
+			result.isHaste = this.isHaste;
+			result.isTrample = this.isTrample;
+			result.isVigilance = this.isVigilance;
+			result.isLandwalk = this.isLandwalk;
 			result.card = this.card;
 			return result;
 		}
