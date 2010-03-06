@@ -14,7 +14,7 @@ private function completeHandler():void
 	if (this.typeSorcery == null) {
 		this.initType();	
 	}
-	this.validateTypeProperties();
+	this.showTypeProperties();
 }
 
 public function set cardType(value:ICardType):void
@@ -25,7 +25,7 @@ public function set cardType(value:ICardType):void
 		this.initType();
 	}
 	if (this.initialized) {
-		this.validateTypeProperties();
+		this.showTypeProperties();
 	}
 }
 

@@ -1,5 +1,13 @@
 package org.hamster.magic.common.models.type.utils
 {
+	import org.hamster.magic.common.models.type.TypeArtifact;
+	import org.hamster.magic.common.models.type.TypeCreature;
+	import org.hamster.magic.common.models.type.TypeEnchantment;
+	import org.hamster.magic.common.models.type.TypeInstant;
+	import org.hamster.magic.common.models.type.TypeLand;
+	import org.hamster.magic.common.models.type.TypeSorcery;
+	import org.hamster.magic.common.utils.MapCollector;
+	
 	
 	public class CardType
 	{
@@ -58,26 +66,26 @@ package org.hamster.magic.common.models.type.utils
 //			return -1;
 //		}
 //		
-//		public static var _typeMap:MapCollector;
-//		
-//		public static function get typeMap():MapCollector
-//		{
-//			if (_typeMap == null) {
-//				_typeMap = new MapCollector();
-//				_typeMap.put(CardType.ARTIFACT, TypeArtifact);
-//				_typeMap.put(CardType.CREATURE, TypeCreature);
-//				_typeMap.put(CardType.ENCHANTMENT, TypeEnchantment);
-//				_typeMap.put(CardType.INSTANT, TypeInstant);
-//				_typeMap.put(CardType.LAND, TypeLand);
-//				_typeMap.put(CardType.SORCERY, TypeSorcery);
-//			}
-//			return _typeMap;
-//		}
-//		
-//		public static function getType(cardType:int):Class
-//		{
-//			return Class(typeMap.getValue(cardType));
-//		}
+		public static var _typeMap:MapCollector;
+		
+		public static function get typeMap():MapCollector
+		{
+			if (_typeMap == null) {
+				_typeMap = new MapCollector();
+				_typeMap.put(CardType.ARTIFACT, TypeArtifact);
+				_typeMap.put(CardType.CREATURE, TypeCreature);
+				_typeMap.put(CardType.ENCHANTMENT, TypeEnchantment);
+				_typeMap.put(CardType.INSTANT, TypeInstant);
+				_typeMap.put(CardType.LAND, TypeLand);
+				_typeMap.put(CardType.SORCERY, TypeSorcery);
+			}
+			return _typeMap;
+		}
+		
+		public static function getType(cardType:int):Class
+		{
+			return Class(typeMap.getValue(cardType));
+		}
 				
 	}
 }

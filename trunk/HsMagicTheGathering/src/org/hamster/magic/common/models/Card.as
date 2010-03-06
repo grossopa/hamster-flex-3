@@ -4,6 +4,7 @@ package org.hamster.magic.common.models
 	import org.hamster.magic.common.commands.LoadCardXMLCmd;
 	import org.hamster.magic.common.models.base.AbstractModelSupport;
 	import org.hamster.magic.common.models.type.base.ICardType;
+	import org.hamster.magic.common.models.type.utils.CardType;
 	
 	
 	public class Card extends AbstractModelSupport
@@ -33,12 +34,12 @@ package org.hamster.magic.common.models
 			this.oracleText = xml.attribute("oracle-text");
 			this.magic.decodeString(xml.attribute("magic-cost"));
 			
-//			if (xml.elements("type")[0] != null) {
-//				var typeName:int = xml.elements("type")[0].attribute("name");
-//				var cls:Class = CardType.getType(typeName);
-//				this.type = new cls();
-//				this.type.decodeXML(xml.elements("type")[0]);
-//			}
+			if (xml.elements("type")[0] != null) {
+				var typeName:int = xml.elements("type")[0].attribute("name");
+				var cls:Class = CardType.getType(typeName);
+				this.type = new cls();
+				this.type.decodeXML(xml.elements("type")[0]);
+			}
 //			
 //			if (xml.elements("actions")[0] != null) {
 //				this.actionManager.decodeXML(xml.elements("actions")[0]);
