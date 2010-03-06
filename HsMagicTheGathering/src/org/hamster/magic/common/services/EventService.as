@@ -65,6 +65,12 @@ package org.hamster.magic.common.services
 			var disEvt:CardUnitEvent = new CardUnitEvent(CardUnitEvent.UNSELECT_CARD);
 			this.dispatchEvent(disEvt);				
 		}
+		
+		public function gotoNextStep():void
+		{
+			
+		}
+		
 
 	}
 }

@@ -10,5 +10,6 @@
 		]]>
 	</mx:Script>
 	<mx:Script source="PlayMainViewAs.as" />
+	<units:GameStepUnit id="gameStepUnit" />
 	<containers:PlayerContainer id="player1Container" y="225" />
 </mx:Canvas>
