@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="140" height="35"
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" xmlns:base="org.hamster.magic.common.controls.base.*">
+	<mx:Script source="GameStepUnitAs.as" />
+	<base:BaseIconButton normalIcon="@Embed(source='/org/hamster/magic/play/assets/buttons/btn_step_next.png')" y="2" right="2"
+		 downIcon="@Embed(source='/org/hamster/magic/play/assets/buttons/btn_step_next_down.png')" 
+		 click="gotoNextStepHandler()"/>
+</mx:Canvas>

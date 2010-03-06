@@ -15,5 +15,13 @@ package org.hamster.magic.common.events
 			super(type, bubbles, cancelable);
 		}
 		
+		override public function clone():Event
+		{
+			var result:PlayerEvent = new PlayerEvent(type, bubbles, cancelable);
+			result.magicType = this.magicType;
+			result.magicCount = this.magicCount;
+			return result;
+		}
+		
 	}
 }

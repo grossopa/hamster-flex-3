@@ -71,6 +71,8 @@ package org.hamster.magic.common.services
 			}
 			return result;
 		}
+		
+		
 //		
 //		/**
 //		 * user configurations
