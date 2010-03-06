@@ -8,6 +8,7 @@ import org.hamster.commands.events.CommandEvent;
 import org.hamster.magic.common.commands.SaveDetailToFileCmd;
 import org.hamster.magic.common.models.Card;
 import org.hamster.magic.common.models.CardCollection;
+import org.hamster.magic.common.models.Magic;
 import org.hamster.magic.common.models.type.TypeArtifact;
 import org.hamster.magic.common.models.type.TypeCreature;
 import org.hamster.magic.common.models.type.TypeEnchantment;
@@ -64,6 +65,7 @@ private function completeHandler():void
 	for each (var name:String in DS.userCollNames) {
 		userCollectionNames.push(name);
 	}
+	
 }
 
 private function magicUnitCompleteHandler():void
@@ -72,6 +74,8 @@ private function magicUnitCompleteHandler():void
 		child.addEventListener(MouseEvent.CLICK, magicUnitItemClickHandler);
 		child.addEventListener(MouseEvent.RIGHT_CLICK, magicUnitRightClickHandler);
 	}
+	
+	this.magicUnit.magic = new Magic();
 }
 
 private function magicUnitItemClickHandler(evt:MouseEvent):void
@@ -85,7 +89,11 @@ private function magicUnitItemClickHandler(evt:MouseEvent):void
 
 private function magicUnitRightClickHandler(evt:MouseEvent):void
 {
-	
+	var item:MagicCircleItem = MagicCircleItem(evt.currentTarget);
+	item.magicValue -= 1;
+	if (item.magicValue <= 0) {
+		item.magicValue = 0;
+	}	
 }
 
 private function cardCollectionChangeHandler():void
@@ -137,6 +145,8 @@ private function selectCardChangeHandler():void
 		}
 	}
 	
+	this.magicUnit.magic.decodeString(currentCard.magic.encodeString());
+	
 	ITypeEditor(this.baseTypeViewStack.selectedChild).cardType = this.currentCard.type;
 }
 
@@ -149,6 +159,7 @@ private function saveCard():void
 {
 	if (this.currentCard != null) {
 		ITypeEditor(this.baseTypeViewStack.selectedChild).validateTypeProperties();
+		this.currentCard.magic.decodeString(this.magicUnit.magic.encodeString());
 		this.currentCard.type = ITypeEditor(this.baseTypeViewStack.selectedChild).cardType.clone();
 		var cmd:SaveDetailToFileCmd = new SaveDetailToFileCmd();
 		cmd.card = this.currentCard;
