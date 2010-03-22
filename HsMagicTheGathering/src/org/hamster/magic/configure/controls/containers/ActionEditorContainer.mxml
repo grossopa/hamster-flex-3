@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+	horizontalScrollPolicy="off">
+	<mx:Script source="ActionEditorContainerAs.as" />
+	<mx:FormItem label="触发时机">
+		<mx:ComboBox id="triggerComboBox" />
+	</mx:FormItem>
+	<mx:FormItem label="对象">
+		<mx:CheckBox id="targetSelfPlayerCheckBox" label="玩家自己" />
+		<mx:CheckBox id="targetOppositePlayerCheckBox" label="对方玩家" />
+		<mx:HBox width="100%" verticalScrollPolicy="off" horizontalScrollPolicy="off">
+			<mx:CheckBox id="targetSelfCreaturesCheckBox" label="自己的生物" />
+			<mx:NumericStepper id="targetSelfCreaturesNumber" visible="false" />
+		</mx:HBox>
+		<mx:HBox width="100%" verticalScrollPolicy="off" horizontalScrollPolicy="off">
+			<mx:CheckBox id="targetOppositeCreaturesCheckBox" label="对方的生物" />
+			<mx:NumericStepper id="targetOppositeCreaturesNumber" visible="false" />
+		</mx:HBox>		
+	</mx:FormItem>
+</mx:VBox>
