@@ -18,13 +18,16 @@
 			<mx:ComboBox id="userCollectionComboBox" 
 				dataProvider="{userCollectionNames}"
 				change="userCollectionChangeHandler()" />
+			<mx:VRule />
+			<mx:Button label="保存" click="saveCollectionHandler()" />
 		</mx:FormItem>
 	</mx:Form>
 	<mx:HorizontalList id="cardHList" width="100%" 
 		height="90" columnWidth="45" rowHeight="70"
 		paddingBottom="5" paddingTop="5" change="selectCardChangeHandler()"
 		itemRenderer="org.hamster.magic.common.controls.units.CardUnit"
-		dataProvider="{cards}" />
+		dataProvider="{cards}" doubleClickEnabled="true"
+		itemDoubleClick="cardCollDoubleClickHandler(event)" />
 	<mx:HBox width="100%" height="311">
 		<units:CardUnit id="cardViewUnit" width="226" height="311" />
 		<mx:VBox id="cardPropertiesContainer" width="100%" height="100%">

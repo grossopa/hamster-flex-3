@@ -11,7 +11,6 @@ package org.hamster.magic.common.commands
 
 	public class SaveUserCardCollCmd extends AbstractCommand
 	{
-		public var folder:File;
 		public var name:String;
 		public var cards:ArrayCollection;
 		

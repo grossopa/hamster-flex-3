@@ -5,6 +5,7 @@ package org.hamster.magic.common.controls.units
 	import mx.containers.Canvas;
 	import mx.controls.Image;
 	import mx.core.ScrollPolicy;
+	import mx.events.FlexEvent;
 	
 	import org.hamster.magic.common.models.Card;
 	import org.hamster.magic.common.services.AssetService;
@@ -74,6 +75,8 @@ package org.hamster.magic.common.controls.units
 			
 			this.horizontalScrollPolicy = ScrollPolicy.OFF;
 			this.verticalScrollPolicy = ScrollPolicy.OFF;
+			
+			this.addEventListener(FlexEvent.CREATION_COMPLETE, completeHandler);
 		}
 		
 		override protected function createChildren():void
@@ -88,6 +91,11 @@ package org.hamster.magic.common.controls.units
 			_mainImage.setStyle("horizontalAlign", "center");
 			_mainImage.source = this.source;
 			this.addChild(_mainImage);
+		}
+		
+		protected function completeHandler(evt:FlexEvent):void
+		{
+			this.mainImage.source = this.source;
 		}
 		
 		
