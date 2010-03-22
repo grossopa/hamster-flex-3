@@ -3,10 +3,12 @@ import flash.events.MouseEvent;
 
 import mx.collections.ArrayCollection;
 import mx.controls.Alert;
+import mx.events.ListEvent;
 
 import org.hamster.commands.events.CommandEvent;
 import org.hamster.magic.common.commands.LoadUserCollCmd;
 import org.hamster.magic.common.commands.SaveDetailToFileCmd;
+import org.hamster.magic.common.commands.SaveUserCardCollCmd;
 import org.hamster.magic.common.models.Card;
 import org.hamster.magic.common.models.CardCollection;
 import org.hamster.magic.common.models.Magic;
@@ -69,7 +71,6 @@ private function completeHandler():void
 	for each (var name:String in DS.userCollNames) {
 		userCollectionNames.push(name);
 	}
-	
 }
 
 private function magicUnitCompleteHandler():void
@@ -179,6 +180,30 @@ private function saveCard():void
 		cmd.addEventListener(CommandEvent.COMMAND_RESULT, saveCompleteHandler);
 		cmd.execute();
 	}
+}
+
+private function cardCollDoubleClickHandler(evt:ListEvent):void {
+	var card:Card = Card(this.cardHList.selectedItem);
+	if (this.selectedCards.contains(card)) {
+		card.isSelected = false;
+		card.count = 0;
+		this.selectedCards.removeItemAt(
+				this.selectedCards.getItemIndex(card));
+	} else {
+		this.selectedCards.addItem(card);
+		card.isSelected = true;
+	}
+}
+
+private function saveCollectionHandler():void
+{
+	if (this.userCollectionNameInput.text == "") {
+		return;
+	}
+	var cmd:SaveUserCardCollCmd = new SaveUserCardCollCmd();
+	cmd.cards = this.selectedCards;
+	cmd.name = this.userCollectionNameInput.text;
+	cmd.execute();
 }
 
 private function saveCompleteHandler(evt:CommandEvent):void

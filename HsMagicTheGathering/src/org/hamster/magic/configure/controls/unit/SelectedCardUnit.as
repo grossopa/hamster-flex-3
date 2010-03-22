@@ -35,6 +35,9 @@ package org.hamster.magic.configure.controls.unit
 			_numStepper.stepSize = 1;
 			_numStepper.minimum = 0;
 			_numStepper.maximum = 5;
+			_numStepper.percentWidth = 100;
+			_numStepper.height = 20;
+			_numStepper.setStyle("bottom", 0);
 			_numStepper.addEventListener(NumericStepperEvent.CHANGE, countChangeHandler);
 			this.addChild(_numStepper);
 		}
