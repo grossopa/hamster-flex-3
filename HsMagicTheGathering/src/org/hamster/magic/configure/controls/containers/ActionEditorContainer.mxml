@@ -2,19 +2,31 @@
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
 	horizontalScrollPolicy="off">
 	<mx:Script source="ActionEditorContainerAs.as" />
+	
+	
 	<mx:FormItem label="触发时机">
 		<mx:ComboBox id="triggerComboBox" />
 	</mx:FormItem>
-	<mx:FormItem label="对象">
+	<mx:FormItem label="触发对象">
 		<mx:CheckBox id="targetSelfPlayerCheckBox" label="玩家自己" />
 		<mx:CheckBox id="targetOppositePlayerCheckBox" label="对方玩家" />
 		<mx:HBox width="100%" verticalScrollPolicy="off" horizontalScrollPolicy="off">
 			<mx:CheckBox id="targetSelfCreaturesCheckBox" label="自己的生物" />
-			<mx:NumericStepper id="targetSelfCreaturesNumber" visible="false" />
+			<mx:NumericStepper id="targetSelfCreaturesNumber" visible="{targetSelfCreaturesCheckBox.selected}" />
 		</mx:HBox>
 		<mx:HBox width="100%" verticalScrollPolicy="off" horizontalScrollPolicy="off">
 			<mx:CheckBox id="targetOppositeCreaturesCheckBox" label="对方的生物" />
-			<mx:NumericStepper id="targetOppositeCreaturesNumber" visible="false" />
+			<mx:NumericStepper id="targetOppositeCreaturesNumber" visible="{targetOppositeCreaturesCheckBox.selected}" />
 		</mx:HBox>		
 	</mx:FormItem>
+	<mx:FormItem label="效果列表">
+		<mx:HBox height="24" width="100%" verticalScrollPolicy="off" horizontalScrollPolicy="off"
+		 	verticalAlign="middle" horizontalAlign="right" >
+			<mx:Button label="增加" />
+			<mx:Button label="删除" />
+		</mx:HBox>
+		<mx:VBox id="simpleActionEditorContainer" width="100%" height="100%" />
+	</mx:FormItem>
+	
+	
 </mx:VBox>

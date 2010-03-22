@@ -5,6 +5,7 @@ import mx.collections.ArrayCollection;
 import mx.controls.Alert;
 
 import org.hamster.commands.events.CommandEvent;
+import org.hamster.magic.common.commands.LoadUserCollCmd;
 import org.hamster.magic.common.commands.SaveDetailToFileCmd;
 import org.hamster.magic.common.models.Card;
 import org.hamster.magic.common.models.CardCollection;
@@ -38,6 +39,9 @@ public var userCollectionNames:Array;
 
 [Bindable]
 public var cards:ArrayCollection;
+
+[Bindable]
+public var selectedCards:ArrayCollection;
 
 private var _currentCard:Card;
 
@@ -111,6 +115,15 @@ private function userCollectionChangeHandler():void
 		return;
 	}
 	this.userCollectionNameInput.text = String(this.userCollectionComboBox.selectedItem);
+	var cmd:LoadUserCollCmd = new LoadUserCollCmd();
+	cmd.name = this.userCollectionNameInput.text;
+	cmd.addEventListener(CommandEvent.COMMAND_RESULT, loadUserCollectionResultHandler);
+	cmd.execute();
+}
+
+private function loadUserCollectionResultHandler(evt:CommandEvent):void
+{
+	this.selectedCards = LoadUserCollCmd(evt.currentTarget).cards;
 }
 
 private function inputUserCollNameChangeHandler():void
