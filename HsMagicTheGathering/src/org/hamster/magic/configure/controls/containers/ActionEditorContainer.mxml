@@ -22,8 +22,8 @@
 	<mx:FormItem label="效果列表">
 		<mx:HBox height="24" width="100%" verticalScrollPolicy="off" horizontalScrollPolicy="off"
 		 	verticalAlign="middle" horizontalAlign="right" >
-			<mx:Button label="增加" />
-			<mx:Button label="删除" />
+			<mx:Button label="增加" click="addSimpleActionHandler()" />
+			<mx:Button label="删除" click="removeSimpleActionHandler()" />
 		</mx:HBox>
 		<mx:VBox id="simpleActionEditorContainer" width="100%" height="100%" />
 	</mx:FormItem>
