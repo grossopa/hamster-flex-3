@@ -7,6 +7,7 @@ package org.hamster.magic.common.commands
 	import mx.collections.ArrayCollection;
 	
 	import org.hamster.commands.AbstractCommand;
+	import org.hamster.magic.common.models.Card;
 	import org.hamster.magic.common.utils.FileUtil;
 
 	public class SaveUserCardCollCmd extends AbstractCommand

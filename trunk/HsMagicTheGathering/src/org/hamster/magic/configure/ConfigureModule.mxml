@@ -18,7 +18,7 @@
 			<mx:ComboBox id="userCollectionComboBox" 
 				dataProvider="{userCollectionNames}"
 				change="userCollectionChangeHandler()" />
-			<mx:VRule />
+			<mx:VRule height="20" verticalCenter="0" />
 			<mx:Button label="保存" click="saveCollectionHandler()" />
 		</mx:FormItem>
 	</mx:Form>
@@ -63,7 +63,7 @@
 		</mx:VBox>
 	</mx:HBox>
 	<mx:HorizontalList id="selectedCardHList" width="100%" 
-		height="90" columnWidth="45" rowHeight="70"
+		height="90" columnWidth="45" rowHeight="85"
 		paddingBottom="5" paddingTop="5"
 		itemRenderer="org.hamster.magic.configure.controls.unit.SelectedCardUnit"
 		dataProvider="{selectedCards}" />	
