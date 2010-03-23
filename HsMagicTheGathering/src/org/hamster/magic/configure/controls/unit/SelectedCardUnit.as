@@ -28,6 +28,10 @@ package org.hamster.magic.configure.controls.unit
 		{
 			super.createChildren();
 			
+			this.mainImage.setStyle("top", "0");
+			this.mainImage.setStyle("verticalAlign", "top");
+			this.height = 85;
+			
 			_numStepper = new NumericStepper();
 			if (this.card != null) {
 				_numStepper.value = this.card.count;

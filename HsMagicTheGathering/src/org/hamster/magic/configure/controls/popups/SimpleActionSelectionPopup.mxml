@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="420" height="320" title="选择效果" layout="absolute"
+	creationComplete="completeHandler()">
+	<mx:Metadata>
+		[Event(name="close", type="flash.events.Event")]
+		[Event(name="cancel", type="flash.events.Event")]
+	</mx:Metadata>
+	<mx:Script source="SimpleActionSelectionPopupAs.as" />
+	<mx:Canvas id="mainCheckBoxContainer" width="420" height="300" 
+		horizontalScrollPolicy="off" />
+	<mx:Button label="确定" click="saveAndCloseHandler()" y="300" x="10" />
+	<mx:Button label="取消" click="closeHandler()" y="300" x="110"/>
+</mx:Panel>

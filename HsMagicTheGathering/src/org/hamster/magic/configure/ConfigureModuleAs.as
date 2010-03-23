@@ -130,7 +130,7 @@ private function loadUserCollectionResultHandler(evt:CommandEvent):void
 private function inputUserCollNameChangeHandler():void
 {
 	if (this.userCollectionNames.indexOf(this.userCollectionNameInput.text) > 0) {
-		this.userCollectionComboBox.selectedItem = this.userCollectionNameInput.text;
+		// this.userCollectionComboBox.selectedItem = this.userCollectionNameInput.text;
 	} else {
 		this.userCollectionComboBox.selectedIndex = -1;
 	}
@@ -203,6 +203,7 @@ private function saveCollectionHandler():void
 	var cmd:SaveUserCardCollCmd = new SaveUserCardCollCmd();
 	cmd.cards = this.selectedCards;
 	cmd.name = this.userCollectionNameInput.text;
+	cmd.addEventListener(CommandEvent.COMMAND_RESULT, saveCompleteHandler);
 	cmd.execute();
 }
 
