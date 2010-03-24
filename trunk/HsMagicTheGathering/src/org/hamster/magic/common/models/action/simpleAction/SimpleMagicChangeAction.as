@@ -48,8 +48,8 @@ package org.hamster.magic.common.models.action.simpleAction
 		override public function toXML():XML
 		{
 			var xml:XML = super.toXML();
-			xml.attribute("change-value") = this.changeValue.encodeString();
-			xml.attribute("type") = "SimpleMagicChangeAction";
+			xml.@["change-value"] = this.changeValue.encodeString();
+			xml.@["type"] = "SimpleMagicChangeAction";
 			return xml;
 		}
 		

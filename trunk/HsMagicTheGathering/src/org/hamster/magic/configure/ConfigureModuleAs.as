@@ -12,6 +12,7 @@ import org.hamster.magic.common.commands.SaveUserCardCollCmd;
 import org.hamster.magic.common.models.Card;
 import org.hamster.magic.common.models.CardCollection;
 import org.hamster.magic.common.models.Magic;
+import org.hamster.magic.common.models.action.CardAction;
 import org.hamster.magic.common.models.type.TypeArtifact;
 import org.hamster.magic.common.models.type.TypeCreature;
 import org.hamster.magic.common.models.type.TypeEnchantment;
@@ -20,6 +21,7 @@ import org.hamster.magic.common.models.type.TypeLand;
 import org.hamster.magic.common.models.type.TypeSorcery;
 import org.hamster.magic.common.models.type.utils.CardType;
 import org.hamster.magic.common.services.DataService;
+import org.hamster.magic.configure.controls.unit.ActionEditorUnit;
 import org.hamster.magic.configure.controls.unit.base.ITypeEditor;
 import org.hamster.magic.play.controls.items.MagicCircleItem;
 
@@ -162,6 +164,13 @@ private function selectCardChangeHandler():void
 	this.magicUnit.magic.decodeString(currentCard.magic.encodeString());
 	
 	ITypeEditor(this.baseTypeViewStack.selectedChild).cardType = this.currentCard.type;
+	this.actionEditorContainer.removeAllChildren();
+	
+	for each (var action:CardAction in this.currentCard.actions) {
+		var temp:ActionEditorUnit = new ActionEditorUnit();
+		temp.cardAction = action.clone();
+		this.actionEditorContainer.addChild(temp);
+	}
 }
 
 private function cardTypeChangeHandler():void
@@ -175,6 +184,11 @@ private function saveCard():void
 		ITypeEditor(this.baseTypeViewStack.selectedChild).validateTypeProperties();
 		this.currentCard.magic.decodeString(this.magicUnit.magic.encodeString());
 		this.currentCard.type = ITypeEditor(this.baseTypeViewStack.selectedChild).cardType.clone();
+		var actions:Array = new Array();
+		for each (var actionUnit:ActionEditorUnit in this.actionEditorContainer.getChildren()) {
+			actions.push(actionUnit.applyChanges());
+		}
+		this.currentCard.actions = actions;
 		var cmd:SaveDetailToFileCmd = new SaveDetailToFileCmd();
 		cmd.card = this.currentCard;
 		cmd.addEventListener(CommandEvent.COMMAND_RESULT, saveCompleteHandler);
@@ -214,5 +228,6 @@ private function saveCompleteHandler(evt:CommandEvent):void
 
 private function addCardActionHandler():void
 {
-	
+	var newActionEditor:ActionEditorUnit = new ActionEditorUnit();
+	this.actionEditorContainer.addChild(newActionEditor);
 }

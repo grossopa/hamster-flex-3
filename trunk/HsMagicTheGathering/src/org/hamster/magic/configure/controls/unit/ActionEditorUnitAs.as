@@ -34,9 +34,14 @@ private function actionEditorContainerCompleteHandler():void
 	}
 }
 
+public function applyChanges():CardAction
+{
+	return null;
+}
+
 private function applySimpleActions():void
 {
-	this.simpleActionEditorContainer.removeAllChildren();
+	//this.simpleActionEditorContainer.removeAllChildren();
 	
 	
 }
