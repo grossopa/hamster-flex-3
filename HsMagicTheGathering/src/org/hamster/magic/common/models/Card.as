@@ -20,6 +20,7 @@ package org.hamster.magic.common.models
 		public var isSelected:Boolean;
 		
 		public var type:ICardType;
+		public var actions:Array = new Array();
 		
 		/**
 		 * card detail information
