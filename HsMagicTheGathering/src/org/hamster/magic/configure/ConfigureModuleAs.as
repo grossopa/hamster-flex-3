@@ -211,3 +211,8 @@ private function saveCompleteHandler(evt:CommandEvent):void
 {
 	Alert.show("保存成功！");
 }
+
+private function addCardActionHandler():void
+{
+	
+}

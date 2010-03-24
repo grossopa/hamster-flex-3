@@ -52,7 +52,7 @@
 						verticalScrollPolicy="off" horizontalScrollPolicy="off">
 						<mx:Label text="功能列表" />
 						<mx:ComboBox id="actionListComboBox" />
-						<mx:Button label="增加" />
+						<mx:Button label="增加" click="addCardActionHandler()" />
 						<mx:Button label="删除" />	
 					</mx:HBox>
 					<mx:VBox id="actionEditor" width="100%" height="100%" 

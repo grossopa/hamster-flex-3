@@ -25,7 +25,8 @@
 			<mx:Button label="增加" click="addSimpleActionHandler()" />
 			<mx:Button label="删除" click="removeSimpleActionHandler()" />
 		</mx:HBox>
-		<mx:VBox id="simpleActionEditorContainer" width="100%" height="100%" />
+		<mx:VBox id="simpleActionEditorContainer" width="100%" height="100%" 
+			creationComplete="actionEditorContainerCompleteHandler()" />
 	</mx:FormItem>
 	
 	
