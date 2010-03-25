@@ -4,8 +4,15 @@
 	<mx:Script source="ActionEditorUnitAs.as" />
 	
 	
-	<mx:FormItem label="触发时机">
-		<mx:ComboBox id="triggerComboBox" />
+	<mx:FormItem label="触发时机" height="50">
+		<mx:CheckBox id="stepBeginningCheckBox"
+			label="开始阶段" width="100" height="20" x="0" y="0" />
+		<mx:CheckBox id="stepMainCheckBox" 
+			label="主要阶段" width="100" height="20" x="105" y="0" />
+		<mx:CheckBox id="stepCombatCheckBox" 
+			label="战斗阶段" width="100" height="20" x="0" y="20" />
+		<mx:CheckBox id="stepEndingCheckBox" 
+			label="结束阶段" width="100" height="20" x="105" y="20" />
 	</mx:FormItem>
 	<mx:FormItem label="触发对象">
 		<mx:CheckBox id="targetSelfPlayerCheckBox" label="玩家自己" />
