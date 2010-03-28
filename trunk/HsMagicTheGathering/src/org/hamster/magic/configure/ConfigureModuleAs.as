@@ -75,34 +75,6 @@ private function completeHandler():void
 	}
 }
 
-private function magicUnitCompleteHandler():void
-{
-	for each (var child:MagicCircleItem in this.magicUnit.getChildren()) {
-		child.addEventListener(MouseEvent.CLICK, magicUnitItemClickHandler);
-		child.addEventListener(MouseEvent.RIGHT_CLICK, magicUnitRightClickHandler);
-	}
-	
-	this.magicUnit.magic = new Magic();
-}
-
-private function magicUnitItemClickHandler(evt:MouseEvent):void
-{
-	var item:MagicCircleItem = MagicCircleItem(evt.currentTarget);
-	item.magicValue += 1;
-	if (item.magicValue >= 20) {
-		item.magicValue = 20;
-	}
-}
-
-private function magicUnitRightClickHandler(evt:MouseEvent):void
-{
-	var item:MagicCircleItem = MagicCircleItem(evt.currentTarget);
-	item.magicValue -= 1;
-	if (item.magicValue <= 0) {
-		item.magicValue = 0;
-	}	
-}
-
 private function cardCollectionChangeHandler():void
 {
 	for each (var cardCollection:CardCollection in DS.cardCollections) {
@@ -161,7 +133,7 @@ private function selectCardChangeHandler():void
 		}
 	}
 	
-	this.magicUnit.magic.decodeString(currentCard.magic.encodeString());
+	this.magicUnit.magic = this.currentCard.magic.clone();
 	
 	ITypeEditor(this.baseTypeViewStack.selectedChild).cardType = this.currentCard.type;
 	this.actionEditorContainer.removeAllChildren();
@@ -182,7 +154,7 @@ private function saveCard():void
 {
 	if (this.currentCard != null) {
 		ITypeEditor(this.baseTypeViewStack.selectedChild).validateTypeProperties();
-		this.currentCard.magic.decodeString(this.magicUnit.magic.encodeString());
+		this.currentCard.magic.decodeString(this.magicUnit.applyChanges().encodeString());
 		this.currentCard.type = ITypeEditor(this.baseTypeViewStack.selectedChild).cardType.clone();
 		var actions:Array = new Array();
 		for each (var actionUnit:ActionEditorUnit in this.actionEditorContainer.getChildren()) {
