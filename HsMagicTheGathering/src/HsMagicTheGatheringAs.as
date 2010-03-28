@@ -1,4 +1,4 @@
-// ActionScript file
+ // ActionScript file
 import flash.display.DisplayObject;
 import flash.filesystem.File;
 
@@ -7,7 +7,7 @@ import mx.controls.Alert;
 import mx.events.ModuleEvent;
 import mx.modules.IModuleInfo;
 import mx.modules.ModuleManager;
-
+ 
 import org.hamster.commands.events.CommandEvent;
 import org.hamster.commands.impl.CommandQueue;
 import org.hamster.magic.common.commands.LoadCardsCmd;
