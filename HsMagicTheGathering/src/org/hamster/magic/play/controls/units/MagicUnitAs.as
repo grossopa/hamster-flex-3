@@ -1,8 +1,23 @@
 // ActionScript file
+import flash.events.MouseEvent;
+
 import org.hamster.magic.common.events.MagicEvent;
 import org.hamster.magic.common.models.Magic;
+import org.hamster.magic.play.controls.items.MagicCircleItem;
 
-private var _magic:Magic;
+private var _magic:Magic = new Magic();
+
+private var _editable:Boolean;
+
+public function set editable(value:Boolean):void
+{
+	this._editable = value;
+}
+
+public function get editable():Boolean
+{
+	return this._editable;
+}
 
 public function set magic(value:Magic):void
 {
@@ -19,6 +34,11 @@ public function set magic(value:Magic):void
 public function get magic():Magic
 {
 	return this._magic;
+}
+
+private function completeHandler():void
+{
+	magicChangeHandler(null);
 }
 
 private function magicChangeHandler(evt:MagicEvent):void
@@ -39,6 +59,43 @@ private function registerListener(magic:Magic):void
 private function removeListener(magic:Magic):void
 {
 	magic.removeEventListener(MagicEvent.CHANGE, magicChangeHandler);
+}
+
+private function itemClickHandler(evt:MouseEvent):void
+{
+	if (this.editable) {	
+		var item:MagicCircleItem = MagicCircleItem(evt.currentTarget);
+		item.magicValue += 1;
+		if (item.magicValue >= 99) {
+			item.magicValue = 99;
+		}
+	}
+}
+
+private function itemRightClickHandler(evt:MouseEvent):void
+{
+	if (this.editable) {
+		var item:MagicCircleItem = MagicCircleItem(evt.currentTarget);
+		item.magicValue -= 1;
+		if (item.magicValue <= 0) {
+			item.magicValue = 0;
+		}
+	}
+}
+
+public function applyChanges():Magic
+{
+	if (this.magic == null) {
+		this.magic = new Magic();
+	}
+	
+	this.magic.red = this.magicRedImage.magicValue;
+	this.magic.blue = this.magicBlueImage.magicValue;
+	this.magic.green = this.magicGreenImage.magicValue;
+	this.magic.black = this.magicBlackImage.magicValue;
+	this.magic.white = this.magicWhiteImage.magicValue;
+	this.magic.colorless = this.magicColorlessImage.magicValue;
+	return this.magic.clone();
 }
 
 override protected function updateDisplayList(uw:Number, uh:Number):void

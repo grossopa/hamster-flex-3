@@ -9,7 +9,7 @@ package org.hamster.magic.common.models.action
 	public class CardAction
 	{
 		public var steps:Array;
-		public var cost:Magic;
+		public var cost:Magic = new Magic();
 		public var targets:Array;
 		public var targetsNumber:int = 1;
 		public var simpleActions:Array;

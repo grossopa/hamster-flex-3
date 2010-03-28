@@ -2,6 +2,7 @@ package org.hamster.magic.common.models
 {
 	import org.hamster.commands.events.CommandEvent;
 	import org.hamster.magic.common.commands.LoadCardXMLCmd;
+	import org.hamster.magic.common.models.action.CardAction;
 	import org.hamster.magic.common.models.base.AbstractModelSupport;
 	import org.hamster.magic.common.models.type.base.ICardType;
 	import org.hamster.magic.common.models.type.utils.CardType;
@@ -41,10 +42,16 @@ package org.hamster.magic.common.models
 				this.type = new cls();
 				this.type.decodeXML(xml.elements("type")[0]);
 			}
-//			
-//			if (xml.elements("actions")[0] != null) {
-//				this.actionManager.decodeXML(xml.elements("actions")[0]);
-//			}
+			
+			this.actions = new Array();
+			if (xml.elements("actions")[0] != null) { 
+				var actionsXML:XML = xml.elements("actions")[0];
+				for each (var actionXML:XML in actionsXML.children()) {
+					var newCardAction:CardAction = new CardAction();
+					newCardAction.decodeXML(actionXML);
+					actions.push(newCardAction);
+				}
+			}
 		}
 		
 		public function decodeUserXML(xml:XML):void
@@ -85,6 +92,14 @@ package org.hamster.magic.common.models
 					</card>);
 			if (this.type != null) {
 				xml.appendChild(this.type.encodeXML());
+			}
+			
+			if (this.actions != null) {
+				var actionsXML:XML = new XML(<actions></actions>);
+				for each (var cardAction:CardAction in this.actions) {
+					actionsXML.appendChild(cardAction.toXML());
+				}
+				xml.appendChild(actionsXML);
 			}
 //			xml.appendChild(this._actionManager.encodeXML());
 			return xml;

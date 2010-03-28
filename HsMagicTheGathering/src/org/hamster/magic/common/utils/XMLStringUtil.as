@@ -8,7 +8,7 @@ package org.hamster.magic.common.utils
 		
 		public static function encodeArray2String(array:Array):String 
 		{
-			if (array == null) {
+			if (array == null || array.length == 0) {
 				return "";
 			}
 			var result:String = "";
