@@ -4,6 +4,12 @@ package org.hamster.magic.common.models.action.simpleAction.base
 	public class BaseSimpleAction implements ISimpleAction
 	{
 		private var _target:Object;
+		protected var _type:String;
+		
+		public function get type():String
+		{
+			return this._type;
+		}
 		
 		public function set target(value:Object):void
 		{

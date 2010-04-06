@@ -12,6 +12,7 @@ package org.hamster.magic.common.models.action.simpleAction
 		public function SimpleMagicChangeAction()
 		{
 			super();
+			this._type = "SimpleMagicChangeAction";
 		}
 		
 		override public function execute():void

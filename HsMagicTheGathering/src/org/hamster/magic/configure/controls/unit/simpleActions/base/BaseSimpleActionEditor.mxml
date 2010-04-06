@@ -3,5 +3,5 @@
 	verticalAlign="middle" verticalScrollPolicy="off" horizontalScrollPolicy="off"
 	creationComplete="completeHandler()">
 	<mx:Script source="BaseSimpleActionEditorAs.as" />
-	<mx:CheckBox id="checkBox" label="{_name}" width="50" labelPlacement="right" verticalCenter="0" />
+	<mx:CheckBox id="checkBox" label="{_name}" width="80" labelPlacement="right" verticalCenter="0" />
 </mx:HBox>

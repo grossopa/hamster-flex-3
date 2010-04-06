@@ -2,7 +2,7 @@
 import org.hamster.magic.common.models.action.simpleAction.base.ISimpleAction;
 
 [Bindable]
-private var _name:String;
+protected var _name:String;
 
 private var _simpleAction:ISimpleAction;
 
@@ -36,7 +36,7 @@ protected function initProperties():void
 	
 }
 
-protected function applyChanges():ISimpleAction
+public function applyChanges():ISimpleAction
 {
 	return null;
 }
