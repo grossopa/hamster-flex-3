@@ -4,6 +4,7 @@ import flash.events.Event;
 import mx.controls.CheckBox;
 
 import org.hamster.magic.common.models.action.utils.SimpleActionFactory;
+import org.hamster.magic.common.models.action.utils.SimpleActionInfo;
 
 private var _selectedSimpleActions:Array;
 
@@ -15,9 +16,9 @@ public function get selectedSimpleActions():Array
 private function completeHandler():void
 {
 	var supportActions:Array = SimpleActionFactory.supportActions;
-	for each (var className:String in supportActions) {
+	for each (var info:SimpleActionInfo in supportActions) {
 		var checkBox:CheckBox = new CheckBox();
-		checkBox.label = className;
+		checkBox.label = info.name;
 		checkBox.width = this.width / 4;
 		checkBox.height = 20;
 		checkBox.x = (this.numChildren % 4) * 100;
@@ -31,7 +32,12 @@ private function saveAndCloseHandler():void
 	_selectedSimpleActions = new Array();
 	for each (var checkBox:CheckBox in this.mainCheckBoxContainer.getChildren()) {
 		if (checkBox.selected) {
-			_selectedSimpleActions.push(checkBox.label);
+			for each (var info:SimpleActionInfo in SimpleActionFactory.supportActions) {
+				if (info.name == checkBox.label) {
+					_selectedSimpleActions.push(info);
+					break;
+				}
+			}
 		}
 	}
 	this.dispatchEvent(new Event(Event.CLOSE));
