@@ -7,10 +7,13 @@ import mx.core.UIComponent;
 import mx.managers.PopUpManager;
 
 import org.hamster.magic.common.models.action.CardAction;
+import org.hamster.magic.common.models.action.simpleAction.base.ISimpleAction;
 import org.hamster.magic.common.models.action.utils.ActionTarget;
+import org.hamster.magic.common.models.action.utils.SimpleActionFactory;
 import org.hamster.magic.common.models.action.utils.SimpleActionInfo;
 import org.hamster.magic.common.models.utils.GameStep;
 import org.hamster.magic.configure.controls.popups.SimpleActionSelectionPopup;
+import org.hamster.magic.configure.controls.unit.simpleActions.base.BaseSimpleActionEditor;
 
 private var _cardAction:CardAction = new CardAction();
 
@@ -38,6 +41,10 @@ private function addSimpleActionHandler():void
 		for each (var info:SimpleActionInfo in popup.selectedSimpleActions) {
 			simpleActionEditorContainer.addChild(new info.editorType());
 		}
+		PopUpManager.removePopUp(evt.currentTarget as UIComponent);
+	});
+	obj.addEventListener(Event.CANCEL, function (evt:Event):void
+	{
 		PopUpManager.removePopUp(evt.currentTarget as UIComponent);
 	});
 	PopUpManager.centerPopUp(obj);
@@ -87,6 +94,13 @@ public function applyChanges():CardAction
 	}
 	this.cardAction.targets = targets;
 	
+	var simpleActions:Array = new Array();
+	for each (var simpleActionEditor:BaseSimpleActionEditor 
+			in simpleActionEditorContainer.getChildren()) {
+		simpleActions.push(simpleActionEditor.applyChanges());	
+	}
+	this.cardAction.simpleActions = simpleActions;
+	
 	return this.cardAction;
 }
 
@@ -125,6 +139,11 @@ private function initializeActionProperties():void
 	}
 	
 	this.simpleActionEditorContainer.removeAllChildren();
+	for each (var simpleAction:ISimpleAction in this.cardAction.simpleActions) {
+		var editor:BaseSimpleActionEditor = SimpleActionFactory.createEditor(simpleAction.type);
+		editor.simpleAction = simpleAction;
+		this.simpleActionEditorContainer.addChild(editor);
+	}
 	
 //	GameStep.S_11_UNTAP;
 //	GameStep.S_12_UPKEEP;

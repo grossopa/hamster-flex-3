@@ -19,9 +19,9 @@ private function completeHandler():void
 	for each (var info:SimpleActionInfo in supportActions) {
 		var checkBox:CheckBox = new CheckBox();
 		checkBox.label = info.name;
-		checkBox.width = this.width / 4;
+		checkBox.width = mainCheckBoxContainer.width / 4;
 		checkBox.height = 20;
-		checkBox.x = (this.numChildren % 4) * 100;
+		checkBox.x = (mainCheckBoxContainer.numChildren % 4) * 100;
 		checkBox.y = Math.floor(this.numChildren / 4) * 20;
 		this.mainCheckBoxContainer.addChild(checkBox);
 	}

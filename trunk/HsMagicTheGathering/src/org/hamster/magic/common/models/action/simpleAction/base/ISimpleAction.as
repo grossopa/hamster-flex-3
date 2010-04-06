@@ -2,6 +2,7 @@ package org.hamster.magic.common.models.action.simpleAction.base
 {
 	public interface ISimpleAction
 	{
+		function get type():String;
 		function set target(value:Object):void;
 		function get target():Object;
 		function execute():void;

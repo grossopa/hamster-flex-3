@@ -12,6 +12,7 @@ package org.hamster.magic.common.models.action.simpleAction
 		public function SimpleLifeChangeAction()
 		{
 			super();
+			this._type = "SimpleLifeChangeAction";
 		}
 		
 		override public function execute():void
@@ -43,7 +44,6 @@ package org.hamster.magic.common.models.action.simpleAction
 			xml.@["type"] = "SimpleLifeChangeAction";
 			return xml;
 		}
-		
 		
 	}
 }

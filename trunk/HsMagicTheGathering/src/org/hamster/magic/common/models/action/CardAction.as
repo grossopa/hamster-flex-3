@@ -12,7 +12,17 @@ package org.hamster.magic.common.models.action
 		public var cost:Magic = new Magic();
 		public var targets:Array;
 		public var targetsNumber:int = 1;
-		public var simpleActions:Array;
+		private var _simpleActions:Array;
+		
+		public function set simpleActions(value:Array):void
+		{
+			this._simpleActions = value;
+		}
+		
+		public function get simpleActions():Array
+		{
+			return this._simpleActions;
+		}
 		
 		public function CardAction()
 		{
@@ -33,6 +43,7 @@ package org.hamster.magic.common.models.action
 			for each (var simpleAction:ISimpleAction in this.simpleActions) {
 				actions.push(simpleAction.clone());
 			}
+			result.simpleActions = actions;
 			return result;
 		}
 		
@@ -50,7 +61,7 @@ package org.hamster.magic.common.models.action
 					sActionXML.appendChild(sAction.toXML());
 				}
 			}
-			
+			xml.appendChild(sActionXML);
 			return xml;
 		}
 		
@@ -63,13 +74,16 @@ package org.hamster.magic.common.models.action
 			this.targetsNumber = xml.attribute('targets-number');
 			
 			var simpleActionArray:Array = new Array();
-			var simpleXMLList:XMLList = xml.child('simple');
-			for each (var simpleXML:XML in simpleXMLList) {
-				var simpleAction:ISimpleAction = 
-						SimpleActionFactory
-						.createAction(simpleXML.attribute('type'));
-				simpleAction.decodeXML(simpleXML);
-				simpleActionArray.push(simpleAction);
+			var simpleXMLList:XML = xml.child('simple')[0];
+			if (simpleXMLList != null) {
+				for each (var simpleXML:XML in simpleXMLList.children()) {
+					var typeString:String = simpleXML.attribute('type');
+					var simpleAction:ISimpleAction = 
+							SimpleActionFactory
+							.createAction(typeString);
+					simpleAction.decodeXML(simpleXML);
+					simpleActionArray.push(simpleAction);
+				}
 			}
 			this.simpleActions = simpleActionArray;
 		}
