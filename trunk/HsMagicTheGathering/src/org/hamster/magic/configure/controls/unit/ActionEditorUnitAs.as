@@ -1,8 +1,16 @@
 // ActionScript file
+import flash.events.Event;
+
+import mx.core.Application;
+import mx.core.IFlexDisplayObject;
+import mx.core.UIComponent;
+import mx.managers.PopUpManager;
+
 import org.hamster.magic.common.models.action.CardAction;
 import org.hamster.magic.common.models.action.utils.ActionTarget;
+import org.hamster.magic.common.models.action.utils.SimpleActionInfo;
 import org.hamster.magic.common.models.utils.GameStep;
-
+import org.hamster.magic.configure.controls.popups.SimpleActionSelectionPopup;
 
 private var _cardAction:CardAction = new CardAction();
 
@@ -21,7 +29,18 @@ public function get cardAction():CardAction
 
 private function addSimpleActionHandler():void
 {
-	
+	var obj:IFlexDisplayObject = 
+			PopUpManager.createPopUp(Application.application as UIComponent, 
+			SimpleActionSelectionPopup, true);
+	obj.addEventListener(Event.CLOSE, function (evt:Event):void
+	{
+		var popup:SimpleActionSelectionPopup = SimpleActionSelectionPopup(evt.currentTarget);
+		for each (var info:SimpleActionInfo in popup.selectedSimpleActions) {
+			simpleActionEditorContainer.addChild(new info.editorType());
+		}
+		PopUpManager.removePopUp(evt.currentTarget as UIComponent);
+	});
+	PopUpManager.centerPopUp(obj);
 }
 
 private function removeSimpleActionHandler():void

@@ -8,16 +8,15 @@ package org.hamster.magic.common.models.action.utils
 	{
 		public static const PACKAGE:String = "org.hamster.magic.common.models.action.simpleAction";
 		public static const supportActions:Array = [
-			{name : "SimpleLifeChangeAction",  type : SimpleLifeChangeAction}, 
-			{name : "SimpleMagicChangeAction", type : SimpleMagicChangeAction}
+			new SimpleActionInfo("SimpleLifeChangeAction", "SimpleLifeChangeAction", SimpleLifeChangeAction, null),
+			new SimpleActionInfo("SimpleMagicChangeAction", "SimpleMagicChangeAction", SimpleMagicChangeAction, null)
 		];
 		
-		public static function createAction(className:String):ISimpleAction
+		public static function createAction(type:String):ISimpleAction
 		{
-			for each (var obj:Object in supportActions) {
-				if (obj.name == className) {
-					var cls:Class = Class(obj.type);
-					return ISimpleAction(new cls());
+			for each (var info:SimpleActionInfo in supportActions) {
+				if (info.type == type) {
+					return info.createAction();
 				}
 			}
 			return null;

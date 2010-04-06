@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="25"
+	verticalAlign="middle" verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	creationComplete="completeHandler()">
+	<mx:Script source="BaseSimpleActionEditorAs.as" />
+	<mx:CheckBox id="checkBox" label="{_name}" width="50" labelPlacement="right" verticalCenter="0" />
+</mx:HBox>
