@@ -17,6 +17,11 @@ import org.hamster.magic.configure.controls.unit.simpleActions.base.BaseSimpleAc
 
 private var _cardAction:CardAction = new CardAction();
 
+public function get selected():Boolean
+{
+	return selectCheckBox == null ? false : selectCheckBox.selected;
+}
+
 public function set cardAction(value:CardAction):void
 {
 	this._cardAction = value;
@@ -52,7 +57,16 @@ private function addSimpleActionHandler():void
 
 private function removeSimpleActionHandler():void
 {
-	
+	var removeArray:Array = [];
+	for each (var simpleActionEditor:BaseSimpleActionEditor 
+			in this.simpleActionEditorContainer.getChildren()) {
+		if (simpleActionEditor.selected) {
+			removeArray.push(simpleActionEditor);
+		}		
+	}
+	for each (var e:BaseSimpleActionEditor in removeArray) {
+		this.simpleActionEditorContainer.removeChild(e);			
+	}
 }
 
 private function actionEditorContainerCompleteHandler():void
@@ -67,6 +81,11 @@ public function applyChanges():CardAction
 	if (this.cardAction == null) {
 		this.cardAction = new CardAction();
 	}
+	
+	if (this.nameTextInput.text == "") {
+		this.nameTextInput.text = "新动作";
+	}
+	this.cardAction.name = this.nameTextInput.text;
 	
 	this.cardAction.cost = this.costMagicUnit.applyChanges();
 	
@@ -106,6 +125,8 @@ public function applyChanges():CardAction
 
 private function initializeActionProperties():void
 {
+	this.nameTextInput.text = this.cardAction.name;
+	
 	this.stepBeginningCheckBox.selected = false;
 	this.stepMainCheckBox.selected = false;
 	this.stepCombatCheckBox.selected = false;

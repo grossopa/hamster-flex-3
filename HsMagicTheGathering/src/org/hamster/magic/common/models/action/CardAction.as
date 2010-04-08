@@ -8,6 +8,8 @@ package org.hamster.magic.common.models.action
 	
 	public class CardAction
 	{
+		public var name:String;
+		
 		public var steps:Array;
 		public var cost:Magic = new Magic();
 		public var targets:Array;
@@ -50,6 +52,7 @@ package org.hamster.magic.common.models.action
 		public function toXML():XML
 		{
 			var xml:XML = new XML(<action></action>);
+			xml.@['name'] = this.name;
 			xml.@['steps'] = XMLStringUtil.encodeArray2String(this.steps);
 			xml.@['cost'] = this.cost.encodeString();
 			xml.@['targets'] = XMLStringUtil.encodeArray2String(this.targets);
@@ -67,6 +70,7 @@ package org.hamster.magic.common.models.action
 		
 		public function decodeXML(xml:XML):void
 		{
+			this.name = xml.attribute('name');
 			this.steps = XMLStringUtil.string2int(xml.attribute('steps'));
 			this.cost = new Magic();
 			this.cost.decodeString(xml.attribute('cost'));
