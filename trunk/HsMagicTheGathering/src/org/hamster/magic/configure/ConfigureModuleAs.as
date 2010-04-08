@@ -1,6 +1,4 @@
 // ActionScript file
-import flash.events.MouseEvent;
-
 import mx.collections.ArrayCollection;
 import mx.controls.Alert;
 import mx.events.ListEvent;
@@ -11,7 +9,6 @@ import org.hamster.magic.common.commands.SaveDetailToFileCmd;
 import org.hamster.magic.common.commands.SaveUserCardCollCmd;
 import org.hamster.magic.common.models.Card;
 import org.hamster.magic.common.models.CardCollection;
-import org.hamster.magic.common.models.Magic;
 import org.hamster.magic.common.models.action.CardAction;
 import org.hamster.magic.common.models.type.TypeArtifact;
 import org.hamster.magic.common.models.type.TypeCreature;
@@ -23,7 +20,6 @@ import org.hamster.magic.common.models.type.utils.CardType;
 import org.hamster.magic.common.services.DataService;
 import org.hamster.magic.configure.controls.unit.ActionEditorUnit;
 import org.hamster.magic.configure.controls.unit.base.ITypeEditor;
-import org.hamster.magic.play.controls.items.MagicCircleItem;
 
 private static const DS:DataService = DataService.getInstance();
 private static const TYPE_ARRAY:Array = [
@@ -202,4 +198,17 @@ private function addCardActionHandler():void
 {
 	var newActionEditor:ActionEditorUnit = new ActionEditorUnit();
 	this.actionEditorContainer.addChild(newActionEditor);
+}
+
+private function deleteCardActionHandler():void
+{
+	var removeArray:Array = [];
+	for each (var editor:ActionEditorUnit in this.actionEditorContainer.getChildren()) {
+		if (editor.selected) {
+			removeArray.push(editor);
+		}
+	}
+	for each (var e:ActionEditorUnit in removeArray) {
+		this.actionEditorContainer.removeChild(e);
+	}
 }
