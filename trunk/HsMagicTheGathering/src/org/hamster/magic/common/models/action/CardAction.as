@@ -30,8 +30,18 @@ package org.hamster.magic.common.models.action
 		{
 		}
 		
-		public function execute():void
+		public function execute(step:int, tars:Array = null):void
 		{
+			if (this.steps.indexOf(step) < 0) {
+				return;
+			}
+			
+			for each (var simpleAction:ISimpleAction in this.simpleActions) {
+				for each (var t:Object in tars) {
+					simpleAction.execute(t);
+				}
+			}
+			
 		}
 		
 		public function clone():CardAction
