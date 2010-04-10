@@ -15,13 +15,13 @@ package org.hamster.magic.common.models.action.simpleAction
 			this._type = "SimpleMagicChangeAction";
 		}
 		
-		override public function execute():void
+		override public function execute(tar:Object):void
 		{
 			var targetMagic:Magic;
-			if (target is Magic) {
-				targetMagic = Magic(target);
-			} else if (target is Player) {
-				targetMagic = Magic(target.magic);
+			if (tar is Magic) {
+				targetMagic = Magic(tar);
+			} else if (tar is Player) {
+				targetMagic = Magic(tar.magic);
 			}
 			
 			targetMagic.red += changeValue.red;

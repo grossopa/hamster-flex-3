@@ -25,7 +25,7 @@ package org.hamster.magic.common.models.action.simpleAction.base
 		{
 		}
 		
-		public function execute():void
+		public function execute(target:Object):void
 		{
 			
 		}

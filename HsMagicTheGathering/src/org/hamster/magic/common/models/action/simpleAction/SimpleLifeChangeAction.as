@@ -15,12 +15,12 @@ package org.hamster.magic.common.models.action.simpleAction
 			this._type = "SimpleLifeChangeAction";
 		}
 		
-		override public function execute():void
+		override public function execute(tar:Object):void
 		{
-			if (target is ILifeTarget) {
-				ILifeTarget(target).life += changeValue;
-			} else if (target is PlayCard) {
-				ILifeTarget(target.type).life += changeValue;
+			if (tar is ILifeTarget) {
+				ILifeTarget(tar).life += changeValue;
+			} else if (tar is PlayCard) {
+				ILifeTarget(tar.type).life += changeValue;
 			}
 		}
 		
