@@ -3,6 +3,6 @@
 	verticalScrollPolicy="off" horizontalScrollPolicy="off"
 	creationComplete="completeHandler()" xmlns:buttons="org.hamster.magic.play.controls.buttons.*">
 	<mx:Script source="PlayCardCtrlContainerAs.as" />
-	<buttons:ConsoleTextButton text="横置" 
+	<buttons:ConsoleTextButton text="横置" x="10" y="7"
 		click="tapCardHandler()"/>
 </mx:Canvas>
