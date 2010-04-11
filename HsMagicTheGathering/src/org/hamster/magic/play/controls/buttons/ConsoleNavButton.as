@@ -1,12 +1,13 @@
 package org.hamster.magic.play.controls.buttons
 {
 	import flash.events.MouseEvent;
+	import flash.filters.DropShadowFilter;
 	
 	import mx.containers.Canvas;
 	import mx.controls.Image;
 	import mx.controls.Label;
 	import mx.core.ScrollPolicy;
-	import mx.effects.IEffect;
+	import mx.effects.Glow;
 
 	public class ConsoleNavButton extends Canvas
 	{
@@ -19,7 +20,7 @@ package org.hamster.magic.play.controls.buttons
 		private var _mainBdImg:Image;
 		private var _mainLabel:Label;
 		
-		private var _curEffect:IEffect;
+		private var _curGlow:Glow = new Glow();
 		
 		public function set text(value:String):void
 		{
@@ -36,8 +37,8 @@ package org.hamster.magic.play.controls.buttons
 		
 		public function set selected(value:Boolean):void
 		{
-			this._selected = value;
-			if (this.initialized) {
+			if (this.initialized && value != this._selected) {
+				this._selected = value;
 				playSelectedEffect();
 			}
 		}
@@ -61,7 +62,7 @@ package org.hamster.magic.play.controls.buttons
 			
 			_mainLabel = new Label();
 			_mainLabel.text = this.text;
-			_mainLabel.setStyle('verticalCenter', 0); 
+			_mainLabel.setStyle('verticalCenter', 0);
 			_mainLabel.setStyle('horizontalCenter', 0);
 			_mainLabel.setStyle('fontSize', 12);
 			_mainLabel.setStyle('fontWeight', 'bold');
@@ -79,19 +80,31 @@ package org.hamster.magic.play.controls.buttons
 			this.verticalScrollPolicy = ScrollPolicy.OFF;
 			this.horizontalScrollPolicy = ScrollPolicy.OFF;
 			
+			this.filters = [new DropShadowFilter(4, 45, 0x222222, 0.7, 4, 4, 2, 3)];
+			
 			this.addEventListener(MouseEvent.CLICK, mouseClickHandler);
 		}
 		
 		protected function playSelectedEffect():void
 		{
-			if (_curEffect != null) {
-				_curEffect.stop();
+			if (_curGlow != null) {
+				_curGlow.stop();
 			}
+			_curGlow.target = _mainBdImg;
+			_curGlow.blurXFrom = 0;
+			_curGlow.blurXTo = 5;
+			_curGlow.blurYFrom = 0;
+			_curGlow.blurYTo = 5;
+			_curGlow.alphaFrom = 0;
+			_curGlow.alphaTo = 1;
+			_curGlow.color = 0xDFDFDF;
+			_curGlow.duration = 250;
+			_curGlow.play(null, !this.selected);
 		}
 		
 		protected function mouseClickHandler(evt:MouseEvent):void
 		{
-			this.selected = true;
+			//this.selected = true;
 		}
 		
 		
