@@ -1,8 +1,11 @@
 // ActionScript file
+import flash.events.MouseEvent;
+
 import org.hamster.magic.common.events.CardUnitEvent;
 import org.hamster.magic.common.models.Player;
 import org.hamster.magic.common.models.utils.CardLocation;
 import org.hamster.magic.common.services.EventService;
+import org.hamster.magic.play.controls.buttons.ConsoleNavButton;
 
 private var ES:EventService = EventService.getInstance();
 
@@ -54,4 +57,20 @@ private function selectCardHandler(evt:CardUnitEvent):void
 private function unselectCardHandler(evt:CardUnitEvent):void
 {
 	
+}
+
+private function navBtnCardPileClickHandler(event:MouseEvent):void
+{
+	consoleViewStack.selectedIndex = 0;
+	for each (var btn:ConsoleNavButton in navBtnContainer.getChildren()) {
+		btn.selected = btn == ConsoleNavButton(event.currentTarget);
+	}
+}
+
+private function navBtnCardCtrlClickHandler(event:MouseEvent):void
+{
+	consoleViewStack.selectedIndex = 1;
+	for each (var btn:ConsoleNavButton in navBtnContainer.getChildren()) {
+		btn.selected = btn == ConsoleNavButton(event.currentTarget);
+	}
 }
