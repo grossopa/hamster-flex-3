@@ -1,4 +1,4 @@
- // ActionScript file
+  // ActionScript file
 import flash.display.DisplayObject;
 import flash.filesystem.File;
 
@@ -110,41 +110,6 @@ private function moduleCloseHandler(evt:HsModuleEvent):void
 	_moduleInfo.release();
 	loadModuleHandler(evt.nextModule);
 }
-
-//private function menuModuleReadyHandler(evt:ModuleEvent):void
-//{
-//	_moduleInfo.removeEventListener(ModuleEvent.READY, menuModuleReadyHandler);
-//	_currentModule = evt.module.factory.create() as DisplayObject;
-//	_currentModule.addEventListener(HsModuleEvent.CLOSE, menuModuleCloseHandler);
-//	this.addChild(_currentModule);
-//}
-//
-//private function menuModuleCloseHandler(evt:HsModuleEvent):void
-//{
-//	_currentModule.removeEventListener(HsModuleEvent.CLOSE, menuModuleCloseHandler);
-//	this.removeChild(_currentModule);
-//	
-//	_moduleInfo.release();
-//	_moduleInfo = ModuleManager.getModule(Constants.PLAY_MODULE);
-//	_moduleInfo.addEventListener(ModuleEvent.READY, playModuleReadyHandler);
-//	_moduleInfo.load();
-//}
-//
-//private function playModuleReadyHandler(evt:ModuleEvent):void
-//{
-//	_currentModule.removeEventListener(ModuleEvent.READY, playModuleReadyHandler);
-//	_currentModule = evt.module.factory.create() as DisplayObject;
-//	_currentModule.addEventListener(HsModuleEvent.CLOSE, playModuleCloseHandler);
-//	this.addChild(_currentModule);
-//}
-//
-//private function playModuleCloseHandler(evt:HsModuleEvent):void
-//{
-//	_currentModule.removeEventListener(HsModuleEvent.CLOSE, playModuleCloseHandler);
-//	this.removeChild(_currentModule);
-//	_currentModule = null;
-//	queueCompleteHandler(null);
-//}
 
 ///////////////////////////
 // end of module support //

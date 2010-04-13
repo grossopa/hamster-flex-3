@@ -11,6 +11,9 @@ private var _playCard:PlayCard;
 public function set playCard(value:PlayCard):void
 {
 	this._playCard = value;
+	if (this.initialized) {
+		this.initProperties();
+	}
 }
 
 public function get playCard():PlayCard
@@ -22,6 +25,13 @@ private function completeHandler():void
 {
 	ES.addEventListener(CardUnitEvent.SELECT_CARD, selectCardHandler);
 	ES.addEventListener(CardUnitEvent.UNSELECT_CARD, unselectCardHandler);
+	initProperties();
+}
+
+private function initProperties():void
+{
+	actionCtrlContainer.removeAllChildren();
+	for each (var )
 }
 
 private function selectCardHandler(evt:CardUnitEvent):void
