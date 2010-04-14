@@ -7,6 +7,7 @@ package org.hamster.magic.play.controls.utils
 	import org.hamster.magic.common.models.PlayCard;
 	import org.hamster.magic.common.models.Player;
 	import org.hamster.magic.common.models.PlayerCards;
+	import org.hamster.magic.common.models.action.CardAction;
 	
 	public class PlayerFactory
 	{
@@ -33,9 +34,9 @@ package org.hamster.magic.play.controls.utils
 			var result:PlayCard = new PlayCard(ownPlayer);
 			result.name = card.name;
 			result.magic.decodeString(card.magic.encodeString());
-//			if (card.type != null) {
-//				result.type = card.type.clone();
-//			}
+			if (card.type != null) {
+				result.type = card.type.clone();
+			}
 			result.collection = card.collection;
 			result.count = card.count;
 			result.imgPath = card.imgPath;
@@ -43,6 +44,12 @@ package org.hamster.magic.play.controls.utils
 			result.pid = card.pid;
 			result.oracleText = card.oracleText;
 			result.isSelected = true;
+			if (card.actions != null) {
+				result.actions = new Array();
+				for each (var cardAction:CardAction in card.actions) {
+					result.actions.push(cardAction.clone());
+				}
+			}
 //			result.actionManager = card.actionManager.clone();
 			return result;
 		}
