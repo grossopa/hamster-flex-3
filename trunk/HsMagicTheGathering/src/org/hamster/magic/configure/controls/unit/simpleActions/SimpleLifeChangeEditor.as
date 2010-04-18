@@ -8,7 +8,7 @@ package org.hamster.magic.configure.controls.unit.simpleActions
 
 	public class SimpleLifeChangeEditor extends BaseSimpleActionEditor
 	{
-		private var numStepper:NumericStepper;
+		private var _numStepper:NumericStepper;
 		
 		protected function get simpleLifeChange():SimpleLifeChangeAction
 		{
@@ -26,13 +26,13 @@ package org.hamster.magic.configure.controls.unit.simpleActions
 		override protected function createChildren():void
 		{
 			super.createChildren();
-			numStepper = new NumericStepper();
-			this.addChild(numStepper);
+			_numStepper = new NumericStepper();
+			this.addChild(_numStepper);
 		}
 		
 		override protected function initProperties():void
 		{
-			numStepper.value = this.simpleLifeChange.changeValue;
+			_numStepper.value = this.simpleLifeChange.changeValue;
 		} 
 		
 		override public function applyChanges():ISimpleAction
@@ -40,7 +40,7 @@ package org.hamster.magic.configure.controls.unit.simpleActions
 			if (this.simpleAction == null) {
 				this.simpleAction = new SimpleLifeChangeAction();
 			}
-			SimpleLifeChangeAction(this.simpleAction).changeValue = numStepper.value;
+			SimpleLifeChangeAction(this.simpleAction).changeValue = _numStepper.value;
 			return this.simpleAction;
 		}
 		

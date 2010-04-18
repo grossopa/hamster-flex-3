@@ -10,16 +10,22 @@
 		]]>
 	</mx:Script>
 	<mx:Script source="MagicUnitAs.as" />
-	<items:MagicCircleItem id="magicWhiteImage" width="25" height="25" color="{Constants.WHITE_COLOR}" 
+	<items:MagicCircleItem id="magicWhiteImage" 
+		width="{this.height - 2}" height="{this.height - 2}" color="{Constants.WHITE_COLOR}" 
 		click="itemClickHandler(event)" rightClick="itemRightClickHandler(event)"/>
-	<items:MagicCircleItem id="magicBlueImage" width="25" height="25" color="{Constants.BLUE_COLOR}"
+	<items:MagicCircleItem id="magicBlueImage" 
+		width="{this.height - 2}" height="{this.height - 2}" color="{Constants.BLUE_COLOR}"
 		click="itemClickHandler(event)" rightClick="itemRightClickHandler(event)"/>
-	<items:MagicCircleItem id="magicBlackImage" width="25" height="25" color="{Constants.BLACK_COLOR}"
+	<items:MagicCircleItem id="magicBlackImage" 
+		width="{this.height - 2}" height="{this.height - 2}" color="{Constants.BLACK_COLOR}"
 		click="itemClickHandler(event)" rightClick="itemRightClickHandler(event)"/>
-	<items:MagicCircleItem id="magicRedImage" width="25" height="25" color="{Constants.RED_COLOR}"
+	<items:MagicCircleItem id="magicRedImage" 
+		width="{this.height - 2}" height="{this.height - 2}" color="{Constants.RED_COLOR}"
 		click="itemClickHandler(event)" rightClick="itemRightClickHandler(event)"/>
-	<items:MagicCircleItem id="magicGreenImage" width="25" height="25" color="{Constants.GREEN_COLOR}"
+	<items:MagicCircleItem id="magicGreenImage" 
+		width="{this.height - 2}" height="{this.height - 2}" color="{Constants.GREEN_COLOR}"
 		click="itemClickHandler(event)" rightClick="itemRightClickHandler(event)"/>
-	<items:MagicCircleItem id="magicColorlessImage" width="25" height="25" color="{Constants.COLORLESS_COLOR}"
+	<items:MagicCircleItem id="magicColorlessImage" 
+		width="{this.height - 2}" height="{this.height - 2}" color="{Constants.COLORLESS_COLOR}"
 		click="itemClickHandler(event)" rightClick="itemRightClickHandler(event)"/>
 </mx:HBox>
