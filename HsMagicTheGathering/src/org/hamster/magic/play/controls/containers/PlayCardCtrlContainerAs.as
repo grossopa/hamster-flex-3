@@ -1,12 +1,12 @@
 // ActionScript file
 import flash.events.MouseEvent;
 
-import mx.controls.Alert;
-
 import org.hamster.magic.common.events.CardUnitEvent;
 import org.hamster.magic.common.models.PlayCard;
 import org.hamster.magic.common.models.action.CardAction;
+import org.hamster.magic.common.models.action.utils.ActionTarget;
 import org.hamster.magic.common.models.utils.CardStatus;
+import org.hamster.magic.common.models.utils.GameStep;
 import org.hamster.magic.common.services.EventService;
 import org.hamster.magic.play.controls.buttons.ConsoleTextButton;
 
@@ -65,7 +65,13 @@ private function actionBtnClickHandler(evt:MouseEvent):void
 	if (cardAction.targets.length > 1) {
 		// TODO: popup a select target panel
 	}
-	// cardAction.execute(GameStep.P_2_MAIN);
+	var targets:Array = new Array();
+	for each (var target:int in cardAction.targets) {
+		if (target == ActionTarget.PLAYER) {
+			targets.push(this.playCard.player);
+		}
+	}
+	cardAction.execute(GameStep.P_2_MAIN, targets);
 }
 
 private function selectCardHandler(evt:CardUnitEvent):void

@@ -47,6 +47,7 @@ package org.hamster.magic.common.models.action
 		public function clone():CardAction
 		{
 			var result:CardAction = new CardAction();
+			result.name = this.name;
 			result.steps = ArrayUtil.shallowCopyArray(this.steps);
 			result.cost = this.cost.clone();
 			result.targets = ArrayUtil.shallowCopyArray(this.targets);

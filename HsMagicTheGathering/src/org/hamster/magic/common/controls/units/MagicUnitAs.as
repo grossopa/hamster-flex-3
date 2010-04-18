@@ -77,8 +77,8 @@ private function itemRightClickHandler(evt:MouseEvent):void
 	if (this.editable) {
 		var item:MagicCircleItem = MagicCircleItem(evt.currentTarget);
 		item.magicValue -= 1;
-		if (item.magicValue <= 0) {
-			item.magicValue = 0;
+		if (item.magicValue <= -99) {
+			item.magicValue = -99;
 		}
 	}
 }

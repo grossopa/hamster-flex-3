@@ -12,11 +12,9 @@ private var _text:String;
 public function set text(value:String):void
 {
 	this._text = value;
-	if (this.initialized) {
-		this.mainLabel.text = value;
-	}
 }
 
+[Bindable]
 public function get text():String
 {
 	return this._text;
@@ -35,5 +33,4 @@ private function mouseDownHandler():void
 private function completeHandler():void
 {
 	this.setStyle("backgroundImage", _NORMAL);
-	this.mainLabel.text = this.text;
 }
