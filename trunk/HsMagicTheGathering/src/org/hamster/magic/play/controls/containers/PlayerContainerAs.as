@@ -24,6 +24,7 @@ public function get player():Player
 private function completeHandler():void
 {
 	this.playCardPileContainer.player = this.player;
+	this.lifeMagicContainer.player = this.player;
 	ES.addEventListener(CardUnitEvent.SHOW_DETAIL, showDetailHandler);
 	ES.addEventListener(CardUnitEvent.HIDE_DETAIL, hideDetailHandler);
 	ES.addEventListener(CardUnitEvent.SELECT_CARD, selectCardHandler);

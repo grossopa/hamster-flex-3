@@ -14,7 +14,7 @@ package org.hamster.magic.play.controls.units
 			if (this.player != null) {
 				this.player.removeEventListener(PlayerEvent.LIFE_CHANGE, lifeChangeHandler);
 			}
-			this._player = player;
+			this._player = value;
 			this._player.addEventListener(PlayerEvent.LIFE_CHANGE, lifeChangeHandler);
 		}
 		
