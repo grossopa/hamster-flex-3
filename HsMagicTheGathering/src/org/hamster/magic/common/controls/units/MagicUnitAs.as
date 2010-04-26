@@ -3,7 +3,7 @@ import flash.events.MouseEvent;
 
 import org.hamster.magic.common.events.MagicEvent;
 import org.hamster.magic.common.models.Magic;
-import org.hamster.magic.play.controls.items.MagicCircleItem;
+import org.hamster.magic.common.controls.items.MagicCircleItem;
 
 private var _magic:Magic = new Magic();
 
@@ -85,10 +85,6 @@ private function itemRightClickHandler(evt:MouseEvent):void
 
 public function applyChanges():Magic
 {
-	if (this.magic == null) {
-		this.magic = new Magic();
-	}
-	
 	this.magic.red = this.magicRedImage.magicValue;
 	this.magic.blue = this.magicBlueImage.magicValue;
 	this.magic.green = this.magicGreenImage.magicValue;

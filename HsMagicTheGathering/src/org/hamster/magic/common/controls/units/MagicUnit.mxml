@@ -3,7 +3,7 @@
 	verticalScrollPolicy="off" horizontalScrollPolicy="off"
 	 creationComplete="completeHandler()"
 	horizontalGap="4" verticalAlign="middle" horizontalAlign="center" 
-	xmlns:items="org.hamster.magic.play.controls.items.*">
+	xmlns:items="org.hamster.magic.common.controls.items.*">
 	<mx:Script>
 		<![CDATA[
 			import org.hamster.magic.common.utils.Constants;

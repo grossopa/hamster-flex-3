@@ -24,14 +24,15 @@
 		<containers:LifeMagicContainer id="lifeMagicContainer" y="53" />
 		<units:PortraitUnit id="portraitUnit" x="226" y="0" 
 			source="@Embed(source='/org/hamster/magic/play/assets/test/mouse.jpg')" />
-		<mx:ViewStack id="consoleViewStack" x="341" width="365" height="115">
+		<mx:ViewStack id="consoleViewStack" x="341" width="365" height="115"
+			 change="consoleViewStackChangeHandler()">
 			<containers:PlayCardPileContainer id="playCardPileContainer" />
 			<containers:PlayCardCtrlContainer id="playCardCtrlContainer" />
 		</mx:ViewStack>
 		<mx:VBox id="navBtnContainer" x="710" width="90" 
 			verticalGap="5" paddingTop="6" paddingBottom="2"
 			verticalScrollPolicy="off" horizontalScrollPolicy="off">
-			<buttons:ConsoleNavButton text="牌堆" 
+			<buttons:ConsoleNavButton text="牌堆" selected="true"
 				click="navBtnCardPileClickHandler(event)" />
 			<buttons:ConsoleNavButton text="控制" 
 				click="navBtnCardCtrlClickHandler(event)" />

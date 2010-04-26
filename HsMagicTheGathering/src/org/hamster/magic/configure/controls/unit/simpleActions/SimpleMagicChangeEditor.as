@@ -21,6 +21,7 @@ package org.hamster.magic.configure.controls.unit.simpleActions
 			super();
 			
 			this._name = "魔法变化";
+			this.simpleAction = new SimpleMagicChangeAction();
 		}
 		
 		override protected function createChildren():void
@@ -40,9 +41,6 @@ package org.hamster.magic.configure.controls.unit.simpleActions
 		
 		override public function applyChanges():ISimpleAction
 		{
-			if (this.simpleAction == null) {
-				this.simpleAction = new SimpleMagicChangeAction();
-			}
 			_magicUnit.applyChanges();
 			SimpleMagicChangeAction(this.simpleAction).changeValue
 					.decodeString(this._magicUnit.magic.encodeString());

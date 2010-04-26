@@ -8,7 +8,7 @@ package org.hamster.magic.common.services
 	import org.hamster.magic.common.utils.MapCollector;
 	import org.hamster.magic.play.controls.units.PlayCardUnit;
 	
-	public class DataService
+	public class DataService 
 	{
 		private static var _instance:DataService;
 		

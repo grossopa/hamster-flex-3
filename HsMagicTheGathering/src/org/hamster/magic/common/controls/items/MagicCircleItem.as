@@ -1,4 +1,4 @@
-package org.hamster.magic.play.controls.items
+package org.hamster.magic.common.controls.items
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;

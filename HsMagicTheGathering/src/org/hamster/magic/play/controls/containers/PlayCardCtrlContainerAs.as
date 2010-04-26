@@ -5,6 +5,7 @@ import org.hamster.magic.common.events.CardUnitEvent;
 import org.hamster.magic.common.models.PlayCard;
 import org.hamster.magic.common.models.action.CardAction;
 import org.hamster.magic.common.models.action.utils.ActionTarget;
+import org.hamster.magic.common.models.utils.CardLocation;
 import org.hamster.magic.common.models.utils.CardStatus;
 import org.hamster.magic.common.models.utils.GameStep;
 import org.hamster.magic.common.services.EventService;
@@ -49,12 +50,28 @@ private function initProperties():void
 		child.removeEventListener(MouseEvent.CLICK, actionBtnClickHandler);			
 	}
 	actionCtrlContainer.removeAllChildren();
-	for each (var cardAction:CardAction in this.playCard.actions) {
-		var consoleTextBtn:ConsoleTextButton = new ConsoleTextButton();
-		consoleTextBtn.data = cardAction;
-		consoleTextBtn.text = cardAction.name;
-		consoleTextBtn.addEventListener(MouseEvent.CLICK, actionBtnClickHandler);
-		actionCtrlContainer.addChild(consoleTextBtn);
+	if (this.playCard.getLocation() == CardLocation.HAND) {
+		var payButton:ConsoleTextButton = new ConsoleTextButton();
+		payButton.text = "施放";
+		payButton.addEventListener(MouseEvent.CLICK, payButtonClickHandler);
+		actionCtrlContainer.addChild(payButton);
+	} else if (CardLocation.getFieldArray().indexOf(this.playCard.getLocation()) > 0) {
+		for each (var cardAction:CardAction in this.playCard.actions) {
+			var consoleTextBtn:ConsoleTextButton = new ConsoleTextButton();
+			consoleTextBtn.data = cardAction;
+			consoleTextBtn.text = cardAction.name;
+			consoleTextBtn.addEventListener(MouseEvent.CLICK, actionBtnClickHandler);
+			actionCtrlContainer.addChild(consoleTextBtn);
+		}
+	}
+}
+
+private function payButtonClickHandler(evt:MouseEvent):void
+{
+	if (this.playCard.player.magic.gt(this.playCard.magic)) {
+		if (this.playCard.magic.colorless > 0) {
+			
+		}
 	}
 }
 
@@ -62,6 +79,11 @@ private function actionBtnClickHandler(evt:MouseEvent):void
 {
 	var curBtn:ConsoleTextButton = ConsoleTextButton(evt.currentTarget);
 	var cardAction:CardAction = CardAction(curBtn.data);
+	
+	if (!cardAction.notNeedTap && this.playCard.status == CardStatus.PLAY_TAPPED) {
+		return;
+	}
+	
 	if (cardAction.targets.length > 1) {
 		// TODO: popup a select target panel
 	}
@@ -72,6 +94,10 @@ private function actionBtnClickHandler(evt:MouseEvent):void
 		}
 	}
 	cardAction.execute(GameStep.P_2_MAIN, targets);
+	
+	if (!cardAction.notNeedTap) {
+		this.playCard.status = CardStatus.PLAY_TAPPED;
+	}
 }
 
 private function selectCardHandler(evt:CardUnitEvent):void

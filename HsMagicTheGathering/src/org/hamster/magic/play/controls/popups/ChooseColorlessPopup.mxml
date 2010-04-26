@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300"
+	backgroundImage="@Embed(source='/org/hamster/magic/play/assets/popups/choose_colorless_bg.png')"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off">
+	<mx:Script source="ChooseColorlessPopupAs.as" />
+	<mx:Canvas id="colorlessContainer" width="380" height="36"
+		verticalScrollPolicy="off" horizontalScrollPolicy="off" x="10" y="39"/>
+	<mx:HRule width="380" height="3" y="77" x="10"/>
+	<mx:VBox width="380" x="10" height="208" 
+		verticalScrollPolicy="off" horizontalScrollPolicy="off"  y="82"/>
+</mx:Canvas>

@@ -15,6 +15,22 @@ package org.hamster.magic.common.models
 		private var _white:int;
 		private var _colorless:int;
 		
+		public function gt(bMagic:Magic):Boolean
+		{
+			var tRed:int = this.red - bMagic.red;
+			var tBlue:int = this.blue - bMagic.blue;
+			var tGreen:int = this.green - bMagic.green;
+			var tBlack:int = this.black - bMagic.black;
+			var tWhite:int = this.white - bMagic.white;
+			if (tRed < 0 || tBlue < 0 
+					|| tGreen < 0 || tBlack < 0 || tWhite < 0) {
+				return false;
+			}
+			var tColorless:int = this.colorless - bMagic.colorless 
+					- tRed - tBlue - tGreen - tBlack - tWhite;
+			return tColorless >= 0;
+		}
+		
 		public function decodeString(str:String):void
 		{
 			if (str != null && str.length != 0) {
