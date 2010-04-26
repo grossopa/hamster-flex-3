@@ -2,6 +2,7 @@ package org.hamster.magic.common.models.action
 {
 	import org.hamster.common.utils.ArrayUtil;
 	import org.hamster.magic.common.models.Magic;
+	import org.hamster.magic.common.models.PlayCard;
 	import org.hamster.magic.common.models.action.simpleAction.base.ISimpleAction;
 	import org.hamster.magic.common.models.action.utils.SimpleActionFactory;
 	import org.hamster.magic.common.utils.XMLStringUtil;
@@ -15,6 +16,7 @@ package org.hamster.magic.common.models.action
 		public var targets:Array;
 		public var targetsNumber:int = 1;
 		private var _simpleActions:Array;
+		public var notNeedTap:Boolean;
 		
 		public function set simpleActions(value:Array):void
 		{
@@ -36,8 +38,10 @@ package org.hamster.magic.common.models.action
 				return;
 			}
 			
+			var t:Object;
+			
 			for each (var simpleAction:ISimpleAction in this.simpleActions) {
-				for each (var t:Object in tars) {
+				for each (t in tars) {
 					simpleAction.execute(t);
 				}
 			}
@@ -52,6 +56,7 @@ package org.hamster.magic.common.models.action
 			result.cost = this.cost.clone();
 			result.targets = ArrayUtil.shallowCopyArray(this.targets);
 			result.targetsNumber = this.targetsNumber;
+			result.notNeedTap = this.notNeedTap;
 			var actions:Array = new Array();
 			for each (var simpleAction:ISimpleAction in this.simpleActions) {
 				actions.push(simpleAction.clone());
@@ -68,7 +73,7 @@ package org.hamster.magic.common.models.action
 			xml.@['cost'] = this.cost.encodeString();
 			xml.@['targets'] = XMLStringUtil.encodeArray2String(this.targets);
 			xml.@['targets-number'] = this.targetsNumber;
-			
+			xml.@['not-need-tap'] = this.notNeedTap;
 			var sActionXML:XML = new XML(<simple></simple>);
 			if (this.simpleActions != null) {
 				for each (var sAction:ISimpleAction in this.simpleActions) {
@@ -87,6 +92,7 @@ package org.hamster.magic.common.models.action
 			this.cost.decodeString(xml.attribute('cost'));
 			this.targets = XMLStringUtil.string2int(xml.attribute('targets'));
 			this.targetsNumber = xml.attribute('targets-number');
+			this.notNeedTap = xml.attribute('not-need-tap') == 'true';
 			
 			var simpleActionArray:Array = new Array();
 			var simpleXMLList:XML = xml.child('simple')[0];

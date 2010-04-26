@@ -16,5 +16,10 @@ package org.hamster.magic.common.models.utils
 		public static const OUT:int						= 11;
 		
 		public static const TYPE_COUNT:int = 12;
+		
+		public static function getFieldArray():Array
+		{
+			return [LAND, ARTIFACT, CREATURE];
+		}
 	}
 }

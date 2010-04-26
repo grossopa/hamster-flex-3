@@ -2,8 +2,7 @@ package org.hamster.magic.play.controls.units
 {
 	import org.hamster.magic.common.events.PlayerEvent;
 	import org.hamster.magic.common.models.Player;
-	import org.hamster.magic.common.utils.Constants;
-	import org.hamster.magic.play.controls.items.MagicCircleItem;
+	import org.hamster.magic.common.controls.items.MagicCircleItem;
 
 	public class LifeUnit extends MagicCircleItem
 	{

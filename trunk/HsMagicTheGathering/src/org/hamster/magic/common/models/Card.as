@@ -8,7 +8,7 @@ package org.hamster.magic.common.models
 	import org.hamster.magic.common.models.type.utils.CardType;
 	
 	
-	public class Card extends AbstractModelSupport
+	public class Card extends AbstractModelSupport 
 	{
 		public var pid:int;
 		public var name:String;

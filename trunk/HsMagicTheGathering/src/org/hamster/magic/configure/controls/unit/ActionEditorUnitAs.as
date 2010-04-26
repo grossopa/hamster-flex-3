@@ -86,6 +86,7 @@ public function applyChanges():CardAction
 		this.nameTextInput.text = "新动作";
 	}
 	this.cardAction.name = this.nameTextInput.text;
+	this.cardAction.notNeedTap = this.notNeedTapCheckBox.selected;
 	
 	this.cardAction.cost = this.costMagicUnit.applyChanges();
 	
@@ -126,6 +127,7 @@ public function applyChanges():CardAction
 private function initializeActionProperties():void
 {
 	this.nameTextInput.text = this.cardAction.name;
+	this.notNeedTapCheckBox.selected = this.cardAction.notNeedTap;
 	
 	this.stepBeginningCheckBox.selected = false;
 	this.stepMainCheckBox.selected = false;

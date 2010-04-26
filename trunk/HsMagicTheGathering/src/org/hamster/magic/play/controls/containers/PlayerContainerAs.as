@@ -60,18 +60,20 @@ private function unselectCardHandler(evt:CardUnitEvent):void
 	
 }
 
+private function consoleViewStackChangeHandler():void
+{
+	for each (var btn:ConsoleNavButton in navBtnContainer.getChildren()) {
+		btn.selected = false;
+	}
+	ConsoleNavButton(this.navBtnContainer.getChildAt(consoleViewStack.selectedIndex)).selected = true;
+}
+
 private function navBtnCardPileClickHandler(event:MouseEvent):void
 {
 	consoleViewStack.selectedIndex = 0;
-	for each (var btn:ConsoleNavButton in navBtnContainer.getChildren()) {
-		btn.selected = btn == ConsoleNavButton(event.currentTarget);
-	}
 }
 
 private function navBtnCardCtrlClickHandler(event:MouseEvent):void
 {
 	consoleViewStack.selectedIndex = 1;
-	for each (var btn:ConsoleNavButton in navBtnContainer.getChildren()) {
-		btn.selected = btn == ConsoleNavButton(event.currentTarget);
-	}
 }

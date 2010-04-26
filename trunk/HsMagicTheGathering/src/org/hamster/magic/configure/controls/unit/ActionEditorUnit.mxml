@@ -8,6 +8,11 @@
 		<mx:TextInput id="nameTextInput" width="100%" />
 	</mx:HBox>
 	
+	<mx:HBox width="100%">
+		<units:MagicUnit id="costMagicUnit" editable="true" />
+		<mx:CheckBox id="notNeedTapCheckBox" label="不需要横置" />
+	</mx:HBox>
+	
 	<mx:FormItem label="触发时机" height="50">
 		<mx:Canvas width="100%" height="100%" 
 			verticalScrollPolicy="off" horizontalScrollPolicy="off">
@@ -21,7 +26,7 @@
 				label="结束阶段" width="100" height="20" x="105" y="20" />
 		</mx:Canvas>
 	</mx:FormItem>
-	<units:MagicUnit id="costMagicUnit" editable="true" />
+	
 	<mx:FormItem label="触发对象">
 		<mx:CheckBox id="targetSelfPlayerCheckBox" label="玩家自己" />
 		<mx:CheckBox id="targetOppositePlayerCheckBox" label="对方玩家" />

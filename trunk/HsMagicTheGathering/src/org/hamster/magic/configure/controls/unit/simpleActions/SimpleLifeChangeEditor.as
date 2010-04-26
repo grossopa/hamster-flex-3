@@ -21,6 +21,7 @@ package org.hamster.magic.configure.controls.unit.simpleActions
 			super();
 			
 			this._name = "生命变化";
+			this.simpleAction = new SimpleLifeChangeAction();
 		}
 		
 		override protected function createChildren():void

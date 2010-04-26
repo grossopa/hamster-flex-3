@@ -47,10 +47,10 @@ package org.hamster.magic.play.controls.utils
 			if (card.actions != null) {
 				result.actions = new Array();
 				for each (var cardAction:CardAction in card.actions) {
-					result.actions.push(cardAction.clone());
+					var cloneAction:CardAction = cardAction.clone();
+					result.actions.push(cardAction);
 				}
 			}
-//			result.actionManager = card.actionManager.clone();
 			return result;
 		}
 
