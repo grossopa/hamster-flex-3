@@ -27,8 +27,24 @@ package org.hamster.magic.common.models
 				return false;
 			}
 			var tColorless:int = this.colorless - bMagic.colorless 
-					- tRed - tBlue - tGreen - tBlack - tWhite;
+					+ tRed + tBlue + tGreen + tBlack + tWhite;
 			return tColorless >= 0;
+		}
+		
+		public function minus(bMagic:Magic):void
+		{
+			this.minusNumber(bMagic.red, bMagic.blue, bMagic.green, 
+				bMagic.black, bMagic.white, bMagic.colorless);
+		}
+		
+		public function minusNumber(r:int, b:int, g:int, blk:int, w:int, c:int):void
+		{
+			this.red 		-= r;
+			this.blue 		-= b;
+			this.green 		-= g;
+			this.black 		-= blk;
+			this.white 		-= w;
+			this.colorless 	-= c;			
 		}
 		
 		public function decodeString(str:String):void

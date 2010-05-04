@@ -21,6 +21,10 @@
       <airExcludes/>
     </application>
   </applications>
-  <modules/>
+  <modules>
+    <module application="src/HsMagicTheGathering.mxml" destPath="org/hamster/magic/configure/ConfigureModule.swf" optimize="true" sourcePath="configure/org/hamster/magic/configure/ConfigureModule.mxml"/>
+    <module application="src/HsMagicTheGathering.mxml" destPath="org/hamster/magic/play/PlayModule.swf" optimize="true" sourcePath="play/org/hamster/magic/play/PlayModule.mxml"/>
+    <module application="src/HsMagicTheGathering.mxml" destPath="org/hamster/magic/menu/MenuModule.swf" optimize="true" sourcePath="menu/org/hamster/magic/menu/MenuModule.mxml"/>
+  </modules>
   <buildCSSFiles/>
 </actionScriptProperties>

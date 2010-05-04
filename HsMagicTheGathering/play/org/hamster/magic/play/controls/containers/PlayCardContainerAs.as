@@ -8,6 +8,7 @@ import mx.collections.ArrayCollection;
 import mx.events.ChildExistenceChangedEvent;
 import mx.events.CollectionEvent;
 import mx.events.CollectionEventKind;
+import mx.events.ResizeEvent;
 
 import org.hamster.magic.common.events.PlayCardEvent;
 import org.hamster.magic.common.models.Card;
@@ -16,6 +17,8 @@ import org.hamster.magic.common.models.utils.CardStatus;
 import org.hamster.magic.common.services.DataService;
 import org.hamster.magic.common.services.EventService;
 import org.hamster.magic.play.controls.units.PlayCardUnit;
+
+public static const HORIZONTAL_GAP:int = 2;
 
 private static const DS:DataService = DataService.getInstance();
 private static const ES:EventService = EventService.getInstance();
@@ -46,6 +49,7 @@ protected function completeHandler():void
 private function childAddHandler(evt:ChildExistenceChangedEvent):void
 {
 	var unit:PlayCardUnit = PlayCardUnit(evt.relatedObject);
+	unit.addEventListener(ResizeEvent.RESIZE, playCardResizeHandler);
 	unit.addEventListener(PlayCardEvent.STATUS_CHANGED, playCardStatusChangedHandler);
 	unit.addEventListener(MouseEvent.ROLL_OVER, playCardRollOverHandler);
 	unit.addEventListener(MouseEvent.ROLL_OUT, playCardRollOutHandler);
@@ -55,10 +59,16 @@ private function childAddHandler(evt:ChildExistenceChangedEvent):void
 private function childRemoveHandler(evt:ChildExistenceChangedEvent):void
 {
 	var unit:PlayCardUnit = PlayCardUnit(evt.relatedObject);
+	unit.removeEventListener(ResizeEvent.RESIZE, playCardResizeHandler);
 	unit.removeEventListener(PlayCardEvent.STATUS_CHANGED, playCardStatusChangedHandler);
 	unit.removeEventListener(MouseEvent.ROLL_OVER, playCardRollOverHandler);
 	unit.removeEventListener(MouseEvent.ROLL_OUT, playCardRollOutHandler);
 	unit.removeEventListener(MouseEvent.CLICK, playCardClickHandler);	
+}
+
+private function playCardResizeHandler(evt:ResizeEvent):void
+{
+	arrangePlayCards();
 }
 
 private function playCardStatusChangedHandler(evt:PlayCardEvent):void
@@ -143,6 +153,17 @@ private function collectionChangedHandler(evt:CollectionEvent):void
 				this.mainContainer.setChildIndex(playCardUnit, cardArray.getItemIndex(playCard));
 			}
 		}
+	}
+	
+	arrangePlayCards();
+}
+
+protected function arrangePlayCards():void
+{
+	var nextX:Number = 0;
+	for each (var playCardUnit:PlayCardUnit in this.mainContainer.getChildren()) {
+		playCardUnit.move(nextX, playCardUnit.y);
+		nextX += HORIZONTAL_GAP + playCardUnit.width;
 	}
 }
 

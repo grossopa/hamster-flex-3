@@ -12,7 +12,7 @@
 	<mx:UIComponent id="backgroundUIComponent" width="100%" height="100%" />
 	<mx:Image id="titleTextImage" right="10" height="100%" 
 		verticalAlign="middle" horizontalAlign="center" />
-	<mx:HBox id="mainContainer" width="100%" height="{Constants.PLAY_CARD_HEIGHT}"
-		verticalScrollPolicy="off" horizontalScrollPolicy="off"
-		horizontalGap="2" />
+	<!-- cannot use hbox because there is an issue of rotate in a HBox Container -->
+	<mx:Canvas id="mainContainer" width="100%" height="{Constants.PLAY_CARD_HEIGHT}"
+		verticalScrollPolicy="off" horizontalScrollPolicy="off" />
 </mx:Canvas>

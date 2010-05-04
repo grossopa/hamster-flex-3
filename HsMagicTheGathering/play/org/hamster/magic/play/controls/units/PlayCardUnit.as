@@ -1,15 +1,14 @@
 package org.hamster.magic.play.controls.units
 {
-	import mx.core.mx_internal;
+	import mx.controls.Alert;
 	import mx.effects.Rotate;
+	import mx.events.EffectEvent;
 	
 	import org.hamster.magic.common.controls.units.CardUnit;
 	import org.hamster.magic.common.events.PlayCardEvent;
 	import org.hamster.magic.common.models.Card;
 	import org.hamster.magic.common.models.PlayCard;
 	import org.hamster.magic.common.utils.Constants;
-	
-	use namespace mx_internal;
 	
 	[Event(name="statusChanged", type="org.hamster.magic.common.events.PlayCardEvent")]
 
@@ -58,11 +57,11 @@ package org.hamster.magic.play.controls.units
 		public function animationRotateUntap():void
 		{
 			var rotate:Rotate = new Rotate(this);
-			rotate.angleFrom = 90;
+			// rotate.angleFrom = 90;
 			rotate.angleTo = 0;
 			rotate.duration = 250;
-			rotate.originX = this.width >> 1;
-			rotate.originY = this.width >> 1;
+			// rotate.originX = this.width >> 1;
+			// rotate.originY = this.width >> 1;
 			rotate.play();
 		}
 		

@@ -6,6 +6,7 @@ package org.hamster.magic.common.controls.units
 	import mx.controls.Image;
 	import mx.core.ScrollPolicy;
 	import mx.events.FlexEvent;
+	import mx.events.ResizeEvent;
 	
 	import org.hamster.magic.common.models.Card;
 	import org.hamster.magic.common.services.AssetService;
@@ -86,7 +87,7 @@ package org.hamster.magic.common.controls.units
 			_mainImage = new Image();
 			_mainImage.percentWidth = 100;
 			_mainImage.percentHeight = 100;
-			_mainImage.maintainAspectRatio = false;
+			_mainImage.maintainAspectRatio = true;
 			_mainImage.setStyle("verticalAlign", "middle");
 			_mainImage.setStyle("horizontalAlign", "center");
 			_mainImage.source = this.source;
@@ -97,7 +98,6 @@ package org.hamster.magic.common.controls.units
 		{
 			this.mainImage.source = this.source;
 		}
-		
 		
 	}
 }
