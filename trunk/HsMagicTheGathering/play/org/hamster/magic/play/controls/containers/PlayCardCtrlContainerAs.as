@@ -1,10 +1,17 @@
 // ActionScript file
 import flash.events.MouseEvent;
 
+import mx.controls.Alert;
+
 import org.hamster.magic.common.events.CardUnitEvent;
+import org.hamster.magic.common.models.Magic;
 import org.hamster.magic.common.models.PlayCard;
 import org.hamster.magic.common.models.action.CardAction;
 import org.hamster.magic.common.models.action.utils.ActionTarget;
+import org.hamster.magic.common.models.type.TypeArtifact;
+import org.hamster.magic.common.models.type.TypeCreature;
+import org.hamster.magic.common.models.type.TypeLand;
+import org.hamster.magic.common.models.type.base.ICardType;
 import org.hamster.magic.common.models.utils.CardLocation;
 import org.hamster.magic.common.models.utils.CardStatus;
 import org.hamster.magic.common.models.utils.GameStep;
@@ -50,6 +57,10 @@ private function initProperties():void
 		child.removeEventListener(MouseEvent.CLICK, actionBtnClickHandler);			
 	}
 	actionCtrlContainer.removeAllChildren();
+	if (this.playCard == null) {
+		// unselected a card
+		return;
+	}
 	if (this.playCard.getLocation() == CardLocation.HAND) {
 		var payButton:ConsoleTextButton = new ConsoleTextButton();
 		payButton.text = "施放";
@@ -68,11 +79,32 @@ private function initProperties():void
 
 private function payButtonClickHandler(evt:MouseEvent):void
 {
-	if (this.playCard.player.magic.gt(this.playCard.magic)) {
+	var m:Magic = this.playCard.magic;
+	if (this.playCard.player.magic.gt(m)) {
 		if (this.playCard.magic.colorless > 0) {
-			
+			//TODO: Popup a colorless selection
+			// then call payPlayCard function
+		} else {
+			this.payPlayCard(m.red, m.blue, m.green, 
+				m.black, m.white, m.colorless);
 		}
 	}
+}
+
+private function payPlayCard(red:int, blue:int, green:int, 
+							  black:int, white:int, colorless:int):void
+{
+	this.playCard.player.magic.minusNumber(
+		red, blue, green, black, white, colorless);
+	
+	var cardType:ICardType = this.playCard.type;
+	if (cardType is TypeLand) {
+		this.playCard.setLocation(CardLocation.LAND);
+	} else if (cardType is TypeCreature) {
+		this.playCard.setLocation(CardLocation.CREATURE);
+	} else if (cardType is TypeArtifact) {
+		this.playCard.setLocation(CardLocation.ARTIFACT);
+	}		
 }
 
 private function actionBtnClickHandler(evt:MouseEvent):void
