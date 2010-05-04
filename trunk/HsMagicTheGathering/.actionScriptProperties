@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="HsMagicTheGathering.mxml" version="3">
-  <compiler additionalCompilerArguments="-locale=zh_CN,en_US -allow-source-path-overlap=true" copyDependentFiles="true" enableModuleDebug="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersion="9.0.124" htmlPlayerVersionCheck="true" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" useApolloConfig="true" verifyDigests="false" warn="true">
+<actionScriptProperties mainApplicationPath="HsMagicTheGathering.mxml" projectUUID="a934fcd9-998f-4acc-b3f1-996cc756032f" version="6">
+  <compiler additionalCompilerArguments="-locale=zh_CN,en_US -allow-source-path-overlap=true" autoRSLOrdering="false" copyDependentFiles="true" flexSDK="Flex 3.5 (build 12683)" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="true" useDebugRSLSwfs="true" verifyDigests="false" warn="true">
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" linkType="1" path="locale/{locale}"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="common"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="configure"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="menu"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="play"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="1">
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
       <libraryPathEntry kind="4" path=""/>
+      <libraryPathEntry kind="1" linkType="1" path="${DCD_LIB_LOCATION}"/>
+      <libraryPathEntry kind="1" linkType="1" path="${DCD_LOCALE_LOCATION}"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="HsMagicTheGathering.mxml"/>
+    <application path="HsMagicTheGathering.mxml">
+      <airExcludes/>
+    </application>
   </applications>
-  <modules>
-    <module application="src/HsMagicTheGathering.mxml" destPath="org/hamster/magic/menu/MenuModule.swf" optimize="true" sourcePath="src/org/hamster/magic/menu/MenuModule.mxml"/>
-    <module application="src/HsMagicTheGathering.mxml" destPath="org/hamster/magic/play/PlayModule.swf" optimize="true" sourcePath="src/org/hamster/magic/play/PlayModule.mxml"/>
-    <module application="src/HsMagicTheGathering.mxml" destPath="org/hamster/magic/configure/ConfigureModule.swf" optimize="true" sourcePath="src/org/hamster/magic/configure/ConfigureModule.mxml"/>
-  </modules>
+  <modules/>
   <buildCSSFiles/>
 </actionScriptProperties>

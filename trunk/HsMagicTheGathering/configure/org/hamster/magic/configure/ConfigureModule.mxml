@@ -4,7 +4,7 @@
 	verticalScrollPolicy="off" horizontalScrollPolicy="off"
 	creationComplete="completeHandler()"  backgroundColor="white" 
 	xmlns:units="org.hamster.magic.common.controls.units.*"
-	xmlns:unit="org.hamster.magic.configure.controls.unit.*">
+ xmlns:unit="org.hamster.magic.configure.controls.unit.*">
 	<mx:Script source="ConfigureModuleAs.as" />
 	<mx:Form width="100%">
 		<mx:FormItem direction="horizontal" label="选择版本">

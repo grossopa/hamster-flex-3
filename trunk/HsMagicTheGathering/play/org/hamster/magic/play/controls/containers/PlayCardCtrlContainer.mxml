@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="365" height="115"
 	verticalScrollPolicy="off" horizontalScrollPolicy="off" preinitialize="init()"
-	creationComplete="completeHandler()" xmlns:buttons="org.hamster.magic.play.controls.buttons.*">
+	creationComplete="completeHandler()"  xmlns:buttons="org.hamster.magic.play.controls.buttons.*">
 	<mx:Script source="PlayCardCtrlContainerAs.as" />
 	<buttons:ConsoleTextButton text="横置" x="10" y="7"
 		click="tapCardHandler()"/>
