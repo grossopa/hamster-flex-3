@@ -5,6 +5,7 @@ import flash.events.MouseEvent;
 import flash.geom.Matrix;
 
 import mx.collections.ArrayCollection;
+import mx.effects.Rotate;
 import mx.events.ChildExistenceChangedEvent;
 import mx.events.CollectionEvent;
 import mx.events.CollectionEventKind;
@@ -13,9 +14,11 @@ import mx.events.ResizeEvent;
 import org.hamster.magic.common.events.PlayCardEvent;
 import org.hamster.magic.common.models.Card;
 import org.hamster.magic.common.models.PlayCard;
+import org.hamster.magic.common.models.Player;
 import org.hamster.magic.common.models.utils.CardStatus;
 import org.hamster.magic.common.services.DataService;
 import org.hamster.magic.common.services.EventService;
+import org.hamster.magic.common.utils.Constants;
 import org.hamster.magic.play.controls.units.PlayCardUnit;
 
 public static const HORIZONTAL_GAP:int = 2;
@@ -24,6 +27,17 @@ private static const DS:DataService = DataService.getInstance();
 private static const ES:EventService = EventService.getInstance();
 
 private var _cardArray:ArrayCollection;
+private var _player:Player;
+
+public function set player(value:Player):void
+{
+	this._player = value;
+}
+
+public function get player():Player
+{
+	return this._player;
+}
 
 public function set cardArray(value:ArrayCollection):void
 {
@@ -73,15 +87,25 @@ private function playCardResizeHandler(evt:ResizeEvent):void
 
 private function playCardStatusChangedHandler(evt:PlayCardEvent):void
 {
+	var rotate:Rotate;
 	var unit:PlayCardUnit = PlayCardUnit(evt.currentTarget);
 	var playCard:PlayCard = evt.card;
 	if (playCard.status == CardStatus.PLAY_TAPPED) {
-		unit.animationRotateTap();
-		//unit.width = Constants.PLAY_CARD_HEIGHT;
-		//unit.height = Constants.PLAY_CARD_WIDTH;
-		
+		rotate = new Rotate(unit);
+		rotate.angleFrom = 0;
+		rotate.angleTo = -90;
+		rotate.duration = 250;
+		rotate.originX = unit.width >> 1;
+		rotate.originY = unit.width >> 1;
+		rotate.play();
 	} else {
-		unit.animationRotateUntap();
+		rotate = new Rotate(unit);
+		// rotate.angleFrom = 90;
+		rotate.angleTo = 0;
+		rotate.duration = 250;
+		// rotate.originX = this.width >> 1;
+		// rotate.originY = this.width >> 1;
+		rotate.play();
 	}	
 }
 
@@ -162,6 +186,7 @@ protected function arrangePlayCards():void
 {
 	var nextX:Number = 0;
 	for each (var playCardUnit:PlayCardUnit in this.mainContainer.getChildren()) {
+		playCardUnit.enabled = true;
 		playCardUnit.move(nextX, playCardUnit.y);
 		nextX += HORIZONTAL_GAP + playCardUnit.width;
 	}

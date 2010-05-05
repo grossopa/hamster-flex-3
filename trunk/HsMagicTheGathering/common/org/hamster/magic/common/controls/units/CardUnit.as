@@ -21,6 +21,23 @@ package org.hamster.magic.common.controls.units
 		
 		private var _mainImage:Image;
 		
+		private var _cardEnabled:Boolean;
+		
+		override public function set enabled(value:Boolean):void
+		{
+			_cardEnabled = value;
+			if (value) {
+				this.alpha = 1;
+			} else {
+				this.alpha = 0.5;
+			}
+		}
+		
+		override public function get enabled():Boolean
+		{
+			return this._cardEnabled;
+		}
+		
 		override public function set data(value:Object):void
 		{
 			super.data = value;

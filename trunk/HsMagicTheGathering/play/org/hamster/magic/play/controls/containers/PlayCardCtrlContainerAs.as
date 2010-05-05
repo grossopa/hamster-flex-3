@@ -43,11 +43,9 @@ private function init():void
 
 private function completeHandler():void
 {
-
 	if (this.playCard != null) {
 		initProperties();
 	}
-	
 }
 
 private function initProperties():void
@@ -62,10 +60,12 @@ private function initProperties():void
 		return;
 	}
 	if (this.playCard.getLocation() == CardLocation.HAND) {
-		var payButton:ConsoleTextButton = new ConsoleTextButton();
-		payButton.text = "施放";
-		payButton.addEventListener(MouseEvent.CLICK, payButtonClickHandler);
-		actionCtrlContainer.addChild(payButton);
+		if (this.playCard.player.magic.gt(this.playCard.magic)) {
+			var payButton:ConsoleTextButton = new ConsoleTextButton();
+			payButton.text = "施放";
+			payButton.addEventListener(MouseEvent.CLICK, payButtonClickHandler);
+			actionCtrlContainer.addChild(payButton);
+		}
 	} else if (CardLocation.getFieldArray().indexOf(this.playCard.getLocation()) > 0) {
 		for each (var cardAction:CardAction in this.playCard.actions) {
 			var consoleTextBtn:ConsoleTextButton = new ConsoleTextButton();
@@ -104,7 +104,7 @@ private function payPlayCard(red:int, blue:int, green:int,
 		this.playCard.setLocation(CardLocation.CREATURE);
 	} else if (cardType is TypeArtifact) {
 		this.playCard.setLocation(CardLocation.ARTIFACT);
-	}		
+	}	
 }
 
 private function actionBtnClickHandler(evt:MouseEvent):void
