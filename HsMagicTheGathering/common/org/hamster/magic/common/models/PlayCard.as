@@ -1,9 +1,11 @@
 package org.hamster.magic.common.models
 {
 	import org.hamster.magic.common.events.PlayCardEvent;
+	import org.hamster.magic.common.events.PlayerEvent;
 	
 	[Event(name="locationChanged", type="org.hamster.magic.common.events.PlayCardEvent")]
 	[Event(name="statusChanged", type="org.hamster.magic.common.events.PlayCardEvent")]
+	// [Event(name="poolEnoughStatusChange", type="org.hamster.magic.common.events.PlayCardEvent")]
 	
 	public class PlayCard extends Card
 	{
@@ -72,37 +74,12 @@ package org.hamster.magic.common.models
 			this._player = player;
 			
 			//this.actionManager.playCard = this;
-			//_player.addEventListener(PlayerEvent.MAGIC_CHANGE, magicPoolChangedHandler);
+			// _player.addEventListener(PlayerEvent.MAGIC_CHANGE, magicPoolChangedHandler);
 		}
 		
 //		public function magicPoolChangedHandler(evt:PlayerEvent):void
 //		{
-//			if (this.magicPool.white > player.magicWhite) {
-//				this.isPoolEnough = false;
-//				return;
-//			}
-//			if (this.magicPool.black > player.magicBlack) {
-//				this.isPoolEnough = false;
-//				return;
-//			}
-//			if (this.magicPool.blue > player.magicBlue) {
-//				this.isPoolEnough = false;
-//				return;
-//			}
-//			if (this.magicPool.red > player.magicRed) {
-//				this.isPoolEnough = false;
-//				return;
-//			}
-//			if (this.magicPool.green > player.magicGreen) {
-//				this.isPoolEnough = false;
-//				return;
-//			}
-//			
-//			if (this.magicPool.allCount > this.player.magicAllCount) {
-//				this.isPoolEnough = false;
-//				return;
-//			}
-//			this.isPoolEnough = true;
+//			this.isPoolEnough = this.player.magic.gt(this.magic);
 //		}
 		
 //		public function cast(paid:Boolean = false):void

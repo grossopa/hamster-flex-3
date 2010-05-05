@@ -33,6 +33,10 @@ private function completeHandler():void
 
 private function completeHandler2():void
 {
+	creatureContainer.player = this.player;
+	artifactContainer.player = this.player;
+	landContainer.player = this.player;
+	handContainer.player = this.player;
 	creatureContainer.cardArray = this.player.playerCards.getLocationArray(CardLocation.CREATURE);
 	artifactContainer.cardArray = this.player.playerCards.getLocationArray(CardLocation.ARTIFACT);
 	landContainer.cardArray = this.player.playerCards.getLocationArray(CardLocation.LAND);

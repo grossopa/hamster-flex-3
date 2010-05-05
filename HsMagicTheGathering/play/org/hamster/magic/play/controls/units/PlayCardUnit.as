@@ -22,7 +22,7 @@ package org.hamster.magic.play.controls.units
 			
 			super.card = value;
 			if (card != null) {
-				PlayCard(card).addEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
+				card.addEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
 			}
 		}
 		
@@ -41,28 +41,6 @@ package org.hamster.magic.play.controls.units
 		private function statusChangedHandler(evt:PlayCardEvent):void
 		{
 			this.dispatchEvent(evt);
-		}
-		
-		public function animationRotateTap():void
-		{
-			var rotate:Rotate = new Rotate(this);
-			rotate.angleFrom = 0;
-			rotate.angleTo = -90;
-			rotate.duration = 250;
-			rotate.originX = this.width >> 1;
-			rotate.originY = this.width >> 1;
-			rotate.play();
-		}
-		
-		public function animationRotateUntap():void
-		{
-			var rotate:Rotate = new Rotate(this);
-			// rotate.angleFrom = 90;
-			rotate.angleTo = 0;
-			rotate.duration = 250;
-			// rotate.originX = this.width >> 1;
-			// rotate.originY = this.width >> 1;
-			rotate.play();
 		}
 		
 	}
