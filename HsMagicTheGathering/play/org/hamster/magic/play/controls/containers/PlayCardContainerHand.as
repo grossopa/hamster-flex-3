@@ -35,11 +35,13 @@ package org.hamster.magic.play.controls.containers
 		protected function registMagicListener(value:Player):void
 		{
 			value.magic.addEventListener(MagicEvent.CHANGE, playerMagicChangeHandler);
+			value.magic.addEventListener(MagicEvent.MULTI_CHANGE, playerMagicChangeHandler);
 		}
 		
 		protected function removeMagicListener(value:Player):void
 		{
 			value.magic.removeEventListener(MagicEvent.CHANGE, playerMagicChangeHandler);
+			value.magic.removeEventListener(MagicEvent.MULTI_CHANGE, playerMagicChangeHandler);
 		}
 		
 		override protected function arrangePlayCards():void

@@ -2,8 +2,13 @@
 import flash.events.MouseEvent;
 
 import mx.controls.Alert;
+import mx.core.Application;
+import mx.core.Container;
+import mx.core.WindowedApplication;
+import mx.managers.PopUpManager;
 
 import org.hamster.magic.common.events.CardUnitEvent;
+import org.hamster.magic.common.events.PopupEvent;
 import org.hamster.magic.common.models.Magic;
 import org.hamster.magic.common.models.PlayCard;
 import org.hamster.magic.common.models.action.CardAction;
@@ -17,6 +22,7 @@ import org.hamster.magic.common.models.utils.CardStatus;
 import org.hamster.magic.common.models.utils.GameStep;
 import org.hamster.magic.common.services.EventService;
 import org.hamster.magic.play.controls.buttons.ConsoleTextButton;
+import org.hamster.magic.play.controls.popups.ChooseColorlessPopup;
 
 private static const ES:EventService = EventService.getInstance();
 
@@ -82,13 +88,33 @@ private function payButtonClickHandler(evt:MouseEvent):void
 	var m:Magic = this.playCard.magic;
 	if (this.playCard.player.magic.gt(m)) {
 		if (this.playCard.magic.colorless > 0) {
-			//TODO: Popup a colorless selection
-			// then call payPlayCard function
+			var popup:ChooseColorlessPopup = PopUpManager.createPopUp(
+				Container(Application.application),
+				ChooseColorlessPopup, true) 
+				as ChooseColorlessPopup;
+			PopUpManager.bringToFront(popup);
+			popup.setNeededData(m.colorless, this.playCard.player.magic);
+			popup.addEventListener(PopupEvent.APPLY_CLOSE, colorlessPopupCloseHandler);
 		} else {
 			this.payPlayCard(m.red, m.blue, m.green, 
 				m.black, m.white, m.colorless);
 		}
 	}
+}
+
+/**
+ * handler function when colorless payment is choosen.
+ *  
+ * @param evt
+ * 
+ */
+private function colorlessPopupCloseHandler(evt:PopupEvent):void
+{
+	var popup:ChooseColorlessPopup = ChooseColorlessPopup(evt.currentTarget);
+	var m:Magic = popup.selectedMagic.clone();
+	PopUpManager.removePopUp(popup);
+	this.payPlayCard(m.red, m.blue, m.green, 
+		m.black, m.white, m.colorless);
 }
 
 private function payPlayCard(red:int, blue:int, green:int, 
@@ -130,6 +156,8 @@ private function actionBtnClickHandler(evt:MouseEvent):void
 	if (!cardAction.notNeedTap) {
 		this.playCard.status = CardStatus.PLAY_TAPPED;
 	}
+	
+	this.initProperties();
 }
 
 private function selectCardHandler(evt:CardUnitEvent):void

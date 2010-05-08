@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" frameRate="60"
+				layout="absolute" minWidth="955" minHeight="600"
+				 applicationComplete="application1_applicationCompleteHandler(event)">
+	<mx:Canvas id="moveContainer" width="90%" height="90%" verticalCenter="0" horizontalCenter="0"
+			   alpha="0.2" backgroundColor="black" />
+	<mx:Canvas id="container1" width="400" height="400" x="200" y="200" 
+			   alpha="0.3" backgroundColor="red"
+			   verticalScrollPolicy="off" horizontalScrollPolicy="off">
+		<mx:Canvas id="targetMoveCanvas1" width="30" height="30" x="100" y="300" 
+				   backgroundColor="white" borderStyle="solid" 
+				   borderColor="black" borderThickness="1"/>
+	</mx:Canvas>
+	<mx:Script>
+		<![CDATA[
+			import mx.core.Container;
+			import mx.effects.Move;
+			import mx.events.EffectEvent;
+			import mx.events.FlexEvent;
+			
+			import org.hamster.effects.utils.HsEffectUtil;
+			
+			private var _move:Move = new Move();
+
+			protected function application1_applicationCompleteHandler(event:FlexEvent):void
+			{
+				_move.xBy = 400;
+				_move.yBy = -100;
+				_move.duration = 1000;
+				HsEffectUtil.playBetweenContainers([targetMoveCanvas1], _move, container2, moveContainer);
+				_move.addEventListener(EffectEvent.EFFECT_END, effEndHandler);
+			}
+			
+			private function effEndHandler(evt:EffectEvent):void
+			{
+				_move.removeEventListener(EffectEvent.EFFECT_END, effEndHandler);
+				HsEffectUtil.playBetweenContainers([targetMoveCanvas1], _move, container1, moveContainer, true);
+				_move.addEventListener(EffectEvent.EFFECT_END, effEndHandler2);
+			}
+			
+			private function effEndHandler2(evt:EffectEvent):void
+			{
+				_move.removeEventListener(EffectEvent.EFFECT_END, effEndHandler2);
+				HsEffectUtil.playBetweenContainers([targetMoveCanvas1], _move, container2, moveContainer);
+				_move.addEventListener(EffectEvent.EFFECT_END, effEndHandler);
+			}
+
+		]]>
+	</mx:Script>
+	<mx:Canvas id="container2" width="200" height="200" x="611" y="298"
+			   alpha="0.3" backgroundColor="blue"
+			   verticalScrollPolicy="off" horizontalScrollPolicy="off"/>
+</mx:Application>
