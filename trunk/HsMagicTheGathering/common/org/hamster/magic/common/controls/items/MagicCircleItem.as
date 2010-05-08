@@ -17,7 +17,13 @@ package org.hamster.magic.common.controls.items
 		
 		private var _color:Number;
 		private var _magicValue:int;
-		private var _magicValueLabel:Label;	
+		private var _magicValueLabel:Label;
+		
+		override public function set enabled(value:Boolean):void
+		{
+			super.enabled = value;
+			this.alpha = value ? 1 : 0.5;
+		}
 		
 		public function set color(value:Number):void
 		{

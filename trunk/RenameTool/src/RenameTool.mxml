@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="vertical" width="800" height="600"
+	nativeDragEnter="nativeDragEnterHandler(event)"
+	nativeDragDrop="nativeDragDropHandler(event)">
+	<mx:Script source="RenameToolAs.as" />
+	<mx:FormItem label="Folder">
+		<mx:TextInput id="folderInput" width="300" />
+	</mx:FormItem>
+	<mx:FormItem label="Prefix">
+		<mx:TextInput id="prefixInput" width="300" />
+	</mx:FormItem>
+	<mx:Button click="execute()" label="execute" />
+	<mx:Button click="undo()" label="clear" />
+	
+</mx:WindowedApplication>

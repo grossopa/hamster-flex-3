@@ -85,12 +85,13 @@ private function itemRightClickHandler(evt:MouseEvent):void
 
 public function applyChanges():Magic
 {
-	this.magic.red = this.magicRedImage.magicValue;
-	this.magic.blue = this.magicBlueImage.magicValue;
-	this.magic.green = this.magicGreenImage.magicValue;
-	this.magic.black = this.magicBlackImage.magicValue;
-	this.magic.white = this.magicWhiteImage.magicValue;
-	this.magic.colorless = this.magicColorlessImage.magicValue;
+	this.magic.setNumber(
+		this.magicRedImage.magicValue,
+		this.magicBlueImage.magicValue,
+		this.magicGreenImage.magicValue,
+		this.magicBlackImage.magicValue,
+		this.magicWhiteImage.magicValue,
+		this.magicColorlessImage.magicValue);
 	return this.magic.clone();
 }
 

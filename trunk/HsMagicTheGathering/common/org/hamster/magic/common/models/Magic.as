@@ -5,6 +5,7 @@ package org.hamster.magic.common.models
 	import org.hamster.magic.common.utils.Constants;
 	
 	[Event(name="change", type="org.hamster.magic.common.events.MagicEvent")]
+	[Event(name="multiChange", type="org.hamster.magic.common.events.MagicEvent")]
 	
 	public class Magic extends AbstractModelSupport
 	{
@@ -39,12 +40,65 @@ package org.hamster.magic.common.models
 		
 		public function minusNumber(r:int, b:int, g:int, blk:int, w:int, c:int):void
 		{
-			this.red 		-= r;
-			this.blue 		-= b;
-			this.green 		-= g;
-			this.black 		-= blk;
-			this.white 		-= w;
-			this.colorless 	-= c;			
+			this.setNumber(this._red - r, this._blue - b, this._green - g, 
+				this._black - blk, this._white - w, this._colorless - c);
+		}
+		
+		public function setNumber(r:int, b:int, g:int, blk:int, w:int, c:int):void
+		{
+			var colors:Array = new Array();
+			var oldValues:Array = new Array();
+			var newValues:Array = new Array();
+			
+			if (r != this._red) {
+				colors.push(Constants.RED);
+				oldValues.push(this._red);
+				this._red = r;
+				newValues.push(this._red);
+			}
+			if (b != this._blue) {
+				colors.push(Constants.BLUE);
+				oldValues.push(this._blue);
+				this._blue = b;
+				newValues.push(this._blue);
+			}
+			if (g != this._green) {
+				colors.push(Constants.GREEN);
+				oldValues.push(this._green);
+				this._green = g;
+				newValues.push(this._green);
+			}
+			if (blk != this._black) {
+				colors.push(Constants.BLACK);
+				oldValues.push(this._black);
+				this._black = blk;
+				newValues.push(this._black);
+			}
+			if (w != this._white) {
+				colors.push(Constants.WHITE);
+				oldValues.push(this._white);
+				this._white = w;
+				newValues.push(this._white);
+			}
+			if (c != this._colorless) {
+				colors.push(Constants.COLORLESS);
+				oldValues.push(this._colorless);
+				this._colorless = c;
+				newValues.push(this._colorless);
+			}
+			
+			if (colors.length > 0) {
+				var disEvt:MagicEvent = new MagicEvent(MagicEvent.MULTI_CHANGE);
+				disEvt.colors = colors;
+				disEvt.oldValues = oldValues;
+				disEvt.newValues = newValues;
+				this.dispatchEvent(disEvt);
+			}			
+		}
+		
+		public function clear():void
+		{
+			this.setNumber(0,0,0,0,0,0);
 		}
 		
 		public function decodeString(str:String):void
@@ -74,12 +128,9 @@ package org.hamster.magic.common.models
 		public function clone():Magic
 		{
 			var result:Magic = new Magic();
-			result.red = this.red;
-			result.blue = this.blue;
-			result.green = this.green;
-			result.black = this.black;
-			result.white = this.white;
-			result.colorless = this.colorless;
+			result.setNumber(this._red, this._blue, 
+				this._green, this._black, 
+				this._white, this._colorless);
 			return result;
 		}
 		

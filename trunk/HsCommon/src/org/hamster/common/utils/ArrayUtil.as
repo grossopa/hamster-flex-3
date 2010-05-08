@@ -3,7 +3,8 @@ package org.hamster.common.utils
 	import mx.collections.ArrayCollection;
 	
 	/**
-	 * This is a utility class so you needn't create instance.
+	 * 
+	 * @author yinz
 	 * 
 	 */
 	public class ArrayUtil
@@ -21,24 +22,9 @@ package org.hamster.common.utils
 		
 		public static function shallowCopyArray(array:Array):Array
 		{
-			if (array == null) {
-				return null;
-			}
 			var result:Array = new Array();
-			for each (var object:Object in array) {
-				result.push(object);
-			}
-			return result;
-		}
-		
-		public static function shallowCopyArrayCollection(array:ArrayCollection):ArrayCollection
-		{
-			if (array == null) {
-				return null;
-			}
-			var result:ArrayCollection = new ArrayCollection();
-			for each (var object:Object in array) {
-				result.addItem(object);
+			for each (var obj:Object in array) {
+				result.push(obj);
 			}
 			return result;
 		}

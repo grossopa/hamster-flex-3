@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <HTTPServiceLocator xmlns="org.hamster.services.*" xmlns:mx="http://www.adobe.com/2006/mxml">
-	<mx:Script source="HTTPServicesAs.as" />
 	<mx:HTTPService id="getCardFromWeb" url="http://www.cardkingdom.com/card_viewer.php" resultFormat="text" />
 </HTTPServiceLocator>
