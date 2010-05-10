@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300"
 	backgroundImage="@Embed(source='/org/hamster/magic/play/assets/popups/choose_colorless_bg.png')"
+	creationComplete="completeHandler()"
 	verticalScrollPolicy="off" horizontalScrollPolicy="off">
 	<mx:Metadata>
 		[Event(name="applyClose", type="org.hamster.magic.common.events.PopupEvent")]
@@ -11,4 +12,5 @@
 	<mx:Canvas id="magicContainer" width="380" x="10" height="218" 
 		verticalScrollPolicy="off" horizontalScrollPolicy="off" y="76"/>
 	<mx:HRule width="380" height="3" y="74" x="10"/>
+	<mx:Canvas id="frontMask" width="100%" height="100%" />
 </mx:Canvas>

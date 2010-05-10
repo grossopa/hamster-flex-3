@@ -87,12 +87,12 @@ private function payButtonClickHandler(evt:MouseEvent):void
 {
 	var m:Magic = this.playCard.magic;
 	if (this.playCard.player.magic.gt(m)) {
-		if (this.playCard.magic.colorless > 0) {
+		if (m.colorless > 0) {
 			var popup:ChooseColorlessPopup = PopUpManager.createPopUp(
 				Container(Application.application),
 				ChooseColorlessPopup, true) 
 				as ChooseColorlessPopup;
-			PopUpManager.bringToFront(popup);
+			PopUpManager.centerPopUp(popup);
 			popup.setNeededData(m.colorless, this.playCard.player.magic);
 			popup.addEventListener(PopupEvent.APPLY_CLOSE, colorlessPopupCloseHandler);
 		} else {
