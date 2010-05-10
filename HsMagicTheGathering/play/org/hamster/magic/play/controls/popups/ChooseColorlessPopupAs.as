@@ -159,12 +159,14 @@ private function magicCircleClickHandler(evt:MouseEvent):void
 					this.selectedMagic.allCount));
 		targetX = targetItem.x + this.colorlessContainer.x;
 		targetY = targetItem.y + this.colorlessContainer.y;
-		fromX = curCircle.x + this.magicContainer.x;
-		fromY = curCircle.y + this.magicContainer.y;
+		fromX = curCircle.x
+			+ this.magicContainer.x;
+		fromY = curCircle.y
+			+ this.magicContainer.y;
 		_move.xBy = targetX - fromX;
 		_move.yBy = targetY - fromY;
 		_move.duration = 750;
-		HsEffectUtil.playBetweenContainers([curCircle], _move, colorlessContainer, this);
+		HsEffectUtil.playBetweenContainers([curCircle], _move, colorlessContainer, frontMask);
 	} else if (curCircle.parent == this.colorlessContainer) {
 		targetX = this.magicContainer.x;
 		targetY = this.magicContainer.y;
@@ -194,12 +196,14 @@ private function magicCircleClickHandler(evt:MouseEvent):void
 			targetY += 180;
 		}
 		
-		fromX = curCircle.x + this.magicContainer.x;
-		fromY = curCircle.y + this.magicContainer.y;
+		fromX = curCircle.x
+			+ this.magicContainer.x;
+		fromY = curCircle.y
+			+ this.magicContainer.y;
 		_move.xBy = targetX - fromX;
 		_move.yBy = targetY - fromY;
 		_move.duration = 750;
-		HsEffectUtil.playBetweenContainers([curCircle], _move, magicContainer, this);
+		HsEffectUtil.playBetweenContainers([curCircle], _move, magicContainer, frontMask);
 	}
 }
 
