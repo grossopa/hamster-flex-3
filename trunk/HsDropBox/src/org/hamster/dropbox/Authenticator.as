@@ -1,6 +1,7 @@
 package org.hamster.dropbox
 {
 	import flash.events.EventDispatcher;
+	import flash.net.URLRequestMethod;
 	import flash.utils.ByteArray;
 	
 	import mx.controls.Alert;
@@ -10,12 +11,12 @@ package org.hamster.dropbox
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.http.HTTPService;
 	
+	import org.hamster.dropbox.util.DropboxConstants;
 	import org.iotashan.oauth.OAuthConsumer;
 	import org.iotashan.oauth.OAuthRequest;
 	import org.iotashan.oauth.OAuthSignatureMethod_HMAC_SHA1;
 	import org.iotashan.oauth.OAuthToken;
 	import org.iotashan.utils.OAuthUtil;
-	import org.hamster.dropbox.util.DropboxConstants;
 	
 	[Event(name='requestTokenResult', type='org.hamster.dropbox.DropboxEvent')]
 	[Event(name='requestTokenFault', type='org.hamster.dropbox.DropboxEvent')]
@@ -47,6 +48,14 @@ package org.hamster.dropbox
 			this.consumer_key 		= config["consumer_key"];
 			this.consumer_secret	= config["consumer_secret"];
 			
+			if (config['request_token_key'] != null) {
+				this._requestToken = new OAuthToken(config['request_token_key'], config['request_token_secret']);
+			}
+			
+			if (config['access_token_key'] != null) {
+				this._accessToken = new OAuthToken(config['access_token_key'], config['access_token_secret']);
+			}
+			
 			this.request_token_url 	= config["request_token_url"];
 			this.access_token_url 	= config["access_token_url"];
 			this.authorization_url 	= config["authorization_url"];
@@ -63,7 +72,7 @@ package org.hamster.dropbox
 			
 			var params:Object = request.requestParams;
 			var httpService:HTTPService = new HTTPService();
-			httpService.method = OAuthRequest.HTTP_MEHTOD_POST; 
+			httpService.method = URLRequestMethod.POST; 
 			httpService.url = DropboxConstants.REQUEST_TOKEN_URL;
 			httpService.addEventListener(ResultEvent.RESULT, requestTokenResultHandler);
 			httpService.addEventListener(FaultEvent.FAULT, requestTokenFaultHandler);
