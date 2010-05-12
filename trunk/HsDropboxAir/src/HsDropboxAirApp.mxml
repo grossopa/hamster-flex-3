@@ -14,11 +14,29 @@
 	<mx:TextInput id="accessTokenLabel" x="200" y="40" />
 	<mx:TextInput id="accessTokenSecretLabel" x="400" y="40" />
 	<mx:VBox width="100%" height="100%" y="60">
-		<mx:HBox width="100%" height="50" 
-				 verticalScrollPolicy="off" horizontalScrollPolicy="off" >
-			<mx:Button label="Account info" click="getAccountInfo()"/>
-			<mx:TextArea id="accountInfoLabel" height="50" />
-		</mx:HBox>
-		
+		<mx:Form width="100%" height="100%">
+			<mx:FormHeading label="Other API Test" />
+			<mx:FormItem width="100%" label="/account/info" direction="vertical">
+				<mx:Button label="Account info" click="getAccountInfo()"/>
+				<mx:Label text="uid          : {accountInfo.uid}" />
+				<mx:Label text="country      : {accountInfo.country}" />
+				<mx:Label text="display-name : {accountInfo.displayName}" />
+				<mx:Label text="quota-normal : {accountInfo.quotaInfo_normal}" />
+				<mx:Label text="quota-quota  : {accountInfo.quotaInfo_quota}" />
+				<mx:Label text="quota-shared : {accountInfo.quotaInfo_shared}" />
+			</mx:FormItem>
+			<mx:FormItem width="100%" label="/fileops/copy" direction="vertical">
+				<mx:Button label="Copy File" click="postFileopsCopy()"/>
+			</mx:FormItem>
+			<mx:FormItem width="100%" label="/fileops/create_folder" direction="vertical">
+				<mx:Button label="Create Folder" click="postCreateFolder()"/>
+			</mx:FormItem>
+			<mx:FormItem width="100%" label="/fileops/delete" direction="vertical">
+				<mx:Button label="Delete Folder" click="postDeleteFolder()"/>
+			</mx:FormItem>
+			<mx:FormItem width="100%" label="/files/" direction="vertical">
+				<mx:Button label="Get File" click="getFile()"/>
+			</mx:FormItem>
+		</mx:Form>
 	</mx:VBox>
 </s:WindowedApplication>

@@ -2,13 +2,18 @@ import mx.controls.Alert;
 import mx.rpc.events.FaultEvent;
 import mx.rpc.events.ResultEvent;
 
+import org.hamster.commands.events.CommandEvent;
 import org.hamster.dropbox.Authenticator;
 import org.hamster.dropbox.DropboxClient;
 import org.hamster.dropbox.DropboxEvent;
-import org.hamster.dropbox.util.DropboxConstants;
+import org.hamster.dropbox.commands.DropboxCommand;
+import org.hamster.dropbox.models.AccountInfo;
+import org.hamster.dropbox.utils.DropboxConstants;
 
 private var auth:Authenticator;
 private var client:DropboxClient;
+
+[Bindable] private var accountInfo:AccountInfo;
 
 //a8okqizo1k7u6og
 //pf9gtfqloa1braw
@@ -25,7 +30,7 @@ private function appCompleteHandler():void
 	config['access_token_key'] = 'gqutzxa4xvilaiy';
 	config['access_token_secret'] = 'rcweksx39v9xcda';
 	config['server'] = DropboxConstants.SERVER;
-	config['content-server'] = DropboxConstants.CONETENT_SERVER;
+	config['content_server'] = DropboxConstants.CONETENT_SERVER;
 	config['port'] = DropboxConstants.PORT;
 	config["request_token_url"] = DropboxConstants.REQUEST_TOKEN_URL;
 	config["access_token_url"] = DropboxConstants.ACCESS_TOKEN_URL;
@@ -70,19 +75,62 @@ private function accessTokenFaultHandler(evt:DropboxEvent):void
 	
 }
 
-
 public function getAccountInfo():void
+{	
+	var accountInfoCmd:DropboxCommand = client.accountInfo(true, "");
+	accountInfoCmd.addEventListener(CommandEvent.COMMAND_RESULT, function (evt:CommandEvent):void
+	{
+		accountInfo = AccountInfo(evt.currentTarget.resultObject);
+	});
+	accountInfoCmd.addEventListener(CommandEvent.COMMAND_FAULT, faultHandler);
+	accountInfoCmd.execute();
+}
+
+public function postFileopsCopy():void
 {
-	client.addEventListener(DropboxEvent.HTTP_RESULT, function (evt:DropboxEvent):void
+	var fileopsCopyCmd:DropboxCommand = client.fileCopy('id_dsa', 'id_dsa' + new Date().time, "");
+	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_RESULT, function (evt:CommandEvent):void
 	{
-		Alert.show(ResultEvent(evt.relatedEvent).result.toString());
 	});
-	
-	
-	client.addEventListener(DropboxEvent.HTTP_FAULT, function (evt:DropboxEvent):void
+	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_FAULT, faultHandler);
+	fileopsCopyCmd.execute();	
+}
+
+public var testFolderName:String;
+
+public function postCreateFolder():void
+{
+	testFolderName = 'test' + new Date().time;
+	var fileopsCopyCmd:DropboxCommand = client.fileCreateFolder(testFolderName, "");
+	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_RESULT, function (evt:CommandEvent):void
 	{
-		Alert.show(FaultEvent(evt.relatedEvent).fault.toString());
 	});
-	
-	client.accountInfo(true, "");
+	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_FAULT, faultHandler);
+	fileopsCopyCmd.execute();		
+}
+
+public function postDeleteFolder():void
+{
+	var fileopsCopyCmd:DropboxCommand = client.fileDelete(testFolderName, "");
+	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_RESULT, function (evt:CommandEvent):void
+	{
+	});
+	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_FAULT, faultHandler);
+	fileopsCopyCmd.execute();		
+}
+
+public function getFile():void
+{
+	var fileopsCopyCmd:DropboxCommand = client.getFile("id_dsa");
+	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_RESULT, function (evt:CommandEvent):void
+	{
+	});
+	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_FAULT, faultHandler);
+	fileopsCopyCmd.execute();		
+}
+
+
+private function faultHandler(evt:CommandEvent):void
+{
+	Alert.show(evt.toString());
 }

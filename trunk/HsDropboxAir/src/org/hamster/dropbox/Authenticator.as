@@ -11,7 +11,7 @@ package org.hamster.dropbox
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.http.HTTPService;
 	
-	import org.hamster.dropbox.util.DropboxConstants;
+	import org.hamster.dropbox.utils.DropboxConstants;
 	import org.iotashan.oauth.OAuthConsumer;
 	import org.iotashan.oauth.OAuthRequest;
 	import org.iotashan.oauth.OAuthSignatureMethod_HMAC_SHA1;

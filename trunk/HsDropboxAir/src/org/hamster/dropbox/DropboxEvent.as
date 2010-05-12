@@ -16,6 +16,7 @@ package org.hamster.dropbox
 		public static const HTTP_FAULT:String = 'DropboxEvent_HttpFault';
 		
 		public var relatedEvent:Event;
+		public var resultObject:Object;
 		
 		public var requestToken:OAuthToken;
 		public var accessToken:OAuthToken;
@@ -29,6 +30,7 @@ package org.hamster.dropbox
 		{
 			var result:DropboxEvent = new DropboxEvent(type, bubbles, cancelable);
 			result.relatedEvent = this.relatedEvent;
+			result.resultObject = this.resultObject;
 			result.requestToken = this.requestToken;
 			result.accessToken = this.accessToken;
 			return result;
