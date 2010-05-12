@@ -46,7 +46,8 @@ package org.hamster.dropbox
 			}
 			httpService.url = fullURL;
 			
-			var oauthRequest:OAuthRequest = new OAuthRequest(httpMethod, fullURL, null, auth.consumer, auth.accessToken);
+			var oauthRequest:OAuthRequest = new OAuthRequest(
+				httpMethod, fullURL, params, auth.consumer, auth.accessToken);
 			var urlHeader:URLRequestHeader = oauthRequest.buildRequest(
 				OAuthSignatureMethod_HMAC_SHA1.getInstance(), OAuthRequest.RESULT_TYPE_HEADER);
 			var ddd:String = urlHeader.value;
@@ -86,7 +87,7 @@ package org.hamster.dropbox
 		public static function buildURL(url:String, apiVersion:int, params:Object):String
 		{
 			url = URLEncoding.encode("/" + apiVersion + url);
-			url = url.replace("%2F", "/").replace("+", "%20");
+			url = url.replace(/%2F/g, "/").replace("+", "%20");
 			if (params != null && params.length > 0) {
 				url +=  "?" + urlEncode(params);
 			} 
