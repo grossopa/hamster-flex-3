@@ -5,7 +5,7 @@ package org.hamster.dropbox.test
 	import mx.controls.Alert;
 	
 	import org.hamster.dropbox.Authenticator;
-	import org.hamster.dropbox.util.DropboxConstants;
+	import org.hamster.dropbox.utils.DropboxConstants;
 	import org.hamster.dropbox.DropboxEvent;
 	
 	public class OAuthTestCase extends TestCase

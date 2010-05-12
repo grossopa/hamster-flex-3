@@ -2,8 +2,13 @@ package org.hamster.dropbox
 {
 	import flash.events.EventDispatcher;
 	import flash.net.URLRequestMethod;
+	import flash.utils.ByteArray;
 	
 	import mx.rpc.http.HTTPService;
+	
+	import org.hamster.dropbox.commands.DropboxCommand;
+	import org.hamster.dropbox.models.AccountInfo;
+	import org.hamster.dropbox.models.DropboxFile;
 
 	/**
 	* The DropboxClient is the core of the Java API, and is designed to be both instructive and
@@ -36,6 +41,8 @@ package org.hamster.dropbox
 	*/
 	public class DropboxClient extends DropboxClientSupport
 	{
+		public static const SANDBOX:String = 'sandbox';
+		
 		public var auth:Authenticator;
 		public var api_host:String = null;
 		public var content_host:String = null;
@@ -57,62 +64,123 @@ package org.hamster.dropbox
 		
 		/**
 		 * The account/info API call to Dropbox for getting info about an account attached to the access token.
+		 * Return status and account information in JSON format.
+		 * 
+		 * @param statusInResponse
+		 * @param callback
+		 * @return dropboxCommand
 		 */
-		public function accountInfo(status_in_response:Boolean, callback:String):void
+		public function accountInfo(statusInResponse:Boolean, callback:String):DropboxCommand
 		{
 			var params:Object = {
-				"status_in_response": status_in_response,
+				// "status_in_response": statusInResponse,
 				"callback": callback
 			};
-			sendRequest(api_host, "/account/info", auth, params, URLRequestMethod.GET);
+			return this.buildRequestCommand(AccountInfo,
+				api_host, "/account/info", auth, params, URLRequestMethod.GET);
 		}
 		
-//		/**
-//		 * Copy a file from one path to another, with root being either "sandbox" or "dropbox".
-//		 */
-//		public function fileCopy(root:String, from_path:String, to_path:String, callback:String):Object
-//		{
-//			var params:Object = { "root": root, "from_path": from_path,
-//				"to_path": to_path, "callback": callback };
-//			
-//			return sendRequest("POST", defaultProtocol, api_host, port, "/fileops/copy", API_VERSION, params, auth);
-//		}
-//		
-//		/** Create a folder at the given path. */
-//		public function fileCreateFolder(root:String, path:String, callback:String):Object
-//		{
-//			var params:Object = { "root": root, "path", path, "callback": callback };
-//			
-//			return sendRequest("POST", defaultProtocol, api_host, port, "/fileops/create_folder", API_VERSION, params, auth);
-//		}
-//		
-//		/** Delete a file. */
-//		public function fileDelete(root:String, String path, String callback):Object
-//		{
-//			var params:Object = { "root": root, "path": path, "callback": callback };
-//			return sendRequest("POST", defaultProtocol, api_host, port, "/fileops/delete", API_VERSION, params, auth);
-//		}
-//		
-//		/** Move a file. */
-//		public function fileMove(root:String, from_path:String, to_path:String, callback:String):Object
-//		{
-//			var params:Object = { "root", root, "from_path", from_path,
-//				"to_path", to_path, "callback", callback };
-//			
-//			return sendRequest("POST", defaultProtocol, api_host, port, "/fileops/move", API_VERSION, params, auth);
-//		}
-//		
-//		/**
-//		 * Get a file from the content server, returning the raw Apache HTTP Components response object
-//		 * so you can stream it or work with it how you need. 
-//		 * You *must* call .getEntity().consumeContent() on the returned HttpResponse object or you might leak 
-//		 * connections.
-//		 */
-//		public function getFile(root:String, String from_path):HTTPService
-//		{
-//			return getFileWithVersion(root, from_path, null);
-//		}
-//		
+		/**
+		 * Copy a file from one path to another, with root being either "sandbox" or "dropbox".
+		 * return copied file metadata information in JSON format.
+		 * 
+		 * @param fromPath
+		 * @param toPath
+		 * @param callback
+		 * @return dropboxCommand
+		 */
+		public function fileCopy(fromPath:String, toPath:String, callback:String):DropboxCommand
+		{
+			// only use sandbox
+			var params:Object = { 
+				"root": SANDBOX, 
+				"from_path": fromPath,
+				"to_path": toPath, 
+				"callback": callback 
+			};
+			return this.buildRequestCommand(DropboxFile,
+				api_host, "/fileops/copy", auth, params);
+		}
+		
+		/**
+		 * Create a folder at the given path.
+		 * return created folder metadata information in JSON format.
+		 * 
+		 * @param path
+		 * @param callback
+		 * @return dropboxCommand
+		 */
+		public function fileCreateFolder(path:String, callback:String):DropboxCommand
+		{
+			var params:Object = { 
+				"root": SANDBOX, 
+				"path": path, 
+				"callback": callback 
+			};
+			return this.buildRequestCommand(DropboxFile,
+				api_host, "/fileops/create_folder", auth, params);
+		}
+		
+		/** 
+		 * Delete a file.
+		 * 
+		 * @param path
+		 * @param callback
+		 * @return dropboxCommand
+		 */
+		public function fileDelete(path:String, callback:String):DropboxCommand
+		{
+			var params:Object = { 
+				"root": SANDBOX, 
+				"path": path, 
+				"callback": callback 
+			};
+			return this.buildRequestCommand(null,
+				api_host, "/fileops/delete", auth, params);		
+		}
+		
+		/** 
+		 * Move a file.
+		 * 
+		 * @param fromPath
+		 * @param toPath
+		 * @param callback
+		 * @return dropboxCommand
+		 */
+		public function fileMove(fromPath:String, toPath:String, callback:String):DropboxCommand
+		{
+			var params:Object = { 
+				"root" : SANDBOX, 
+				"from_path": fromPath,
+				"to_path": toPath, 
+				"callback": callback 
+			};
+			return this.buildRequestCommand(DropboxFile,
+				api_host, "/fileops/move", auth, params);	
+		}
+		
+		/**
+		 * Get a file from the content server, returning the raw Apache HTTP Components response object
+		 * so you can stream it or work with it how you need. 
+		 * You *must* call .getEntity().consumeContent() on the returned HttpResponse object or you might leak 
+		 * connections.
+		 * 
+		 * @param filePath
+		 * @return dropboxCommand
+		 * 
+		 */
+		public function getFile(filePath:String):DropboxCommand
+		{
+			return this.buildRequestCommand(ByteArray,
+				content_host, "/files/" + SANDBOX + '/' + filePath, auth, null, URLRequestMethod.GET);	
+		}
+		
+		public function putFile(file:String, data:ByteArray):DropboxCommand
+		{
+			var cmd:DropboxCommand = this.buildRequestCommand(null,
+				content_host, "/files/" + SANDBOX + '/' + filePath, auth, null, URLRequestMethod.POST);
+		}
+		
 //		/**
 //		 * Get a file from the content server, returning the raw Apache HTTP Components response object
 //		 * so you can stream it or work with it how you need. 

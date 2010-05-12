@@ -32,10 +32,10 @@
     <mkdir dir="${APP_ROOT}/src" />
     
 		<copy todir="${APP_SRC}">
-			<fileset dir="HsEffects/src" excludes="*.mxml, *.as" includes="**/*" />
+			<!--<fileset dir="HsEffects/src" excludes="*.mxml, *.as" includes="**/*" />
       <fileset dir="HsUpload/src" excludes="*.mxml, *.as" includes="**/*" />
       <fileset dir="HsImageCropper/src" excludes="*.mxml, *.as" includes="**/*" />
-      <fileset dir="HsTip/src" excludes="*.mxml, *.as" includes="**/*" />
+      <fileset dir="HsTip/src" excludes="*.mxml, *.as" includes="**/*" />-->
       <fileset dir="HsFramework/src" excludes="*.mxml, *.as" includes="**/*" />
       <fileset dir="HsCommon/src" excludes="*.mxml, *.as" includes="**/*" />
 		</copy>
