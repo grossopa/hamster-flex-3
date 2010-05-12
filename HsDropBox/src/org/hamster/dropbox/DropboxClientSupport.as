@@ -1,6 +1,7 @@
 package org.hamster.dropbox
 {
 	import flash.events.EventDispatcher;
+	import flash.net.URLRequestHeader;
 	import flash.net.URLRequestMethod;
 	
 	import mx.rpc.events.FaultEvent;
@@ -8,6 +9,9 @@ package org.hamster.dropbox
 	import mx.rpc.http.HTTPService;
 	
 	import org.hamster.dropbox.test.DropboxUnitTest;
+	import org.iotashan.oauth.OAuthRequest;
+	import org.iotashan.oauth.OAuthSignatureMethod_HMAC_SHA1;
+	import org.iotashan.utils.URLEncoding;
 
 	public class DropboxClientSupport extends EventDispatcher
 	{
@@ -16,29 +20,37 @@ package org.hamster.dropbox
 		public static const DEFAULT_PROTOCOL:String = "http";
 		public static const SECURE_PROTOCOL:String = "https";
 		
-		public static function sendRequest(
+		public function sendRequest(
 			apiHost:String, 
 			url:String, 
 			auth:Authenticator,
-			params:Object = null
+			params:Object = null,
 			httpMethod:String = URLRequestMethod.POST, 
 			protocol:String = DEFAULT_PROTOCOL,
-			apiVersion:int = API_VERSION
-			)
+			apiVersion:int = API_VERSION,
+			port:int = 80
+			):void
 		{
 			var fullURL:String = null;
+			
 			var httpService:HTTPService = new HTTPService();
 			httpService.addEventListener(ResultEvent.RESULT, httpResultHandler);
 			httpService.addEventListener(FaultEvent.FAULT, httpFaultHandler);
 			
 			if (httpMethod == URLRequestMethod.GET) {
-				fullURL = buildFullURL(host, buildURL(url, apiVersion, null), port, protocol);
+				fullURL = buildFullURL(apiHost, buildURL(url, apiVersion, null), port, protocol);
 				httpService.method = URLRequestMethod.GET;
 			} else if (httpMethod == URLRequestMethod.POST) {
-				fullURL = buildFullURL(host, buildURL(url, apiVersion, null), port, protocol);
+				fullURL = buildFullURL(apiHost, buildURL(url, apiVersion, null), port, protocol);
 				httpService.method = URLRequestMethod.POST;
 			}
 			httpService.url = fullURL;
+			
+			var oauthRequest:OAuthRequest = new OAuthRequest(httpMethod, fullURL, null, auth.consumer, auth.accessToken);
+			var urlHeader:URLRequestHeader = oauthRequest.buildRequest(
+				OAuthSignatureMethod_HMAC_SHA1.getInstance(), OAuthRequest.RESULT_TYPE_HEADER);
+			var ddd:String = urlHeader.value;
+			httpService.headers['Authorization'] = urlHeader.value;
 			httpService.send(params);
 		}
 		
@@ -87,8 +99,8 @@ package org.hamster.dropbox
 		 */
 		public static function urlEncode(params:Object):String
 		{
-			String result = "";
-			boolean firstTime = true;
+			var result:String = "";
+			var firstTime:Boolean = true;
 			for(var p:Object in params) {
 				if (firstTime) {
 					firstTime = false;
@@ -96,7 +108,7 @@ package org.hamster.dropbox
 					result += "&";
 				}
 				result += URLEncoding.encode(params[p]) 
-					+ "=" + URLEncoding.encode(p);
+					+ "=" + URLEncoding.encode(p.toString());
 			}
 			return result;
 		}
