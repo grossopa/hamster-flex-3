@@ -163,13 +163,17 @@ package org.iotashan.oauth
 					var firstTime:Boolean = false;
 					for (var param:Object in _requestParams) {
 						// if this is an oauth param, include it
-						if (firstTime == false) {
-							firstTime = true;
-						} else {
-							data += ",";
-						}
 						if (param.toString().indexOf("oauth") == 0) {
-							data += param + "=\"" + URLEncoding.encode(_requestParams[param]) + "\"";
+							if (firstTime == false) {
+								firstTime = true;
+							} else {
+								data += ",";
+							}
+							var paramValue:String = URLEncoding.encode(_requestParams[param]);
+							if (paramValue == null) {
+								paramValue = "";
+							}
+							data += param + "=\"" + paramValue + "\"";
 						}
 					}
 

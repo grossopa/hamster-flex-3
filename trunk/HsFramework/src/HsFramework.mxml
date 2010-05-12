@@ -4,7 +4,6 @@
 		<![CDATA[
 			import mx.core.UIComponent;
 			import org.hamster.services.HTTPServiceLocator;
-			var ddd:UIComponent
 		]]>
 	</mx:Script>
 </mx:Application>

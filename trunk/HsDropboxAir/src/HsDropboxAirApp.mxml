@@ -19,6 +19,6 @@
 			<mx:Button label="Account info" click="getAccountInfo()"/>
 			<mx:TextArea id="accountInfoLabel" height="50" />
 		</mx:HBox>
-	
+		
 	</mx:VBox>
 </s:WindowedApplication>
