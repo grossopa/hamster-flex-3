@@ -22,7 +22,7 @@ package org.hamster.dropbox.commands
 		public var resultType:Class;
 		public var params:Object;
 		
-		public var resultObject:DropboxModelSupport;
+		public var resultObject:Object;
 		
 		public function DropboxCommand()
 		{
@@ -40,8 +40,6 @@ package org.hamster.dropbox.commands
 			urlLoader.addEventListener(Event.COMPLETE, result);
 			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, fault);
 			urlLoader.load(urlRequest);
-		//	urlRequest.addEventListener(FaultEvent.FAULT, fault);
-			
 		}
 		
 		override public function result(data:Object):void
@@ -64,8 +62,7 @@ package org.hamster.dropbox.commands
 					}
 				}
 			} else if (resultData is ByteArray) {
-				var byteArray:ByteArray = ByteArray(resultData);
-				trace (byteArray.length);
+				this.resultObject = ByteArray(resultData);
 			}
 			
 			super.result(data);

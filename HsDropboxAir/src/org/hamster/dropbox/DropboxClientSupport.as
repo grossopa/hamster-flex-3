@@ -53,6 +53,7 @@ package org.hamster.dropbox
 			var urlHeader:URLRequestHeader = oauthRequest.buildRequest(
 				OAuthSignatureMethod_HMAC_SHA1.getInstance(), OAuthRequest.RESULT_TYPE_HEADER);
 			urlRequest.requestHeaders = [urlHeader];
+			
 			var cmd:DropboxCommand = new DropboxCommand();
 			cmd.urlRequest = urlRequest;
 			cmd.resultType = resultType;

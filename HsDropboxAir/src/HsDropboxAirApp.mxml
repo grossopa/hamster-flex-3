@@ -2,19 +2,26 @@
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
 					   xmlns:s="library://ns.adobe.com/flex/spark" 
 					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					    width="1000" height="700"
 					   applicationComplete="appCompleteHandler()">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<fx:Script source="HsDropboxAirAs.as" />
+	<mx:VBox x="600">
+		<mx:Button label="token (login by email/pwd)" click="loginByPwd()" />
+		<mx:TextInput id="emailInput" text="grossopaforever@gmail.com" />
+		<mx:TextInput id="passInput" text="47221456"  displayAsPassword="true"/>	
+	</mx:VBox>
+
 	<mx:Button label="Request Token" click="getRequestToken()" />
 	<mx:TextInput id="requestTokenLabel" x="200" />
 	<mx:TextInput id="requestTokenSecretLabel" x="400" />
 	<mx:Button label="Access Token" click="getAccessToken()" y="40" />
 	<mx:TextInput id="accessTokenLabel" x="200" y="40" />
 	<mx:TextInput id="accessTokenSecretLabel" x="400" y="40" />
-	<mx:VBox width="100%" height="100%" y="60">
-		<mx:Form width="100%" height="100%">
+	<mx:VBox width="100%" height="100%" y="140">
+		<mx:Form width="100%" height="510">
 			<mx:FormHeading label="Other API Test" />
 			<mx:FormItem width="100%" label="/account/info" direction="vertical">
 				<mx:Button label="Account info" click="getAccountInfo()"/>

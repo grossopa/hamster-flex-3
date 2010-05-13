@@ -62,6 +62,19 @@ package org.hamster.dropbox
 			this.port = config['port'];
 		}
 		
+		public function getToken(email:String, password:String):DropboxCommand
+		{
+			var params:Object = {
+				//'email' : email,
+				'password': password
+				// "status_in_response": statusInResponse,
+				// "callback": callback
+			};
+			return this.buildRequestCommand(null,
+				this.api_host, "/token", auth, params, URLRequestMethod.POST, 
+				DropboxClientSupport.SECURE_PROTOCOL, 0);
+		}
+		
 		/**
 		 * The account/info API call to Dropbox for getting info about an account attached to the access token.
 		 * Return status and account information in JSON format.
@@ -178,7 +191,9 @@ package org.hamster.dropbox
 		public function putFile(file:String, data:ByteArray):DropboxCommand
 		{
 			var cmd:DropboxCommand = this.buildRequestCommand(null,
-				content_host, "/files/" + SANDBOX + '/' + filePath, auth, null, URLRequestMethod.POST);
+				content_host, "/files/" + SANDBOX + '/' + file, auth, null, URLRequestMethod.POST);
+			cmd.urlRequest.data = data;
+			return cmd;
 		}
 		
 //		/**
