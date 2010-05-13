@@ -20,15 +20,25 @@ private var client:DropboxClient;
 //gqutzxa4xvilaiy
 //rcweksx39v9xcda
 
+private function loginByPwd():void
+{
+	var loginCmd:DropboxCommand = client.getToken(emailInput.text, passInput.text);
+	loginCmd.addEventListener(CommandEvent.COMMAND_RESULT, function (evt:CommandEvent):void
+	{
+	});
+	loginCmd.addEventListener(CommandEvent.COMMAND_FAULT, faultHandler);
+	loginCmd.execute();
+}
+
 private function appCompleteHandler():void
 {
 	var config:Object = new Object();
 	config["consumer_key"] = 'wnl0erseogu50mk';
 	config["consumer_secret"] = 'eypos93aukcysdw';
-	config['request_token_key'] = 'a8okqizo1k7u6og';
-	config['request_token_secret'] = 'pf9gtfqloa1braw';
-	config['access_token_key'] = 'gqutzxa4xvilaiy';
-	config['access_token_secret'] = 'rcweksx39v9xcda';
+//	config['request_token_key'] = 'a8okqizo1k7u6og';
+//	config['request_token_secret'] = 'pf9gtfqloa1braw';
+//	config['access_token_key'] = 'gqutzxa4xvilaiy';
+//	config['access_token_secret'] = 'rcweksx39v9xcda';
 	config['server'] = DropboxConstants.SERVER;
 	config['content_server'] = DropboxConstants.CONETENT_SERVER;
 	config['port'] = DropboxConstants.PORT;
