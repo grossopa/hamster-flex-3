@@ -1,5 +1,7 @@
 package org.hamster.dropbox.models
 {
+	import mx.utils.ObjectUtil;
+
 // {"thumb_exists": false,
 //	"bytes": 736, 
 //	"modified": "Wed, 12 May 2010 07:28:39 +0000", 

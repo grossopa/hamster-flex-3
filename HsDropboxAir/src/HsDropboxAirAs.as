@@ -1,3 +1,5 @@
+import flash.utils.ByteArray;
+
 import mx.controls.Alert;
 import mx.rpc.events.FaultEvent;
 import mx.rpc.events.ResultEvent;
@@ -8,6 +10,7 @@ import org.hamster.dropbox.DropboxClient;
 import org.hamster.dropbox.DropboxEvent;
 import org.hamster.dropbox.commands.DropboxCommand;
 import org.hamster.dropbox.models.AccountInfo;
+import org.hamster.dropbox.models.DropboxFile;
 import org.hamster.dropbox.utils.DropboxConstants;
 
 private var auth:Authenticator;
@@ -35,10 +38,10 @@ private function appCompleteHandler():void
 	var config:Object = new Object();
 	config["consumer_key"] = 'wnl0erseogu50mk';
 	config["consumer_secret"] = 'eypos93aukcysdw';
-//	config['request_token_key'] = 'a8okqizo1k7u6og';
-//	config['request_token_secret'] = 'pf9gtfqloa1braw';
-//	config['access_token_key'] = 'gqutzxa4xvilaiy';
-//	config['access_token_secret'] = 'rcweksx39v9xcda';
+	config['request_token_key'] = 'a8okqizo1k7u6og';
+	config['request_token_secret'] = 'pf9gtfqloa1braw';
+	config['access_token_key'] = 'gqutzxa4xvilaiy';
+	config['access_token_secret'] = 'rcweksx39v9xcda';
 	config['server'] = DropboxConstants.SERVER;
 	config['content_server'] = DropboxConstants.CONETENT_SERVER;
 	config['port'] = DropboxConstants.PORT;
@@ -101,6 +104,8 @@ public function postFileopsCopy():void
 	var fileopsCopyCmd:DropboxCommand = client.fileCopy('id_dsa', 'id_dsa' + new Date().time, "");
 	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_RESULT, function (evt:CommandEvent):void
 	{
+		var f:DropboxFile = DropboxFile(evt.currentTarget.resultObject);
+		copyFileLabel.text = f.toString();
 	});
 	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_FAULT, faultHandler);
 	fileopsCopyCmd.execute();	
@@ -114,6 +119,8 @@ public function postCreateFolder():void
 	var fileopsCopyCmd:DropboxCommand = client.fileCreateFolder(testFolderName, "");
 	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_RESULT, function (evt:CommandEvent):void
 	{
+		var f:DropboxFile = DropboxFile(evt.currentTarget.resultObject);
+		createFolderLabel.text = f.toString();
 	});
 	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_FAULT, faultHandler);
 	fileopsCopyCmd.execute();		
@@ -124,6 +131,7 @@ public function postDeleteFolder():void
 	var fileopsCopyCmd:DropboxCommand = client.fileDelete(testFolderName, "");
 	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_RESULT, function (evt:CommandEvent):void
 	{
+		
 	});
 	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_FAULT, faultHandler);
 	fileopsCopyCmd.execute();		
@@ -134,6 +142,8 @@ public function getFile():void
 	var fileopsCopyCmd:DropboxCommand = client.getFile("id_dsa");
 	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_RESULT, function (evt:CommandEvent):void
 	{
+		var bt:ByteArray = ByteArray(evt.currentTarget.resultObject);
+		getFileLabel.text = bt.length.toString();
 	});
 	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_FAULT, faultHandler);
 	fileopsCopyCmd.execute();		

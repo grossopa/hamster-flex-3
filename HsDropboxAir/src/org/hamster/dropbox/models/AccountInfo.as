@@ -1,8 +1,9 @@
 package org.hamster.dropbox.models
 {
+	import mx.utils.ObjectUtil;
+
 	public class AccountInfo extends DropboxModelSupport
 	{
-		
 		[Bindable] public var uid:int;
 		[Bindable] public var country:String;
 		[Bindable] public var displayName:String;
@@ -27,5 +28,6 @@ package org.hamster.dropbox.models
 			this.quotaInfo_quota = quotaInfo['quota'];
 			this.quotaInfo_shared = quotaInfo['shared'];
 		}
+		
 	}
 }
