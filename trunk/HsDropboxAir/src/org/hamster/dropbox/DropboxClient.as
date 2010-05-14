@@ -1,6 +1,7 @@
 package org.hamster.dropbox
 {
 	import flash.events.EventDispatcher;
+	import flash.net.FileReference;
 	import flash.net.URLRequestMethod;
 	import flash.utils.ByteArray;
 	
@@ -188,11 +189,11 @@ package org.hamster.dropbox
 				content_host, "/files/" + SANDBOX + '/' + filePath, auth, null, URLRequestMethod.GET);	
 		}
 		
-		public function putFile(file:String, data:ByteArray):DropboxCommand
+		public function putFile(file:String, fileRef:FileReference):DropboxCommand
 		{
 			var cmd:DropboxCommand = this.buildRequestCommand(null,
 				content_host, "/files/" + SANDBOX + '/' + file, auth, null, URLRequestMethod.POST);
-			cmd.urlRequest.data = data;
+			//cmd.urlRequest.data = data;
 			return cmd;
 		}
 		

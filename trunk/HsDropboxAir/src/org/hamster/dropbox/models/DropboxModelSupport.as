@@ -1,5 +1,7 @@
 package org.hamster.dropbox.models
 {
+	import mx.utils.ObjectUtil;
+
 	public class DropboxModelSupport
 	{
 		protected var _sourceObject:Object;
@@ -25,7 +27,7 @@ package org.hamster.dropbox.models
 		
 		public function toString():String
 		{
-			return this._sourceObject.toString();
+			return ObjectUtil.toString(this);
 		}
 		
 	}

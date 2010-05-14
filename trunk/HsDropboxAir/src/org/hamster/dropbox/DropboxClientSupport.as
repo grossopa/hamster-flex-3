@@ -44,6 +44,7 @@ package org.hamster.dropbox
 			var urlRequest:URLRequest = new URLRequest();
 			urlRequest.method = httpMethod;
 			urlRequest.url = fullURL;
+			
 			if (params != null) {
 				urlRequest.data = URLUtil.objectToString(params, "&");
 			}
