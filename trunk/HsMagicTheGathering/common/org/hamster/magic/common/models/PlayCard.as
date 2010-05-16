@@ -5,6 +5,7 @@ package org.hamster.magic.common.models
 	
 	[Event(name="locationChanged", type="org.hamster.magic.common.events.PlayCardEvent")]
 	[Event(name="statusChanged", type="org.hamster.magic.common.events.PlayCardEvent")]
+	[Event(name="enableChanged", type="org.hamster.magic.common.events.PlayCardEvent")]
 	// [Event(name="poolEnoughStatusChange", type="org.hamster.magic.common.events.PlayCardEvent")]
 	
 	public class PlayCard extends Card
@@ -13,6 +14,23 @@ package org.hamster.magic.common.models
 		private var _status:int;
 		private var _player:Player;
 		private var _isPoolEnough:Boolean;
+		private var _enabled:Boolean;
+		
+		public function set enabled(value:Boolean):void
+		{
+			if (this._enabled != value) {
+				this._enabled = value;
+				
+				var disEvt:PlayCardEvent = new PlayCardEvent(PlayCardEvent.ENABLE_CHANGED);
+				disEvt.card = this;
+				this.dispatchEvent(disEvt);
+			}
+		}
+		
+		public function get enabled():Boolean
+		{
+			return this._enabled;
+		}
 		
 //		public const enhancementCards:ArrayCollection = new ArrayCollection();
 		

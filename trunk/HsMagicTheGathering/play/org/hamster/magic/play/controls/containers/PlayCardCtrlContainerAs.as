@@ -93,7 +93,7 @@ private function payButtonClickHandler(evt:MouseEvent):void
 				ChooseColorlessPopup, true) 
 				as ChooseColorlessPopup;
 			PopUpManager.centerPopUp(popup);
-			popup.setNeededData(m.colorless, this.playCard.player.magic);
+			popup.setNeededData(m, this.playCard.player.magic);
 			popup.addEventListener(PopupEvent.APPLY_CLOSE, colorlessPopupCloseHandler);
 		} else {
 			this.payPlayCard(m.red, m.blue, m.green, 
