@@ -10,6 +10,7 @@ package org.hamster.magic.common.events
 		
 		public static const LOCATION_CHANGED:String = "PlayCardEventLocationChanged";
 		public static const STATUS_CHANGED:String = "PlayCardEventStatusChanged";
+		public static const ENABLE_CHANGED:String = "PlayCardeventEnableChanged";
 		public static const ENHANCE_CHANGE:String = "PlayCardEventEnhanceChange";
 		public static const POOL_ENOUGH_STATUS_CHANGE:String = "PlayCardEventPoolEnoughStatusChange";
 		

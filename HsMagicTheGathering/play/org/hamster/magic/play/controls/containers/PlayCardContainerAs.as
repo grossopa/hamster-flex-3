@@ -98,7 +98,7 @@ private function playCardStatusChangedHandler(evt:PlayCardEvent):void
 		rotate.originX = unit.width >> 1;
 		rotate.originY = unit.width >> 1;
 		rotate.play();
-	} else {
+	} else if (playCard.status == CardStatus.PLAY) {
 		rotate = new Rotate(unit);
 		// rotate.angleFrom = 90;
 		rotate.angleTo = 0;
@@ -152,6 +152,7 @@ private function collectionChangedHandler(evt:CollectionEvent):void
 			}
 			if (!hasIt) {
 				var unit:PlayCardUnit = DS.getPlayCardUnitByCard(playCard);
+				PlayCard(unit.card).status = CardStatus.PLAY;
 				this.mainContainer.addChild(unit);
 			}
 		}

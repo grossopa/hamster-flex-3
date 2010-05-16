@@ -18,6 +18,27 @@ package org.hamster.magic.common.controls.items
 		private var _color:Number;
 		private var _magicValue:int;
 		private var _magicValueLabel:Label;
+		private var _isShowLabel:Boolean = true;
+		
+		public function set isShowLabel(value:Boolean):void
+		{
+			if (_isShowLabel != value) {
+				_isShowLabel = value;
+				if (!this.initialized) {
+					return;
+				}
+				if (_isShowLabel) {
+					this._magicValueLabel.visible = true;
+				} else {
+					this._magicValueLabel.visible = false;
+				}
+			}
+		}
+		
+		public function get isShowLabel():Boolean
+		{
+			return _isShowLabel;
+		}
 		
 		override public function set enabled(value:Boolean):void
 		{
@@ -68,6 +89,7 @@ package org.hamster.magic.common.controls.items
 			_magicValueLabel.setStyle("textAlign", "center");
 			_magicValueLabel.setStyle("color", 0xFFFFFF);
 			_magicValueLabel.setStyle("fontSize", 18);
+			_magicValueLabel.visible = this.isShowLabel;
 		//	_magicValueLabel.setStyle("fontWeight", "bold");
 			_magicValueLabel.setStyle("verticalAlign", "middle");
 			_magicValueLabel.text = this.magicValue.toString();

@@ -8,27 +8,38 @@ package org.hamster.magic.play.controls.units
 	import org.hamster.magic.common.events.PlayCardEvent;
 	import org.hamster.magic.common.models.Card;
 	import org.hamster.magic.common.models.PlayCard;
+	import org.hamster.magic.common.models.utils.CardStatus;
 	import org.hamster.magic.common.utils.Constants;
 	
 	[Event(name="statusChanged", type="org.hamster.magic.common.events.PlayCardEvent")]
 
 	public class PlayCardUnit extends CardUnit
 	{
+		public function get playCard():PlayCard
+		{
+			return PlayCard(card);
+		}
+		
+		override public function set enabled(value:Boolean):void
+		{
+			super.enabled = value;
+			if (card != null) {
+				playCard.enabled = value;
+			}
+		}
+		
 		override public function set card(value:Card):void
 		{
 			if (super.card != null) {
-				card.removeEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
+				playCard.removeEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
+				playCard.removeEventListener(PlayCardEvent.ENABLE_CHANGED, enableChangedHandler);
 			}
 			
 			super.card = value;
 			if (card != null) {
-				card.addEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
+				playCard.addEventListener(PlayCardEvent.STATUS_CHANGED, statusChangedHandler);
+				playCard.addEventListener(PlayCardEvent.ENABLE_CHANGED, enableChangedHandler);
 			}
-		}
-		
-		public function get playCard():PlayCard
-		{
-			return this.card as PlayCard;
 		}
 		
 		public function PlayCardUnit()
@@ -43,5 +54,14 @@ package org.hamster.magic.play.controls.units
 			this.dispatchEvent(evt);
 		}
 		
+		private function enableChangedHandler(evt:PlayCardEvent):void
+		{
+			if (this.playCard.enabled) {
+				this.alpha = 1;
+			} else {
+				this.alpha = 0.5;
+			}
+			this.dispatchEvent(evt);
+		}
 	}
 }
