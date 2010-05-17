@@ -6,10 +6,13 @@ package org.hamster.dropbox
 	import flash.utils.ByteArray;
 	
 	import mx.rpc.http.HTTPService;
+	import mx.utils.URLUtil;
 	
 	import org.hamster.dropbox.commands.DropboxCommand;
+	import org.hamster.dropbox.commands.DropboxUploadCommand;
 	import org.hamster.dropbox.models.AccountInfo;
 	import org.hamster.dropbox.models.DropboxFile;
+	import org.iotashan.utils.URLEncoding;
 
 	/**
 	* The DropboxClient is the core of the Java API, and is designed to be both instructive and
@@ -189,13 +192,37 @@ package org.hamster.dropbox
 				content_host, "/files/" + SANDBOX + '/' + filePath, auth, null, URLRequestMethod.GET);	
 		}
 		
-		public function putFile(file:String, fileRef:FileReference):DropboxCommand
+		public function putFile(filePath:String, fileRef:FileReference):DropboxUploadCommand
 		{
-			var cmd:DropboxCommand = this.buildRequestCommand(null,
-				content_host, "/files/" + SANDBOX + '/' + file, auth, null, URLRequestMethod.POST);
-			//cmd.urlRequest.data = data;
+			// file = URLEncoding.encode(filePath);
+			var params:Object = { 
+				"file" : fileRef.name
+			};
+			
+			var cmd:DropboxUploadCommand = this.buildUploadCommand(fileRef.data, fileRef.name,
+				content_host, "/files/" + SANDBOX + '/' + filePath, auth, params);
 			return cmd;
 		}
+		
+	/**
+	 * Get metadata about directories and files, such as file listings and such.
+	 */
+	public function metadata(path:String, 
+							 fileLimit:int, 
+							 hash:String, 
+							 list:Boolean
+							):DropboxCommand
+	{
+		var params:Object = {
+			"file_limit" : fileLimit,
+			"hash": hash,
+			"list": list
+		};
+		
+		return this.buildRequestCommand(DropboxFile,
+			api_host, "/metadata/" + SANDBOX + '/' + path, 
+			auth, params, URLRequestMethod.GET);	
+	}		
 		
 //		/**
 //		 * Get a file from the content server, returning the raw Apache HTTP Components response object

@@ -1,3 +1,5 @@
+import flash.events.Event;
+import flash.net.FileReference;
 import flash.utils.ByteArray;
 
 import mx.controls.Alert;
@@ -9,6 +11,7 @@ import org.hamster.dropbox.Authenticator;
 import org.hamster.dropbox.DropboxClient;
 import org.hamster.dropbox.DropboxEvent;
 import org.hamster.dropbox.commands.DropboxCommand;
+import org.hamster.dropbox.commands.DropboxUploadCommand;
 import org.hamster.dropbox.models.AccountInfo;
 import org.hamster.dropbox.models.DropboxFile;
 import org.hamster.dropbox.utils.DropboxConstants;
@@ -147,6 +150,34 @@ public function getFile():void
 	});
 	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_FAULT, faultHandler);
 	fileopsCopyCmd.execute();		
+}
+
+public function putFile():void
+{
+	var fileReference:FileReference = new FileReference();
+	fileReference.addEventListener(Event.SELECT, function (evt:Event):void
+	{
+		var handler:Function = function (evt:Event):void
+		{
+			fileReference.removeEventListener(Event.COMPLETE, handler);
+			var putFileCmd:DropboxUploadCommand = client.putFile("abcd", fileReference);
+			putFileCmd.execute();
+		};
+		fileReference.addEventListener(Event.COMPLETE, handler);
+		fileReference.load();
+	});
+	fileReference.browse();
+}
+
+public function getFileMatadata():void
+{
+	var fileopsCopyCmd:DropboxCommand = client.metadata("abcd", 100, "", true);
+	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_RESULT, function (evt:CommandEvent):void
+	{
+		matadataLabel.text = fileopsCopyCmd.resultObject.toString();
+	});
+	fileopsCopyCmd.addEventListener(CommandEvent.COMMAND_FAULT, faultHandler);
+	fileopsCopyCmd.execute();	
 }
 
 
