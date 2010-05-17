@@ -18,28 +18,32 @@ package org.hamster.dropbox.commands
 	
 	public class DropboxCommand extends AbstractCommand
 	{
-		public var urlRequest:URLRequest;
-		public var resultType:Class;
-		public var params:Object;
+		private var _urlRequest:URLRequest;
+		private var _resultType:Class;
+		private var _params:Object;
 		
 		public var resultObject:Object;
 		
-		public function DropboxCommand()
+		public function DropboxCommand(urlRequest:URLRequest, resultType:Class = null, params:Object = null)
 		{
 			super();
+			
+			this._urlRequest = urlRequest;
+			this._resultType = resultType;
+			this._params = params;
 		}
 		
 		override public function execute():void
 		{
 			var urlLoader:URLLoader = new URLLoader();
-			if (resultType == null || resultType != ByteArray) {
+			if (_resultType == null || _resultType != ByteArray) {
 				urlLoader.dataFormat = URLLoaderDataFormat.TEXT;
 			} else {
 				urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
 			}
 			urlLoader.addEventListener(Event.COMPLETE, result);
 			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, fault);
-			urlLoader.load(urlRequest);
+			urlLoader.load(_urlRequest);
 		}
 		
 		override public function result(data:Object):void
@@ -50,12 +54,12 @@ package org.hamster.dropbox.commands
 			var resultData:Object = urlLoader.data;
 			
 			if (resultData is String) {
-				if (this.resultType != null) {
+				if (this._resultType != null) {
 					if (resultData == 'OK') {
 						super.result(data);
 					} else {
 						var obj:Object = new JSONDecoder(resultData.toString()).getValue();
-						this.resultObject = new this.resultType;
+						this.resultObject = new this._resultType;
 						if (obj != null) {
 							this.resultObject.decode(obj);
 						}

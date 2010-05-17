@@ -1,10 +1,12 @@
 package org.hamster.dropbox
 {
 	import flash.events.EventDispatcher;
+	import flash.net.FileReference;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestHeader;
 	import flash.net.URLRequestMethod;
+	import flash.utils.ByteArray;
 	
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
@@ -14,6 +16,7 @@ package org.hamster.dropbox
 	
 	import org.hamster.commands.events.CommandEvent;
 	import org.hamster.dropbox.commands.DropboxCommand;
+	import org.hamster.dropbox.commands.DropboxUploadCommand;
 	import org.hamster.dropbox.models.DropboxModelSupport;
 	import org.hamster.dropbox.test.DropboxUnitTest;
 	import org.iotashan.oauth.OAuthRequest;
@@ -39,6 +42,41 @@ package org.hamster.dropbox
 				port:int = 80
 			):DropboxCommand
 		{
+			var urlRequest:URLRequest = buildURLRequest(apiHost, url, auth, params, httpMethod, protocol, apiVersion, port);
+			var cmd:DropboxCommand = new DropboxCommand(urlRequest, resultType, params);
+			return cmd;
+		}
+		
+		public function buildUploadCommand(
+				uploadData:ByteArray,
+				fileName:String,
+				apiHost:String, 
+				url:String, 
+				auth:Authenticator,
+				params:Object = null,
+				httpMethod:String = URLRequestMethod.POST, 
+				protocol:String = DEFAULT_PROTOCOL,
+				apiVersion:int = API_VERSION,
+				port:int = 80
+			):DropboxUploadCommand
+		{
+			
+			var urlRequest:URLRequest = buildURLRequest(apiHost, url, auth, params, httpMethod, protocol, apiVersion, port);
+			var cmd:DropboxUploadCommand = new DropboxUploadCommand(urlRequest, uploadData, fileName);
+			return cmd;
+		}
+		
+		public function buildURLRequest(
+				apiHost:String, 
+				url:String, 
+				auth:Authenticator,
+				params:Object,
+				httpMethod:String = URLRequestMethod.POST, 
+				protocol:String = DEFAULT_PROTOCOL,
+				apiVersion:int = API_VERSION,
+				port:int = 80
+			):URLRequest
+		{
 			var fullURL:String = buildFullURL(apiHost, "/" + apiVersion + url, port, protocol);
 			
 			var urlRequest:URLRequest = new URLRequest();
@@ -54,47 +92,9 @@ package org.hamster.dropbox
 			var urlHeader:URLRequestHeader = oauthRequest.buildRequest(
 				OAuthSignatureMethod_HMAC_SHA1.getInstance(), OAuthRequest.RESULT_TYPE_HEADER);
 			urlRequest.requestHeaders = [urlHeader];
-			
-			var cmd:DropboxCommand = new DropboxCommand();
-			cmd.urlRequest = urlRequest;
-			cmd.resultType = resultType;
-			cmd.params = params;
-			return cmd;
+			return urlRequest;
 		}
 		
-		
-//		public static function buildStreamRequestCommand(
-//			resultType:Class,
-//			apiHost:String, 
-//			url:String, 
-//			auth:Authenticator,
-//			params:Object = null,
-//			httpMethod:String = URLRequestMethod.POST, 
-//			protocol:String = DEFAULT_PROTOCOL,
-//			apiVersion:int = API_VERSION,
-//			port:int = 80
-//		):DropboxCommand 
-//		{
-//			var fullURL:String = null;
-//			
-//			var urlRequest:URLRequest = new URLRequest();
-//			fullURL = buildFullURL(apiHost, "/" + apiVersion + url, port, protocol);
-//			urlRequest.method = httpMethod;
-//			urlRequest.url = fullURL;
-//			
-//			var oauthRequest:OAuthRequest = new OAuthRequest(
-//				httpMethod, fullURL, params, auth.consumer, auth.accessToken);
-//			var urlHeader:URLRequestHeader = oauthRequest.buildRequest(
-//				OAuthSignatureMethod_HMAC_SHA1.getInstance(), OAuthRequest.RESULT_TYPE_HEADER);
-//			var ddd:String = urlHeader.value;
-//			httpService.headers['Authorization'] = urlHeader.value;
-//			
-//			var cmd:DropboxCommand = new DropboxCommand();
-//			cmd.httpService = httpService;
-//			cmd.resultType = resultType;
-//			cmd.params = params;
-//			return cmd;			
-//		}
 		/**
 		 * Used internally to construct a complete URL to a given host, which can sometimes
 		 * be the "API host" or the "content host" depending on the type of call.
