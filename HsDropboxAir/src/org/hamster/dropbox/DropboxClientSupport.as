@@ -23,13 +23,45 @@ package org.hamster.dropbox
 	import org.iotashan.oauth.OAuthSignatureMethod_HMAC_SHA1;
 	import org.iotashan.utils.URLEncoding;
 
+	/**
+	 * Client support function, use to build DropboxCommand instance.
+	 * You should not create instance of this class manaually.
+	 *  
+	 * @author yinzeshuo
+	 * 
+	 */
 	public class DropboxClientSupport extends EventDispatcher
 	{
-		/** This is set by Dropbox to indicate what version of the API you are using. */
+		/** 
+		 * This is set by Dropbox to indicate what version of the API you are using. 
+		 */
 		public static const API_VERSION:int = 0;
+		
+		/**
+		 * default protocol is using http, which is non-secure but more faster.
+		 */
 		public static const DEFAULT_PROTOCOL:String = "http";
+		
+		/**
+		 * secure protocol, used in authenticator API, not sure whether Dropbox supports it.
+		 */
 		public static const SECURE_PROTOCOL:String = "https";
 		
+		/**
+		 * 
+		 *  
+		 * @param resultType
+		 * @param apiHost
+		 * @param url
+		 * @param auth
+		 * @param params
+		 * @param httpMethod
+		 * @param protocol
+		 * @param apiVersion
+		 * @param port
+		 * @return 
+		 * 
+		 */
 		public function buildRequestCommand(
 				resultType:Class,
 				apiHost:String, 
