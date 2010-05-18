@@ -15,34 +15,12 @@ package org.hamster.dropbox
 	import org.iotashan.utils.URLEncoding;
 
 	/**
-	* The DropboxClient is the core of the Java API, and is designed to be both instructive and
-	* easy to use.  If you find yourself needing to do more than what's provided, use the code here
-	* as a guide to implement your own alternatives.
-	*
-	* Before you can work with DropboxClient you'll need to configure an Authenticator with a
-	* working OAuth access token.  Typically this is done like this:
-	*
-	* <pre>
-	*  Map config = Authenticator.loadConfig("config/testing.json");
-	*  Authenticator auth = new Authenticator(config);
-	*  String url = auth.retrievesendRequestToken("http://mysite.com/theyaredone?blah=blah");
-	*  // bounce them to the URL
-	*  auth.retrieveAccessToken("");
-	*  String access_key = auth.getTokenKey();
-	*  String access_secret = auth.getTokenSecret();
-	*  // store those so that you can put them in config and not have to do the above again
-	* </pre>
-	*
-	* Once you've done the above, or configured a config Map with "access_token_key" and 
-	* "access_token_secret" parameters, then you can create a DropboxClient object to work with:
-	*
-	* <pre>
-	*  DropboxClient client = new DropboxClient(config, auth);
-	* </pre>
-	*
-	* And that should be it.  For every operation you need to catch the DropboxException, but that's
-	* the only additional complexity.
-	*/
+	 * 
+	 * 
+	 * 
+	 * @author yinzeshuo
+	 * 
+	 */
 	public class DropboxClient extends DropboxClientSupport
 	{
 		public static const SANDBOX:String = 'sandbox';
