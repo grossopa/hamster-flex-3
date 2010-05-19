@@ -44,6 +44,18 @@ package org.hamster.magic.common.models
 				this._black - blk, this._white - w, this._colorless - c);
 		}
 		
+		public function add(bMagic:Magic):void
+		{
+			this.addNumber(bMagic.red, bMagic.blue, bMagic.green, 
+				bMagic.black, bMagic.white, bMagic.colorless);
+		}
+		
+		public function addNumber(r:int, b:int, g:int, blk:int, w:int, c:int):void
+		{
+			this.setNumber(this._red + r, this._blue + b, this._green + g, 
+				this._black + blk, this._white + w, this._colorless + c);
+		}
+		
 		public function setNumber(r:int, b:int, g:int, blk:int, w:int, c:int):void
 		{
 			var colors:Array = new Array();
