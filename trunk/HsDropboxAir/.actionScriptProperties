@@ -19,6 +19,9 @@
     <application path="HsDropboxAirApp.mxml">
       <airExcludes/>
     </application>
+    <application path="HsDropboxAPIApp.mxml">
+      <airExcludes/>
+    </application>
   </applications>
   <modules/>
   <buildCSSFiles/>

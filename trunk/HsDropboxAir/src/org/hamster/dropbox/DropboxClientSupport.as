@@ -10,7 +10,6 @@ package org.hamster.dropbox
 	
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
-	import mx.rpc.http.HTTPService;
 	import mx.utils.ObjectUtil;
 	import mx.utils.URLUtil;
 	
@@ -48,19 +47,24 @@ package org.hamster.dropbox
 		public static const SECURE_PROTOCOL:String = "https";
 		
 		/**
-		 * 
+		 * Build an instance of DropboxCommand.  everything is ready and you can 
+		 * register CommandEvent.COMMAND_RESULT and CommandEvent.COMMAND_FAULT
+		 * event and then call execute() function to execute it.
 		 *  
-		 * @param resultType
-		 * @param apiHost
-		 * @param url
-		 * @param auth
-		 * @param params
-		 * @param httpMethod
-		 * @param protocol
-		 * @param apiVersion
-		 * @param port
-		 * @return 
-		 * 
+		 * @param resultType define result object type, if the value is null, then the 
+		 * 		             DropboxCommand.resultObject is null, otherwise a new instance
+		 *                   is created and decode(object:Object) function of resultObject
+		 *                   is called to set the value.
+		 * @param apiHost    define the host address.
+		 * @param url        sub URL of API.
+		 * @param auth       authenticator instance. the value must be set to generate
+		 *                   OAuth request header.
+		 * @param params     parameters, optional.
+		 * @param httpMethod "POST" or "GET", default is "POST"
+		 * @param protocol   "http" or "https", default is "http"
+		 * @param apiVersion API version, currently is 0.
+		 * @param port       default value is 80;
+		 * @return           an instance of DropboxCommand
 		 */
 		public function buildRequestCommand(
 				resultType:Class,
@@ -74,11 +78,39 @@ package org.hamster.dropbox
 				port:int = 80
 			):DropboxCommand
 		{
-			var urlRequest:URLRequest = buildURLRequest(apiHost, url, auth, params, httpMethod, protocol, apiVersion, port);
+			var urlRequest:URLRequest = buildURLRequest(apiHost, 
+				url, auth, params, httpMethod, protocol, apiVersion, port);
 			var cmd:DropboxCommand = new DropboxCommand(urlRequest, resultType, params);
 			return cmd;
 		}
 		
+		/**
+		 * Build a instance of dropbox upload command.
+		 * 
+		 * There is an issue that Dropbox API use multi-part/formdata
+		 * to upload file and it will check  every Content-Deposition is legal or not,
+		 * if not legal, then an exception is thrown from server. default Flash upload will
+		 * generate a Content-Deposition named "Upload" and with value "Submit Query"
+		 * which is not allowed by Dropbox API. So in order to solve the issue I had to
+		 * import a third-party class ru.inspirit.net.MultipartURLLoader and modified part of
+		 * its source code to remove illegal items.
+		 * 
+		 * So the API only support Flash Player 10 or higher because the FileReference
+		 * cannot be used directly.
+		 *  
+		 * @param uploadData The data to upload.
+		 * @param fileName   file name of upload file
+		 * @param apiHost    define the host address.
+		 * @param url        sub URL of API.
+		 * @param auth       authenticator instance. the value must be set to generate
+		 *                   OAuth request header.
+		 * @param params     parameters, optional.
+		 * @param httpMethod "POST" or "GET", default is "POST"
+		 * @param protocol   "http" or "https", default is "http"
+		 * @param apiVersion API version, currently is 0.
+		 * @param port       default value is 80.
+		 * @return           an instance of DropboxCommand
+		 */
 		public function buildUploadCommand(
 				uploadData:ByteArray,
 				fileName:String,
@@ -93,11 +125,25 @@ package org.hamster.dropbox
 			):DropboxUploadCommand
 		{
 			
-			var urlRequest:URLRequest = buildURLRequest(apiHost, url, auth, params, httpMethod, protocol, apiVersion, port);
+			var urlRequest:URLRequest = buildURLRequest(apiHost, 
+				url, auth, params, httpMethod, protocol, apiVersion, port);
 			var cmd:DropboxUploadCommand = new DropboxUploadCommand(urlRequest, uploadData, fileName);
 			return cmd;
 		}
 		
+		/**
+		 * build a URL request
+		 * 
+		 * @param apiHost
+		 * @param url
+		 * @param auth
+		 * @param params
+		 * @param httpMethod
+		 * @param protocol
+		 * @param apiVersion
+		 * @param port
+		 * @return 
+		 */
 		public function buildURLRequest(
 				apiHost:String, 
 				url:String, 

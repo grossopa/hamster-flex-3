@@ -8,6 +8,7 @@ import mx.rpc.events.ResultEvent;
 
 import org.hamster.commands.events.CommandEvent;
 import org.hamster.dropbox.Authenticator;
+import org.hamster.dropbox.DropboxAPI;
 import org.hamster.dropbox.DropboxClient;
 import org.hamster.dropbox.DropboxEvent;
 import org.hamster.dropbox.commands.DropboxCommand;
@@ -15,6 +16,7 @@ import org.hamster.dropbox.commands.DropboxUploadCommand;
 import org.hamster.dropbox.models.AccountInfo;
 import org.hamster.dropbox.models.DropboxFile;
 import org.hamster.dropbox.utils.DropboxConstants;
+import org.hamster.dropbox.utils.OAuthHelper;
 
 private var auth:Authenticator;
 private var client:DropboxClient;
@@ -53,6 +55,9 @@ private function appCompleteHandler():void
 	config["authorization_url"] = DropboxConstants.AUTHORIZATION_URL;
 	auth = new Authenticator(config);
 	client = new DropboxClient(config, auth);
+	
+	var ddd:OAuthHelper;
+	var dddd:DropboxAPI
 }
 
 public function getRequestToken():void

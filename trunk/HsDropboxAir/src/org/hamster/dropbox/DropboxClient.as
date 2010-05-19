@@ -63,7 +63,7 @@ package org.hamster.dropbox
 		 * 
 		 * @param statusInResponse
 		 * @param callback
-		 * @return dropboxCommand
+		 * @return DropboxCommand
 		 */
 		public function accountInfo(statusInResponse:Boolean, callback:String):DropboxCommand
 		{

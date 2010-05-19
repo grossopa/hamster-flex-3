@@ -51,7 +51,7 @@ package org.hamster.dropbox
 	 * via OAuth is :
 	 * 
 	 * 1. Prepare a consumer key/secret, which you can request it from 
-	 *    <a href="https://www.dropbox.com/">dropbox</a> web site;
+	 *    <a href="http://www.dropbox.com/">dropbox</a> web site;
 	 * 2. Call retrieveRequestToken() function to get a request token key/secret;
 	 * 3. Ask user to go getAuthorizeUrl() and allow your application to access;
 	 * 4. After user do that, let user trigger a "allowed" action and call
@@ -64,32 +64,22 @@ package org.hamster.dropbox
 	public class Authenticator extends EventDispatcher
 	{
 		/**
-		 * consumer key
-		 */
-		public var consumerKey:String = null;
-		
-		/**
-		 * consumer secret
-		 */
-		public var consumerSecret:String = null;
-		
-		/**
 		 * request token url, default value is DropboxConstants.REQUEST_TOKEN_URL
 		 * set from config['request_token_url'] object.
 		 */
-		public var requestTokenUrl:String = null;
+		private var _requestTokenUrl:String = null;
 		
 		/**
 		 * access token url, default value is DropboxConstants.ACCESS_TOKEN_URL
 		 * set from config['access_token_url'] object.
 		 */
-		public var accessTokenUrl:String = null;
+		private var _accessTokenUrl:String = null;
 		
 		/**
 		 * authorization url, default value is DropboxConstants.AUTHORIZATION_URL
 		 * set from config['authorization_url'] object.
 		 */
-		public var authorizationUrl:String = null;
+		private var _baseAuthUrl:String = null;
 		
 		private var _config:Object = null;
 		private var _consumer:OAuthConsumer;
@@ -110,8 +100,11 @@ package org.hamster.dropbox
 		public function Authenticator(config:Object)
 		{
 			this._config = config;
-			this.consumerKey 	= config["consumer_key"];
-			this.consumerSecret	= config["consumer_secret"];
+			if (config["consumer_key"] == null) {
+				throw new Error("consumer key should not be null!");
+			} else {
+				this._consumer = new OAuthConsumer(config["consumer_key"], config["consumer_secret"]);
+			}
 			
 			if (config['request_token_key'] != null) {
 				this._requestToken = new OAuthToken(config['request_token_key'], config['request_token_secret']);
@@ -121,11 +114,9 @@ package org.hamster.dropbox
 				this._accessToken = new OAuthToken(config['access_token_key'], config['access_token_secret']);
 			}
 			
-			this.requestTokenUrl 	= config["request_token_url"];
-			this.accessTokenUrl 	= config["access_token_url"];
-			this.authorizationUrl 	= config["authorization_url"];
-			
-			this._consumer = new OAuthConsumer(this.consumerKey, this.consumerSecret);
+			this._requestTokenUrl 	= config["request_token_url"];
+			this._accessTokenUrl 	= config["access_token_url"];
+			this._baseAuthUrl 		= config["authorization_url"];
 		}
 		
 		/**
@@ -138,7 +129,7 @@ package org.hamster.dropbox
 		public function retrieveRequestToken():void
 		{
 			var request:OAuthRequest = new OAuthRequest(OAuthRequest.HTTP_MEHTOD_POST, 
-				this.requestTokenUrl, null, this.consumer, null);
+				this._requestTokenUrl, null, this.consumer, null);
 			request.buildRequest(OAuthSignatureMethod_HMAC_SHA1.getInstance(), 
 				OAuthRequest.RESULT_TYPE_POST);
 			
@@ -162,7 +153,7 @@ package org.hamster.dropbox
 			if (_requestToken.isEmpty) {
 				this.requestTokenFaultHandler(null);
 			} else {
-				_authorizeUrl = this.authorizationUrl + '?oauth_token=' + this._requestToken.key;
+				_authorizeUrl = this._baseAuthUrl + '?oauth_token=' + this._requestToken.key;
 				
 				var disEvt:DropboxEvent = new DropboxEvent(DropboxEvent.REQUEST_TOKEN_RESULT);
 				disEvt.requestToken = this.requestToken;
@@ -191,7 +182,7 @@ package org.hamster.dropbox
 		public function retrieveAccessToken():void
 		{
 			var request:OAuthRequest = new OAuthRequest(OAuthRequest.HTTP_MEHTOD_GET, 
-				this.accessTokenUrl, null, this.consumer, this._requestToken);
+				this._accessTokenUrl, null, this.consumer, this._requestToken);
 			var paramString:String = request.buildRequest(OAuthSignatureMethod_HMAC_SHA1.getInstance(), 
 				OAuthRequest.RESULT_TYPE_POST);
 			
