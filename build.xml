@@ -61,7 +61,7 @@
   <!-- build -->
 	<target name="build-swc" depends="prepare">
 
-		<compc output="${APP_ROOT}/hamster.swc" include-classes="${evaFramework_classes}">
+		<compc output="${APP_ROOT}/hamster.swc" include-classes="${evaFramework_classes}" debug="false">
 			<source-path path-element="${APP_SRC}" />
 		</compc>
     
