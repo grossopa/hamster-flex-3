@@ -72,7 +72,7 @@ private function initProperties():void
 			payButton.addEventListener(MouseEvent.CLICK, payButtonClickHandler);
 			actionCtrlContainer.addChild(payButton);
 		}
-	} else if (CardLocation.getFieldArray().indexOf(this.playCard.getLocation()) > 0) {
+	} else if (CardLocation.getFieldArray().indexOf(this.playCard.getLocation()) >= 0) {
 		for each (var cardAction:CardAction in this.playCard.actions) {
 			var consoleTextBtn:ConsoleTextButton = new ConsoleTextButton();
 			consoleTextBtn.data = cardAction;

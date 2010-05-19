@@ -6,11 +6,12 @@ import org.hamster.magic.common.models.Player;
 import org.hamster.magic.common.models.utils.CardLocation;
 import org.hamster.magic.common.services.EventService;
 import org.hamster.magic.play.controls.buttons.ConsoleNavButton;
+import org.hamster.magic.play.controls.containers.WorkflowContainer;
 
 private var ES:EventService = EventService.getInstance();
 
 private var _player:Player;
-
+var ddd:WorkflowContainer
 public function set player(value:Player):void
 {
 	this._player = value;

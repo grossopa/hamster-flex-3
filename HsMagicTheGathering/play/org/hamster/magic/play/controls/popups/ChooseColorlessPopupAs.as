@@ -252,6 +252,9 @@ private function magicCircleClickHandler(evt:MouseEvent):void
 private function moveEffEndHandler(evt:EffectEvent):void
 {
 	if (this.selectedMagic.allCount == this.cardMagic.colorless) {
+		this.selectedMagic.addNumber(this.cardMagic.red, this.cardMagic.blue
+			,this.cardMagic.green, this.cardMagic.black, 
+			this.cardMagic.white, 0);
 		this.dispatchEvent(new PopupEvent(PopupEvent.APPLY_CLOSE));
 	}
 }

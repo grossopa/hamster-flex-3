@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+		   width="500" height="30" verticalAlign="middle"
+		   creationComplete="completeHandler()">
+	<mx:Script source="WorkflowContainerAs.as" />
+	<mx:Style>
+		Label {
+			fontSize: 20;
+			fontWeight: bold;
+			color : #DADADA;
+		}
+	</mx:Style>
+	<mx:Label text="开始阶段" />
+	<mx:Image source="@Embed(source='/org/hamster/magic/play/assets/workflow/go_next.png')" />
+	<mx:Label text="出牌阶段" />
+	<mx:Image source="@Embed(source='/org/hamster/magic/play/assets/workflow/go_next.png')" />
+	<mx:Label text="战斗阶段" />
+	<mx:Image source="@Embed(source='/org/hamster/magic/play/assets/workflow/go_next.png')" />
+	<mx:Label text="结束阶段" />
+	<mx:Image source="@Embed(source='/org/hamster/magic/play/assets/workflow/go_next.png')" />
+
+</mx:HBox>

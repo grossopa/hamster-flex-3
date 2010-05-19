@@ -1,9 +1,9 @@
 // ActionScript file
 import flash.events.MouseEvent;
 
+import org.hamster.magic.common.controls.items.MagicCircleItem;
 import org.hamster.magic.common.events.MagicEvent;
 import org.hamster.magic.common.models.Magic;
-import org.hamster.magic.common.controls.items.MagicCircleItem;
 
 private var _magic:Magic = new Magic();
 
@@ -54,11 +54,13 @@ private function magicChangeHandler(evt:MagicEvent):void
 private function registerListener(magic:Magic):void
 {
 	magic.addEventListener(MagicEvent.CHANGE, magicChangeHandler);
+	magic.addEventListener(MagicEvent.MULTI_CHANGE, magicChangeHandler);
 }
 
 private function removeListener(magic:Magic):void
 {
 	magic.removeEventListener(MagicEvent.CHANGE, magicChangeHandler);
+	magic.addEventListener(MagicEvent.MULTI_CHANGE, magicChangeHandler);
 }
 
 private function itemClickHandler(evt:MouseEvent):void
