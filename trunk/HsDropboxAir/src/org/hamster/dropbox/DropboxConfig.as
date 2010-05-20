@@ -10,6 +10,8 @@ package org.hamster.dropbox
 		public static const REQUEST_TOKEN_URL:String = 'http://api.dropbox.com/0/oauth/request_token';
 		public static const ACCESS_TOKEN_URL:String = 'http://api.dropbox.com/0/oauth/access_token';
 		public static const AUTHORIZATION_URL:String = 'http://api.dropbox.com/0/oauth/authorize';
+		public static const SANDBOX:String = 'sandbox';
+		public static const DROPBOX:String = 'dropbox';
 		
 		public var consumerKey:String;
 		public var consumerSecret:String;
@@ -23,7 +25,8 @@ package org.hamster.dropbox
 		public var port:int;
 		public var requestTokenUrl:String;
 		public var accessTokenUrl:String;
-		public var authorzationUrl:String;
+		public var authorizationUrl:String;
+		public var box:String;
 		
 		public function DropboxConfig(
 			consumerKey:String = "",consumerSecret:String = "",
@@ -33,7 +36,8 @@ package org.hamster.dropbox
 			contentServer:String = CONETENT_SERVER, port:int = PORT,
 			requestTokenUrl:String = REQUEST_TOKEN_URL, 
 			accessTokenUrl:String = ACCESS_TOKEN_URL,
-			authorizationUrl:String = AUTHORIZATION_URL)
+			authorizationUrl:String = AUTHORIZATION_URL,
+			box:String = SANDBOX)
 		{
 			this.setConsumer(consumerKey, consumerSecret);
 			this.setRequestToken(requestTokenKey, requestTokenSecret);
@@ -44,7 +48,7 @@ package org.hamster.dropbox
 			this.port = port;
 			this.requestTokenUrl = requestTokenUrl;
 			this.accessTokenUrl = accessTokenUrl;
-			this.authorzationUrl = authorizationUrl;
+			this.authorizationUrl = authorizationUrl;
 		}
 		
 		public function setConsumer(key:String, secret:String):void

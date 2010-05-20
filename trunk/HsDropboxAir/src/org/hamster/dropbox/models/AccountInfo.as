@@ -29,5 +29,14 @@ package org.hamster.dropbox.models
 			this.quotaInfo_shared = quotaInfo['shared'];
 		}
 		
+		override public function toString():String 
+		{
+			return "AccountInfo [country=" + country + ", displayName="
+				+ displayName + ", quotaInfo_normal=" + quotaInfo_normal
+				+ ", quotaInfo_quota=" + quotaInfo_quota
+				+ ", quotaInfo_shared=" + quotaInfo_shared + ", uid=" + uid
+				+ "]";
+		}
+		
 	}
 }

@@ -16,9 +16,6 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="HsDropboxAirApp.mxml">
-      <airExcludes/>
-    </application>
     <application path="HsDropboxAPIApp.mxml">
       <airExcludes/>
     </application>
