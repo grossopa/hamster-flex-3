@@ -22,8 +22,8 @@ package org.hamster.dropbox.utils
 													 params:Object, 
 													 consumerKey:String,
 													 consumerSecret:String,
-													 tokenKey:String,
-													 tokenSecret:String,
+													 tokenKey:String = null,
+													 tokenSecret:String = null,
 													 httpMethod:String = URLRequestMethod.GET,
 													 headerRealm:String = "",
 													 signMethod:String = "HMAC-SHA1"):URLRequestHeader
@@ -69,8 +69,8 @@ package org.hamster.dropbox.utils
 										   params:Object, 
 										   consumerKey:String,
 										   consumerSecret:String,
-										   tokenKey:String,
-										   tokenSecret:String,
+										   tokenKey:String = null,
+										   tokenSecret:String = null,
 										   httpMethod:String = URLRequestMethod.GET,
 										   signMethod:String = "HMAC-SHA1"):Object
 		{
@@ -168,6 +168,35 @@ package org.hamster.dropbox.utils
 			// return them like a querystring
 			ret += encodeURIComponent(aParams.join("&"));
 			return ret;
+		}
+		
+		/**
+		 *
+		 * @param tokenResponse Result from a getRequest/AccessToken call.
+		 * @return OAuthToken containing key/secret of the token request response.
+		 *
+		 * Inspired by http://github.com/sekimura/as3-misc/blob/master/twitter-oauth/test2.mxml
+		 *
+		 */
+		public static function getTokenFromResponse(tokenResponse:String):Object {
+			var result:Object = new Object();
+			var params:Array = tokenResponse.split("&");
+			for each (var param:String in params ) {
+				var paramNameValue:Array = param.split("=");
+				if ( paramNameValue.length == 2 ) {
+					if ( paramNameValue[0] == "oauth_token" ) {
+						result.key = paramNameValue[1];
+					} else if ( paramNameValue[0] == "oauth_token_secret" ) {
+						result.secret = paramNameValue[1];
+					}
+				}
+			}
+			
+			// check if key and secret are set otherwise return null
+			if ( result.key != null && result.secret != null ) {
+				return result;
+			}
+			return null;
 		}
 	}
 }
