@@ -1,20 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- mySimpleBuild.xml -->
-<project name="My App Builder" basedir="." default="build-swc">
+<project name="My App Builder" basedir="." default="swc">
 
-  <!-- properties -->
-  <property environment="env" />
-	<property name="FLEX_HOME" value="${env.FLEX_HOME}"/>
-	<property name="APP_ROOT" value="${basedir}/ant-bin"/>
-	<property name="APP_SRC" value="${APP_ROOT}/src"/>
-
-  <!-- time stamp -->
-	<tstamp>
-		<format property="BUILD_TIME" pattern="MM/dd/yyyy HH:mm" locale="en"/>
-	</tstamp>
-
-  <!-- flex ant task lib -->
-  <taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+  <import file="properties.xml" />
 
   <!-- clean -->
   <target name="clean">
@@ -57,15 +45,85 @@
       </mapper>
     </pathconvert>
 	</target>
+  
+  <!-- Confusion codes
+  <target name="confusion" depends="prepare">
+    <echo message="Start confusing code..." />
+    <for param="file">
+      <path>
+        <fileset dir="${APP_ROOT}">
+          <include name="**/*.as" />
+        </fileset>
+      </path>
+      <sequential>
+        <confusion fileName="@{file}" />
+      </sequential>
+    </for>
+    <echo message="Code confusion completed." />
+  </target> -->
 
   <!-- build -->
-	<target name="build-swc" depends="prepare">
+	<target name="swc" depends="prepare">
 
-		<compc output="${APP_ROOT}/hamster.swc" include-classes="${evaFramework_classes}" debug="false">
+		<compc output="${APP_ROOT}/${swc.name}" include-classes="${evaFramework_classes}" debug="false">
 			<source-path path-element="${APP_SRC}" />
+      <compiler.external-library-path dir="${FLEX_HOME}/frameworks">
+        <include name="**/*.swc" />
+      </compiler.external-library-path>
+      <!-- 添加项目中的SWC包,请注意这里是外部
+      <compiler.external-library-path dir="${dist.home.libs}">
+        <include name="**/*.swc" />
+      </compiler.external-library-path> -->
 		</compc>
     
 	</target>
+  
+    <target name="optimize-swc" depends="swc">
+
+    <macrodef name="optimize-rsl">
+      <attribute name="rsl-dir" />
+      <attribute name="swc-path" />
+      <sequential>
+        <propertyregex override="yes" property="swc-name" input="@{swc-path}" regexp="bin\\(.*).swc" select="\1" />
+        <propertyregex override="yes" property="swc-dir" input="@{swc-path}" regexp="(.*)\\(.*).swc" select="\1" />
+
+        <unzip src="${APP_ROOT}/${swc.name}" dest="@{rsl-dir}">
+          <patternset>
+            <include name="library.swf" />
+          </patternset>
+        </unzip>
+        <!-- 优化SWF文件 -->
+        <java jar="${FLEX_HOME}\lib\optimizer.jar" fork="true" failonerror="true">
+          <jvmarg line="-ea -DAS3 -DAVMPLUS -Dflexlib=${FLEX_HOME}\frameworks -Xms32m -Xmx384m -Dsun.io.useCanonCaches=false" />
+          <arg line="'@{rsl-dir}/library.swf' --output '@{rsl-dir}/${swc-name}.swf'
+      --keep-as3-metadata='Bindable,Managed,ChangeEvent,NonCommittingChangeEvent,Transient,RemoteClass' " />
+        </java>
+        <!-- 重建描述文件 -->
+        <java jar="${FLEX_HOME}/lib/digest.jar" fork="true" failonerror="true">
+          <jvmarg line="-ea -DAS3 -DAVMPLUS -Xms32m -Xmx384m -Dsun.io.useCanonCaches=false" />
+          <arg line="--digest.rsl-file  @{rsl-dir}/${swc-name}.swf --digest.swc-path  @{rsl-dir}/${swc-name}.swc" />
+        </java>
+        <!-- 清除解压出来的文件 -->
+        <delete>
+          <fileset dir="@{rsl-dir}" includes="*.swf" />
+        </delete>
+      </sequential>
+    </macrodef>
+
+    <!-- 优化所有SWC文件 -->
+    <for param="file">
+      <path>
+        <fileset dir="${dist.home.bin}">
+          <include name="*.swc" />
+        </fileset>
+      </path>
+      <sequential>
+        <!-- 优化SWC -->
+        <optimize-rsl rsl-dir="${dist.home.bin}" swc-path="@{file}" />
+        <echo message="optimize @{file} success~!" />
+      </sequential>
+    </for>
+  </target>
   
   <!-- build doc -->
   <target name="doc" depends="prepare">

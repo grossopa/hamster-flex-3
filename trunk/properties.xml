@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Hamster Build Configuration">
+  <!-- properties -->
+  <property environment="env" />
+	<property name="FLEX_HOME" value="${env.FLEX_HOME}"/>
+  <property name="FLEX_ANT_LIB" value="${env.FLEX_HOME}/ant/lib"/>
+	<property name="APP_ROOT" value="${basedir}/ant-bin"/>
+	<property name="APP_SRC" value="${APP_ROOT}/src"/>
+
+  <!-- time stamp -->
+	<tstamp>
+		<format property="BUILD_TIME" pattern="MM/dd/yyyy HH:mm" locale="en"/>
+	</tstamp>
+  
+  <path id="flex.ant.classpath">
+    <fileset dir="${FLEX_ANT_LIB}">
+      <include name="*.jar" />
+    </fileset>
+  </path>
+
+  <!-- flex ant task lib -->
+  <taskdef resource="flexTasks.tasks" classpathref="flex.ant.classpath" />
+  <taskdef resource="confusion.tasks" classpathref="flex.ant.classpath" />
+  <taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="flex.ant.classpath" />
+  
+  <property name="project.name" value="hamster" />
+  <property name="swc.name" value="${project.name}.swc" />
+</project>

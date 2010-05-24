@@ -1,0 +1,218 @@
+<project name="Flex Ant Builder Template" basedir=".">
+  <!-- =================================================================== -->
+  <!-- Flex Ant Builder SSO Project                 -->
+  <!-- =================================================================== -->
+
+  <!-- 定义ant存放位置  -->
+  <property name="ant.lib.dir" value="E:\FlexSDK\3.2.0/ant/lib" />
+  <!-- 定义Flex SDK存放位置  -->
+  <property name="FLEX_HOME" value="E:\FlexSDK\3.2.0" />
+
+  <!-- 初始化时间格式,以便使用 -->
+  <tstamp>
+    <format property="TODAY" pattern="yy.mm.dd" />
+  </tstamp>
+
+  <!-- 导入ant支持包 -->
+  <path id="ant.classpath">
+    <fileset dir="${ant.lib.dir}">
+      <include name="*.jar" />
+    </fileset>
+  </path>
+
+  <!-- 定义目标编译结果路径 -->
+  <property name="dist.home" value="./dist" />
+  <property name="dist.home.src" value="./dist/src" />
+  <property name="dist.home.libs" value="./dist/libs" />
+  <property name="dist.home.bin" value="./dist/bin" />
+
+  <!-- 定义源码路径  -->
+  <property name="project.home" value="./" />
+  <property name="project.home.src" value="./src" />
+  <property name="project.home.libs" value="./libs" />
+
+
+  <!-- =================================================================== -->
+  <!-- 初始化                   -->
+  <!--     清除dist目录; 将源码复制过去.                    -->
+  <!-- =================================================================== -->
+  <target name="init">
+    <taskdef resource="flexTasks.tasks" classpathref="ant.classpath" />
+    <taskdef resource="confusion.tasks" classpathref="ant.classpath" />
+    <taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="ant.classpath" />
+
+    <echo message="Flex SDK Home: ${FLEX_HOME}" />
+    <delete dir="${dist.home}" />
+    <mkdir dir="${dist.home}" />
+    <copy todir="${dist.home.src}">
+      <fileset dir="${project.home.src}" />
+    </copy>
+
+    <copy todir="${dist.home.libs}">
+      <fileset dir="${project.home.libs}" />
+    </copy>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- 混淆代码                     -->
+  <!-- =================================================================== -->
+  <target name="confusion" depends="init">
+    <echo message="star confusion code..." />
+    <for param="file">
+      <path>
+        <fileset dir="${dist.home.src}">
+          <include name="**/*.as" />
+        </fileset>
+      </path>
+      <sequential>
+        <confusion fileName="@{file}" />
+        <echo message="@{file} is confusioned!!" />
+      </sequential>
+    </for>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- 编译Flex Library Project项目                      -->
+  <!-- =================================================================== -->
+  <target name="compileFLP" depends="confusion">
+    <property name="project.name" value="Comman" />
+    <echo message="star complie Flex Library Project..." />
+    <echo message="build ${dist.home.bin}/${project.name}.swc" />
+
+    <compc output="${dist.home.bin}/${project.name}.swc" debug="false" incremental="true">
+      <!-- 指定Comman项目的源码目录 -->
+      <source-path path-element="${dist.home.src}" />
+      <!-- 指定编译的文件列表 -->
+      <include-sources dir="${dist.home.src}">
+        <include name="**/*.as" />
+      </include-sources>
+      <!-- 将Flex SDK 作为外部库进行引用 -->
+      <compiler.external-library-path dir="${FLEX_HOME}/frameworks">
+        <include name="**/*.swc" />
+      </compiler.external-library-path>
+      <!-- 添加项目中的SWC包,请注意这里是外部 -->
+      <compiler.external-library-path dir="${dist.home.libs}">
+        <include name="**/*.swc" />
+      </compiler.external-library-path>
+    </compc>
+    <!-- 删除缓存文件 -->
+    <delete>
+      <fileset dir="${dist.home.bin}" includes="*.cache" />
+    </delete>
+    <echo message="complier Flex Library Project finished!" />
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- 优化SWC文件                     -->
+  <!-- =================================================================== -->
+  <target name="optimizeSWC" depends="compileFLP">
+    <echo message="star optimize SWC..." />
+
+    <!-- 定义一个优化操作模块 -->
+    <macrodef name="optimize-rsl">
+      <attribute name="rsl-dir" />
+      <attribute name="swc-path" />
+      <sequential>
+        <propertyregex override="yes" property="swc-name" input="@{swc-path}" regexp="bin\\(.*).swc" select="\1" />
+        <propertyregex override="yes" property="swc-dir" input="@{swc-path}" regexp="(.*)\\(.*).swc" select="\1" />
+
+        <!-- 从SWC中解压出SWF文件 -->
+        <unzip src="${swc-dir}/${swc-name}.swc" dest="@{rsl-dir}">
+          <patternset>
+            <include name="library.swf" />
+          </patternset>
+        </unzip>
+        <!-- 优化SWF文件 -->
+        <java jar="${FLEX_HOME}\lib\optimizer.jar" fork="true" failonerror="true">
+          <jvmarg line="-ea -DAS3 -DAVMPLUS -Dflexlib=${FLEX_HOME}\frameworks -Xms32m -Xmx384m -Dsun.io.useCanonCaches=false" />
+          <arg line="'@{rsl-dir}/library.swf' --output '@{rsl-dir}/${swc-name}.swf'
+      --keep-as3-metadata='Bindable,Managed,ChangeEvent,NonCommittingChangeEvent,Transient,RemoteClass' " />
+        </java>
+        <!-- 重建描述文件 -->
+        <java jar="${FLEX_HOME}/lib/digest.jar" fork="true" failonerror="true">
+          <jvmarg line="-ea -DAS3 -DAVMPLUS -Xms32m -Xmx384m -Dsun.io.useCanonCaches=false" />
+          <arg line="--digest.rsl-file  @{rsl-dir}/${swc-name}.swf --digest.swc-path  @{rsl-dir}/${swc-name}.swc" />
+        </java>
+        <!-- 清除解压出来的文件 -->
+        <delete>
+          <fileset dir="@{rsl-dir}" includes="*.swf" />
+        </delete>
+      </sequential>
+    </macrodef>
+
+    <!-- 优化所有SWC文件 -->
+    <for param="file">
+      <path>
+        <fileset dir="${dist.home.bin}">
+          <include name="*.swc" />
+        </fileset>
+      </path>
+      <sequential>
+        <!-- 优化SWC -->
+        <optimize-rsl rsl-dir="${dist.home.bin}" swc-path="@{file}" />
+        <echo message="optimize @{file} success~!" />
+      </sequential>
+    </for>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- 编译  Flex Action Script Project 项目                  -->
+  <!-- =================================================================== -->
+  <target name="compileASP" depends="confusion">
+    <property name="compile.name" value="AntASP" />
+    <echo message="start compile ${dist.home.src}/${compile.name}.as" />
+    <mxmlc file="${dist.home.src}/${compile.name}.as" output="${dist.home.bin}/${compile.name}.swf" actionscript-file-encoding="UTF-8" keep-generated-actionscript="false" incremental="true">
+      <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+      <source-path path-element="${FLEX_HOME}/frameworks" />
+      <source-path path-element="${dist.home.src}" />
+      <compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+        <include name="libs" />
+        <include name="../bundles/{locale}" />
+      </compiler.library-path>
+    </mxmlc>
+    <echo message="clear cache file." />
+    <delete>
+      <fileset dir="${dist.home.bin}" includes="*.cache" />
+    </delete>
+    <echo message="compile ${dist.home.src}/${compile.name}.as  ===>>  ${dist.home.bin}/${compile.name}.swf success!" />
+  </target>
+  <!-- =================================================================== -->
+  <!-- 编译Flex Project 项目                          -->
+  <!-- =================================================================== -->
+  <target name="compileFP" depends="confusion">
+    <echo message="start compile Flex Project..." />
+    <for param="file">
+      <path>
+        <fileset dir="${dist.home.src}">
+          <include name="**/*.mxml" />
+        </fileset>
+      </path>
+      <sequential>
+        <!-- 通过正则表达式取出modules中的模块文件,进行批量编译~! -->
+        <propertyregex override="yes" property="compile.target.name" input="@{file}" regexp="(.*)src(.*)(mxml)" replace="\1bin\2swf" />
+        <mxmlc file="@{file}" output="${compile.target.name}" debug="false" incremental="true">
+          <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+          <static-link-runtime-shared-libraries>false</static-link-runtime-shared-libraries>
+          <source-path path-element="${dist.home.src}" />
+
+          <runtime-shared-library-path path-element="${FLEX_HOME}/frameworks/libs/framework.swc">
+            <url rsl-url="../framework_3.2.0.3958.swz" />
+            <url rsl-url="../framework_3.2.0.3958.swf" />
+          </runtime-shared-library-path>
+
+
+          <!-- 指定外部依赖库文件,这些库文件将不会编译进目标SWF中 -->
+          <compiler.external-library-path dir="${dist.home.libs}">
+            <include name="**/*.swc" />
+          </compiler.external-library-path>
+
+        </mxmlc>
+        <!-- 清除缓存文件 -->
+        <delete file="${compile.target.name}.cache" />
+        <echo message="Compiled @{file} =====>>   ${compile.target.name}" />
+        <echo message=" " />
+      </sequential>
+    </for>
+
+  </target>
+</project>
