@@ -2,6 +2,7 @@
 <!-- mySimpleBuild.xml -->
 <project name="My App Builder" basedir="." default="swc">
 
+  <!-- all properties are defined here -->
   <import file="properties.xml" />
 
   <!-- clean -->
@@ -18,6 +19,7 @@
     
     <mkdir dir="${APP_ROOT}" />
     <mkdir dir="${APP_ROOT}/src" />
+    <mkdir dir="${APP_ROOT}/${SWC_LIB}" />
     
 		<copy todir="${APP_SRC}">
 			<!--<fileset dir="HsEffects/src" excludes="*.mxml, *.as" includes="**/*" />
@@ -65,65 +67,24 @@
   <!-- build -->
 	<target name="swc" depends="prepare">
 
-		<compc output="${APP_ROOT}/${swc.name}" include-classes="${evaFramework_classes}" debug="false">
+		<compc output="${APP_ROOT}/${swc.name}" 
+      include-classes="${evaFramework_classes}" 
+      actionscript-file-encoding="UTF-8" 
+      keep-generated-actionscript="true" 
+      link-report="hamster-framework-build.xml" 
+      incremental="true"
+      debug="false" 
+      optimize="true">
 			<source-path path-element="${APP_SRC}" />
       <compiler.external-library-path dir="${FLEX_HOME}/frameworks">
         <include name="**/*.swc" />
       </compiler.external-library-path>
-      <!-- 添加项目中的SWC包,请注意这里是外部
-      <compiler.external-library-path dir="${dist.home.libs}">
+      <compiler.external-library-path dir="${APP_ROOT}/${SWC_LIB}">
         <include name="**/*.swc" />
-      </compiler.external-library-path> -->
+      </compiler.external-library-path>
 		</compc>
     
 	</target>
-  
-    <target name="optimize-swc" depends="swc">
-
-    <macrodef name="optimize-rsl">
-      <attribute name="rsl-dir" />
-      <attribute name="swc-path" />
-      <sequential>
-        <propertyregex override="yes" property="swc-name" input="@{swc-path}" regexp="bin\\(.*).swc" select="\1" />
-        <propertyregex override="yes" property="swc-dir" input="@{swc-path}" regexp="(.*)\\(.*).swc" select="\1" />
-
-        <unzip src="${APP_ROOT}/${swc.name}" dest="@{rsl-dir}">
-          <patternset>
-            <include name="library.swf" />
-          </patternset>
-        </unzip>
-        <!-- 优化SWF文件 -->
-        <java jar="${FLEX_HOME}\lib\optimizer.jar" fork="true" failonerror="true">
-          <jvmarg line="-ea -DAS3 -DAVMPLUS -Dflexlib=${FLEX_HOME}\frameworks -Xms32m -Xmx384m -Dsun.io.useCanonCaches=false" />
-          <arg line="'@{rsl-dir}/library.swf' --output '@{rsl-dir}/${swc-name}.swf'
-      --keep-as3-metadata='Bindable,Managed,ChangeEvent,NonCommittingChangeEvent,Transient,RemoteClass' " />
-        </java>
-        <!-- 重建描述文件 -->
-        <java jar="${FLEX_HOME}/lib/digest.jar" fork="true" failonerror="true">
-          <jvmarg line="-ea -DAS3 -DAVMPLUS -Xms32m -Xmx384m -Dsun.io.useCanonCaches=false" />
-          <arg line="--digest.rsl-file  @{rsl-dir}/${swc-name}.swf --digest.swc-path  @{rsl-dir}/${swc-name}.swc" />
-        </java>
-        <!-- 清除解压出来的文件 -->
-        <delete>
-          <fileset dir="@{rsl-dir}" includes="*.swf" />
-        </delete>
-      </sequential>
-    </macrodef>
-
-    <!-- 优化所有SWC文件 -->
-    <for param="file">
-      <path>
-        <fileset dir="${dist.home.bin}">
-          <include name="*.swc" />
-        </fileset>
-      </path>
-      <sequential>
-        <!-- 优化SWC -->
-        <optimize-rsl rsl-dir="${dist.home.bin}" swc-path="@{file}" />
-        <echo message="optimize @{file} success~!" />
-      </sequential>
-    </for>
-  </target>
   
   <!-- build doc -->
   <target name="doc" depends="prepare">
