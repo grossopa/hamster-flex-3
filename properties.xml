@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project name="Hamster Build Configuration">
+<project name="Hamster Build Configuration" basedir=".">
   <!-- properties -->
   <property environment="env" />
 	<property name="FLEX_HOME" value="${env.FLEX_HOME}"/>
   <property name="FLEX_ANT_LIB" value="${env.FLEX_HOME}/ant/lib"/>
+  <property name="ANT_CONTRIB_LIB" value="bat/ant-lib"/>
 	<property name="APP_ROOT" value="${basedir}/ant-bin"/>
 	<property name="APP_SRC" value="${APP_ROOT}/src"/>
+  
+  <property name="SWC_LIB" value="libs" />
 
   <!-- time stamp -->
 	<tstamp>
@@ -17,12 +20,23 @@
       <include name="*.jar" />
     </fileset>
   </path>
+  
+  <path id="ant-contrib.classpath">
+    <fileset dir="${ANT_CONTRIB_LIB}">
+      <include name="*.jar" />
+    </fileset>
+  </path>
 
   <!-- flex ant task lib -->
   <taskdef resource="flexTasks.tasks" classpathref="flex.ant.classpath" />
-  <taskdef resource="confusion.tasks" classpathref="flex.ant.classpath" />
-  <taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="flex.ant.classpath" />
+  <!--<taskdef resource="confusion.tasks" classpathref="flex.ant.classpath" />-->
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+    <classpath>
+      <pathelement location="${ANT_CONTRIB_LIB}/ant-contrib-1.0b3.jar"/>
+    </classpath>
+  </taskdef>
   
   <property name="project.name" value="hamster" />
-  <property name="swc.name" value="${project.name}.swc" />
+  <property name="project.version" value="0.0.1a" />
+  <property name="swc.name" value="${project.name}-${project.version}.swc" />
 </project>
