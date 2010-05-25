@@ -3,6 +3,7 @@ package org.hamster.gamesaver.services
 	import flash.filesystem.File;
 	
 	import mx.collections.ArrayCollection;
+	import mx.collections.Sort;
 	import mx.resources.ResourceManager;
 	
 	import org.hamster.gamesaver.models.Game;
@@ -96,7 +97,8 @@ package org.hamster.gamesaver.services
 			try {
 				copyPath = new File(xml.attribute("copy-path"));
 			} catch (e:Error) {
-				
+				var ddd:ArrayCollection;
+				var dddd:Sort;
 			}
 			this.zipEnabled = xml.attribute("zip-enabled") as String == "true";
 			var gamesXML:XML = xml.child("games")[0];

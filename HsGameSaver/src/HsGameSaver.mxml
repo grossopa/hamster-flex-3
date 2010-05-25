@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
-	width="620" height="480" showStatusBar="false"
+	width="620" height="600" showStatusBar="false"
 	verticalScrollPolicy="off" horizontalScrollPolicy="off"
 	applicationComplete="completeHandler()" xmlns:views="org.hamster.gamesaver.controls.views.*"
-	backgroundColor="#EEEEEE" xmlns:units="org.hamster.gamesaver.controls.units.*" xmlns:containers="org.hamster.gamesaver.controls.containers.*">
+	backgroundColor="#EEEEEE" xmlns:units="org.hamster.gamesaver.controls.units.*" 
+	xmlns:containers="org.hamster.gamesaver.controls.containers.*">
 	<mx:Metadata>
 		[ResourceBundle("main")]
 	</mx:Metadata>

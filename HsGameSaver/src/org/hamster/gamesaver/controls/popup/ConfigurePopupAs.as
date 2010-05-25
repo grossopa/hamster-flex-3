@@ -1,5 +1,6 @@
 // ActionScript file
 import flash.events.Event;
+import flash.filesystem.File;
 
 import mx.managers.PopUpManager;
 
@@ -37,7 +38,14 @@ private function copyPathSelectHandler(evt:Event):void
 private function closeSelfHandler():void
 {
 	if (!this.targetCopyPathInput.checkFilePath()) {
-		warningButton.visible = true;
+		var file:File = new File(this.targetCopyPathInput.text);
+		file.createDirectory();
+		if (!this.targetCopyPathInput.checkFilePath()) {
+			warningButton.visible = true;
+		} else {
+			warningButton.visible = false;
+			PopUpManager.removePopUp(this);
+		}	
 	} else {
 		PopUpManager.removePopUp(this);
 	}
