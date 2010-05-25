@@ -1,4 +1,7 @@
 // ActionScript file
+import mx.containers.Canvas;
+import mx.core.Application;
+import mx.core.Container;
 import mx.core.UIComponent;
 import mx.managers.PopUpManager;
 
@@ -131,6 +134,12 @@ private function zipFailedHandler(evt:CommandEvent):void
 private function helpHandler():void
 {
 	GlobalUtil.showHelperPanel();
+}
+
+private function expandHandler():void
+{
+	mainContainer.width = 1220;
+	Container(Application.application).width = 1220;
 }
 
 public function applyChanges():Boolean

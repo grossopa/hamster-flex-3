@@ -2,9 +2,9 @@
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="600" height="140"
 	verticalScrollPolicy="off" horizontalScrollPolicy="off"
 	creationComplete="completeHandler()"
-	backgroundImage="@Embed(source='/org/hamster/gamesaver/assets/game_unit/background.png')"
 	xmlns:base="org.hamster.gamesaver.controls.base.*" xmlns:buttons="org.hamster.gamesaver.controls.buttons.*" xmlns:units="org.hamster.gamesaver.controls.units.*">
 	<mx:Script source="GameUnitAs.as" />
+	<!-- backgroundImage="@Embed(source='/org/hamster/gamesaver/assets/game_unit/background.png')" -->
 	<mx:Form color="white" width="571" verticalGap="4" 
 		verticalScrollPolicy="off" horizontalScrollPolicy="off"
 		paddingTop="0" paddingLeft="0" paddingRight="0" paddingBottom="0" 
