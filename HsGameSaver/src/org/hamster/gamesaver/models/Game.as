@@ -8,9 +8,11 @@ package org.hamster.gamesaver.models
 		{
 		}
 		
+		public var name:String;
 		public var path:String;
 		public var savePath:String;
-		public var name:String;
+		public var imagePath:String;
+		
 		
 		public var includes:Array = new Array();
 		public var excludes:Array = new Array();
@@ -42,7 +44,7 @@ package org.hamster.gamesaver.models
 		public function encodeXML():XML
 		{
 			var xml:XML = new XML(<game name={this.name} save-path={this.savePath} 
-					path={this.path} include-sub-folder={this.includeSubFolder}></game>);
+					path={this.path} include-sub-folder={this.includeSubFolder} image-path={this.imagePath}></game>);
 			var includesXML:XML = new XML(<includes></includes>);
 			var s:String;
 			for each (s in includes) {
@@ -61,6 +63,7 @@ package org.hamster.gamesaver.models
 		{
 			this.path = xml.attribute("path");
 			this.savePath = xml.attribute("save-path");
+			this.imagePath = xml.attribute("image-path");
 			this.name = xml.attribute("name");
 			 
 			this.includeSubFolder = xml.attribute("include-sub-folder") == "true";

@@ -138,8 +138,8 @@ private function helpHandler():void
 
 private function expandHandler():void
 {
-	mainContainer.width = 1220;
-	Container(Application.application).width = 1220;
+	mainContainer.width = 1225;
+	Container(Application.application).width = 1225;
 }
 
 public function applyChanges():Boolean

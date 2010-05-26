@@ -9,11 +9,15 @@ import org.hamster.gamesaver.models.Game;
 import org.hamster.gamesaver.services.DataService;
 import org.hamster.gamesaver.utils.FileUtil;
 
+[Embed(source='/org/hamster/gamesaver/assets/images/background/default.png')]
+private var DEFAULT_BACKGROUNDIMAGE:Class;
+
 private static var DS:DataService = DataService.getInstance();
 
 private var _game:Game;
 private var _gameChanged:Boolean;
 private var _editable:Boolean = false;
+[Bindable] private var _backgroundImage:Object;
 
 public function set editable(value:Boolean):void
 {
@@ -50,6 +54,9 @@ private function completeHandler():void
 		this.titleInput.text = game.name;
 		this.pathInput.text = game.path;
 		this.savePathInput.text = game.savePath;
+		if (!FileUtil.checkPath(game.imagePath)) {
+			this._backgroundImage = DEFAULT_BACKGROUNDIMAGE;
+		}
 		this.subFolderCheckBox.selected = game.includeSubFolder;
 		this.filterContainer.removeAllChildren();
 		for each (var inStr:String in game.includes) {

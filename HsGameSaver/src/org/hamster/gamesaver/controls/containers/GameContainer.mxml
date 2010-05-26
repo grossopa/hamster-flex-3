@@ -19,5 +19,5 @@
 		<buttons:HelpButton width="40" height="40" click="helpHandler()" />
 		<buttons:ExpandButton width="40" height="40" click="expandHandler()" />
 	</mx:HBox>
-	<mx:Tile id="mainContainer" width="620" height="100%" verticalGap="0" y="45" tileWidth="600" />
+	<mx:Tile id="mainContainer" width="620" height="100%" verticalGap="3" y="45" tileWidth="600" horizontalGap="3" />
 </mx:Canvas>

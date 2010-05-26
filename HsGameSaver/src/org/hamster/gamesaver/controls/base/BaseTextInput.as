@@ -26,14 +26,28 @@ package org.hamster.gamesaver.controls.base
 			_focusOutHandler(null);
 		}
 		
+		override public function set editable(value:Boolean):void
+		{
+			super.editable = value;
+			if (value) {
+				this.setStyle("backgroundAlpha", 0.2);
+			} else {
+				this.setStyle("backgroundAlpha", 0);
+			}
+		}
+		
 		private function _focusInHandler(evt:FocusEvent):void
 		{
-			this.setStyle("backgroundAlpha", 0.3);
+			this.setStyle("backgroundAlpha", 0.4);
 		}
 		
 		private function _focusOutHandler(evt:FocusEvent):void
 		{
-			this.setStyle("backgroundAlpha", 0);
+			if (this.editable) {
+				this.setStyle("backgroundAlpha", 0.2);
+			} else {
+				this.setStyle("backgroundAlpha", 0);
+			}
 			this.dispatchEvent(new TextInputEvent(TextInputEvent.APPLY_CHANGE));
 		}
 		
