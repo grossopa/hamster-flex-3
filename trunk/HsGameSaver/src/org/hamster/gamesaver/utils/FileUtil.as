@@ -27,6 +27,9 @@ package org.hamster.gamesaver.utils
 		
 		public static function checkPath(path:String):Boolean
 		{
+			if (path == null) {
+				return false;
+			}
 			try {
 				var file:File = new File(path);
 			} catch (e:Error) {
@@ -38,6 +41,11 @@ package org.hamster.gamesaver.utils
 		public static function getConfFile():File
 		{
 			return new File(File.applicationDirectory.nativePath + File.separator + "conf.xml");
+		}
+		
+		public static function getRootImageFolder():File
+		{
+			return new File(File.applicationDirectory.nativePath + File.separator + "images");
 		}
 
 	}

@@ -97,8 +97,6 @@ package org.hamster.gamesaver.services
 			try {
 				copyPath = new File(xml.attribute("copy-path"));
 			} catch (e:Error) {
-				var ddd:ArrayCollection;
-				var dddd:Sort;
 			}
 			this.zipEnabled = xml.attribute("zip-enabled") as String == "true";
 			var gamesXML:XML = xml.child("games")[0];
