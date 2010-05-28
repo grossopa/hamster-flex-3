@@ -11,6 +11,7 @@
 	<mx:Style source="/org/hamster/gamesaver/css/Main.css" />
 	<mx:Script>
 		<![CDATA[
+			import org.hamster.commands.AbstractCommand;
 			[Embed(mimeType='application/x-font', source='org/hamster/gamesaver/assets/fonts/FZMWFont.TTF', fontName='fzmwFont')]
 			private var myFont:Class;
 		]]>

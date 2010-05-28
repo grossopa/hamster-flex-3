@@ -22,11 +22,6 @@ package org.hamster.gamesaver.commands
 			}
 		}
 		
-		override public function result(data:Object):void
-		{
-			
-		}
-		
 		override public function fault(info:Object):void
 		{
 			

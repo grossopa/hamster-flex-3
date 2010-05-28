@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- mySimpleBuild.xml -->
-<project name="My App Builder" basedir="." default="swc">
+<project name="Hamster Flex Framework Builder" basedir="." default="swc">
 
   <!-- all properties are defined here -->
   <import file="properties.xml" />
@@ -48,22 +47,6 @@
     </pathconvert>
 	</target>
   
-  <!-- Confusion codes
-  <target name="confusion" depends="prepare">
-    <echo message="Start confusing code..." />
-    <for param="file">
-      <path>
-        <fileset dir="${APP_ROOT}">
-          <include name="**/*.as" />
-        </fileset>
-      </path>
-      <sequential>
-        <confusion fileName="@{file}" />
-      </sequential>
-    </for>
-    <echo message="Code confusion completed." />
-  </target> -->
-
   <!-- build -->
 	<target name="swc" depends="prepare">
 
@@ -73,7 +56,7 @@
       keep-generated-actionscript="true" 
       link-report="hamster-framework-build.xml" 
       incremental="true"
-      debug="false" 
+      debug="true" 
       optimize="true">
 			<source-path path-element="${APP_SRC}" />
       <compiler.external-library-path dir="${FLEX_HOME}/frameworks">
