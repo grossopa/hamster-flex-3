@@ -37,5 +37,14 @@ package org.hamster.math.linearAlgebra.test
 			trace("-----");
 		}
 		
+		public function testMultiply():void
+		{
+			var m1:MatrixMath = new MatrixMath();
+			m1.initMatrix([[1],[2],[3],[4]], 4, 1);
+			var m2:MatrixMath = new MatrixMath();
+			m2.initMatrix([1, 2, 3, 4], 1, 4);
+			trace(m1.multiply(m2).toString());
+		}
+		
 	}
 }
