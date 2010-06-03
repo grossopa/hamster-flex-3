@@ -176,6 +176,33 @@ package org.hamster.math.linearAlgebra
 			return this;
 		}
 		
+		public function multiply(m:MatrixMath):MatrixMath
+		{
+			var cm1:int = this.cLength;
+			var rm2:int = m.rLength;
+			var cm2:int = m.cLength;
+			var rm1:int = this.rLength;
+			
+			if (cm1 != rm2) {
+				return null;
+			}
+			
+			var newEles:Array = [];
+			for (var i:int = 0; i < rm1; i++) {
+				var ele:Array = [];
+				for (var j:int = 0; j < cm2; j++) {
+					var cij:Number = 0;
+					for (var p:int = 0; p < cm1; p++) {
+						cij += _eles[i][p] * m.getValue(p, j);
+					}
+					ele[j] = cij;
+				}
+				newEles[i] = ele; 
+			}
+			
+			return this.initMatrix(newEles, rm1, cm2);
+		}
+		
 		/////////////////////////////////
 		// methods with another matrix //
 		/////////////////////////////////
