@@ -4,6 +4,7 @@ package org.hamster.math.linearAlgebra
 	
 	import mx.utils.ArrayUtil;
 	
+	import org.hamster.math.linearAlgebra.utils.MatrixMathError;
 	import org.hamster.math.linearAlgebra.utils.MatrixMathUtil;
 
 	/**
@@ -91,6 +92,7 @@ package org.hamster.math.linearAlgebra
 		 */
 		public function setValue(value:Number, row:int, column:int):void
 		{
+			this.checkOutOfBound(row, column, MatrixMathError.OUT_OF_BOUND_MSG);
 			this._eles[row][column] = value;
 		}
 		
@@ -103,6 +105,7 @@ package org.hamster.math.linearAlgebra
 		 */
 		public function getValue(row:int, column:int):Number
 		{
+			this.checkOutOfBound(row, column, MatrixMathError.OUT_OF_BOUND_MSG);
 			return this._eles[row][column];
 		}
 		
@@ -118,6 +121,8 @@ package org.hamster.math.linearAlgebra
 		 */
 		public function subMatrix(row:int, column:int, rLength:int, cLength:int):MatrixMath
 		{
+			this.checkOutOfBound(row, column, MatrixMathError.OUT_OF_BOUND_MSG);
+			
 			var r:int;
 			var c:int;
 			var tmpArray:Array = [];
@@ -141,6 +146,7 @@ package org.hamster.math.linearAlgebra
 		 */
 		public function getRow(row:int):MatrixMath
 		{
+			this.checkOutOfBound(row, 0, MatrixMathError.OUT_OF_BOUND_MSG);
 			return this.subMatrix(row, 0, 1, this.cLength);
 		}
 		
@@ -153,6 +159,7 @@ package org.hamster.math.linearAlgebra
 		 */
 		public function getColumn(column:int):MatrixMath
 		{
+			this.checkOutOfBound(0, column, MatrixMathError.OUT_OF_BOUND_MSG);
 			return this.subMatrix(0, column, this.rLength, 1);
 		}
 		
@@ -242,9 +249,8 @@ package org.hamster.math.linearAlgebra
 		 */
 		public function add(m:MatrixMath):MatrixMath
 		{
-			if (!checkMatrixSize(m)) {
-				return null;
-			}
+			this.checkMatrixSize(m, MatrixMathError.SIZE_NOT_SAME_MSG);
+			
 			var cl:int = this.cLength;
 			var rl:int = this.rLength;
 			
@@ -263,11 +269,29 @@ package org.hamster.math.linearAlgebra
 		 * @return true if both of them are same
 		 * 
 		 */
-		public function checkMatrixSize(m:MatrixMath):Boolean
+		public function checkMatrixSize(m:MatrixMath, 
+										errorMessage:String = ""):Boolean
 		{
-			return  m != null 
+			var result:Boolean = m != null 
 				&& this.cLength == m.cLength 
 				&& this.rLength == m.rLength;
+			if (!result && errorMessage != "") {
+				throw new MatrixMathError(errorMessage, 
+					MatrixMathError.SIZE_NOT_SAME);
+			}
+			return result;
+		}
+		
+		public function checkOutOfBound(r:int, c:int, 
+										  errorMessage:String = ""):Boolean
+		{
+			var result:Boolean = this.rLength < r 
+				&& this.cLength < c && r > 0 && c > 0;
+			if (!result && errorMessage != "") {
+				throw new MatrixMathError(errorMessage, 
+					MatrixMathError.OUT_OF_BOUND);
+			}
+			return result;
 		}
 		
 		public function toString():String
