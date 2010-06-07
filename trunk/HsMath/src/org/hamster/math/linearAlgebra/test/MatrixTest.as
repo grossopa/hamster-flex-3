@@ -29,7 +29,7 @@ package org.hamster.math.linearAlgebra.test
 			trace("-----");
 			trace(matrix.toString());
 			trace("-----");
-			trace(matrix.subMatrix(2,1,2,2).toString());
+			trace(matrix.getSubMatrix(2,1,2,2).toString());
 			trace("-----");
 			trace(matrix.getRow(3));
 			trace("-----");

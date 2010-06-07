@@ -100,6 +100,7 @@ package org.hamster.math.linearAlgebra
 			this._eles = eles;
 			this._rLength = rLength;
 			this._cLength = cLength;
+			return this;
 		}
 		
 		/**
@@ -129,7 +130,7 @@ package org.hamster.math.linearAlgebra
 		}
 		
 		/**
-		 * sub the matrix.
+		 * get sub of the matrix
 		 *  
 		 * @param row start row index
 		 * @param column start column index
@@ -138,23 +139,25 @@ package org.hamster.math.linearAlgebra
 		 * @return new Matrix 
 		 * 
 		 */
-		public function subMatrix(row:int, column:int, rLength:int, cLength:int):MatrixMath
+		public function getSubMatrix(row:int, column:int, rLength:int, cLength:int):MatrixMath
 		{
 			this.checkOutOfBound(row, column, MatrixMathError.OUT_OF_BOUND_MSG);
-			
-			var r:int;
-			var c:int;
-			var tmpArray:Array = [];
-			
-			for (r = 0; r < rLength; r++) {
-				var offset:int = r * cLength;
-				for (c = 0; c < cLength; c++) {
-					tmpArray[offset + c] = _eles[row + r][column + c];
-				}
-			}
-			
 			var result:MatrixMath = new MatrixMath();
-			return result.initMatrix(tmpArray, rLength, cLength);
+			result.setMatrix(this._eles, rLength, cLength);
+			return result;
+//			var r:int;
+//			var c:int;
+//			var tmpArray:Array = [];
+//			
+//			for (r = 0; r < rLength; r++) {
+//				var offset:int = r * cLength;
+//				for (c = 0; c < cLength; c++) {
+//					tmpArray[offset + c] = _eles[row + r][column + c];
+//				}
+//			}
+//			
+//			var result:MatrixMath = new MatrixMath();
+//			return result.initMatrix(tmpArray, rLength, cLength);
 		}
 		
 		/**
@@ -166,7 +169,7 @@ package org.hamster.math.linearAlgebra
 		public function getRow(row:int):MatrixMath
 		{
 			this.checkOutOfBound(row, 0, MatrixMathError.OUT_OF_BOUND_MSG);
-			return this.subMatrix(row, 0, 1, this.cLength);
+			return this.getSubMatrix(row, 0, 1, this.cLength);
 		}
 		
 		/**
@@ -179,7 +182,7 @@ package org.hamster.math.linearAlgebra
 		public function getColumn(column:int):MatrixMath
 		{
 			this.checkOutOfBound(0, column, MatrixMathError.OUT_OF_BOUND_MSG);
-			return this.subMatrix(0, column, this.rLength, 1);
+			return this.getSubMatrix(0, column, this.rLength, 1);
 		}
 		
 		/**
@@ -336,8 +339,8 @@ package org.hamster.math.linearAlgebra
 		public function checkOutOfBound(r:int, c:int, 
 										  errorMessage:String = ""):Boolean
 		{
-			var result:Boolean = this.rLength < r 
-				&& this.cLength < c && r > 0 && c > 0;
+			var result:Boolean =  r < _rLength
+				&& c < _cLength && r >= 0 && c >= 0;
 			if (!result && errorMessage != "") {
 				throw new MatrixMathError(errorMessage, 
 					MatrixMathError.OUT_OF_BOUND);
@@ -348,9 +351,23 @@ package org.hamster.math.linearAlgebra
 		public function toString():String
 		{
 			var result:String = '';
-			for each (var rEle:Array in this._eles) {
-				result += rEle.join(',') + '\n';
+			var rl:int = this.rLength;
+			var cl:int = this.cLength;
+			var c:int = 0;
+			var r:int = 0;
+			for (r = 0; r < rl - 1; r++) {
+				for (c = 0; c < cl - 1; c++) {
+					result += _eles[r][c] + ',';
+				}
+				result += _eles[r][cl - 1] + '\n';
 			}
+			for (c = 0; c < cl - 1; c++) {
+				result += _eles[rl - 1][c] + ',';
+			}
+			result += _eles[rl - 1][cl - 1];
+//			for each (var rEle:Array in this._eles) {
+//				result += rEle.join(',') + '\n';
+//			}
 			return result;
 		}
 	}
