@@ -35,6 +35,7 @@ package org.hamster.math.linearAlgebra.test
 			trace("-----");
 			trace(matrix.getColumn(2));
 			trace("-----");
+			trace(matrix.transpose().toString());
 		}
 		
 		public function testMultiply():void
@@ -44,6 +45,7 @@ package org.hamster.math.linearAlgebra.test
 			var m2:MatrixMath = new MatrixMath();
 			m2.initMatrix([1, 2, 3, 4], 1, 4);
 			trace(m1.multiply(m2).toString());
+			
 		}
 		
 	}

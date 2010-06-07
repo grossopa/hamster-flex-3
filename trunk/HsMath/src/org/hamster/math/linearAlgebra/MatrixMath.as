@@ -20,7 +20,7 @@ package org.hamster.math.linearAlgebra
 		 */
 		private var _eles:Array;
 		/**
-		 * length of row 
+		 * length of row, this value is possibly not equals
 		 */
 		private var _rLength:int;
 		/**
@@ -43,7 +43,8 @@ package org.hamster.math.linearAlgebra
 		}
 		
 		/**
-		 * initialization from a Number array.
+		 * initialization from a Number array. A new reference of object is created.
+		 * So this method is a pass-by-value initialization method.
 		 *  
 		 * @param eles can be either array[array] or array[Number]
 		 * @param rLength row length
@@ -81,6 +82,24 @@ package org.hamster.math.linearAlgebra
 				}
 			}
 			return this;
+		}
+		
+		/**
+		 * set matrix from a formatted elements array, the style is array[array] which
+		 * usually got from another Matrix instance. this is a pass-by-reference set
+		 * method which means the reference of eles will be passed into this method.
+		 * 
+		 * @param eles
+		 * @param rLength
+		 * @param cLength
+		 * @return this
+		 * 
+		 */
+		public function setMatrix(eles:Array, rLength:int, cLength:int):MatrixMath
+		{
+			this._eles = eles;
+			this._rLength = rLength;
+			this._cLength = cLength;
 		}
 		
 		/**
@@ -183,31 +202,29 @@ package org.hamster.math.linearAlgebra
 			return this;
 		}
 		
-		public function multiply(m:MatrixMath):MatrixMath
+		/**
+		 * Transpose a matrix.
+		 *  
+		 * @return this
+		 */
+		public function transpose():MatrixMath
 		{
-			var cm1:int = this.cLength;
-			var rm2:int = m.rLength;
-			var cm2:int = m.cLength;
-			var rm1:int = this.rLength;
-			
-			if (cm1 != rm2) {
-				return null;
-			}
+			var rl:int = this.rLength;
+			var cl:int = this.cLength;
 			
 			var newEles:Array = [];
-			for (var i:int = 0; i < rm1; i++) {
+			for (var c:int = 0; c < cl; c++) {
 				var ele:Array = [];
-				for (var j:int = 0; j < cm2; j++) {
-					var cij:Number = 0;
-					for (var p:int = 0; p < cm1; p++) {
-						cij += _eles[i][p] * m.getValue(p, j);
-					}
-					ele[j] = cij;
+				for (var r:int = 0; r < rl; r++) {
+					ele[r] = this._eles[r][c];
 				}
-				newEles[i] = ele; 
+				newEles[c] = ele;
 			}
 			
-			return this.initMatrix(newEles, rm1, cm2);
+			this._eles = newEles;
+			this._rLength = cl;
+			this._cLength = rl;
+			return this;
 		}
 		
 		/////////////////////////////////
@@ -260,6 +277,40 @@ package org.hamster.math.linearAlgebra
 				}
 			}
 			return this;
+		}
+		
+		/**
+		 * multiply with another matrix.
+		 *  
+		 * @param m
+		 * @return this
+		 * 
+		 */
+		public function multiply(m:MatrixMath):MatrixMath
+		{
+			var cm1:int = this.cLength;
+			var rm2:int = m.rLength;
+			var cm2:int = m.cLength;
+			var rm1:int = this.rLength;
+			
+			if (cm1 != rm2) {
+				return null;
+			}
+			
+			var newEles:Array = [];
+			for (var i:int = 0; i < rm1; i++) {
+				var ele:Array = [];
+				for (var j:int = 0; j < cm2; j++) {
+					var cij:Number = 0;
+					for (var p:int = 0; p < cm1; p++) {
+						cij += _eles[i][p] * m.getValue(p, j);
+					}
+					ele[j] = cij;
+				}
+				newEles[i] = ele; 
+			}
+			
+			return this.initMatrix(newEles, rm1, cm2);
 		}
 		
 		/**
