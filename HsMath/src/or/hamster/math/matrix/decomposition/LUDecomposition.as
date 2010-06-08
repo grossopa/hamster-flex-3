@@ -3,6 +3,12 @@ package or.hamster.math.matrix.decomposition
 	import or.hamster.math.matrix.MatrixMath;
 	import or.hamster.math.matrix.utils.MatrixMathError;
 
+	/**
+	 * Translated from Jama.
+	 *  
+	 * @author yinzeshuo
+	 * 
+	 */
 	public class LUDecomposition
 	{
 		private var _eles:Array;
@@ -83,6 +89,11 @@ package or.hamster.math.matrix.decomposition
 			}
 		}
 		
+		/**
+		 *  
+		 * @return 
+		 * 
+		 */
 		public function det():Number
 		{
 			if (_rLength != _cLength) {
