@@ -330,6 +330,41 @@ package or.hamster.math.matrix
 			
 			return this.initMatrix(newEles, rm1, cm2);
 		}
+		
+		//////////////////////////
+		// basic transformation //
+		//////////////////////////
+		public function exchangeRow(row1:int, row2:int):MatrixMath
+		{
+			if (row1 >= this._rLength || row2 > this._rLength || row1 < 0 || row2 < 0) {
+				throw new MatrixMathError(MatrixMathError.OUT_OF_BOUND_MSG, 
+					MatrixMathError.OUT_OF_BOUND);
+			}
+			var cl:int = _cLength;
+			for (var c:int = 0; c < cl; c++) {
+				var t:Number = _eles[row1][c];
+				_eles[row1][c] = _eles[row2][c];
+				_eles[row2][c] = t;
+			}
+			return this;
+		}
+		
+		public function exchangeColumn(column1:int, column2:int):MatrixMath
+		{
+			if (column1 >= this._cLength || column2 > this._cLength 
+				|| column1 < 0 || column2 < 0) {
+				throw new MatrixMathError(MatrixMathError.OUT_OF_BOUND_MSG, 
+					MatrixMathError.OUT_OF_BOUND);
+			}
+			
+			var rl:int = _rLength;
+			for (var r:int = 0; r < rl; r++) {
+				var t:Number = _eles[column1][r];
+				_eles[column1][r] = _eles[column2][r];
+				_eles[column2][r] = t;
+			}
+			return this;
+		}
 	
 		///////////////////
 		// check methods //
