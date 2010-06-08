@@ -1,11 +1,12 @@
-package org.hamster.math.linearAlgebra
+package or.hamster.math.matrix
 {
 	import flash.geom.Matrix;
 	
 	import mx.utils.ArrayUtil;
 	
-	import org.hamster.math.linearAlgebra.utils.MatrixMathError;
-	import org.hamster.math.linearAlgebra.utils.MatrixMathUtil;
+	import or.hamster.math.matrix.decomposition.LUDecomposition;
+	import or.hamster.math.matrix.utils.MatrixMathError;
+	import or.hamster.math.matrix.utils.MatrixMathUtil;
 
 	/**
 	 * Matrix class.
@@ -20,11 +21,11 @@ package org.hamster.math.linearAlgebra
 		 */
 		private var _eles:Array;
 		/**
-		 * length of row, this value is possibly not equals
+		 * length of row
 		 */
 		private var _rLength:int;
 		/**
-		 * length of column 
+		 * length of column
 		 */
 		private var _cLength:int;
 		
@@ -141,23 +142,19 @@ package org.hamster.math.linearAlgebra
 		 */
 		public function getSubMatrix(row:int, column:int, rLength:int, cLength:int):MatrixMath
 		{
-			this.checkOutOfBound(row, column, MatrixMathError.OUT_OF_BOUND_MSG);
+			var r:int;
+			var c:int;
+			var tmpArray:Array = [];
+			
+			for (r = 0; r < rLength; r++) {
+				var offset:int = r * cLength;
+				for (c = 0; c < cLength; c++) {
+					tmpArray[offset + c] = _eles[row + r][column + c];
+				}
+			}
+			
 			var result:MatrixMath = new MatrixMath();
-			result.setMatrix(this._eles, rLength, cLength);
-			return result;
-//			var r:int;
-//			var c:int;
-//			var tmpArray:Array = [];
-//			
-//			for (r = 0; r < rLength; r++) {
-//				var offset:int = r * cLength;
-//				for (c = 0; c < cLength; c++) {
-//					tmpArray[offset + c] = _eles[row + r][column + c];
-//				}
-//			}
-//			
-//			var result:MatrixMath = new MatrixMath();
-//			return result.initMatrix(tmpArray, rLength, cLength);
+			return result.initMatrix(tmpArray, rLength, cLength);
 		}
 		
 		/**
@@ -230,6 +227,24 @@ package org.hamster.math.linearAlgebra
 			return this;
 		}
 		
+		/**
+		 * use LU decomposition to get two array of the matrix,
+		 * the matrix must be an n*n matrix otherwise an error is thrown.
+		 *  
+		 * @return 
+		 * 
+		 */
+		public function lu():void
+		{
+			this.checkSquareMatrix(MatrixMathError.NOT_A_SQUARE_MATRIX_MSG);
+						
+		}
+		
+		public function det():Number
+		{
+			return new LUDecomposition(this).det();
+		}
+		
 		/////////////////////////////////
 		// methods with another matrix //
 		/////////////////////////////////
@@ -244,7 +259,7 @@ package org.hamster.math.linearAlgebra
 		 */
 		public function equals(m:MatrixMath):Boolean
 		{
-			if (!checkMatrixSize(m)) {
+			if (!checkMatrixDimensions(m)) {
 				return false;
 			}
 			var cl:int = m.cLength;
@@ -269,7 +284,7 @@ package org.hamster.math.linearAlgebra
 		 */
 		public function add(m:MatrixMath):MatrixMath
 		{
-			this.checkMatrixSize(m, MatrixMathError.SIZE_NOT_SAME_MSG);
+			this.checkMatrixDimensions(m, MatrixMathError.SIZE_NOT_SAME_MSG);
 			
 			var cl:int = this.cLength;
 			var rl:int = this.rLength;
@@ -315,7 +330,10 @@ package org.hamster.math.linearAlgebra
 			
 			return this.initMatrix(newEles, rm1, cm2);
 		}
-		
+	
+		///////////////////
+		// check methods //
+		///////////////////
 		/**
 		 * check whether the rLength and cLength are same
 		 *  
@@ -323,7 +341,7 @@ package org.hamster.math.linearAlgebra
 		 * @return true if both of them are same
 		 * 
 		 */
-		public function checkMatrixSize(m:MatrixMath, 
+		public function checkMatrixDimensions(m:MatrixMath, 
 										errorMessage:String = ""):Boolean
 		{
 			var result:Boolean = m != null 
@@ -336,6 +354,14 @@ package org.hamster.math.linearAlgebra
 			return result;
 		}
 		
+		/**
+		 * 
+		 * @param r
+		 * @param c
+		 * @param errorMessage
+		 * @return 
+		 * 
+		 */
 		public function checkOutOfBound(r:int, c:int, 
 										  errorMessage:String = ""):Boolean
 		{
@@ -344,6 +370,42 @@ package org.hamster.math.linearAlgebra
 			if (!result && errorMessage != "") {
 				throw new MatrixMathError(errorMessage, 
 					MatrixMathError.OUT_OF_BOUND);
+			}
+			return result;
+		}
+		
+		/**
+		 * check whether the matrix is a square(n * n) matrix.
+		 *  
+		 * @param errorMessage
+		 * @return 
+		 * 
+		 */
+		public function checkSquareMatrix(errorMessage:String = ""):Boolean
+		{
+			var result:Boolean = _rLength == _cLength;
+			if (!result && errorMessage != "") {
+				throw new MatrixMathError(errorMessage,
+					MatrixMathError.NOT_A_SQUARE_MATRIX);
+			}
+			return result;
+		}
+		
+		//////////////////
+		// util methods //
+		//////////////////
+		public function getElesCopy():Array
+		{
+			var result:Array = [];
+			var rl:int = _rLength;
+			var cl:int = _cLength;
+			
+			for (var r:int = 0; r < rl; r++) {
+				var cArray:Array = [];
+				for (var c:int = 0; c < cl; c++) {
+					cArray[c] = _eles[r][c];
+				}
+				result[r] = cArray;
 			}
 			return result;
 		}
@@ -365,9 +427,6 @@ package org.hamster.math.linearAlgebra
 				result += _eles[rl - 1][c] + ',';
 			}
 			result += _eles[rl - 1][cl - 1];
-//			for each (var rEle:Array in this._eles) {
-//				result += rEle.join(',') + '\n';
-//			}
 			return result;
 		}
 	}
