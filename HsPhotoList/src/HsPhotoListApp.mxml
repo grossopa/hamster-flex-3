@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			    frameRate="60"
+			   applicationComplete="application1_applicationCompleteHandler(event)"
+			   minWidth="955" minHeight="600" xmlns:photoList="org.hamster.components.photoList.*">
+	<photoList:HsPhotoList width="100%" height="300" borderColor="black" borderStyle="solid" click="hsphotolist1_clickHandler(event)">
+		<mx:Canvas id="redItem" backgroundColor="red" width="100" height="50" alpha="0.5" />
+		<mx:Canvas backgroundColor="0x000000" width="100" height="50" alpha="0.5" />
+		<mx:Canvas backgroundColor="0x444444" width="100" height="50" alpha="0.5" />
+		<mx:Canvas backgroundColor="0x666666" width="100" height="50" alpha="0.5" />
+		<mx:Canvas backgroundColor="0x888888" width="100" height="50" alpha="0.5" />
+		<mx:Canvas backgroundColor="0xaaaaaa" width="100" height="50" alpha="0.5" />
+		<mx:Canvas backgroundColor="0x000000" width="100" height="50" alpha="0.5" />
+		<mx:Canvas backgroundColor="0x222222" width="100" height="50" alpha="0.5" />
+		<mx:Canvas backgroundColor="0x444444" width="100" height="50" alpha="0.5" />
+		<mx:Canvas backgroundColor="0x666666" width="100" height="50" alpha="0.5" />
+		<mx:Canvas backgroundColor="0x888888" width="100" height="50" alpha="0.5" />
+		<mx:Canvas backgroundColor="0xaaaaaa" width="100" height="50" alpha="0.5" />
+	</photoList:HsPhotoList>
+	<s:TextArea id="trackingArea" width="100%" height="100%" y="300" />
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import org.hamster.components.photoList.HsPhotoList;
+//			private function _onEnterFrameHandler(evt:Event):void
+//			{
+//				testCanvas.rotationX += 2;
+//			}
+
+			protected function application1_applicationCompleteHandler(event:FlexEvent):void
+			{
+				var angle:Number = Math.PI * 2 / 5;
+			}
+
+
+			protected function wrapper_creationCompleteHandler(event:FlexEvent):void
+			{
+			}
+
+
+			protected function hsphotolist1_clickHandler(event:MouseEvent):void
+			{
+				trackingArea.text += redItem.z + "   " + redItem.y + "   " + redItem.rotationY + '\n';
+			}
+
+		]]>
+	</fx:Script>
+
+	
+</s:Application>
