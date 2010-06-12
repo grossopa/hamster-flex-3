@@ -14,6 +14,7 @@
   </compiler>
   <applications>
     <application path="HsPhotoListApp.mxml"/>
+    <application path="RotTest2.mxml"/>
   </applications>
   <modules/>
   <buildCSSFiles/>
