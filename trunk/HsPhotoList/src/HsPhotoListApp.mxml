@@ -13,6 +13,12 @@
 				this.hsPhotoList.setFocusItemByIndex(
 					toIndexCombobox.selectedIndex, counterClockwiseCheckbox.selected);
 			}
+
+			protected function isRotationYCheckbox_changeHandler(event:Event):void
+			{
+				this.hsPhotoList.isRotationY = this.isRotationYCheckbox.selected;
+			}
+
 		]]>
 	</fx:Script>
 
@@ -23,6 +29,8 @@
 	</photoList:HsPhotoList>
 	<mx:HBox y="300" width="100%">
 		<s:CheckBox id="counterClockwiseCheckbox" label="Counter Clockwise" />
+		<s:CheckBox id="isRotationYCheckbox" label="RotationY" selected="true" 
+					change="isRotationYCheckbox_changeHandler(event)" />
 		<s:ComboBox id="toIndexCombobox" dataProvider="{itemNumArray}" />
 		<s:Button click="button1_clickHandler(event)" />
 	</mx:HBox>
