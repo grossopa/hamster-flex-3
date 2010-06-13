@@ -5,39 +5,73 @@
 			    frameRate="60"
 			   applicationComplete="application1_applicationCompleteHandler(event)"
 			   minWidth="955" minHeight="600" xmlns:photoList="org.hamster.components.photoList.*">
-	<photoList:HsPhotoList width="100%" height="300" x="0" y="0" borderColor="black" borderStyle="solid" click="hsphotolist1_clickHandler(event)">
-		<mx:Canvas id="redItem" backgroundColor="red" width="100" height="50" />
-		<mx:Canvas backgroundColor="0x000000" width="100" height="50" />
-		<mx:Canvas backgroundColor="0x444444" width="100" height="50" />
-		<mx:Canvas backgroundColor="0x666666" width="100" height="50" />
-		<mx:Canvas backgroundColor="0x888888" width="100" height="50" />
-		<mx:Canvas backgroundColor="0xaaaaaa" width="100" height="50" />
-		<mx:Canvas backgroundColor="0x000000" width="100" height="50" />
-		<mx:Canvas backgroundColor="0x222222" width="100" height="50" />
-		<mx:Canvas backgroundColor="0x444444" width="100" height="50" />
-		<mx:Canvas backgroundColor="0x666666" width="100" height="50" />
-		<mx:Canvas backgroundColor="0x888888" width="100" height="50" />
-		<mx:Canvas backgroundColor="0xaaaaaa" width="100" height="50" />
+
+	<fx:Script>
+		<![CDATA[
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				this.hsPhotoList.setFocusItemByIndex(
+					toIndexCombobox.selectedIndex, counterClockwiseCheckbox.selected);
+			}
+		]]>
+	</fx:Script>
+
+	
+	<photoList:HsPhotoList id="hsPhotoList" width="100%" height="300"
+						   x="0" y="0" borderColor="black" borderStyle="solid" 
+						   click="hsphotolist1_clickHandler(event)">
 	</photoList:HsPhotoList>
-	<s:TextArea id="trackingArea" width="100%" height="100%" y="300" />
+	<mx:HBox y="300" width="100%">
+		<s:CheckBox id="counterClockwiseCheckbox" label="Counter Clockwise" />
+		<s:ComboBox id="toIndexCombobox" dataProvider="{itemNumArray}" />
+		<s:Button click="button1_clickHandler(event)" />
+	</mx:HBox>
 	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:ArrayCollection id="itemNumArray">
+			<fx:int>0</fx:int>
+			<fx:int>1</fx:int>
+			<fx:int>2</fx:int>
+			<fx:int>3</fx:int>
+			<fx:int>4</fx:int>
+			<fx:int>5</fx:int>
+			<fx:int>6</fx:int>
+			<fx:int>7</fx:int>
+			<fx:int>8</fx:int>
+			<fx:int>9</fx:int>
+			<fx:int>10</fx:int>
+			<fx:int>11</fx:int>
+		</s:ArrayCollection>
+		
+		<fx:Array id="itemArray">
+			<mx:Canvas label="0" id="redItem" backgroundColor="red" width="100" height="50" />
+			<mx:Canvas label="1" backgroundColor="0x000000" width="50" height="50" />
+			<mx:Canvas label="2" backgroundColor="0x111111" width="100" height="50" />
+			<mx:Canvas label="3" backgroundColor="0x222222" width="100" height="50" />
+			<mx:Canvas label="4" backgroundColor="0x333333" width="100" height="50" />
+			<mx:Canvas label="5" backgroundColor="0x444444" width="100" height="50" />
+			<mx:Canvas label="6" backgroundColor="0x555555" width="100" height="50" />
+			<mx:Canvas label="7" backgroundColor="0x666666" width="100" height="50" />
+			<mx:Canvas label="8" backgroundColor="0x777777" width="100" height="50" />
+			<mx:Canvas label="9" backgroundColor="0x888888" width="100" height="50" />
+			<mx:Canvas label="10" backgroundColor="0x999999" width="100" height="50" />
+			<mx:Canvas label="11" backgroundColor="0xaaaaaa" width="100" height="50" />
+		</fx:Array>
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import mx.effects.AnimateProperty;
+			import mx.effects.easing.Bounce;
 			import mx.events.FlexEvent;
 			
 			import org.hamster.components.photoList.HsPhotoList;
-//			private function _onEnterFrameHandler(evt:Event):void
-//			{
-//				testCanvas.rotationX += 2;
-//			}
 
 			protected function application1_applicationCompleteHandler(event:FlexEvent):void
 			{
-				var angle:Number = Math.PI * 2 / 5;
+				this.hsPhotoList.setSliderItem(itemArray, 0);
+				
+				this.hsPhotoList.setFocusItemByIndex(1);
+				
 			}
-
 
 			protected function wrapper_creationCompleteHandler(event:FlexEvent):void
 			{
@@ -46,7 +80,6 @@
 
 			protected function hsphotolist1_clickHandler(event:MouseEvent):void
 			{
-				trackingArea.text += redItem.z + "   " + redItem.y + "   " + redItem.rotationY + '\n';
 			}
 
 		]]>
