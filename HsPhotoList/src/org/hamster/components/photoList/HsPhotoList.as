@@ -30,7 +30,8 @@ package org.hamster.components.photoList
 		private var _itemArray:Array = [];
 		private const _aniProperties:AnimateProperty = new AnimateProperty(this);
 		private var _angleOffset:Number = 0;
-		private var _speed:Number = 10;
+		private var _speed:Number = 200;
+		private var _isRotationY:Boolean = true;
 		
 		public function set angleOffset(value:Number):void
 		{
@@ -45,6 +46,18 @@ package org.hamster.components.photoList
 			return this._angleOffset;
 		}
 		
+		public function set isRotationY(value:Boolean):void
+		{
+			this._isRotationY = value;
+			if (this.initialized) {
+				this.layoutHandler(this.angleOffset * Math.PI / 180);
+			}
+		}
+		
+		public function get isRotationY():Boolean
+		{
+			return this._isRotationY;
+		}
 		/**
 		 * set slider item.
 		 *  
@@ -143,6 +156,12 @@ package org.hamster.components.photoList
 			var items:Array = this.getChildren();
 			items.sort(depthSort);
 			for (var i:int = 0; i < this.numChildren; i++) {
+				var uiComponent:UIComponent = UIComponent(items[i]);
+				if (uiComponent.z > 0) {
+					uiComponent.alpha = 0.5 - 0.3 * (uiComponent.z + this._radius) / 2 / this._radius;
+				} else {
+					uiComponent.alpha = 1;
+				}
 				this.setChildIndex(items[i], i);
 			}
 		}
@@ -178,7 +197,11 @@ package org.hamster.components.photoList
 				child.z = Math.sin(angle) * _radius;
 				child.transformX = child.width / 2;
 				child.x = Math.cos(angle) * _radius + this.width / 2 - child.width / 2;
-				child.rotationY = -angle / Math.PI * 180 + 90;
+				if (this._isRotationY) {
+					child.rotationY = -angle / Math.PI * 180 + 90;
+				} else {
+					child.rotationY = 0;
+				}
 			}
 			this.sortItems();
 		}
@@ -186,16 +209,25 @@ package org.hamster.components.photoList
 		/////////////////////
 		// control methods //
 		/////////////////////
-		public function setFocusItemByIndex(index:int, counterClockwise:Boolean = false):void
+		/**
+		 * 
+		 * @param index
+		 * @param counterClockwise
+		 * @param times
+		 * 
+		 */
+		public function setFocusItemByIndex(index:int, counterClockwise:Boolean = false, times:int = 1):void
 		{
 			var curOffset:Number = (this.angleOffset) % 360;
 			var toValue:Number = (index + 1) * 360 / this._itemArray.length;
-			
+//			if (toValue == 360) {
+//				toValue = 0;
+//			}
 			var byValue:Number = 0;
 			
 			if (!counterClockwise) {
 				if (curOffset < toValue) {
-					byValue = - (360 - toValue + curOffset);
+					byValue =  - 360 + toValue - curOffset;
 				} else {
 					byValue = - toValue + curOffset;
 				}
@@ -206,14 +238,15 @@ package org.hamster.components.photoList
 					byValue = toValue - curOffset;
 				}
 			}
-			// byValue -= 90;
 			
+			byValue += (times - 1) * 360;
 			
 			if (_aniProperties.isPlaying) {
 				_aniProperties.stop();
 			}
 			_aniProperties.toValue = this.angleOffset + byValue;
-			_aniProperties.duration = 1000;
+			_aniProperties.duration = this._speed *  
+				Math.abs(int(byValue / (360 / this._itemArray.length)));
 			_aniProperties.play();
 		}
 		
