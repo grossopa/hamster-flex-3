@@ -16,8 +16,9 @@ package or.hamster.math.matrix
 	public class MatrixMath
 	{
 		/**
-		 * An two-dimensional array contains a list of Number. the length of
-		 * this array should be [N * N], N is a nature number.
+		 * An two-dimensional array contains a list of Number.
+		 * 
+		 * The array should be [N][M].
 		 */
 		private var _eles:Array;
 		/**
@@ -39,15 +40,20 @@ package or.hamster.math.matrix
 			return this._cLength;
 		}
 		
+		public function get eles():Array
+		{
+			return this._eles;
+		}
+		
 		public function MatrixMath()
 		{
 		}
 		
 		/**
-		 * initialization from a Number array. A new reference of object is created.
+		 * Initialization from a Number array. A new reference of object is created.
 		 * So this method is a pass-by-value initialization method.
 		 *  
-		 * @param eles can be either array[array] or array[Number]
+		 * @param eles can be either array[array[Number]] or array[Number]
 		 * @param rLength row length
 		 * @param cLength column length
 		 * @return this
@@ -110,11 +116,16 @@ package or.hamster.math.matrix
 		 * @param value
 		 * @param row
 		 * @param column
+		 * @param newMatrix return a new matrix if true
+		 * @return this or a new matrix
 		 */
-		public function setValue(value:Number, row:int, column:int):void
+		public function setValue(value:Number, row:int, column:int, 
+			newMatrix:Boolean = false):MatrixMath
 		{
 			this.checkOutOfBound(row, column, MatrixMathError.OUT_OF_BOUND_MSG);
-			this._eles[row][column] = value;
+			var result:MatrixMath = this.getReturnMatrix(newMatrix);
+			result.eles[row][column] = value;
+			return result;
 		}
 		
 		/**
@@ -131,14 +142,13 @@ package or.hamster.math.matrix
 		}
 		
 		/**
-		 * get sub of the matrix
+		 * get sub of the matrix, always return a new matrix.
 		 *  
 		 * @param row start row index
 		 * @param column start column index
 		 * @param rLength row length
 		 * @param cLength column length
 		 * @return new Matrix 
-		 * 
 		 */
 		public function getSubMatrix(row:int, column:int, rLength:int, cLength:int):MatrixMath
 		{
@@ -158,7 +168,19 @@ package or.hamster.math.matrix
 		}
 		
 		/**
-		 * get a row 
+		 * 
+		 * @param removeRow
+		 * @param removeColumn
+		 * @return 
+		 * 
+		 */
+		public function getSubOrderMatrix(removeRow:int, removeColumn:int):MatrixMath
+		{
+			return null;
+		}
+		
+		/**
+		 * get a row, always return a new matrix
 		 * 
 		 * @param row
 		 * @return new row Matrix
@@ -170,11 +192,10 @@ package or.hamster.math.matrix
 		}
 		
 		/**
-		 * get a column
+		 * get a column, always return a new matrix
 		 *  
 		 * @param column
 		 * @return new column Matrix
-		 * 
 		 */
 		public function getColumn(column:int):MatrixMath
 		{
@@ -186,45 +207,49 @@ package or.hamster.math.matrix
 		 * multiply a number.
 		 * 
 		 * @param n the number to multiply
-		 * @return this
+		 * @param newMatrix return a new matrix if true.
+		 * @return this or a new matrix
 		 */
-		public function multiplyNumber(n:Number):MatrixMath
+		public function multiplyNumber(n:Number, 
+			newMatrix:Boolean = false):MatrixMath
 		{
-			var rl:int = this.rLength;
-			var cl:int = this.cLength;
+			var result:MatrixMath = this.getReturnMatrix(newMatrix);
+			var e:Array = result.eles;
+			var rl:int = result.rLength;
+			var cl:int = result.cLength;
 			
 			for (var r:int = 0; r < rl; r++) {
 				for (var c:int = 0; c < cl; c++) {
-					_eles[r][c] *= n;
+					e[r][c] *= n;
 				}
 			}
-			
-			return this;
+			return result;
 		}
 		
 		/**
-		 * Transpose a matrix.
-		 *  
-		 * @return this
+		 * Transpose a matrix
+		 *
+		 * @param newMatrix return a new matrix if true.  
+		 * @return this or a new matrix
 		 */
-		public function transpose():MatrixMath
+		public function transpose(newMatrix:Boolean = false):MatrixMath
 		{
-			var rl:int = this.rLength;
-			var cl:int = this.cLength;
+			var result:MatrixMath = this.getReturnMatrix(newMatrix);
+			var e:Array = result.eles;
+			var rl:int = result.rLength;
+			var cl:int = result.cLength;
 			
 			var newEles:Array = [];
 			for (var c:int = 0; c < cl; c++) {
 				var ele:Array = [];
 				for (var r:int = 0; r < rl; r++) {
-					ele[r] = this._eles[r][c];
+					ele[r] = e[r][c];
 				}
 				newEles[c] = ele;
 			}
 			
-			this._eles = newEles;
-			this._rLength = cl;
-			this._cLength = rl;
-			return this;
+			result.setMatrix(newEles, rl, cl);
+			return result;
 		}
 		
 		/**
@@ -232,7 +257,6 @@ package or.hamster.math.matrix
 		 * the matrix must be an n*n matrix otherwise an error is thrown.
 		 *  
 		 * @return 
-		 * 
 		 */
 		public function lu():void
 		{
@@ -240,9 +264,14 @@ package or.hamster.math.matrix
 						
 		}
 		
+		/**
+		 * det
+		 * 
+		 * @return result
+		 */
 		public function det():Number
 		{
-			return new LUDecomposition(this).det();
+			return LUDecomposition.detOfMatrix(this);
 		}
 		
 		/////////////////////////////////
@@ -255,7 +284,6 @@ package or.hamster.math.matrix
 		 *  
 		 * @param m
 		 * @return true if they are same
-		 * 
 		 */
 		public function equals(m:MatrixMath):Boolean
 		{
@@ -280,39 +308,49 @@ package or.hamster.math.matrix
 		 * add another matrix
 		 *  
 		 * @param m
-		 * @return this
+		 * @param newMatrix return a new matrix if true.
+		 * @return this or a new matrix
 		 */
-		public function add(m:MatrixMath):MatrixMath
+		public function add(m:MatrixMath, newMatrix:Boolean = false):MatrixMath
 		{
 			this.checkMatrixDimensions(m, MatrixMathError.SIZE_NOT_SAME_MSG);
+			var result:MatrixMath = this.getReturnMatrix(newMatrix);
+			var e:Array = result.eles;
+			var cl:int = result.cLength;
+			var rl:int = result.rLength;
 			
-			var cl:int = this.cLength;
-			var rl:int = this.rLength;
+			var e2:Array = m.eles;
 			
 			for (var r:int = 0; r < rl; r++) {
 				for (var c:int = 0; c < cl; c++) {
-					_eles[r][c] += m.getValue(r, c);
+					e[r][c] += e2[r][c];
 				}
 			}
-			return this;
+			return result;
 		}
 		
 		/**
 		 * multiply with another matrix.
 		 *  
 		 * @param m
-		 * @return this
-		 * 
+		 * @param newMatrix return a new matrix if true.
+		 * @return this or a new matrix
 		 */
-		public function multiply(m:MatrixMath):MatrixMath
+		public function multiply(m:MatrixMath, 
+								 newMatrix:Boolean = false):MatrixMath
 		{
-			var cm1:int = this.cLength;
+			var result:MatrixMath = this.getReturnMatrix(newMatrix);
+			
+			var e:Array = result.eles;
+			var cm1:int = result.cLength;
 			var rm2:int = m.rLength;
 			var cm2:int = m.cLength;
-			var rm1:int = this.rLength;
+			var rm1:int = result.rLength;
+			
+			var e2:Array = m.eles;
 			
 			if (cm1 != rm2) {
-				return null;
+				throw new MatrixMathError('The column length of left matrix should be same as row length of right matrix!');
 			}
 			
 			var newEles:Array = [];
@@ -321,50 +359,118 @@ package or.hamster.math.matrix
 				for (var j:int = 0; j < cm2; j++) {
 					var cij:Number = 0;
 					for (var p:int = 0; p < cm1; p++) {
-						cij += _eles[i][p] * m.getValue(p, j);
+						cij += e[i][p] * e2[p][j];
 					}
 					ele[j] = cij;
 				}
 				newEles[i] = ele; 
 			}
 			
-			return this.initMatrix(newEles, rm1, cm2);
+			return result.setMatrix(newEles, rm1, cm2);
 		}
 		
 		//////////////////////////
 		// basic transformation //
 		//////////////////////////
-		public function exchangeRow(row1:int, row2:int):MatrixMath
+		/**
+		 * Basic transformation of a matrix. Exchange two rows of a matrix 
+		 * r1 <-> r2
+		 * 
+		 * @param row1
+		 * @param row2
+		 * @param newMatrix return a new matrix if true.
+		 * @return this or a new matrix
+		 */
+		public function exchangeRow(row1:int, row2:int, 
+									newMatrix:Boolean = false):MatrixMath
 		{
-			if (row1 >= this._rLength || row2 > this._rLength || row1 < 0 || row2 < 0) {
-				throw new MatrixMathError(MatrixMathError.OUT_OF_BOUND_MSG, 
-					MatrixMathError.OUT_OF_BOUND);
-			}
-			var cl:int = _cLength;
-			for (var c:int = 0; c < cl; c++) {
-				var t:Number = _eles[row1][c];
-				_eles[row1][c] = _eles[row2][c];
-				_eles[row2][c] = t;
-			}
-			return this;
-		}
-		
-		public function exchangeColumn(column1:int, column2:int):MatrixMath
-		{
-			if (column1 >= this._cLength || column2 > this._cLength 
-				|| column1 < 0 || column2 < 0) {
+			if (row1 >= this._rLength || row2 > this._rLength 
+				|| row1 < 0 || row2 < 0) {
 				throw new MatrixMathError(MatrixMathError.OUT_OF_BOUND_MSG, 
 					MatrixMathError.OUT_OF_BOUND);
 			}
 			
-			var rl:int = _rLength;
-			for (var r:int = 0; r < rl; r++) {
-				var t:Number = _eles[column1][r];
-				_eles[column1][r] = _eles[column2][r];
-				_eles[column2][r] = t;
+			var result:MatrixMath = this.getReturnMatrix(newMatrix);
+			var cl:int = result.cLength;
+			var e:Array = result.eles;
+			for (var c:int = 0; c < cl; c++) {
+				var t:Number = e[row1][c];
+				e[row1][c] = e[row2][c];
+				e[row2][c] = t;
 			}
-			return this;
+			return result;
 		}
+		
+		/**
+		 * Basic transformation of a matrix. The number should not be 0.
+		 * r1 -> num * r1
+		 * 
+		 * @param num
+		 * @param row
+		 * @param newMatrix return a new matrix if true.
+		 * @return this or a new matrix
+		 */
+		public function multiplyRow(num:Number, row:int,
+			newMatrix:Boolean = false):MatrixMath
+		{
+			if (num == 0) {
+				throw new MatrixMathError("The number should not be 0!");
+			}
+			this.checkOutOfBound(row, 0, MatrixMathError.OUT_OF_BOUND_MSG);
+			
+			var result:MatrixMath = this.getReturnMatrix(newMatrix);
+			var e:Array = result.eles;
+			var cl:int = this._cLength;
+			var tempE:Array = e[row];
+			for (var c:int = 0; c < cl; c++) {
+				tempE[c] *= num;
+			}
+			return result;
+		}
+		
+		/**
+		 * Basic transformation of a matrix.
+		 * r2 -> num * r1 + r2
+		 * 
+		 * @param num
+		 * @param row1
+		 * @param row2
+		 * @param newMatrix return a new matrix if true.
+		 * @return this or a new matrix
+		 */
+		public function multiplyAndAddTo(num:Number, row1:int, row2:int, 
+			newMatrix:Boolean = false):MatrixMath
+		{
+			if (row1 < 0 || row1 >= this._rLength 
+				|| row2 < 0 || row2 >= this._rLength) {
+				throw new MatrixMathError(MatrixMathError.OUT_OF_BOUND);
+			}
+			var result:MatrixMath = this.getReturnMatrix(newMatrix);
+			var eleRow1:Array = result.eles[row1];
+			var eleRow2:Array = result.eles[row2];
+			var cl:int = this._cLength;
+			for (var c:int = 0; c < cl; c++) {
+				eleRow2[c] = eleRow1[c] * num + eleRow2[c];
+			}
+			return result;
+		}
+		
+//		public function exchangeColumn(column1:int, column2:int):MatrixMath
+//		{
+//			if (column1 >= this._cLength || column2 > this._cLength 
+//				|| column1 < 0 || column2 < 0) {
+//				throw new MatrixMathError(MatrixMathError.OUT_OF_BOUND_MSG, 
+//					MatrixMathError.OUT_OF_BOUND);
+//			}
+//			
+//			var rl:int = _rLength;
+//			for (var r:int = 0; r < rl; r++) {
+//				var t:Number = _eles[column1][r];
+//				_eles[column1][r] = _eles[column2][r];
+//				_eles[column2][r] = t;
+//			}
+//			return this;
+//		}
 	
 		///////////////////
 		// check methods //
@@ -374,7 +480,6 @@ package or.hamster.math.matrix
 		 *  
 		 * @param m
 		 * @return true if both of them are same
-		 * 
 		 */
 		public function checkMatrixDimensions(m:MatrixMath, 
 										errorMessage:String = ""):Boolean
@@ -390,12 +495,13 @@ package or.hamster.math.matrix
 		}
 		
 		/**
+		 * Whether row or column are out of bound
 		 * 
 		 * @param r
 		 * @param c
-		 * @param errorMessage
-		 * @return 
-		 * 
+		 * @param errorMessage If error message is empty, then no Error
+		 *                     is thrown.
+		 * @return is out of Bound
 		 */
 		public function checkOutOfBound(r:int, c:int, 
 										  errorMessage:String = ""):Boolean
@@ -410,11 +516,11 @@ package or.hamster.math.matrix
 		}
 		
 		/**
-		 * check whether the matrix is a square(n * n) matrix.
+		 * Check whether the matrix is a square(n * n) matrix.
 		 *  
-		 * @param errorMessage
-		 * @return 
-		 * 
+		 * @param errorMessage If error message is empty, then no Error
+		 *                     is thrown.
+		 * @return whether the matrix is square.
 		 */
 		public function checkSquareMatrix(errorMessage:String = ""):Boolean
 		{
@@ -429,6 +535,26 @@ package or.hamster.math.matrix
 		//////////////////
 		// util methods //
 		//////////////////
+		/**
+		 * @private
+		 * @param isCreateNewMatrix
+		 * @return 
+		 */
+		private function getReturnMatrix(
+			isCreateNewMatrix:Boolean):MatrixMath
+		{
+			if (isCreateNewMatrix) {
+				return this.clone();
+			} else {
+				return this;
+			}
+		}
+		
+		/**
+		 * return a copy of eles array.
+		 * 
+		 * @return copied array
+		 */
 		public function getElesCopy():Array
 		{
 			var result:Array = [];
@@ -445,6 +571,21 @@ package or.hamster.math.matrix
 			return result;
 		}
 		
+		/**
+		 * @private 
+		 * @return new matrix 
+		 */
+		public function clone():MatrixMath
+		{
+			var newMatrix:MatrixMath = new MatrixMath();
+			newMatrix.initMatrix(this._eles, this._rLength, this._cLength);
+			return newMatrix;			
+		}
+		
+		/**
+		 * @private
+		 * @return 
+		 */
 		public function toString():String
 		{
 			var result:String = '';
