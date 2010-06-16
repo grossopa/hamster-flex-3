@@ -168,15 +168,45 @@ package or.hamster.math.matrix
 		}
 		
 		/**
+		 *          |  a11  ...  a1j-1   a1j+1  ...  a1n  |
+		 *          |  ...  ...   ...     ...   ...  ...  |
+		 * A(i|j) = | ai-11 ... ai-1j-1 ai-1j+1 ... ai-1n |
+		 *          | ai+11 ... ai+1j-1 ai+1j+1 ... ai+1n |
+		 *          |  ...  ...   ...     ...   ...  ...  |
+		 *          |  an1  ...  anj-1   anj+1  ...  ann  |
 		 * 
-		 * @param removeRow
-		 * @param removeColumn
-		 * @return 
+		 * @param r removeRow
+		 * @param c removeColumn
+		 * @return A(r|c)
 		 * 
 		 */
-		public function getSubOrderMatrix(removeRow:int, removeColumn:int):MatrixMath
+		public function getSubOrderMatrix(r:int, c:int):MatrixMath
 		{
-			return null;
+			this.checkSquareMatrix(MatrixMathError.NOT_A_SQUARE_MATRIX_MSG);
+			this.checkOutOfBound(r, c, MatrixMathError.OUT_OF_BOUND_MSG);
+			var l:int = this._cLength;
+			if (l <= 1) {
+				throw new MatrixMathError("The dimensions of matrix must be larger than 1!");
+			}
+			
+			var eles:Array = new Array();
+			for (var i:int = 0; i < l; i++) {
+				var tempE:Array = [];
+				for (var j:int = 0; j < l; j++) {
+					if (i == r || j == c) {
+						continue;
+					} else {
+						tempE.push(this._eles[i][j]);
+					}
+				}
+				if (i != r) {
+					eles.push(tempE);
+				}
+			}
+			
+			var result:MatrixMath = new MatrixMath();
+			result.setMatrix(eles, l - 1, l - 1);
+			return result;
 		}
 		
 		/**

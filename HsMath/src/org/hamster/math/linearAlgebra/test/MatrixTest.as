@@ -25,12 +25,18 @@ package org.hamster.math.linearAlgebra.test
 		
 		override public function setUp():void
 		{
+			trace ("-------- " + this.methodName + " -------");
 			super.setUp();
 		}
 		
 		override public function tearDown():void
 		{
 			super.tearDown();
+		}
+		
+		public function testSubOrder():void
+		{
+			trace(matrix.getSubOrderMatrix(2, 3).toString());
 		}
 		
 		public function testMatrix():void
