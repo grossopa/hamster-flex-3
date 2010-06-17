@@ -168,12 +168,17 @@ package or.hamster.math.matrix
 		}
 		
 		/**
-		 *          |  a11  ...  a1j-1   a1j+1  ...  a1n  |
-		 *          |  ...  ...   ...     ...   ...  ...  |
-		 * A(i|j) = | ai-11 ... ai-1j-1 ai-1j+1 ... ai-1n |
-		 *          | ai+11 ... ai+1j-1 ai+1j+1 ... ai+1n |
-		 *          |  ...  ...   ...     ...   ...  ...  |
-		 *          |  an1  ...  anj-1   anj+1  ...  ann  |
+		 * A sub order matrix is a sub matrix of a matrix that removed its r row and c column.
+		 * 
+		 * <p>A(i|j) = </p>
+		 * <table>
+		 * <tr><td>a11</td><td>...</td><td>a1j-1</td><td>a1j+1</td><td>...</td><td>a1n</td></tr>
+		 * <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+		 * <tr><td>ai-11</td><td>...</td><td>ai-1j-1</td><td>ai-1j+1</td><td>...</td><td>ai-1n</td></tr>
+		 * <tr><td>ai+11</td><td>...</td><td>ai+1j-1</td><td>ai+1j+1</td><td>...</td><td>ai+1n</td></tr>
+		 * <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+		 * <tr><td>an1</td><td>...</td><td>anj-1</td><td>anj+1</td><td>...</td><td>ann</td></tr>
+		 * </table>
 		 * 
 		 * @param r removeRow
 		 * @param c removeColumn
@@ -206,6 +211,76 @@ package or.hamster.math.matrix
 			
 			var result:MatrixMath = new MatrixMath();
 			result.setMatrix(eles, l - 1, l - 1);
+			return result;
+		}
+		
+		/**
+		 * get cofactor of a determinant
+		 * 
+		 * Aij = |A(i|j)| * (-1)^(i + j)
+		 * 
+		 * @param r 
+		 * @param c
+		 * @return 
+		 */
+		public function cofactor(r:int, c:int):Number
+		{
+			var tempEles:Array = [];
+			var rl:int = this._rLength;
+			var cl:int = this._cLength;
+			
+			for (var i:int = 0; i < rl; i++) {
+				var tempE:Array = [];
+				for (var j:int = 0; j < cl; j++) {
+					if (i == r || j == c) {
+						continue;
+					} else {
+						tempE.push(this._eles[i][j]);
+					}
+				}
+				if (i != r) {
+					tempEles.push(tempE);
+				}
+			}
+			
+			var LUInfo:Array = LUDecomposition.initFromEles(tempEles, rl - 1, rl - 1);
+			var result:Number = LUDecomposition.detFromLU(LUInfo[0], rl - 1, cl - 1, LUInfo[1]);
+			
+			if ((r + c) % 2 == 0) {
+				return result;
+			} else {
+				return - result;
+			}
+		}
+		
+		/**
+		 * get adjoint of the matrix, always return a new matrix
+		 * 
+		 * <p>A* = </p>
+		 * <table>
+		 * <tr><td>A11</td><td>A12</td><td>...</td><td>A1n</td></tr>
+		 * <tr><td>A21</td><td>A22</td><td>...</td><td>A2n</td></tr>
+		 * <tr><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+		 * <tr><td>An1</td><td>An2</td><td>...</td><td>Ann</td></tr>
+		 * 
+		 * @return adjoint matrix
+		 * 
+		 */
+		public function adjoint():MatrixMath
+		{
+			var rl:int = this._rLength;
+			var cl:int = this._cLength;
+			
+			var tempEles:Array = [];
+			for (var i:int = 0; i < rl; i++) {
+				var tempE:Array = [];
+				for (var j:int = 0; j < cl; j++) {
+					tempE[j] = this.getSubOrderMatrix(i, j);
+				}
+				tempEles[i] = tempE;
+			}
+			var result:MatrixMath = new MatrixMath();
+			result.setMatrix(tempEles, rl, cl);
 			return result;
 		}
 		

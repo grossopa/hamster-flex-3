@@ -18,7 +18,7 @@ package or.hamster.math.matrix.decomposition
 		
 		public function LUDecomposition(matrix:MatrixMath)
 		{
-			var result:Array = LUDecomposition.initEles(matrix);
+			var result:Array = initFromMatrix(matrix);
 			_LU = result[0];
 			_pivsign = result[1];
 			_rLength = matrix.rLength;
@@ -37,21 +37,25 @@ package or.hamster.math.matrix.decomposition
 		
 		public static function detOfMatrix(matrix:MatrixMath):Number
 		{
-			var resultInfo:Array = initEles(matrix);
+			var resultInfo:Array = initFromMatrix(matrix);
 			return detFromLU(resultInfo[0], 
 				matrix.rLength, matrix.cLength, resultInfo[1]);
 		}
 		
-		public static function initEles(matrix:MatrixMath):Array
+		public static function initFromMatrix(matrix:MatrixMath):Array
+		{
+			var eles:Array = matrix.getElesCopy();
+			var rl:int = matrix.rLength;
+			var cl:int = matrix.cLength;
+			return initFromEles(eles, rl, cl);
+		}
+		
+		public static function initFromEles(eles:Array, rl:int, cl:int):Array
 		{
 			// Use a "left-looking", dot-product, Crout/Doolittle algorithm.
 			var i:int;
 			var j:int;
 			var k:int;
-			
-			var eles:Array = matrix.getElesCopy();
-			var rl:int = matrix.rLength;
-			var cl:int = matrix.cLength;
 			var piv:Array = [];
 			var pivsign:int = 1;
 			
@@ -104,14 +108,13 @@ package or.hamster.math.matrix.decomposition
 				}
 				
 				// Compute multipliers.
-				
 				if (j < rl && eles[j][j] != 0) {
 					for (i = j + 1; i < rl; i++) {
 						eles[i][j] /= eles[j][j];
 					}
 				}
 			}
-			return [eles, pivsign];
+			return [eles, pivsign];			
 		}
 		
 		public static function detFromLU(LU:Array, rl:int, cl:int, pivsign:int):Number

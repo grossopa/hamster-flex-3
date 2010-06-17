@@ -141,7 +141,7 @@ package org.hamster.components.photoList
 		{
 			this.transform.perspectiveProjection = new PerspectiveProjection();
 			this.transform.perspectiveProjection.projectionCenter 
-				= new Point(this.width / 2, 0);	
+				= new Point(this.width / 2, this.height / 2);	
 		}
 
 		
@@ -193,7 +193,7 @@ package org.hamster.components.photoList
 			for (var i:int = 0; i < l; i++) {
 				var child:UIComponent = UIComponent(_itemArray[i]);
 				var angle:Number = Math.PI * 2 / l * i + angleOffset - 90;
-				child.y = child.height;
+				child.y = this.height / 2 - child.height / 2;
 				child.z = Math.sin(angle) * _radius;
 				child.transformX = child.width / 2;
 				child.x = Math.cos(angle) * _radius + this.width / 2 - child.width / 2;
