@@ -243,6 +243,20 @@ package or.hamster.math.matrix
 				}
 			}
 			
+//			var traceString:String = '';
+//			for (i = 0; i < rl - 2; i++) {
+//				for (j = 0; j < cl - 2; j++) {
+//					traceString += tempEles[i][j] + ',';
+//				}
+//				traceString += tempEles[i][cl - 2] + '\n';
+//			}
+//			for (j = 0; j < cl - 2; j++) {
+//				traceString += tempEles[rl - 2][j] + ',';
+//			}
+//			traceString += tempEles[rl - 2][cl - 2];
+//			trace (traceString);
+//			trace ("------------------------");
+			
 			var LUInfo:Array = LUDecomposition.initFromEles(tempEles, rl - 1, rl - 1);
 			var result:Number = LUDecomposition.detFromLU(LUInfo[0], rl - 1, cl - 1, LUInfo[1]);
 			
@@ -262,12 +276,15 @@ package or.hamster.math.matrix
 		 * <tr><td>A21</td><td>A22</td><td>...</td><td>A2n</td></tr>
 		 * <tr><td>...</td><td>...</td><td>...</td><td>...</td></tr>
 		 * <tr><td>An1</td><td>An2</td><td>...</td><td>Ann</td></tr>
+		 * </table>
 		 * 
 		 * @return adjoint matrix
 		 * 
 		 */
 		public function adjoint():MatrixMath
 		{
+			this.checkSquareMatrix(MatrixMathError.NOT_A_SQUARE_MATRIX_MSG);
+			
 			var rl:int = this._rLength;
 			var cl:int = this._cLength;
 			
@@ -275,13 +292,13 @@ package or.hamster.math.matrix
 			for (var i:int = 0; i < rl; i++) {
 				var tempE:Array = [];
 				for (var j:int = 0; j < cl; j++) {
-					tempE[j] = this.getSubOrderMatrix(i, j);
+					tempE[j] = this.cofactor(i, j);
 				}
 				tempEles[i] = tempE;
 			}
 			var result:MatrixMath = new MatrixMath();
 			result.setMatrix(tempEles, rl, cl);
-			return result;
+			return result.transpose();
 		}
 		
 		/**
@@ -400,7 +417,7 @@ package or.hamster.math.matrix
 			
 			for (var r:int = 0; r < rl; r++) {
 				for (var c:int = 0; c < cl; c++) {
-					if (_eles[r][c] != m.getValue(r, c)) {
+					if (_eles[r][c] - m.getValue(r, c) > 0.000000001) {
 						return false;
 					}
 				}
@@ -543,7 +560,7 @@ package or.hamster.math.matrix
 		 * @param newMatrix return a new matrix if true.
 		 * @return this or a new matrix
 		 */
-		public function multiplyAndAddTo(num:Number, row1:int, row2:int, 
+		public function multiplyRowAndAddTo(num:Number, row1:int, row2:int, 
 			newMatrix:Boolean = false):MatrixMath
 		{
 			if (row1 < 0 || row1 >= this._rLength 
