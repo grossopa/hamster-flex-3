@@ -11,7 +11,7 @@ package org.hamster.mapleCard.base.commands
 	
 	public class BaseFileLoaderCmd extends AbstractCommand
 	{
-	//	public var key:String;
+		public var key:String;
 		public var filePath:String;
 		public var fileMode:String = FileMode.READ;
 		public var byteArray:ByteArray;
