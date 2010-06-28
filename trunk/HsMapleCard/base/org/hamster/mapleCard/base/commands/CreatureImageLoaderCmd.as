@@ -7,6 +7,7 @@ package org.hamster.mapleCard.base.commands
 	import org.hamster.commands.events.CommandEvent;
 	import org.hamster.commands.impl.CommandQueue;
 	import org.hamster.mapleCard.base.constants.Constants;
+	import org.hamster.mapleCard.base.constants.CreatureStatusConst;
 	import org.hamster.mapleCard.base.model.support.CreatureImageInfo;
 	
 	public class CreatureImageLoaderCmd extends AbstractCommand
@@ -35,7 +36,7 @@ package org.hamster.mapleCard.base.commands
 				
 				for (var file:File in _files) {
 					var fLoader:BaseFileLoaderCmd = new BaseFileLoaderCmd();
-				//	fLoader.key = Constants.CREATE_KEY_PREFIX + file.name;
+					fLoader.key = file.name;
 					fLoader.filePath = file.nativePath;
 					fLoader.addEventListener(CommandEvent.COMMAND_RESULT, commandResultHandler);
 					cmdArray.push(fLoader);
@@ -50,13 +51,21 @@ package org.hamster.mapleCard.base.commands
 		private function commandResultHandler(evt:CommandEvent):void
 		{
 			var fLoader:BaseFileLoaderCmd = BaseFileLoaderCmd(evt.currentTarget);
-			_resultDict[fLoader.filePath] = fLoader.byteArray;
+			_resultDict[fLoader.key] = fLoader.byteArray;
 		}
 		
 		private function queueResultHandler(evt:CommandEvent):void
 		{
 			creatureImageInfo = new CreatureImageInfo();
 			
+			for (var s:String in _resultDict) {
+				if (s.indexOf(CreatureStatusConst.STAND) >= 0) {
+				} else if (s.indexOf(CreatureStatusConst.MOVE) >= 0) {
+				} else if (s.indexOf(CreatureStatusConst.HIT) >= 0) {
+				} else if (s.indexOf(CreatureStatusConst.DIE) >= 0) {
+					
+				}
+			}
 		}
 	}
 }
