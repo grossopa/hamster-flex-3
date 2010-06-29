@@ -1,7 +1,5 @@
 package or.hamster.math.matrix
 {
-	import flash.geom.Matrix;
-	
 	import mx.utils.ArrayUtil;
 	
 	import or.hamster.math.matrix.decomposition.LUDecomposition;
@@ -15,6 +13,8 @@ package or.hamster.math.matrix
 	 */
 	public class MatrixMath
 	{
+		public static const SMALL_NUMBER:Number = 0.0000000001;
+		
 		/**
 		 * An two-dimensional array contains a list of Number.
 		 * 
@@ -225,6 +225,8 @@ package or.hamster.math.matrix
 		 */
 		public function cofactor(r:int, c:int):Number
 		{
+			this.checkOutOfBound(r, c, MatrixMathError.OUT_OF_BOUND_MSG);
+			
 			var tempEles:Array = [];
 			var rl:int = this._rLength;
 			var cl:int = this._cLength;
@@ -242,20 +244,6 @@ package or.hamster.math.matrix
 					tempEles.push(tempE);
 				}
 			}
-			
-//			var traceString:String = '';
-//			for (i = 0; i < rl - 2; i++) {
-//				for (j = 0; j < cl - 2; j++) {
-//					traceString += tempEles[i][j] + ',';
-//				}
-//				traceString += tempEles[i][cl - 2] + '\n';
-//			}
-//			for (j = 0; j < cl - 2; j++) {
-//				traceString += tempEles[rl - 2][j] + ',';
-//			}
-//			traceString += tempEles[rl - 2][cl - 2];
-//			trace (traceString);
-//			trace ("------------------------");
 			
 			var LUInfo:Array = LUDecomposition.initFromEles(tempEles, rl - 1, rl - 1);
 			var result:Number = LUDecomposition.detFromLU(LUInfo[0], rl - 1, cl - 1, LUInfo[1]);
@@ -278,15 +266,17 @@ package or.hamster.math.matrix
 		 * <tr><td>An1</td><td>An2</td><td>...</td><td>Ann</td></tr>
 		 * </table>
 		 * 
+		 * @param newMatrix return a new matrix if true
 		 * @return adjoint matrix
 		 * 
 		 */
-		public function adjoint():MatrixMath
+		public function adjoint(newMatrix:Boolean = false):MatrixMath
 		{
 			this.checkSquareMatrix(MatrixMathError.NOT_A_SQUARE_MATRIX_MSG);
+			var result:MatrixMath = this.getReturnMatrix(newMatrix);
 			
-			var rl:int = this._rLength;
-			var cl:int = this._cLength;
+			var rl:int = result.rLength;
+			var cl:int = result.cLength;
 			
 			var tempEles:Array = [];
 			for (var i:int = 0; i < rl; i++) {
@@ -296,7 +286,7 @@ package or.hamster.math.matrix
 				}
 				tempEles[i] = tempE;
 			}
-			var result:MatrixMath = new MatrixMath();
+			
 			result.setMatrix(tempEles, rl, cl);
 			return result.transpose();
 		}
@@ -375,18 +365,6 @@ package or.hamster.math.matrix
 		}
 		
 		/**
-		 * use LU decomposition to get two array of the matrix,
-		 * the matrix must be an n*n matrix otherwise an error is thrown.
-		 *  
-		 * @return 
-		 */
-		public function lu():void
-		{
-			this.checkSquareMatrix(MatrixMathError.NOT_A_SQUARE_MATRIX_MSG);
-						
-		}
-		
-		/**
 		 * det
 		 * 
 		 * @return result
@@ -394,6 +372,25 @@ package or.hamster.math.matrix
 		public function det():Number
 		{
 			return LUDecomposition.detOfMatrix(this);
+		}
+		
+		/**
+		 * insverse of the matrix, 
+		 * 
+		 * @param newMatrix return a new matrix if true
+		 * @return this or a new matrix 
+		 * 
+		 */		
+		public function inverse(newMatrix:Boolean = false):MatrixMath
+		{
+			var result:MatrixMath = this.getReturnMatrix(newMatrix);
+			
+			var det:Number = result.det();
+			if (Math.abs(det) < SMALL_NUMBER) {
+				throw new MatrixMathError("The det of matrix is 0, so the inverse matrix is not exist!");
+			}
+			
+			return result.adjoint().multiplyNumber(1 / det);
 		}
 		
 		/////////////////////////////////
@@ -417,7 +414,7 @@ package or.hamster.math.matrix
 			
 			for (var r:int = 0; r < rl; r++) {
 				for (var c:int = 0; c < cl; c++) {
-					if (_eles[r][c] - m.getValue(r, c) > 0.000000001) {
+					if (Math.abs(_eles[r][c] - m.getValue(r, c)) > SMALL_NUMBER) {
 						return false;
 					}
 				}
