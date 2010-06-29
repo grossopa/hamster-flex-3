@@ -39,24 +39,26 @@ package org.hamster.math.linearAlgebra.test
 			super.tearDown();
 		}
 		
-		public function testCofactor():void
+		public function testAdjoint():void
 		{
-			trace ("-----");
-			trace (baseMatrix1.toString());
-			trace ("-----");
-			var adjointMatrix:MatrixMath = baseMatrix1.adjoint();
-			
-			trace (adjointMatrix.toString());
-			
+			var adjointMatrix:MatrixMath = baseMatrix1.adjoint(true);
 			var aMultiAStar:MatrixMath = baseMatrix1.multiply(adjointMatrix, true);
 			var aStarMultiA:MatrixMath = adjointMatrix.multiply(baseMatrix1, true);
-			trace ("-----");
-			trace (aMultiAStar.toString());
-			trace ("-----");
-			trace (aStarMultiA.toString());
 			Assert.assertTrue(aMultiAStar.equals(aStarMultiA));
 			Assert.assertTrue(aMultiAStar.equals(idenMatrix1.multiplyNumber(baseMatrix1.det(), true)));
 		}
 		
+		public function testInverse():void
+		{
+			var inverseMatrix:MatrixMath = baseMatrix1.inverse(true);
+			var m1:MatrixMath = baseMatrix1.multiply(inverseMatrix, true);
+			var m2:MatrixMath = inverseMatrix.multiply(baseMatrix1, true);
+			
+			Assert.assertTrue(m1.equals(m2));
+			Assert.assertTrue(m1.equals(idenMatrix1));
+		}
+		
+		
+		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 	}
 }
