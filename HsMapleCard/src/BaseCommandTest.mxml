@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx">
+
+	<fx:Declarations>
+	</fx:Declarations>
+	<fx:Script source="BaseCommandTestAs.as" />
+	
+	<mx:HBox width="100%">
+		<s:Button click="testCreatureImageLoaderCommand()" />
+	</mx:HBox>
+</s:WindowedApplication>
