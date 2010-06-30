@@ -12,6 +12,7 @@ package org.hamster.mapleCard.base.commands
 	
 	public class CreatureImageLoaderCmd extends AbstractCommand
 	{
+		
 		public var dir:String;
 		
 		private var _files:Array;
@@ -60,12 +61,17 @@ package org.hamster.mapleCard.base.commands
 			
 			for (var s:String in _resultDict) {
 				if (s.indexOf(CreatureStatusConst.STAND) >= 0) {
+					creatureImageInfo.standImages.push(_resultDict[s]);
 				} else if (s.indexOf(CreatureStatusConst.MOVE) >= 0) {
+					creatureImageInfo.moveImages.push(_resultDict[s]);
 				} else if (s.indexOf(CreatureStatusConst.HIT) >= 0) {
+					creatureImageInfo.hitImages.push(_resultDict[s]);
 				} else if (s.indexOf(CreatureStatusConst.DIE) >= 0) {
-					
+					creatureImageInfo.dieImages.push(_resultDict[s]);
 				}
 			}
+			
+			super.result(evt);
 		}
 	}
 }

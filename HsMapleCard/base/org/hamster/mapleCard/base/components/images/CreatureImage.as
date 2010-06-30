@@ -41,7 +41,9 @@ package org.hamster.mapleCard.base.components.images
 		
 		protected function initialization():void
 		{
-			if ()
+			if (!DS.imageCacheManager.exists(_subDir)) {
+				
+			}
 		}
 		
 		protected function onEnterFrameHandler(evt:Event):void
