@@ -20,6 +20,9 @@
     <application path="HsMapleCard.mxml">
       <airExcludes/>
     </application>
+    <application path="BaseCommandTest.mxml">
+      <airExcludes/>
+    </application>
   </applications>
   <modules/>
   <buildCSSFiles/>
