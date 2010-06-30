@@ -4,6 +4,7 @@
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" linkType="1" path="base"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="common"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="test"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="3">
       <libraryPathEntry kind="4" path="">
@@ -23,4 +24,3 @@
   <modules/>
   <buildCSSFiles/>
 </actionScriptProperties>
-

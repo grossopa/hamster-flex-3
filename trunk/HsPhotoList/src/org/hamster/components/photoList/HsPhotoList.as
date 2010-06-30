@@ -98,6 +98,7 @@ package org.hamster.components.photoList
 		{
 			super();
 			
+			
 			this.addEventListener(ResizeEvent.RESIZE, resizeHandler);
 			this.addEventListener(FlexEvent.CREATION_COMPLETE, completeHandler);
 			
