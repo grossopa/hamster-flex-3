@@ -5,6 +5,7 @@
       <compilerSourcePathEntry kind="1" linkType="1" path="base"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="common"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="test"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="test-data"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="3">
       <libraryPathEntry kind="4" path="">
