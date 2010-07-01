@@ -5,6 +5,7 @@ package org.hamster.mapleCard.base.components.images
 	import org.hamster.commands.events.CommandEvent;
 	import org.hamster.mapleCard.base.commands.CreatureImageLoaderCmd;
 	import org.hamster.mapleCard.base.components.BaseImage;
+	import org.hamster.mapleCard.base.constants.CreatureStatusConst;
 	import org.hamster.mapleCard.base.model.support.CreatureImageInfo;
 	import org.hamster.mapleCard.base.services.DataService;
 	
@@ -22,7 +23,7 @@ package org.hamster.mapleCard.base.components.images
 		public function set status(value:String):void { this._status = value; }
 		public function get status():String { return this._status; }
 		
-		private var _
+		private var _currentFrame:int = 0;
 		
 		public function CreatureImage(id:String)
 		{
@@ -54,8 +55,11 @@ package org.hamster.mapleCard.base.components.images
 		protected function onEnterFrameHandler(evt:Event):void
 		{
 			if (this._info == null) return;
-			
-			switch (status)
+			switch (status) {
+				if (CreatureStatusConst.MOVE) {
+					playImageContent()
+				}
+			}
 		}
 	}
 }
