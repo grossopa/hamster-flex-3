@@ -9,6 +9,7 @@ package org.hamster.mapleCard.base.commands
 	import org.hamster.mapleCard.base.constants.Constants;
 	import org.hamster.mapleCard.base.constants.CreatureStatusConst;
 	import org.hamster.mapleCard.base.model.support.CreatureImageInfo;
+	import org.hamster.mapleCard.base.utils.FileUtil;
 	
 	public class CreatureImageLoaderCmd extends AbstractCommand
 	{
@@ -35,7 +36,7 @@ package org.hamster.mapleCard.base.commands
 			} else {
 				var cmdArray:Array = [];
 				
-				for (var file:File in _files) {
+				for each (var file:File in _files) {
 					var fLoader:BaseFileLoaderCmd = new BaseFileLoaderCmd();
 					fLoader.key = file.name;
 					fLoader.filePath = file.nativePath;
@@ -44,6 +45,7 @@ package org.hamster.mapleCard.base.commands
 				}
 				
 				var cmdQueue:CommandQueue = new CommandQueue(cmdArray);
+				cmdQueue.addEventListener(CommandEvent.COMMAND_RESULT, queueResultHandler);
 				cmdQueue.addEventListener(CommandEvent.COMMAND_FAULT, queueResultHandler);
 				cmdQueue.execute();
 			}
@@ -72,6 +74,14 @@ package org.hamster.mapleCard.base.commands
 			}
 			
 			super.result(evt);
+		}
+		
+		public static function execute(id:String):CreatureImageLoaderCmd
+		{
+			var cmd:CreatureImageLoaderCmd = new CreatureImageLoaderCmd();
+			cmd.dir = FileUtil.creatureDir.nativePath + File.separator + id;
+			cmd.execute();
+			return cmd;
 		}
 	}
 }

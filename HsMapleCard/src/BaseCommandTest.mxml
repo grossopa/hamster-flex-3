@@ -7,7 +7,7 @@
 	</fx:Declarations>
 	<fx:Script source="BaseCommandTestAs.as" />
 	
-	<mx:HBox width="100%">
+	<mx:HBox width="100%" verticalAlign="middle" horizontalAlign="left">
 		<s:Button click="testCreatureImageLoaderCommand()" />
 	</mx:HBox>
 </s:WindowedApplication>
