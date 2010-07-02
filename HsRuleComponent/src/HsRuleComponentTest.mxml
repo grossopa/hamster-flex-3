@@ -35,14 +35,28 @@
 				</s:dataProvider>
 			</s:ComboBox>
 			<s:CheckBox id="isShowCrosslineCheckBox" selected="true" label="show crossline" />
-			<s:HSlider id="xFromSlider" minimum="-100" maximum="100" value="0" />
-			<s:HSlider id="yFromSlider" minimum="-100" maximum="100" value="50" />
-			<s:HSlider id="xToSlider" minimum="-100" maximum="100" value="50"  />
-			<s:HSlider id="yToSlider" minimum="-100" maximum="100" value="100" />
-			<s:HSlider id="xGapSlider" minimum="2" maximum="20" value="5" />
-			<s:HSlider id="yGapSlider" minimum="2" maximum="20" value="5" />
-			<s:HSlider id="xGapWidthSlider" minimum="2" maximum="20" value="5" />
-			<s:HSlider id="yGapWidthSlider" minimum="2" maximum="20" value="5" />
+			<s:Group>
+				<s:layout>
+					<s:TileLayout requestedColumnCount="2" />
+				</s:layout>
+				<s:Label text="X From : " />
+				<s:HSlider id="xFromSlider" minimum="-100" maximum="100" value="0" />
+				<s:Label text="Y From : " />
+				<s:HSlider id="yFromSlider" minimum="-100" maximum="100" value="50" />
+				<s:Label text="X To : " />
+				<s:HSlider id="xToSlider" minimum="-100" maximum="100" value="50"  />
+				<s:Label text="Y To : " />
+				<s:HSlider id="yToSlider" minimum="-100" maximum="100" value="100" />
+				<s:Label text="X Gap : " />
+				<s:HSlider id="xGapSlider" minimum="2" maximum="20" value="5" />
+				<s:Label text="Y Gap : " />
+				<s:HSlider id="yGapSlider" minimum="2" maximum="20" value="5" />
+				<s:Label text="X Gap Width: " />
+				<s:HSlider id="xGapWidthSlider" minimum="2" maximum="20" value="5" />
+				<s:Label text="Y Gap Width: " />
+				<s:HSlider id="yGapWidthSlider" minimum="2" maximum="20" value="5" />
+			</s:Group>
+			
 		</s:VGroup>
 	</s:HGroup>
 </s:WindowedApplication>
