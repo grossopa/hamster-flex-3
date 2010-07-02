@@ -1,10 +1,14 @@
 package org.hamster.ruleComponent
 {
+	import flash.display.BitmapData;
 	import flash.display.Graphics;
 	import flash.events.MouseEvent;
+	import flash.geom.Matrix;
 	
 	import mx.core.UIComponent;
+	import mx.core.UITextField;
 	import mx.events.ResizeEvent;
+	import mx.graphics.ImageSnapshot;
 	
 	import spark.components.Group;
 	import spark.layouts.BasicLayout;
@@ -17,6 +21,8 @@ package org.hamster.ruleComponent
 		private var _isRedrawRules:Boolean = true;
 		private var _isRedrawInteractive:Boolean = true;
 		private var _interactiveLayer:UIComponent;
+		private var _textSnapshotUtil:UITextField;
+		private var _matrixUtil:Matrix;
 		
 		private var _xFrom:Number;
 		private var _yFrom:Number;
@@ -216,6 +222,7 @@ package org.hamster.ruleComponent
 			
 		//	this.verticalScrollPolicy = "off";
 		//	this.horizontalScrollPolicy = "off";
+			_matrixUtil = new Matrix();
 			
 			this.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
 			this.addEventListener(ResizeEvent.RESIZE, resizeHandler);
@@ -228,6 +235,8 @@ package org.hamster.ruleComponent
 			_interactiveLayer.percentHeight = 100;
 			_interactiveLayer.percentWidth = 100;
 			this.addElement(this._interactiveLayer);
+			
+			_textSnapshotUtil = new UITextField();
 		}
 		
 		private function mouseMoveHandler(evt:MouseEvent):void
@@ -320,6 +329,18 @@ package org.hamster.ruleComponent
 				g.moveTo(startX, 6);
 				g.lineTo(startX, this._ruleWidth);
 				
+				// draw numbers
+				var tipValue:Number = this._xGap * i + this._xFrom;
+				_textSnapshotUtil.text = tipValue.toString();
+				_textSnapshotUtil.width = _textSnapshotUtil.textWidth + 4;
+				var textBitmapData:BitmapData = ImageSnapshot.captureBitmapData(_textSnapshotUtil);
+				g.lineStyle(0, 0, 0);
+				_matrixUtil.tx = startX + 1;
+				_matrixUtil.ty = -2;
+				g.beginBitmapFill(textBitmapData, _matrixUtil);
+				g.drawRect(startX + 1, -2, _textSnapshotUtil.measuredWidth, _textSnapshotUtil.measuredHeight);
+				g.endFill();
+				g.lineStyle(1, 0x000000, 1);
 				
 				for (ii = 1; ii < 10; ii = ii + 2) {
 					tmpX = startX + xDrawSmallGap * ii;
@@ -368,7 +389,7 @@ package org.hamster.ruleComponent
 					g.moveTo(this._ruleWidth - 8, tmpY);
 					g.lineTo(this._ruleWidth, tmpY);
 				}
-			}			
+			}
 		}
 		
 		private function redrawInteractiveLayer(g:Graphics, uw:Number, uh:Number):void
