@@ -1,5 +1,7 @@
 package org.hamster.mapleCard.base.managers
 {
+	import flash.utils.Dictionary;
+
 	/**
 	 * Manager class of all assets include swf, png, etc.
 	 * 

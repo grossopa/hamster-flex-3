@@ -43,7 +43,7 @@ package org.hamster.mapleCard.base.commands
 				var cmdArray:Array = [];
 				
 				for each (var file:File in _files) {
-					var fLoader:BaseFileLoaderCmd = new BaseFileLoaderCmd();
+					var fLoader:BaseImageLoaderCmd = new BaseImageLoaderCmd();
 					fLoader.key = file.name;
 					fLoader.filePath = file.nativePath;
 					fLoader.addEventListener(CommandEvent.COMMAND_RESULT, commandResultHandler);
@@ -59,8 +59,8 @@ package org.hamster.mapleCard.base.commands
 		
 		private function commandResultHandler(evt:CommandEvent):void
 		{
-			var fLoader:BaseFileLoaderCmd = BaseFileLoaderCmd(evt.currentTarget);
-			_resultDict[fLoader.key] = fLoader.byteArray;
+			var fLoader:BaseImageLoaderCmd = BaseImageLoaderCmd(evt.currentTarget);
+			_resultDict[fLoader.key] = fLoader.bitmap;
 		}
 		
 		private function queueResultHandler(evt:CommandEvent):void
