@@ -25,12 +25,13 @@ package org.hamster.mapleCard.base.components.images
 		public function set status(value:String):void { this._status = value; }
 		public function get status():String { return this._status; }
 		
-		private var _speed:int = 11;
+		private var _speed:int = 30;
 		public function set speed(value:int):void { this._speed = value; }
 		public function get speed():int { return this._speed }
 		
 		private var _currentFrame:int = 0;
 		private var _frameCount:int = 0;
+		private var _isPlayReverse:Boolean = false;
 		private var _matrixUtil:Matrix;
 		private var _measuredWidth:Number;
 		private var _measuredHeight:Number;
@@ -64,19 +65,21 @@ package org.hamster.mapleCard.base.components.images
 			this._info = cmd.creatureImageInfo;
 			var measuredWidth:Number = 0;
 			var measuredHeight:Number = 0;
-			for each (var bitmap:Bitmap in this._info.dieImages) {
+			var bitmap:Bitmap;
+			
+			for each (bitmap in this._info.dieImages) {
 				measuredWidth = Math.max(measuredWidth, bitmap.width);
 				measuredHeight = Math.max(measuredHeight, bitmap.height);
 			}
-			for each (var bitmap:Bitmap in this._info.hitImages) {
+			for each (bitmap in this._info.hitImages) {
 				measuredWidth = Math.max(measuredWidth, bitmap.width);
 				measuredHeight = Math.max(measuredHeight, bitmap.height);
 			}
-			for each (var bitmap:Bitmap in this._info.moveImages) {
+			for each (bitmap in this._info.moveImages) {
 				measuredWidth = Math.max(measuredWidth, bitmap.width);
 				measuredHeight = Math.max(measuredHeight, bitmap.height);
 			}
-			for each (var bitmap:Bitmap in this._info.standImages) {
+			for each (bitmap in this._info.standImages) {
 				measuredWidth = Math.max(measuredWidth, bitmap.width);
 				measuredHeight = Math.max(measuredHeight, bitmap.height);
 			}
@@ -110,19 +113,43 @@ package org.hamster.mapleCard.base.components.images
 		{
 			this.graphics.clear();
 			
-			var bitmap:Bitmap;
+			var imgArray:Array;
 			if (status == CreatureStatusConst.MOVE) {
-				this._currentFrame++;
-				if (this._currentFrame >= this._info.moveImages.length) {
-					this._currentFrame = 0;
-				}
-				bitmap = this._info.moveImages[this._currentFrame];
+				imgArray = this._info.moveImages;
+			} else if (status == CreatureStatusConst.HIT) {
+				imgArray = this._info.hitImages;
+			} else if (status == CreatureStatusConst.STAND) {
+				imgArray = this._info.standImages;
+			} else if (status == CreatureStatusConst.DIE) {
+				imgArray = this._info.dieImages;
 			}
 			
+			
+			if (imgArray.length == 1) {
+				this._currentFrame = 0;
+			} else {
+				if (!_isPlayReverse) {
+					if (this._currentFrame == imgArray.length - 1) {
+						this._currentFrame--;
+						_isPlayReverse = true;
+					} else {
+						this._currentFrame++;
+					}
+				} else {
+					if (this._currentFrame == 0) {
+						this._currentFrame++;
+						_isPlayReverse = false;
+					} else {
+						this._currentFrame--;
+					}				
+				}
+			}
+			var bitmap:Bitmap = imgArray[_currentFrame];
 			_matrixUtil.tx = (this._measuredWidth - bitmap.width) / 2;
 			_matrixUtil.ty = this._measuredHeight - bitmap.height;
-			this.graphics.beginBitmapFill(bitmap.bitmapData, _matrixUtil, false);
 			this.graphics.drawRect(0, 0, this._measuredWidth, this._measuredHeight);
+			this.graphics.beginBitmapFill(bitmap.bitmapData, _matrixUtil, false);
+			this.graphics.drawRect(_matrixUtil.tx, _matrixUtil.ty, bitmap.width, bitmap.height);
 			this.graphics.endFill();
 		}
 	}

@@ -8,7 +8,11 @@
 	<fx:Script source="BaseCommandTestAs.as" />
 	
 	<mx:HBox width="100%" verticalAlign="middle" horizontalAlign="left">
-		<s:Button click="testCreatureImageLoaderCommand()" />
+		<s:Button click="testCreatureImageLoaderCommand()" label="Load" />
+		<s:Button click="creatureWalk()" label="Walk" />
+		<s:Button click="creatureStand()" label="Stand" />
+		<s:Button click="creatureHit()" label="Hit" />
+		<s:Button click="creatureDie()" label="Die" />
 	</mx:HBox>
 	<mx:UIComponent y="30" id="sv" width="100%" height="100%" />
 </s:WindowedApplication>
