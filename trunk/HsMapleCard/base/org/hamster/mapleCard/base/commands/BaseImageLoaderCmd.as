@@ -15,7 +15,9 @@ package org.hamster.mapleCard.base.commands
 	
 	public class BaseImageLoaderCmd extends AbstractCommand
 	{
-		public var fileDir:String;
+		public var key:String;
+		public var filePath:String;
+		public var bitmap:Bitmap;
 		
 		public function BaseImageLoaderCmd()
 		{
@@ -24,10 +26,16 @@ package org.hamster.mapleCard.base.commands
 		
 		override public function execute():void
 		{
-			var loader:Loader = new URLLoader();
-			var urlRequest:URLRequest = new URLRequest(fileDir);
-			loader.loaderInfo.addEventListener(Event.COMPLETE, completeHandler);
+			var loader:Loader = new Loader();
+			var urlRequest:URLRequest = new URLRequest(this.filePath);
+			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, result);
 			loader.load(urlRequest);
+		}
+		
+		override public function result(data:Object):void
+		{
+			this.bitmap = data.target.content;
+			super.result(data);
 		}
 	}
 }
