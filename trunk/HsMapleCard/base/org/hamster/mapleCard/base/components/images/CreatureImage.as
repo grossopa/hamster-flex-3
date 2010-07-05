@@ -22,10 +22,14 @@ package org.hamster.mapleCard.base.components.images
 		public function get info():CreatureImageInfo { return this._info };
 		
 		private var _status:String;
-		public function set status(value:String):void { this._status = value; }
+		public function set status(value:String):void 
+		{
+			this._status = value;
+			this._currentFrame = 0;
+		}
 		public function get status():String { return this._status; }
 		
-		private var _speed:int = 30;
+		private var _speed:int = 6;
 		public function set speed(value:int):void { this._speed = value; }
 		public function get speed():int { return this._speed }
 		
@@ -127,7 +131,7 @@ package org.hamster.mapleCard.base.components.images
 			
 			if (imgArray.length == 1) {
 				this._currentFrame = 0;
-			} else {
+			} else if (status != CreatureStatusConst.DIE) {
 				if (!_isPlayReverse) {
 					if (this._currentFrame == imgArray.length - 1) {
 						this._currentFrame--;
@@ -143,7 +147,11 @@ package org.hamster.mapleCard.base.components.images
 						this._currentFrame--;
 					}				
 				}
+			} else if (this._currentFrame != imgArray.length - 1) {
+				this._currentFrame++;
 			}
+			
+			
 			var bitmap:Bitmap = imgArray[_currentFrame];
 			_matrixUtil.tx = (this._measuredWidth - bitmap.width) / 2;
 			_matrixUtil.ty = this._measuredHeight - bitmap.height;
