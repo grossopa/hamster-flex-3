@@ -23,7 +23,7 @@ package org.hamster.mapleCard.base.commands
 		public var dir:String;
 		
 		private var _files:Array;
-		private var _resultDict:Dictionary;
+		private var _resultDict:Object;
 		
 		public var creatureImageInfo:CreatureImageInfo;
 		
@@ -35,7 +35,7 @@ package org.hamster.mapleCard.base.commands
 		override public function execute():void
 		{
 			_files = new File(dir).getDirectoryListing();
-			_resultDict = new Dictionary();
+			_resultDict = new Object();
 			if (_files.length == 0) {
 				_files = [];
 				this.result(null);
@@ -68,14 +68,16 @@ package org.hamster.mapleCard.base.commands
 			creatureImageInfo = new CreatureImageInfo();
 			
 			for (var s:String in _resultDict) {
+				var ss:String = s.substr(s.length - 5, 1);
+				var idx:int = parseInt(ss);
 				if (s.indexOf(CreatureStatusConst.STAND) >= 0) {
-					creatureImageInfo.standImages.push(_resultDict[s]);
+					creatureImageInfo.standImages[idx] = (_resultDict[s]);
 				} else if (s.indexOf(CreatureStatusConst.MOVE) >= 0) {
-					creatureImageInfo.moveImages.push(_resultDict[s]);
+					creatureImageInfo.moveImages[idx] = (_resultDict[s]);
 				} else if (s.indexOf(CreatureStatusConst.HIT) >= 0) {
-					creatureImageInfo.hitImages.push(_resultDict[s]);
+					creatureImageInfo.hitImages[idx] = (_resultDict[s]);
 				} else if (s.indexOf(CreatureStatusConst.DIE) >= 0) {
-					creatureImageInfo.dieImages.push(_resultDict[s]);
+					creatureImageInfo.dieImages[idx] = (_resultDict[s]);
 				}
 			}
 			
