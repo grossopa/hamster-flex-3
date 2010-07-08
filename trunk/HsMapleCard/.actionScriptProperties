@@ -6,6 +6,7 @@
       <compilerSourcePathEntry kind="1" linkType="1" path="common"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="test"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="test-data"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="management"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="3">
       <libraryPathEntry kind="4" path="">
@@ -21,6 +22,9 @@
     <application path="HsMapleCard.mxml">
       <airExcludes/>
     </application>
+    <application path="MapleCardManagement.mxml">
+      <airExcludes/>
+    </application>
     <application path="BaseCommandTest.mxml">
       <airExcludes/>
     </application>
@@ -28,4 +32,3 @@
   <modules/>
   <buildCSSFiles/>
 </actionScriptProperties>
-

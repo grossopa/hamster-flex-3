@@ -6,6 +6,7 @@ package org.hamster.mapleCard.base.utils
 	{
 		private static var _rootDir:File;
 		private static var _creatureDir:File;
+		private static var _creatureMetaDir:File;
 		
 		public static function get rootDir():File
 		{
@@ -22,6 +23,15 @@ package org.hamster.mapleCard.base.utils
 					+ File.separator + "Creatures");
 			}
 			return _creatureDir;
+		}
+		
+		public static function get creatureMetaDir():File
+		{
+			if (_creatureMetaDir == null) {
+				_creatureMetaDir = new File(rootDir.nativePath
+					+ File.separator + "CreatureMeta");
+			}
+			return _creatureMetaDir;
 		}
 	}
 }
