@@ -1,4 +1,4 @@
-package org.hamster.mapleCard.base.components
+package org.hamster.mapleCard.base.components.images
 {
 	import flash.display.Bitmap;
 	import flash.display.MovieClip;
