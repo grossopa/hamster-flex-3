@@ -13,7 +13,7 @@ package org.hamster.mapleCard.base.commands
 	import org.hamster.commands.events.CommandEvent;
 	import org.hamster.commands.impl.CommandQueue;
 	import org.hamster.mapleCard.base.constants.Constants;
-	import org.hamster.mapleCard.base.constants.CreatureStatusConst;
+	import org.hamster.mapleCard.base.constants.CreatureStatus;
 	import org.hamster.mapleCard.base.model.support.CreatureImageInfo;
 	import org.hamster.mapleCard.base.utils.FileUtil;
 	
@@ -70,13 +70,13 @@ package org.hamster.mapleCard.base.commands
 			for (var s:String in _resultDict) {
 				var ss:String = s.substr(s.length - 5, 1);
 				var idx:int = parseInt(ss);
-				if (s.indexOf(CreatureStatusConst.STAND) >= 0) {
+				if (s.indexOf(CreatureStatus.STAND) >= 0) {
 					creatureImageInfo.standImages[idx] = (_resultDict[s]);
-				} else if (s.indexOf(CreatureStatusConst.MOVE) >= 0) {
+				} else if (s.indexOf(CreatureStatus.MOVE) >= 0) {
 					creatureImageInfo.moveImages[idx] = (_resultDict[s]);
-				} else if (s.indexOf(CreatureStatusConst.HIT) >= 0) {
+				} else if (s.indexOf(CreatureStatus.HIT) >= 0) {
 					creatureImageInfo.hitImages[idx] = (_resultDict[s]);
-				} else if (s.indexOf(CreatureStatusConst.DIE) >= 0) {
+				} else if (s.indexOf(CreatureStatus.DIE) >= 0) {
 					creatureImageInfo.dieImages[idx] = (_resultDict[s]);
 				}
 			}
