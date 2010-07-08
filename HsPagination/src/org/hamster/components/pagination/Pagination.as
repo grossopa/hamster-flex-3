@@ -21,7 +21,13 @@ package org.hamster.components.pagination
 		
 		public function set totalSize(value:int):void
 		{
-			this._totalSize = value;
+			if (this._totalSize != value) {
+				this._totalSize = value;
+				var disEvt:PaginationEvent = new PaginationEvent(PaginationEvent.CHANGE);
+				disEvt.oldIndex = this._currentIndex;
+				disEvt.newIndex = this._currentIndex;
+				this.dispatchEvent(disEvt);
+			}
 		}
 		
 		public function get totalSize():int
@@ -31,7 +37,13 @@ package org.hamster.components.pagination
 		
 		public function set countPerPaging(value:int):void
 		{
-			this._countPerPaging = value;
+			if (this._countPerPaging != value) {
+				this._countPerPaging = value;
+				var disEvt:PaginationEvent = new PaginationEvent(PaginationEvent.CHANGE);
+				disEvt.oldIndex = this._currentIndex;
+				disEvt.newIndex = this._currentIndex;
+				this.dispatchEvent(disEvt);
+			}
 		}
 		
 		public function get countPerPaging():int
@@ -53,6 +65,12 @@ package org.hamster.components.pagination
 		public function get currentIndex():int
 		{
 			return this._currentIndex;
+		}
+		
+		// getter
+		public function get startIndex():int
+		{
+			return this._currentIndex - (this._currentIndex % this._countPerPaging);
 		}
 		
 		private var _farLeftBtn:Label;
@@ -117,7 +135,7 @@ package org.hamster.components.pagination
 			this.addElement(_goLeftBtn);
 			_goLeftBtn.visible = this._currentIndex > 0;
 			
-			var stIndex:int = this._currentIndex - (this._currentIndex % this._countPerPaging);
+			var stIndex:int = this.startIndex;
 			for (var i:int = 0; i < this._countPerPaging; i++) {
 				if (i + stIndex >= this._totalSize) {
 					break;

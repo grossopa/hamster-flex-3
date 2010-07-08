@@ -1,6 +1,6 @@
 package org.hamster.mapleCard.base.constants
 {
-	public class CreatureStatusConst
+	public class CreatureStatus
 	{
 		public static const STAND:String = "stand";
 		public static const MOVE:String = "move";

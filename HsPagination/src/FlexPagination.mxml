@@ -5,10 +5,18 @@
 	<fx:Script>
 		<![CDATA[
 			import org.hamster.components.pagination.PaginationEvent;
+			[Bindable] private var totalSize:int = 0;
+
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				totalSize = 5;
+			}
+
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<pagination1:Pagination totalSize="47" />
+	<pagination1:Pagination totalSize="{totalSize}" />
+	<s:Button click="button1_clickHandler(event)" />
 </s:Application>
