@@ -16,6 +16,8 @@ package org.hamster.mapleCard.base.commands
 		public var fileMode:String = FileMode.READ;
 		public var byteArray:ByteArray;
 		
+		protected var fs:FileStream;
+		
 		public function BaseFileLoaderCmd()
 		{
 			super();
@@ -24,7 +26,7 @@ package org.hamster.mapleCard.base.commands
 		override public function execute():void
 		{
 			var file:File = new File(filePath);
-			var fs:FileStream = new FileStream();
+			fs = new FileStream();
 			fs.addEventListener(Event.COMPLETE, result);
 			fs.addEventListener(IOErrorEvent.IO_ERROR, fault);
 			fs.openAsync(file, FileMode.READ);
@@ -33,7 +35,6 @@ package org.hamster.mapleCard.base.commands
 		override public function result(data:Object):void
 		{
 			byteArray = new ByteArray();
-			var fs:FileStream = FileStream(data.currentTarget);
 			fs.readBytes(byteArray, 0, fs.bytesAvailable);
 			super.result(data);
 		}
@@ -41,6 +42,10 @@ package org.hamster.mapleCard.base.commands
 		override public function fault(info:Object):void
 		{
 			super.fault(info);
+		}
+		
+		protected function afterResult(data:Object):void{
+			super.result(data);	
 		}
 	}
 }
