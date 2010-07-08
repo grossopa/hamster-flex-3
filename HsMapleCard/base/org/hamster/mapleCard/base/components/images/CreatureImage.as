@@ -6,7 +6,6 @@ package org.hamster.mapleCard.base.components.images
 	
 	import org.hamster.commands.events.CommandEvent;
 	import org.hamster.mapleCard.base.commands.CreatureImageLoaderCmd;
-	import org.hamster.mapleCard.base.components.BaseImage;
 	import org.hamster.mapleCard.base.constants.BaseImagePlayMethod;
 	import org.hamster.mapleCard.base.constants.CreatureStatus;
 	import org.hamster.mapleCard.base.model.support.CreatureImageInfo;
