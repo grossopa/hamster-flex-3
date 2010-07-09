@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
 					   xmlns:s="library://ns.adobe.com/flex/spark"  frameRate="60"
-					   xmlns:mx="library://ns.adobe.com/flex/mx">
+					   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:local="*" 
+					   xmlns:components="org.hamster.mapleCard.management.views.components.*"
+					    applicationComplete="windowedapplication1_applicationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import org.hamster.mapleCard.management.facade.ManagementFacade;
+			import org.puremvc.as3.patterns.observer.Notification;
+		
+		private var facade:ManagementFacade = ManagementFacade.getInstance();
+		
+		private function start():void
+		{
+			
+		}
+
+			protected function windowedapplication1_applicationCompleteHandler(event:FlexEvent):void
+			{
+				facade.notifyObservers( new Notification( ManagementFacade.APP_INIT, this ) );
+			}
+
+		]]>
+	</fx:Script>
+	<components:CreatureEditor id="creatureEditor" />
 </s:WindowedApplication>
