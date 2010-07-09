@@ -1,8 +1,10 @@
 package org.hamster.mapleCard.base.model.card
 {
-	public class CreatureCard
+	[Bindable]
+	public class CreatureCard extends BaseCard
 	{
 		public var id:String;
+		public var name:String;
 		public var moveSpeed:Number;
 		public var att:Number;
 		public var def:Number;
@@ -12,6 +14,7 @@ package org.hamster.mapleCard.base.model.card
 		override public function decode(xml:XML):void
 		{
 			this.id = xml.attribute("id");
+			this.name = xml.attribute("name");
 			this.moveSpeed = xml.attribute("move-speed");
 			this.att = xml.attribute("att");
 			this.def = xml.attribute("def");
@@ -21,7 +24,7 @@ package org.hamster.mapleCard.base.model.card
 		
 		override public function encode():XML
 		{
-			var xml:XML = new XML(<creature-card id={id} 
+			var xml:XML = new XML(<creature-card id={id} name={name} 
 				move-speed={moveSpeed} att={att} def={def} 
 				hp={hp} distance={distance}></creature-card>);
 			return xml;

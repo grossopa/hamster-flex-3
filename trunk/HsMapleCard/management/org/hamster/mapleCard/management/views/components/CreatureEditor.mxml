@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" 
+		 xmlns:card="org.hamster.mapleCard.base.model.card.*">
+	<fx:Declarations>
+		<card:CreatureCard id="edittingCard"
+						   name="{currentCard.name}"
+						   moveSpeed="{currentCard.moveSpeed}"
+						   att="{currentCard.att}"
+						   def="{currentCard.def}"
+						   hp="{currentCard.hp}"
+						   distance="{currentCard.distance}" />
+		
+	</fx:Declarations>
+	<fx:Metadata>
+		[Event("saveCreatureCard")]
+		[Event("loadCreatureCard")]
+	</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			[Bindable] public var currentCard:CreatureCard;
+		]]>
+	</fx:Script>
+
+	<fx:Script source="CreatureEditorAs.as" />
+	
+	
+	<mx:UIComponent id="mainCreatureImg" width="150" height="150" />
+	<mx:Form width="300" height="150" x="150" paddingTop="5" paddingBottom="5">
+		<mx:FormHeading label="{currentCard.id}" />
+		<mx:FormItem label="Name : ">
+			<s:TextInput id="nameInput" text="{currentCard.name}" />
+		</mx:FormItem>
+		<mx:FormItem label="Move speed : ">
+			<s:TextInput id="moveSpeedInput" text="{currentCard.moveSpeed}" />
+		</mx:FormItem>
+		<mx:FormItem label="Attack : ">
+			<s:TextInput id="attInput" text="{currentCard.att}" />
+		</mx:FormItem>
+		<mx:FormItem label="Defense : ">
+			<s:TextInput id="defInput" text="{currentCard.def}" />
+		</mx:FormItem>
+	</mx:Form>
+	<mx:Form width="300" height="150" x="450" paddingTop="5">
+		<mx:FormItem label="HP : ">
+			<s:TextInput id="hpInput" text="{currentCard.hp}" />
+		</mx:FormItem>
+		<mx:FormItem label="Distance : ">
+			<s:TextInput id="distanceInput" text="{currentCard.distance}" />
+		</mx:FormItem>
+	</mx:Form>
+	<s:HGroup y="150" width="100%">
+		<s:Button id="submitBtn" label="Submit" click="dispatchEvent(new Event('saveCreatureCard'))" />
+		<s:Button id="reloadBtn" label="Load" click="dispatchEvent(new Event('loadCreatureCard'))" />
+	</s:HGroup>
+</s:Group>
