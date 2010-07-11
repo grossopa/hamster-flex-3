@@ -27,6 +27,7 @@ package org.hamster.mapleCard.base.model.card
 			var xml:XML = new XML(<creature-card id={id} name={name} 
 				move-speed={moveSpeed} att={att} def={def} 
 				hp={hp} distance={distance}></creature-card>);
+			trace(xml.toString());
 			return xml;
 		}
 	}

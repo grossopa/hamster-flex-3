@@ -10,11 +10,11 @@ package org.hamster.mapleCard.base.commands
 	import org.hamster.mapleCard.base.model.card.CreatureCard;
 	import org.hamster.mapleCard.base.utils.FileUtil;
 	
-	public class CreatureMetaLoaderCmd extends BaseFileLoaderCmd
+	public class CreatureCardLoaderCmd extends BaseFileLoaderCmd
 	{
 		public var creatureCard:CreatureCard;
 		
-		public function CreatureMetaLoaderCmd()
+		public function CreatureCardLoaderCmd()
 		{
 			super();
 		}
