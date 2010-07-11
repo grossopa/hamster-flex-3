@@ -6,7 +6,7 @@ package org.hamster.mapleCard.management.commands
 	import mx.rpc.IResponder;
 	import mx.rpc.events.ResultEvent;
 	
-	import org.hamster.mapleCard.base.commands.CreatureMetaLoaderCmd;
+	import org.hamster.mapleCard.base.commands.CreatureCardLoaderCmd;
 	import org.hamster.mapleCard.base.model.card.CreatureCard;
 	import org.hamster.mapleCard.management.delegates.CreatureMetaDelegate;
 	import org.hamster.mapleCard.management.facade.ManagementFacade;
@@ -35,7 +35,7 @@ package org.hamster.mapleCard.management.commands
 			var creatureCard:CreatureCard = new CreatureCard();
 			creatureCard.decode(new XML(str));
 			var creatureCardProxy:CreatureCardProxy = facade.retrieveProxy(CreatureCardProxy.NAME) as CreatureCardProxy;
-			creatureCardProxy.setData(creatureCard);
+			creatureCardProxy.addCreatureCard(creatureCard);
 			this.sendNotification(ManagementFacade.LOAD_CREATURE_DONE, creatureCard);
 		}
 		

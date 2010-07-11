@@ -48,7 +48,8 @@ package org.hamster.mapleCard.management.delegates
 			var file:File = new File(FileUtil.creatureMetaDir.nativePath 
 				+ File.separator + meta.id.toString() + ".xml");
 			fs.open(file, FileMode.WRITE);
-			fs.writeUTF(meta.encode().toString());
+			fs.writeMultiByte(meta.encode().toString(), "utf-8");
+			fs.close();
 			this.responder.result(meta);
 		}
 	}
