@@ -7,6 +7,7 @@ package org.hamster.mapleCard.base.components.images
 	import org.hamster.commands.events.CommandEvent;
 	import org.hamster.mapleCard.base.commands.CreatureImageLoaderCmd;
 	import org.hamster.mapleCard.base.constants.BaseImagePlayMethod;
+	import org.hamster.mapleCard.base.constants.Constants;
 	import org.hamster.mapleCard.base.constants.CreatureStatus;
 	import org.hamster.mapleCard.base.model.support.CreatureImageInfo;
 	import org.hamster.mapleCard.base.services.DataService;
@@ -50,7 +51,7 @@ package org.hamster.mapleCard.base.components.images
 				cmd.addEventListener(CommandEvent.COMMAND_FAULT, loaderFaultHandler);
 			} else {
 				trace ("Load Image " + id + " from cache service");
-				this._info = CreatureImageInfo(DS.imageCacheManager.get(id));
+				this._info = CreatureImageInfo(DS.imageCacheManager.get(Constants.CREATE_KEY_PREFIX + id));
 				initializeFromImgArray(_info.moveImages, _info.standImages, _info.hitImages, _info.dieImages);
 			}
 		}
@@ -61,14 +62,14 @@ package org.hamster.mapleCard.base.components.images
 			this._info = cmd.creatureImageInfo;
 			
 			// save item to cache
-			DS.imageCacheManager.put(id, _info);
+			DS.imageCacheManager.put(Constants.CREATE_KEY_PREFIX + id, _info);
 			initializeFromImgArray(_info.moveImages, _info.standImages, _info.hitImages, _info.dieImages);
 		}
 		
 		
 		private function loaderFaultHandler(evt:CommandEvent):void
 		{
-			
+			trace ("Load image " + id + " failed");
 		}
 		
 		override protected function updateDisplayContent():void
