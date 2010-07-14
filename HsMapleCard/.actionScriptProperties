@@ -7,6 +7,8 @@
       <compilerSourcePathEntry kind="1" linkType="1" path="test"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="test-data"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="management"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="main"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="assets"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="3">
       <libraryPathEntry kind="4" path="">

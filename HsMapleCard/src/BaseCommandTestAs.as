@@ -1,12 +1,21 @@
 import flash.filesystem.File;
 
+import mx.events.FlexEvent;
+
 import org.hamster.commands.events.CommandEvent;
 import org.hamster.mapleCard.base.commands.CreatureImageLoaderCmd;
 import org.hamster.mapleCard.base.components.images.CreatureImage;
 import org.hamster.mapleCard.base.constants.CreatureStatus;
 import org.hamster.mapleCard.base.utils.FileUtil;
+import org.hamster.mapleCard.main.component.containers.BattleFieldContainer;
 
 private var _testCreatureImage:CreatureImage;
+
+protected function windowedapplication1_applicationCompleteHandler(event:FlexEvent):void
+{
+	var battleFieldContainer:BattleFieldContainer = new BattleFieldContainer();
+	sv2.addChild(battleFieldContainer);
+}
 
 public function testCreatureImageLoaderCommand():void
 {
@@ -14,6 +23,8 @@ public function testCreatureImageLoaderCommand():void
 	_testCreatureImage.x = this.sv.numChildren * 50;
 	_testCreatureImage.direction = (this.sv.numChildren % 2 == 0) ? "left" : "right";
 	this.sv.addChild(_testCreatureImage);
+	
+	
 }
 
 private function creatureDie():void

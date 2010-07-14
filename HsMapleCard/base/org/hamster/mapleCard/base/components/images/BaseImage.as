@@ -6,6 +6,8 @@ package org.hamster.mapleCard.base.components.images
 	import flash.events.Event;
 	import flash.geom.Matrix;
 	
+	import org.hamster.mapleCard.animations.IAnimationControl;
+	import org.hamster.mapleCard.animations.SimpleAnimationControl;
 	import org.hamster.mapleCard.base.constants.BaseImagePlayMethod;
 	
 	public class BaseImage extends Sprite
@@ -22,6 +24,8 @@ package org.hamster.mapleCard.base.components.images
 		public function set playMethod(value:String):void { this._playMethod = value; }
 		public function get playMethod():String { return this._playMethod }
 		
+		protected var animationControl:IAnimationControl = new SimpleAnimationControl();
+		
 		protected var _imgArray:Array;
 		protected var _currentImgIndex:int = 0;
 		protected var _frameCount:int = 0;
@@ -31,6 +35,7 @@ package org.hamster.mapleCard.base.components.images
 		
 		// play method
 		protected var _isPlayReverse:Boolean;
+		protected var _isSkipRefresh:Boolean;
 		
 		public function BaseImage()
 		{
@@ -41,6 +46,9 @@ package org.hamster.mapleCard.base.components.images
 		
 		protected function onEnterFrameHandler(evt:Event):void
 		{
+			if (_isSkipRefresh) {
+				return;
+			}
 			if ((_frameCount % this._speed) == 0) {
 				_frameCount = 1;
 				updateDisplayContent(); 
@@ -91,6 +99,7 @@ package org.hamster.mapleCard.base.components.images
 		{
 			updateCurrentImgIndex();
 			updateBitmapData();
+			animationControl.control(this);
 		}
 		
 		protected function initializeFromImgArray(...imgArrays):void

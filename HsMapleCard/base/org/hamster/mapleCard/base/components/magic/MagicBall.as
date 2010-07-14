@@ -65,7 +65,7 @@ package org.hamster.mapleCard.base.components.magic
 				y = randomLength - this.width * 2 - this.height;
 			}
 			
-			vx = x - centerX
+			// vx = x - centerX
 		}
 	}
 }
