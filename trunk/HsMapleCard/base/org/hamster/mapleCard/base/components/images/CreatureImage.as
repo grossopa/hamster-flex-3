@@ -34,17 +34,17 @@ package org.hamster.mapleCard.base.components.images
 		{
 			super();
 			this._id = id;
-			this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
+			this.addEventListener(Event.ADDED, addedHandler);
 		}
 		
-		protected function addedToStageHandler(evt:Event):void
+		protected function addedHandler(evt:Event):void
 		{
 			initialization();
 		}
 		
 		protected function initialization():void
 		{
-			if (!DS.imageCacheManager.exists(id)) {
+			if (!DS.imageCacheManager.exists(Constants.CREATE_KEY_PREFIX + id)) {
 				trace ("Load Image " + id + " from file system");
 				var cmd:CreatureImageLoaderCmd = CreatureImageLoaderCmd.execute(id);
 				cmd.addEventListener(CommandEvent.COMMAND_RESULT, loaderResultHandler);

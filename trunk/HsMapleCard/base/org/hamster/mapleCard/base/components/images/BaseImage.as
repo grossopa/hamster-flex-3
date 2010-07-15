@@ -6,6 +6,9 @@ package org.hamster.mapleCard.base.components.images
 	import flash.events.Event;
 	import flash.geom.Matrix;
 	
+	import mx.core.FlexSprite;
+	import mx.core.UIComponent;
+	
 	import org.hamster.mapleCard.animations.IAnimationControl;
 	import org.hamster.mapleCard.animations.SimpleAnimationControl;
 	import org.hamster.mapleCard.base.constants.BaseImagePlayMethod;
