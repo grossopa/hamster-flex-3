@@ -35,10 +35,10 @@ package org.hamster.mapleCard.main.component.units
 			this.width = 75;
 			this.height = 100;
 			this._playMethod == BaseImagePlayMethod.NORMAL;
-			this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
+			this.addEventListener(Event.ADDED, addedHandler);
 		}
 		
-		private function addedToStageHandler(evt:Event):void
+		private function addedHandler(evt:Event):void
 		{
 			var defaultKey:String = Constants.BATTLE_FIELD_KEY_PREFIX + BattleFieldUnitStatus.NORMAL;
 			var bitmap:Bitmap;
