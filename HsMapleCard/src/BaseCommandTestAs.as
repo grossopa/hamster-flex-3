@@ -7,7 +7,7 @@ import org.hamster.mapleCard.base.commands.CreatureImageLoaderCmd;
 import org.hamster.mapleCard.base.components.images.CreatureImage;
 import org.hamster.mapleCard.base.constants.CreatureStatus;
 import org.hamster.mapleCard.base.utils.FileUtil;
-import org.hamster.mapleCard.main.component.containers.BattleFieldContainer;
+import org.hamster.mapleCard.main.components.battleField.BattleFieldContainer;
 
 private var _testCreatureImage:CreatureImage;
 
