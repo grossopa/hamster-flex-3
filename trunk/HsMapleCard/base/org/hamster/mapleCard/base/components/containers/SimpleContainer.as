@@ -11,10 +11,10 @@ package org.hamster.mapleCard.base.components.containers
 		public function SimpleContainer()
 		{
 			super();
-			this.addEventListener(Event.ENTER_FRAME, onEnterFramwHandler);
+			this.addEventListener(Event.ADDED, addedHandler);
 		}
 		
-		protected function onEnterFramwHandler(evt:Event):void
+		protected function addedHandler(evt:Event):void
 		{
 			this.width = this._measuredWidth;
 			this.height = this._measuredHeight;
