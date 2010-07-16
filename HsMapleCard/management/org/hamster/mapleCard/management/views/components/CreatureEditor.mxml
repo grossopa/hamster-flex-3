@@ -49,21 +49,21 @@
 			<s:TextInput id="nameInput" text="{currentCard.name}" />
 		</mx:FormItem>
 		<mx:FormItem label="Move speed : ">
-			<s:TextInput id="moveSpeedInput" text="{currentCard.moveSpeed}" />
+			<s:TextInput id="moveSpeedInput" text="{currentCard.maxMoveSpeed}" />
 		</mx:FormItem>
 		<mx:FormItem label="Attack : ">
-			<s:TextInput id="attInput" text="{currentCard.att}" />
+			<s:TextInput id="attInput" text="{currentCard.maxAtt}" />
 		</mx:FormItem>
 	</mx:Form>
 	<mx:Form width="300" height="150" x="450" paddingTop="5">
 		<mx:FormItem label="Defense : ">
-			<s:TextInput id="defInput" text="{currentCard.def}" />
+			<s:TextInput id="defInput" text="{currentCard.maxDef}" />
 		</mx:FormItem>
 		<mx:FormItem label="HP : ">
-			<s:TextInput id="hpInput" text="{currentCard.hp}" />
+			<s:TextInput id="hpInput" text="{currentCard.maxHp}" />
 		</mx:FormItem>
 		<mx:FormItem label="Distance : ">
-			<s:TextInput id="distanceInput" text="{currentCard.distance}" />
+			<s:TextInput id="distanceInput" text="{currentCard.maxDistance}" />
 		</mx:FormItem>
 	</mx:Form>
 	<s:HGroup y="150" width="100%" verticalAlign="middle" height="30">
