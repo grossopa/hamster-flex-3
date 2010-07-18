@@ -1,12 +1,20 @@
 package org.hamster.mapleCard.main.components.battleField
 {
+	import mx.effects.AnimateProperty;
 	import mx.effects.Effect;
 	import mx.effects.Move;
+	import mx.effects.Parallel;
+	import mx.effects.Tween;
+	import mx.effects.TweenEffect;
+	import mx.effects.easing.Linear;
+	import mx.effects.effectClasses.TweenEffectInstance;
 	
 	import org.hamster.mapleCard.assets.style.BattleFieldItemStyle;
 	import org.hamster.mapleCard.assets.style.BattleFieldStyle;
 	import org.hamster.mapleCard.base.components.containers.SimpleContainer;
 	import org.hamster.mapleCard.base.event.BattleFieldDataEvent;
+	
+	import spark.effects.Animate;
 	
 	public class BattleFieldItemContainer extends SimpleContainer
 	{
@@ -40,8 +48,30 @@ package org.hamster.mapleCard.main.components.battleField
 			var xValue:Number = xIdx * BattleFieldItemStyle.WIDTH;
 			var yValue:Number = yIdx * BattleFieldItemStyle.HEIGHT;
 			
-			item.x = xValue;
-			item.y = yValue;
+			var length:Number = Math.sqrt((xValue - item.x) * (xValue - item.x)
+				+ (yValue - item.y) * (yValue - item.y));
+			
+			var duration:Number = length * 5;
+			
+			var aniPropertyX:AnimateProperty = new AnimateProperty(item);
+			aniPropertyX.property = "x";
+			aniPropertyX.fromValue = item.x;
+			aniPropertyX.toValue = xValue;
+			aniPropertyX.duration = duration;
+			aniPropertyX.easingFunction = Linear.easeNone;
+			var aniPropertyY:AnimateProperty = new AnimateProperty(item);
+			aniPropertyY.property = "y";
+			aniPropertyY.fromValue = item.y;
+			aniPropertyY.toValue = yValue;
+			aniPropertyY.duration = duration;
+			aniPropertyY.easingFunction = Linear.easeNone;
+			var parallel:Parallel = new Parallel();
+			parallel.addChild(aniPropertyX);
+			parallel.addChild(aniPropertyY);
+			parallel.play();
+			//item.x = xValue;
+			//item.y = yValue;
+			
 		}
 		
 		protected function addItemListener(item:BattleFieldItem):void
