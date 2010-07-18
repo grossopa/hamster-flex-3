@@ -8,8 +8,19 @@ package org.hamster.mapleCard.base.model.card
 		public var maxMoveSpeed:Number;
 		public var maxAtt:Number;
 		public var maxDef:Number;
-		public var maxHp:Number;
 		public var maxDistance:Number;
+		
+		private var _maxHp:Number;
+		
+		public function set maxHp(value:Number):void
+		{
+			_maxHp = value;
+		}
+		
+		public function get maxHp():Number
+		{
+			return _maxHp;
+		}
 		
 		override public function decode(xml:XML):void
 		{
