@@ -1,7 +1,11 @@
 package org.hamster.mapleCard.base.components.containers
 {
+	import flash.display.DisplayObjectContainer;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	
+	import mx.core.UIComponent;
 	
 	public class SimpleContainer extends Sprite
 	{
@@ -19,8 +23,8 @@ package org.hamster.mapleCard.base.components.containers
 		
 		protected function addedHandler(evt:Event):void
 		{
-			this.width = this._measuredWidth;
-			this.height = this._measuredHeight;
+			this.graphics.lineStyle(0, 0, 0);
+			this.graphics.drawRect(0, 0, this._measuredWidth, this.measuredHeight);
 		}
 	}
 }
