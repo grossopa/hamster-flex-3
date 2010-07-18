@@ -36,6 +36,9 @@ package org.hamster.mapleCard.base.components.images
 		protected var _measuredWidth:Number;
 		protected var _measuredHeight:Number;
 		
+		public function get measuredWidth():Number { return _measuredWidth; }
+		public function get measuredHeight():Number { return _measuredHeight; }
+		
 		// play method
 		protected var _isPlayReverse:Boolean;
 		protected var _isSkipRefresh:Boolean;

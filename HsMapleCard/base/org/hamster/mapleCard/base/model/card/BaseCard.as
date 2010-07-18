@@ -1,6 +1,8 @@
 package org.hamster.mapleCard.base.model.card
 {
-	public class BaseCard implements IBaseCard
+	import flash.events.EventDispatcher;
+
+	public class BaseCard extends EventDispatcher implements IBaseCard
 	{
 		public function BaseCard()
 		{

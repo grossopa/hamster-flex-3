@@ -1,5 +1,6 @@
 package org.hamster.mapleCard.base.model.battleField
 {
+	import org.hamster.mapleCard.base.event.BattleFieldDataEvent;
 	import org.hamster.mapleCard.base.model.IBattleFieldData;
 	import org.hamster.mapleCard.base.model.card.CreatureCard;
 	
@@ -16,7 +17,13 @@ package org.hamster.mapleCard.base.model.battleField
 		
 		public function set hp(value:Number):void
 		{
-			_hp = value;
+			if (_hp != value) {
+				var disEvt:BattleFieldDataEvent = new BattleFieldDataEvent(BattleFieldDataEvent.HP_CHANGED);
+				disEvt.oldValue = _hp;
+				_hp = value;
+				disEvt.newValue = _hp;
+				this.dispatchEvent(disEvt);
+			}
 		}
 		
 		public function get hp():Number
@@ -26,7 +33,13 @@ package org.hamster.mapleCard.base.model.battleField
 		
 		public function set status(value:String):void
 		{
-			_status = value;
+			if (_status != value) {
+				var disEvt:BattleFieldDataEvent = new BattleFieldDataEvent(BattleFieldDataEvent.STATUS_CHANGED);
+				disEvt.oldValue = _status;
+				_status = value;
+				disEvt.newValue = _status;
+				this.dispatchEvent(disEvt);
+			}
 		}
 		
 		public function get status():String
@@ -36,7 +49,13 @@ package org.hamster.mapleCard.base.model.battleField
 		
 		public function set actionProgress(value:Number):void
 		{
-			_actionProgress = value;
+			if (_actionProgress != value) {
+				var disEvt:BattleFieldDataEvent = new BattleFieldDataEvent(BattleFieldDataEvent.ACTIONPROGRESS_CHANGED);
+				disEvt.oldValue = _actionProgress;
+				_actionProgress = value;
+				disEvt.newValue = _actionProgress;
+				this.dispatchEvent(disEvt);
+			}
 		}
 		
 		public function get actionProgress():Number

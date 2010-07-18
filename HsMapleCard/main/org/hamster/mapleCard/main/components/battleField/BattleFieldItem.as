@@ -4,7 +4,12 @@ package org.hamster.mapleCard.main.components.battleField
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
+	import mx.core.IUIComponent;
+	
+	import org.hamster.mapleCard.assets.style.BattleFieldItemStyle;
 	import org.hamster.mapleCard.base.components.containers.SimpleContainer;
+	import org.hamster.mapleCard.base.components.images.BaseImage;
+	import org.hamster.mapleCard.base.event.BattleFieldDataEvent;
 	import org.hamster.mapleCard.base.model.IBattleFieldData;
 	
 	public class BattleFieldItem extends SimpleContainer
@@ -13,7 +18,11 @@ package org.hamster.mapleCard.main.components.battleField
 		
 		public function set battleFieldData(value:IBattleFieldData):void
 		{
+			if (_battleFieldData != null) {
+				this.removeBattleFieldDataListener(_battleFieldData);
+			}
 			_battleFieldData = value;
+			this.addBattleFieldDataListener(_battleFieldData);
 		}
 		
 		public function get battleFieldData():IBattleFieldData
@@ -21,15 +30,24 @@ package org.hamster.mapleCard.main.components.battleField
 			return _battleFieldData;
 		}
 		
-		protected var _mainImage:Sprite;
+		protected var _mainImage:BaseImage;
 		protected var _lifeBar:Sprite;
+		
+		public function set mainImage(value:BaseImage):void
+		{
+			this._mainImage = value;
+		}
+		
+		public function get mainImage():BaseImage
+		{
+			return this._mainImage;
+		}
 		
 		public function BattleFieldItem()
 		{
 			super();
-			
-			this._measuredWidth = 100;
-			this._measuredHeight = 75;
+			this._measuredWidth = BattleFieldItemStyle.WIDTH;
+			this._measuredHeight = BattleFieldItemStyle.HEIGHT;
 			
 			this.addEventListener(Event.ENTER_FRAME, onEnterFrameHandler);
 		}
@@ -39,8 +57,6 @@ package org.hamster.mapleCard.main.components.battleField
 			if (this.numChildren == 0) {
 				this._lifeBar = new Sprite();
 				this.addChild(this._lifeBar);
-				this._lifeBar.width = 80;
-				this._lifeBar.height = 5;
 				this._lifeBar.y = 10;
 				this._lifeBar.x = 10;
 				
@@ -52,13 +68,55 @@ package org.hamster.mapleCard.main.components.battleField
 		
 		protected function onEnterFrameHandler(ect:Event):void
 		{
-			this._mainImage.x = (this._measuredWidth - this._mainImage) / 2;
-			this._mainImage.y = this._measuredHeight - this._mainImage.height - 10;
+			this._mainImage.x = (this._measuredWidth - this._mainImage.measuredWidth) / 2;
+			this._mainImage.y = this._measuredHeight - this._mainImage.measuredHeight - 30;
+			
+			if (this._battleFieldData != null) {
+				drawLifeBar();
+			}
 		}
 		
 		protected function drawLifeBar():void
 		{
 			var g:Graphics = this._lifeBar.graphics;
+			g.clear();
+			g.lineStyle(0.5, 0, 0.5);
+			g.beginFill(BattleFieldItemStyle.LIFE_BAR_COLOR, 1);
+			var w:Number = BattleFieldItemStyle.LIFE_BAR_WIDTH * (this._battleFieldData.hp / this._battleFieldData.maxHp);
+			g.drawRect(0, 0, w, BattleFieldItemStyle.LIFE_BAR_HEIGHT);
+			g.endFill();
+			
+			//this._lifeBar.width = BattleFieldItemStyle.LIFE_BAR_WIDTH;
+			//this._lifeBar.height = BattleFieldItemStyle.LIFE_BAR_HEIGHT;
+		}
+		
+		protected function hpChangedHandler(evt:BattleFieldDataEvent):void
+		{
+			
+		}
+		
+		protected function statusChangedHandler(evt:BattleFieldDataEvent):void
+		{
+			
+		}
+		
+		protected function actionProgressChangedHandler(evt:BattleFieldDataEvent):void
+		{
+			
+		}
+		
+		protected function removeBattleFieldDataListener(obj:IBattleFieldData):void
+		{
+			obj.addEventListener(BattleFieldDataEvent.HP_CHANGED, hpChangedHandler);
+			obj.addEventListener(BattleFieldDataEvent.STATUS_CHANGED, statusChangedHandler);
+			obj.addEventListener(BattleFieldDataEvent.ACTIONPROGRESS_CHANGED, actionProgressChangedHandler);
+		}
+		
+		protected function addBattleFieldDataListener(obj:IBattleFieldData):void
+		{
+			obj.removeEventListener(BattleFieldDataEvent.HP_CHANGED, hpChangedHandler);
+			obj.removeEventListener(BattleFieldDataEvent.STATUS_CHANGED, statusChangedHandler);
+			obj.removeEventListener(BattleFieldDataEvent.ACTIONPROGRESS_CHANGED, actionProgressChangedHandler);
 		}
 	}
 }
