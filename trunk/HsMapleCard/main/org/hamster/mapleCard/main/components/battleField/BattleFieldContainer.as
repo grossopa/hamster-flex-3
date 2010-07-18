@@ -11,6 +11,8 @@ package org.hamster.mapleCard.main.components.battleField
 		public static const ROW_COUNT:int = 5;
 		public static const COL_COUNT:int = 7;
 		
+		private var _itemContainer:BattleFieldItemContainer;
+		
 		public function BattleFieldContainer()
 		{
 			this._measuredWidth = 525;
@@ -29,12 +31,15 @@ package org.hamster.mapleCard.main.components.battleField
 					unit.y = Math.floor(i / COL_COUNT) * 100;
 					this.addChild(unit);
 				}
+				
+				_itemContainer = new BattleFieldItemContainer();
+				this.addChild(_itemContainer);
 			}
 		}
 		
-		public function addCreature(creature:CreatureImage, xIndex:int, yIndex:int):void
+		public function addBattleFieldItem(item:BattleFieldItem, xIndex:int, yIndex:int):void
 		{
-			
+			_itemContainer.addBattleFieldItem(item, xIndex, yIndex);
 		}
 		
 		

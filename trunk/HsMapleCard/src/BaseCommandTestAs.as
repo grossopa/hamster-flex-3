@@ -12,12 +12,14 @@ import org.hamster.mapleCard.base.utils.FileUtil;
 import org.hamster.mapleCard.main.components.battleField.BattleFieldContainer;
 import org.hamster.mapleCard.main.components.battleField.BattleFieldItem;
 
+private var _battleFieldContainer:BattleFieldContainer;
+private var _battleFieldItem:BattleFieldItem;
 private var _testCreatureImage:CreatureImage;
 
 protected function windowedapplication1_applicationCompleteHandler(event:FlexEvent):void
 {
-	var battleFieldContainer:BattleFieldContainer = new BattleFieldContainer();
-	sv2.addChild(battleFieldContainer);
+	_battleFieldContainer = new BattleFieldContainer();
+	sv2.addChild(_battleFieldContainer);
 }
 
 public function testCreatureImageLoaderCommand():void
@@ -30,13 +32,16 @@ public function testCreatureImageLoaderCommand():void
 	battleFieldData.maxHp = 10;
 	battleFieldData.hp = 3;
 	
+	_battleFieldItem = new BattleFieldItem();
+	_battleFieldItem.battleFieldData = battleFieldData;
+	_battleFieldItem.mainImage = _testCreatureImage;
 	
-	
-	var battleFieldItem:BattleFieldItem = new BattleFieldItem();
-	battleFieldItem.battleFieldData = battleFieldData;
-	battleFieldItem.mainImage = _testCreatureImage;
-	
-	this.sv.addChild(battleFieldItem);
+	this._battleFieldContainer.addBattleFieldItem(_battleFieldItem, 0, 0);
+}
+
+private function moveBattleFieldItem():void
+{
+	_battleFieldItem.battleFieldData.setIndex(2, 4);
 }
 
 private function creatureDie():void
