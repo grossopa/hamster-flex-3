@@ -6,8 +6,8 @@ import org.hamster.commands.events.CommandEvent;
 import org.hamster.mapleCard.base.commands.CreatureImageLoaderCmd;
 import org.hamster.mapleCard.base.components.images.CreatureImage;
 import org.hamster.mapleCard.base.constants.CreatureStatus;
-import org.hamster.mapleCard.base.model.IBattleFieldData;
-import org.hamster.mapleCard.base.model.battleField.CreatureBattleFieldData;
+import org.hamster.mapleCard.base.model.IBattleFieldItemData;
+import org.hamster.mapleCard.base.model.battleField.CreatureBattleFieldItemData;
 import org.hamster.mapleCard.base.utils.FileUtil;
 import org.hamster.mapleCard.main.components.battleField.BattleFieldContainer;
 import org.hamster.mapleCard.main.components.battleField.BattleFieldItem;
@@ -28,7 +28,7 @@ public function testCreatureImageLoaderCommand():void
 	_testCreatureImage.x = this.sv.numChildren * 50;
 	_testCreatureImage.direction = (this.sv.numChildren % 2 == 0) ? "left" : "right";
 	
-	var battleFieldData:CreatureBattleFieldData = new CreatureBattleFieldData();
+	var battleFieldData:CreatureBattleFieldItemData = new CreatureBattleFieldItemData();
 	battleFieldData.maxHp = 10;
 	battleFieldData.hp = 3;
 	

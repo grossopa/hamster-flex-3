@@ -1,10 +1,13 @@
 package org.hamster.mapleCard.base.model.battleField
 {
-	import org.hamster.mapleCard.base.event.BattleFieldDataEvent;
-	import org.hamster.mapleCard.base.model.IBattleFieldData;
+	import flash.display.BitmapData;
+	
+	import org.hamster.mapleCard.base.event.ActionStackItemDataEvent;
+	import org.hamster.mapleCard.base.event.BattleFieldItemDataEvent;
+	import org.hamster.mapleCard.base.model.IBattleFieldItemData;
 	import org.hamster.mapleCard.base.model.card.CreatureCard;
 	
-	public class CreatureBattleFieldData extends CreatureCard implements IBattleFieldData
+	public class CreatureBattleFieldItemData extends CreatureCard implements IBattleFieldItemData
 	{
 		private var _hp:Number;
 		private var _status:String;
@@ -12,7 +15,7 @@ package org.hamster.mapleCard.base.model.battleField
 		private var _xIndex:int;
 		private var _yIndex:int;
 		
-		public function CreatureBattleFieldData()
+		public function CreatureBattleFieldItemData()
 		{
 			super();
 		}
@@ -20,8 +23,8 @@ package org.hamster.mapleCard.base.model.battleField
 		public function set hp(value:Number):void
 		{
 			if (_hp != value) {
-				if (hasEventListener(BattleFieldDataEvent.HP_CHANGED)) {
-					var disEvt:BattleFieldDataEvent = new BattleFieldDataEvent(BattleFieldDataEvent.HP_CHANGED);
+				if (hasEventListener(BattleFieldItemDataEvent.HP_CHANGED)) {
+					var disEvt:BattleFieldItemDataEvent = new BattleFieldItemDataEvent(BattleFieldItemDataEvent.HP_CHANGED);
 					disEvt.oldValue = _hp;
 					_hp = value;
 					disEvt.newValue = _hp;
@@ -40,8 +43,8 @@ package org.hamster.mapleCard.base.model.battleField
 		public function set status(value:String):void
 		{
 			if (_status != value) {
-				if (hasEventListener(BattleFieldDataEvent.STATUS_CHANGED)) {
-					var disEvt:BattleFieldDataEvent = new BattleFieldDataEvent(BattleFieldDataEvent.STATUS_CHANGED);
+				if (hasEventListener(BattleFieldItemDataEvent.STATUS_CHANGED)) {
+					var disEvt:BattleFieldItemDataEvent = new BattleFieldItemDataEvent(BattleFieldItemDataEvent.STATUS_CHANGED);
 					disEvt.oldValue = _status;
 					_status = value;
 					disEvt.newValue = _status;
@@ -60,8 +63,8 @@ package org.hamster.mapleCard.base.model.battleField
 		public function set actionProgress(value:Number):void
 		{
 			if (_actionProgress != value) {
-				if (hasEventListener(BattleFieldDataEvent.ACTIONPROGRESS_CHANGED)) {
-					var disEvt:BattleFieldDataEvent = new BattleFieldDataEvent(BattleFieldDataEvent.ACTIONPROGRESS_CHANGED);
+				if (hasEventListener(ActionStackItemDataEvent.ACTIONPROGRESS_CHANGED)) {
+					var disEvt:ActionStackItemDataEvent = new ActionStackItemDataEvent(ActionStackItemDataEvent.ACTIONPROGRESS_CHANGED);
 					disEvt.oldValue = _actionProgress;
 					_actionProgress = value;
 					disEvt.newValue = _actionProgress;
@@ -80,8 +83,8 @@ package org.hamster.mapleCard.base.model.battleField
 		public function set xIndex(value:int):void
 		{
 			if (_xIndex != value) {
-				if (hasEventListener(BattleFieldDataEvent.INDEX_CHANGED)) {
-					var disEvt:BattleFieldDataEvent = new BattleFieldDataEvent(BattleFieldDataEvent.INDEX_CHANGED);
+				if (hasEventListener(BattleFieldItemDataEvent.INDEX_CHANGED)) {
+					var disEvt:BattleFieldItemDataEvent = new BattleFieldItemDataEvent(BattleFieldItemDataEvent.INDEX_CHANGED);
 					disEvt.oldXIndex = _xIndex;
 					disEvt.oldYIndex = _yIndex;
 					_xIndex = value;
@@ -102,8 +105,8 @@ package org.hamster.mapleCard.base.model.battleField
 		public function set yIndex(value:int):void
 		{
 			if (_yIndex != value) {
-				if (hasEventListener(BattleFieldDataEvent.INDEX_CHANGED)) {
-					var disEvt:BattleFieldDataEvent = new BattleFieldDataEvent(BattleFieldDataEvent.INDEX_CHANGED);
+				if (hasEventListener(BattleFieldItemDataEvent.INDEX_CHANGED)) {
+					var disEvt:BattleFieldItemDataEvent = new BattleFieldItemDataEvent(BattleFieldItemDataEvent.INDEX_CHANGED);
 					disEvt.oldXIndex = _xIndex;
 					disEvt.oldYIndex = _yIndex;
 					_xIndex = value;
@@ -124,8 +127,8 @@ package org.hamster.mapleCard.base.model.battleField
 		public function setIndex(xIdx:int, yIdx:int):void
 		{
 			if (xIdx != _xIndex || yIdx != _yIndex) {
-				if (hasEventListener(BattleFieldDataEvent.INDEX_CHANGED)) {
-					var disEvt:BattleFieldDataEvent = new BattleFieldDataEvent(BattleFieldDataEvent.INDEX_CHANGED);
+				if (hasEventListener(BattleFieldItemDataEvent.INDEX_CHANGED)) {
+					var disEvt:BattleFieldItemDataEvent = new BattleFieldItemDataEvent(BattleFieldItemDataEvent.INDEX_CHANGED);
 					disEvt.oldXIndex = _xIndex;
 					disEvt.oldYIndex = _yIndex;
 					_xIndex = xIdx;
@@ -138,6 +141,11 @@ package org.hamster.mapleCard.base.model.battleField
 					_yIndex = yIdx;
 				}
 			}
+		}
+		
+		public function get actionStackIcon():BitmapData
+		{
+			return null;
 		}
 	}
 }

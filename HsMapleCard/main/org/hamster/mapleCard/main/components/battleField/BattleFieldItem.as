@@ -7,19 +7,20 @@ package org.hamster.mapleCard.main.components.battleField
 	import org.hamster.mapleCard.assets.style.BattleFieldItemStyle;
 	import org.hamster.mapleCard.base.components.containers.SimpleContainer;
 	import org.hamster.mapleCard.base.components.images.BaseImage;
-	import org.hamster.mapleCard.base.event.BattleFieldDataEvent;
-	import org.hamster.mapleCard.base.model.IBattleFieldData;
+	import org.hamster.mapleCard.base.event.ActionStackItemDataEvent;
+	import org.hamster.mapleCard.base.event.BattleFieldItemDataEvent;
+	import org.hamster.mapleCard.base.model.IBattleFieldItemData;
 	
-	[Event(name="hpChanged", type="org.hamster.mapleCard.base.event.BattleFieldDataEvent")]
-	[Event(name="statusChanged", type="org.hamster.mapleCard.base.event.BattleFieldDataEvent")]
-	[Event(name="actionprogressChanged", type="org.hamster.mapleCard.base.event.BattleFieldDataEvent")]
-	[Event(name="indexChanged", type="org.hamster.mapleCard.base.event.BattleFieldDataEvent")]
+	[Event(name="hpChanged", type="org.hamster.mapleCard.base.event.BattleFieldItemDataEvent")]
+	[Event(name="statusChanged", type="org.hamster.mapleCard.base.event.BattleFieldItemDataEvent")]
+	[Event(name="actionprogressChanged", type="org.hamster.mapleCard.base.event.BattleFieldItemDataEvent")]
+	[Event(name="indexChanged", type="org.hamster.mapleCard.base.event.BattleFieldItemDataEvent")]
 	
 	public class BattleFieldItem extends SimpleContainer
 	{
-		protected var _battleFieldData:IBattleFieldData;
+		protected var _battleFieldData:IBattleFieldItemData;
 		
-		public function set battleFieldData(value:IBattleFieldData):void
+		public function set battleFieldData(value:IBattleFieldItemData):void
 		{
 			if (_battleFieldData != null) {
 				this.removeBattleFieldDataListener(_battleFieldData);
@@ -28,7 +29,7 @@ package org.hamster.mapleCard.main.components.battleField
 			this.addBattleFieldDataListener(_battleFieldData);
 		}
 		
-		public function get battleFieldData():IBattleFieldData
+		public function get battleFieldData():IBattleFieldItemData
 		{
 			return _battleFieldData;
 		}
@@ -100,41 +101,41 @@ package org.hamster.mapleCard.main.components.battleField
 			this._lifeBar.height = BattleFieldItemStyle.LIFE_BAR_HEIGHT;
 		}
 		
-		protected function hpChangedHandler(evt:BattleFieldDataEvent):void
+		protected function hpChangedHandler(evt:BattleFieldItemDataEvent):void
 		{
 			_isRedrawLifeBar = true;
 			this.dispatchEvent(evt);
 		}
 		
-		protected function statusChangedHandler(evt:BattleFieldDataEvent):void
+		protected function statusChangedHandler(evt:BattleFieldItemDataEvent):void
 		{
 			this.dispatchEvent(evt);
 		}
 		
-		protected function actionProgressChangedHandler(evt:BattleFieldDataEvent):void
+		protected function actionProgressChangedHandler(evt:BattleFieldItemDataEvent):void
 		{
 			this.dispatchEvent(evt);
 		}
 		
-		protected function indexChangedHandler(evt:BattleFieldDataEvent):void
+		protected function indexChangedHandler(evt:BattleFieldItemDataEvent):void
 		{
 			this.dispatchEvent(evt);
 		}
 		
-		protected function addBattleFieldDataListener(obj:IBattleFieldData):void
+		protected function addBattleFieldDataListener(obj:IBattleFieldItemData):void
 		{
-			obj.addEventListener(BattleFieldDataEvent.HP_CHANGED, hpChangedHandler);
-			obj.addEventListener(BattleFieldDataEvent.STATUS_CHANGED, statusChangedHandler);
-			obj.addEventListener(BattleFieldDataEvent.ACTIONPROGRESS_CHANGED, actionProgressChangedHandler);
-			obj.addEventListener(BattleFieldDataEvent.INDEX_CHANGED, indexChangedHandler);
+			obj.addEventListener(BattleFieldItemDataEvent.HP_CHANGED, hpChangedHandler);
+			obj.addEventListener(BattleFieldItemDataEvent.STATUS_CHANGED, statusChangedHandler);
+			obj.addEventListener(ActionStackItemDataEvent.ACTIONPROGRESS_CHANGED, actionProgressChangedHandler);
+			obj.addEventListener(BattleFieldItemDataEvent.INDEX_CHANGED, indexChangedHandler);
 		}
 		
-		protected function removeBattleFieldDataListener(obj:IBattleFieldData):void
+		protected function removeBattleFieldDataListener(obj:IBattleFieldItemData):void
 		{
-			obj.removeEventListener(BattleFieldDataEvent.HP_CHANGED, hpChangedHandler);
-			obj.removeEventListener(BattleFieldDataEvent.STATUS_CHANGED, statusChangedHandler);
-			obj.removeEventListener(BattleFieldDataEvent.ACTIONPROGRESS_CHANGED, actionProgressChangedHandler);
-			obj.removeEventListener(BattleFieldDataEvent.INDEX_CHANGED, indexChangedHandler);
+			obj.removeEventListener(BattleFieldItemDataEvent.HP_CHANGED, hpChangedHandler);
+			obj.removeEventListener(BattleFieldItemDataEvent.STATUS_CHANGED, statusChangedHandler);
+			obj.removeEventListener(ActionStackItemDataEvent.ACTIONPROGRESS_CHANGED, actionProgressChangedHandler);
+			obj.removeEventListener(BattleFieldItemDataEvent.INDEX_CHANGED, indexChangedHandler);
 		}
 	}
 }
