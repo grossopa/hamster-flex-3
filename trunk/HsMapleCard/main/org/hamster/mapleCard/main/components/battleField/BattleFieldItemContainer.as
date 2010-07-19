@@ -12,7 +12,7 @@ package org.hamster.mapleCard.main.components.battleField
 	import org.hamster.mapleCard.assets.style.BattleFieldItemStyle;
 	import org.hamster.mapleCard.assets.style.BattleFieldStyle;
 	import org.hamster.mapleCard.base.components.containers.SimpleContainer;
-	import org.hamster.mapleCard.base.event.BattleFieldDataEvent;
+	import org.hamster.mapleCard.base.event.BattleFieldItemDataEvent;
 	
 	import spark.effects.Animate;
 	
@@ -37,7 +37,7 @@ package org.hamster.mapleCard.main.components.battleField
 			item.y = yValue;
 		}
 		
-		protected function itemIndexChangedHandler(evt:BattleFieldDataEvent):void
+		protected function itemIndexChangedHandler(evt:BattleFieldItemDataEvent):void
 		{
 			var item:BattleFieldItem = BattleFieldItem(evt.currentTarget);
 			moveItemTo(item, evt.newXIndex, evt.newYIndex);
@@ -76,12 +76,12 @@ package org.hamster.mapleCard.main.components.battleField
 		
 		protected function addItemListener(item:BattleFieldItem):void
 		{
-			item.addEventListener(BattleFieldDataEvent.INDEX_CHANGED, itemIndexChangedHandler);
+			item.addEventListener(BattleFieldItemDataEvent.INDEX_CHANGED, itemIndexChangedHandler);
 		}
 		
 		protected function removeItemListener(item:BattleFieldItem):void
 		{
-			item.removeEventListener(BattleFieldDataEvent.INDEX_CHANGED, itemIndexChangedHandler);
+			item.removeEventListener(BattleFieldItemDataEvent.INDEX_CHANGED, itemIndexChangedHandler);
 		}
 		
 		
