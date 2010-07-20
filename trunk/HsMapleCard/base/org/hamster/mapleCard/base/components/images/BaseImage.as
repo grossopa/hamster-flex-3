@@ -103,6 +103,9 @@ package org.hamster.mapleCard.base.components.images
 		
 		protected function updateDisplayContent():void 
 		{
+			if (!_imgArray) {
+				return;
+			}
 			updateCurrentImgIndex();
 			updateBitmapData();
 			animationControl.control(this);
@@ -129,6 +132,9 @@ package org.hamster.mapleCard.base.components.images
 		protected function updateBitmapData():void 
 		{
 			this.graphics.clear();
+			if (_imgArray == null || _imgArray.length == 0) {
+				return;
+			}
 			var bitmap:Bitmap = _imgArray[_currentImgIndex];
 			
 			var measuredX:Number = (this._measuredWidth - bitmap.width) / 2;

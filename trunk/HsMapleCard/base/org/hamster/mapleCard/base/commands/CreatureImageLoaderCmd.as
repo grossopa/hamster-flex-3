@@ -78,6 +78,8 @@ package org.hamster.mapleCard.base.commands
 					creatureImageInfo.hitImages[idx] = (_resultDict[s]);
 				} else if (s.indexOf(CreatureStatus.DIE) >= 0) {
 					creatureImageInfo.dieImages[idx] = (_resultDict[s]);
+				} else if (s.indexOf("icon.png") >= 0) {
+					creatureImageInfo.icon = _resultDict[s];
 				}
 			}
 			

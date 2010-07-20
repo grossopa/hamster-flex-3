@@ -49,6 +49,8 @@ package org.hamster.mapleCard.main.components.actionStack
 			this.addChild(item);
 			this.actionStackItemList.addItem(item);
 			sortList();
+			
+			playAddEffect(item);
 		}
 		
 		private function removeBattleFieldItemDataHandler(evt:GameEvent):void
@@ -73,7 +75,7 @@ package org.hamster.mapleCard.main.components.actionStack
 			
 			for each (var item:ActionStackItem in this.actionStackItemList) {
 				if (item != newItem) {
-					if (item.actionStackItem.actionProgress > 
+					if (item.actionStackItem.actionProgress >=
 						newItem.actionStackItem.actionProgress) {
 						rightLocationArray.push(item);
 					}
@@ -85,7 +87,7 @@ package org.hamster.mapleCard.main.components.actionStack
 				var ani:AnimateProperty = new AnimateProperty(item);
 				ani.property = "x";
 				ani.fromValue = item.x;
-				ani.toValue = item.x + ActionStackStyle.WIDTH;
+				ani.toValue = item.x + 50;
 				parallel.addChild(ani);
 			}
 			
