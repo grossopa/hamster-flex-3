@@ -13,11 +13,15 @@ package org.hamster.mapleCard.main.components.battleField
 	import org.hamster.mapleCard.assets.style.BattleFieldStyle;
 	import org.hamster.mapleCard.base.components.containers.SimpleContainer;
 	import org.hamster.mapleCard.base.event.BattleFieldItemDataEvent;
+	import org.hamster.mapleCard.base.services.DataService;
+	import org.hamster.mapleCard.base.services.GameService;
 	
 	import spark.effects.Animate;
 	
 	public class BattleFieldItemContainer extends SimpleContainer
 	{
+		private static const GS:GameService = GameService.instance;
+		
 		public function BattleFieldItemContainer()
 		{
 			super();
@@ -35,6 +39,8 @@ package org.hamster.mapleCard.main.components.battleField
 			
 			item.x = xValue;
 			item.y = yValue;
+			
+			GS.addBattleFieldItemData(item.battleFieldData);
 		}
 		
 		protected function itemIndexChangedHandler(evt:BattleFieldItemDataEvent):void

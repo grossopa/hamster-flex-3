@@ -24,4 +24,6 @@
 		<s:Button click="moveBattleFieldItem()" label="Move" />
 	</mx:HBox>
 	<mx:UIComponent id="sv2" width="525" height="500" />
+	<mx:HRule height="1" width="100%" />
+	<mx:UIComponent id="sv3" width="525" height="40" />
 </s:WindowedApplication>
