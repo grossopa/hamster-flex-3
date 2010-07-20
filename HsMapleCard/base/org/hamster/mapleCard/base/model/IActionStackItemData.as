@@ -1,5 +1,6 @@
 package org.hamster.mapleCard.base.model
 {
+	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.events.IEventDispatcher;
 	
@@ -9,7 +10,7 @@ package org.hamster.mapleCard.base.model
 	{
 		function set actionProgress(value:Number):void;
 		function get actionProgress():Number;
-		
-		function get actionStackIcon():BitmapData;
+		function set actionStackIcon(value:Bitmap):void;
+		function get actionStackIcon():Bitmap;
 	}
 }

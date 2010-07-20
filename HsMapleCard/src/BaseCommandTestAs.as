@@ -1,3 +1,4 @@
+import flash.display.Bitmap;
 import flash.filesystem.File;
 
 import mx.events.FlexEvent;
@@ -36,7 +37,6 @@ public function testCreatureImageLoaderCommand():void
 	var battleFieldData:CreatureBattleFieldItemData = new CreatureBattleFieldItemData();
 	battleFieldData.maxHp = 10;
 	battleFieldData.hp = 3;
-	
 	_battleFieldItem = new BattleFieldItem();
 	_battleFieldItem.battleFieldData = battleFieldData;
 	_battleFieldItem.mainImage = _testCreatureImage;

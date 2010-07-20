@@ -1,5 +1,6 @@
 package org.hamster.mapleCard.base.model.battleField
 {
+	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	
 	import org.hamster.mapleCard.base.event.ActionStackItemDataEvent;
@@ -11,9 +12,10 @@ package org.hamster.mapleCard.base.model.battleField
 	{
 		private var _hp:Number;
 		private var _status:String;
-		private var _actionProgress:Number;
+		private var _actionProgress:Number = 0;
 		private var _xIndex:int;
 		private var _yIndex:int;
+		private var _icon:Bitmap;
 		
 		public function CreatureBattleFieldItemData()
 		{
@@ -143,9 +145,14 @@ package org.hamster.mapleCard.base.model.battleField
 			}
 		}
 		
-		public function get actionStackIcon():BitmapData
+		public function set actionStackIcon(value:Bitmap):void
 		{
-			return null;
+			this._icon = value;
+		}
+		
+		public function get actionStackIcon():Bitmap
+		{
+			return _icon;
 		}
 	}
 }
