@@ -9,10 +9,12 @@ import org.hamster.mapleCard.base.constants.CreatureStatus;
 import org.hamster.mapleCard.base.model.IBattleFieldItemData;
 import org.hamster.mapleCard.base.model.battleField.CreatureBattleFieldItemData;
 import org.hamster.mapleCard.base.utils.FileUtil;
+import org.hamster.mapleCard.main.components.actionStack.ActionStackContainer;
 import org.hamster.mapleCard.main.components.battleField.BattleFieldContainer;
 import org.hamster.mapleCard.main.components.battleField.BattleFieldItem;
 
 private var _battleFieldContainer:BattleFieldContainer;
+private var _actionStackContainer:ActionStackContainer;
 private var _battleFieldItem:BattleFieldItem;
 private var _testCreatureImage:CreatureImage;
 
@@ -20,6 +22,9 @@ protected function windowedapplication1_applicationCompleteHandler(event:FlexEve
 {
 	_battleFieldContainer = new BattleFieldContainer();
 	sv2.addChild(_battleFieldContainer);
+	_actionStackContainer = new ActionStackContainer();
+	sv3.addChild(_actionStackContainer);
+	
 }
 
 public function testCreatureImageLoaderCommand():void

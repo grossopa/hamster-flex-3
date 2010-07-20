@@ -1,5 +1,8 @@
 package org.hamster.mapleCard.main.components.actionStack
 {
+	import flash.events.Event;
+	
+	import org.hamster.mapleCard.assets.style.ActionStackStyle;
 	import org.hamster.mapleCard.base.components.images.BaseImage;
 	import org.hamster.mapleCard.base.event.ActionStackItemDataEvent;
 	import org.hamster.mapleCard.base.event.BattleFieldItemDataEvent;
@@ -26,6 +29,18 @@ package org.hamster.mapleCard.main.components.actionStack
 		public function ActionStackItem()
 		{
 			super();
+			
+			this._measuredHeight = ActionStackStyle.HEIGHT;
+			this._measuredWidth = 40;
+			
+			this.addEventListener(Event.ENTER_FRAME, _onEnterFrameHandler);
+		}
+		
+		private function _onEnterFrameHandler(evt:Event):void
+		{
+			this.graphics.clear();
+			this.graphics.lineStyle(1);
+			this.graphics.drawRect(0, 0, _measuredWidth, _measuredHeight);
 		}
 		
 		private function actionProgressChanged(evt:ActionStackItemDataEvent):void
