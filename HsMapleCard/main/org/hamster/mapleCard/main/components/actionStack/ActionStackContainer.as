@@ -1,5 +1,7 @@
 package org.hamster.mapleCard.main.components.actionStack
 {
+	import flash.display.DisplayObject;
+	import flash.display.Loader;
 	import flash.events.Event;
 	
 	import mx.collections.ArrayCollection;
@@ -29,6 +31,7 @@ package org.hamster.mapleCard.main.components.actionStack
 			
 			this._measuredWidth = ActionStackStyle.WIDTH;
 			this._measuredHeight = ActionStackStyle.HEIGHT;
+			
 		}
 		
 		override protected function addedHandler(evt:Event):void
@@ -39,6 +42,12 @@ package org.hamster.mapleCard.main.components.actionStack
 				addBattleFieldItemDataHandler);
 			ES.addEventListener(GameEvent.REMOVE_BATTLEFIELDITEMDATA, 
 				removeBattleFieldItemDataHandler);
+			
+			//var obj:DisplayObject = new ActionStackStyle.actionBg();
+			//this.addChild(obj);
+			this.graphics.lineStyle(3, 0xff0000, 1);
+			this.graphics.drawRect(0, 0, 45, 40);
+			//this.addChild();
 		}
 		
 		private function addBattleFieldItemDataHandler(evt:GameEvent):void
@@ -107,7 +116,7 @@ package org.hamster.mapleCard.main.components.actionStack
 			var movY:AnimateProperty = new AnimateProperty(newItem);
 			movY.property = "y";
 			movY.fromValue = ActionStackStyle.HEIGHT;
-			movY.toValue = 0;
+			movY.toValue = 5;
 			
 			var fade:AnimateProperty = new AnimateProperty(newItem);
 			fade.property = "alpha";

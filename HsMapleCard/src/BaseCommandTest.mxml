@@ -2,7 +2,7 @@
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
 					   xmlns:s="library://ns.adobe.com/flex/spark"  frameRate="60"
 					   xmlns:mx="library://ns.adobe.com/flex/mx"
-					    backgroundColor="0x7f7f7f"
+					    backgroundColor="0x7f7f7f" width="800" height="600"
 					   applicationComplete="windowedapplication1_applicationCompleteHandler(event)">
 
 	<fx:Declarations>
