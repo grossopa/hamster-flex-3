@@ -10,6 +10,8 @@ package org.hamster.mapleCard.assets.style
 		public static const ADD_EFF_DURATION:Number = 500;
 		public static const REMOVE_EFF_DURATION:Number = 500;
 		
+		[Embed(source="/org/hamster/mapleCard/assets/actionStack/actionStack_action.swf")]
+		public static var actionBg:Class;	
 		
 	}
 }

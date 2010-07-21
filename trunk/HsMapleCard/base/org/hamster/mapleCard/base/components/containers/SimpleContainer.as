@@ -18,7 +18,7 @@ package org.hamster.mapleCard.base.components.containers
 		public function SimpleContainer()
 		{
 			super();
-			this.addEventListener(Event.ADDED, addedHandler);
+			this.addEventListener(Event.ADDED_TO_STAGE, addedHandler);
 		}
 		
 		protected function addedHandler(evt:Event):void
