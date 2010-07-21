@@ -13,17 +13,19 @@ package org.hamster.mapleCard.main.components.actionStack
 	{
 		private var _actionStackItem:IActionStackItemData;
 		
-		public function set actionStackItem(value:IActionStackItemData):void
+		public function set actionStackItemData(value:IActionStackItemData):void
 		{
 			if (_actionStackItem != null) {
 				removeItemListener(_actionStackItem);
 			}
 			_actionStackItem = value;
 			addItemListener(_actionStackItem);
-			//this.initializeFromImgArray([_actionStackItem.actionStackIcon]);
+			if (_actionStackItem.actionStackIcon != null) {
+				this.initializeFromImgArray([_actionStackItem.actionStackIcon]);
+			}
 		}
 		
-		public function get actionStackItem():IActionStackItemData
+		public function get actionStackItemData():IActionStackItemData
 		{
 			return _actionStackItem;
 		}

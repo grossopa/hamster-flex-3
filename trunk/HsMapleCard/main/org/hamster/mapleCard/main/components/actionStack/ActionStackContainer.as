@@ -20,8 +20,8 @@ package org.hamster.mapleCard.main.components.actionStack
 	{
 		public static const ES:EventService = EventService.instance;
 		
-		private const actionStackList:ArrayCollection = new ArrayCollection();
-		private const actionStackItemList:ArrayCollection = new ArrayCollection();
+		// private const actionStackList:ArrayCollection = new ArrayCollection();
+		private const actionStackPendingItemList:ArrayCollection = new ArrayCollection();
 		
 		public function ActionStackContainer()
 		{
@@ -43,11 +43,21 @@ package org.hamster.mapleCard.main.components.actionStack
 		
 		private function addBattleFieldItemDataHandler(evt:GameEvent):void
 		{
-			actionStackList.addItem(evt.battleFieldItemData);
+			// actionStackList.addItem(evt.battleFieldItemData);
 			var item:ActionStackItem = new ActionStackItem();
-			item.actionStackItem = evt.battleFieldItemData;
-			this.addChild(item);
-			this.actionStackItemList.addItem(item);
+			item.actionStackItemData = evt.battleFieldItemData;
+			
+			var targetIndex:int = 0;
+			
+			for (var i:int = 0; i < this.actionStackPendingItemList.length; i++) {
+				var existItem:ActionStackItem = this.actionStackPendingItemList[i];
+				if (existItem.actionStackItemData.actionProgress >
+					item.actionStackItemData.actionProgress) {
+					targetIndex++;
+				}
+			}
+			this.addChildAt(item, targetIndex);
+			this.actionStackPendingItemList.addItemAt(item, targetIndex);
 			sortList();
 			
 			playAddEffect(item);
@@ -55,7 +65,7 @@ package org.hamster.mapleCard.main.components.actionStack
 		
 		private function removeBattleFieldItemDataHandler(evt:GameEvent):void
 		{
-			actionStackList.removeItemAt(actionStackList.getItemIndex(evt.battleFieldItemData));
+			// actionStackList.removeItemAt(actionStackList.getItemIndex(evt.battleFieldItemData));
 			// this.actionStackItemList.removeItemAt(this.actionStackItemList.getItemIndex(
 			sortList();
 		}
@@ -65,22 +75,25 @@ package org.hamster.mapleCard.main.components.actionStack
 			var sort:Sort = new Sort();
 			var sortField:SortField = new SortField("actionProgress", false, false, true);
 			sort.fields = [sortField];
-			actionStackList.sort = sort;
-			actionStackList.refresh();
+		//	actionStackList.sort = sort;
+		//	actionStackList.refresh();
 		}
 		
 		private function playAddEffect(newItem:ActionStackItem):void
 		{
 			var rightLocationArray:Array = [];
 			
-			for each (var item:ActionStackItem in this.actionStackItemList) {
+			for each (var item:ActionStackItem in this.actionStackPendingItemList) {
 				if (item != newItem) {
-					if (item.actionStackItem.actionProgress >=
-						newItem.actionStackItem.actionProgress) {
+					if (item.actionStackItemData.actionProgress >
+						newItem.actionStackItemData.actionProgress) {
 						rightLocationArray.push(item);
 					}
 				}
 			}
+			
+			var insertIdx:int = this.actionStackPendingItemList.length - rightLocationArray.length;
+			newItem.x = insertIdx * 50;
 			
 			var parallel:Parallel = new Parallel();
 			for each (item in rightLocationArray) {
@@ -91,17 +104,17 @@ package org.hamster.mapleCard.main.components.actionStack
 				parallel.addChild(ani);
 			}
 			
-			var mov:AnimateProperty = new AnimateProperty(newItem);
-			mov.property = "y";
-			mov.fromValue = ActionStackStyle.HEIGHT;
-			mov.toValue = 0;
+			var movY:AnimateProperty = new AnimateProperty(newItem);
+			movY.property = "y";
+			movY.fromValue = ActionStackStyle.HEIGHT;
+			movY.toValue = 0;
 			
 			var fade:AnimateProperty = new AnimateProperty(newItem);
 			fade.property = "alpha";
 			fade.fromValue = 0;
 			fade.toValue = 1;
 			parallel.addChild(fade);
-			parallel.addChild(mov);
+			parallel.addChild(movY);
 			
 			parallel.duration = ActionStackStyle.ADD_EFF_DURATION;
 			parallel.play();
