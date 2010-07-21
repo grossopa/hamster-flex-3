@@ -6,13 +6,17 @@ import mx.events.FlexEvent;
 import org.hamster.commands.events.CommandEvent;
 import org.hamster.mapleCard.base.commands.CreatureImageLoaderCmd;
 import org.hamster.mapleCard.base.components.images.CreatureImage;
+import org.hamster.mapleCard.base.constants.Constants;
 import org.hamster.mapleCard.base.constants.CreatureStatus;
 import org.hamster.mapleCard.base.model.IBattleFieldItemData;
 import org.hamster.mapleCard.base.model.battleField.CreatureBattleFieldItemData;
+import org.hamster.mapleCard.base.services.DataService;
 import org.hamster.mapleCard.base.utils.FileUtil;
 import org.hamster.mapleCard.main.components.actionStack.ActionStackContainer;
 import org.hamster.mapleCard.main.components.battleField.BattleFieldContainer;
 import org.hamster.mapleCard.main.components.battleField.BattleFieldItem;
+
+private static const DS:DataService = DataService.instance;
 
 private var _battleFieldContainer:BattleFieldContainer;
 private var _actionStackContainer:ActionStackContainer;
@@ -26,10 +30,21 @@ protected function windowedapplication1_applicationCompleteHandler(event:FlexEve
 	_actionStackContainer = new ActionStackContainer();
 	sv3.addChild(_actionStackContainer);
 	
+	
 }
 
 public function testCreatureImageLoaderCommand():void
 {
+	var creatureLoaderCmd:CreatureImageLoaderCmd = CreatureImageLoaderCmd.execute("0100100");
+	creatureLoaderCmd.addEventListener(CommandEvent.COMMAND_RESULT, creatureLoaderResultHandler);
+}
+
+public function creatureLoaderResultHandler(evt:CommandEvent):void
+{
+	var creatureLoaderCmd:CreatureImageLoaderCmd = CreatureImageLoaderCmd(evt.currentTarget);
+	DS.imageCacheManager.put(Constants.CREATE_KEY_PREFIX + creatureLoaderCmd.creatureImageInfo.uid, 
+		creatureLoaderCmd.creatureImageInfo);
+	
 	_testCreatureImage = new CreatureImage("0100100");
 	_testCreatureImage.x = this.sv.numChildren * 50;
 	_testCreatureImage.direction = (this.sv.numChildren % 2 == 0) ? "left" : "right";
@@ -37,6 +52,8 @@ public function testCreatureImageLoaderCommand():void
 	var battleFieldData:CreatureBattleFieldItemData = new CreatureBattleFieldItemData();
 	battleFieldData.maxHp = 10;
 	battleFieldData.hp = 3;
+	battleFieldData.actionProgress = Math.random();
+	battleFieldData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
 	_battleFieldItem = new BattleFieldItem();
 	_battleFieldItem.battleFieldData = battleFieldData;
 	_battleFieldItem.mainImage = _testCreatureImage;
@@ -67,14 +84,4 @@ private function creatureHit():void
 private function creatureWalk():void
 {
 	this._testCreatureImage.status = CreatureStatus.MOVE;
-}
-
-private function cilCmdResultHandler(evt:CommandEvent):void
-{
-	var cmd:CreatureImageLoaderCmd = CreatureImageLoaderCmd(evt.currentTarget);
-}
-
-private function cilCmdFaultHandler(evt:CommandEvent):void
-{
-	var cmd:CreatureImageLoaderCmd = CreatureImageLoaderCmd(evt.currentTarget);
 }

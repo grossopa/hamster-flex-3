@@ -2,11 +2,13 @@ package org.hamster.mapleCard.base.model.battleField
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.media.Video;
 	
 	import org.hamster.mapleCard.base.event.ActionStackItemDataEvent;
 	import org.hamster.mapleCard.base.event.BattleFieldItemDataEvent;
 	import org.hamster.mapleCard.base.model.IBattleFieldItemData;
 	import org.hamster.mapleCard.base.model.card.CreatureCard;
+	import org.hamster.mapleCard.base.model.player.Player;
 	
 	public class CreatureBattleFieldItemData extends CreatureCard implements IBattleFieldItemData
 	{
@@ -16,6 +18,7 @@ package org.hamster.mapleCard.base.model.battleField
 		private var _xIndex:int;
 		private var _yIndex:int;
 		private var _icon:Bitmap;
+		private var _parentPlayer:Player;
 		
 		public function CreatureBattleFieldItemData()
 		{
@@ -153,6 +156,16 @@ package org.hamster.mapleCard.base.model.battleField
 		public function get actionStackIcon():Bitmap
 		{
 			return _icon;
+		}
+		
+		public function set parentPlayer(value:Player):void
+		{
+			this._parentPlayer = value;
+		}
+		
+		public function get parentPlayer():Player
+		{
+			return this._parentPlayer;
 		}
 	}
 }
