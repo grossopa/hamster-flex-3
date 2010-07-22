@@ -19,9 +19,9 @@ package org.hamster.mapleCard.main.components.battleField
 			this._measuredHeight = 500;
 		}
 		
-		override protected function addedHandler(evt:Event):void
+		override protected function addedToStageHandler(evt:Event):void
 		{
-			super.addedHandler(evt);
+			super.addedToStageHandler(evt);
 			
 			if (this.numChildren == 0) {
 				var allCount:int = ROW_COUNT * COL_COUNT;
@@ -37,10 +37,10 @@ package org.hamster.mapleCard.main.components.battleField
 			}
 		}
 		
-		public function addBattleFieldItem(item:BattleFieldItem, xIndex:int, yIndex:int):void
-		{
-			_itemContainer.addBattleFieldItem(item, xIndex, yIndex);
-		}
+//		public function addBattleFieldItem(item:BattleFieldItem, xIndex:int, yIndex:int):void
+//		{
+//			_itemContainer.addBattleFieldItem(item, xIndex, yIndex);
+//		}
 		
 		
 		

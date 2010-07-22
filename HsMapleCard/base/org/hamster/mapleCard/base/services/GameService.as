@@ -6,6 +6,7 @@ package org.hamster.mapleCard.base.services
 	import mx.collections.ArrayList;
 	
 	import org.hamster.mapleCard.base.event.GameEvent;
+	import org.hamster.mapleCard.base.model.IActionStackItemData;
 	import org.hamster.mapleCard.base.model.IBattleFieldItemData;
 	import org.hamster.mapleCard.base.model.card.IBaseCard;
 
@@ -49,5 +50,18 @@ package org.hamster.mapleCard.base.services
 			disEvt.battleFieldItemData = itemData;
 			ES.dispatchEvent(disEvt);		
 		}
+		
+		public function actionBattleFieldItemData(itemData:IActionStackItemData):void
+		{
+			if (itemData is IBattleFieldItemData) {
+				var fieldData:IBattleFieldItemData = IBattleFieldItemData(itemData);
+				
+				var disEvt:GameEvent = new GameEvent(GameEvent.ACTION_BATTLEFIELDITEM);
+				disEvt.battleFieldItemData = fieldData;
+				ES.dispatchEvent(disEvt);
+			}
+		}
+		
+		// private var _actionStackList:ArrayCollection = new ArrayCollection();
 	}
 }

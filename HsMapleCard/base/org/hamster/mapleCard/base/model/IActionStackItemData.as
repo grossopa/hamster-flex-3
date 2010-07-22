@@ -6,7 +6,7 @@ package org.hamster.mapleCard.base.model
 	
 	[Event(name="actionprogressChanged", type="org.hamster.mapleCard.base.event.ActionStackItemDataEvent")]
 
-	public interface IActionStackItemData extends IEventDispatcher, IPlayerItem
+	public interface IActionStackItemData extends IEventDispatcher, IPlayerItem, IBaseModel
 	{
 		function set actionProgress(value:Number):void;
 		function get actionProgress():Number;

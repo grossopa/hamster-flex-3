@@ -25,5 +25,8 @@
 	</mx:HBox>
 	<mx:UIComponent id="sv2" width="525" height="500" />
 	<mx:HRule height="1" width="100%" />
+	<mx:HBox width="100%" verticalAlign="middle" horizontalAlign="left">
+		<s:Button click="pickUpNextItem()" label="Next" />
+	</mx:HBox>
 	<mx:UIComponent id="sv3" width="525" height="40" />
 </s:WindowedApplication>

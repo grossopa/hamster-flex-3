@@ -10,6 +10,8 @@ package org.hamster.mapleCard.base.event
 		public static const ADD_BATTLEFIELDITEMDATA:String = "GameEvent_addBattleFiledItemData";
 		public static const REMOVE_BATTLEFIELDITEMDATA:String = "GameEvent_removeBattleFiledItemData";
 		
+		public static const ACTION_BATTLEFIELDITEM:String = "GameEvent_actionBattleFieldItem";
+		
 		public var battleFieldItemData:IBattleFieldItemData;
 		
 		public function GameEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)

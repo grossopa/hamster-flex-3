@@ -1,5 +1,7 @@
 package org.hamster.mapleCard.main.components.battleField
 {
+	import flash.events.Event;
+	
 	import mx.effects.AnimateProperty;
 	import mx.effects.Effect;
 	import mx.effects.Move;
@@ -13,20 +15,34 @@ package org.hamster.mapleCard.main.components.battleField
 	import org.hamster.mapleCard.assets.style.BattleFieldStyle;
 	import org.hamster.mapleCard.base.components.containers.SimpleContainer;
 	import org.hamster.mapleCard.base.event.BattleFieldItemDataEvent;
+	import org.hamster.mapleCard.base.event.GameEvent;
 	import org.hamster.mapleCard.base.services.DataService;
+	import org.hamster.mapleCard.base.services.EventService;
 	import org.hamster.mapleCard.base.services.GameService;
-	
-	import spark.effects.Animate;
 	
 	public class BattleFieldItemContainer extends SimpleContainer
 	{
-		private static const GS:GameService = GameService.instance;
+		private static const ES:EventService = EventService.instance;
 		
 		public function BattleFieldItemContainer()
 		{
 			super();
 			this._measuredWidth = BattleFieldStyle.WIDTH;
 			this._measuredHeight = BattleFieldStyle.HEIGHT;
+		}
+		
+		override protected function addedToStageHandler(evt:Event):void
+		{
+			super.addedToStageHandler(evt);
+			
+			ES.addEventListener(GameEvent.ADD_BATTLEFIELDITEMDATA, addBattleFieldItemHandler);
+		}
+		
+		private function addBattleFieldItemHandler(evt:GameEvent):void
+		{
+			var item:BattleFieldItem = new BattleFieldItem();
+			item.battleFieldData = evt.battleFieldItemData;
+			this.addBattleFieldItem(item, item.battleFieldData.xIndex, item.battleFieldData.yIndex);
 		}
 		
 		public function addBattleFieldItem(item:BattleFieldItem, xIndex:int, yIndex:int):void
@@ -39,8 +55,6 @@ package org.hamster.mapleCard.main.components.battleField
 			
 			item.x = xValue;
 			item.y = yValue;
-			
-			GS.addBattleFieldItemData(item.battleFieldData);
 		}
 		
 		protected function itemIndexChangedHandler(evt:BattleFieldItemDataEvent):void
@@ -75,9 +89,6 @@ package org.hamster.mapleCard.main.components.battleField
 			parallel.addChild(aniPropertyX);
 			parallel.addChild(aniPropertyY);
 			parallel.play();
-			//item.x = xValue;
-			//item.y = yValue;
-			
 		}
 		
 		protected function addItemListener(item:BattleFieldItem):void

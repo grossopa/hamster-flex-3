@@ -8,15 +8,20 @@ import org.hamster.mapleCard.base.commands.CreatureImageLoaderCmd;
 import org.hamster.mapleCard.base.components.images.CreatureImage;
 import org.hamster.mapleCard.base.constants.Constants;
 import org.hamster.mapleCard.base.constants.CreatureStatus;
+import org.hamster.mapleCard.base.event.GameEvent;
+import org.hamster.mapleCard.base.model.IActionStackItemData;
 import org.hamster.mapleCard.base.model.IBattleFieldItemData;
 import org.hamster.mapleCard.base.model.battleField.CreatureBattleFieldItemData;
+import org.hamster.mapleCard.base.model.player.Player;
 import org.hamster.mapleCard.base.services.DataService;
+import org.hamster.mapleCard.base.services.EventService;
 import org.hamster.mapleCard.base.utils.FileUtil;
 import org.hamster.mapleCard.main.components.actionStack.ActionStackContainer;
 import org.hamster.mapleCard.main.components.battleField.BattleFieldContainer;
 import org.hamster.mapleCard.main.components.battleField.BattleFieldItem;
 
 private static const DS:DataService = DataService.instance;
+private static const ES:EventService = EventService.instance;
 
 private var _battleFieldContainer:BattleFieldContainer;
 private var _actionStackContainer:ActionStackContainer;
@@ -29,8 +34,6 @@ protected function windowedapplication1_applicationCompleteHandler(event:FlexEve
 	sv2.addChild(_battleFieldContainer);
 	_actionStackContainer = new ActionStackContainer();
 	sv3.addChild(_actionStackContainer);
-	
-	
 }
 
 public function testCreatureImageLoaderCommand():void
@@ -45,20 +48,32 @@ public function creatureLoaderResultHandler(evt:CommandEvent):void
 	DS.imageCacheManager.put(Constants.CREATE_KEY_PREFIX + creatureLoaderCmd.creatureImageInfo.uid, 
 		creatureLoaderCmd.creatureImageInfo);
 	
-	_testCreatureImage = new CreatureImage("0100100");
-	_testCreatureImage.x = this.sv.numChildren * 50;
-	_testCreatureImage.direction = (this.sv.numChildren % 2 == 0) ? "left" : "right";
+	var player:Player = new Player();
+	player.color = 0xdd0000;
+	
+//	_testCreatureImage = new CreatureImage("0100100");
+//	_testCreatureImage.x = this.sv.numChildren * 50;
+//	_testCreatureImage.direction = (this.sv.numChildren % 2 == 0) ? "left" : "right";
 	
 	var battleFieldData:CreatureBattleFieldItemData = new CreatureBattleFieldItemData();
+	battleFieldData.id = Constants.CREATE_KEY_PREFIX + "0100100";
 	battleFieldData.maxHp = 10;
 	battleFieldData.hp = 3;
-	battleFieldData.actionProgress = Math.random();
+	battleFieldData.actionProgress = Math.random() * 100;
 	battleFieldData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
-	_battleFieldItem = new BattleFieldItem();
-	_battleFieldItem.battleFieldData = battleFieldData;
-	_battleFieldItem.mainImage = _testCreatureImage;
+	battleFieldData.parentPlayer = player;
 	
-	this._battleFieldContainer.addBattleFieldItem(_battleFieldItem, 0, 0);
+	var disEvt:GameEvent = new GameEvent(GameEvent.ADD_BATTLEFIELDITEMDATA);
+	disEvt.battleFieldItemData = battleFieldData;
+	ES.dispatchEvent(disEvt);
+	
+//	this._battleFieldContainer.addBattleFieldItem(_battleFieldItem, 0, 0);
+}
+
+private function pickUpNextItem():void
+{
+	var data:IActionStackItemData = _actionStackContainer.pickUpNextActionItem();
+	data.actionProgress += 50;
 }
 
 private function moveBattleFieldItem():void
