@@ -1,5 +1,6 @@
 package org.hamster.mapleCard.main.components.actionStack
 {
+	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
 	import flash.events.Event;
@@ -29,6 +30,7 @@ package org.hamster.mapleCard.main.components.actionStack
 		
 		private var _lastActionItem:ActionStackItem;
 		private var _currentActionItem:ActionStackItem;
+		private var _actionBg:DisplayObject;
 		
 		public function get currentActionItemData():IActionStackItemData
 		{
@@ -53,8 +55,11 @@ package org.hamster.mapleCard.main.components.actionStack
 			ES.addEventListener(GameEvent.REMOVE_BATTLEFIELDITEMDATA, 
 				removeBattleFieldItemDataHandler);
 			
-			this.graphics.lineStyle(3, 0xff0000, 1);
-			this.graphics.drawRect(0, 0, 45, 40);
+			//this.graphics.lineStyle(3, 0xff0000, 1);
+			//this.graphics.drawRect(0, 0, 39, 37);
+			_actionBg = new ActionStackStyle.actionBg();
+			this.addChild(_actionBg);
+			
 		}
 		
 		public function pickUpNextActionItem():IActionStackItemData
@@ -127,6 +132,8 @@ package org.hamster.mapleCard.main.components.actionStack
 			this.actionStackPendingItemList.addItemAt(item, targetIndex);
 			sortList();
 			
+			this.setChildIndex(_actionBg, this.numChildren - 1);
+			
 			playAddEffect(item);
 		}
 		
@@ -158,7 +165,7 @@ package org.hamster.mapleCard.main.components.actionStack
 			}
 			
 			var insertIdx:int = this.actionStackPendingItemList.length - rightLocationArray.length;
-			newItem.x = insertIdx * (ActionStackItemStyle.WIDTH + ActionStackItemStyle.ITEM_GAP);
+			newItem.x = insertIdx * (ActionStackItemStyle.WIDTH + ActionStackItemStyle.ITEM_GAP) + 6;
 			
 			var parallel:Parallel = new Parallel();
 			for each (item in rightLocationArray) {
@@ -172,7 +179,7 @@ package org.hamster.mapleCard.main.components.actionStack
 			var movY:AnimateProperty = new AnimateProperty(newItem);
 			movY.property = "y";
 			movY.fromValue = ActionStackStyle.HEIGHT;
-			movY.toValue = 5;
+			movY.toValue = 6;
 			
 			var fade:AnimateProperty = new AnimateProperty(newItem);
 			fade.property = "alpha";
