@@ -42,7 +42,7 @@ package org.hamster.mapleCard.main.components.actionStack
 		{
 			super.updateDisplayContent();
 			
-			this.graphics.lineStyle(3);
+			this.graphics.lineStyle(3, this.actionStackItemData.parentPlayer.color);
 			this.graphics.drawRect(0, 0, _measuredWidth, _measuredHeight);
 		}
 		

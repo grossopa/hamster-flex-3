@@ -10,20 +10,30 @@ package org.hamster.mapleCard.main.components.actionStack
 	import mx.effects.AnimateProperty;
 	import mx.effects.Parallel;
 	import mx.effects.Tween;
+	import mx.events.EffectEvent;
 	
+	import org.hamster.mapleCard.assets.style.ActionStackItemStyle;
 	import org.hamster.mapleCard.assets.style.ActionStackStyle;
 	import org.hamster.mapleCard.base.components.containers.SimpleContainer;
 	import org.hamster.mapleCard.base.event.GameEvent;
 	import org.hamster.mapleCard.base.model.IActionStackItemData;
 	import org.hamster.mapleCard.base.services.EventService;
+	import org.hamster.mapleCard.base.services.GameService;
 	import org.hamster.mapleCard.main.components.battleField.BattleFieldItem;
 	
 	public class ActionStackContainer extends SimpleContainer
 	{
 		public static const ES:EventService = EventService.instance;
 		
-		// private const actionStackList:ArrayCollection = new ArrayCollection();
 		private const actionStackPendingItemList:ArrayCollection = new ArrayCollection();
+		
+		private var _lastActionItem:ActionStackItem;
+		private var _currentActionItem:ActionStackItem;
+		
+		public function get currentActionItemData():IActionStackItemData
+		{
+			return _currentActionItem == null ? null : _currentActionItem.actionStackItemData;
+		}
 		
 		public function ActionStackContainer()
 		{
@@ -34,25 +44,73 @@ package org.hamster.mapleCard.main.components.actionStack
 			
 		}
 		
-		override protected function addedHandler(evt:Event):void
+		override protected function addedToStageHandler(evt:Event):void
 		{
-			super.addedHandler(evt);
+			super.addedToStageHandler(evt);
 			
 			ES.addEventListener(GameEvent.ADD_BATTLEFIELDITEMDATA, 
 				addBattleFieldItemDataHandler);
 			ES.addEventListener(GameEvent.REMOVE_BATTLEFIELDITEMDATA, 
 				removeBattleFieldItemDataHandler);
 			
-			//var obj:DisplayObject = new ActionStackStyle.actionBg();
-			//this.addChild(obj);
 			this.graphics.lineStyle(3, 0xff0000, 1);
 			this.graphics.drawRect(0, 0, 45, 40);
-			//this.addChild();
+		}
+		
+		public function pickUpNextActionItem():IActionStackItemData
+		{
+			var parallel:Parallel = new Parallel();
+			
+			if (_currentActionItem != null) {
+				var aniFade:AnimateProperty = new AnimateProperty();
+				aniFade.fromValue = 1;
+				aniFade.toValue = 0;
+				aniFade.property = "alpha";
+				aniFade.target = _currentActionItem;
+				_lastActionItem = _currentActionItem;
+				parallel.addChild(aniFade);
+			}
+			
+			var leftItem:ActionStackItem = null;
+			for (var i:int = 0; i < this.actionStackPendingItemList.length; i++) {
+				var item:ActionStackItem = this.actionStackPendingItemList[i];
+				if (leftItem == null) {
+					leftItem = item;
+				} else {
+					leftItem = leftItem.x < item.x ? leftItem : item;
+				}
+				
+				var aniX:AnimateProperty = new AnimateProperty();
+				aniX.fromValue = item.x;
+				aniX.toValue = item.x - ActionStackItemStyle.WIDTH - ActionStackItemStyle.ITEM_GAP;
+				aniX.target = item;
+				aniX.property = "x";
+				parallel.addChild(aniX);
+			}
+			
+			actionStackPendingItemList.removeItemAt(actionStackPendingItemList.getItemIndex(leftItem));
+			for each (var otherItem:ActionStackItem in this.actionStackPendingItemList) {
+				otherItem.actionStackItemData.actionProgress -= leftItem.actionStackItemData.actionProgress;
+			}
+			this._currentActionItem = leftItem;
+			
+			parallel.duration = ActionStackStyle.NEXT_EFF_DURATION;
+			parallel.addEventListener(EffectEvent.EFFECT_END, pickUpNextItemEffEndHandler);
+			parallel.play();
+			
+			return this._currentActionItem.actionStackItemData;
+		}
+		
+		private function pickUpNextItemEffEndHandler(evt:EffectEvent):void
+		{
+			if (_lastActionItem != null) {
+				actionStackPendingItemList.addItem(_lastActionItem);
+				playSwitchEffect(_lastActionItem);
+			}
 		}
 		
 		private function addBattleFieldItemDataHandler(evt:GameEvent):void
 		{
-			// actionStackList.addItem(evt.battleFieldItemData);
 			var item:ActionStackItem = new ActionStackItem();
 			item.actionStackItemData = evt.battleFieldItemData;
 			
@@ -74,8 +132,6 @@ package org.hamster.mapleCard.main.components.actionStack
 		
 		private function removeBattleFieldItemDataHandler(evt:GameEvent):void
 		{
-			// actionStackList.removeItemAt(actionStackList.getItemIndex(evt.battleFieldItemData));
-			// this.actionStackItemList.removeItemAt(this.actionStackItemList.getItemIndex(
 			sortList();
 		}
 		
@@ -102,14 +158,14 @@ package org.hamster.mapleCard.main.components.actionStack
 			}
 			
 			var insertIdx:int = this.actionStackPendingItemList.length - rightLocationArray.length;
-			newItem.x = insertIdx * 50;
+			newItem.x = insertIdx * (ActionStackItemStyle.WIDTH + ActionStackItemStyle.ITEM_GAP);
 			
 			var parallel:Parallel = new Parallel();
 			for each (item in rightLocationArray) {
 				var ani:AnimateProperty = new AnimateProperty(item);
 				ani.property = "x";
 				ani.fromValue = item.x;
-				ani.toValue = item.x + 50;
+				ani.toValue = item.x + ActionStackItemStyle.WIDTH + ActionStackItemStyle.ITEM_GAP;
 				parallel.addChild(ani);
 			}
 			
@@ -127,6 +183,11 @@ package org.hamster.mapleCard.main.components.actionStack
 			
 			parallel.duration = ActionStackStyle.ADD_EFF_DURATION;
 			parallel.play();
+		}
+		
+		private function playSwitchEffect(newItem:ActionStackItem):void
+		{
+			this.playAddEffect(newItem);
 		}
 	}
 }

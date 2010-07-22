@@ -34,7 +34,7 @@ package org.hamster.mapleCard.base.components.images
 		{
 			super();
 			this._id = id;
-			this.addEventListener(Event.ADDED, addedHandler);
+			this.addEventListener(Event.ADDED_TO_STAGE, addedHandler);
 		}
 		
 		protected function addedHandler(evt:Event):void

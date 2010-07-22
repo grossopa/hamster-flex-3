@@ -7,6 +7,8 @@ package org.hamster.mapleCard.main.components.battleField
 	import org.hamster.mapleCard.assets.style.BattleFieldItemStyle;
 	import org.hamster.mapleCard.base.components.containers.SimpleContainer;
 	import org.hamster.mapleCard.base.components.images.BaseImage;
+	import org.hamster.mapleCard.base.components.images.CreatureImage;
+	import org.hamster.mapleCard.base.constants.Constants;
 	import org.hamster.mapleCard.base.event.ActionStackItemDataEvent;
 	import org.hamster.mapleCard.base.event.BattleFieldItemDataEvent;
 	import org.hamster.mapleCard.base.model.IBattleFieldItemData;
@@ -24,9 +26,11 @@ package org.hamster.mapleCard.main.components.battleField
 		{
 			if (_battleFieldData != null) {
 				this.removeBattleFieldDataListener(_battleFieldData);
+				this.removeChild(_mainImage);
 			}
 			_battleFieldData = value;
 			this.addBattleFieldDataListener(_battleFieldData);
+			initMainImage();
 		}
 		
 		public function get battleFieldData():IBattleFieldItemData
@@ -58,17 +62,23 @@ package org.hamster.mapleCard.main.components.battleField
 			this.addEventListener(Event.ENTER_FRAME, onEnterFrameHandler);
 		}
 		
-		override protected function addedHandler(evt:Event):void
+		override protected function addedToStageHandler(evt:Event):void
 		{
-			if (this.numChildren == 0) {
+			super.addedToStageHandler(evt);
+			
+			if (this._lifeBar == null) {
 				this._lifeBar = new Sprite();
 				this.addChild(this._lifeBar);
 				this._lifeBar.y = 15;
 				this._lifeBar.x = 10;
-				
-				if (this._mainImage != null) {
-					this.addChild(this._mainImage);
-				}
+			}
+		}
+		
+		protected function initMainImage():void
+		{
+			if (this._battleFieldData.id.indexOf(Constants.CREATE_KEY_PREFIX) >= 0) {
+				this._mainImage = new CreatureImage(this._battleFieldData.id.replace(Constants.CREATE_KEY_PREFIX, ""));
+				this.addChild(_mainImage);
 			}
 		}
 		
@@ -112,7 +122,7 @@ package org.hamster.mapleCard.main.components.battleField
 			this.dispatchEvent(evt);
 		}
 		
-		protected function actionProgressChangedHandler(evt:BattleFieldItemDataEvent):void
+		protected function actionProgressChangedHandler(evt:ActionStackItemDataEvent):void
 		{
 			this.dispatchEvent(evt);
 		}

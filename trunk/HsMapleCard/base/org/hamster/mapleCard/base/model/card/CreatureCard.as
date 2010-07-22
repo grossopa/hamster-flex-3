@@ -3,7 +3,10 @@ package org.hamster.mapleCard.base.model.card
 	[Bindable]
 	public class CreatureCard extends BaseCard
 	{
-		public var id:String;
+		private var _id:String;
+		public function set id(value:String):void { _id = value; }
+		public function get id():String { return _id; }
+		
 		public var name:String;
 		public var maxMoveSpeed:Number;
 		public var maxAtt:Number;

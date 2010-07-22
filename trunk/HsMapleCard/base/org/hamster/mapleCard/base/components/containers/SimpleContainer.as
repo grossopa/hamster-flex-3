@@ -18,10 +18,10 @@ package org.hamster.mapleCard.base.components.containers
 		public function SimpleContainer()
 		{
 			super();
-			this.addEventListener(Event.ADDED_TO_STAGE, addedHandler);
+			this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
 		}
 		
-		protected function addedHandler(evt:Event):void
+		protected function addedToStageHandler(evt:Event):void
 		{
 			this.graphics.lineStyle(0, 0, 0);
 			this.graphics.drawRect(0, 0, this._measuredWidth, this.measuredHeight);
