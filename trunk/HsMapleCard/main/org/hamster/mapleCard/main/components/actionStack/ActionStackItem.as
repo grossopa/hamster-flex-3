@@ -42,6 +42,9 @@ package org.hamster.mapleCard.main.components.actionStack
 		{
 			super.updateDisplayContent();
 			
+			this._measuredHeight = ActionStackItemStyle.HEIGHT;
+			this._measuredWidth = ActionStackItemStyle.WIDTH;
+			
 			this.graphics.lineStyle(3, this.actionStackItemData.parentPlayer.color);
 			this.graphics.drawRect(0, 0, _measuredWidth, _measuredHeight);
 		}
