@@ -2,6 +2,7 @@ package org.hamster.ruleComponent
 {
 	import flash.display.BitmapData;
 	import flash.display.Graphics;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
 	
@@ -223,7 +224,7 @@ package org.hamster.ruleComponent
 		//	this.verticalScrollPolicy = "off";
 		//	this.horizontalScrollPolicy = "off";
 			_matrixUtil = new Matrix();
-			
+			this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
 			this.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
 			this.addEventListener(ResizeEvent.RESIZE, resizeHandler);
 		}
@@ -248,7 +249,15 @@ package org.hamster.ruleComponent
 		private function resizeHandler(evt:ResizeEvent):void
 		{
 			this._isRedrawRules = true;
+			this._isRedrawInteractive = true;
 			this.invalidateDisplayList();
+		}
+		
+		private function addedToStageHandler(evt:Event):void
+		{
+			this._isRedrawInteractive = true;
+			this._isRedrawRules = true;
+			this.invalidateDisplayList();		
 		}
 		
 		override protected function updateDisplayList(uw:Number, uh:Number):void
