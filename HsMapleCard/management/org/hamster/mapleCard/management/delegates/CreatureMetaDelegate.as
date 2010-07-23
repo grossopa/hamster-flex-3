@@ -14,7 +14,9 @@ package org.hamster.mapleCard.management.delegates
 	public class CreatureMetaDelegate
 	{
 		private var responder:IResponder;
+		
 		private var fs:FileStream;
+		private var meta:CreatureCard;
 		
 		public function CreatureMetaDelegate(responder:IResponder)
 		{
@@ -28,6 +30,7 @@ package org.hamster.mapleCard.management.delegates
 		{
 			var fs:FileStream = FileStream(evt.currentTarget);
 			var str:String = fs.readUTFBytes(fs.bytesAvailable);
+			fs.close();
 			this.responder.result(str);
 		}
 		
@@ -45,11 +48,17 @@ package org.hamster.mapleCard.management.delegates
 		
 		public function saveCreatureMeta(meta:CreatureCard):void 
 		{
+			this.meta = meta;
 			var file:File = new File(FileUtil.creatureMetaDir.nativePath 
 				+ File.separator + meta.id.toString() + ".xml");
+			fs.addEventListener(Event.CLOSE, saveCreatureMetaWriteCompleteHandler);
 			fs.open(file, FileMode.WRITE);
-			fs.writeMultiByte(meta.encode().toString(), "utf-8");
+			fs.writeUTFBytes(meta.encode().toXMLString());
 			fs.close();
+		}
+		
+		public function saveCreatureMetaWriteCompleteHandler(evt:Event):void
+		{
 			this.responder.result(meta);
 		}
 	}

@@ -5,14 +5,13 @@
 		 xmlns:card="org.hamster.mapleCard.base.model.card.*"
 		  creationComplete="group1_creationCompleteHandler(event)">
 	<fx:Declarations>
-		<!--<card:CreatureCard id="edittingCard"
+		<card:CreatureCard id="edittingCard"
 						   name="{currentCard.name}"
-						   moveSpeed="{currentCard.moveSpeed}"
-						   att="{currentCard.att}"
-						   def="{currentCard.def}"
-						   hp="{currentCard.hp}"
-						   distance="{currentCard.distance}" />
-		-->
+						   maxMoveSpeed="{currentCard.maxMoveSpeed}"
+						   maxAtt="{currentCard.maxAtt}"
+						   maxDef="{currentCard.maxDef}"
+						   maxHp="{currentCard.maxHp}"
+						   maxDistance="{currentCard.maxDistance}" />
 	</fx:Declarations>
 	<fx:Metadata>
 		[Event("saveCreatureCard")]
@@ -41,29 +40,29 @@
 	
 	<mx:UIComponent id="mainCreatureImg" width="150" height="150" />
 	<mx:Form width="300" height="150" x="150" paddingTop="5" paddingBottom="5">
-		<mx:FormHeading label="{currentCard.id}" />
+		<mx:FormHeading label="{edittingCard.id}" />
 		<mx:FormItem label="id : ">
-			<s:TextInput id="idInput" text="{currentCard.id}" />
+			<s:TextInput id="idInput" text="{edittingCard.id}" />
 		</mx:FormItem>
 		<mx:FormItem label="Name : ">
-			<s:TextInput id="nameInput" text="{currentCard.name}" />
+			<s:TextInput id="nameInput" text="{edittingCard.name}" />
 		</mx:FormItem>
 		<mx:FormItem label="Move speed : ">
-			<s:TextInput id="moveSpeedInput" text="{currentCard.maxMoveSpeed}" />
+			<s:TextInput id="moveSpeedInput" text="{edittingCard.maxMoveSpeed}" />
 		</mx:FormItem>
 		<mx:FormItem label="Attack : ">
-			<s:TextInput id="attInput" text="{currentCard.maxAtt}" />
+			<s:TextInput id="attInput" text="{edittingCard.maxAtt}" />
 		</mx:FormItem>
 	</mx:Form>
 	<mx:Form width="300" height="150" x="450" paddingTop="5">
 		<mx:FormItem label="Defense : ">
-			<s:TextInput id="defInput" text="{currentCard.maxDef}" />
+			<s:TextInput id="defInput" text="{edittingCard.maxDef}" />
 		</mx:FormItem>
 		<mx:FormItem label="HP : ">
-			<s:TextInput id="hpInput" text="{currentCard.maxHp}" />
+			<s:TextInput id="hpInput" text="{edittingCard.maxHp}" />
 		</mx:FormItem>
 		<mx:FormItem label="Distance : ">
-			<s:TextInput id="distanceInput" text="{currentCard.maxDistance}" />
+			<s:TextInput id="distanceInput" text="{edittingCard.maxDistance}" />
 		</mx:FormItem>
 	</mx:Form>
 	<s:HGroup y="150" width="100%" verticalAlign="middle" height="30">
