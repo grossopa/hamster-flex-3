@@ -7,6 +7,7 @@ package org.hamster.mapleCard.base.utils
 		private static var _rootDir:File;
 		private static var _creatureDir:File;
 		private static var _creatureMetaDir:File;
+		private static var _effectDir:File;
 		
 		public static function get rootDir():File
 		{
@@ -32,6 +33,15 @@ package org.hamster.mapleCard.base.utils
 					+ File.separator + "CreatureMeta");
 			}
 			return _creatureMetaDir;
+		}
+		
+		public static function get effectDir():File
+		{
+			if (_effectDir == null) {
+				_effectDir = new File(rootDir.nativePath
+					+ File.separator + "Effects");
+			}
+			return _effectDir;
 		}
 	}
 }
