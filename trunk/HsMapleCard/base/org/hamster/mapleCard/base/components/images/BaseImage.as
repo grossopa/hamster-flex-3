@@ -27,6 +27,10 @@ package org.hamster.mapleCard.base.components.images
 		public function set playMethod(value:String):void { this._playMethod = value; }
 		public function get playMethod():String { return this._playMethod }
 		
+		protected var _alignment:String;
+		public function set alignment(value:String):void { this._alignment = value; }
+		public function get alignment():String { return this._alignment };
+		
 		protected var animationControl:IAnimationControl = new SimpleAnimationControl();
 		
 		protected var _imgArray:Array;
@@ -138,7 +142,12 @@ package org.hamster.mapleCard.base.components.images
 			var bitmap:Bitmap = _imgArray[_currentImgIndex];
 			
 			var measuredX:Number = (this._measuredWidth - bitmap.width) / 2;
-			var measuredY:Number = this._measuredHeight - bitmap.height; 
+			var measuredY:Number
+			if (_alignment == "center") {
+				measuredY = (this._measuredHeight - bitmap.height) / 2;
+			} else {
+				measuredY = this._measuredHeight - bitmap.height;
+			}
 			_matrixUtil.tx = measuredX;
 			_matrixUtil.ty = measuredY;
 			if (this._direction == "right") {

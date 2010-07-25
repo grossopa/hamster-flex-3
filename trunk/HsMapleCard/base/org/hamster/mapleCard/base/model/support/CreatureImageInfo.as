@@ -5,7 +5,7 @@ package org.hamster.mapleCard.base.model.support
 
 	public class CreatureImageInfo
 	{
-		public var uid:String;
+		public var id:String;
 		
 		public var icon:Bitmap;
 		public var moveImages:Array = [];

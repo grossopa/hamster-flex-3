@@ -6,6 +6,7 @@ import mx.events.FlexEvent;
 import org.hamster.commands.events.CommandEvent;
 import org.hamster.mapleCard.base.commands.CreatureImageLoaderCmd;
 import org.hamster.mapleCard.base.components.images.CreatureImage;
+import org.hamster.mapleCard.base.components.images.EffectImage;
 import org.hamster.mapleCard.base.constants.Constants;
 import org.hamster.mapleCard.base.constants.CreatureStatus;
 import org.hamster.mapleCard.base.event.GameEvent;
@@ -27,13 +28,18 @@ private var _battleFieldContainer:BattleFieldContainer;
 private var _actionStackContainer:ActionStackContainer;
 private var _battleFieldItem:BattleFieldItem;
 private var _testCreatureImage:CreatureImage;
+private var _testEffectImage:EffectImage;
 
 protected function windowedapplication1_applicationCompleteHandler(event:FlexEvent):void
 {
 	_battleFieldContainer = new BattleFieldContainer();
 	sv2.addChild(_battleFieldContainer);
+	
+	_testEffectImage = new EffectImage("attack_1");
+	
 	_actionStackContainer = new ActionStackContainer();
 	sv3.addChild(_actionStackContainer);
+	sv2.addChild(_testEffectImage);
 }
 
 public function testCreatureImageLoaderCommand():void
@@ -45,7 +51,7 @@ public function testCreatureImageLoaderCommand():void
 public function creatureLoaderResultHandler(evt:CommandEvent):void
 {
 	var creatureLoaderCmd:CreatureImageLoaderCmd = CreatureImageLoaderCmd(evt.currentTarget);
-	DS.imageCacheManager.put(Constants.CREATE_KEY_PREFIX + creatureLoaderCmd.creatureImageInfo.uid, 
+	DS.imageCacheManager.put(Constants.CREATE_KEY_PREFIX + creatureLoaderCmd.creatureImageInfo.id, 
 		creatureLoaderCmd.creatureImageInfo);
 	
 	var player:Player = new Player();
