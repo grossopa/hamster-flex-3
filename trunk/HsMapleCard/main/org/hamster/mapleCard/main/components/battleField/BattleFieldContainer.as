@@ -1,5 +1,6 @@
 package org.hamster.mapleCard.main.components.battleField
 {
+	import flash.display.SpreadMethod;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
@@ -34,15 +35,12 @@ package org.hamster.mapleCard.main.components.battleField
 				
 				_itemContainer = new BattleFieldItemContainer();
 				this.addChild(_itemContainer);
+				
+//				if (!this.mask) {
+//					this.mask = new Sprite();
+//				}
 			}
 		}
-		
-//		public function addBattleFieldItem(item:BattleFieldItem, xIndex:int, yIndex:int):void
-//		{
-//			_itemContainer.addBattleFieldItem(item, xIndex, yIndex);
-//		}
-		
-		
 		
 	}
 }

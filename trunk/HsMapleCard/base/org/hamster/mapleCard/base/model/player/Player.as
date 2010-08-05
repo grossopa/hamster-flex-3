@@ -23,10 +23,21 @@ package org.hamster.mapleCard.base.model.player
 		private var _icon:Bitmap;
 		private var _parentPlayer:Player;
 		private var _maxHp:Number;
+		private var _direction:String;
 		
 		public var name:String;
 		public var color:Number;
 		public var creatures:Array;
+		
+		public function set direction(value:String):void
+		{
+			this._direction = value;
+		}
+		
+		public function get direction():String
+		{
+			return this._direction;
+		}
 		
 		public function Player():void
 		{

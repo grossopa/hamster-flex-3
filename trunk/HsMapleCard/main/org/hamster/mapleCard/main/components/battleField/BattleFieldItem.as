@@ -78,6 +78,7 @@ package org.hamster.mapleCard.main.components.battleField
 		{
 			if (this._battleFieldData.id.indexOf(Constants.CREATE_KEY_PREFIX) >= 0) {
 				this._mainImage = new CreatureImage(this._battleFieldData.id.replace(Constants.CREATE_KEY_PREFIX, ""));
+				this._mainImage.direction = this._battleFieldData.direction;
 				this.addChild(_mainImage);
 			}
 		}

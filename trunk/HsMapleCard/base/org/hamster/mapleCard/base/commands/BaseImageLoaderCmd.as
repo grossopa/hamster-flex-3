@@ -1,17 +1,11 @@
 package org.hamster.mapleCard.base.commands
 {
 	import flash.display.Bitmap;
-	import flash.display.BitmapData;
 	import flash.display.Loader;
 	import flash.events.Event;
-	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
-	import mx.core.BitmapAsset;
-	
 	import org.hamster.commands.AbstractCommand;
-	
-	import spark.utils.BitmapUtil;
 	
 	public class BaseImageLoaderCmd extends AbstractCommand
 	{

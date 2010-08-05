@@ -12,7 +12,12 @@ package org.hamster.mapleCard.base.event
 		
 		public static const ACTION_BATTLEFIELDITEM:String = "GameEvent_actionBattleFieldItem";
 		
+		public static const ATTACK_START:String = "GameEvent_attackStart";
+		
 		public var battleFieldItemData:IBattleFieldItemData;
+		
+		public var attacker:IBattleFieldItemData;
+		public var defender:IBattleFieldItemData;
 		
 		public function GameEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{

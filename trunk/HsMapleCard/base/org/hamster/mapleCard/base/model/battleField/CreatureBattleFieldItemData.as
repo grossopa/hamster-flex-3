@@ -20,6 +20,11 @@ package org.hamster.mapleCard.base.model.battleField
 		private var _icon:Bitmap;
 		private var _parentPlayer:Player;
 		
+		public function get direction():String
+		{
+			return this._parentPlayer.direction;
+		}
+		
 		public function CreatureBattleFieldItemData()
 		{
 			super();

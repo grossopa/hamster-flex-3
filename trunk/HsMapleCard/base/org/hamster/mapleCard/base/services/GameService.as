@@ -62,6 +62,11 @@ package org.hamster.mapleCard.base.services
 			}
 		}
 		
+		public function performAttack(attacker:IBattleFieldItemData, defender:IBattleFieldItemData):void
+		{
+			
+		}
+		
 		// private var _actionStackList:ArrayCollection = new ArrayCollection();
 	}
 }

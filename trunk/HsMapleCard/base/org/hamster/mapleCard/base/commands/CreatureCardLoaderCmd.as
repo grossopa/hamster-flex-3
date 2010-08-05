@@ -1,12 +1,7 @@
 package org.hamster.mapleCard.base.commands
 {
-	import flash.events.Event;
-	import flash.events.IOErrorEvent;
 	import flash.filesystem.File;
-	import flash.filesystem.FileMode;
-	import flash.filesystem.FileStream;
 	
-	import org.hamster.commands.AbstractCommand;
 	import org.hamster.mapleCard.base.model.card.CreatureCard;
 	import org.hamster.mapleCard.base.utils.FileUtil;
 	

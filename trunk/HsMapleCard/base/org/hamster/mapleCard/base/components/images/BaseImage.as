@@ -1,13 +1,9 @@
 package org.hamster.mapleCard.base.components.images
 {
 	import flash.display.Bitmap;
-	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.geom.Matrix;
-	
-	import mx.core.FlexSprite;
-	import mx.core.UIComponent;
 	
 	import org.hamster.mapleCard.animations.IAnimationControl;
 	import org.hamster.mapleCard.animations.SimpleAnimationControl;

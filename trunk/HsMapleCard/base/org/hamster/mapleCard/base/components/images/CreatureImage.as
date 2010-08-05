@@ -1,8 +1,6 @@
 package org.hamster.mapleCard.base.components.images
 {
-	import flash.display.Bitmap;
 	import flash.events.Event;
-	import flash.geom.Matrix;
 	
 	import org.hamster.commands.events.CommandEvent;
 	import org.hamster.mapleCard.base.commands.CreatureImageLoaderCmd;

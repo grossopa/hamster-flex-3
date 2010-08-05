@@ -20,5 +20,6 @@ package org.hamster.mapleCard.base.model
 		function setIndex(xIdx:int, yIdx:int):void;
 		
 		function get maxHp():Number;
+		function get direction():String;
 	}
 }

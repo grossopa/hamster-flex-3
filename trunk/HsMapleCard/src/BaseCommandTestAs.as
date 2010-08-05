@@ -27,6 +27,8 @@ private static const ES:EventService = EventService.instance;
 private var _battleFieldContainer:BattleFieldContainer;
 private var _actionStackContainer:ActionStackContainer;
 private var _battleFieldItem:BattleFieldItem;
+private var _attackerData:IBattleFieldItemData;
+private var _defenderData:IBattleFieldItemData;
 private var _testCreatureImage:CreatureImage;
 private var _testEffectImage:EffectImage;
 
@@ -35,11 +37,11 @@ protected function windowedapplication1_applicationCompleteHandler(event:FlexEve
 	_battleFieldContainer = new BattleFieldContainer();
 	sv2.addChild(_battleFieldContainer);
 	
-	_testEffectImage = new EffectImage("attack_1");
+	// _testEffectImage = new EffectImage("attack_1");
 	
 	_actionStackContainer = new ActionStackContainer();
 	sv3.addChild(_actionStackContainer);
-	sv2.addChild(_testEffectImage);
+	// sv2.addChild(_testEffectImage);
 }
 
 public function testCreatureImageLoaderCommand():void
@@ -54,8 +56,13 @@ public function creatureLoaderResultHandler(evt:CommandEvent):void
 	DS.imageCacheManager.put(Constants.CREATE_KEY_PREFIX + creatureLoaderCmd.creatureImageInfo.id, 
 		creatureLoaderCmd.creatureImageInfo);
 	
-	var player:Player = new Player();
-	player.color = 0xdd0000;
+	var player1:Player = new Player();
+	player1.direction = "right";
+	player1.color = 0xdd0000;
+	
+	var player2:Player = new Player();
+	player2.direction = "left";
+	player2.color = 0x0000dd;
 	
 //	_testCreatureImage = new CreatureImage("0100100");
 //	_testCreatureImage.x = this.sv.numChildren * 50;
@@ -67,13 +74,46 @@ public function creatureLoaderResultHandler(evt:CommandEvent):void
 	battleFieldData.hp = 3;
 	battleFieldData.actionProgress = Math.random() * 100;
 	battleFieldData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
-	battleFieldData.parentPlayer = player;
+	battleFieldData.parentPlayer = player1;
+	
+	_attackerData = new CreatureBattleFieldItemData();
+	_attackerData.id = Constants.CREATE_KEY_PREFIX + "0100100";
+	CreatureBattleFieldItemData(_attackerData).maxHp = 10;
+	_attackerData.hp = 10;
+	_attackerData.xIndex = 3;
+	_attackerData.yIndex = 3;
+	_attackerData.actionProgress = Math.random() * 100;
+	_attackerData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
+	_attackerData.parentPlayer = player1;
+	
+	_defenderData = new CreatureBattleFieldItemData();
+	_defenderData.id = Constants.CREATE_KEY_PREFIX + "0100100";
+	CreatureBattleFieldItemData(_defenderData).maxHp = 10;
+	_defenderData.hp = 10;
+	_defenderData.xIndex = 4;
+	_defenderData.yIndex = 3;
+	_defenderData.actionProgress = Math.random() * 100;
+	_defenderData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
+	_defenderData.parentPlayer = player2;
 	
 	var disEvt:GameEvent = new GameEvent(GameEvent.ADD_BATTLEFIELDITEMDATA);
 	disEvt.battleFieldItemData = battleFieldData;
 	ES.dispatchEvent(disEvt);
 	
+	var disEvt1:GameEvent = new GameEvent(GameEvent.ADD_BATTLEFIELDITEMDATA);
+	disEvt1.battleFieldItemData = _attackerData;
+	ES.dispatchEvent(disEvt1);
+	
+	var disEvt2:GameEvent = new GameEvent(GameEvent.ADD_BATTLEFIELDITEMDATA);
+	disEvt2.battleFieldItemData = _defenderData;
+	ES.dispatchEvent(disEvt2);
+	
 //	this._battleFieldContainer.addBattleFieldItem(_battleFieldItem, 0, 0);
+}
+
+protected function attack_clickHandler(event:MouseEvent):void
+{
+	
 }
 
 private function pickUpNextItem():void
