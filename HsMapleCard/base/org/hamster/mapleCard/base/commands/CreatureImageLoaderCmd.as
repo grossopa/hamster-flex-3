@@ -1,18 +1,10 @@
 package org.hamster.mapleCard.base.commands
 {
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.display.Loader;
 	import flash.filesystem.File;
-	import flash.system.JPEGLoaderContext;
-	import flash.utils.Dictionary;
-	
-	import mx.graphics.codec.JPEGEncoder;
 	
 	import org.hamster.commands.AbstractCommand;
 	import org.hamster.commands.events.CommandEvent;
 	import org.hamster.commands.impl.CommandQueue;
-	import org.hamster.mapleCard.base.constants.Constants;
 	import org.hamster.mapleCard.base.constants.CreatureStatus;
 	import org.hamster.mapleCard.base.model.support.CreatureImageInfo;
 	import org.hamster.mapleCard.base.utils.FileUtil;

@@ -1,11 +1,7 @@
 package org.hamster.mapleCard.base.components.containers
 {
-	import flash.display.DisplayObjectContainer;
-	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	
-	import mx.core.UIComponent;
 	
 	public class SimpleContainer extends Sprite
 	{

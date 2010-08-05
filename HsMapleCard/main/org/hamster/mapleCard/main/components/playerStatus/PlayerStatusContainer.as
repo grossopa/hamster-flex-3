@@ -1,7 +1,5 @@
 package org.hamster.mapleCard.main.components.playerStatus
 {
-	import flashx.textLayout.conversion.PlainTextExporter;
-	
 	import org.hamster.mapleCard.base.components.containers.SimpleContainer;
 	import org.hamster.mapleCard.base.event.ActionStackItemDataEvent;
 	import org.hamster.mapleCard.base.event.BattleFieldItemDataEvent;

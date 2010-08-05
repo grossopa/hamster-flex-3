@@ -4,9 +4,6 @@
 					   xmlns:mx="library://ns.adobe.com/flex/mx"
 					    backgroundColor="0x7f7f7f" width="800" height="600"
 					   applicationComplete="windowedapplication1_applicationCompleteHandler(event)">
-
-	<fx:Declarations>
-	</fx:Declarations>
 	<fx:Script source="BaseCommandTestAs.as" />
 	<s:layout>
 		<s:VerticalLayout />
@@ -21,6 +18,7 @@
 	<mx:HRule height="1" width="100%" />
 	<mx:HBox width="100%" verticalAlign="middle" horizontalAlign="left">
 		<s:Button click="moveBattleFieldItem()" label="Move" />
+		<s:Button click="attack_clickHandler(event)" label="Attack" />
 	</mx:HBox>
 	<mx:UIComponent id="sv2" width="525" height="500" />
 	<mx:HRule height="1" width="100%" />

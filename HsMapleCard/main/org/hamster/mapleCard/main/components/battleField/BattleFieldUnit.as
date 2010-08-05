@@ -1,16 +1,12 @@
 package org.hamster.mapleCard.main.components.battleField
 {
 	import flash.display.Bitmap;
-	import flash.display.BitmapData;
 	import flash.events.Event;
-	
-	import mx.controls.Image;
 	
 	import org.hamster.mapleCard.base.components.images.BaseImage;
 	import org.hamster.mapleCard.base.constants.BaseImagePlayMethod;
 	import org.hamster.mapleCard.base.constants.BattleFieldUnitStatus;
 	import org.hamster.mapleCard.base.constants.Constants;
-	import org.hamster.mapleCard.base.constants.CreatureStatus;
 	import org.hamster.mapleCard.base.services.DataService;
 	
 	public class BattleFieldUnit extends BaseImage
