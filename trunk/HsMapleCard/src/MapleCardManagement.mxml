@@ -9,15 +9,17 @@
 			import mx.events.FlexEvent;
 			
 			import org.hamster.mapleCard.management.facade.ManagementFacade;
+			import org.hamster.mapleCard.management.views.mediators.BaseMediator;
 			import org.puremvc.as3.patterns.observer.Notification;
 		
-		private var facade:ManagementFacade = ManagementFacade.getInstance();
-
-		protected function windowedapplication1_applicationCompleteHandler(event:FlexEvent):void
-		{
-			facade.notifyObservers( new Notification( ManagementFacade.APP_INIT, this ) );
-		}
-
+			private var facade:ManagementFacade = ManagementFacade.getInstance();
+	
+			protected function windowedapplication1_applicationCompleteHandler(event:FlexEvent):void
+			{
+				BaseMediator.app = this;
+				
+				facade.notifyObservers( new Notification( ManagementFacade.APP_INIT, this ));
+			}
 		]]>
 	</fx:Script>
 	<components:CreatureEditor id="creatureEditor" />

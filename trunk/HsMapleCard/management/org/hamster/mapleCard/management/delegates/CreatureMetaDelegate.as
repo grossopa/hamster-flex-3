@@ -51,15 +51,13 @@ package org.hamster.mapleCard.management.delegates
 			this.meta = meta;
 			var file:File = new File(FileUtil.creatureMetaDir.nativePath 
 				+ File.separator + meta.id.toString() + ".xml");
-			fs.addEventListener(Event.CLOSE, saveCreatureMetaWriteCompleteHandler);
+			// fs.addEventListener(Event.CLOSE, saveCreatureMetaWriteCompleteHandler);
 			fs.open(file, FileMode.WRITE);
 			fs.writeUTFBytes(meta.encode().toXMLString());
 			fs.close();
-		}
-		
-		public function saveCreatureMetaWriteCompleteHandler(evt:Event):void
-		{
-			this.responder.result(meta);
+			if (this.responder) {
+				this.responder.result(meta);
+			}
 		}
 	}
 }

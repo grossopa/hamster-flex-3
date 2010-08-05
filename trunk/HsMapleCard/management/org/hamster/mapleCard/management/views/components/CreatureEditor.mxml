@@ -3,15 +3,17 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" 
 		 xmlns:card="org.hamster.mapleCard.base.model.card.*"
-		  creationComplete="group1_creationCompleteHandler(event)">
+		 creationComplete="dispatchEvent(new Event('loadAllCreatureCards'))">
 	<fx:Declarations>
 		<card:CreatureCard id="edittingCard"
-						   name="{currentCard.name}"
-						   maxMoveSpeed="{currentCard.maxMoveSpeed}"
-						   maxAtt="{currentCard.maxAtt}"
-						   maxDef="{currentCard.maxDef}"
-						   maxHp="{currentCard.maxHp}"
-						   maxDistance="{currentCard.maxDistance}" />
+						   name="{nameInput.text}"
+						   maxMoveSpeed="{parseFloat(moveSpeedInput.text)}"
+						   maxAtt="{parseFloat(attInput.text)}"
+						   maxDef="{parseFloat(defInput.text)}"
+						   maxHp="{parseFloat(hpInput.text)}"
+						   maxDistance="{parseFloat(distanceInput.text)}">
+			<card:id>{this.idInput.text}</card:id>
+		</card:CreatureCard>
 	</fx:Declarations>
 	<fx:Metadata>
 		[Event("saveCreatureCard")]
@@ -19,62 +21,59 @@
 		[Event("loadAllCreatureCards")]
 	</fx:Metadata>
 	<fx:Script>
-		<![CDATA[
+		<![CDATA[ 
 			import mx.collections.ArrayCollection;
 			import mx.events.FlexEvent;
 			
 			import org.hamster.mapleCard.base.model.card.CreatureCard;
 			[Bindable] public var currentCard:CreatureCard;
 			[Bindable] public var allCards:ArrayCollection;
-
-			protected function group1_creationCompleteHandler(event:FlexEvent):void
-			{
-				this.dispatchEvent(new Event("loadAllCreatureCards"));
-			}
-
 		]]>
 	</fx:Script>
 
 	<fx:Script source="CreatureEditorAs.as" />
 	
-	
 	<mx:UIComponent id="mainCreatureImg" width="150" height="150" />
 	<mx:Form width="300" height="150" x="150" paddingTop="5" paddingBottom="5">
-		<mx:FormHeading label="{edittingCard.id}" />
+		<mx:FormHeading label="{currentCard.id}" />
 		<mx:FormItem label="id : ">
-			<s:TextInput id="idInput" text="{edittingCard.id}" />
+			<s:TextInput id="idInput" text="{currentCard.id}" />
 		</mx:FormItem>
 		<mx:FormItem label="Name : ">
-			<s:TextInput id="nameInput" text="{edittingCard.name}" />
+			<s:TextInput id="nameInput" text="{currentCard.name}" />
 		</mx:FormItem>
 		<mx:FormItem label="Move speed : ">
-			<s:TextInput id="moveSpeedInput" text="{edittingCard.maxMoveSpeed}" />
+			<s:TextInput id="moveSpeedInput" text="{currentCard.maxMoveSpeed}" />
 		</mx:FormItem>
 		<mx:FormItem label="Attack : ">
-			<s:TextInput id="attInput" text="{edittingCard.maxAtt}" />
+			<s:TextInput id="attInput" text="{currentCard.maxAtt}" />
 		</mx:FormItem>
 	</mx:Form>
 	<mx:Form width="300" height="150" x="450" paddingTop="5">
 		<mx:FormItem label="Defense : ">
-			<s:TextInput id="defInput" text="{edittingCard.maxDef}" />
+			<s:TextInput id="defInput" text="{currentCard.maxDef}" />
 		</mx:FormItem>
 		<mx:FormItem label="HP : ">
-			<s:TextInput id="hpInput" text="{edittingCard.maxHp}" />
+			<s:TextInput id="hpInput" text="{currentCard.maxHp}" />
 		</mx:FormItem>
 		<mx:FormItem label="Distance : ">
-			<s:TextInput id="distanceInput" text="{edittingCard.maxDistance}" />
+			<s:TextInput id="distanceInput" text="{currentCard.maxDistance}" />
 		</mx:FormItem>
 	</mx:Form>
 	<s:HGroup y="150" width="100%" verticalAlign="middle" height="30">
 		<s:Button id="submitBtn" label="Submit" click="dispatchEvent(new Event('saveCreatureCard'))" />
 		<s:Button id="reloadBtn" label="Load" click="dispatchEvent(new Event('loadCreatureCard'))" />
 	</s:HGroup>
-	<mx:DataGrid id="allCardsDataGrid" width="100%" height="100%" dataProvider="{this.allCards}" 
-				  y="180"
+	<mx:DataGrid id="allCardsDataGrid" width="100%" height="100%" dataProvider="{this.allCards}" y="180"
 				 change="this.currentCard = allCardsDataGrid.selectedItem as CreatureCard">
 		<mx:columns>
 			<mx:DataGridColumn dataField="id" />
 			<mx:DataGridColumn dataField="name" />
+			<mx:DataGridColumn dataField="maxMoveSpeed" />
+			<mx:DataGridColumn dataField="maxAtt" />
+			<mx:DataGridColumn dataField="maxDef" />
+			<mx:DataGridColumn dataField="maxHp" />
+			<mx:DataGridColumn dataField="maxDistance" />
 		</mx:columns>
 	</mx:DataGrid>
 	

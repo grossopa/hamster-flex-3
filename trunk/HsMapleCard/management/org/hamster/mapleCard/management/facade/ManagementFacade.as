@@ -17,7 +17,7 @@ package org.hamster.mapleCard.management.facade
 		}
 		
 		public static const APP_INIT:String = "AppInit";
-		
+		public static const APP_INIT_DONE:String = "AppInitDone";
 		public static const LOAD_CREATURE:String = "LoadCreature";
 		public static const SAVE_CREATURE:String = "SaveCreature";
 		public static const LOAD_ALL_CREATURES:String = "LoadAllCreatures";
@@ -28,6 +28,7 @@ package org.hamster.mapleCard.management.facade
 		override protected function initializeController():void
 		{
 			super.initializeController();
+			
 			this.registerCommand(APP_INIT, InitManagementCommand);
 			this.registerCommand(LOAD_CREATURE, LoadCreatureMetaCommand);
 			this.registerCommand(SAVE_CREATURE, SaveCreatureMetaCommand);
