@@ -10,7 +10,7 @@ package org.hamster.mapleCard.management.views.mediators
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
 	
-	public class CreatureEditorMediator extends Mediator implements IMediator
+	public class CreatureEditorMediator extends BaseMediator implements IMediator
 	{
 		public static const NAME:String = 'CreatureEditorMediator';
 		
@@ -25,16 +25,19 @@ package org.hamster.mapleCard.management.views.mediators
 		
 		protected function onSaveCreatureCardHandler(evt:Event):void
 		{
-			this.sendNotification(ManagementFacade.SAVE_CREATURE, this.creatureEditor.currentCard);
+			this.popupGlobalProgressBar("Saving creature card ...");
+			this.sendNotification(ManagementFacade.SAVE_CREATURE, this.creatureEditor.edittingCard);
 		}
 		
 		protected function onLoadCreatureCardHandler(evt:Event):void
 		{
+			this.popupGlobalProgressBar("Loading creature card ...");
 			this.sendNotification(ManagementFacade.LOAD_CREATURE, "0100100");
 		}
 		
 		protected function onLoadAllCreatureCardsHandler(evt:Event):void
 		{
+			this.popupGlobalProgressBar("Loading all creature cards ...");
 			this.sendNotification(ManagementFacade.LOAD_ALL_CREATURES);
 		}
 		
@@ -54,10 +57,12 @@ package org.hamster.mapleCard.management.views.mediators
 		
 		override public function handleNotification(notification:INotification):void
 		{
+			this.removeGlobalProgressBar();
 			switch (notification.getName()) {
 				case ManagementFacade.LOAD_CREATURE_DONE:
 					break;
 				case ManagementFacade.SAVE_CREATURE_DONE:
+					this.creatureEditor.currentCard.decode(this.creatureEditor.edittingCard.encode());
 					break;
 				case ManagementFacade.LOAD_ALL_CREATURES_DONE:
 					this.creatureEditor.allCards = notification.getBody() as ArrayCollection;

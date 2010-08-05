@@ -31,7 +31,7 @@ package org.hamster.mapleCard.management.commands
 		
 		public function result(data:Object):void
 		{
-			this.sendNotification(ManagementFacade.LOAD_CREATURE_DONE, meta);
+			this.sendNotification(ManagementFacade.SAVE_CREATURE_DONE, meta);
 		}
 		
 		public function fault(info:Object):void
