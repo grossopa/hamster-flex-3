@@ -13,6 +13,7 @@ package org.hamster.mapleCard.main.components.battleField
 		public static const COL_COUNT:int = 7;
 		
 		private var _itemContainer:BattleFieldItemContainer;
+		private var _maskContainer:BattleFieldMaskContainer;
 		
 		public function BattleFieldContainer()
 		{
@@ -36,11 +37,16 @@ package org.hamster.mapleCard.main.components.battleField
 				_itemContainer = new BattleFieldItemContainer();
 				this.addChild(_itemContainer);
 				
+				_maskContainer = new BattleFieldMaskContainer();
+				this.addChild(_maskContainer);
+				
 //				if (!this.mask) {
 //					this.mask = new Sprite();
 //				}
 			}
 		}
+		
+		
 		
 	}
 }
