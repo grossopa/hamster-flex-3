@@ -8,6 +8,8 @@ package org.hamster.mapleCard.base.services
 	import org.hamster.mapleCard.base.event.GameEvent;
 	import org.hamster.mapleCard.base.model.IActionStackItemData;
 	import org.hamster.mapleCard.base.model.IBattleFieldItemData;
+	import org.hamster.mapleCard.base.model.battleField.CreatureBattleFieldItemData;
+	import org.hamster.mapleCard.base.model.card.CreatureCard;
 	import org.hamster.mapleCard.base.model.card.IBaseCard;
 
 	public class GameService
@@ -62,9 +64,15 @@ package org.hamster.mapleCard.base.services
 			}
 		}
 		
-		public function performAttack(attacker:IBattleFieldItemData, defender:IBattleFieldItemData):void
+		public function performAttack(attacker:CreatureBattleFieldItemData, 
+									  defender:CreatureBattleFieldItemData):void
 		{
+			defender.hp -= attacker.maxAtt;
 			
+			var disEvt:GameEvent = new GameEvent(GameEvent.ATTACK_START);
+			disEvt.attacker = attacker;
+			disEvt.defender = defender;
+			ES.dispatchEvent(disEvt);
 		}
 		
 		// private var _actionStackList:ArrayCollection = new ArrayCollection();

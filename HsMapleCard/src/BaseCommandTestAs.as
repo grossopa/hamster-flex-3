@@ -16,6 +16,7 @@ import org.hamster.mapleCard.base.model.battleField.CreatureBattleFieldItemData;
 import org.hamster.mapleCard.base.model.player.Player;
 import org.hamster.mapleCard.base.services.DataService;
 import org.hamster.mapleCard.base.services.EventService;
+import org.hamster.mapleCard.base.services.GameService;
 import org.hamster.mapleCard.base.utils.FileUtil;
 import org.hamster.mapleCard.main.components.actionStack.ActionStackContainer;
 import org.hamster.mapleCard.main.components.battleField.BattleFieldContainer;
@@ -23,12 +24,13 @@ import org.hamster.mapleCard.main.components.battleField.BattleFieldItem;
 
 private static const DS:DataService = DataService.instance;
 private static const ES:EventService = EventService.instance;
+private static const GS:GameService = GameService.instance;
 
 private var _battleFieldContainer:BattleFieldContainer;
 private var _actionStackContainer:ActionStackContainer;
 private var _battleFieldItem:BattleFieldItem;
-private var _attackerData:IBattleFieldItemData;
-private var _defenderData:IBattleFieldItemData;
+private var _attackerData:CreatureBattleFieldItemData;
+private var _defenderData:CreatureBattleFieldItemData;
 private var _testCreatureImage:CreatureImage;
 private var _testEffectImage:EffectImage;
 
@@ -113,7 +115,7 @@ public function creatureLoaderResultHandler(evt:CommandEvent):void
 
 protected function attack_clickHandler(event:MouseEvent):void
 {
-	
+	GS.performAttack(this._attackerData, this._defenderData);
 }
 
 private function pickUpNextItem():void
