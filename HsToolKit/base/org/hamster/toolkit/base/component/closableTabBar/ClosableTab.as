@@ -32,9 +32,7 @@ package org.hamster.toolkit.base.component.closableTabBar
 		public function set alwaysShowCloseButton(value:Boolean):void
 		{
 			_alwaysShowCloseButton = value;
-			if (_alwaysShowCloseButton) {
-				_closeButton.visible = true;
-			}
+			_closeButton.visible = value || selected;
 		}
 		
 		[Inspectable(category="General", enumeration="true,false", defaultValue="false")]

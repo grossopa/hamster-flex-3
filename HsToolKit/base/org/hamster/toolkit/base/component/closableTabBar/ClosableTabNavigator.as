@@ -7,11 +7,28 @@ package org.hamster.toolkit.base.component.closableTabBar
 	import mx.core.IFactory;
 	import mx.styles.StyleProxy;
 	
+	[Style(name="closeButtonPadding", type="Number", inherit="yes")]
+	
+	[Event(name="closeTab", type="org.hamster.toolkit.base.component.closableTabBar.ClosableTabBarEvent")]
+	
 	public class ClosableTabNavigator extends TabNavigator
 	{
 		protected var tabBarClass:IFactory = new ClassFactory(ClosableTabBar);
 		
 		private var _autoRemoveChild:Boolean = true;
+		private var _alwaysShowCloseButton:Boolean = false;
+		private var _closable:Boolean = true;
+		
+		public function set closable(value:Boolean):void
+		{
+			if (tabBar) {
+				ClosableTabBar(tabBar).closable = value;
+			}
+			_closable = value;
+		}
+		
+		[Inspectable(category="General", enumeration="false,true", defaultValue="true")]
+		public function get closable():Boolean { return _closable; }
 		
 		public function set autoRemoveChild(value:Boolean):void
 		{
@@ -22,10 +39,18 @@ package org.hamster.toolkit.base.component.closableTabBar
 		}
 		
 		[Inspectable(category="General", enumeration="false,true", defaultValue="true")]
-		public function get autoRemoveChild():Boolean
+		public function get autoRemoveChild():Boolean { return _autoRemoveChild; }
+		
+		public function set alwaysShowCloseButton(value:Boolean):void
 		{
-			return _autoRemoveChild;
+			if (tabBar) {
+				ClosableTabBar(tabBar).alwaysShowCloseButton = value;
+			}
+			_alwaysShowCloseButton = value;
 		}
+		
+		[Inspectable(category="General", enumeration="true,false", defaultValue="false")]
+		public function get alwaysShowCloseButton():Boolean { return _alwaysShowCloseButton; }
 		
 		public function ClosableTabNavigator()
 		{
