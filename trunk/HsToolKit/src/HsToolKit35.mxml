@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:component="org.hamster.toolkit.base.component.*" xmlns:closableTabBar="org.hamster.toolkit.base.component.closableTabBar.*">
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
+						xmlns:component="org.hamster.toolkit.base.component.*"
+						xmlns:closableTabBar="org.hamster.toolkit.base.component.closableTabBar.*"
+						 applicationComplete="appCompleteHandler()">
 	<mx:HBox width="100%" height="40" verticalAlign="middle">
 		<mx:CheckBox id="closableCheckBox" selected="true" label="closable" />
 		<mx:CheckBox id="alwaysShowCloseButtonCheckBox" selected="false" label="always show close button" />
@@ -15,4 +18,34 @@
 		<mx:Canvas backgroundColor="#FFFFFF" label="white" />
 		<mx:Canvas backgroundColor="#FF0000" label="red" />
 	</closableTabBar:ClosableTabNavigator>
+	
+	<mx:HBox width="100%" height="100%">
+		<mx:AdvancedDataGrid editable="true" dragEnabled="true" dropEnabled="true" dragMoveEnabled="true">
+			<mx:dataProvider>
+				<mx:ArrayCollection id="testDataProvider">
+					<mx:Point x="10" y="10" />
+					<mx:Point x="20" y="20" />
+					<mx:Point x="30" y="30" />
+					<mx:Point x="40" y="40" />
+				</mx:ArrayCollection>
+			</mx:dataProvider>
+		</mx:AdvancedDataGrid>
+		<mx:DataGrid dataProvider="{testDataProvider}" />
+	</mx:HBox>
+
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.XMLListCollection;
+			private function appCompleteHandler():void
+			{
+				var xml:XML = <a><a1>1</a1><a1>2</a1></a>;
+				var coll:XMLListCollection = new XMLListCollection(xml.elements("a1"));
+				var ddd:ArrayCollection;
+				this.set
+				coll.setItemAt(coll.getItemAt(0), 1);
+				trace (coll.toXMLString());
+			}
+		]]>
+	</mx:Script>
+	
 </mx:WindowedApplication>
