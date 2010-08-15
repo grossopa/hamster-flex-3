@@ -9,6 +9,8 @@ package org.hamster.mapleCard.base.components.images
 	import org.hamster.mapleCard.animations.SimpleAnimationControl;
 	import org.hamster.mapleCard.base.constants.BaseImagePlayMethod;
 	
+	
+	
 	public class BaseImage extends Sprite
 	{
 		protected var _speed:int = 6;
@@ -75,6 +77,8 @@ package org.hamster.mapleCard.base.components.images
 			if (this._playMethod == BaseImagePlayMethod.NORMAL) {
 				if (this._currentImgIndex < this._imgArray.length - 1) {
 					this._currentImgIndex++;
+				} else {
+					this.dispatchEvent(new Event(Event.COMPLETE));
 				}
 			} else if (this._playMethod == BaseImagePlayMethod.REPEAT) {
 				if (this._currentImgIndex < this._imgArray.length - 1) {

@@ -50,6 +50,12 @@ package org.hamster.mapleCard.main.components.battleField
 			item.y = yValue;
 		}
 		
+		public function removeBattleFieldItem(item:BattleFieldItem):void
+		{
+			this.removeChild(item);
+			this.removeItemListener(item);
+		}
+		
 		protected function itemIndexChangedHandler(evt:BattleFieldItemDataEvent):void
 		{
 			var item:BattleFieldItem = BattleFieldItem(evt.currentTarget);

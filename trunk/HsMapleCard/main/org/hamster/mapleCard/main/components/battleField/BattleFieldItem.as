@@ -9,6 +9,7 @@ package org.hamster.mapleCard.main.components.battleField
 	import org.hamster.mapleCard.base.components.images.BaseImage;
 	import org.hamster.mapleCard.base.components.images.CreatureImage;
 	import org.hamster.mapleCard.base.constants.Constants;
+	import org.hamster.mapleCard.base.constants.CreatureStatus;
 	import org.hamster.mapleCard.base.event.ActionStackItemDataEvent;
 	import org.hamster.mapleCard.base.event.BattleFieldItemDataEvent;
 	import org.hamster.mapleCard.base.model.IBattleFieldItemData;
@@ -115,6 +116,9 @@ package org.hamster.mapleCard.main.components.battleField
 		protected function hpChangedHandler(evt:BattleFieldItemDataEvent):void
 		{
 			_isRedrawLifeBar = true;
+			if (evt.newValue == 0) {
+				CreatureImage(this._mainImage).status = CreatureStatus.DIE;
+			}
 			this.dispatchEvent(evt);
 		}
 		

@@ -9,6 +9,7 @@
       <compilerSourcePathEntry kind="1" linkType="1" path="management"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="main"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="assets"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="main2"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="3">
       <libraryPathEntry kind="4" path="">
@@ -34,3 +35,4 @@
   <modules/>
   <buildCSSFiles/>
 </actionScriptProperties>
+
