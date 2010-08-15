@@ -11,6 +11,7 @@ package org.hamster.mapleCard.base.services
 	import org.hamster.mapleCard.base.model.battleField.CreatureBattleFieldItemData;
 	import org.hamster.mapleCard.base.model.card.CreatureCard;
 	import org.hamster.mapleCard.base.model.card.IBaseCard;
+	import org.hamster.mapleCard.base.model.player.Player;
 
 	public class GameService
 	{
@@ -24,6 +25,9 @@ package org.hamster.mapleCard.base.services
 		}
 		
 		public static const ES:EventService = EventService.instance;
+		
+		public var player1:Player;
+		public var player2:Player;
 		
 		
 		private var _battleFiledItemDataList:ArrayCollection = new ArrayCollection();
@@ -67,7 +71,7 @@ package org.hamster.mapleCard.base.services
 		public function performAttack(attacker:CreatureBattleFieldItemData, 
 									  defender:CreatureBattleFieldItemData):void
 		{
-			defender.hp -= attacker.maxAtt;
+			defender.hp = Math.max(defender.hp - Math.max(attacker.maxAtt - defender.maxDef, 0), 0);
 			
 			var disEvt:GameEvent = new GameEvent(GameEvent.ATTACK_START);
 			disEvt.attacker = attacker;

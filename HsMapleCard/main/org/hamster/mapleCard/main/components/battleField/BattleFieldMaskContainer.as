@@ -29,9 +29,19 @@ package org.hamster.mapleCard.main.components.battleField
 		private function attackStartHandler(evt:GameEvent):void
 		{
 			var effectImg:EffectImage = new EffectImage("attack_1");
+			effectImg.addEventListener(Event.COMPLETE, effectPlayCompleteHandler);
 			this.addChild(effectImg);
-			effectImg.x = evt.defender.xIndex * BattleFieldItemStyle.WIDTH;
-			effectImg.y = evt.defender.yIndex * BattleFieldItemStyle.HEIGHT;
+			effectImg.x = evt.defender.xIndex * BattleFieldItemStyle.WIDTH
+				- (effectImg.measuredWidth - BattleFieldItemStyle.WIDTH) / 2;
+			effectImg.y = evt.defender.yIndex * BattleFieldItemStyle.HEIGHT
+				- (effectImg.measuredHeight - BattleFieldItemStyle.HEIGHT) / 2;
+		}
+		
+		private function effectPlayCompleteHandler(evt:Event):void
+		{
+			var effectImg:EffectImage = EffectImage(evt.currentTarget);
+			effectImg.removeEventListener(Event.COMPLETE, effectPlayCompleteHandler);
+			this.removeChild(effectImg);
 		}
 	}
 }

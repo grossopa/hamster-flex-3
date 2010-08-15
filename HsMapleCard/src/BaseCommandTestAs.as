@@ -84,6 +84,10 @@ public function creatureLoaderResultHandler(evt:CommandEvent):void
 	_attackerData.hp = 10;
 	_attackerData.xIndex = 3;
 	_attackerData.yIndex = 3;
+	_attackerData.maxAtt = 3;
+	_attackerData.maxDef = 1;
+	_attackerData.maxDistance = 1;
+	_attackerData.maxMoveSpeed = 1;
 	_attackerData.actionProgress = Math.random() * 100;
 	_attackerData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
 	_attackerData.parentPlayer = player1;
@@ -94,6 +98,10 @@ public function creatureLoaderResultHandler(evt:CommandEvent):void
 	_defenderData.hp = 10;
 	_defenderData.xIndex = 4;
 	_defenderData.yIndex = 3;
+	_defenderData.maxAtt = 3;
+	_defenderData.maxDef = 1;
+	_defenderData.maxDistance = 1;
+	_defenderData.maxMoveSpeed = 1;
 	_defenderData.actionProgress = Math.random() * 100;
 	_defenderData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
 	_defenderData.parentPlayer = player2;

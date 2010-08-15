@@ -23,7 +23,7 @@ package org.hamster.mapleCard.base.components.images
 		{
 			super();
 			this._alignment = "center";
-			this.playMethod = BaseImagePlayMethod.REPEAT;
+			this.playMethod = BaseImagePlayMethod.NORMAL;
 			this.speed = 10;
 			this._id = id;
 			this.addEventListener(Event.ADDED_TO_STAGE, addedHandler);
