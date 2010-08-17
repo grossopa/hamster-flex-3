@@ -18,8 +18,6 @@ package org.hamster.toolkit.model
 		
 		public function ToolVO()
 		{
-			var xmlList:XMLListCollection = new XMLListCollection();
-			xmlList.
 		}
 	}
 }
