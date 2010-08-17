@@ -2,7 +2,10 @@ package org.hamster.mapleBattle.main
 {
 	import flash.events.Event;
 	
+	import mx.collections.ArrayCollection;
+	
 	import org.hamster.mapleCard.base.components.containers.SimpleContainer;
+	import org.hamster.mapleCard.base.model.IActionStackItemData;
 	import org.hamster.mapleCard.base.model.IBattleFieldItemData;
 	import org.hamster.mapleCard.base.model.battleField.CreatureBattleFieldItemData;
 	import org.hamster.mapleCard.base.model.player.Player;
@@ -14,11 +17,15 @@ package org.hamster.mapleBattle.main
 		private static const GS:GameService = GameService.instance;
 		
 		private static const REFRESH_FRAME_GAP:int = 6;
+		
+		private static const DISTANCE_RADIX:int = 10;
+		
+		private static const ACTION_STACK_GAP:int = 1;
+		
 		private var _refreshCount:int;
 		
-		// utility
-//		private var _leftSideItemList:Array = [];
-//		private var _rightSideItemList:Array = [];
+		private var _attackerList:ArrayCollection = new ArrayCollection();
+		private var _defenderList:ArrayCollection = new ArrayCollection();
 		
 		public function BattleFloorContainer()
 		{
@@ -64,16 +71,54 @@ package org.hamster.mapleBattle.main
 			
 			var n:int = this.numChildren;
 			for (var i:int = 0; i < n; i++) {
-				var item:BattleFieldItem = BattleFieldItem(this.getChildAt(i));
+				var item1:BattleFieldItem = BattleFieldItem(this.getChildAt(i));
+				if (_attackerList.contains(item1)) {
+					continue;
+				}
 				for (var j:int = 0; j < n; j++) {
-					var item2:BattleFieldItem = BattleFieldItem(this.getChildAt(i));
-					if (item.battleFieldData.direction != item2.battleFieldData.direction) {
-						// they are opposite
-						
+					var item2:BattleFieldItem = BattleFieldItem(this.getChildAt(j));
+					if (item1.battleFieldData.parentPlayer != item2.battleFieldData.parentPlayer) {
+						// they are in different side
+						if (item1.battleFieldData is CreatureBattleFieldItemData) {
+							var cData1:CreatureBattleFieldItemData = CreatureBattleFieldItemData(item1.battleFieldData);
+							if (item2.x - item1.x <= DISTANCE_RADIX * cData1.maxDistance && item2.x - item1.x > 0) {
+								// they are so close to raise a attack
+								_attackerList.addItem(item1);
+								_defenderList.addItem(item2);
+							}
+						}
 					}
 				}
 			}
 		}
+		
+		
+		private function blockingForNextAction():void
+		{
+			var n:int = this.numChildren;
+			for (var i:int = 0; i < n; i++) {
+				var item:BattleFieldItem = BattleFieldItem(this.getChildAt(i)) {
+					if (item.battleFieldData is IActionStackItemData) {
+						var actionStack:IActionStackItemData = IActionStackItemData(item.battleFieldData);
+						if (actionStack.actionProgress <= 0) {
+							// take action
+						} else {
+							actionStack.actionProgress -= ACTION_STACK_GAP;
+						}
+					}
+				}
+			}
+		}
+		
+		private function takeAction(item:BattleFieldItem):void
+		{
+			
+			
+			if (item.battleFieldData is IActionStackItemData) {
+				IActionStackItemData(item.battleFieldData).actionProgress += 10; // should be action cost
+			}
+		}
+		
 		
 		
 	}
