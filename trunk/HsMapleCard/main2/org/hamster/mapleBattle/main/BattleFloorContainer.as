@@ -5,6 +5,7 @@ package org.hamster.mapleBattle.main
 	import mx.collections.ArrayCollection;
 	
 	import org.hamster.mapleCard.base.components.containers.SimpleContainer;
+	import org.hamster.mapleCard.base.constants.ActionStatus;
 	import org.hamster.mapleCard.base.model.IActionStackItemData;
 	import org.hamster.mapleCard.base.model.IBattleFieldItemData;
 	import org.hamster.mapleCard.base.model.battleField.CreatureBattleFieldItemData;
@@ -72,7 +73,7 @@ package org.hamster.mapleBattle.main
 			var n:int = this.numChildren;
 			for (var i:int = 0; i < n; i++) {
 				var item1:BattleFieldItem = BattleFieldItem(this.getChildAt(i));
-				if (_attackerList.contains(item1)) {
+				if (_attackerList.contains(item1) || item1.battleFieldData.actionStatus != ActionStatus.MOVING) {
 					continue;
 				}
 				for (var j:int = 0; j < n; j++) {
@@ -83,6 +84,7 @@ package org.hamster.mapleBattle.main
 							var cData1:CreatureBattleFieldItemData = CreatureBattleFieldItemData(item1.battleFieldData);
 							if (item2.x - item1.x <= DISTANCE_RADIX * cData1.maxDistance && item2.x - item1.x > 0) {
 								// they are so close to raise a attack
+								item1.battleFieldData.actionStatus = ActionStatus.ATTACKING;
 								_attackerList.addItem(item1);
 								_defenderList.addItem(item2);
 							}
@@ -98,10 +100,24 @@ package org.hamster.mapleBattle.main
 			var n:int = this.numChildren;
 			for (var i:int = 0; i < n; i++) {
 				var item:BattleFieldItem = BattleFieldItem(this.getChildAt(i)) {
-					if (item.battleFieldData is IActionStackItemData) {
-						var actionStack:IActionStackItemData = IActionStackItemData(item.battleFieldData);
+					if (item.battleFieldData is IBattleFieldItemData) {
+						var actionStack:IBattleFieldItemData = IBattleFieldItemData(item.battleFieldData);
 						if (actionStack.actionProgress <= 0) {
 							// take action
+							if (actionStack.actionStatus == ActionStatus.ATTACKING) {
+								actionStack.actionStatus = ActionStatus.HIT;
+								actionStack.actionProgress = 10;
+							} else if (actionStack.actionStatus == ActionStatus.HIT) {
+								GS.performAttack(
+									CreatureBattleFieldItemData(item.battleFieldData), 
+									CreatureBattleFieldItemData(
+										this._defenderList[this._attackerList.getItemIndex(item.battleFieldData)]);
+								actionStack.actionStatus = ActionStatus.MOVING;
+								actionStack.actionProgress = 10;
+							} else if (actionStack.actionStatus == ActionStatus.MOVING) {
+								// move
+								actionStack.actionStatus = 10;
+							}
 						} else {
 							actionStack.actionProgress -= ACTION_STACK_GAP;
 						}
@@ -112,8 +128,6 @@ package org.hamster.mapleBattle.main
 		
 		private function takeAction(item:BattleFieldItem):void
 		{
-			
-			
 			if (item.battleFieldData is IActionStackItemData) {
 				IActionStackItemData(item.battleFieldData).actionProgress += 10; // should be action cost
 			}
