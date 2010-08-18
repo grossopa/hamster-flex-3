@@ -4,6 +4,7 @@ package org.hamster.mapleCard.base.model.battleField
 	import flash.display.BitmapData;
 	import flash.media.Video;
 	
+	import org.hamster.mapleCard.base.constants.ActionStatus;
 	import org.hamster.mapleCard.base.event.ActionStackItemDataEvent;
 	import org.hamster.mapleCard.base.event.BattleFieldItemDataEvent;
 	import org.hamster.mapleCard.base.model.IBattleFieldItemData;
@@ -14,6 +15,7 @@ package org.hamster.mapleCard.base.model.battleField
 	{
 		private var _hp:Number;
 		private var _status:String;
+		private var _actionStatus:String = ActionStatus.MOVING;
 		private var _actionProgress:Number = 0;
 		private var _xIndex:int;
 		private var _yIndex:int;
@@ -68,6 +70,26 @@ package org.hamster.mapleCard.base.model.battleField
 		public function get status():String
 		{
 			return _status;
+		}
+		
+		public function set actionStatus(value:String):void
+		{
+			if (_actionStatus != value) {
+				if (hasEventListener(ActionStackItemDataEvent.ACTIONPSTATUS_CHANGED)) {
+					var disEvt:ActionStackItemDataEvent = new ActionStackItemDataEvent(ActionStackItemDataEvent.ACTIONPSTATUS_CHANGED);
+					disEvt.oldValue = _actionStatus;
+					_actionStatus = value;
+					disEvt.newValue = _actionStatus;
+					this.dispatchEvent(disEvt);
+				} else {
+					_actionStatus = value;
+				}
+			}
+		}
+		
+		public function get actionStatus():String
+		{
+			return _actionStatus;
 		}
 		
 		public function set actionProgress(value:Number):void

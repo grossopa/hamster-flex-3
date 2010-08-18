@@ -21,5 +21,14 @@ package org.hamster.mapleCard.base.model
 		
 		function get maxHp():Number;
 		function get direction():String;
+		
+		function set actionStatus(value:String):void;
+		/**
+		 * action status, includes ATTACKING, HIT, MOVING
+		 * 
+		 * @return 
+		 * 
+		 */		
+		function get actionStatus():String;
 	}
 }
