@@ -2,20 +2,30 @@
 import mx.events.FlexEvent;
 
 import org.hamster.mapleBattle.main.BattleFloorContainer;
+import org.hamster.mapleBattle.main.component.buildTile.BuildTileContainer;
+import org.hamster.mapleBattle.main.component.buildTile.model.BuildItemVO;
 import org.hamster.mapleCard.base.constants.Constants;
 import org.hamster.mapleCard.base.model.battleField.CreatureBattleFieldItemData;
 import org.hamster.mapleCard.base.model.player.Player;
 import org.hamster.mapleCard.main.components.battleField.BattleFieldItem;
+import org.osmf.traits.PlayableTrait;
+
+private var _player1:Player;
+private var _player2:Player;
+private var _attackerData:CreatureBattleFieldItemData;
+
+public function get player1():Player { return _player1 }
+public function get player2():Player { return _player2 }
 
 protected function windowedapplication1_applicationCompleteHandler(event:FlexEvent):void
 {
-	var player1:Player = new Player();
-	player1.direction = "right";
-	player1.color = 0xdd0000;
+	_player1 = new Player();
+	_player1.direction = "right";
+	_player1.color = 0xdd0000;
 	
-	var player2:Player = new Player();
-	player2.direction = "left";
-	player2.color = 0x0000dd;
+	_player2 = new Player();
+	_player2.direction = "left";
+	_player2.color = 0x0000dd;
 	
 //	var battleFieldData:CreatureBattleFieldItemData = new CreatureBattleFieldItemData();
 //	battleFieldData.id = Constants.CREATE_KEY_PREFIX + "0100100";
@@ -25,7 +35,7 @@ protected function windowedapplication1_applicationCompleteHandler(event:FlexEve
 //	battleFieldData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
 //	battleFieldData.parentPlayer = player1;
 	
-	var _attackerData:CreatureBattleFieldItemData = new CreatureBattleFieldItemData();
+	_attackerData = new CreatureBattleFieldItemData();
 	_attackerData.id = Constants.CREATE_KEY_PREFIX + "0100100";
 	CreatureBattleFieldItemData(_attackerData).maxHp = 10;
 	_attackerData.hp = 10;
@@ -35,7 +45,7 @@ protected function windowedapplication1_applicationCompleteHandler(event:FlexEve
 	_attackerData.maxDef = 1;
 	_attackerData.maxDistance = 1;
 	_attackerData.maxMoveSpeed = 1;
-	_attackerData.moveSpeed = 1;
+	_attackerData.moveSpeed = 2;
 	_attackerData.actionProgress = Math.random() * 100;
 	// _attackerData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
 	_attackerData.parentPlayer = player1;
@@ -50,7 +60,7 @@ protected function windowedapplication1_applicationCompleteHandler(event:FlexEve
 	_defenderData.maxDef = 1;
 	_defenderData.maxDistance = 1;
 	_defenderData.maxMoveSpeed = 1;
-	_defenderData.moveSpeed = 1;
+	_defenderData.moveSpeed = 2;
 	_defenderData.actionProgress = Math.random() * 100;
 //	_defenderData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
 	_defenderData.parentPlayer = player2;
@@ -64,5 +74,18 @@ protected function windowedapplication1_applicationCompleteHandler(event:FlexEve
 	sv.addChild(bfc);
 	bfc.addBattleFieldItem(item1, 0);
 	bfc.addBattleFieldItem(item2, 550);
+	
+	
+	createBuildTileItems();
+}
+
+private function createBuildTileItems():void
+{
+	var btc:BuildTileContainer = new BuildTileContainer(player1);
+	sv.addChild(btc);
+	btc.y = 200;
+	var buildItemVO:BuildItemVO = new BuildItemVO(_attackerData);
+	buildItemVO.moneyCost = 10;
+	btc.tileItemDataList.addItem(buildItemVO);
 	
 }

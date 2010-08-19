@@ -85,12 +85,23 @@ package org.hamster.mapleBattle.main
 						// they are in different side
 						if (item1.battleFieldData is CreatureBattleFieldItemData) {
 							var cData1:CreatureBattleFieldItemData = CreatureBattleFieldItemData(item1.battleFieldData);
-							if (item2.x - item1.x <= DISTANCE_RADIX * cData1.maxDistance && item2.x - item1.x > 0) {
-								// they are so close to raise a attack
-								item1.battleFieldData.actionStatus = ActionStatus.ATTACKING;
-								_attackerList.addItem(item1.battleFieldData);
-								_defenderList.addItem(item2.battleFieldData);
+							if (item1.battleFieldData.direction == "right") {
+								if (item2.x - item1.x <= DISTANCE_RADIX * cData1.maxDistance + item1.measuredWidth
+									&& item2.x - item1.x > 0) {
+									item1.battleFieldData.actionStatus = ActionStatus.ATTACKING;
+									_attackerList.addItem(item1.battleFieldData);
+									_defenderList.addItem(item2.battleFieldData);
+								}
+							} else {
+								if (item1.x - item2.x <= DISTANCE_RADIX * cData1.maxDistance + item2.measuredWidth
+									&& item1.x - item2.x > 0) {
+									item1.battleFieldData.actionStatus = ActionStatus.ATTACKING;
+									_attackerList.addItem(item1.battleFieldData);
+									_defenderList.addItem(item2.battleFieldData);
+								}
 							}
+							
+							
 						}
 					}
 				}
