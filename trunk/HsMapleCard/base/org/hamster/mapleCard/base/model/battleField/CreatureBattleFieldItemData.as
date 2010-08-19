@@ -14,6 +14,8 @@ package org.hamster.mapleCard.base.model.battleField
 	public class CreatureBattleFieldItemData extends CreatureCard implements IBattleFieldItemData
 	{
 		private var _hp:Number;
+		private var _moveSpeed:Number;
+		
 		private var _status:String;
 		private var _actionStatus:String = ActionStatus.MOVING;
 		private var _actionProgress:Number = 0;
@@ -21,6 +23,9 @@ package org.hamster.mapleCard.base.model.battleField
 		private var _yIndex:int;
 		private var _icon:Bitmap;
 		private var _parentPlayer:Player;
+		
+		public function set moveSpeed(value:Number):void { _moveSpeed = value }
+		public function get moveSpeed():Number { return _moveSpeed }
 		
 		public function get direction():String
 		{
