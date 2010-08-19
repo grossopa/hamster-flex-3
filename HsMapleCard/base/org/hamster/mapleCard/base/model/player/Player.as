@@ -17,6 +17,8 @@ package org.hamster.mapleCard.base.model.player
 	public class Player extends BaseModel implements IBattleFieldItemData
 	{
 		private var _hp:Number;
+		private var _moveSpeed:Number;
+		
 		private var _status:String;
 		private var _actionStatus:String = ActionStatus.MOVING;
 		private var _actionProgress:Number = 0;
@@ -30,6 +32,9 @@ package org.hamster.mapleCard.base.model.player
 		public var name:String;
 		public var color:Number;
 		public var creatures:Array;
+		
+		public function set moveSpeed(value:Number):void { _moveSpeed = value }
+		public function get moveSpeed():Number { return _moveSpeed }
 		
 		public function set direction(value:String):void
 		{

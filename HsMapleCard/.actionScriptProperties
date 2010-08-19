@@ -22,17 +22,19 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="HsMapleCard.mxml">
-      <airExcludes/>
-    </application>
     <application path="MapleCardManagement.mxml">
       <airExcludes/>
     </application>
     <application path="BaseCommandTest.mxml">
       <airExcludes/>
     </application>
+    <application path="HsMapleCard.mxml">
+      <airExcludes/>
+    </application>
+    <application path="ComponentDebugger.mxml">
+      <airExcludes/>
+    </application>
   </applications>
   <modules/>
   <buildCSSFiles/>
 </actionScriptProperties>
-
