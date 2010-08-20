@@ -20,8 +20,8 @@ package org.hamster.mapleCard.main.components.actionStack
 			}
 			_actionStackItem = value;
 			addItemListener(_actionStackItem);
-			if (_actionStackItem.actionStackIcon != null) {
-				this.initializeFromImgArray([_actionStackItem.actionStackIcon]);
+			if (_actionStackItem.itemIcon != null) {
+				this.initializeFromImgArray([_actionStackItem.itemIcon]);
 			}
 		}
 		

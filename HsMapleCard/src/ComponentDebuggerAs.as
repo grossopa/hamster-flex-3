@@ -1,14 +1,19 @@
 // ActionScript file
 import mx.events.FlexEvent;
 
+import org.hamster.commands.events.CommandEvent;
 import org.hamster.mapleBattle.main.BattleFloorContainer;
 import org.hamster.mapleBattle.main.component.buildTile.BuildTileContainer;
 import org.hamster.mapleBattle.main.component.buildTile.model.BuildItemVO;
+import org.hamster.mapleCard.base.commands.CreatureImageLoaderCmd;
 import org.hamster.mapleCard.base.constants.Constants;
 import org.hamster.mapleCard.base.model.battleField.CreatureBattleFieldItemData;
 import org.hamster.mapleCard.base.model.player.Player;
+import org.hamster.mapleCard.base.services.DataService;
 import org.hamster.mapleCard.main.components.battleField.BattleFieldItem;
 import org.osmf.traits.PlayableTrait;
+
+private static var DS:DataService = DataService.instance;
 
 private var _player1:Player;
 private var _player2:Player;
@@ -19,6 +24,16 @@ public function get player2():Player { return _player2 }
 
 protected function windowedapplication1_applicationCompleteHandler(event:FlexEvent):void
 {
+	var creatureLoaderCmd:CreatureImageLoaderCmd = CreatureImageLoaderCmd.execute("0100100");
+	creatureLoaderCmd.addEventListener(CommandEvent.COMMAND_RESULT, creatureLoaderResultHandler);
+}
+
+private function creatureLoaderResultHandler(evt:CommandEvent):void
+{
+	var creatureLoaderCmd:CreatureImageLoaderCmd = CreatureImageLoaderCmd(evt.currentTarget);
+	DS.imageCacheManager.put(Constants.CREATE_KEY_PREFIX + creatureLoaderCmd.creatureImageInfo.id, 
+		creatureLoaderCmd.creatureImageInfo);
+	
 	_player1 = new Player();
 	_player1.direction = "right";
 	_player1.color = 0xdd0000;
@@ -47,7 +62,7 @@ protected function windowedapplication1_applicationCompleteHandler(event:FlexEve
 	_attackerData.maxMoveSpeed = 1;
 	_attackerData.moveSpeed = 2;
 	_attackerData.actionProgress = Math.random() * 100;
-	// _attackerData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
+	_attackerData.itemIcon = creatureLoaderCmd.creatureImageInfo.icon;
 	_attackerData.parentPlayer = player1;
 	
 	var _defenderData:CreatureBattleFieldItemData = new CreatureBattleFieldItemData();
@@ -62,7 +77,7 @@ protected function windowedapplication1_applicationCompleteHandler(event:FlexEve
 	_defenderData.maxMoveSpeed = 1;
 	_defenderData.moveSpeed = 2;
 	_defenderData.actionProgress = Math.random() * 100;
-//	_defenderData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
+	_defenderData.itemIcon = creatureLoaderCmd.creatureImageInfo.icon;
 	_defenderData.parentPlayer = player2;
 	
 	var item1:BattleFieldItem = new BattleFieldItem();

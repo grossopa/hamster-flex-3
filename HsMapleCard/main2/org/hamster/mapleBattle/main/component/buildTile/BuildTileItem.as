@@ -31,7 +31,15 @@ package org.hamster.mapleBattle.main.component.buildTile
 		
 		protected function onEnterFrameHandler(evt:Event):void
 		{
-			
+			refreshImage();
+		}
+		
+		private function refreshImage():void
+		{
+			if ((_baseImage.imgArray == null || _baseImage.imgArray.length == 0)
+				&& this.buildItemVO != null) {
+				this._baseImage.initializeFromImgArray([this.buildItemVO.battleFieldItemData.itemIcon]);
+			}
 		}
 		
 		

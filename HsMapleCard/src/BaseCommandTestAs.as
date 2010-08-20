@@ -75,7 +75,7 @@ public function creatureLoaderResultHandler(evt:CommandEvent):void
 	battleFieldData.maxHp = 10;
 	battleFieldData.hp = 3;
 	battleFieldData.actionProgress = Math.random() * 100;
-	battleFieldData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
+	battleFieldData.itemIcon = creatureLoaderCmd.creatureImageInfo.icon;
 	battleFieldData.parentPlayer = player1;
 	
 	_attackerData = new CreatureBattleFieldItemData();
@@ -89,7 +89,7 @@ public function creatureLoaderResultHandler(evt:CommandEvent):void
 	_attackerData.maxDistance = 1;
 	_attackerData.maxMoveSpeed = 1;
 	_attackerData.actionProgress = Math.random() * 100;
-	_attackerData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
+	_attackerData.itemIcon = creatureLoaderCmd.creatureImageInfo.icon;
 	_attackerData.parentPlayer = player1;
 	
 	_defenderData = new CreatureBattleFieldItemData();
@@ -103,7 +103,7 @@ public function creatureLoaderResultHandler(evt:CommandEvent):void
 	_defenderData.maxDistance = 1;
 	_defenderData.maxMoveSpeed = 1;
 	_defenderData.actionProgress = Math.random() * 100;
-	_defenderData.actionStackIcon = creatureLoaderCmd.creatureImageInfo.icon;
+	_defenderData.itemIcon = creatureLoaderCmd.creatureImageInfo.icon;
 	_defenderData.parentPlayer = player2;
 	
 	var disEvt:GameEvent = new GameEvent(GameEvent.ADD_BATTLEFIELDITEMDATA);
