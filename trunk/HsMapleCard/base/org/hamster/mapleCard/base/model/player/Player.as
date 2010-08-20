@@ -194,12 +194,12 @@ package org.hamster.mapleCard.base.model.player
 			}
 		}
 		
-		public function set actionStackIcon(value:Bitmap):void
+		public function set itemIcon(value:Bitmap):void
 		{
 			this._icon = value;
 		}
 		
-		public function get actionStackIcon():Bitmap
+		public function get itemIcon():Bitmap
 		{
 			return _icon;
 		}

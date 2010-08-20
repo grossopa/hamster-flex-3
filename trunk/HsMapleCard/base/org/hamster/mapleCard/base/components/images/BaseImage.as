@@ -27,11 +27,13 @@ package org.hamster.mapleCard.base.components.images
 		
 		protected var _alignment:String;
 		public function set alignment(value:String):void { this._alignment = value; }
-		public function get alignment():String { return this._alignment };
+		public function get alignment():String { return this._alignment }
+		
+		protected var _imgArray:Array;
+		public function get imgArray():Array { return _imgArray }
 		
 		protected var animationControl:IAnimationControl = new SimpleAnimationControl();
 		
-		protected var _imgArray:Array;
 		protected var _currentImgIndex:int = 0;
 		protected var _frameCount:int = 0;
 		protected var _matrixUtil:Matrix;
@@ -115,7 +117,7 @@ package org.hamster.mapleCard.base.components.images
 			animationControl.control(this);
 		}
 		
-		protected function initializeFromImgArray(...imgArrays):void
+		public function initializeFromImgArray(...imgArrays):void
 		{
 			var measuredWidth:Number = 0;
 			var measuredHeight:Number = 0;
