@@ -15,10 +15,9 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.Bitmap.Config;
 import android.graphics.Paint.Style;
 import android.widget.RemoteViews;
 
@@ -84,6 +83,13 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 	
 	private void updateCalendar(int width, int height, RemoteViews views, Context context) {
 		updateDateNumbers(width, height, views, context);
+		updateMonth(views, context);
+	}
+	
+	private void updateMonth(RemoteViews views, Context context) {
+		int monthId = Calendar.getInstance().get(Calendar.MONTH);
+		int resId = ResourceUtil.MONTH_IMG_LIST[monthId];
+		views.setImageViewBitmap(R.id.View_monthImage, BCS.getBitmap(resId));
 	}
 	
 	/**
@@ -100,9 +106,7 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 			startWeek += 7;
 		}
 		
-		
 		int week = startWeek;
-		
 		
 		Date startDate = new Date(calendar.getTime().getYear(), calendar.get(Calendar.MONTH), 1);
 		Date endDate = new Date(calendar.getTime().getYear(), calendar.get(Calendar.MONTH), dayCount);
@@ -125,8 +129,6 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 			
 			week = week == 7 ? 1 : week + 1;
 		}
-
-		
 	}
 	
 	

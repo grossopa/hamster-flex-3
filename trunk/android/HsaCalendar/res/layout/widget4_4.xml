@@ -9,6 +9,11 @@
     android:layout_height="400dp"
     android:background="@drawable/background" />
   <ImageView android:id="@+id/View_monthImage"
+    android:layout_x="20dp"
+    android:layout_y="70dp"
+    android:layout_width="100dp"
+    android:layout_height="35dp" />  
+  <ImageView android:id="@+id/View_weekImage"
     android:layout_x="10dp"
     android:layout_y="115dp"
     android:layout_width="280dp"
