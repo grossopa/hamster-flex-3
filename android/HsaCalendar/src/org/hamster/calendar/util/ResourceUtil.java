@@ -31,4 +31,20 @@ public class ResourceUtil {
 		R.drawable.n8,  
 		R.drawable.n9, 
 	};
+	
+	public static final int[] MONTH_IMG_LIST = {
+		R.drawable.month_1,
+		R.drawable.month_2,
+		R.drawable.month_3,
+		R.drawable.month_4,
+		R.drawable.month_5,
+		R.drawable.month_6,
+		R.drawable.month_7,
+		R.drawable.month_8,
+		R.drawable.month_9,
+		R.drawable.month_10,
+		R.drawable.month_11,
+		R.drawable.month_12,
+		
+	};
 }
