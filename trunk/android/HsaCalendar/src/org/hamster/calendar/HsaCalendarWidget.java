@@ -11,9 +11,11 @@ import org.hamster.calendar.service.BitmapCacheService;
 import org.hamster.calendar.util.CalendarUtil;
 import org.hamster.calendar.util.ResourceUtil;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -51,14 +53,7 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 			paint.setStyle(Style.STROKE);
 			paint.setColor(0xff0000);
 			paint.setStrokeWidth(1);
-			
-			// updateDayViews(views);
-			// buttons = createImageButtons(context, widthGap, heightGap);
-	        updateCalendar(210, 270, views, context);
-//	        updateBackground(210, 270, views);
-	        //view.setBackgroundColor(color)
-	       // view.setAlpha(alpha)
-	        // views.setImageViewBitmap(R.id.View_background, BCS.getBitmap(R.drawable.c_background));
+	        updateCalendar(views, context);
 			initialized = true;
 		} 
 
@@ -71,18 +66,22 @@ public class HsaCalendarWidget extends AppWidgetProvider {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
 	
-//	private void updateBackground(int width, int height, RemoteViews views) {
-//		Bitmap bitmap = Bitmap.createBitmap(width, height, Config.RGB_565);
-//		Canvas canvas = new Canvas(bitmap);
-//		Paint paint = new Paint();
-//		// paint.setAlpha(50);
-//		canvas.drawRect(new Rect(0, 0, width, height), paint);
-//		Bitmap.createBitmap(bitmap);
-//		views.setImageViewBitmap(R.id.View_background, bitmap);
-//	}
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		super.onReceive(context, intent);
+		if (intent.getAction().equals("org.hamster.calendar.click")) {
+			System.out.println(intent.getStringExtra("hs_aaaa"));
+			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4_4);
+		}
+	}
 	
-	private void updateCalendar(int width, int height, RemoteViews views, Context context) {
-		updateDateNumbers(width, height, views, context);
+	private void updateCalendar(RemoteViews views, Context context) {
+		Intent actClick = new Intent(context, HsaCalendarWidget.class);
+		actClick.setAction("org.hamster.calendar.click");
+		actClick.putExtra("hs_aaaa", "ha_asbc");
+		PendingIntent pending = PendingIntent.getBroadcast(context, 0, actClick, 0);
+		views.setOnClickPendingIntent(R.id.View_day11, pending);
+		updateDateNumbers(views, context);
 		updateMonth(views, context);
 	}
 	
@@ -95,7 +94,7 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 	/**
 	 * week 1 = Sunday
 	 */
-	private void updateDateNumbers(int width, int height, RemoteViews views, Context context) {
+	private void updateDateNumbers(RemoteViews views, Context context) {
 		Calendar calendar = Calendar.getInstance();
 		final int curDay = calendar.get(Calendar.DATE);
 		final int curWeek = calendar.get(Calendar.DAY_OF_WEEK);

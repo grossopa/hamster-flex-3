@@ -14,11 +14,13 @@
 		<receiver android:name="HsaCalendarWidget" >
 		    <intent-filter>
 		        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+		        <action android:name="org.hamster.calendar.click"></action>
 		    </intent-filter>
 		    <meta-data android:name="android.appwidget.provider"
 		               android:resource="@xml/appwidget_provider" />
 		</receiver>
     </application>
+    
     <uses-sdk android:minSdkVersion="7" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
 </manifest> 
