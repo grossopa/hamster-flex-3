@@ -8,6 +8,12 @@
     android:layout_width="300dp"
     android:layout_height="400dp"
     android:background="@drawable/background" />
+  <ImageButton android:id="@+id/View_RightButton"
+    android:layout_x="20dp"
+    android:layout_y="70dp"
+    android:layout_width="100dp"
+    android:layout_height="35dp" /> 
+    
   <ImageView android:id="@+id/View_monthImage"
     android:layout_x="20dp"
     android:layout_y="70dp"
