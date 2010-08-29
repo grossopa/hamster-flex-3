@@ -3,7 +3,6 @@ package org.hamster.calendar.util;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 import android.content.ContentResolver;
@@ -107,6 +106,6 @@ public class CalendarUtil {
 		} else if (level == Calendar.DAY_OF_MONTH) {
 			return 0;
 		}
-		return 0;
+		return 0; 
 	}
 }
