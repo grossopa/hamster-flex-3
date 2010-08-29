@@ -9,7 +9,7 @@
     android:layout_height="400dp"
     android:background="@drawable/background" />
   <ImageButton android:id="@+id/View_RightButton"
-    android:layout_x="230dp"
+    android:layout_x="260dp"
     android:layout_y="60dp"
     android:layout_width="50dp"
     android:layout_height="45dp" 
@@ -22,7 +22,7 @@
     android:background="@drawable/switchbuttonl"/> 
     
   <ImageView android:id="@+id/View_monthImage"
-    android:layout_x="80dp"
+    android:layout_x="60dp"
     android:layout_y="60dp"
     android:layout_width="100dp"
     android:layout_height="35dp" />  
@@ -32,6 +32,11 @@
     android:layout_width="280dp"
     android:layout_height="25dp"
     android:background="@drawable/week_label" />
+  <ImageView android:id="@+id/View_yearImage"
+    android:layout_x="160dp"
+    android:layout_y="60dp"
+    android:layout_width="100dp"
+    android:layout_height="35dp" />  
   <AbsoluteLayout android:id="@+id/Layout_mainDayList"
     android:layout_x="20dp"
     android:layout_y="130dp"
