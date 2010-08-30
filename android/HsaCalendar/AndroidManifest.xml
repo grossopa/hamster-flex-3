@@ -14,7 +14,8 @@
 		<receiver android:name="HsaCalendarWidget" >
 		    <intent-filter>
 		        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-		        <action android:name="org.hamster.calendar.click"></action>
+		        <action android:name="org.hamster.calendar.click" />
+		        <action android:name="org.hamster.calendar.date_tick" />
 		    </intent-filter>
 		    <meta-data android:name="android.appwidget.provider"
 		               android:resource="@xml/appwidget_provider" />

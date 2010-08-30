@@ -8,6 +8,11 @@
     android:layout_width="320dp"
     android:layout_height="400dp"
     android:background="@drawable/background" />
+  <ImageView android:id="@+id/View_background2"
+    android:layout_y="0dp"
+    android:layout_width="320dp"
+    android:layout_height="400dp"
+    android:background="@drawable/background2" />
   <ImageButton android:id="@+id/View_RightButton"
     android:layout_x="260dp"
     android:layout_y="60dp"
