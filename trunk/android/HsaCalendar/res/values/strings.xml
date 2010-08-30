@@ -2,7 +2,5 @@
 <resources>
     <string name="hello">Hello World, HsaCalendar!</string>
     <string name="app_name">HsaCalendar</string>
-    
-    <string name="day_width">35dp</string>
-    <string name="day_height">35dp</string>
+    <string name="widget44_name">HsCalendar Widget 4x4</string>
 </resources>

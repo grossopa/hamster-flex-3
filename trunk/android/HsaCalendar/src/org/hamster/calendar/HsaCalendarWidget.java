@@ -14,6 +14,7 @@ import org.hamster.calendar.util.CalendarUtil;
 import org.hamster.calendar.util.CommonUtil;
 import org.hamster.calendar.util.ResourceUtil;
 
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -21,8 +22,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
+import android.graphics.Bitmap.Config;
 import android.widget.RemoteViews;
 
 /**
@@ -34,49 +35,58 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 	private static BitmapCacheService BCS = BitmapCacheService.getInstance();
 	private static final Calendar ca = Calendar.getInstance();
 	
-	private boolean initialized = false;
 	private boolean hasCalendar = true;
 //	private Paint paint;
 	
 	public HsaCalendarWidget () {
-		super();   
+		super();
+	}
+	
+	/* (non-Javadoc)
+	 * @see android.appwidget.AppWidgetProvider#onEnabled(android.content.Context)
+	 */
+	@Override
+	public void onEnabled(Context context) {
+		BCS.setResources(context.getResources());
+		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4_4);
+		initCalendar(views, context);
+		updateCalendar(views, context, Calendar.getInstance());
+		
+		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+		appWidgetManager.updateAppWidget(new ComponentName(context, HsaCalendarWidget.class), views);
 	}
 	
 	
-	/* (non-Javadoc)
-	 * @see android.appwidget.AppWidgetProvider#onUpdate(android.content.Context, android.appwidget.AppWidgetManager, int[])
-	 */
-	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        final int N = appWidgetIds.length;
-        BCS.setResources(context.getResources()); 
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4_4);
-       // context.
-		if (!initialized) {
-//			paint = new Paint();
-//			paint.setAlpha(127);
-//			paint.setStyle(Style.STROKE);
-//			paint.setColor(0xff0000);
-//			paint.setStrokeWidth(1);
-			initCalendar(views, context, appWidgetIds[0]);
-	        updateCalendar(views, context, Calendar.getInstance());
-			initialized = true;
-		} 
-
-        //views.setImageViewBitmap(R.id.View_mainDayList, painter);
-        for (int i=0; i<N; i++) {
-            int appWidgetId = appWidgetIds[i];
-            appWidgetManager.updateAppWidget(appWidgetId, views);
-        }
-        
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
-    }
+	
+//	/* (non-Javadoc)
+//	 * @see android.appwidget.AppWidgetProvider#onUpdate(android.content.Context, android.appwidget.AppWidgetManager, int[])
+//	 */
+//	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+//        final int N = appWidgetIds.length;
+//        BCS.setResources(context.getResources()); 
+//        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4_4);
+//		if (!initialized) {
+//	        updateCalendar(views, context, Calendar.getInstance());
+////	        IntentFilter filter = new IntentFilter();
+////	        filter.addAction(Intent.ACTION_TIME_TICK);
+////	        context.registerReceiver(this, filter);
+//			initialized = true;
+//		} 
+//
+//        for (int i=0; i<N; i++) {
+//            int appWidgetId = appWidgetIds[i];
+//            appWidgetManager.updateAppWidget(appWidgetId, views);
+//        }
+//        
+//        super.onUpdate(context, appWidgetManager, appWidgetIds);
+//    }
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		super.onReceive(context, intent);
 		
 		BCS.setResources(context.getResources());
-		
+		System.out.println(">>><<< Track : " + intent.getAction());
 		if (intent.getAction().equals("org.hamster.calendar.switch.click.right")) {
 			
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4_4);
@@ -104,12 +114,16 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 			appWidgetManager.updateAppWidget(new ComponentName(context, HsaCalendarWidget.class), views);
 			
 			System.out.println("TRACE   end of updating");
+		} else if (intent.getAction().equals("org.hamster.calendar.date_tick")) {
+			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4_4);
+			Calendar calendar = Calendar.getInstance();
+			this.updateCalendar(views, context, calendar);
+			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+			appWidgetManager.updateAppWidget(new ComponentName(context, HsaCalendarWidget.class), views);
 		}
-		
-		
 	}
 	
-	private void initCalendar(RemoteViews views, Context context, int appWidgetId) {
+	private void initCalendar(RemoteViews views, Context context) {
 		Intent actClick = new Intent(context, HsaCalendarWidget.class);
 		actClick.setAction("org.hamster.calendar.switch.click.right");
 		actClick.putExtra("calendar", ca);
@@ -122,6 +136,19 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 		actClickl.putExtra("calendar", ca);
 		PendingIntent pendingl = PendingIntent.getBroadcast(context, 0, actClickl, 0);
 		views.setOnClickPendingIntent(R.id.View_LeftButton, pendingl);
+		
+		Calendar c = Calendar.getInstance();
+	    c.set(Calendar.HOUR_OF_DAY,   0);   
+	    c.set(Calendar.MINUTE,   0);   
+	    c.set(Calendar.SECOND,   0);   
+	    c.set(Calendar.MILLISECOND,   0);
+	    c.add(Calendar.DAY_OF_MONTH, 1);
+		
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+		Intent timeIntent = new Intent(context, HsaCalendarWidget.class);
+		timeIntent.setAction("org.hamster.calendar.date_tick");
+		PendingIntent operation = PendingIntent.getBroadcast(context, 0, timeIntent, 0);
+		alarmManager.setRepeating(AlarmManager.RTC, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, operation);
 	}
 	
 	private void updateCalendar(RemoteViews views, Context context, Calendar calendar) {
@@ -147,8 +174,8 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 		+ img3.getWidth() + img4.getWidth();
 		int height = (int) CommonUtil.mathMax(img1.getHeight(), img2.getHeight(),
 				img3.getHeight(), img4.getHeight());
-		double ratio = width / height;
-		Bitmap newBp = Bitmap.createBitmap((int) (45 * ratio), 45, Config.ARGB_8888);
+		//double ratio = width / height;
+		Bitmap newBp = Bitmap.createBitmap(width, height, Config.ARGB_8888);
 		Canvas canvas = new Canvas(newBp);
 		int offset = 0;
 		canvas.drawBitmap(img1, offset, (height - img1.getHeight()) / 2, null);
@@ -195,7 +222,6 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 		} else if (startWeek >= 7) {
 			startWeek -= 7;
 		}
-		int week = startWeek;
 		Calendar startDate = new GregorianCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), 1);
 		Calendar endDate = new GregorianCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), cDayCount);
 		Calendar curDate = Calendar.getInstance();
@@ -213,6 +239,7 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 			
 		}
 		int monthCompare = CalendarUtil.compareCalendar(curDate, startDate, Calendar.MONTH);
+		boolean red = false;
 		
 		for (int i = 1; i < cDayCount + 1; i++) {
 			int indexX = (startWeek + i - 1) % 7; // 0-6
@@ -242,26 +269,22 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 				maskBitmap = BCS.getBitmap(R.drawable.selected);
 			}
 			
-			
+			red = (indexX == 6 || indexX == 0);
 			if (i < 10) {
-				drawSingleNumber(indexX, indexY, i, views, maskBitmap);
+				drawSingleNumber(indexX, indexY, i, views, maskBitmap, red);
 			} else {
-				drawDoubleNumber(indexX, indexY, i, views, maskBitmap);
+				drawDoubleNumber(indexX, indexY, i, views, maskBitmap, red);
 			}
-			
-			week = week == 7 ? 1 : week + 1;
 		}
 	}
 	
 	
-	private void drawSingleNumber(int indexX, int indexY, int i, RemoteViews views, Bitmap maskBitmap) {
+	private void drawSingleNumber(int indexX, int indexY, int i, RemoteViews views, Bitmap maskBitmap, boolean red) {
 		Bitmap newBp = Bitmap.createBitmap(48, 60, Config.ARGB_8888);
 		Canvas canvas = new Canvas(newBp);
-		//Rect r = new Rect(0, 0, 48, 60);
-		//Paint paint = new Paint();
-		//paint.set
-		//canvas.drawRect(r, paint)
-		Bitmap b = BCS.getBitmap(ResourceUtil.NUMBER_IMG_LIST[i]);
+		Bitmap b = red 
+				? BCS.getBitmap(ResourceUtil.NUMBER_IMG_LIST_RED[i]) 
+				: BCS.getBitmap(ResourceUtil.NUMBER_IMG_LIST[i]);
 		canvas.drawBitmap(b, (48 - b.getWidth()) / 2, (50 - b.getHeight()) / 2, null);
 		if (maskBitmap != null) {
 			canvas.drawBitmap(maskBitmap, 0, 0, null);
@@ -270,17 +293,21 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 		views.setBitmap(ResourceUtil.DATE_VIEW_ID_LIST[indexY][indexX], "setImageBitmap", newBp);
 	}
 	
-	private void drawDoubleNumber(int indexX, int indexY, int i, RemoteViews views, Bitmap maskBitmap) {
+	private void drawDoubleNumber(int indexX, int indexY, int i, RemoteViews views, Bitmap maskBitmap, boolean red) {
 		Bitmap newBp = Bitmap.createBitmap(48, 60, Config.ARGB_8888);
 		Canvas canvas = new Canvas(newBp);
 		  
 		// draw ten digit number
 		int tenDigit = (int) (i / 10);
-		Bitmap b1  = BCS.getBitmap(ResourceUtil.NUMBER_IMG_LIST[tenDigit]);
+		Bitmap b1 = red 
+			? BCS.getBitmap(ResourceUtil.NUMBER_IMG_LIST_RED[tenDigit]) 
+					: BCS.getBitmap(ResourceUtil.NUMBER_IMG_LIST[tenDigit]);
 		
 		// draw single digit number
 		int singleDigit = i % 10;
-		Bitmap b2 = BCS.getBitmap(ResourceUtil.NUMBER_IMG_LIST[singleDigit]);
+		Bitmap b2 = red 
+			? BCS.getBitmap(ResourceUtil.NUMBER_IMG_LIST_RED[singleDigit]) 
+					: BCS.getBitmap(ResourceUtil.NUMBER_IMG_LIST[singleDigit]);
 		
 		int gap = 0;
 		canvas.drawBitmap(b1, (48 - b1.getWidth() - b2.getWidth()) / 2 - gap, (50 - b1.getHeight()) / 2, null);
