@@ -33,7 +33,7 @@ import android.widget.RemoteViews;
 public class HsaCalendarWidget extends AppWidgetProvider {
 	 
 	private static BitmapCacheService BCS = BitmapCacheService.getInstance();
-	private static final Calendar ca = Calendar.getInstance();
+	//private static final Calendar ca = Calendar.getInstance();
 	
 	private boolean hasCalendar = true;
 //	private Paint paint;
@@ -49,6 +49,7 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 	public void onEnabled(Context context) {
 		BCS.setResources(context.getResources());
 		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4_4);
+		
 		initCalendar(views, context);
 		updateCalendar(views, context, Calendar.getInstance());
 		
@@ -91,12 +92,17 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 			
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4_4);
 			//Calendar calendar = (Calendar) intent.getSerializableExtra("calendar");
-			Calendar calendar = ca;
-				calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
-				System.out.println("INFO right : calendar  " + calendar.toString() + "   " + calendar.getTime().toString());
-				this.updateCalendar(views, context, calendar);
+			Calendar calendar = (Calendar) intent.getSerializableExtra("calendar");
+			calendar.add(Calendar.MONTH, 1);
+			System.out.println("INFO right : calendar  " + calendar.toString() + "   " + calendar.getTime().toString());
+			this.updateCalendar(views, context, calendar);
 				
-			intent.putExtra("calendar", calendar);
+			Intent actClick = new Intent(context, HsaCalendarWidget.class);
+			actClick.setAction("org.hamster.calendar.switch.click.right");
+			actClick.putExtra("calendar", calendar);
+			PendingIntent pending = PendingIntent.getBroadcast(context, 0, actClick, 0);
+			views.setOnClickPendingIntent(R.id.View_RightButton, pending);
+			
 			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 			appWidgetManager.updateAppWidget(new ComponentName(context, HsaCalendarWidget.class), views);
 			
@@ -105,11 +111,11 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 		} else if (intent.getAction().equals("org.hamster.calendar.switch.click.left")) {
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4_4);
 			//Calendar calendar = (Calendar) intent.getSerializableExtra("calendar");
-			Calendar calendar = ca;
-			calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
+			Calendar calendar = (Calendar) intent.getSerializableExtra("calendar");
+			calendar.add(Calendar.MONTH, -1);
 			System.out.println("INFO left  : calendar  " + calendar.toString() + "   " + calendar.getTime().toString());
 			this.updateCalendar(views, context, calendar);
-			
+			intent.putExtra("calendar", calendar);
 			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 			appWidgetManager.updateAppWidget(new ComponentName(context, HsaCalendarWidget.class), views);
 			
@@ -124,12 +130,12 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 	}
 	
 	private void initCalendar(RemoteViews views, Context context) {
+		Calendar ca = Calendar.getInstance();
 		Intent actClick = new Intent(context, HsaCalendarWidget.class);
 		actClick.setAction("org.hamster.calendar.switch.click.right");
 		actClick.putExtra("calendar", ca);
 		PendingIntent pending = PendingIntent.getBroadcast(context, 0, actClick, 0);
 		views.setOnClickPendingIntent(R.id.View_RightButton, pending);
-		
 		
 		Intent actClickl = new Intent(context, HsaCalendarWidget.class);
 		actClickl.setAction("org.hamster.calendar.switch.click.left");
