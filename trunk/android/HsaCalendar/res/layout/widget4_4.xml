@@ -16,18 +16,18 @@
   <ImageButton android:id="@+id/View_RightButton"
     android:layout_x="260dp"
     android:layout_y="60dp"
-    android:layout_width="50dp"
+    android:layout_width="40dp"
     android:layout_height="45dp" 
     android:background="@drawable/switchbutton"/>
   <ImageButton android:id="@+id/View_LeftButton"
     android:layout_x="10dp"
     android:layout_y="60dp"
-    android:layout_width="50dp"
+    android:layout_width="40dp"
     android:layout_height="45dp" 
     android:background="@drawable/switchbuttonl"/> 
     
   <ImageView android:id="@+id/View_monthImage"
-    android:layout_x="60dp"
+    android:layout_x="50dp"
     android:layout_y="60dp"
     android:layout_width="100dp"
     android:layout_height="35dp" />  

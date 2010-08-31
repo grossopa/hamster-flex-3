@@ -40,7 +40,8 @@ public class BitmapCacheService {
 		if (!storage.containsKey(id)) {
 			Bitmap newBitmap = BitmapFactory.decodeResource(resources, id);
 			Bitmap alter = Bitmap.createBitmap(newBitmap);
-			storage.put(id, alter); 
+			storage.put(id, alter);
+			System.out.println("WARN: load " + id + "from resource");
 			return alter;
 		} else {
 			return storage.get(id);
