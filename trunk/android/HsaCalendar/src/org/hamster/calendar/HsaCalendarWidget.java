@@ -12,6 +12,7 @@ import java.util.List;
 import org.hamster.calendar.service.BitmapCacheService;
 import org.hamster.calendar.util.CalendarUtil;
 import org.hamster.calendar.util.CommonUtil;
+import org.hamster.calendar.util.ConfigUtil;
 import org.hamster.calendar.util.ResourceUtil;
 
 import android.app.AlarmManager;
@@ -33,7 +34,6 @@ import android.widget.RemoteViews;
 public class HsaCalendarWidget extends AppWidgetProvider {
 	 
 	private static BitmapCacheService BCS = BitmapCacheService.getInstance();
-	//private static final Calendar ca = Calendar.getInstance();
 	
 	private boolean hasCalendar = true;
 //	private Paint paint;
@@ -50,6 +50,7 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 		BCS.setResources(context.getResources());
 		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4_4);
 		
+		ConfigUtil.init(context);
 		initCalendar(views, context);
 		updateCalendar(views, context, Calendar.getInstance());
 		
@@ -85,14 +86,27 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		super.onReceive(context, intent);
-		
 		BCS.setResources(context.getResources());
 		System.out.println(">>><<< Track : " + intent.getAction());
+		String pDate = ConfigUtil.get(context, "pDate");
+		Calendar calendar= Calendar.getInstance();
+		if (pDate == null) {
+			ConfigUtil.put(context, "pDate", 
+					calendar.get(Calendar.YEAR) + ":" 
+					+ calendar.get(Calendar.MONTH) + ":" 
+					+ calendar.get(Calendar.DAY_OF_MONTH));
+			System.out.println("create config file");
+		} else {
+			String[] info = pDate.split(":");
+			calendar.set(Calendar.YEAR, Integer.valueOf(info[0]));
+			calendar.set(Calendar.MONTH, Integer.valueOf(info[1]));
+			calendar.set(Calendar.DAY_OF_MONTH, Integer.valueOf(info[2]));
+			System.out.println("get config file");
+		}
 		if (intent.getAction().equals("org.hamster.calendar.switch.click.right")) {
 			
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4_4);
-			//Calendar calendar = (Calendar) intent.getSerializableExtra("calendar");
-			Calendar calendar = (Calendar) intent.getSerializableExtra("calendar");
+			// Calendar calendar = (Calendar) intent.getSerializableExtra("calendar");
 			calendar.add(Calendar.MONTH, 1);
 			System.out.println("INFO right : calendar  " + calendar.toString() + "   " + calendar.getTime().toString());
 			this.updateCalendar(views, context, calendar);
@@ -106,12 +120,17 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 			appWidgetManager.updateAppWidget(new ComponentName(context, HsaCalendarWidget.class), views);
 			
+			ConfigUtil.put(context, "pDate", 
+					calendar.get(Calendar.YEAR) + ":" 
+					+ calendar.get(Calendar.MONTH) + ":" 
+					+ calendar.get(Calendar.DAY_OF_MONTH));
+			
 			System.out.println("TRACE   end of updating");
 			
 		} else if (intent.getAction().equals("org.hamster.calendar.switch.click.left")) {
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4_4);
 			//Calendar calendar = (Calendar) intent.getSerializableExtra("calendar");
-			Calendar calendar = (Calendar) intent.getSerializableExtra("calendar");
+		//	Calendar calendar = (Calendar) intent.getSerializableExtra("calendar");
 			calendar.add(Calendar.MONTH, -1);
 			System.out.println("INFO left  : calendar  " + calendar.toString() + "   " + calendar.getTime().toString());
 			this.updateCalendar(views, context, calendar);
@@ -119,13 +138,23 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 			appWidgetManager.updateAppWidget(new ComponentName(context, HsaCalendarWidget.class), views);
 			
+			ConfigUtil.put(context, "pDate", 
+					calendar.get(Calendar.YEAR) + ":" 
+					+ calendar.get(Calendar.MONTH) + ":" 
+					+ calendar.get(Calendar.DAY_OF_MONTH));
+			
 			System.out.println("TRACE   end of updating");
 		} else if (intent.getAction().equals("org.hamster.calendar.date_tick")) {
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4_4);
-			Calendar calendar = Calendar.getInstance();
-			this.updateCalendar(views, context, calendar);
+			Calendar c = Calendar.getInstance();
+			this.updateCalendar(views, context, c);
 			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 			appWidgetManager.updateAppWidget(new ComponentName(context, HsaCalendarWidget.class), views);
+			
+			ConfigUtil.put(context, "pDate", 
+					calendar.get(Calendar.YEAR) + ":" 
+					+ calendar.get(Calendar.MONTH) + ":" 
+					+ calendar.get(Calendar.DAY_OF_MONTH));
 		}
 	}
 	
@@ -142,7 +171,6 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 		actClickl.putExtra("calendar", ca);
 		PendingIntent pendingl = PendingIntent.getBroadcast(context, 0, actClickl, 0);
 		views.setOnClickPendingIntent(R.id.View_LeftButton, pendingl);
-		
 		Calendar c = Calendar.getInstance();
 	    c.set(Calendar.HOUR_OF_DAY,   0);   
 	    c.set(Calendar.MINUTE,   0);   
