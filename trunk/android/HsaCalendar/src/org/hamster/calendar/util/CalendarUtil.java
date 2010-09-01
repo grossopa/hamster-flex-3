@@ -23,34 +23,8 @@ public class CalendarUtil {
 
 		ContentResolver contentResolver = context.getContentResolver();
 
-		// Fetch a list of all calendars synced with the device, their display
-		// names and whether the
-		// user has them selected for display.
-
-//		final Cursor cursor = contentResolver.query(Uri
-//				.parse("content://calendar/calendars"), (new String[] { "_id",
-//				"color", "selected" }), null, null, null);
-		// For a full list of available columns see http://tinyurl.com/yfbg76w
-
-//		HashSet<String> calendarIds = new HashSet<String>();
-
-//		while (cursor.moveToNext()) {
-//
-//			final String _id = cursor.getString(0);
-//			final int color = cursor.getInt(1);
-//			final Boolean selected = !cursor.getString(2).equals("0");
-//
-//			System.out.println("Id: " + _id + " color: " + color
-//					+ " Selected: " + selected);
-//			calendarIds.add(_id);
-//		}
-
-		// For each calendar, display all the events from the previous week to
-		// the end of next week.
 		List<Date> result = new ArrayList<Date>();
 		Uri.Builder builder = Uri.parse("content://calendar/instances/when").buildUpon();
-		System.out.println("INFO : startDate " + startDate.getTime().toLocaleString());
-		System.out.println("INFO :  endDate  " + endDate.getTime().toLocaleString());
 		ContentUris.appendId(builder, startDate.getTime().getTime());
 		ContentUris.appendId(builder, endDate.getTime().getTime());
 
@@ -59,13 +33,11 @@ public class CalendarUtil {
 				null);
 
 		while (eventCursor.moveToNext()) {
-			final String title = eventCursor.getString(0);
+	//		final String title = eventCursor.getString(0);
 			final Date begin = new Date(eventCursor.getLong(1));
-			final Date end = new Date(eventCursor.getLong(2));
-			final Boolean allDay = !eventCursor.getString(3).equals("0");
+	//		final Date end = new Date(eventCursor.getLong(2));
+	//		final Boolean allDay = !eventCursor.getString(3).equals("0");
 			result.add(begin);
-			System.out.println("Title: " + title + " Begin: " + begin
-					+ " End: " + end + " All Day: " + allDay);
 		}
 		return result;
 	}

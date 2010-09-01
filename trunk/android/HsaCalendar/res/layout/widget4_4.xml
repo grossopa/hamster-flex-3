@@ -38,7 +38,7 @@
     android:layout_height="25dp"
     android:background="@drawable/week_label" />
   <ImageView android:id="@+id/View_yearImage"
-    android:layout_x="160dp"
+    android:layout_x="150dp"
     android:layout_y="60dp"
     android:layout_width="100dp"
     android:layout_height="35dp" />  

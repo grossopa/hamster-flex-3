@@ -14,8 +14,12 @@
 		<receiver android:name="HsaCalendarWidget" android:label="@string/widget44_name" >
 		    <intent-filter>
 		        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+		        <action android:name="android.intent.extra.INTENT" />
+		        <action android:name="android.intent.action.PICK_ACTIVITY" />
+		        <action android:name="android.intent.action.RUN" />
 		        <action android:name="org.hamster.calendar.click" />
 		        <action android:name="org.hamster.calendar.date_tick" />
+		        <action android:name="org.hamster.calendar.click.yearMonth" />
 		    </intent-filter>
 		    <meta-data android:name="android.appwidget.provider"
 		               android:resource="@xml/appwidget_provider" />
@@ -24,5 +28,5 @@
     
     <uses-sdk android:minSdkVersion="7" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
-    <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM" />
+    <uses-permission android:name="android.permission.SET_ACTIVITY_WATCHER" />
 </manifest> 
