@@ -6,7 +6,7 @@ package org.hamster.calendar.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -26,22 +26,16 @@ public class BitmapCacheService {
 	}
 	
 	private Map<Integer, Bitmap> storage;
-	private Resources resources;
-	
-	public void setResources(Resources resources) {
-		this.resources = resources;
-	}
 	
 	public BitmapCacheService() {
 		storage = new HashMap<Integer, Bitmap>();
 	}
 	
-	public Bitmap getBitmap(int id) {
+	public Bitmap getBitmap(Context context, int id) {
 		if (!storage.containsKey(id)) {
-			Bitmap newBitmap = BitmapFactory.decodeResource(resources, id);
+			Bitmap newBitmap = BitmapFactory.decodeResource(context.getResources(), id);
 			Bitmap alter = Bitmap.createBitmap(newBitmap);
 			storage.put(id, alter);
-			System.out.println("WARN: load " + id + "from resource");
 			return alter;
 		} else {
 			return storage.get(id);
