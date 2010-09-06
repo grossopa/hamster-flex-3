@@ -103,21 +103,21 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 			calendar.add(Calendar.MONTH, -1);
 		} else if (intent.getAction().equals(HsConstants.DATE_TICK)
 				|| intent.getAction().equals(HsConstants.YEAR_MONTH_CLICK)) {
-//			calendar = Calendar.getInstance();
-//			invalidate = true;
+			calendar = Calendar.getInstance();
+			invalidate = true;
 			// Intent it = new Intent("android.intent.action.AnCal.ACTION_MODE_EDIT_SELECT_DATE");
-			Intent it = new Intent("com.htc.calendar.CalendarApplication");    
+	//		Intent it = new Intent("com.htc.calendar.CalendarApplication");    
 		//	it.se
-            Bundle data = new Bundle();
-            calendar = ConfigUtil.getCurDateSelection(context);
+  //          Bundle data = new Bundle();
+//            calendar = ConfigUtil.getCurDateSelection(context);
 			//invalidate = true;
-			calendar.add(Calendar.MONTH, 1);
-            data.putLong("date", calendar.getTimeInMillis());
-            data.putInt("firstDayOfWeek", Calendar.MONDAY);
-            data.putBoolean("noneButton", false);   
-            it.putExtras(data);
-            it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(it);
+//			calendar.add(Calendar.MONTH, 1);
+//            data.putLong("date", calendar.getTimeInMillis());
+//            data.putInt("firstDayOfWeek", Calendar.MONDAY);
+//            data.putBoolean("noneButton", false);   
+//            it.putExtras(data);
+//            it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            context.startActivity(it);
             //startActivityForResult(it, SELECT_DATE_REQUEST);
 		}
 

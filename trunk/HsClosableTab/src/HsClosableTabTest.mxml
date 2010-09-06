@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:closableTab="org.hamster.closableTab.*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<mx:HBox width="100%" height="40" verticalAlign="middle">
+		<mx:CheckBox id="closableCheckBox" selected="true" label="closable" />
+		<mx:CheckBox id="alwaysShowCloseButtonCheckBox" selected="false" label="always show close button" />
+		<mx:CheckBox id="autoRemoveChildCheckBox" selected="true" label="auto remove child" />
+	</mx:HBox>
+	<closableTab:HsClosableTabNavigator width="100%" height="100%" y="50" closeButtonPadding="6"
+										 closable="{closableCheckBox.selected}"
+										 alwaysShowCloseButton="{alwaysShowCloseButtonCheckBox.selected}"
+										 autoRemoveChild="{autoRemoveChildCheckBox.selected}">
+		<mx:Canvas backgroundColor="#000000" label="black" />
+		<mx:Canvas backgroundColor="#220000" label="not sure" />
+		<mx:Canvas backgroundColor="#FFFFFF" label="white" />
+		<mx:Canvas backgroundColor="#FF0000" label="red" />
+	</closableTab:HsClosableTabNavigator>
+	
+</s:Application>
