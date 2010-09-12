@@ -25,9 +25,10 @@
       <fileset dir="HsUpload/src" excludes="*.mxml, *.as" includes="**/*" />
       <fileset dir="HsImageCropper/src" excludes="*.mxml, *.as" includes="**/*" />
       <fileset dir="HsTip/src" excludes="*.mxml, *.as" includes="**/*" />-->
-      <fileset dir="HsFramework/src" excludes="*.mxml, *.as" includes="**/*" />
+      <!--<fileset dir="HsFramework/src" excludes="*.mxml, *.as" includes="**/*" />
       <fileset dir="HsCommon/src" excludes="*.mxml, *.as" includes="**/*" />
-      <fileset dir="HsPagination/src" excludes="*.mxml, *.as" includes="**/*" />
+      <fileset dir="HsPagination/src" excludes="*.mxml, *.as" includes="**/*" />-->
+      <fileset dir="HsClosableTab/src" excludes="*.mxml, *.as" includes="**/*" />
 		</copy>
     
  		<fileset dir="${APP_SRC}" id="src.files">
