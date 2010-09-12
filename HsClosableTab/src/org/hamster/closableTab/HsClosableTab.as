@@ -124,7 +124,7 @@ package org.hamster.closableTab
 			
 			var overlayCount:int = 0;
 			// If there is an overlay, place the child underneath it.
-			if (effectOverlayReferenceCount && child != effectOverlay)
+			if (overlayReferenceCount && child != overlay)
 				overlayCount++;
 			
 			if (_closeButton) {
@@ -149,7 +149,7 @@ package org.hamster.closableTab
 		{
 			// Place the child underneath the overlay.
 			var overlayCount:int = 0;
-			if (effectOverlayReferenceCount && child != effectOverlay)
+			if (overlayReferenceCount && child != overlay)
 				overlayCount++;
 			
 			if (_closeButton) {

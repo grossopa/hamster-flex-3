@@ -37,6 +37,7 @@
   </taskdef>
   
   <property name="project.name" value="hamster" />
-  <property name="project.version" value="0.0.1a" />
-  <property name="swc.name" value="${project.name}-${project.version}.swc" />
+  <property name="project.package" value="closableTab" />
+  <property name="project.version" value="1.0.0" />
+  <property name="swc.name" value="${project.name}-${project.version}-${project.package}.swc" />
 </project>
