@@ -305,8 +305,8 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 				Calendar.MONTH);
 		boolean red = false;
 		float density = context.getResources().getDisplayMetrics().density;
-		int widthPx = (int) (48 * density);
-		int heightPx = (int) (54 * density);
+		int widthPx = (int) (38 * density);
+		int heightPx = (int) (38 * density);
 
 		for (int i = 1; i < cDayCount + 1; i++) {
 			int indexX = (startWeek + i - 1) % 7; // 0-6
