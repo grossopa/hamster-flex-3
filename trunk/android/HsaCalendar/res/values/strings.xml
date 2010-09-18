@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, HsaCalendar!</string>
+    <string name="hello">Author: grossopaforever@gmail.com</string>
     <string name="app_name">HsaCalendar</string>
     <string name="widget44_name">HsCalendar Widget 4x4</string>
 </resources>
