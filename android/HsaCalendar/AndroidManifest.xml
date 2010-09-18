@@ -8,6 +8,8 @@
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.android.calendar.LaunchActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -20,6 +22,7 @@
 		        <action android:name="org.hamster.calendar.click" />
 		        <action android:name="org.hamster.calendar.date_tick" />
 		        <action android:name="org.hamster.calendar.click.yearMonth" />
+		        <action android:name="org.hamster.calendar.click.calendar" />
 		    </intent-filter>
 		    <meta-data android:name="android.appwidget.provider"
 		               android:resource="@xml/appwidget_provider" />
@@ -28,5 +31,4 @@
     
     <uses-sdk android:minSdkVersion="7" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
-    <uses-permission android:name="android.permission.SET_ACTIVITY_WATCHER" />
 </manifest> 

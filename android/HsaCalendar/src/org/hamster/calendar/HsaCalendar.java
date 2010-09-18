@@ -3,7 +3,8 @@ package org.hamster.calendar;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class HsaCalendar extends Activity { 
+public class HsaCalendar extends Activity {
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {

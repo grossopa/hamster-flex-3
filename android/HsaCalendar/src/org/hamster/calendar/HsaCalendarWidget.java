@@ -26,8 +26,8 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.widget.RemoteViews;
 
@@ -105,20 +105,19 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 				|| intent.getAction().equals(HsConstants.YEAR_MONTH_CLICK)) {
 			calendar = Calendar.getInstance();
 			invalidate = true;
-			// Intent it = new Intent("android.intent.action.AnCal.ACTION_MODE_EDIT_SELECT_DATE");
-	//		Intent it = new Intent("com.htc.calendar.CalendarApplication");    
-		//	it.se
-  //          Bundle data = new Bundle();
-//            calendar = ConfigUtil.getCurDateSelection(context);
-			//invalidate = true;
-//			calendar.add(Calendar.MONTH, 1);
-//            data.putLong("date", calendar.getTimeInMillis());
-//            data.putInt("firstDayOfWeek", Calendar.MONDAY);
-//            data.putBoolean("noneButton", false);   
-//            it.putExtras(data);
-//            it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            context.startActivity(it);
-            //startActivityForResult(it, SELECT_DATE_REQUEST);
+		} else if (intent.getAction().equals(HsConstants.CALENDAR_CLICK)) {
+			Intent it = new Intent();
+            Bundle data = new Bundle();
+            calendar = ConfigUtil.getCurDateSelection(context);
+            data.putLong("date", calendar.getTimeInMillis());
+            data.putInt("firstDayOfWeek", Calendar.MONDAY);
+            data.putBoolean("noneButton", false);
+            it.putExtras(data);
+            it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            ComponentName comp = new ComponentName("com.htc.calendar", 
+            		"com.htc.calendar.MonthActivity");
+            it.setComponent(comp);
+            context.startActivity(it);
 		}
 
 		if (invalidate == true) {
@@ -164,7 +163,15 @@ public class HsaCalendarWidget extends AppWidgetProvider {
 				context, 0, monthBtnClickIntent, 0);
 		views.setOnClickPendingIntent(R.id.View_monthImage,
 				monthBtnClickPendingIntent);
-
+		
+		Intent calendarBtnClickIntent = new Intent(context,
+				HsaCalendarWidget.class);
+		calendarBtnClickIntent.setAction(HsConstants.CALENDAR_CLICK);
+		PendingIntent calendarBtnClickPendingIntent = PendingIntent.getBroadcast(
+				context, 0, calendarBtnClickIntent, 0);
+		views.setOnClickPendingIntent(R.id.View_calendar,
+				calendarBtnClickPendingIntent);
+		
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.HOUR_OF_DAY, 0);
 		c.set(Calendar.MINUTE, 0);
