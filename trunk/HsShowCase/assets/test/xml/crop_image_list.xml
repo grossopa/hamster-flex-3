@@ -1,0 +1,6 @@
+<result status="0">
+<crop-image-list>
+  <crop-image id="1" name="img1" location="test/xml/cropImage/1.jpg" width="306" height="450" />
+  <crop-image id="1" name="img2" location="test/xml/cropImage/2.jpg" width="526" height="340" />
+</crop-image-list>
+</result>

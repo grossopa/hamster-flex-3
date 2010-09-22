@@ -13,5 +13,13 @@ package org.hamster.showcase.common.config
 				return rootURL + "case_list.xml";
 			}
 		}
+		
+		public static function get URL_CROP_IMAGE_LIST():String {
+			if (TEST_MODE) {
+				return "test/xml/crop_image_list.xml";
+			} else {
+				return rootURL + "crop_image_list.xml";
+			}
+		}
 	}
 }

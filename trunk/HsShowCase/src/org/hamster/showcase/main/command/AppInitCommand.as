@@ -13,7 +13,6 @@ package org.hamster.showcase.main.command
 			super();
 		}
 		
-		
 		override public function execute(notification:INotification):void
 		{
 			facade.registerProxy(new CaseVOProxy());

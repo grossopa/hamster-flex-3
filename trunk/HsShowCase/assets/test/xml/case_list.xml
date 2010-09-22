@@ -1,6 +1,6 @@
 <result status="0">
 <case-list>
-  <case id="1" name="ImageCropper" module-location="ImageCropper.swf" />
+  <case id="1" name="ImageCropper" module-location="ImageCropperModule.swf" />
   <case id="1" name="RuleComponent" module-location="RuleComponent.swf" />
 </case-list>
 </result>

@@ -4,11 +4,14 @@ package org.hamster.showcase.common.vo.proxy
 	
 	import mx.rpc.IResponder;
 	
+	import org.hamster.services.HTTPServiceLocator;
 	import org.hamster.showcase.common.util.ValidatorUtil;
 	import org.puremvc.as3.patterns.proxy.Proxy;
 	
 	public class BaseRemoteProxy extends Proxy implements IResponder
 	{
+		protected var locator:HTTPServiceLocator = HTTPServiceLocator.getInstance();
+		
 		public function BaseRemoteProxy(proxyName:String=null, data:Object=null)
 		{
 			super(proxyName, data);

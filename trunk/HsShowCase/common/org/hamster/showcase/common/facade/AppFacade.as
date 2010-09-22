@@ -1,6 +1,7 @@
 package org.hamster.showcase.common.facade
 {
 	import org.hamster.showcase.common.service.MainHTTPService;
+	import org.hamster.showcase.imageCropper.command.LoadCropImageListCommand;
 	import org.hamster.showcase.main.command.AppInitCommand;
 	import org.hamster.showcase.main.command.LoadCaseListCommand;
 	import org.puremvc.as3.interfaces.IFacade;
@@ -14,6 +15,11 @@ package org.hamster.showcase.common.facade
 		
 		public static const LOAD_CASELIST:String = NAME + "Load_CaseList";
 		public static const UPDATE_CASELIST:String = NAME + "Update_CaseList";
+		public static const SELECT_CASELIST:String = NAME + "Select_CaseList";
+		
+		// IMAGE CROPPER MODULE
+		public static const LOAD_CROPIMAGE:String = NAME + "Load_CropImage";
+		public static const UPDATE_CROPIMAGE:String = NAME + "Update_CropImage";
 		
 		public static const ERROR:String = NAME + "Error";
 		
@@ -40,6 +46,7 @@ package org.hamster.showcase.common.facade
 			
 			registerCommand(INIT, AppInitCommand);
 			registerCommand(LOAD_CASELIST, LoadCaseListCommand);
+			registerCommand(LOAD_CROPIMAGE, LoadCropImageListCommand)
 			//			this.registerCommand(APP_INIT, InitManagementCommand);
 			//			this.registerCommand(LOAD_CREATURE, LoadCreatureMetaCommand);
 			//			this.registerCommand(SAVE_CREATURE, SaveCreatureMetaCommand);
