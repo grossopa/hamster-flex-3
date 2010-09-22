@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" 
+		   xmlns:imageCropper="org.hamster.imageCropper.*" layout="vertical"
+		   removedFromStage="module1_removedFromStageHandler(event)"
+		   creationComplete="module1_creationCompleteHandler(event)">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.controls.Image;
+			import mx.events.FlexEvent;
+			import mx.events.ListEvent;
+			
+			import org.hamster.showcase.common.facade.AppFacade;
+			import org.hamster.showcase.common.util.CommonUtil;
+			import org.hamster.showcase.imageCropper.mediator.ImageCropperModuleMediator;
+			import org.hamster.showcase.imageCropper.vo.CropImageVO;
+			import org.hamster.showcase.imageCropper.vo.proxy.CropImageVOProxy;
+			import org.puremvc.as3.interfaces.IFacade;
+			
+			[Bindable] public var cropImageSourceList:Array;
+			
+			protected function module1_creationCompleteHandler(event:FlexEvent):void
+			{
+				var facade:IFacade = CommonUtil.facade;
+				facade.registerMediator(new ImageCropperModuleMediator(this));
+				facade.registerProxy(new CropImageVOProxy());
+				facade.sendNotification(AppFacade.LOAD_CROPIMAGE);
+			}
+			
+			protected function cropImageHList_changeHandler(event:ListEvent):void
+			{
+				var item:CropImageVO = CropImageVO(cropImageHList.selectedItem);
+				imageCropper.setImageData(item.location, item.width, item.height);
+			}
+			
+
+			protected function module1_removedFromStageHandler(event:Event):void
+			{
+				var facade:IFacade = CommonUtil.facade;
+				facade.removeMediator(ImageCropperModuleMediator.NAME + this.toString());
+			}
+
+
+			protected function cropButton_clickHandler(event:MouseEvent):void
+			{
+				Alert.show(imageCropper.getCropArea().toString());
+			}
+
+
+			protected function cropImageHList_dataChangeHandler(event:FlexEvent):void
+			{
+				if (cropImageHList.selectedIndex == -1 
+					&& cropImageSourceList != null
+					&& cropImageSourceList.length > 0) {
+					var item:CropImageVO = CropImageVO(cropImageSourceList[0]);
+					imageCropper.setImageData(item.location, item.width, item.height);
+				}
+			}
+
+		]]>
+	</mx:Script>
+	<mx:HBox width="100%" height="100%" horizontalGap="5">
+		<mx:VBox width="80" height="100%" 
+				 paddingLeft="10" paddingRight="10" paddingTop="10">
+			<mx:Button id="cropButton" click="cropButton_clickHandler(event)" width="100%" />
+		</mx:VBox>
+		<imageCropper:HsImageCropper id="imageCropper" width="100%" height="100%" />
+	</mx:HBox>
+	<mx:HorizontalList id="cropImageHList" dataProvider="{cropImageSourceList}" 
+					   height="70" width="100%" selectedIndex="0"
+					   labelField="location" rowHeight="68" columnWidth="90"
+					   change="cropImageHList_changeHandler(event)"
+					   dataChange="cropImageHList_dataChangeHandler(event)">
+		<mx:itemRenderer>
+			<mx:Component>
+				<mx:Image verticalAlign="middle" horizontalAlign="center" />
+			</mx:Component>
+		</mx:itemRenderer>
+	</mx:HorizontalList>
+</mx:Module>

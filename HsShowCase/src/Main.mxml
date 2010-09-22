@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
 				layout="absolute" minWidth="955" minHeight="600" frameRate="60"
-				applicationComplete="app_applicationCompleteHandler(event)" xmlns:closableTab="org.hamster.closableTab.*">
+				applicationComplete="app_applicationCompleteHandler(event)" 
+				xmlns:closableTab="org.hamster.closableTab.*">
+	<mx:Metadata>
+		[Event(name="caseList_Change")]
+	</mx:Metadata>
 	<mx:Script>
 		<![CDATA[
 			import mx.collections.ArrayCollection;
 			import mx.events.FlexEvent;
 			import mx.events.ListEvent;
 			
-			import org.hamster.closableTab.HsClosableTabBarEvent;
+			import org.hamster.closableTab.HsClosableTabEvent;
 			import org.hamster.showcase.common.facade.AppFacade;
-			import org.hamster.toolkit.base.component.closableTabBar.ClosableTabBarEvent;
+			import org.hamster.showcase.common.util.CommonUtil;
+			import org.hamster.showcase.main.view.ModuleLoaderContainer;
 			
 			private var facade:AppFacade = AppFacade.instance;
 			
@@ -18,19 +23,24 @@
 
 			protected function app_applicationCompleteHandler(event:FlexEvent):void
 			{
+				CommonUtil.facade = this.facade;
 				facade.sendNotification(AppFacade.INIT, this);
 			}
 
 
 			protected function caseList_changeHandler(event:ListEvent):void
 			{
+				this.dispatchEvent(new Event("caseList_Change"));
+			}
+			
+			protected function caseList_dataChangeHandler(event:FlexEvent):void
+			{
 				if (caseNavigator.numChildren > 1) {
 					caseNavigator.closable = true;
 				}
 			}
 
-
-			protected function caseNavigator_closeTabHandler(event:HsClosableTabBarEvent):void
+			protected function caseNavigator_closeTabHandler(event:HsClosableTabEvent):void
 			{
 				caseNavigator.removeChildAt(event.index);
 				if (caseNavigator.numChildren <= 1) {
@@ -39,17 +49,26 @@
 				}
 			}
 
+			public function addNewModule(modulePath:String):void
+			{
+				var moduleLoaderContainer:ModuleLoaderContainer = new ModuleLoaderContainer();
+				moduleLoaderContainer.loadModule(modulePath);
+				moduleLoaderContainer.label = modulePath;
+				
+				caseNavigator.addChild(moduleLoaderContainer);
+				caseNavigator.closable = caseNavigator.numChildren > 1;
+			}
 		]]>
 	</mx:Script>
 	
 	<mx:HDividedBox width="100%" height="100%">
 		<mx:List id="caseList" dataProvider="{caseVOList}" labelField="name" width="150" height="100%"
+				  dataChange="caseList_dataChangeHandler(event)"
 				 change="caseList_changeHandler(event)"/>
 		<!--<mx:Canvas id="caseContainer" width="100%" height="100%" />-->
 		<closableTab:HsClosableTabNavigator id="caseNavigator" width="100%" height="100%"
 											autoRemoveChild="false"
 											closeTab="caseNavigator_closeTabHandler(event)">
-			
 		</closableTab:HsClosableTabNavigator>
 	</mx:HDividedBox>
 </mx:Application>

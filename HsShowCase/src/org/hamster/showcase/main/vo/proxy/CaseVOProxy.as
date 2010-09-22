@@ -24,7 +24,7 @@ package org.hamster.showcase.main.vo.proxy
 		
 		public function loadCaseList():void
 		{
-			HTTPServiceLocator.getInstance().sendService("caseList", this);
+			locator.sendService("caseList", this);
 		}
 		
 		override protected function processResult(xml:XML):void
