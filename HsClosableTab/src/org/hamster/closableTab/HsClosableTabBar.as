@@ -12,7 +12,7 @@ package org.hamster.closableTab
 	
 	[Style(name="closeButtonPadding", type="Number", inherit="yes")]
 	
-	[Event(name="closeTab", type="org.hamster.toolkit.base.component.closableTabBar.HsClosableTabBarEvent")]
+	[Event(name="closeTab", type="org.hamster.closableTab.HsClosableTabEvent")]
 	
 	public class HsClosableTabBar extends TabBar
 	{

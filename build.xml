@@ -45,6 +45,9 @@
         <chainedmapper>
           <globmapper from="*.as" to="*"/>
         </chainedmapper>
+        <chainedmapper>
+          <globmapper from="*.mxml" to="*"/>
+        </chainedmapper>
       </mapper>
     </pathconvert>
 	</target>
@@ -55,7 +58,7 @@
 		<compc output="${APP_ROOT}/${swc.name}" 
       include-classes="${evaFramework_classes}" 
       actionscript-file-encoding="UTF-8" 
-      keep-generated-actionscript="true" 
+      keep-generated-actionscript="false" 
       link-report="hamster-framework-build.xml" 
       incremental="true"
       debug="true" 
