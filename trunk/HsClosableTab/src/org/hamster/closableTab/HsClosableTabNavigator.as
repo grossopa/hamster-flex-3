@@ -9,7 +9,7 @@ package org.hamster.closableTab
 	
 	[Style(name="closeButtonPadding", type="Number", inherit="yes")]
 	
-	[Event(name="closeTab", type="org.hamster.toolkit.base.component.closableTabBar.HsClosableTabBarEvent")]
+	[Event(name="closeTab", type="org.hamster.closableTab.HsClosableTabEvent")]
 	
 	public class HsClosableTabNavigator extends TabNavigator
 	{
@@ -66,14 +66,14 @@ package org.hamster.closableTab
 				tabBar.focusEnabled = false;
 				HsClosableTabBar(tabBar).autoRemoveChild = autoRemoveChild;
 				tabBar.styleName = new StyleProxy(this, tabBarStyleFilters);
-				tabBar.addEventListener(HsClosableTabBarEvent.CLOSE_TAB, closeTabHandler);
+				tabBar.addEventListener(HsClosableTabEvent.CLOSE_TAB, closeTabHandler);
 				rawChildren.addChild(tabBar);
 			}
 			
 			super.createChildren();
 		}
 		
-		protected function closeTabHandler(evt:HsClosableTabBarEvent):void
+		protected function closeTabHandler(evt:HsClosableTabEvent):void
 		{
 			if (!HsClosableTabBar(tabBar).autoRemoveChild) {
 				// do nothing

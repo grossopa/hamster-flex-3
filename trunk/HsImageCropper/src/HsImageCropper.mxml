@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical"
-	creationComplete="completeHandler()" xmlns:imageCropper="org.hamster.imageCropper.*">
-	<mx:Script source="HsImageCropperAs.as" />
-	<mx:Button click="showRect()" label="rect" />
-	<imageCropper:HsImageCropper id="cropper"  width="700" height="500"/>
+	 applicationComplete="application1_applicationCompleteHandler(event)" xmlns:imageCropper="org.hamster.imageCropper.*">
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+
+			protected function application1_applicationCompleteHandler(event:FlexEvent):void
+			{
+			}
+
+		]]>
+	</mx:Script>
+	<mx:Button label="rect" />
+	<imageCropper:HsIC width="100%" height="100%" maintainAspectRatio="true"
+					   source="org/hamster/assets/1.jpg" />
 </mx:Application>

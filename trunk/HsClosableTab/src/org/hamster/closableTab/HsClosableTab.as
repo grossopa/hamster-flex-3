@@ -201,7 +201,7 @@ package org.hamster.closableTab
 		override protected function clickHandler(event:MouseEvent):void
 		{
 			if (event.target == _closeButton) {
-				var disEvt:HsClosableTabBarEvent = new HsClosableTabBarEvent(HsClosableTabBarEvent.CLOSE_TAB, true);
+				var disEvt:HsClosableTabEvent = new HsClosableTabEvent(HsClosableTabEvent.CLOSE_TAB, true);
 				disEvt.index = this.parent.getChildIndex(this);
 				this.dispatchEvent(disEvt);
 			} else {
