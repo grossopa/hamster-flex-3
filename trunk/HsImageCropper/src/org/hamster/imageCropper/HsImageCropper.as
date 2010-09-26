@@ -8,8 +8,14 @@ package org.hamster.imageCropper
 	import mx.containers.Canvas;
 	import mx.controls.Image;
 	import mx.core.UIComponent;
+	import mx.managers.CursorManager;
 	
-	public class HsIC extends Canvas
+	[Event(name="mDown", type="org.hamster.imageCropper.HsImageCropperEvent")]
+	[Event(name="mUp", type="org.hamster.imageCropper.HsImageCropperEvent")]
+	[Event(name="selectionChange", type="org.hamster.imageCropper.HsImageCropperEvent")]
+	[Event(name="sourceChange", type="org.hamster.imageCropper.HsImageCropperEvent")]
+	
+	public class HsImageCropper extends Canvas
 	{
 		private static const TOP:uint     =  1;   //  000001
 		private static const LEFT:uint    =  2;   //  000010
@@ -19,6 +25,16 @@ package org.hamster.imageCropper
 		private static const MIDDLE:uint  = 32;   //  100000
 		private static const MOVE:uint    = 64;   // 1000000
 		
+		[Embed(source='/org/hamster/imageCropper/assets/resize_lt_rb.png')]
+		private static var CURSOR_LT_RB:Class;
+		[Embed(source='/org/hamster/imageCropper/assets/resize_rt_lb.png')]
+		private static var CURSOR_RT_LB:Class;
+		[Embed(source='/org/hamster/imageCropper/assets/resize_ct_cb.png')]
+		private static var CURSOR_CT_CB:Class;
+		[Embed(source='/org/hamster/imageCropper/assets/resize_lm_rm.png')]
+		private static var CURSOR_LM_RM:Class;
+		[Embed(source='/org/hamster/imageCropper/assets/resize_move.png')]
+		private static var CURSOR_MOVE:Class;
 		
 		private const _mainImage:Image = new Image();
 		private var _selectMask:UIComponent;
@@ -28,33 +44,74 @@ package org.hamster.imageCropper
 		private var _originY:Number;
 		private var _location:uint;
 		
-		private var _minSelectionH:Number = 20;
-		private var _minSelectionW:Number = 20;
 		private var _boundArea:Rectangle = new Rectangle();
-		
-		private var _selectedArea:Rectangle = new Rectangle();
 		private var _oldArea:Rectangle = new Rectangle();
 		
 		private var _blockWidth:Number = 8;
 		private var _maintainAspectRatio:Boolean;
+		private var _selectedArea:Rectangle = new Rectangle();
+		private var _minSelectionH:Number = 20;
+		private var _minSelectionW:Number = 20;
 		
-		public function set blockWidth(value:Number):void { _blockWidth = value }
+		private var _cursorLT:Class = CURSOR_LT_RB;
+		private var _cursorCT:Class = CURSOR_CT_CB;
+		private var _cursorRT:Class = CURSOR_RT_LB;
+		private var _cursorLM:Class = CURSOR_LM_RM;
+		private var _cursorRM:Class = CURSOR_LM_RM;
+		private var _cursorLB:Class = CURSOR_RT_LB;
+		private var _cursorCB:Class = CURSOR_CT_CB;
+		private var _cursorRB:Class = CURSOR_LT_RB;
+		private var _cursorMV:Class = CURSOR_MOVE;
+		private var _cursorOffset:Number = -13;
+		
+		public function set blockWidth(value:Number):void
+		{ 
+			_blockWidth = value;
+			invalidateDisplayList();
+		}
 		public function get blockWidth():Number { return _blockWidth }
-		public function set source(value:Object):void { this._mainImage.source = value }
+		public function set source(value:Object):void 
+		{ 
+			this._mainImage.source = value;
+			invalidateDisplayList();
+		}
 		public function get source():Object { return this._mainImage.source }
-		public function set maintainAspectRatio(value:Boolean):void { _maintainAspectRatio = value }
+		public function set maintainAspectRatio(value:Boolean):void 
+		{ 
+			_maintainAspectRatio = value;
+			invalidateDisplayList();
+		}
 		public function get maintainAspectRatio():Boolean { return _maintainAspectRatio }
-		
 		public function set selectedArea(value:Rectangle):void
 		{
 			_selectedArea = value;
-			this.invalidateDisplayList();
+			invalidateDisplayList();
 		}
 		public function get selectedArea():Rectangle { return _selectedArea }
+		public function set minSelectionH(value:Number):void 
+		{ 
+			_minSelectionH = Math.max(1, value);
+			invalidateDisplayList();
+		}
+		public function get minSelectionH():Number { return _minSelectionH }
+		public function set minSelectionW(value:Number):void 
+		{ 
+			_minSelectionW = Math.max(1, value);
+			invalidateDisplayList();
+		}
+		public function get minSelectionW():Number { return _minSelectionW }
 		
+		public function set cursorLT(value:Class):void { _cursorLT = value }
+		public function set cursorCT(value:Class):void { _cursorCT = value }
+		public function set cursorRT(value:Class):void { _cursorRT = value }
+		public function set cursorLM(value:Class):void { _cursorLM = value }
+		public function set cursorRM(value:Class):void { _cursorRM = value }
+		public function set cursorLB(value:Class):void { _cursorLB = value }
+		public function set cursorCB(value:Class):void { _cursorCB = value }
+		public function set cursorRB(value:Class):void { _cursorRB = value }
+		public function set cursorMV(value:Class):void { _cursorMV = value }
 		
-		
-		public function HsIC()
+		public function HsImageCropper()
 		{
 			super();
 		}
@@ -158,7 +215,7 @@ package org.hamster.imageCropper
 			_originX = evt.localX;
 			_originY = evt.localY;
 			
-			refreshLocation(_originX, _originY);
+			_location = refreshLocation(_originX, _originY);
 			
 			var count:int = 2;
 			
@@ -184,13 +241,22 @@ package org.hamster.imageCropper
 				_originY = _selectedArea.y + _selectedArea.height;
 			}
 			
-			if (count > 0 || (_location == (MIDDLE | CENTER))) {
+			if ((count > 0 || (_location == (MIDDLE | CENTER))) 
+				&& this._selectedArea.contains(evt.localX, evt.localY)) {
 				_location = MOVE;
 			}// else location is the selected action
 			
 			_oldArea = _selectedArea.clone();
 			
 			this.invalidateDisplayList();
+			
+			if (_location != 0 
+				&& hasEventListener(HsImageCropperEvent.M_DOWN)) {
+				var disEvt:HsImageCropperEvent = new HsImageCropperEvent(HsImageCropperEvent.M_DOWN);
+				disEvt.mouseDownX = evt.localX;
+				disEvt.mouseDownY = evt.localY;
+				this.dispatchEvent(disEvt);
+			}
 		}
 		
 		private function maskMouseMoveHandler(evt:MouseEvent):void
@@ -244,8 +310,13 @@ package org.hamster.imageCropper
 				}
 			} else {
 				// just update cursor
+				var _moveLoc:uint = refreshLocation(evt.localX, evt.localY);
+				showResizeCursor(_moveLoc);
+				if (_moveLoc == 0 
+					&& !_selectedArea.contains(evt.localX, evt.localY)) {
+					hideResizeCursor();
+				}
 			}
-			
 			
 			this.invalidateDisplayList();
 		}
@@ -253,9 +324,11 @@ package org.hamster.imageCropper
 		private function maskMouseUpHandler(evt:MouseEvent):void
 		{
 			this._mouseDown = false;
+			_location = 0;
+			this.hideResizeCursor();
 		}
 		
-		private function refreshLocation(px:Number, py:Number):void
+		private function refreshLocation(px:Number, py:Number):uint
 		{
 			var _sx:Number = this._selectedArea.x;
 			var _sy:Number = this._selectedArea.y;
@@ -263,25 +336,27 @@ package org.hamster.imageCropper
 			var _sh:Number = this._selectedArea.height;
 			var _bw:Number = this.blockWidth;
 			
-			_location = 0;
+			var loc:uint = 0;
 			
 			// count X
 			if (px < _sx + _bw && px > _sx - _bw) {
-				_location = _location | LEFT;
+				loc = loc | LEFT;
 			} else if (px < _sx + _bw + _sw / 2 && px > _sx - _bw + _sw / 2) {
-				_location = _location | CENTER;
+				loc = loc | CENTER;
 			} else if (px < _sx + _bw + _sw && px > _sx - _bw + _sw) {
-				_location = _location | RIGHT;
+				loc = loc | RIGHT;
 			}
 			
 			// count Y
 			if (py < _sy + _bw && py > _sy - _bw) {
-				_location = _location | TOP;
+				loc = loc | TOP;
 			} else if (py < _sy + _bw + _sh / 2  && py > _sy - _bw + _sh / 2) {
-				_location = _location | MIDDLE;
+				loc = loc | MIDDLE;
 			} else if (py < _sy + _bw + _sh  && py > _sy - _bw + _sh) {
-				_location = _location | BOTTOM;
+				loc = loc | BOTTOM;
 			}
+			
+			return loc;
 		}
 		
 		private function isOutOfBound():void
@@ -326,6 +401,34 @@ package org.hamster.imageCropper
 			}
 		}
 		
+		private function showResizeCursor(location:uint):void
+		{
+			if (location == (LEFT | TOP)) {
+				CursorManager.setCursor(_cursorLT, 2, _cursorOffset, _cursorOffset);
+			} else if (location == (CENTER | TOP) && !maintainAspectRatio) {
+				CursorManager.setCursor(_cursorCT, 2, _cursorOffset, _cursorOffset);
+			} else if (location == (RIGHT | TOP)) {
+				CursorManager.setCursor(_cursorRT, 2, _cursorOffset, _cursorOffset);
+			} else if (location == (LEFT | MIDDLE) && !maintainAspectRatio) {
+				CursorManager.setCursor(_cursorLM, 2, _cursorOffset, _cursorOffset);
+			} else if (location == (RIGHT | MIDDLE) && !maintainAspectRatio) {
+				CursorManager.setCursor(_cursorRM, 2, _cursorOffset, _cursorOffset);
+			} else if (location == (LEFT | BOTTOM)) {
+				CursorManager.setCursor(_cursorLB, 2, _cursorOffset, _cursorOffset);
+			} else if (location == (CENTER | BOTTOM) && !maintainAspectRatio) {
+				CursorManager.setCursor(_cursorCB, 2, _cursorOffset, _cursorOffset);
+			} else if (location == (RIGHT | BOTTOM)) {
+				CursorManager.setCursor(_cursorRB, 2, _cursorOffset, _cursorOffset);
+			} else if (location == MOVE) {
+				CursorManager.setCursor(_cursorMV, 2, _cursorOffset, _cursorOffset);
+			}
+		}
+		
+		private function hideResizeCursor():void
+		{
+			CursorManager.removeAllCursors();
+		}
+		
 		protected function drawSelectedAreaCorner(g:Graphics, centerX:Number, centerY:Number):void
 		{
 			g.lineStyle(1, 0x7f7f7f);
@@ -336,7 +439,6 @@ package org.hamster.imageCropper
 		{
 			
 		}
-		
 		
 	}
 }
