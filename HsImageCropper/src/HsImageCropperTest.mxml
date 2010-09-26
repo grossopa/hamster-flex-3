@@ -12,6 +12,6 @@
 		]]>
 	</mx:Script>
 	<mx:Button label="rect" />
-	<imageCropper:HsIC width="100%" height="100%" maintainAspectRatio="true"
+	<imageCropper:HsImageCropper width="100%" height="100%" maintainAspectRatio="true"
 					   source="org/hamster/assets/1.jpg" />
 </mx:Application>
