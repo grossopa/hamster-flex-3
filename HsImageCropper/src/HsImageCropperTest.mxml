@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical"
-	 applicationComplete="application1_applicationCompleteHandler(event)" xmlns:imageCropper="org.hamster.imageCropper.*">
+	applicationComplete="application1_applicationCompleteHandler(event)" 
+	xmlns:imageCropper="org.hamster.imageCropper.*">
 	<mx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
@@ -12,6 +13,6 @@
 		]]>
 	</mx:Script>
 	<mx:Button label="rect" />
-	<imageCropper:HsImageCropper width="100%" height="100%" maintainAspectRatio="true"
+	<imageCropper:HsImageCropper width="100%" height="100%" maintainAspectRatio="false"
 					   source="org/hamster/assets/1.jpg" />
 </mx:Application>

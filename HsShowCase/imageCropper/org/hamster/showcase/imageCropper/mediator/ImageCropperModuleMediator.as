@@ -42,6 +42,9 @@ package org.hamster.showcase.imageCropper.mediator
 				sourceArray.push(vo.location);
 			}
 			module.cropImageSourceList = cropImageVOList;
+			
+			var item:CropImageVO = CropImageVO(cropImageVOList[0]);
+			module.imageCropper.source = item.location;
 		}
 	}
 }

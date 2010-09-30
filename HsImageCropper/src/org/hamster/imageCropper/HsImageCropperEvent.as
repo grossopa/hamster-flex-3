@@ -11,8 +11,8 @@ package org.hamster.imageCropper
 		public static const SELECTION_CHANGE:String = "selectionChange";
 		public static const SOURCE_CHANGE:String = "sourceChange";
 		
-		public var mouseDownX:Number;
-		public var mouseDownY:Number;
+		public var mouseX:Number;
+		public var mouseY:Number;
 		
 		public var selectionArea:Rectangle;
 		
@@ -24,10 +24,19 @@ package org.hamster.imageCropper
 		override public function clone():Event
 		{
 			var result:HsImageCropperEvent = new HsImageCropperEvent(type, bubbles, cancelable);
-			result.mouseDownX = mouseDownX;
-			result.mouseDownY = mouseDownY;
+			result.mouseX = mouseX;
+			result.mouseY = mouseY;
 			result.selectionArea = selectionArea.clone();
 			return result;
+		}
+		
+		override public function toString():String
+		{
+			return "{'HsImageCropperEvent':{'type':'"
+				+ type + "','mouseX':'"
+				+ mouseX + "','mouseY':'"
+				+ mouseY + "','selectionArea':'"
+				+ selectionArea.toString() + "'}}";
 		}
 	}
 }
