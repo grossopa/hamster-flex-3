@@ -30,7 +30,7 @@
 			protected function cropImageHList_changeHandler(event:ListEvent):void
 			{
 				var item:CropImageVO = CropImageVO(cropImageHList.selectedItem);
-				imageCropper.setImageData(item.location, item.width, item.height);
+				imageCropper.source = item.location;
 			}
 			
 
@@ -43,7 +43,7 @@
 
 			protected function cropButton_clickHandler(event:MouseEvent):void
 			{
-				Alert.show(imageCropper.getCropArea().toString());
+				Alert.show(imageCropper.selectedArea.toString());
 			}
 
 
@@ -53,7 +53,7 @@
 					&& cropImageSourceList != null
 					&& cropImageSourceList.length > 0) {
 					var item:CropImageVO = CropImageVO(cropImageSourceList[0]);
-					imageCropper.setImageData(item.location, item.width, item.height);
+					imageCropper.source = item.location;
 				}
 			}
 
@@ -64,7 +64,7 @@
 				 paddingLeft="10" paddingRight="10" paddingTop="10">
 			<mx:Button id="cropButton" click="cropButton_clickHandler(event)" width="100%" />
 		</mx:VBox>
-		<imageCropper:HsImageCropper id="imageCropper" width="100%" height="100%" />
+		<imageCropper:HsImageCropper id="imageCropper" width="100%" height="100%" backgroundColor="black" />
 	</mx:HBox>
 	<mx:HorizontalList id="cropImageHList" dataProvider="{cropImageSourceList}" 
 					   height="70" width="100%" selectedIndex="0"

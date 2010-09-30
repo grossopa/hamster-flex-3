@@ -8,6 +8,7 @@ package org.hamster.imageCropper
 	import mx.containers.Canvas;
 	import mx.controls.Image;
 	import mx.core.UIComponent;
+	import mx.events.ResizeEvent;
 	import mx.managers.CursorManager;
 	
 	[Event(name="mDown", type="org.hamster.imageCropper.HsImageCropperEvent")]
@@ -43,6 +44,7 @@ package org.hamster.imageCropper
 		private var _originX:Number;
 		private var _originY:Number;
 		private var _location:uint;
+		private var _moveLoc:uint;
 		
 		private var _boundArea:Rectangle = new Rectangle();
 		private var _oldArea:Rectangle = new Rectangle();
@@ -66,38 +68,51 @@ package org.hamster.imageCropper
 		
 		public function set blockWidth(value:Number):void
 		{ 
-			_blockWidth = value;
-			invalidateDisplayList();
+			if (_blockWidth != value) {
+				_blockWidth = value;
+				invalidateDisplayList();
+			}
 		}
 		public function get blockWidth():Number { return _blockWidth }
 		public function set source(value:Object):void 
-		{ 
-			this._mainImage.source = value;
-			invalidateDisplayList();
+		{
+			if (this._mainImage.source != value) {
+				this._mainImage.source = value;
+				invalidateDisplayList();
+				dispatchICEvent(HsImageCropperEvent.SOURCE_CHANGE, -1, -1);
+			}
 		}
 		public function get source():Object { return this._mainImage.source }
 		public function set maintainAspectRatio(value:Boolean):void 
-		{ 
-			_maintainAspectRatio = value;
-			invalidateDisplayList();
+		{
+			if (_maintainAspectRatio != value) {
+				_maintainAspectRatio = value;
+				invalidateDisplayList();
+			}
 		}
 		public function get maintainAspectRatio():Boolean { return _maintainAspectRatio }
 		public function set selectedArea(value:Rectangle):void
 		{
-			_selectedArea = value;
-			invalidateDisplayList();
+			if (_selectedArea != value) {
+				_selectedArea = value;
+				invalidateDisplayList();
+			}
 		}
 		public function get selectedArea():Rectangle { return _selectedArea }
 		public function set minSelectionH(value:Number):void 
 		{ 
-			_minSelectionH = Math.max(1, value);
-			invalidateDisplayList();
+			if (_minSelectionH != value) {
+				_minSelectionH = Math.max(1, value);
+				invalidateDisplayList();
+			}
 		}
 		public function get minSelectionH():Number { return _minSelectionH }
 		public function set minSelectionW(value:Number):void 
-		{ 
-			_minSelectionW = Math.max(1, value);
-			invalidateDisplayList();
+		{
+			if (_minSelectionW != value) {
+				_minSelectionW = Math.max(1, value);
+				invalidateDisplayList();
+			}
 		}
 		public function get minSelectionW():Number { return _minSelectionW }
 		
@@ -119,11 +134,24 @@ package org.hamster.imageCropper
 		private function imageSetCompleteHandler(evt:Event):void
 		{
 			if (!this.initialized) {
-				this.callLater(imageSetCompleteHandler, [evt]);
+				this.callLater(initBoundArea);
 				return;
 			}
+			initBoundArea();
+		}
+		
+		private function imgResizeHandler(evt:ResizeEvent):void
+		{
+			if (_mainImage.source) {
+				initBoundArea();
+			}
+		}
+		
+		private function initBoundArea():void
+		{
 			var cw:Number = this._mainImage.contentWidth;
 			var ch:Number = this._mainImage.contentHeight;
+			if (isNaN(cw) || isNaN(ch) || cw == 0 || ch == 0) return;
 			var ratio1:Number = cw / ch;
 			var ratio2:Number = this.width / this.height;
 			if (ratio1 > ratio2) {
@@ -142,7 +170,6 @@ package org.hamster.imageCropper
 			_selectedArea.y = _boundArea.y + _boundArea.height / 4;
 			_selectedArea.width = _boundArea.width / 2;
 			_selectedArea.height = _boundArea.height / 2;
-			
 			this.invalidateDisplayList();
 		}
 		
@@ -153,6 +180,7 @@ package org.hamster.imageCropper
 			_mainImage.percentWidth = 100;
 			_mainImage.percentHeight = 100;
 			_mainImage.addEventListener(Event.COMPLETE, imageSetCompleteHandler);
+			_mainImage.addEventListener(ResizeEvent.RESIZE, imgResizeHandler);
 			_mainImage.setStyle("verticalAlign", "middle");
 			_mainImage.setStyle("horizontalAlign", "center");
 			this.addChild(_mainImage);
@@ -206,6 +234,7 @@ package org.hamster.imageCropper
 			}
 			
 			// 
+			drawSelectedAreaBorder(g, selectedArea);
 			
 		}
 		
@@ -241,22 +270,11 @@ package org.hamster.imageCropper
 				_originY = _selectedArea.y + _selectedArea.height;
 			}
 			
-			if ((count > 0 || (_location == (MIDDLE | CENTER))) 
-				&& this._selectedArea.contains(evt.localX, evt.localY)) {
-				_location = MOVE;
-			}// else location is the selected action
-			
 			_oldArea = _selectedArea.clone();
 			
 			this.invalidateDisplayList();
 			
-			if (_location != 0 
-				&& hasEventListener(HsImageCropperEvent.M_DOWN)) {
-				var disEvt:HsImageCropperEvent = new HsImageCropperEvent(HsImageCropperEvent.M_DOWN);
-				disEvt.mouseDownX = evt.localX;
-				disEvt.mouseDownY = evt.localY;
-				this.dispatchEvent(disEvt);
-			}
+			dispatchICEvent(HsImageCropperEvent.M_DOWN, evt.localX, evt.localY);
 		}
 		
 		private function maskMouseMoveHandler(evt:MouseEvent):void
@@ -308,13 +326,23 @@ package org.hamster.imageCropper
 						_selectedArea.height = measuredH;
 					}
 				}
+				dispatchICEvent(HsImageCropperEvent.SELECTION_CHANGE, evt.localX, evt.localY);
 			} else {
 				// just update cursor
-				var _moveLoc:uint = refreshLocation(evt.localX, evt.localY);
-				showResizeCursor(_moveLoc);
-				if (_moveLoc == 0 
+				var _tempMoveLoc:uint = refreshLocation(evt.localX, evt.localY);
+				if (_moveLoc != 0 && _tempMoveLoc == 0
 					&& !_selectedArea.contains(evt.localX, evt.localY)) {
 					hideResizeCursor();
+					_moveLoc = 0;
+				} else if (_tempMoveLoc != _moveLoc) {
+					if (_moveLoc == 0) {
+						showResizeCursor(_tempMoveLoc);
+						_moveLoc = _tempMoveLoc;
+					} else if (_tempMoveLoc != 0) {
+						hideResizeCursor();
+						showResizeCursor(_tempMoveLoc);
+						_moveLoc = _tempMoveLoc;
+					}
 				}
 			}
 			
@@ -324,8 +352,10 @@ package org.hamster.imageCropper
 		private function maskMouseUpHandler(evt:MouseEvent):void
 		{
 			this._mouseDown = false;
-			_location = 0;
-			this.hideResizeCursor();
+			dispatchICEvent(HsImageCropperEvent.M_UP, evt.localX, evt.localY);
+//			_location = 0;
+//			this.hideResizeCursor();
+//			this._moveLoc = 0;
 		}
 		
 		private function refreshLocation(px:Number, py:Number):uint
@@ -338,25 +368,41 @@ package org.hamster.imageCropper
 			
 			var loc:uint = 0;
 			
+			var _isX:Boolean = false;
+			var _isY:Boolean = false;
 			// count X
 			if (px < _sx + _bw && px > _sx - _bw) {
 				loc = loc | LEFT;
+				_isX = true;
 			} else if (px < _sx + _bw + _sw / 2 && px > _sx - _bw + _sw / 2) {
 				loc = loc | CENTER;
+				_isX = true;
 			} else if (px < _sx + _bw + _sw && px > _sx - _bw + _sw) {
 				loc = loc | RIGHT;
+				_isX = true;
 			}
 			
 			// count Y
 			if (py < _sy + _bw && py > _sy - _bw) {
 				loc = loc | TOP;
+				_isY = true;
 			} else if (py < _sy + _bw + _sh / 2  && py > _sy - _bw + _sh / 2) {
 				loc = loc | MIDDLE;
+				_isY = true;
 			} else if (py < _sy + _bw + _sh  && py > _sy - _bw + _sh) {
 				loc = loc | BOTTOM;
+				_isY = true;
 			}
 			
-			return loc;
+			if ((loc == (CENTER | MIDDLE)) 
+				|| (!(_isX && _isY) && _selectedArea.contains(px, py))) {
+				return MOVE;
+			}
+			if (_isX && _isY) {
+				return loc;	
+			} else {
+				return 0;
+			}
 		}
 		
 		private function isOutOfBound():void
@@ -394,34 +440,50 @@ package org.hamster.imageCropper
 			}
 			
 			if (_selectedArea.height < this._minSelectionH) {
+				if (_mouseDown && (_location & TOP)) {
+					_selectedArea.y = _oldArea.y + _oldArea.height - this.minSelectionH;
+				}
 				_selectedArea.height = this._minSelectionH;
 			}
 			if (_selectedArea.width < this._minSelectionW) {
+				if (_mouseDown && (_location & LEFT)) {
+					_selectedArea.x = _oldArea.x + _oldArea.width - this.minSelectionW;
+				}
 				_selectedArea.width = this._minSelectionW;
 			}
 		}
 		
-		private function showResizeCursor(location:uint):void
+		private function showResizeCursor(location:uint):Boolean
 		{
 			if (location == (LEFT | TOP)) {
 				CursorManager.setCursor(_cursorLT, 2, _cursorOffset, _cursorOffset);
+				return true;
 			} else if (location == (CENTER | TOP) && !maintainAspectRatio) {
 				CursorManager.setCursor(_cursorCT, 2, _cursorOffset, _cursorOffset);
+				return true;
 			} else if (location == (RIGHT | TOP)) {
 				CursorManager.setCursor(_cursorRT, 2, _cursorOffset, _cursorOffset);
+				return true;
 			} else if (location == (LEFT | MIDDLE) && !maintainAspectRatio) {
 				CursorManager.setCursor(_cursorLM, 2, _cursorOffset, _cursorOffset);
+				return true;
 			} else if (location == (RIGHT | MIDDLE) && !maintainAspectRatio) {
 				CursorManager.setCursor(_cursorRM, 2, _cursorOffset, _cursorOffset);
+				return true;
 			} else if (location == (LEFT | BOTTOM)) {
 				CursorManager.setCursor(_cursorLB, 2, _cursorOffset, _cursorOffset);
+				return true;
 			} else if (location == (CENTER | BOTTOM) && !maintainAspectRatio) {
 				CursorManager.setCursor(_cursorCB, 2, _cursorOffset, _cursorOffset);
+				return true;
 			} else if (location == (RIGHT | BOTTOM)) {
 				CursorManager.setCursor(_cursorRB, 2, _cursorOffset, _cursorOffset);
+				return true;
 			} else if (location == MOVE) {
 				CursorManager.setCursor(_cursorMV, 2, _cursorOffset, _cursorOffset);
+				return true;
 			}
+			return false;
 		}
 		
 		private function hideResizeCursor():void
@@ -431,13 +493,61 @@ package org.hamster.imageCropper
 		
 		protected function drawSelectedAreaCorner(g:Graphics, centerX:Number, centerY:Number):void
 		{
-			g.lineStyle(1, 0x7f7f7f);
+			g.lineStyle(1, 0xEAEAEA);
 			g.drawRect(centerX - blockWidth / 2, centerY - blockWidth / 2, blockWidth, blockWidth);
 		}
 		
 		protected function drawSelectedAreaBorder(g:Graphics, sArea:Rectangle):void
 		{
+			var sx:Number = _selectedArea.x;
+			var sy:Number = _selectedArea.y;
+			var sw:Number = _selectedArea.width;
+			var sh:Number = _selectedArea.height;
 			
+			var gap:Number = 5;
+			var t_gap:Number = 10;
+			
+			g.lineStyle(1, 0xEAEAEA);
+			// top & bottom
+			var offset:Number = 0;
+			for (; offset < sw - gap; offset += t_gap) {
+				g.moveTo(offset + sx, sy);
+				g.lineTo(offset + sx + gap, sy);
+				g.moveTo(offset + sx, sy + sh);
+				g.lineTo(offset + sx + gap, sy + sh);
+			}
+			if (sw > offset) {
+				g.moveTo(offset + sx, sy);
+				g.lineTo(sx + sw, sy);
+				g.moveTo(offset + sx, sy + sh);
+				g.lineTo(sx + sw, sy + sh);
+			}
+			
+			// left & right
+			offset = 0;
+			for (; offset < sh - gap; offset += t_gap) {
+				g.moveTo(sx, sy + offset);
+				g.lineTo(sx, sy + offset + gap);
+				g.moveTo(sx + sw, sy + offset);
+				g.lineTo(sx + sw, sy + offset + gap);
+			}
+			if (sh > offset) {
+				g.moveTo(sx, sy + offset);
+				g.lineTo(sx, sy + sh);
+				g.moveTo(sx + sw, sy + offset);
+				g.lineTo(sx + sw, sy + sh);
+			}
+		}
+		
+		private function dispatchICEvent(type:String, x:Number, y:Number):void
+		{
+			if (hasEventListener(type)) {
+				var disEvt:HsImageCropperEvent = new HsImageCropperEvent(type);
+				disEvt.mouseX = x;
+				disEvt.mouseY = y;
+				disEvt.selectionArea = _selectedArea.clone();
+				this.dispatchEvent(disEvt);
+			}
 		}
 		
 	}
