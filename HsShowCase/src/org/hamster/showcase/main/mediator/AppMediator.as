@@ -5,6 +5,7 @@ package org.hamster.showcase.main.mediator
 	import mx.collections.ArrayCollection;
 	
 	import org.hamster.showcase.common.facade.AppFacade;
+	import org.hamster.showcase.main.view.ModuleLoaderContainer;
 	import org.hamster.showcase.main.vo.CaseVO;
 	import org.puremvc.as3.interfaces.IMediator;
 	import org.puremvc.as3.interfaces.INotification;
@@ -63,13 +64,31 @@ package org.hamster.showcase.main.mediator
 			var app:Main = Main(this.getViewComponent());
 			var caseVO:CaseVO = CaseVO(notification.getBody());
 			app.addNewModule(caseVO.moduleLocation);
+			app.caseNavigator.selectedIndex = app.caseNavigator.numChildren - 1;
 		}
 		
 		// handle view events
 		private function caseListChangeHandler(evt:Event):void
 		{
 			var app:Main = Main(this.getViewComponent());
-			this.sendNotification(AppFacade.SELECT_CASELIST, CaseVO(app.caseList.selectedItem));
+			var caseVO:CaseVO = CaseVO(app.caseList.selectedItem);
+			var index:int = isModuleExists(app, caseVO.moduleLocation);
+			if (index != -1) {
+				app.caseNavigator.selectedIndex = index;
+			} else {
+				this.sendNotification(AppFacade.SELECT_CASELIST, caseVO);
+			}
+		}
+		
+		private function isModuleExists(app:Main, url:String):int
+		{
+			for (var i:int = 0; i < app.caseNavigator.numChildren; i++) {
+				var child:ModuleLoaderContainer = ModuleLoaderContainer(app.caseNavigator.getChildAt(i));
+				if (child.url == url) {
+					return i;
+				}
+			}
+			return -1;
 		}
 		
 	}
