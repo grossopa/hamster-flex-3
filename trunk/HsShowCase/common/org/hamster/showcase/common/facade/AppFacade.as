@@ -21,6 +21,9 @@ package org.hamster.showcase.common.facade
 		public static const LOAD_CROPIMAGE:String = NAME + "Load_CropImage";
 		public static const UPDATE_CROPIMAGE:String = NAME + "Update_CropImage";
 		
+		// LOGGER CONTAINER
+		public static const ADD_LOGGER:String = NAME + "Add_Logger";
+		
 		public static const ERROR:String = NAME + "Error";
 		
 		private static var __instance:AppFacade;

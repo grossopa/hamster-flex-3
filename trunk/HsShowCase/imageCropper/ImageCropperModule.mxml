@@ -27,13 +27,6 @@
 				facade.sendNotification(AppFacade.LOAD_CROPIMAGE);
 			}
 			
-			protected function cropImageHList_changeHandler(event:ListEvent):void
-			{
-				var item:CropImageVO = CropImageVO(cropImageHList.selectedItem);
-				imageCropper.source = item.location;
-			}
-			
-
 			protected function module1_removedFromStageHandler(event:Event):void
 			{
 				var facade:IFacade = CommonUtil.facade;
@@ -46,17 +39,6 @@
 				Alert.show(imageCropper.selectedArea.toString());
 			}
 
-
-			protected function cropImageHList_dataChangeHandler(event:FlexEvent):void
-			{
-				if (cropImageHList.selectedIndex == -1 
-					&& cropImageSourceList != null
-					&& cropImageSourceList.length > 0) {
-					var item:CropImageVO = CropImageVO(cropImageSourceList[0]);
-					imageCropper.source = item.location;
-				}
-			}
-
 		]]>
 	</mx:Script>
 	<mx:HBox width="100%" height="100%" horizontalGap="5">
@@ -64,13 +46,12 @@
 				 paddingLeft="10" paddingRight="10" paddingTop="10">
 			<mx:Button id="cropButton" click="cropButton_clickHandler(event)" width="100%" />
 		</mx:VBox>
-		<imageCropper:HsImageCropper id="imageCropper" width="100%" height="100%" backgroundColor="black" />
+		<imageCropper:HsImageCropper id="imageCropper" width="100%" height="100%" backgroundColor="black"
+									  source="{cropImageHList.selectedItem.location}"/>
 	</mx:HBox>
 	<mx:HorizontalList id="cropImageHList" dataProvider="{cropImageSourceList}" 
 					   height="70" width="100%" selectedIndex="0"
-					   labelField="location" rowHeight="68" columnWidth="90"
-					   change="cropImageHList_changeHandler(event)"
-					   dataChange="cropImageHList_dataChangeHandler(event)">
+					   labelField="location" rowHeight="68" columnWidth="90">
 		<mx:itemRenderer>
 			<mx:Component>
 				<mx:Image verticalAlign="middle" horizontalAlign="center" />

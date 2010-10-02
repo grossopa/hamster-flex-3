@@ -98,7 +98,32 @@ package org.hamster.imageCropper
 				invalidateDisplayList();
 			}
 		}
-		public function get selectedArea():Rectangle { return _selectedArea }
+		public function get selectedArea():Rectangle { return _selectedArea; }
+		public function set cropArea(value:Rectangle):void
+		{
+			if (_mainImage.source != null) {
+				var p:Number =  _selectedArea.width / _mainImage.contentWidth;
+				_selectedArea.x = value.x * p;
+				_selectedArea.y = value.y * p;
+				_selectedArea.width = value.width * p;
+				_selectedArea.height = value.height * p;
+				invalidateDisplayList();
+			}
+		}
+		public function get cropArea():Rectangle
+		{
+			if (_mainImage.source != null) {
+				var p:Number = _mainImage.contentWidth / _selectedArea.width;
+				var result:Rectangle = new Rectangle();
+				result.x = _selectedArea.x * p;
+				result.y = _selectedArea.y * p;
+				result.width = _selectedArea.width * p;
+				result.height = _selectedArea.height * p;
+				return result;
+			} else {
+				return null;
+			}
+		}
 		public function set minSelectionH(value:Number):void 
 		{ 
 			if (_minSelectionH != value) {
@@ -234,7 +259,7 @@ package org.hamster.imageCropper
 			}
 			
 			// 
-			drawSelectedAreaBorder(g, selectedArea);
+			drawSelectedAreaBorder(g, _selectedArea);
 			
 		}
 		
