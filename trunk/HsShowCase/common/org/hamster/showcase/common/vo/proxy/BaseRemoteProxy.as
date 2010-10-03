@@ -2,7 +2,11 @@ package org.hamster.showcase.common.vo.proxy
 {
 	import flash.xml.XMLNode;
 	
+	import mx.logging.ILogger;
+	import mx.logging.Log;
+	import mx.rpc.Fault;
 	import mx.rpc.IResponder;
+	import mx.rpc.events.FaultEvent;
 	
 	import org.hamster.services.HTTPServiceLocator;
 	import org.hamster.showcase.common.util.ValidatorUtil;
@@ -11,6 +15,7 @@ package org.hamster.showcase.common.vo.proxy
 	public class BaseRemoteProxy extends Proxy implements IResponder
 	{
 		protected var locator:HTTPServiceLocator = HTTPServiceLocator.getInstance();
+		private static var _logger:ILogger = Log.getLogger("hs.BaseRemoteProxy");
 		
 		public function BaseRemoteProxy(proxyName:String=null, data:Object=null)
 		{
@@ -29,6 +34,8 @@ package org.hamster.showcase.common.vo.proxy
 		
 		public final function fault(info:Object):void
 		{
+			var faultEvt:FaultEvent = FaultEvent(info);
+			_logger.error(faultEvt.fault.toString());
 		}
 		
 		protected function processResult(xml:XML):void

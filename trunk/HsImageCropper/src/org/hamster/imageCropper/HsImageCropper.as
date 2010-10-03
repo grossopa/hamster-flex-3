@@ -102,7 +102,7 @@ package org.hamster.imageCropper
 		public function set cropArea(value:Rectangle):void
 		{
 			if (_mainImage.source != null) {
-				var p:Number =  _selectedArea.width / _mainImage.contentWidth;
+				var p:Number =  _boundArea.width / _mainImage.content.width;
 				_selectedArea.x = value.x * p;
 				_selectedArea.y = value.y * p;
 				_selectedArea.width = value.width * p;
@@ -113,7 +113,7 @@ package org.hamster.imageCropper
 		public function get cropArea():Rectangle
 		{
 			if (_mainImage.source != null) {
-				var p:Number = _mainImage.contentWidth / _selectedArea.width;
+				var p:Number = _mainImage.content.width / _boundArea.width;
 				var result:Rectangle = new Rectangle();
 				result.x = _selectedArea.x * p;
 				result.y = _selectedArea.y * p;
@@ -570,7 +570,7 @@ package org.hamster.imageCropper
 				var disEvt:HsImageCropperEvent = new HsImageCropperEvent(type);
 				disEvt.mouseX = x;
 				disEvt.mouseY = y;
-				disEvt.selectionArea = _selectedArea.clone();
+				disEvt.cropArea = cropArea ? cropArea.clone() : new Rectangle(-1, -1, -1, -1);
 				this.dispatchEvent(disEvt);
 			}
 		}

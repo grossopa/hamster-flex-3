@@ -6,6 +6,7 @@
 				xmlns:closableTab="org.hamster.closableTab.*">
 	<mx:Metadata>
 		[Event(name="caseList_Change")]
+		[ResourceBundle("app")]
 	</mx:Metadata>
 	<mx:Script>
 		<![CDATA[
@@ -31,6 +32,7 @@
 			protected function app_preinitializeHandler(event:FlexEvent):void
 			{
 				CommonUtil.facade = this.facade;
+				CommonUtil.setLocale("en_US");
 			}
 			
 			protected function app_applicationCompleteHandler(event:FlexEvent):void
@@ -85,18 +87,30 @@
 				}
 			}
 
+
+			protected function localeComboBox_changeHandler(event:ListEvent):void
+			{
+				CommonUtil.setLocale(String(localeComboBox.selectedItem));
+			}
+
 		]]>
 	</mx:Script>
-	
-	<mx:HDividedBox width="100%" height="100%">
-		<mx:List id="caseList" dataProvider="{caseVOList}" labelField="name" width="150" height="100%"
-				  dataChange="caseList_dataChangeHandler(event)"
-				 change="caseList_changeHandler(event)"/>
-		<!--<mx:Canvas id="caseContainer" width="100%" height="100%" />-->
-		<closableTab:HsClosableTabNavigator id="caseNavigator" width="100%" height="100%"
-											autoRemoveChild="false" 
-											change="caseNavigator_changeHandler(event)"
-											closeTab="caseNavigator_closeTabHandler(event)">
-		</closableTab:HsClosableTabNavigator>
-	</mx:HDividedBox>
+	<mx:VBox width="100%" height="100%">
+		<mx:HBox width="100%" verticalAlign="middle">
+			<mx:Label text="{this.resourceManager.getString('app', 'app.title')}" />
+			<mx:ComboBox id="localeComboBox" dataProvider="{CommonUtil.LOCALES}" 
+						 selectedIndex="0" change="localeComboBox_changeHandler(event)" />
+		</mx:HBox>
+		<mx:HDividedBox width="100%" height="100%">
+			<mx:List id="caseList" dataProvider="{caseVOList}" labelField="name" width="150" height="100%"
+					 dataChange="caseList_dataChangeHandler(event)"
+					 change="caseList_changeHandler(event)"/>
+			<!--<mx:Canvas id="caseContainer" width="100%" height="100%" />-->
+			<closableTab:HsClosableTabNavigator id="caseNavigator" width="100%" height="100%"
+												autoRemoveChild="false" 
+												change="caseNavigator_changeHandler(event)"
+												closeTab="caseNavigator_closeTabHandler(event)">
+			</closableTab:HsClosableTabNavigator>
+		</mx:HDividedBox>
+	</mx:VBox>
 </mx:Application>

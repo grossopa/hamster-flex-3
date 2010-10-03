@@ -3,6 +3,9 @@
 		   xmlns:imageCropper="org.hamster.imageCropper.*" layout="vertical"
 		   removedFromStage="module1_removedFromStageHandler(event)"
 		   creationComplete="module1_creationCompleteHandler(event)">
+	<mx:Metadata>
+		[ResourceBundle("imageCropper")]
+	</mx:Metadata>
 	<mx:Script>
 		<![CDATA[
 			import mx.controls.Alert;
@@ -37,7 +40,7 @@
 
 			protected function cropButton_clickHandler(event:MouseEvent):void
 			{
-				Alert.show(imageCropper.selectedArea.toString());
+				Alert.show(imageCropper.cropArea.toString());
 			}
 
 
@@ -67,9 +70,10 @@
 		]]>
 	</mx:Script>
 	<mx:HBox width="100%" height="100%" horizontalGap="5">
-		<mx:VBox width="80" height="100%" 
+		<mx:VBox width="120" height="100%" 
 				 paddingLeft="10" paddingRight="10" paddingTop="10">
-			<mx:Button id="cropButton" click="cropButton_clickHandler(event)" width="100%" />
+			<mx:Button id="cropButton" click="cropButton_clickHandler(event)" width="100%"
+					   label="{resourceManager.getString('imageCropper', 'imageCropper.alertSelectedArea')}"/>
 		</mx:VBox>
 		<imageCropper:HsImageCropper id="imageCropper" width="100%" height="100%" backgroundColor="black"
 									  source="{cropImageHList.selectedItem.location}"
