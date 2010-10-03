@@ -13,8 +13,7 @@ package org.hamster.imageCropper
 		
 		public var mouseX:Number;
 		public var mouseY:Number;
-		
-		public var selectionArea:Rectangle;
+		public var cropArea:Rectangle;
 		
 		public function HsImageCropperEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
@@ -26,17 +25,17 @@ package org.hamster.imageCropper
 			var result:HsImageCropperEvent = new HsImageCropperEvent(type, bubbles, cancelable);
 			result.mouseX = mouseX;
 			result.mouseY = mouseY;
-			result.selectionArea = selectionArea.clone();
+			result.cropArea = cropArea.clone();
 			return result;
 		}
 		
 		override public function toString():String
 		{
-			return "{'HsImageCropperEvent':{'type':'"
-				+ type + "','mouseX':'"
-				+ mouseX + "','mouseY':'"
-				+ mouseY + "','selectionArea':'"
-				+ selectionArea.toString() + "'}}";
+			return "{'HsImageCropperEvent':{'t':'"
+				+ type + "','mX':'"
+				+ mouseX + "','mY':'"
+				+ mouseY + "','cArea':'"
+				+ cropArea.toString() + "'}}";
 		}
 	}
 }
