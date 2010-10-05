@@ -323,6 +323,8 @@ package org.hamster.imageRuler
 			
 			var xDrawSmallGap:Number = xDrawGap * 0.1;
 			var yDrawSmallGap:Number = yDrawGap * 0.1;
+			var tipValue:Number;
+			var textBitmapData:BitmapData;
 			
 			for (var i:int = 0; i < xUnitCount + 1; i++) {
 				var startX:Number = xDrawGap * i + this._ruleWidth;
@@ -336,10 +338,10 @@ package org.hamster.imageRuler
 				g.lineTo(startX, this._ruleWidth);
 				
 				// draw numbers
-				var tipValue:Number = this._xGap * i + this._xFrom;
+				tipValue = this._xGap * i + this._xFrom;
 				_textSnapshotUtil.text = tipValue.toString();
 				_textSnapshotUtil.width = _textSnapshotUtil.textWidth + 4;
-				var textBitmapData:BitmapData = ImageSnapshot.captureBitmapData(_textSnapshotUtil);
+				textBitmapData = ImageSnapshot.captureBitmapData(_textSnapshotUtil);
 				g.lineStyle(0, 0, 0);
 				_matrixUtil.tx = startX + 1;
 				_matrixUtil.ty = -2;
@@ -375,6 +377,19 @@ package org.hamster.imageRuler
 				if (startY > uh) {
 					break;
 				}
+				
+				tipValue = this._yGap * j + this._yFrom;
+				_textSnapshotUtil.text = tipValue.toString();
+				_textSnapshotUtil.width = _textSnapshotUtil.textWidth + 4;
+				textBitmapData = ImageSnapshot.captureBitmapData(_textSnapshotUtil);
+				g.lineStyle(0, 0, 0);
+				_matrixUtil.tx = 0;
+				_matrixUtil.ty = startY - 1;
+				g.beginBitmapFill(textBitmapData, _matrixUtil);
+				g.drawRect(_matrixUtil.tx, _matrixUtil.ty, _textSnapshotUtil.measuredWidth, _textSnapshotUtil.measuredHeight);
+				g.endFill();
+				g.lineStyle(1, 0x000000, 1);
+				
 				g.moveTo(6, startY);
 				g.lineTo(this._ruleWidth, startY);
 				
