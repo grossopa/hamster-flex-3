@@ -332,7 +332,7 @@ package org.hamster.imageCropper
 					_selectedArea.x = _oldArea.x + offsetX;
 					_selectedArea.y = _oldArea.y + offsetY;
 				}
-				isOutOfBound();
+				
 				if (maintainAspectRatio && _location != 0 && _location != MOVE) {
 					var r1:Number = _selectedArea.width / _selectedArea.height;
 					var r2:Number = _boundArea.width / _boundArea.height;
@@ -351,6 +351,7 @@ package org.hamster.imageCropper
 						_selectedArea.height = measuredH;
 					}
 				}
+				isOutOfBound();
 				dispatchICEvent(HsImageCropperEvent.SELECTION_CHANGE, evt.localX, evt.localY);
 			} else {
 				// just update cursor
