@@ -6,6 +6,7 @@
       <compilerSourcePathEntry kind="1" linkType="1" path="assets"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="imageCropper"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="locale/{locale}"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="imageRuler"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -22,6 +23,7 @@
   </applications>
   <modules>
     <module application="src/Main.mxml" destPath="ImageCropperModule.swf" optimize="true" sourcePath="imageCropper/ImageCropperModule.mxml"/>
+    <module application="src/Main.mxml" destPath="ImageRulerModule.swf" optimize="true" sourcePath="imageRuler/ImageRulerModule.mxml"/>
   </modules>
   <buildCSSFiles/>
 </actionScriptProperties>

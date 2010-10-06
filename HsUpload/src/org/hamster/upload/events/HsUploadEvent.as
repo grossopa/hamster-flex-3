@@ -10,22 +10,22 @@ package org.hamster.upload.events
 		public var uploadFile:IUploadFile;
 		
 		// events for one file
-		public static const FILE_START:String = "CommonUploadEvent_fileStartEvent";
-		public static const FILE_PROGRESS:String = "CommonUploadEvent_fileProgressEvent";
-		public static const FILE_UPLOADED:String = "CommonUploadEvent_fileUploadedEvent";
-		public static const FILE_FINISHED:String = "CommonUploadEvent_fileFinishedEvent";
+		public static const FILE_START:String = "fileStart";
+		public static const FILE_PROGRESS:String = "fileProgress";
+		public static const FILE_UPLOADED:String = "fileUploaded";
+		public static const FILE_FINISHED:String = "fileFinished";
 		// additional
-		public static const FILE_DELETE:String = "CommonUploadEvent_fileDeleteEvent";
+		public static const FILE_DELETE:String = "fileDelete";
 		// @see UploadFile.isDeleted
-		public static const FILE_FINISHED_THEN_DELETE:String = "CommonUploadEvent_fileFinishedThenDeleteEvent";
-		public static const FILE_ERROR:String = "CommonUploadEvent_fileErrorEvent";
+		public static const FILE_FINISHED_THEN_DELETE:String = "fileFinishedThenDelete";
+		public static const FILE_ERROR:String = "fileError";
 		
 		public var fileList:FileReferenceList;
 		
 		// events for tasks
-		public static const TASK_ADD:String = "CommonUploadEvent_taskAddEvent";
-		public static const TASK_START:String = "CommonUploadEvent_taskStartEvent";
-		public static const TASK_FINISHED:String = "CommonUploadEvent_taskFinishedEvent";
+		public static const TASK_ADD:String = "taskAdd";
+		public static const TASK_START:String = "taskStart";
+		public static const TASK_FINISHED:String = "taskFinished";
 		
 		public var evt:Event;
 		

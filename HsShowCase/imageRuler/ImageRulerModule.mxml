@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="100%" height="100%" 
+		   xmlns:imageRuler="org.hamster.imageRuler.*"
+		   backgroundColor="white"
+		   creationComplete="module1_creationCompleteHandler(event)">
+	<mx:Metadata>
+		[ResourceBundle("imageRuler")]
+	</mx:Metadata>
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import org.hamster.showcase.common.facade.AppFacade;
+			import org.hamster.showcase.common.util.CommonUtil;
+			import org.hamster.showcase.imageRuler.mediator.ImageRulerModuleMediator;
+			import org.hamster.showcase.imageRuler.vo.proxy.ImageRulerVOProxy;
+			import org.puremvc.as3.interfaces.IFacade;
+			
+			[Bindable] public var imageSource:Object;
+
+			protected function module1_creationCompleteHandler(event:FlexEvent):void
+			{
+				var facade:IFacade = CommonUtil.facade;
+				facade.registerMediator(new ImageRulerModuleMediator(this));
+				facade.registerProxy(new ImageRulerVOProxy());
+				facade.sendNotification(AppFacade.LOAD_RULERIMAGE);
+			}
+
+		]]>
+	</mx:Script>
+	<mx:Image id="mainImage" source="{imageSource}" width="80%" height="80%"
+			  verticalCenter="0" horizontalCenter="0" 
+			  verticalAlign="middle" horizontalAlign="center" />
+	<imageRuler:HsImageRuler id="imageRuler" width="100%" height="100%"
+							 xGap="10" yGap="10" xGapWidth="10" yGapWidth="10" 
+							 xFrom="0" xTo="100" yFrom="0" yTo="100" ruleMode="FromToMode"/>
+</mx:Module>

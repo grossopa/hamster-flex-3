@@ -2,7 +2,8 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
 				layout="absolute" minWidth="955" minHeight="600" frameRate="60"
 				preinitialize="app_preinitializeHandler(event)"
-				applicationComplete="app_applicationCompleteHandler(event)" 
+				applicationComplete="app_applicationCompleteHandler(event)"
+				 creationComplete="application1_creationCompleteHandler(event)"
 				xmlns:closableTab="org.hamster.closableTab.*">
 	<mx:Metadata>
 		[Event(name="caseList_Change")]
@@ -91,6 +92,12 @@
 			protected function localeComboBox_changeHandler(event:ListEvent):void
 			{
 				CommonUtil.setLocale(String(localeComboBox.selectedItem));
+			}
+
+
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
 			}
 
 		]]>

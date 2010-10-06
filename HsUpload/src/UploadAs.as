@@ -30,12 +30,6 @@ private function uploadHandler():void
 
 public function appCompleteHandler():void
 {
-	var evt:HsUploadEvent = new HsUploadEvent("ddd");
-	this.addEventListener("ddd", function (evt:HsUploadEvent):void {
-		dispatchEvent(evt);
-	});
-	this.dispatchEvent(evt);
-	
 	responder = new mx.rpc.Responder(deleteResult, deleteFault);
 	uploadContainer.uploadFiles = new ArrayCollection(hsUpload.files);
 	hsUpload.url = "http://localhost:8000/upload/uploadImage/";

@@ -10,4 +10,6 @@
 					method="GET" resultFormat="text" />
 	<mx:HTTPService id="cropImageList" url="{AppConfig.URL_CROP_IMAGE_LIST}"
 					method="GET" resultFormat="text" />
+	<mx:HTTPService id="imageRuler" url="{AppConfig.URL_IMAGE_RULER}"
+					method="GET" resultFormat="text" />
 </services:HTTPServiceLocator>
