@@ -2,6 +2,7 @@ package org.hamster.showcase.common.facade
 {
 	import org.hamster.showcase.common.service.MainHTTPService;
 	import org.hamster.showcase.imageCropper.command.LoadCropImageListCommand;
+	import org.hamster.showcase.imageRuler.command.LoadImageRulerCommand;
 	import org.hamster.showcase.main.command.AppInitCommand;
 	import org.hamster.showcase.main.command.LoadCaseListCommand;
 	import org.puremvc.as3.interfaces.IFacade;
@@ -20,6 +21,10 @@ package org.hamster.showcase.common.facade
 		// IMAGE CROPPER MODULE
 		public static const LOAD_CROPIMAGE:String = NAME + "Load_CropImage";
 		public static const UPDATE_CROPIMAGE:String = NAME + "Update_CropImage";
+		
+		// IMAGE RULER MODULE
+		public static const LOAD_RULERIMAGE:String = NAME + "Load_RulerImage";
+		public static const UPDATE_RULERIMAGE:String = NAME + "Update_RulerImage";
 		
 		// LOGGER CONTAINER
 		public static const ADD_LOGGER:String = NAME + "Add_Logger";
@@ -49,11 +54,8 @@ package org.hamster.showcase.common.facade
 			
 			registerCommand(INIT, AppInitCommand);
 			registerCommand(LOAD_CASELIST, LoadCaseListCommand);
-			registerCommand(LOAD_CROPIMAGE, LoadCropImageListCommand)
-			//			this.registerCommand(APP_INIT, InitManagementCommand);
-			//			this.registerCommand(LOAD_CREATURE, LoadCreatureMetaCommand);
-			//			this.registerCommand(SAVE_CREATURE, SaveCreatureMetaCommand);
-			//			this.registerCommand(LOAD_ALL_CREATURES, LoadAllCreaturesCommand);
+			registerCommand(LOAD_CROPIMAGE, LoadCropImageListCommand);
+			registerCommand(LOAD_RULERIMAGE, LoadImageRulerCommand);
 			
 			this.sendNotification(LOAD_CASELIST);
 		}

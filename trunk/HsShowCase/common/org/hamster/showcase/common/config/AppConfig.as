@@ -21,5 +21,13 @@ package org.hamster.showcase.common.config
 				return rootURL + "crop_image_list.xml";
 			}
 		}
+		
+		public static function get URL_IMAGE_RULER():String {
+			if (TEST_MODE) {
+				return "test/xml/image_ruler.xml";
+			} else {
+				return rootURL + "image_ruler.xml";
+			}
+		}
 	}
 }

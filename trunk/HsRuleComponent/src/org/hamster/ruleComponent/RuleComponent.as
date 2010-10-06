@@ -11,10 +11,7 @@ package org.hamster.ruleComponent
 	import mx.events.ResizeEvent;
 	import mx.graphics.ImageSnapshot;
 	
-	import spark.components.Group;
-	import spark.layouts.BasicLayout;
-	
-	public class RuleComponent extends Group
+	public class RuleComponent extends UIComponent
 	{
 		public static const FROM_TO_MODE:String = "FromToMode";
 		public static const GAP_MODE:String = "GapMode";
@@ -235,7 +232,7 @@ package org.hamster.ruleComponent
 			this._interactiveLayer = new UIComponent();
 			_interactiveLayer.percentHeight = 100;
 			_interactiveLayer.percentWidth = 100;
-			this.addElement(this._interactiveLayer);
+			this.addChild(this._interactiveLayer);
 			
 			_textSnapshotUtil = new UITextField();
 		}

@@ -66,21 +66,32 @@
 			{
 				//CommonUtil.traceEvent(event, event.toString());
 			}
-
+ 
 		]]>
 	</mx:Script>
 	<mx:HBox width="100%" height="100%" horizontalGap="5">
-		<mx:VBox width="120" height="100%" 
+		<mx:VBox height="100%" 
 				 paddingLeft="10" paddingRight="10" paddingTop="10">
 			<mx:Button id="cropButton" click="cropButton_clickHandler(event)" width="100%"
-					   label="{resourceManager.getString('imageCropper', 'imageCropper.alertSelectedArea')}"/>
+				label="{resourceManager.getString('imageCropper', 'imageCropper.alertSelectedArea')}"/>
+			<mx:CheckBox id="aspectRatioCheckBox" 
+				label="{resourceManager.getString('imageCropper', 'imageCropper.aspectRatioCheckBox')}"/>
+			<mx:FormItem label="{resourceManager.getString('imageCropper', 'imageCropper.minSelectionW')}">
+				<mx:NumericStepper id="minSelWStepper" stepSize="5" minimum="20" maximum="100" />
+			</mx:FormItem>
+			<mx:FormItem label="{resourceManager.getString('imageCropper', 'imageCropper.minSelectionH')}">
+				<mx:NumericStepper id="minSelHStepper" stepSize="5" minimum="20" maximum="100" />
+			</mx:FormItem>
 		</mx:VBox>
 		<imageCropper:HsImageCropper id="imageCropper" width="100%" height="100%" backgroundColor="black"
-									  source="{cropImageHList.selectedItem.location}"
-									  mUp="imageCropper_mUpHandler(event)"
-									  mDown="imageCropper_mDownHandler(event)"
-									  sourceChange="imageCropper_sourceChangeHandler(event)"
-									  selectionChange="imageCropper_selectionChangeHandler(event)"/>
+									 source="{cropImageHList.selectedItem.location}"
+									 maintainAspectRatio="{aspectRatioCheckBox.selected}"
+									 minSelectionW="{minSelWStepper.value}"
+									 minSelectionH="{minSelWStepper.value}"
+									 mUp="imageCropper_mUpHandler(event)"
+									 mDown="imageCropper_mDownHandler(event)"
+									 sourceChange="imageCropper_sourceChangeHandler(event)"
+									 selectionChange="imageCropper_selectionChangeHandler(event)"/>
 	</mx:HBox>
 	<mx:HorizontalList id="cropImageHList" dataProvider="{cropImageSourceList}" 
 					   height="70" width="100%" selectedIndex="0"
