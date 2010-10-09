@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+				xmlns:closableTab="org.hamster.closableTab.*"
 				layout="absolute" minWidth="955" minHeight="600" frameRate="60"
+				backgroundColor="0xaeaeae"
 				preinitialize="app_preinitializeHandler(event)"
 				applicationComplete="app_applicationCompleteHandler(event)"
-				 creationComplete="application1_creationCompleteHandler(event)"
-				xmlns:closableTab="org.hamster.closableTab.*">
+				creationComplete="application1_creationCompleteHandler(event)"
+				>
 	<mx:Metadata>
 		[Event(name="caseList_Change")]
 		[ResourceBundle("app")]
@@ -21,6 +23,7 @@
 			import org.hamster.closableTab.HsClosableTabEvent;
 			import org.hamster.showcase.common.facade.AppFacade;
 			import org.hamster.showcase.common.util.CommonUtil;
+			import org.hamster.showcase.common.util.SWFProfiler;
 			import org.hamster.showcase.common.util.TracePanelUtil;
 			import org.hamster.showcase.main.view.ModuleLoaderContainer;
 			import org.hamster.showcase.main.vo.CaseVO;
@@ -38,6 +41,7 @@
 			
 			protected function app_applicationCompleteHandler(event:FlexEvent):void
 			{
+				SWFProfiler.init(this.stage, this);
 				TracePanelUtil.instance.init(this.stage, this);
 				
 				facade.sendNotification(AppFacade.INIT, this);

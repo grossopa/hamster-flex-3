@@ -64,7 +64,7 @@
 
 			protected function imageCropper_selectionChangeHandler(event:HsImageCropperEvent):void
 			{
-				//CommonUtil.traceEvent(event, event.toString());   
+				//CommonUtil.traceEvent(event, event.toString());    
 			}
  
 		]]>
@@ -90,8 +90,7 @@
 									 minSelectionH="{minSelWStepper.value}"
 									 mUp="imageCropper_mUpHandler(event)"
 									 mDown="imageCropper_mDownHandler(event)"
-									 sourceChange="imageCropper_sourceChangeHandler(event)"
-									 selectionChange="imageCropper_selectionChangeHandler(event)"/>
+									 sourceChange="imageCropper_sourceChangeHandler(event)"/>
 	</mx:HBox>
 	<mx:HorizontalList id="cropImageHList" dataProvider="{cropImageSourceList}" 
 					   height="70" width="100%" selectedIndex="0"
