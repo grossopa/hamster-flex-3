@@ -352,6 +352,7 @@ package org.hamster.imageCropper
 					}
 				}
 				isOutOfBound();
+				this.invalidateDisplayList();
 				dispatchICEvent(HsImageCropperEvent.SELECTION_CHANGE, evt.localX, evt.localY);
 			} else {
 				// just update cursor
@@ -371,8 +372,6 @@ package org.hamster.imageCropper
 					}
 				}
 			}
-			
-			this.invalidateDisplayList();
 		}
 		
 		private function maskMouseUpHandler(evt:MouseEvent):void
