@@ -2,5 +2,16 @@
 <case-list>
   <case id="1" name="ImageCropper" module-location="ImageCropperModule.swf" />
   <case id="2" name="ImageRuler" module-location="ImageRulerModule.swf" />
+  <case id="3" name="Utility" module-location="UtilityModule.swf" />
 </case-list>
+<language>
+  <zh_CN>
+    <resource bundle-name="main" resource-name="main.imageCropper.description"><![CDATA[
+      ImageCropper是
+    ]]></resource>
+  </zh_CN>
+  <en_US>
+  
+  </en_US>
+</language>
 </result>

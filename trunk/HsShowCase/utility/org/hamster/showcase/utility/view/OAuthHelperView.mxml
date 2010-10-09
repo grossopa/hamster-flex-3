@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:BaseUtilityItemView xmlns:mx="http://www.adobe.com/2006/mxml" 
+						  xmlns:view="org.hamster.showcase.utility.view.*" width="100%">
+
+	<mx:Script>
+		<![CDATA[
+			import org.hamster.showcase.utility.coll.OAuthHelper;
+			
+			[Bindable] private var resultString:String;
+			
+			protected function generateButton_clickHandler(event:MouseEvent):void
+			{
+				var urlReqHeader:URLRequestHeader;
+				if (tokenKeyInput.text.length > 0 && tokenSecretInput.length > 0) {
+					urlReqHeader = OAuthHelper.buildURLRequestHeader(urlInput.text, null, 
+						consumerKeyInput.text, consumerSecretInput.text,
+						tokenKeyInput.text, tokenSecretInput.text);
+				} else {
+					urlReqHeader = OAuthHelper.buildURLRequestHeader(urlInput.text, null, 
+						consumerKeyInput.text, consumerSecretInput.text);
+				}
+				resultString = urlReqHeader.value;
+			}
+		]]>
+	</mx:Script>
+
+	<mx:HBox width="100%" height="100%">
+		<mx:Form width="500" height="100%">
+			<mx:FormItem label="{resourceManager.getString('utility','util.oauth.url')}" labelWidth="150">
+				<mx:TextInput id="urlInput" width="100%" text="http://api.t.sina.com.cn/oauth/request_token" />
+			</mx:FormItem>
+			<mx:FormItem label="{resourceManager.getString('utility','util.oauth.consumerKey')}" labelWidth="150">
+				<mx:TextInput id="consumerKeyInput" width="100%" text="624185024" />
+			</mx:FormItem>
+			<mx:FormItem label="{resourceManager.getString('utility','util.oauth.consumerSecret')}" labelWidth="150">
+				<mx:TextInput id="consumerSecretInput" width="100%" text="dca6f3ef3c7cd99d0711b39d34a364b2" />
+			</mx:FormItem>
+			<mx:FormItem label="{resourceManager.getString('utility','util.oauth.tokenKey')}" labelWidth="150">
+				<mx:TextInput id="tokenKeyInput" width="100%" text="44c835fef98ee34ddb94b041146b16ce" />
+			</mx:FormItem>
+			<mx:FormItem label="{resourceManager.getString('utility','util.oauth.tokenSecret')}" labelWidth="150">
+				<mx:TextInput id="tokenSecretInput" width="100%" text="a0e501c381aef2c6dc7dc569933371e6" />
+			</mx:FormItem>
+			<mx:FormItem>
+				<mx:Button id="generateButton" label="{resourceManager.getString('utility','util.oauth.generate')}"
+						   enabled="{!(urlInput.text.length == 0 || consumerKeyInput.text.length == 0 || consumerSecretInput.text.length == 0)}"
+						   click="generateButton_clickHandler(event)" />
+			</mx:FormItem>
+		</mx:Form>
+		<mx:VBox width="100%" height="100%">
+			<mx:Label text="{resourceManager.getString('utility','util.oauth.result')}" />
+			<mx:TextArea text="{resultString}" width="100%" backgroundAlpha="0" editable="false" />
+		</mx:VBox>
+	</mx:HBox>
+	
+</view:BaseUtilityItemView>

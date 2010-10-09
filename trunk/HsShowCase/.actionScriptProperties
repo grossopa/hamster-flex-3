@@ -7,6 +7,7 @@
       <compilerSourcePathEntry kind="1" linkType="1" path="imageCropper"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="locale/{locale}"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="imageRuler"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="utility"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -25,6 +26,7 @@
     <application path="Main.mxml"/>
   </applications>
   <modules>
+    <module application="src/Main.mxml" destPath="UtilityModule.swf" optimize="true" sourcePath="utility/UtilityModule.mxml"/>
     <module application="src/Main.mxml" destPath="ImageCropperModule.swf" optimize="true" sourcePath="imageCropper/ImageCropperModule.mxml"/>
     <module application="src/Main.mxml" destPath="ImageRulerModule.swf" optimize="true" sourcePath="imageRuler/ImageRulerModule.mxml"/>
   </modules>
