@@ -161,6 +161,7 @@ package org.hamster.imageRuler
 			return this._ruleWidth;
 		}
 		
+		[Inspectable(category="General", enumeration="FromToMode,GapMode", defaultValue="GapMode")]
 		public function set ruleMode(value:String):void
 		{
 			if (this._ruleMode != value) {
@@ -188,11 +189,21 @@ package org.hamster.imageRuler
 			return this._isShowCrossline;
 		}
 		
+		public function get xValue():Number
+		{
+			return contentMouseX / (width - ruleWidth) * (xTo - xFrom) + xFrom;
+		}
+		
+		public function get yValue():Number
+		{
+			return contentMouseY / (height - ruleWidth) * (yTo - yFrom) + yFrom;
+		}
+		
 		public function switch2FromToMode(xFrom_:Number, yFrom_:Number, 
 										  xTo_:Number, yTo_:Number, 
 										  xGap_:Number, yGap_:Number):void
 		{
-			this._ruleMode = FROM_TO_MODE;
+			this._ruleMode = FROM_TO_MODE; 
 			this.xFrom = xFrom_;
 			this.yFrom = yFrom_;
 			this.xTo = xTo_;
@@ -262,7 +273,7 @@ package org.hamster.imageRuler
 			super.updateDisplayList(uw, uh);
 			
 			if (!this.initialized) {
-				return;
+				this.callLater(invalidateDisplayList);
 			}
 			
 			if (isNaN(_ruleWidth) || _ruleWidth <= 20) {
@@ -307,9 +318,9 @@ package org.hamster.imageRuler
 			var yDrawGap:Number;
 			if (this._ruleMode == FROM_TO_MODE) {
 				xUnitCount = Math.abs(this._xFrom - this._xTo) / this._xGap;
-				xDrawGap = uw / xUnitCount;
+				xDrawGap = (uw - _ruleWidth) / xUnitCount;
 				yUnitCount = Math.abs(this._yFrom - this._yTo) / this._yGap;
-				yDrawGap = uh / yUnitCount;
+				yDrawGap = (uh - _ruleWidth) / yUnitCount;
 				this._xGapWidth = xDrawGap;
 				this._yGapWidth = yDrawGap;
 			} else if (this._ruleMode == GAP_MODE) {
@@ -341,14 +352,16 @@ package org.hamster.imageRuler
 				tipValue = this._xGap * i + this._xFrom;
 				_textSnapshotUtil.text = tipValue.toString();
 				_textSnapshotUtil.width = _textSnapshotUtil.textWidth + 4;
-				textBitmapData = ImageSnapshot.captureBitmapData(_textSnapshotUtil);
-				g.lineStyle(0, 0, 0);
-				_matrixUtil.tx = startX + 1;
-				_matrixUtil.ty = -2;
-				g.beginBitmapFill(textBitmapData, _matrixUtil);
-				g.drawRect(startX + 1, -2, _textSnapshotUtil.measuredWidth, _textSnapshotUtil.measuredHeight);
-				g.endFill();
-				g.lineStyle(1, 0x000000, 1);
+				if (_textSnapshotUtil.width + startX + 1 <= uw) {
+					textBitmapData = ImageSnapshot.captureBitmapData(_textSnapshotUtil);
+					g.lineStyle(0, 0, 0);
+					_matrixUtil.tx = startX + 1;
+					_matrixUtil.ty = -2;
+					g.beginBitmapFill(textBitmapData, _matrixUtil);
+					g.drawRect(startX + 1, -2, _textSnapshotUtil.measuredWidth, _textSnapshotUtil.measuredHeight);
+					g.endFill();
+					g.lineStyle(1, 0x000000, 1);
+				}
 				
 				for (ii = 1; ii < 10; ii = ii + 2) {
 					tmpX = startX + xDrawSmallGap * ii;
@@ -381,14 +394,16 @@ package org.hamster.imageRuler
 				tipValue = this._yGap * j + this._yFrom;
 				_textSnapshotUtil.text = tipValue.toString();
 				_textSnapshotUtil.width = _textSnapshotUtil.textWidth + 4;
-				textBitmapData = ImageSnapshot.captureBitmapData(_textSnapshotUtil);
-				g.lineStyle(0, 0, 0);
-				_matrixUtil.tx = 0;
-				_matrixUtil.ty = startY - 1;
-				g.beginBitmapFill(textBitmapData, _matrixUtil);
-				g.drawRect(_matrixUtil.tx, _matrixUtil.ty, _textSnapshotUtil.measuredWidth, _textSnapshotUtil.measuredHeight);
-				g.endFill();
-				g.lineStyle(1, 0x000000, 1);
+				if (_textSnapshotUtil.textHeight + startY - 1 <= uh) {
+					textBitmapData = ImageSnapshot.captureBitmapData(_textSnapshotUtil);
+					g.lineStyle(0, 0, 0);
+					_matrixUtil.tx = 0;
+					_matrixUtil.ty = startY - 2;
+					g.beginBitmapFill(textBitmapData, _matrixUtil);
+					g.drawRect(_matrixUtil.tx, _matrixUtil.ty, _textSnapshotUtil.measuredWidth, _textSnapshotUtil.measuredHeight);
+					g.endFill();
+					g.lineStyle(1, 0x000000, 1);
+				}
 				
 				g.moveTo(6, startY);
 				g.lineTo(this._ruleWidth, startY);

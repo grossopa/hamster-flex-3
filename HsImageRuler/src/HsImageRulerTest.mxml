@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
 				minWidth="955" minHeight="600" xmlns:ruleComponent="org.hamster.imageRuler.*">
-	<ruleComponent:HsImageRuler id="hsImageRuler" width="500" height="500" xGap="10" yGap="10" xGapWidth="10" yGapWidth="10" xFrom="0" xTo="100" yFrom="0" yTo="100" ruleMode="FromToMode" />
+	<ruleComponent:HsImageRuler id="hsImageRuler" width="500" height="500" xGap="10" yGap="10" xGapWidth="10" yGapWidth="10" xFrom="0" xTo="109" yFrom="0" yTo="100" ruleMode="FromToMode" />
 </mx:Application>
