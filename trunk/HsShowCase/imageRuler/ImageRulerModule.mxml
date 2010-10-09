@@ -9,12 +9,17 @@
 	<mx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
+			import mx.events.ListEvent;
+			import mx.logging.ILogger;
+			import mx.logging.Log;
 			
 			import org.hamster.showcase.common.facade.AppFacade;
 			import org.hamster.showcase.common.util.CommonUtil;
 			import org.hamster.showcase.imageRuler.mediator.ImageRulerModuleMediator;
 			import org.hamster.showcase.imageRuler.vo.proxy.ImageRulerVOProxy;
 			import org.puremvc.as3.interfaces.IFacade;
+			
+			private static const logger:ILogger = Log.getLogger("hs.imageRuler");
 			
 			[Bindable] public var imageSource:Object;
 
@@ -26,12 +31,88 @@
 				facade.sendNotification(AppFacade.LOAD_RULERIMAGE);
 			}
 
+
+			protected function modeSelection_changeHandler(event:ListEvent):void
+			{
+				if (modeSelection.selectedItem == "FromToMode") {
+					gapWidthFormItem.enabled = false;
+					toFormItem.enabled = true;
+				} else if (modeSelection.selectedItem == "GapMode") {
+					gapWidthFormItem.enabled = true;
+					toFormItem.enabled = false;
+				}
+			}
+
+
+			protected function imageRuler_clickHandler(event:MouseEvent):void
+			{
+				logger.info("image cropper click : x : " + imageRuler.xValue + " , y : " + imageRuler.yValue);  
+			}
+
 		]]>
 	</mx:Script>
-	<mx:Image id="mainImage" source="{imageSource}" width="80%" height="80%"
-			  verticalCenter="0" horizontalCenter="0" 
-			  verticalAlign="middle" horizontalAlign="center" />
-	<imageRuler:HsImageRuler id="imageRuler" width="100%" height="100%"
-							 xGap="10" yGap="10" xGapWidth="10" yGapWidth="10" 
-							 xFrom="0" xTo="100" yFrom="0" yTo="100" ruleMode="FromToMode"/>
+	<mx:HBox width="100%" height="100%">
+		<mx:VBox width="250" height="100%">
+			<mx:ComboBox id="modeSelection" selectedIndex="0" 
+						 change="modeSelection_changeHandler(event)">
+				<mx:dataProvider>
+					<mx:Array>
+						<mx:String>FromToMode</mx:String>
+						<mx:String>GapMode</mx:String>
+					</mx:Array>
+				</mx:dataProvider>
+			</mx:ComboBox>
+			<mx:FormItem id="gapFormItem" 
+						 label="{resourceManager.getString('imageRuler','imageRuler.gap')}" 
+						 direction="horizontal" labelWidth="100">
+				<mx:NumericStepper id="xGapNumStepper" minimum="3" maximum="50" value="10" width="60" />
+				<mx:NumericStepper id="yGapNumStepper" minimum="3" maximum="50" value="10" width="60" />
+			</mx:FormItem>
+			<mx:FormItem id="gapWidthFormItem" enabled="false"
+						 label="{resourceManager.getString('imageRuler','imageRuler.gapWidth')}" 
+						 direction="horizontal" labelWidth="100">
+				<mx:NumericStepper id="xGapWidthNumStepper" minimum="3" maximum="50" value="10" width="60" />
+				<mx:NumericStepper id="yGapWidthNumStepper" minimum="3" maximum="50" value="10" width="60" />
+			</mx:FormItem>
+			<mx:FormItem id="fromFormItem"
+						 label="{resourceManager.getString('imageRuler','imageRuler.from')}" 
+						 direction="horizontal" labelWidth="100">
+				<mx:NumericStepper id="xFromNumStepper" minimum="-100" maximum="100" value="100" width="60"  />
+				<mx:NumericStepper id="yFromNumStepper" minimum="-100" maximum="100" value="100" width="60"  />
+			</mx:FormItem>
+			<mx:FormItem id="toFormItem"
+						 label="{resourceManager.getString('imageRuler','imageRuler.to')}" 
+						 direction="horizontal" labelWidth="100">
+				<mx:NumericStepper id="xToNumStepper" minimum="200" maximum="400" value="200" width="60" />
+				<mx:NumericStepper id="yToNumStepper" minimum="200" maximum="400" value="200" width="60" />
+			</mx:FormItem>
+			<mx:CheckBox id="showCrosslineCheckBox" 
+						 label="{resourceManager.getString('imageRuler','imageRuler.showCrossline')}" />
+			<mx:FormItem id="ruleWidthFormItem"
+						 label="{resourceManager.getString('imageRuler','imageRuler.ruleWidth')}" 
+						 direction="horizontal" labelWidth="100">
+				<mx:NumericStepper id="ruleWidthStepper" minimum="20" maximum="80" value="30" width="60" />
+			</mx:FormItem>
+		</mx:VBox>
+		<mx:Canvas width="100%" height="100%">
+			<mx:Image id="mainImage" source="{imageSource}" width="80%" height="80%"
+					  verticalCenter="0" horizontalCenter="0"
+					  verticalAlign="middle" horizontalAlign="center" />
+			<imageRuler:HsImageRuler id="imageRuler" width="100%" height="100%"
+									 isShowCrossline="{showCrosslineCheckBox.selected}"
+									 xGap="{xGapNumStepper.value}" 
+									 yGap="{yGapNumStepper.value}" 
+									 xGapWidth="{xGapWidthNumStepper.value}" 
+									 yGapWidth="{yGapWidthNumStepper.value}" 
+									 xFrom="{xFromNumStepper.value}" 
+									 yFrom="{yFromNumStepper.value}" 
+									 xTo="{xToNumStepper.value}" 
+									 yTo="{yToNumStepper.value}"
+									 ruleWidth="{ruleWidthStepper.value}"
+									 ruleMode="{modeSelection.selectedItem}"
+									 click="imageRuler_clickHandler(event)"/>		
+		</mx:Canvas>
+
+	</mx:HBox>
+
 </mx:Module>
