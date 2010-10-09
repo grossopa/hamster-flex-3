@@ -64,7 +64,7 @@
 
 			protected function imageCropper_selectionChangeHandler(event:HsImageCropperEvent):void
 			{
-				//CommonUtil.traceEvent(event, event.toString());
+				//CommonUtil.traceEvent(event, event.toString());   
 			}
  
 		]]>
