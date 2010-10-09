@@ -191,12 +191,12 @@ package org.hamster.imageRuler
 		
 		public function get xValue():Number
 		{
-			return contentMouseX / (width - ruleWidth) * (xTo - xFrom) + xFrom;
+			return (contentMouseX - ruleWidth) / (width - ruleWidth) * (xTo - xFrom) + xFrom;
 		}
 		
 		public function get yValue():Number
 		{
-			return contentMouseY / (height - ruleWidth) * (yTo - yFrom) + yFrom;
+			return (contentMouseY - ruleWidth) / (height - ruleWidth) * (yTo - yFrom) + yFrom;
 		}
 		
 		public function switch2FromToMode(xFrom_:Number, yFrom_:Number, 
