@@ -115,8 +115,8 @@ package org.hamster.imageCropper
 			if (_mainImage.source != null) {
 				var p:Number = _mainImage.content.width / _boundArea.width;
 				var result:Rectangle = new Rectangle();
-				result.x = _selectedArea.x * p;
-				result.y = _selectedArea.y * p;
+				result.x = (_selectedArea.x - _boundArea.x) * p;
+				result.y = (_selectedArea.y - _boundArea.y) * p;
 				result.width = _selectedArea.width * p;
 				result.height = _selectedArea.height * p;
 				return result;
