@@ -49,7 +49,7 @@
 		</mx:Form>
 		<mx:VBox width="100%" height="100%">
 			<mx:Label text="{resourceManager.getString('utility','util.oauth.result')}" />
-			<mx:TextArea text="{resultString}" width="100%" backgroundAlpha="0" editable="false" />
+			<mx:TextArea text="{resultString}" width="100%" backgroundAlpha="0" editable="false" borderStyle="none" />
 		</mx:VBox>
 	</mx:HBox>
 	
