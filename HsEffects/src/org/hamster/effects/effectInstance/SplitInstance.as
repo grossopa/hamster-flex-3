@@ -10,7 +10,7 @@ package org.hamster.effects.effectInstance
 	import mx.core.mx_internal;
 	import mx.effects.effectClasses.TweenEffectInstance;
 	import mx.events.ChildExistenceChangedEvent;
-	import mx.geom.RoundedRectangle;
+	import mx.graphics.RoundedRectangle;
 	
 	use namespace mx_internal;
 	

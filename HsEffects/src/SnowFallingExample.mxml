@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" minWidth="955" minHeight="600" frameRate="60">
+	<mx:Script>
+		<![CDATA[
+			import org.hamster.effects.SnowFalling;
+			
+			[Embed(source='/org/hamster/assets/snowflake.png')]
+			private var SNOWFLAKE:Class;
+
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				var snowFalling:SnowFalling = new SnowFalling(mainCanvas);
+				var bm1:Bitmap = new SNOWFLAKE();
+				bm1.scaleX = 0.5;
+				bm1.scaleY = 0.5;
+				
+				var bd1:BitmapData = bm1.bitmapData;
+				bm1.scaleX = 0.3;
+				bm1.scaleY = 0.3;
+				var bd2:BitmapData = bm1.bitmapData;
+				snowFalling.bitmapDataList = [bd1, bd2];
+				snowFalling.rockHorizontal = 5;
+				snowFalling.rockSpeed = 0.03;
+				snowFalling.dropDuration = 6000;
+				snowFalling.duration = 30000;
+				snowFalling.play();
+			}
+
+		]]>
+	</mx:Script>
+	<mx:Canvas id="mainCanvas" width="100%" height="100%" />
+	<mx:Button click="button1_clickHandler(event)" label="start" />
+</mx:Application>
