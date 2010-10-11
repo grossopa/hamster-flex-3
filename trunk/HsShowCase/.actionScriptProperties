@@ -8,6 +8,7 @@
       <compilerSourcePathEntry kind="1" linkType="1" path="locale/{locale}"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="imageRuler"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="utility"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="effects"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -29,6 +30,7 @@
     <module application="src/Main.mxml" destPath="UtilityModule.swf" optimize="true" sourcePath="utility/UtilityModule.mxml"/>
     <module application="src/Main.mxml" destPath="ImageCropperModule.swf" optimize="true" sourcePath="imageCropper/ImageCropperModule.mxml"/>
     <module application="src/Main.mxml" destPath="ImageRulerModule.swf" optimize="true" sourcePath="imageRuler/ImageRulerModule.mxml"/>
+    <module application="src/Main.mxml" destPath="EffectsModule.swf" optimize="true" sourcePath="effects/EffectsModule.mxml"/>
   </modules>
   <buildCSSFiles/>
 </actionScriptProperties>

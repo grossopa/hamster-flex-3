@@ -12,22 +12,23 @@ package org.hamster.showcase.utility.view
 	
 	public class BaseUtilityItemView extends VBox
 	{
-		protected var _titleLabelBox:Label = new Label();
+		protected var _titleLabel:Label = new Label();
 		protected var _mainContainer:Canvas = new Canvas();
+		protected var _titleLabelContainer:Canvas = new Canvas();
 		
 		override public function set label(value:String):void
 		{
 			super.label = value;
-			if (_titleLabelBox) {
-				_titleLabelBox.text = value;
+			if (_titleLabel) {
+				_titleLabel.text = value;
 			}
 		}
 		
 		override public function set width(value:Number):void
 		{
 			super.width = value;
-			if (_titleLabelBox) {
-				_titleLabelBox.width = value;
+			if (_titleLabel) {
+				_titleLabel.width = value;
 			}
 		}
 		
@@ -39,13 +40,26 @@ package org.hamster.showcase.utility.view
 		override protected function createChildren():void
 		{
 			//_titleLabelBox = new Label();
-			_titleLabelBox.text = this.label;
-			_titleLabelBox.percentWidth = 100;
-			_titleLabelBox.buttonMode = true;
-			_titleLabelBox.addEventListener(MouseEvent.CLICK, titleLabelBoxClickHandler);
+			_titleLabel.text = this.label;
+			_titleLabel.percentWidth = 100;
+			_titleLabel.buttonMode = true;
+			_titleLabel.setStyle("verticalCenter", 0);
+			
+			
 			// _titleLabelBox.setStyle("backgroundColor", 0x7f7f7f);
-			_titleLabelBox.setStyle("fontSize", 22);
-			_titleLabelBox.setStyle("fontWeight", "bold");
+			_titleLabel.setStyle("fontSize", 22);
+			_titleLabel.setStyle("fontWeight", "bold");
+			_titleLabel.addEventListener(MouseEvent.CLICK, titleLabelBoxClickHandler);
+			
+			_titleLabelContainer.percentWidth = 100;
+			_titleLabelContainer.height = 45;
+			_titleLabelContainer.setStyle('backgroundColor', 0x5F99FF);
+			_titleLabelContainer.setStyle('backgroundAlpha', 0.6);
+			_titleLabelContainer.setStyle("borderStyle", "solid");
+			_titleLabelContainer.setStyle("borderWidth", 1);
+			_titleLabelContainer.setStyle("borderColor", 0x3E3E3E);
+			_titleLabelContainer.addChild(_titleLabel);
+			
 			this.setStyle("borderStyle", "solid");
 			this.setStyle("borderWidth", 1);
 			this.setStyle("paddingLeft", 5);
@@ -53,7 +67,7 @@ package org.hamster.showcase.utility.view
 			this.setStyle("paddingRight", 5);
 			this.setStyle("paddingBottom", 5);
 			
-			super.addChildAt(_titleLabelBox, 0);
+			super.addChildAt(_titleLabelContainer, 0);
 			
 			//_mainContainer = new VBox();
 			_mainContainer.percentWidth = 100;
