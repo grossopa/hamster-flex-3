@@ -5,5 +5,6 @@
 	<mx:Metadata>
 		[ResourceBundle("utility")]
 	</mx:Metadata>
-	<view:OAuthHelperView id="oAuthHelperView" label="OAuthHelperView" />
+	<view:OAuthHelperView id="oAuthHelperView" 
+						  label="{resourceManager.getString('utility', 'util.oauth.name')}" />
 </mx:Module>

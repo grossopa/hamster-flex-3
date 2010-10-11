@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" 
+		   layout="absolute" width="100%" height="100%" xmlns:effects="org.hamster.effects.*">
+
+	<mx:Script>
+		<![CDATA[
+			import mx.events.EffectEvent;
+			protected function waterDissolveButton_clickHandler(event:MouseEvent):void
+			{
+				effectsContainer.selectedIndex = 0;
+				waterDisslove.play();
+				waterDissolveButton.enabled = false;
+			}
+
+			protected function waterDisslove_effectEndHandler(event:EffectEvent):void
+			{
+				waterDissolveButton.enabled = true;
+			}
+
+		]]>
+	</mx:Script>
+
+	<effects:WaterDissolve id="waterDisslove" alphaFrom="1" alphaTo="0" 
+						   duration="1000" startDelay="500" target="{waterDissoveImage}"
+						   effectEnd="waterDisslove_effectEndHandler(event)" />
+	<mx:Fade id="switchShowEff" alphaFrom="0" alphaTo="1" duration="500" />
+	<mx:Fade id="switchHideEff" alphaFrom="1" alphaTo="0" duration="500" />
+	
+	<mx:ViewStack id="effectsContainer" showEffect="{switchShowEff}" hideEffect="{switchHideEff}" 
+				  width="100%" height="100%">
+		<mx:Canvas id="waterDissloveContainer" width="100%" height="100%">
+			<mx:Image id="waterDissoveImage" width="100%" height="100%"
+					  verticalAlign="middle" horizontalAlign="center"
+					  source="@Embed(source='/test/xml/effects/4.jpg')"/>
+		</mx:Canvas>
+	</mx:ViewStack>
+	<mx:HBox id="modeSelectorContainer" alpha="0.5">
+		<mx:Button id="waterDissolveButton" click="waterDissolveButton_clickHandler(event)"
+				   label="{resourceManager.getString('effects','effects.waterDissolve')}" />
+	</mx:HBox>
+	
+</mx:Module>

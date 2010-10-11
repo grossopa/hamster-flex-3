@@ -2,7 +2,8 @@
 <case-list>
   <case id="1" name="ImageCropper" module-location="ImageCropperModule.swf" />
   <case id="2" name="ImageRuler" module-location="ImageRulerModule.swf" />
-  <case id="3" name="Utility" module-location="UtilityModule.swf" />
+  <case id="3" name="Effects" module-location="EffectsModule.swf" />
+  <case id="4" name="Utility" module-location="UtilityModule.swf" />
 </case-list>
 <language>
   <zh_CN>
