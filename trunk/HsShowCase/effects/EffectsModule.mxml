@@ -1,35 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" 
-		   layout="absolute" width="100%" height="100%" xmlns:effects="org.hamster.effects.*">
+		   layout="absolute" width="100%" height="100%" xmlns:effects="org.hamster.effects.*"
+		   xmlns:geom="flash.geom.*">
 
 	<mx:Script>
 		<![CDATA[
+			import mx.effects.easing.Linear;
 			import mx.events.EffectEvent;
+			
 			protected function waterDissolveButton_clickHandler(event:MouseEvent):void
 			{
 				effectsContainer.selectedIndex = 0;
 				waterDisslove.play();
 				waterDissolveButton.enabled = false;
+				splitMassButton.enabled = false;
+			}
+			
+			protected function splitMassButton_clickHandler(event:MouseEvent):void
+			{
+				effectsContainer.selectedIndex = 0;
+				splitMass.play();
+				waterDissolveButton.enabled = false;
+				splitMassButton.enabled = false;
 			}
 
 			protected function waterDisslove_effectEndHandler(event:EffectEvent):void
 			{
 				waterDissolveButton.enabled = true;
+				splitMassButton.enabled = true;
+			}
+
+			protected function splitMass_effectEndHandler(event:EffectEvent):void
+			{
+				waterDissolveButton.enabled = true;
+				splitMassButton.enabled = true;
 			}
 
 		]]>
 	</mx:Script>
 
 	<effects:WaterDissolve id="waterDisslove" alphaFrom="1" alphaTo="0" 
-						   duration="1000" startDelay="500" target="{waterDissoveImage}"
+						   duration="1000" startDelay="500" target="{waterDissolveImage}"
 						   effectEnd="waterDisslove_effectEndHandler(event)" />
+	<effects:SplitMass id="splitMass" rowCount="100" columnCount="100" 
+					   easingFunction="{Linear.easeNone}" duration="2000" target="{waterDissolveImage}"
+					   effectEnd="splitMass_effectEndHandler(event)">
+		<effects:startPoints>
+			<mx:Array>
+				<geom:Point x="0" y="0"/>
+				<geom:Point x="0" y="{effectsContainer.height}"/>
+				<geom:Point x="{effectsContainer.width}" y="0"/>
+				<geom:Point x="{effectsContainer.width}" y="{effectsContainer.height}"/>
+			</mx:Array>
+		</effects:startPoints>
+	</effects:SplitMass>
+					   
 	<mx:Fade id="switchShowEff" alphaFrom="0" alphaTo="1" duration="500" />
 	<mx:Fade id="switchHideEff" alphaFrom="1" alphaTo="0" duration="500" />
 	
 	<mx:ViewStack id="effectsContainer" showEffect="{switchShowEff}" hideEffect="{switchHideEff}" 
 				  width="100%" height="100%">
 		<mx:Canvas id="waterDissloveContainer" width="100%" height="100%">
-			<mx:Image id="waterDissoveImage" width="100%" height="100%"
+			<mx:Image id="waterDissolveImage" width="100%" height="100%"
 					  verticalAlign="middle" horizontalAlign="center"
 					  source="@Embed(source='/test/xml/effects/4.jpg')"/>
 		</mx:Canvas>
@@ -37,6 +69,8 @@
 	<mx:HBox id="modeSelectorContainer" alpha="0.5">
 		<mx:Button id="waterDissolveButton" click="waterDissolveButton_clickHandler(event)"
 				   label="{resourceManager.getString('effects','effects.waterDissolve')}" />
+		<mx:Button id="splitMassButton" click="splitMassButton_clickHandler(event)"
+				   label="{resourceManager.getString('effects','effects.splitMass')}" />
 	</mx:HBox>
 	
 </mx:Module>

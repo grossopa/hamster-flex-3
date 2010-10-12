@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:BaseUtilityItemView xmlns:mx="http://www.adobe.com/2006/mxml"
+						  xmlns:view="org.hamster.showcase.utility.view.*" 
+						  width="100%">
+
+	<mx:Script>
+		<![CDATA[
+			import or.hamster.math.matrix.MatrixMath;
+			protected function doAllTestButton_clickHandler(event:MouseEvent):void
+			{
+				
+			}
+			
+			private function buildTestMatrix():Array
+			{
+				var matrix1:MatrixMath = new MatrixMath();
+			}
+		]]>
+	</mx:Script>
+
+	
+	<mx:VBox width="100%">
+		<mx:HBox width="100%" horizontalGap="10">
+			<mx:TextArea id="matrixTextArea1" width="50%" height="80" />
+			<mx:TextArea id="matrixTextArea2" width="50%" height="80" />
+		</mx:HBox>
+		<mx:Button id="doAllTestButton" verticalCenter="0" 
+				   label="{resourceManager.getString('utility', 'util.matrix.doAllTest')}"
+				   click="doAllTestButton_clickHandler(event)"/>
+		<mx:TextArea id="logPanelTextArea" width="100%" height="450" editable="false" />
+	</mx:VBox>
+	
+</view:BaseUtilityItemView>

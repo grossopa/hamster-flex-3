@@ -7,4 +7,6 @@
 	</mx:Metadata>
 	<view:OAuthHelperView id="oAuthHelperView" 
 						  label="{resourceManager.getString('utility', 'util.oauth.name')}" />
+	<view:MatrixView id="matrixView"
+					 label="{resourceManager.getString('utility', 'util.matrix.name')}" />
 </mx:Module>
