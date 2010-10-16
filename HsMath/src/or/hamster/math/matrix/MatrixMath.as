@@ -705,7 +705,7 @@ package or.hamster.math.matrix
 		 * @private
 		 * @return 
 		 */
-		public function toString():String
+		public function toString(fixed:int = 2):String
 		{
 			var result:String = '';
 			var rl:int = this.rLength;
@@ -714,14 +714,14 @@ package or.hamster.math.matrix
 			var r:int = 0;
 			for (r = 0; r < rl - 1; r++) {
 				for (c = 0; c < cl - 1; c++) {
-					result += _eles[r][c] + ',';
+					result += Number(_eles[r][c]).toFixed(fixed) + ',';
 				}
-				result += _eles[r][cl - 1] + '\n';
+				result += Number(_eles[r][cl - 1]).toFixed(fixed) + '\n';
 			}
 			for (c = 0; c < cl - 1; c++) {
-				result += _eles[rl - 1][c] + ',';
+				result += Number(_eles[rl - 1][c]).toFixed(fixed) + ',';
 			}
-			result += _eles[rl - 1][cl - 1];
+			result += Number(_eles[rl - 1][cl - 1]).toFixed(fixed);
 			return result;
 		}
 	}

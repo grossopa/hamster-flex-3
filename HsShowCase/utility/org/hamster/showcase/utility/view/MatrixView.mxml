@@ -5,15 +5,62 @@
 
 	<mx:Script>
 		<![CDATA[
+			import mx.logging.ILogger;
+			import mx.logging.Log;
+			
 			import or.hamster.math.matrix.MatrixMath;
+			
+			private static const logger:ILogger = Log.getLogger('hs.math');
+			
 			protected function doAllTestButton_clickHandler(event:MouseEvent):void
 			{
+				var matrix1:MatrixMath = this.createMatrix(matrixTextArea1.text);
+				var matrix2:MatrixMath = this.createMatrix(matrixTextArea2.text);
 				
+				// options here
+				
+				// m1 * m2
+				var matrix3:MatrixMath = matrix1.multiply(matrix2, true);
+				logHelper('m1 * m2', matrix3);
+				
+				// m3^*
+				var matrix4:MatrixMath = matrix3.adjoint(true);
+				logHelper('m3*', matrix4);
+				
+				// |m3|
+				var num:Number = matrix3.det();
+				logHelper('|m3| = ' + num);
 			}
 			
-			private function buildTestMatrix():Array
+			private function logHelper(actionString:String, resultMatrix:MatrixMath = null):void
 			{
-				var matrix1:MatrixMath = new MatrixMath();
+				var loggerString:String = '\r' + actionString + '\r' + (resultMatrix ? resultMatrix.toString() + '\r' : "");
+				logger.info(loggerString);
+				this.logPanelTextArea.text += loggerString;
+			}
+			
+			private function createMatrix(str:String):MatrixMath
+			{
+				var eles:Array = [];
+				var rLength:int;
+				var cLength:int;
+				
+				var n:Array = str.split('|');
+				for each (var s1:String in n) {
+					var n2:Array = s1.split(',');
+					var rEle:Array = [];
+					for each (var s2:String in n2) {
+						rEle.push(parseFloat(s2));
+					}
+					cLength = rEle.length;
+					eles.push(rEle);
+				}
+				rLength = eles.length;
+				
+				var result:MatrixMath = new MatrixMath();
+				result.initMatrix(eles, rLength, cLength);
+				return result;
+				
 			}
 		]]>
 	</mx:Script>
@@ -21,8 +68,17 @@
 	
 	<mx:VBox width="100%">
 		<mx:HBox width="100%" horizontalGap="10">
-			<mx:TextArea id="matrixTextArea1" width="50%" height="80" />
-			<mx:TextArea id="matrixTextArea2" width="50%" height="80" />
+			<mx:TextArea id="matrixTextArea1" width="50%" height="120">
+				<mx:text>
+					<![CDATA[1,2,-3,5,6|2.2,1.9,5.1,6,-9|11,33,51,2,1]]>
+				</mx:text>
+			</mx:TextArea>
+			
+			<mx:TextArea id="matrixTextArea2" width="50%" height="120">
+				<mx:text>
+					<![CDATA[-11.5,14,3|6,0,0|12,-1,20|3,5,7|8,8,-6]]>
+				</mx:text>
+				</mx:TextArea>
 		</mx:HBox>
 		<mx:Button id="doAllTestButton" verticalCenter="0" 
 				   label="{resourceManager.getString('utility', 'util.matrix.doAllTest')}"
