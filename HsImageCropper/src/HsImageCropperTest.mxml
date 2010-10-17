@@ -19,6 +19,6 @@
 		]]>
 	</mx:Script>
 	<mx:Button label="rect" click="button1_clickHandler(event)" />
-	<imageCropper:HsImageCropper id="ic" width="100%" height="100%" maintainAspectRatio="true"
-					   source="org/hamster/assets/1.jpg" />
+	<imageCropper:HsImageCropper id="ic" width="100%" height="100%" maintainAspectRatio="false"
+					   source="org/hamster/assets/1.jpg" minSelectionH="80" minSelectionW="40" />
 </mx:Application>

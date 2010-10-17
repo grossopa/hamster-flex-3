@@ -87,7 +87,7 @@
 									 source="{cropImageHList.selectedItem.location}"
 									 maintainAspectRatio="{aspectRatioCheckBox.selected}"
 									 minSelectionW="{minSelWStepper.value}"
-									 minSelectionH="{minSelWStepper.value}"
+									 minSelectionH="{minSelHStepper.value}"
 									 mUp="imageCropper_mUpHandler(event)"
 									 mDown="imageCropper_mDownHandler(event)"
 									 sourceChange="imageCropper_sourceChangeHandler(event)"/>
