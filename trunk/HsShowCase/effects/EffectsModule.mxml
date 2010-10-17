@@ -19,6 +19,8 @@
 			protected function splitMassButton_clickHandler(event:MouseEvent):void
 			{
 				effectsContainer.selectedIndex = 0;
+				waterDissloveContainer.visible = true;
+				waterDissloveContainer.alpha = 1;
 				splitMass.play();
 				waterDissolveButton.enabled = false;
 				splitMassButton.enabled = false;
