@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"  frameRate="60" backgroundColor="black"
+				layout="absolute" minWidth="955" minHeight="600" xmlns:game="org.hamster.alive30.game.*"
+				 applicationComplete="application1_applicationCompleteHandler(event)">
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.logging.ILogger;
+			import mx.logging.Log;
+			
+			import org.hamster.alive30.common.util.SWFProfiler;
+			import org.hamster.alive30.common.util.TracePanelUtil;
+			import org.hamster.alive30.game.control.ControlManager;
+			
+			private var logger:ILogger = Log.getLogger('hs.main');
+			private var ctrlManager:ControlManager = ControlManager.instance;
+
+			protected function application1_applicationCompleteHandler(event:FlexEvent):void
+			{
+				SWFProfiler.init(stage, this);
+				TracePanelUtil.instance.init(stage, this);
+				ctrlManager.stage = stage;
+				//stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+				//stage.addEventListener(KeyboardEvent.KEY_UP, keyUpHandler);
+			}
+			
+//			override protected function keyDownHandler(evt:KeyboardEvent):void
+//			{
+//				//logger.info("Key Down : " + evt.keyCode);
+//			}
+//			
+//			override protected  function keyUpHandler(evt:KeyboardEvent):void
+//			{
+//				//logger.info("Key Up   : " + evt.keyCode);
+//			}
+
+		]]>
+	</mx:Script>
+	<game:GameModule id="gameModule" width="100%" height="100%" />
+</mx:Application>
