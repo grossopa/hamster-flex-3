@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"  frameRate="60" backgroundColor="black"
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"  frameRate="60" backgroundColor="white"
 				layout="absolute" minWidth="955" minHeight="600" xmlns:game="org.hamster.alive30.game.*"
 				 applicationComplete="application1_applicationCompleteHandler(event)">
 	<mx:Script>

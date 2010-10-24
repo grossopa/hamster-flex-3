@@ -14,5 +14,27 @@ package org.hamster.alive30.common.util
 			this._x = x;
 			this._y = y;
 		}
+		
+		public function set length(value:Number):void
+		{
+			var a:Number = angle;
+			_x = Math.cos(a) * value;
+			_y = Math.sin(a) * value;
+		}
+		
+		public function get length():Number
+		{
+			return Math.sqrt(lengthSQ);
+		}
+		
+		public function get lengthSQ():Number
+		{
+			return _x * _x + _y * _y;
+		}
+		
+		public function get angle():Number
+		{
+			return Math.atan2(_y, _x);
+		}
 	}
 }
