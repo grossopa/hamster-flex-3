@@ -15,6 +15,7 @@ package org.hamster.alive30.game.container
 	import org.hamster.alive30.common.manager.CacheManager;
 	import org.hamster.alive30.common.util.IVector2DItem;
 	import org.hamster.alive30.game.control.ControlManager;
+	import org.hamster.alive30.game.control.RealTimeManager;
 	import org.hamster.alive30.game.event.GameEvent;
 	import org.hamster.alive30.game.item.Bullet;
 	import org.hamster.alive30.game.item.Plane;
@@ -25,9 +26,11 @@ package org.hamster.alive30.game.container
 	
 	public class GameMainContainer extends UIComponent
 	{
+		public static const NAME:String = "GameMainContainer";
 		private static const logger:ILogger = Log.getLogger('hs.GameMainContainer');
 		private static var ctrlManager:ControlManager = ControlManager.instance;
 		private static var cacheManager:CacheManager = CacheManager.instance;
+		private static var timeManager:RealTimeManager = RealTimeManager.instance;
 		
 		private var _mainContainer:SimpleContainer;
 		
@@ -54,7 +57,7 @@ package org.hamster.alive30.game.container
 				_bullets.addItem(dc);
 			}
 			
-			
+			timeManager.addRecord(NAME);
 			
 			this.addChild(_mainContainer);
 			
@@ -84,6 +87,7 @@ package org.hamster.alive30.game.container
 					child.y += vc.speedVector.y;
 					vc.speedVector.x += vc.accelVector.x;
 					vc.speedVector.y += vc.accelVector.y;
+					vc.onEnterFrameHandler(timeManager.getTimeElapsed(NAME));
 				}
 			}
 			

@@ -11,5 +11,10 @@ package org.hamster.alive30.game.util
 		public static const MOVE_SPEED:Number = 3;
 		public static const ABSORB_SPEED:Number = 5;
 		
+		// In milliseconds
+		public static const PLANE_CHANGE_TYPE_TIME:Number = 300;
+		public static const PLANE_TYPE_COOL_DOWN_TIME:Number = 100;
+		public static const PLANE_ALL_CHANGE_TYPE_TIME:Number = 400;
+		
 	}
 }
