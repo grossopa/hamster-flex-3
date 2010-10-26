@@ -18,9 +18,11 @@ package org.hamster.alive30.game.item
 		private var _type:String;
 		private var _currentOuter:Object;
 		
+		private var _changeTypeTimeCount:Number;
+		
 		public function set type(value:String):void
 		{
-			if (_type != value) {
+			if (_type != value && _changeTypeTimeCount <= 0) {
 				_type = value;
 				if (numChildren > 1) {
 					this.removeChildAt(0);
@@ -30,6 +32,7 @@ package org.hamster.alive30.game.item
 				} else if (_type == GameConstants.RED) {
 					this.addChildAt(new ResourceConstants.PLANE_OUTER_RED(), 0);
 				}
+				_changeTypeTimeCount = GameConstants.PLANE_ALL_CHANGE_TYPE_TIME;
 			}
 		}
 		
@@ -53,6 +56,13 @@ package org.hamster.alive30.game.item
 		private function addedToStageHandler(evt:Event):void
 		{
 			
+		}
+		
+		public function onEnterFrameHandler(timeElapsed:Number):void
+		{
+			if (_changeTypeTimeCount > 0) {
+				_changeTypeTimeCount -= timeElasped;
+			}
 		}
 		
 		

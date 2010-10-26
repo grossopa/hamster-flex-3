@@ -54,7 +54,6 @@ package org.hamster.alive30.game.item
 		{
 			super();
 			this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
-			this.addEventListener(Event.ENTER_FRAME, enterFrameHandler);
 			this.filters = [new GlowFilter(0x0098ff, 1, 5, 5, 2, 3)];
 		}
 	
@@ -63,7 +62,7 @@ package org.hamster.alive30.game.item
 			
 		}
 		
-		protected function enterFrameHandler(evt:Event):void
+		public function onEnterFrameHandler(timeElapsed:Number):void
 		{
 			
 		}
