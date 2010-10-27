@@ -149,7 +149,8 @@ class TracePanel extends Sprite
 		this.addEventListener(Event.ADDED_TO_STAGE, addedHandler, false, 0, true);
 		this.addEventListener(Event.REMOVED_FROM_STAGE, removedHandler, false, 0, true);
 		
-		var tf:TextFormat = new TextFormat("Courier New", 12, 0xEAEAEA);
+		var tf:TextFormat = new TextFormat("Arial", 12, 0xEAEAEA);
+		// var tf:TextFormat = new TextFormat("Courier New", 12, 0xEAEAEA);
 		_textField = new TextField();
 		_textField.defaultTextFormat = tf;
 		_textField.wordWrap = true;
