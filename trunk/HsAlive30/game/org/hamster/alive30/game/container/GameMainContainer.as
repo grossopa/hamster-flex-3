@@ -91,10 +91,9 @@ package org.hamster.alive30.game.container
 				}
 			}
 			
-			
-			
 			var hitResult:Array = planeHitTest();
 			absorbBullet(hitResult);
+			hitByBullet(hitResult);
 		//	logger.info("Test hit result count : " + hitResult.length);
 		}
 		
@@ -199,7 +198,13 @@ package org.hamster.alive30.game.container
 		
 		private function hitByBullet(array:Array):void
 		{
-			this.dispatchEvent(new GameEvent(GameEvent.PLANE_HIT));
+			for each (var bullet:Bullet in array) {
+				if (bullet.type != _plane.type && !_plane.isChangingType) {
+					logger.info("boom");
+					this.dispatchEvent(new GameEvent(GameEvent.PLANE_HIT));
+					return;
+				}
+			}
 		}
 		
 		private function getBulletFromCache():Bullet

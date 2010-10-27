@@ -29,7 +29,13 @@ package org.hamster.alive30.game.control
 		
 		public function getTimeElapsed(name:String):Number
 		{
-			var objIndex:int = records.indexOf(name);
+			var objIndex:int = -1;
+			for (var i:int = 0, len:int = records.length; i < len; i++) {
+				if (records[i].name == name) {
+					objIndex = i;
+					break;
+				}
+			}
 			if (objIndex == -1) {
 				return -1;
 			} else {
