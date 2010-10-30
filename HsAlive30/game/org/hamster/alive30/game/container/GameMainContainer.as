@@ -19,6 +19,8 @@ package org.hamster.alive30.game.container
 	import org.hamster.alive30.game.event.GameEvent;
 	import org.hamster.alive30.game.item.Bullet;
 	import org.hamster.alive30.game.item.Plane;
+	import org.hamster.alive30.game.model.vo.BulletListVO;
+	import org.hamster.alive30.game.model.vo.BulletVO;
 	import org.hamster.alive30.game.util.GameConstants;
 	import org.hamster.alive30.game.util.GameUtil;
 	
@@ -36,6 +38,12 @@ package org.hamster.alive30.game.container
 		
 		private var _plane:Plane;
 		private var _bullets:ArrayCollection = new ArrayCollection();
+		private var _nextBulletVOList:BulletListVO;
+		
+		private var _bulletListVOArray:Array;
+		
+		public function set bulletListVOArray(value:Array):void { _bulletListVOArray = value }
+		public function get bulletListVOArray():Array { return _bulletListVOArray }
 		
 		public function GameMainContainer()
 		{
@@ -76,6 +84,11 @@ package org.hamster.alive30.game.container
 		
 		private function enterFrameHandler(evt:Event):void
 		{
+			var timeElasped:Number = timeManager.getTimeElapsed(NAME);
+			
+			// handle nextBulletVOs
+			updateBulletVOList(timeElasped);
+			
 			// update vectors
 			updateAbsorbedBullets();
 			
@@ -87,19 +100,17 @@ package org.hamster.alive30.game.container
 					child.y += vc.speedVector.y;
 					vc.speedVector.x += vc.accelVector.x;
 					vc.speedVector.y += vc.accelVector.y;
-					vc.onEnterFrameHandler(timeManager.getTimeElapsed(NAME));
+					vc.onEnterFrameHandler(timeElasped);
 				}
 			}
 			
 			var hitResult:Array = planeHitTest();
 			absorbBullet(hitResult);
 			hitByBullet(hitResult);
-		//	logger.info("Test hit result count : " + hitResult.length);
 		}
 		
 		private function _keyDownHandler(evt:KeyboardEvent):void
 		{
-			//logger.info("Key Down : " + evt.keyCode);
 			if (evt.keyCode == Keyboard.LEFT) {
 				_plane.speedVector.x = - GameConstants.MOVE_SPEED;
 			} else if (evt.keyCode == Keyboard.RIGHT) {
@@ -152,18 +163,39 @@ package org.hamster.alive30.game.container
 			return result;
 		}
 		
+		private function updateBulletVOList(timeElasped:Number):void
+		{
+			if (!_nextBulletVOList && _bulletListVOArray.length > 0) {
+				_nextBulletVOList = _bulletListVOArray.pop();
+			} else if (!_nextBulletVOList) {
+				return;
+			}
+			
+			_nextBulletVOList.timeGap -= timeElasped;
+			if (_nextBulletVOList.timeGap <= 0) {
+				var bulletVOList:Array = _nextBulletVOList.bulletVOList;
+				for each (var bulletVO:BulletVO in bulletVOList) {
+					var bullet:Bullet = this.getBulletFromCache();
+					bullet.applyVO(bulletVO);
+					this._bullets.addItem(bullet);
+					this._mainContainer.addChild(bullet);
+				}
+				_nextBulletVOList = null;
+			}
+		}
+		
 		private function updateAbsorbedBullets():void
 		{
 			var planeCX:Number = _plane.x + GameConstants.PLANE_SAME_TYPE_HIT_RADIUS;
 			var planeCY:Number = _plane.y + GameConstants.PLANE_SAME_TYPE_HIT_RADIUS;
 			var removeChildren:Array = new Array();
 			for each (var bullet:Bullet in _bullets) {
-				if (bullet.isAbsorbed && bullet.scaleX >= 0.3) {
-					var distance:Number = 
-						(bullet.x + GameConstants.BULLET_HIT_RADIUS - planeCX) 
-						* (bullet.x + GameConstants.BULLET_HIT_RADIUS - planeCX) 
-						+ (bullet.y + GameConstants.BULLET_HIT_RADIUS - planeCY)
-						* (bullet.y + GameConstants.BULLET_HIT_RADIUS - planeCY);
+				var distance:Number = 
+					(bullet.x + (bullet.width >> 1) - planeCX) 
+					* (bullet.x + (bullet.width >> 1) - planeCX) 
+					+ (bullet.y + (bullet.width >> 1) - planeCY)
+					* (bullet.y + (bullet.width >> 1) - planeCY);
+				if (bullet.isAbsorbed && distance >= 5) {
 					var percent:Number = Math.sqrt(distance) / (GameConstants.BULLET_HIT_RADIUS + GameConstants.PLANE_SAME_TYPE_HIT_RADIUS);
 					if (percent > 1) {
 						percent = 1;
@@ -173,7 +205,7 @@ package org.hamster.alive30.game.container
 					bullet.speedVector.x = planeCX - (bullet.x + GameConstants.BULLET_HIT_RADIUS * percent);
 					bullet.speedVector.y = planeCY - (bullet.y + GameConstants.BULLET_HIT_RADIUS * percent);
 					bullet.speedVector.length = GameConstants.ABSORB_SPEED;
-				} else if (bullet.scaleX < 0.3) {
+				} else if (distance < 5) {
 					bullet.speedVector.x = 0;
 					bullet.speedVector.y = 0;
 					removeChildren.push(bullet);
