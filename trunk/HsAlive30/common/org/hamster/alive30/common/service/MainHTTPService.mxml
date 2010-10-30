@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<services:HTTPServiceLocator xmlns:mx="http://www.adobe.com/2006/mxml"
+		   xmlns:services="org.hamster.services.*">
+	<mx:Script>
+		<![CDATA[
+			import org.hamster.alive30.common.config.AppConfig;AppConfig;
+			// import org.hamster.showcase.common.config.AppConfig;
+		]]>
+	</mx:Script>
+	<mx:HTTPService id="bulletList" url="{AppConfig.URL_BULLET_LIST}"
+					method="GET" resultFormat="text" />
+<!--	<mx:HTTPService id="cropImageList" url="{AppConfig.URL_CROP_IMAGE_LIST}"
+					method="GET" resultFormat="text" />
+	<mx:HTTPService id="imageRuler" url="{AppConfig.URL_IMAGE_RULER}"
+					method="GET" resultFormat="text" /> -->
+</services:HTTPServiceLocator>

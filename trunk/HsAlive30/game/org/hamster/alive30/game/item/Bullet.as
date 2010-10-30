@@ -19,6 +19,7 @@ package org.hamster.alive30.game.item
 		private const _speedVector:Vector2D = new Vector2D();
 		private const _accelVector:Vector2D = new Vector2D();
 		private var _type:String;
+		private var _moveType:String;
 		private var _isAbsorbed:Boolean;
 		
 		private var _glowFilter:GlowFilter;
@@ -52,6 +53,8 @@ package org.hamster.alive30.game.item
 			}
 		}
 		public function get type():String { return _type }
+		public function set moveType(value:String):void { _moveType = value }
+		public function get moveType():String { return _moveType }
 		public function get speedVector():Vector2D { return _speedVector }
 		public function get accelVector():Vector2D { return _accelVector }
 		public function set isAbsorbed(value:Boolean):void { _isAbsorbed = value }
@@ -81,6 +84,7 @@ package org.hamster.alive30.game.item
 			this.type = bulletVO.type;
 			this.x = bulletVO.x;
 			this.y = bulletVO.y;
+			this.moveType = bulletVO.moveType;
 			if (bulletVO.speedVector) {
 				this.speedVector.x = bulletVO.speedVector.x;
 				this.speedVector.y = bulletVO.speedVector.y;

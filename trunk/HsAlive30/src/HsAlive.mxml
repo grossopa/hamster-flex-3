@@ -8,18 +8,23 @@
 			import mx.logging.ILogger;
 			import mx.logging.Log;
 			
+			import org.hamster.alive30.common.facade.AppFacade;
+			import org.hamster.alive30.common.service.MainHTTPService;
 			import org.hamster.alive30.common.util.SWFProfiler;
 			import org.hamster.alive30.common.util.TracePanelUtil;
 			import org.hamster.alive30.game.control.ControlManager;
 			
 			private var logger:ILogger = Log.getLogger('hs.main');
 			private var ctrlManager:ControlManager = ControlManager.instance;
+			private var facade:AppFacade = AppFacade.instance;
 
 			protected function application1_applicationCompleteHandler(event:FlexEvent):void
 			{
 				SWFProfiler.init(stage, this);
 				TracePanelUtil.instance.init(stage, this);
 				ctrlManager.stage = stage;
+				new MainHTTPService();
+				facade.sendNotification(AppFacade.INIT);
 				//stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 				//stage.addEventListener(KeyboardEvent.KEY_UP, keyUpHandler);
 			}
