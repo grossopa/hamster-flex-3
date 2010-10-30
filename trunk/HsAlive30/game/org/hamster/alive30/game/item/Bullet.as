@@ -10,6 +10,7 @@ package org.hamster.alive30.game.item
 	import org.hamster.alive30.common.component.BaseImage;
 	import org.hamster.alive30.common.util.IVector2DItem;
 	import org.hamster.alive30.common.util.Vector2D;
+	import org.hamster.alive30.game.model.vo.BulletVO;
 	import org.hamster.alive30.game.util.GameConstants;
 	import org.hamster.alive30.game.util.ResourceConstants;
 	
@@ -20,6 +21,8 @@ package org.hamster.alive30.game.item
 		private var _type:String;
 		private var _isAbsorbed:Boolean;
 		
+		private var _glowFilter:GlowFilter;
+		
 		public function set type(value:String):void
 		{
 			if (value != _type) {
@@ -29,19 +32,23 @@ package org.hamster.alive30.game.item
 				}
 				if (value == GameConstants.RED) {
 					this.graphics.clear();
-					this.graphics.beginFill(0xDD0000, 1);
+					_glowFilter.color = 0xDD0000;
+					this.graphics.lineStyle(2, 0xDD0000, 0.4, false);
 					this.graphics.drawCircle(GameConstants.BULLET_HIT_RADIUS, 
 						GameConstants.BULLET_HIT_RADIUS,
 						GameConstants.BULLET_HIT_RADIUS - 5);
 					//this.addChild(new ResourceConstants.IMG_RED_BALL());
 				} else if (value == GameConstants.BLUE) {
 					this.graphics.clear();
-					this.graphics.beginFill(0x0098FF, 1);
+					//this.graphics.beginFill(0x0098FF, 1);
+					_glowFilter.color = 0x0098FF;
+					this.graphics.lineStyle(2, 0x0098FF, 0.4, false);
 					this.graphics.drawCircle(GameConstants.BULLET_HIT_RADIUS, 
 						GameConstants.BULLET_HIT_RADIUS,
 						GameConstants.BULLET_HIT_RADIUS - 5);
 					//this.addChild(new ResourceConstants.IMG_BLUE_BALL());
 				}
+				this.filters = [_glowFilter];
 			}
 		}
 		public function get type():String { return _type }
@@ -54,7 +61,9 @@ package org.hamster.alive30.game.item
 		{
 			super();
 			this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
-			this.filters = [new GlowFilter(0x0098ff, 1, 5, 5, 2, 3)];
+			
+			_glowFilter = new GlowFilter(0x0098ff, 1, 5, 5, 2, 3)
+			this.filters = [_glowFilter];
 		}
 	
 		protected function addedToStageHandler(evt:Event):void
@@ -65,6 +74,27 @@ package org.hamster.alive30.game.item
 		public function onEnterFrameHandler(timeElapsed:Number):void
 		{
 			
+		}
+		
+		public function applyVO(bulletVO:BulletVO):void
+		{
+			this.type = bulletVO.type;
+			this.x = bulletVO.x;
+			this.y = bulletVO.y;
+			if (bulletVO.speedVector) {
+				this.speedVector.x = bulletVO.speedVector.x;
+				this.speedVector.y = bulletVO.speedVector.y;
+			} else {
+				this.speedVector.x = 0;
+				this.speedVector.y = 0;
+			}
+			if (bulletVO.accelVector) {
+				this.accelVector.x = bulletVO.accelVector.x;
+				this.accelVector.y = bulletVO.accelVector.y;
+			} else {
+				this.accelVector.x = 0;
+				this.accelVector.y = 0;
+			}
 		}
 	}
 }
