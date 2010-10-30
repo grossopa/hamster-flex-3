@@ -12,6 +12,7 @@ package org.hamster.alive30.game.container
 	import mx.logging.Log;
 	
 	import org.hamster.alive30.common.component.SimpleContainer;
+	import org.hamster.alive30.common.constant.AppConstants;
 	import org.hamster.alive30.common.manager.CacheManager;
 	import org.hamster.alive30.common.util.IVector2DItem;
 	import org.hamster.alive30.game.control.ControlManager;
@@ -21,6 +22,7 @@ package org.hamster.alive30.game.container
 	import org.hamster.alive30.game.item.Plane;
 	import org.hamster.alive30.game.model.vo.BulletListVO;
 	import org.hamster.alive30.game.model.vo.BulletVO;
+	import org.hamster.alive30.game.util.BulletMoveType;
 	import org.hamster.alive30.game.util.GameConstants;
 	import org.hamster.alive30.game.util.GameUtil;
 	
@@ -49,21 +51,24 @@ package org.hamster.alive30.game.container
 		{
 			super();
 			_mainContainer = new SimpleContainer();
-			_mainContainer.measuredWidth = 800;
-			_mainContainer.measuredHeight = 600;
+			_mainContainer.measuredWidth = AppConstants.APP_WIDTH;
+			_mainContainer.measuredHeight = AppConstants.APP_HEIGHT;
 			_mainContainer.addEventListener(Event.ENTER_FRAME, enterFrameHandler);
 			_plane = new Plane();
+			_plane.x = (AppConstants.APP_WIDTH >> 1) + GameConstants.PLANE_SAME_TYPE_HIT_RADIUS;
+			_plane.y = (AppConstants.APP_HEIGHT >> 1) + GameConstants.PLANE_SAME_TYPE_HIT_RADIUS;
 			_plane.type = GameConstants.BLUE;
 			_mainContainer.addChild(_plane);
 			
-			for (var i:int = 0; i < 100; i++) {
-				var dc:Bullet = new Bullet();
-				dc.x = 200 * Math.random();
-				dc.y = 200 * Math.random();
-				dc.type = GameConstants.BLUE;
-				_mainContainer.addChild(dc);
-				_bullets.addItem(dc);
-			}
+//			for (var i:int = 0; i < 100; i++) {
+//				var dc:Bullet = new Bullet();
+//				dc.x = 200 * Math.random();
+//				dc.y = 200 * Math.random();
+//				dc.type = GameConstants.BLUE;
+//				dc.moveType = BulletMoveType.FOLLOW;
+//				_mainContainer.addChild(dc);
+//				_bullets.addItem(dc);
+//			}
 			
 			timeManager.addRecord(NAME);
 			
@@ -104,6 +109,8 @@ package org.hamster.alive30.game.container
 				}
 			}
 			
+			updateBulletMoveType();
+			
 			var hitResult:Array = planeHitTest();
 			absorbBullet(hitResult);
 			hitByBullet(hitResult);
@@ -116,7 +123,7 @@ package org.hamster.alive30.game.container
 			} else if (evt.keyCode == Keyboard.RIGHT) {
 				_plane.speedVector.x = GameConstants.MOVE_SPEED;
 			} else if (evt.keyCode == Keyboard.UP) {
-				_plane.speedVector.y = -GameConstants.MOVE_SPEED;
+				_plane.speedVector.y = - GameConstants.MOVE_SPEED;
 			} else if (evt.keyCode == Keyboard.DOWN) {
 				_plane.speedVector.y = GameConstants.MOVE_SPEED;
 			} else if (evt.keyCode == Keyboard.CONTROL) {
@@ -165,7 +172,7 @@ package org.hamster.alive30.game.container
 		
 		private function updateBulletVOList(timeElasped:Number):void
 		{
-			if (!_nextBulletVOList && _bulletListVOArray.length > 0) {
+			if (!_nextBulletVOList && _bulletListVOArray && _bulletListVOArray.length > 0) {
 				_nextBulletVOList = _bulletListVOArray.pop();
 			} else if (!_nextBulletVOList) {
 				return;
@@ -181,6 +188,20 @@ package org.hamster.alive30.game.container
 					this._mainContainer.addChild(bullet);
 				}
 				_nextBulletVOList = null;
+			}
+		}
+		
+		private function updateBulletMoveType():void
+		{
+			for each (var bullet:Bullet in _bullets) {
+				if (bullet.isAbsorbed) {
+					continue;
+				}
+				if (bullet.moveType == BulletMoveType.FOLLOW) {
+					BulletMoveType.follow(bullet, bullet.accelVector, _plane, 0.1);
+				} else if (bullet.moveType == BulletMoveType.STRAIGHT) {
+					BulletMoveType.straight(bullet, bullet.accelVector, _plane, 0);
+				}
 			}
 		}
 		
@@ -205,7 +226,7 @@ package org.hamster.alive30.game.container
 					bullet.speedVector.x = planeCX - (bullet.x + GameConstants.BULLET_HIT_RADIUS * percent);
 					bullet.speedVector.y = planeCY - (bullet.y + GameConstants.BULLET_HIT_RADIUS * percent);
 					bullet.speedVector.length = GameConstants.ABSORB_SPEED;
-				} else if (distance < 5) {
+				} else if (bullet.isAbsorbed && distance < 5) {
 					bullet.speedVector.x = 0;
 					bullet.speedVector.y = 0;
 					removeChildren.push(bullet);

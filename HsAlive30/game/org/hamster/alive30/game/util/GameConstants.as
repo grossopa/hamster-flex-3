@@ -8,6 +8,7 @@ package org.hamster.alive30.game.util
 		public static const PLANE_DIFF_TYPE_HIT_RADIUS:Number = 1;
 		public static const BULLET_HIT_RADIUS:Number = 20;
 		
+		public static const TURN_SPEED:Number = 0.2;
 		public static const MOVE_SPEED:Number = 3;
 		public static const ABSORB_SPEED:Number = 5;
 		
