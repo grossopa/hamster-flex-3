@@ -109,11 +109,30 @@ package org.hamster.alive30.game.container
 				}
 			}
 			
+			if (_plane.cx <= 0) {
+				_plane.cx = 0;
+			}
+			
+			if (_plane.cy <= 0) {
+				_plane.cy = 0;
+			}
+			
+			if (_plane.cx >= AppConstants.APP_WIDTH) {
+				_plane.cx = AppConstants.APP_WIDTH;
+			}
+			
+			if (_plane.cy >= AppConstants.APP_HEIGHT) {
+				_plane.cy = AppConstants.APP_HEIGHT;
+			}
+			
 			updateBulletMoveType();
 			
 			var hitResult:Array = planeHitTest();
 			absorbBullet(hitResult);
 			hitByBullet(hitResult);
+			
+			// remove out-bound bullets
+			removeOutBoundBullets();
 		}
 		
 		private function _keyDownHandler(evt:KeyboardEvent):void
@@ -182,10 +201,7 @@ package org.hamster.alive30.game.container
 			if (_nextBulletVOList.timeGap <= 0) {
 				var bulletVOList:Array = _nextBulletVOList.bulletVOList;
 				for each (var bulletVO:BulletVO in bulletVOList) {
-					var bullet:Bullet = this.getBulletFromCache();
-					bullet.applyVO(bulletVO);
-					this._bullets.addItem(bullet);
-					this._mainContainer.addChild(bullet);
+					this.addBulletToStage(bulletVO);
 				}
 				_nextBulletVOList = null;
 			}
@@ -234,9 +250,7 @@ package org.hamster.alive30.game.container
 			}
 			
 			for each (var rb:Bullet in removeChildren) {
-				//_bullets.splice((_bullets.indexOf(rb), 1);
-				_bullets.removeItemAt(_bullets.getItemIndex(rb));
-				this._mainContainer.removeChild(rb);
+				removeBulletFromStage(rb);
 			}
 		}
 		
@@ -258,6 +272,34 @@ package org.hamster.alive30.game.container
 					return;
 				}
 			}
+		}
+		
+		private function removeOutBoundBullets():void
+		{
+			var gap:int = 20;
+			for each (var bullet:Bullet in _bullets) {
+				if (bullet.x < - bullet.width - gap
+					|| bullet.y < - bullet.height - gap
+					|| bullet.x > AppConstants.APP_WIDTH + gap
+					|| bullet.y > AppConstants.APP_HEIGHT + gap) {
+					removeBulletFromStage(bullet);
+				}
+			}
+		}
+		
+		private function addBulletToStage(bulletVO:BulletVO):void
+		{
+			var bullet:Bullet = getBulletFromCache();
+			bullet.applyVO(bulletVO);
+			_bullets.addItem(bullet);
+			_mainContainer.addChild(bullet);
+		}
+		
+		private function removeBulletFromStage(bullet:Bullet):void
+		{
+			this.putBulletIntoCache(bullet);
+			_bullets.removeItemAt(_bullets.getItemIndex(bullet));
+			_mainContainer.removeChild(bullet);
 		}
 		
 		private function getBulletFromCache():Bullet
