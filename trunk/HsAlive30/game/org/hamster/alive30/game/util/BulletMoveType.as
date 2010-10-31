@@ -5,8 +5,8 @@ package org.hamster.alive30.game.util
 	public class BulletMoveType
 	{
 		public static const STRAIGHT:String = "straight";
-		public static const DEFAULT:String = "default";
-		public static const FOLLOW:String = "follow";
+		public static const DEFAULT:String 	= "default";
+		public static const FOLLOW:String 	= "follow";
 		
 		public function BulletMoveType()
 		{
@@ -20,8 +20,8 @@ package org.hamster.alive30.game.util
 		
 		public static function follow(source:Object, accelVector:Vector2D, target:Object, speed:Number):void
 		{
-			accelVector.x = target.x - source.x;
-			accelVector.y = target.y - source.y;
+			accelVector.x = target.cx - source.cx;
+			accelVector.y = target.cy - source.cy;
 			accelVector.length = GameConstants.TURN_SPEED;
 			
 			if (isNaN(source.speedVector.x)) {

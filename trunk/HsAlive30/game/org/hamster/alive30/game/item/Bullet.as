@@ -55,6 +55,10 @@ package org.hamster.alive30.game.item
 		public function get type():String { return _type }
 		public function set moveType(value:String):void { _moveType = value }
 		public function get moveType():String { return _moveType }
+		public function set cx(value:Number):void { x = value - (width >> 1) }
+		public function get cx():Number { return x + (width >> 1) }
+		public function set cy(value:Number):void { y = value - (height >> 1) }
+		public function get cy():Number { return y + (height >> 1) }
 		public function get speedVector():Vector2D { return _speedVector }
 		public function get accelVector():Vector2D { return _accelVector }
 		public function set isAbsorbed(value:Boolean):void { _isAbsorbed = value }
@@ -82,8 +86,8 @@ package org.hamster.alive30.game.item
 		public function applyVO(bulletVO:BulletVO):void
 		{
 			this.type = bulletVO.type;
-			this.x = bulletVO.x;
-			this.y = bulletVO.y;
+			this.cx = bulletVO.cx;
+			this.cy = bulletVO.cy;
 			this.moveType = bulletVO.moveType;
 			if (bulletVO.speedVector) {
 				this.speedVector.x = bulletVO.speedVector.x;
