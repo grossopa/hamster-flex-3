@@ -55,8 +55,8 @@ package org.hamster.alive30.game.container
 			_mainContainer.measuredHeight = AppConstants.APP_HEIGHT;
 			_mainContainer.addEventListener(Event.ENTER_FRAME, enterFrameHandler);
 			_plane = new Plane();
-			_plane.x = (AppConstants.APP_WIDTH >> 1) + GameConstants.PLANE_SAME_TYPE_HIT_RADIUS;
-			_plane.y = (AppConstants.APP_HEIGHT >> 1) + GameConstants.PLANE_SAME_TYPE_HIT_RADIUS;
+			_plane.cx = (AppConstants.APP_WIDTH >> 1);
+			_plane.cy = (AppConstants.APP_HEIGHT >> 1);
 			_plane.type = GameConstants.BLUE;
 			_mainContainer.addChild(_plane);
 			
@@ -207,8 +207,8 @@ package org.hamster.alive30.game.container
 		
 		private function updateAbsorbedBullets():void
 		{
-			var planeCX:Number = _plane.x + GameConstants.PLANE_SAME_TYPE_HIT_RADIUS;
-			var planeCY:Number = _plane.y + GameConstants.PLANE_SAME_TYPE_HIT_RADIUS;
+			var planeCX:Number = _plane.cx;
+			var planeCY:Number = _plane.cy;
 			var removeChildren:Array = new Array();
 			for each (var bullet:Bullet in _bullets) {
 				var distance:Number = 
@@ -223,8 +223,8 @@ package org.hamster.alive30.game.container
 					}
 					bullet.scaleX = percent;
 					bullet.scaleY = percent;
-					bullet.speedVector.x = planeCX - (bullet.x + GameConstants.BULLET_HIT_RADIUS * percent);
-					bullet.speedVector.y = planeCY - (bullet.y + GameConstants.BULLET_HIT_RADIUS * percent);
+					bullet.speedVector.x = planeCX - bullet.cx;
+					bullet.speedVector.y = planeCY - bullet.cy;
 					bullet.speedVector.length = GameConstants.ABSORB_SPEED;
 				} else if (bullet.isAbsorbed && distance < 5) {
 					bullet.speedVector.x = 0;

@@ -4,8 +4,8 @@ package org.hamster.alive30.game.model.vo
 
 	public class BulletVO
 	{
-		public var x:Number;
-		public var y:Number;
+		public var cx:Number;
+		public var cy:Number;
 		public var type:String;
 		public var moveType:String;
 		public var speedVector:Vector2D;

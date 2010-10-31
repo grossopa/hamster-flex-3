@@ -41,6 +41,10 @@ package org.hamster.alive30.game.item
 		{
 			return _type;
 		}
+		public function set cx(value:Number):void { x = value - (width >> 1) }
+		public function get cx():Number { return x + (width >> 1) }
+		public function set cy(value:Number):void { y = value - (height >> 1) }
+		public function get cy():Number { return y + (height >> 1) }
 		public function get speedVector():Vector2D { return _speedVector }
 		public function get accelVector():Vector2D { return _accelVector }
 		
