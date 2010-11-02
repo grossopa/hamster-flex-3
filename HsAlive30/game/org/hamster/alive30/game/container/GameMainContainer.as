@@ -12,7 +12,6 @@ package org.hamster.alive30.game.container
 	import mx.logging.Log;
 	
 	import org.hamster.alive30.common.component.SimpleContainer;
-	import org.hamster.alive30.common.constant.AppConstants;
 	import org.hamster.alive30.common.manager.CacheManager;
 	import org.hamster.alive30.common.util.IVector2DItem;
 	import org.hamster.alive30.game.control.ControlManager;
@@ -51,12 +50,12 @@ package org.hamster.alive30.game.container
 		{
 			super();
 			_mainContainer = new SimpleContainer();
-			_mainContainer.measuredWidth = AppConstants.APP_WIDTH;
-			_mainContainer.measuredHeight = AppConstants.APP_HEIGHT;
+			_mainContainer.measuredWidth = GameConstants.GAME_WIDTH;
+			_mainContainer.measuredHeight = GameConstants.GAME_HEIGHT;
 			_mainContainer.addEventListener(Event.ENTER_FRAME, enterFrameHandler);
 			_plane = new Plane();
-			_plane.cx = (AppConstants.APP_WIDTH >> 1);
-			_plane.cy = (AppConstants.APP_HEIGHT >> 1);
+			_plane.cx = (GameConstants.GAME_WIDTH >> 1);
+			_plane.cy = (GameConstants.GAME_HEIGHT >> 1);
 			_plane.type = GameConstants.BLUE;
 			_mainContainer.addChild(_plane);
 			
@@ -117,12 +116,12 @@ package org.hamster.alive30.game.container
 				_plane.cy = 0;
 			}
 			
-			if (_plane.cx >= AppConstants.APP_WIDTH) {
-				_plane.cx = AppConstants.APP_WIDTH;
+			if (_plane.cx >= GameConstants.GAME_WIDTH) {
+				_plane.cx = GameConstants.GAME_WIDTH;
 			}
 			
-			if (_plane.cy >= AppConstants.APP_HEIGHT) {
-				_plane.cy = AppConstants.APP_HEIGHT;
+			if (_plane.cy >= GameConstants.GAME_HEIGHT) {
+				_plane.cy = GameConstants.GAME_HEIGHT;
 			}
 			
 			updateBulletMoveType();
@@ -280,8 +279,8 @@ package org.hamster.alive30.game.container
 			for each (var bullet:Bullet in _bullets) {
 				if (bullet.x < - bullet.width - gap
 					|| bullet.y < - bullet.height - gap
-					|| bullet.x > AppConstants.APP_WIDTH + gap
-					|| bullet.y > AppConstants.APP_HEIGHT + gap) {
+					|| bullet.x > GameConstants.GAME_WIDTH + gap
+					|| bullet.y > GameConstants.GAME_HEIGHT + gap) {
 					removeBulletFromStage(bullet);
 				}
 			}

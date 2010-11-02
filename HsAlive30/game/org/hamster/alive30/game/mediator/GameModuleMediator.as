@@ -35,7 +35,7 @@ package org.hamster.alive30.game.mediator
 		{
 			var bulletListArray:Array = notification.getBody() as Array;
 			var gameModule:GameModule = GameModule(getViewComponent());
-			gameModule.bulletListArray = bulletListArray;
+			//gameModule.bulletListArray = bulletListArray;
 		}
 	}
 }

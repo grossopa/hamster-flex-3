@@ -32,6 +32,13 @@ package org.hamster.alive30.common.util
 			return _x * _x + _y * _y;
 		}
 		
+		public function set angle(value:Number):void
+		{
+			var len:Number = length;
+			_x = Math.cos(value) * len;
+			_y = Math.sin(value) * len;
+		}
+		
 		public function get angle():Number
 		{
 			return Math.atan2(_y, _x);

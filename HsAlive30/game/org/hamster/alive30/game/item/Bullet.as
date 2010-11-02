@@ -49,7 +49,7 @@ package org.hamster.alive30.game.item
 						GameConstants.BULLET_HIT_RADIUS - 5);
 					//this.addChild(new ResourceConstants.IMG_BLUE_BALL());
 				}
-				this.filters = [_glowFilter];
+				this.filters = [];
 			}
 		}
 		public function get type():String { return _type }
@@ -70,7 +70,7 @@ package org.hamster.alive30.game.item
 			this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
 			
 			_glowFilter = new GlowFilter(0x0098ff, 1, 5, 5, 2, 3)
-			this.filters = [_glowFilter];
+			//this.filters = [_glowFilter];
 		}
 	
 		protected function addedToStageHandler(evt:Event):void
@@ -88,6 +88,9 @@ package org.hamster.alive30.game.item
 			this.type = bulletVO.type;
 			this.cx = bulletVO.cx;
 			this.cy = bulletVO.cy;
+			this.isAbsorbed = false;
+			this.scaleX = 1;
+			this.scaleY = 1;
 			this.moveType = bulletVO.moveType;
 			if (bulletVO.speedVector) {
 				this.speedVector.x = bulletVO.speedVector.x;
