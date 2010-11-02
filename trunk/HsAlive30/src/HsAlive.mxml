@@ -12,7 +12,13 @@
 			import org.hamster.alive30.common.service.MainHTTPService;
 			import org.hamster.alive30.common.util.SWFProfiler;
 			import org.hamster.alive30.common.util.TracePanelUtil;
+			import org.hamster.alive30.common.util.Vector2D;
 			import org.hamster.alive30.game.control.ControlManager;
+			import org.hamster.alive30.game.item.Bullet;
+			import org.hamster.alive30.game.model.vo.BulletListVO;
+			import org.hamster.alive30.game.model.vo.BulletVO;
+			import org.hamster.alive30.game.util.BulletMoveType;
+			import org.hamster.alive30.game.util.GameConstants;
 			
 			private var logger:ILogger = Log.getLogger('hs.main');
 			private var ctrlManager:ControlManager = ControlManager.instance;
@@ -25,20 +31,39 @@
 				ctrlManager.stage = stage;
 				new MainHTTPService();
 				facade.sendNotification(AppFacade.INIT);
-				//stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
-				//stage.addEventListener(KeyboardEvent.KEY_UP, keyUpHandler);
+				
+				testBullets();
 			}
 			
-//			override protected function keyDownHandler(evt:KeyboardEvent):void
-//			{
-//				//logger.info("Key Down : " + evt.keyCode);
-//			}
-//			
-//			override protected  function keyUpHandler(evt:KeyboardEvent):void
-//			{
-//				//logger.info("Key Up   : " + evt.keyCode);
-//			}
-
+			
+			private function testBullets():void
+			{
+				var bulletListArray:Array = new Array();
+				for (var i:int = 0; i < 10; i++) {
+					var bulletList:BulletListVO = new BulletListVO();
+					bulletList.timeGap = 800;
+					bulletList.bulletVOList = [];
+					for (var j:int = 0; j < 5; j++) {
+						var bulletVO:BulletVO = new BulletVO();
+						bulletVO.cx = (i % 2 == 0 ? 0.2 : 0.8) * GameConstants.GAME_WIDTH;
+						bulletVO.cy = 0.2 * GameConstants.GAME_HEIGHT;
+						bulletVO.type = i % 2 == 0 ? GameConstants.BLUE : GameConstants.RED;
+						bulletVO.moveType = BulletMoveType.DEFAULT;
+						bulletVO.speedVector = new Vector2D();
+						bulletVO.speedVector.length = 3;
+						if (i % 2 == 0) {
+							bulletVO.speedVector.angle = (15 + 12 * j) * Math.PI / 180;
+						} else {
+							bulletVO.speedVector.angle = (105 + 12 * j) * Math.PI / 180;
+						}
+						bulletList.bulletVOList.push(bulletVO);
+					}
+					bulletListArray.push(bulletList);
+				}
+				
+				gameModule.bulletListArray = bulletListArray;
+			}
+			
 		]]>
 	</mx:Script>
 	<game:GameModule id="gameModule" width="100%" height="100%" />

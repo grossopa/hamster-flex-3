@@ -36,5 +36,6 @@ package org.hamster.alive30.game.util
 			}
 			source.speedVector.length = GameConstants.MOVE_SPEED;
 		}
+		
 	}
 }
