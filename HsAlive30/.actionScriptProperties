@@ -5,6 +5,7 @@
       <compilerSourcePathEntry kind="1" linkType="1" path="game"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="assets"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="common"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="menu"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
