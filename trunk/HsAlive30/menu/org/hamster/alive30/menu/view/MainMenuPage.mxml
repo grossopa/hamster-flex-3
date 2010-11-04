@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
 		   width="100%" height="100%"
-		   xmlns:filters="flash.filters.*" xmlns:item="org.hamster.alive30.menu.item.*">
+		   xmlns:filters="flash.filters.*" xmlns:item="org.hamster.alive30.menu.item.*" xmlns:view="org.hamster.alive30.menu.view.*">
 	<mx:Script>
 		<![CDATA[
+
+			protected function menuselectionlabel1_clickHandler(event:MouseEvent):void
+			{
+				levelSelectorPage.visible = true;
+			}
+
 		]]>
 	</mx:Script>
 	<mx:Canvas width="250" height="100%" backgroundColor="black" backgroundAlpha="0.5">
 		<mx:filters>
 			<filters:DropShadowFilter blurX="10" blurY="10" quality="3" />
 		</mx:filters>
-		<item:MenuSelectionLabel label="Start Game" y="200" width="100%" height="30" />
+		<item:MenuSelectionLabel label="Start Game" y="200" width="100%" height="30" 
+								 click="menuselectionlabel1_clickHandler(event)" />
 	</mx:Canvas>
+	<view:LevelSelectorPage id="levelSelectorPage" visible="false" />
 </mx:Canvas>

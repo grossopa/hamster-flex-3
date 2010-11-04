@@ -1,6 +1,7 @@
 package org.hamster.alive30.game.mediator
 {
 	import org.hamster.alive30.common.facade.AppFacade;
+	import org.hamster.alive30.common.vo.LevelVO;
 	import org.hamster.alive30.game.GameModule;
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
@@ -17,7 +18,8 @@ package org.hamster.alive30.game.mediator
 		override public function listNotificationInterests():Array
 		{
 			return [
-				AppFacade.LOAD_BULLET_LIST_DONE
+				AppFacade.LOAD_BULLET_LIST_DONE,
+				AppFacade.GAME_START
 			];
 		}
 		
@@ -25,10 +27,20 @@ package org.hamster.alive30.game.mediator
 		{
 			var name:String = notification.getName();
 			switch (name) {
+				case AppFacade.GAME_START:
+					handleGameStart(notification);
+					break;
 				case AppFacade.LOAD_BULLET_LIST_DONE:
 					handleLoadBulletListDone(notification);
 					break;
 			}
+		}
+		
+		private function handleGameStart(notification:INotification):void
+		{
+			var levelVO:LevelVO = LevelVO(notification.getBody());
+			
+			// 
 		}
 		
 		private function handleLoadBulletListDone(notification:INotification):void

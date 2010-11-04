@@ -32,6 +32,7 @@ package org.hamster.alive30.menu.item
 			
 			this.setStyle('backgroundColor', 0x000000);
 			this.setStyle('backgroundAlpha', 0.01);
+			this.buttonMode = true;
 		}
 		
 		override protected function createChildren():void
