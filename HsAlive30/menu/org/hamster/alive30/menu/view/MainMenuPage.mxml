@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
 		   width="100%" height="100%"
-		   xmlns:filters="flash.filters.*" xmlns:item="org.hamster.alive30.menu.item.*" xmlns:view="org.hamster.alive30.menu.view.*">
+		   xmlns:filters="flash.filters.*" 
+		   xmlns:item="org.hamster.alive30.menu.item.*" 
+		   xmlns:view="org.hamster.alive30.menu.view.*" 
+		   creationComplete="canvas1_creationCompleteHandler(event)">
+	<mx:Metadata>
+		[Event(name="pageChange", type="org.hamster.alive30.common.event.PageEvent")]
+	</mx:Metadata>
 	<mx:Script>
 		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import org.hamster.alive30.common.event.PageEvent;
+			import org.hamster.alive30.common.facade.AppFacade;
+			import org.hamster.alive30.common.vo.proxy.PageProxy;
+			import org.hamster.alive30.menu.mediator.LevelSelectorMediator;
+			import org.hamster.alive30.menu.mediator.MainMenuMediator;
 
 			protected function menuselectionlabel1_clickHandler(event:MouseEvent):void
 			{
-				levelSelectorPage.visible = true;
+				//levelSelectorPage.visible = true;
+				var pageEvent:PageEvent = new PageEvent(PageEvent.PAGE_CHANGE);
+				pageEvent.newPageMediatorName = LevelSelectorMediator.NAME;
+				pageEvent.newContainer = this;
+				this.dispatchEvent(pageEvent);
+			}
+
+
+			protected function canvas1_creationCompleteHandler(event:FlexEvent):void
+			{
+				var facade:AppFacade = AppFacade.instance;
+				facade.registerMediator(new MainMenuMediator(this));
 			}
 
 		]]>
@@ -19,5 +43,6 @@
 		<item:MenuSelectionLabel label="Start Game" y="200" width="100%" height="30" 
 								 click="menuselectionlabel1_clickHandler(event)" />
 	</mx:Canvas>
-	<view:LevelSelectorPage id="levelSelectorPage" visible="false" />
+	<!--<view:LevelSelectorPage id="levelSelectorPage" visible="false" 
+							verticalCenter="0" horizontalCenter="0" />-->
 </mx:Canvas>
