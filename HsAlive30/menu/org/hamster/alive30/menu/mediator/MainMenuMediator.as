@@ -1,5 +1,7 @@
 package org.hamster.alive30.menu.mediator
 {
+	import flash.display.DisplayObjectContainer;
+	
 	import mx.core.UIComponent;
 	
 	import org.hamster.alive30.common.config.AppConfig;
@@ -23,17 +25,19 @@ package org.hamster.alive30.menu.mediator
 		
 		public function pageChangeHandler(evt:PageEvent):void
 		{
-			this.sendNotification(AppFacade.PAGE_CHANGE, evt);
+			this.sendNotification(AppFacade.PAGE_CHANGE, evt); 
 		}
 		
 		
 		
-		public function showPage(container:UIComponent=null, data:Object = null):void
+		public function showPage(container:DisplayObjectContainer=null, data:Object = null):void
 		{
 		}
 		
-		public function hidePage(container:UIComponent=null, data:Object = null):void
+		public function hidePage(container:DisplayObjectContainer=null, data:Object = null):void
 		{
+			var app:MainMenuPage = MainMenuPage(viewComponent);
+			app.parent.removeChild(app);
 		}
 	}
 }

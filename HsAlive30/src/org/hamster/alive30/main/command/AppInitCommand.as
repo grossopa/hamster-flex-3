@@ -2,7 +2,6 @@ package org.hamster.alive30.main.command
 {
 	import org.hamster.alive30.common.facade.AppFacade;
 	import org.hamster.alive30.main.mediator.AppMediator;
-	import org.hamster.alive30.menu.mediator.LevelSelectorMediator;
 	import org.hamster.alive30.menu.view.LevelSelectorPage;
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
@@ -27,8 +26,6 @@ package org.hamster.alive30.main.command
 			//sendNotification(ApplicationFacade.GET_BOOKS);
 			//	this.sendNotification(ManagementFacade.APP_INIT_DONE, app);
 			this.sendNotification(AppFacade.LOAD_BULLET_LIST);
-			
-			facade.registerMediator(new LevelSelectorMediator(new LevelSelectorPage()));
 		}
 	}
 }
