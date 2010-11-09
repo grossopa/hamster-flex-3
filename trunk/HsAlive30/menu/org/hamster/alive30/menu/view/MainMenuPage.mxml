@@ -10,21 +10,27 @@
 	</mx:Metadata>
 	<mx:Script>
 		<![CDATA[
+			import mx.events.EffectEvent;
 			import mx.events.FlexEvent;
 			
 			import org.hamster.alive30.common.event.PageEvent;
 			import org.hamster.alive30.common.facade.AppFacade;
+			import org.hamster.alive30.common.vo.LevelVO;
 			import org.hamster.alive30.common.vo.proxy.PageProxy;
-			import org.hamster.alive30.menu.mediator.LevelSelectorMediator;
+			import org.hamster.alive30.game.mediator.GameModuleMediator;
+			import org.hamster.alive30.menu.event.LevelSelectorEvent;
 			import org.hamster.alive30.menu.mediator.MainMenuMediator;
+			
+			private var _currentSelection:LevelVO;
 
 			protected function menuselectionlabel1_clickHandler(event:MouseEvent):void
 			{
 				//levelSelectorPage.visible = true;
-				var pageEvent:PageEvent = new PageEvent(PageEvent.PAGE_CHANGE);
-				pageEvent.newPageMediatorName = LevelSelectorMediator.NAME;
-				pageEvent.newContainer = this;
-				this.dispatchEvent(pageEvent);
+//				var pageEvent:PageEvent = new PageEvent(PageEvent.PAGE_CHANGE);
+//				pageEvent.newPageMediatorName = LevelSelectorMediator.NAME;
+//				pageEvent.newContainer = this;
+//				this.dispatchEvent(pageEvent);
+				levelSelectorPage.visible = true;
 			}
 
 
@@ -34,15 +40,46 @@
 				facade.registerMediator(new MainMenuMediator(this));
 			}
 
+
+			protected function levelSelectorPage_levelSelectedHandler(event:LevelSelectorEvent):void
+			{
+				this.levelSelectorPage.visible = false;
+				this.leftPanel.visible = false;
+				
+				_currentSelection = event.levelVO;
+			}
+
+
+			protected function lpHideEffect_effectEndHandler(event:EffectEvent):void
+			{
+				var pageEvent:PageEvent = new PageEvent(PageEvent.PAGE_CHANGE);
+				pageEvent.oldContainer = this.parent;
+				pageEvent.oldPageMediatorName = MainMenuMediator.NAME;
+				pageEvent.newContainer = null;
+				pageEvent.newPageMediatorName = GameModuleMediator.NAME;
+				pageEvent.data = _currentSelection;
+				this.dispatchEvent(pageEvent);
+			}
+
 		]]>
 	</mx:Script>
-	<mx:Canvas width="250" height="100%" backgroundColor="black" backgroundAlpha="0.5">
+	<mx:Canvas id="leftPanel" width="250" height="100%" backgroundColor="black" backgroundAlpha="0.5"
+			   hideEffect="{lpHideEffect}">
 		<mx:filters>
 			<filters:DropShadowFilter blurX="10" blurY="10" quality="3" />
 		</mx:filters>
 		<item:MenuSelectionLabel label="Start Game" y="200" width="100%" height="30" 
 								 click="menuselectionlabel1_clickHandler(event)" />
 	</mx:Canvas>
-	<!--<view:LevelSelectorPage id="levelSelectorPage" visible="false" 
-							verticalCenter="0" horizontalCenter="0" />-->
+	<mx:Parallel id="lpHideEffect" startDelay="300" duration="1000"
+				 effectEnd="lpHideEffect_effectEndHandler(event)">
+		<mx:Fade alphaFrom="1" alphaTo="0" />
+		<mx:Move xFrom="0" xTo="{-levelSelectorPage.width}" />
+	</mx:Parallel>
+	<view:LevelSelectorPage id="levelSelectorPage" visible="false" 
+							verticalCenter="0" horizontalCenter="0" 
+							showEffect="{lsShowEffect}" hideEffect="{lsHideEffect}"
+							levelSelected="levelSelectorPage_levelSelectedHandler(event)"/>
+	<mx:Fade id="lsShowEffect" duration="500" alphaFrom="0" alphaTo="1" />
+	<mx:Fade id="lsHideEffect" duration="500" alphaFrom="1" alphaTo="0" />
 </mx:Canvas>

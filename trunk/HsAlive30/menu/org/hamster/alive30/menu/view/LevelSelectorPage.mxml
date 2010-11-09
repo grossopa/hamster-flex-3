@@ -12,7 +12,7 @@
 			
 			import org.hamster.alive30.common.facade.AppFacade;
 			import org.hamster.alive30.common.vo.LevelVO;
-			import org.hamster.alive30.menu.mediator.LevelSelectorMediator;
+			import org.hamster.alive30.menu.event.LevelSelectorEvent;
 			import org.puremvc.as3.patterns.facade.Facade;
 			[Bindable] public var levelVOList:Array = [
 				new LevelVO(),
@@ -22,6 +22,10 @@
 			protected function mainTileList_clickHandler(event:MouseEvent):void
 			{
 				var levelVO:LevelVO = LevelVO(mainTileList.selectedItem);
+				
+				var levelSelectorEvent:LevelSelectorEvent = new LevelSelectorEvent(LevelSelectorEvent.LEVEL_SELECTED);
+				levelSelectorEvent.levelVO = levelVO;
+				this.dispatchEvent(levelSelectorEvent);
 			}
 		]]>
 	</mx:Script>

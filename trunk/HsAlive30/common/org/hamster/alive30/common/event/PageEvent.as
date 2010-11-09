@@ -1,8 +1,7 @@
 package org.hamster.alive30.common.event
 {
+	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
-	
-	import mx.core.UIComponent;
 	
 	public class PageEvent extends Event
 	{
@@ -10,8 +9,8 @@ package org.hamster.alive30.common.event
 		
 		public var oldPageMediatorName:String;
 		public var newPageMediatorName:String;
-		public var oldContainer:UIComponent;
-		public var newContainer:UIComponent;
+		public var oldContainer:DisplayObjectContainer;
+		public var newContainer:DisplayObjectContainer;
 		public var data:Object;
 		
 		public function PageEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
