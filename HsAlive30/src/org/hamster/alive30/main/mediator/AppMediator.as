@@ -1,12 +1,14 @@
 package org.hamster.alive30.main.mediator
 {
+	import flash.display.DisplayObjectContainer;
+	
 	import org.hamster.alive30.common.event.PageEvent;
 	import org.hamster.alive30.common.facade.AppFacade;
 	import org.hamster.alive30.common.mediator.IPageMediator;
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
 	
-	public class AppMediator extends Mediator
+	public class AppMediator extends Mediator implements IPageMediator
 	{
 		public static const NAME:String = "AppMediator";
 		
@@ -48,6 +50,16 @@ package org.hamster.alive30.main.mediator
 			if (newMediator) {
 				newMediator.showPage(pageEvent.newContainer, pageEvent.data);
 			}
+		}
+		
+		public function showPage(newContainer:DisplayObjectContainer = null, data:Object = null):void
+		{
+			
+		}
+		
+		public function hidePage(oldContainer:DisplayObjectContainer = null, data:Object = null):void
+		{
+			
 		}
 		
 		
