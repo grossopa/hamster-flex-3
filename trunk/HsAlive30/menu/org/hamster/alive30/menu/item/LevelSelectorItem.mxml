@@ -6,15 +6,18 @@
 			import org.hamster.alive30.common.vo.LevelVO;
 			
 			[Bindable] private var _levelVO:LevelVO;
+			[Bindable] private var _levelCount:int;
 			
 			override public function set data(value:Object):void
 			{
 				super.data = value;
 				_levelVO = LevelVO(value);
+				
+				_levelCount = _levelVO.levelCount;
 			}
 		]]>
 	</mx:Script>
-	<mx:Label text="{_levelVO.levelCount + 1}" fontSize="26" color="0xcacaca" 
+	<mx:Label text="{_levelCount + 1}" fontSize="26" color="0xcacaca" 
 			  verticalCenter="0" horizontalCenter="0" alpha="0.5">
 		<mx:rollOverEffect>
 			<mx:Fade alphaFrom="0.5" alphaTo="1" duration="500" />
