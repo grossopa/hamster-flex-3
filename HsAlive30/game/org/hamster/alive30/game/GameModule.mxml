@@ -4,13 +4,19 @@
 		   xmlns:container="org.hamster.alive30.game.container.*" 
 		   xmlns:vo="org.hamster.alive30.game.model.vo.*" 
 		   xmlns:util="org.hamster.alive30.common.util.*" 
-		   creationComplete="module1_creationCompleteHandler(event)" xmlns:view="org.hamster.alive30.game.view.*">
+		   creationComplete="module1_creationCompleteHandler(event)" 
+		   xmlns:view="org.hamster.alive30.game.view.*">
+	<mx:Metadata>
+		[Event(name="gameStart", type="org.hamster.alive30.game.event.GameEvent")]
+	</mx:Metadata>
 	<mx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
 			
 			import org.hamster.alive30.common.constant.AppConstants;
 			import org.hamster.alive30.common.facade.AppFacade;
+			import org.hamster.alive30.common.vo.LevelVO;
+			import org.hamster.alive30.game.event.GameEvent;
 			import org.hamster.alive30.game.mediator.GameModuleMediator;
 			import org.hamster.alive30.game.util.GameConstants;
 			
@@ -24,16 +30,22 @@
 				// facade.sendNotification(AppFacade.LOAD_BULLET_LIST);
 			}
 			
-			public function start():void
+			public function start(levelVO:LevelVO):void
 			{
 				levelStartView.addEventListener("playEnd", levelStartAnimationEndHandler);
+				levelStartView.play(levelVO);
 				levelStartView.visible = true;
+				
 			}
 			
 			public function levelStartAnimationEndHandler(evt:Event):void
 			{
 				levelStartView.removeEventListener("playEnd", levelStartAnimationEndHandler);
 				levelStartView.visible = false;
+				bulletListArray = levelStartView.currentLevelVO.bulletVOListArray;
+//				var gameEvent:GameEvent = new GameEvent(GameEvent.GAME_START);
+//				gameEvent.data = levelStartView.currentLevelVO;
+//				this.dispatchEvent(gameEvent);
 			}
 
 		]]>

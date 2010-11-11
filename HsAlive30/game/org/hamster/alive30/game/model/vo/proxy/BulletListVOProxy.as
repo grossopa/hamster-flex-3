@@ -1,8 +1,11 @@
 package org.hamster.alive30.game.model.vo.proxy
 {
+	import mx.collections.ArrayCollection;
+	
 	import org.hamster.alive30.common.config.AppConfig;
 	import org.hamster.alive30.common.constant.AppConstants;
 	import org.hamster.alive30.common.facade.AppFacade;
+	import org.hamster.alive30.common.vo.LevelVO;
 	import org.hamster.alive30.common.vo.proxy.BaseRemoteProxy;
 	import org.hamster.alive30.game.model.vo.BulletListVO;
 	import org.hamster.alive30.game.model.vo.BulletVO;
@@ -11,6 +14,12 @@ package org.hamster.alive30.game.model.vo.proxy
 	public class BulletListVOProxy extends BaseRemoteProxy
 	{
 		public static const NAME:String = "BulletListVOProxy";
+		
+		private var _levelVOArray:Array = new Array();
+		public function get levelVOArray():Array
+		{
+			return _levelVOArray;
+		}
 		
 		public function BulletListVOProxy(data:Object=null)
 		{
@@ -43,7 +52,12 @@ package org.hamster.alive30.game.model.vo.proxy
 				result.push(bulletListVO);
 			}
 			
-			this.sendNotification(AppFacade.LOAD_BULLET_LIST_DONE, result);
+			var levelVO:LevelVO = new LevelVO();
+			levelVO.levelCount = xml.attribute("level");
+			levelVO.bulletVOListArray = result;
+			_levelVOArray.push(levelVO);
+			
+			this.sendNotification(AppFacade.LOAD_BULLET_LIST_DONE, levelVO);
 		}
 	}
 }
