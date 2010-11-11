@@ -5,20 +5,27 @@
 	</mx:Metadata>
 	<mx:Script>
 		<![CDATA[
+			import mx.collections.LeafNodeCursor;
 			import mx.events.EffectEvent;
 			
 			import org.hamster.alive30.common.vo.LevelVO;
 			
+			private var _currentLevelVO:LevelVO;
+			
+			public function get currentLevelVO():LevelVO
+			{
+				return _currentLevelVO;
+			}
+			
 			public function play(levelVO:LevelVO):void
 			{
-				levelLabel.visible = true;
+				levelLabel.text = "Level " + (levelVO.levelCount + 1);
+				_currentLevelVO = levelVO;
 				playEffect.play([levelLabel]);
 			}
 
 			protected function playEffect_effectEndHandler(event:EffectEvent):void
 			{
-				levelLabel.visible = false;
-				readyLabel.visible = true;
 				play2Effect.play([readyLabel]);
 				
 			}
@@ -26,8 +33,6 @@
 
 			protected function play2Effect_effectEndHandler(event:EffectEvent):void
 			{
-				readyLabel.visible = false;
-				goLabel.visible = true;
 				play3Effect.play([goLabel]);
 				
 			}
@@ -35,7 +40,7 @@
 
 			protected function play3Effect_effectEndHandler(event:EffectEvent):void
 			{
-				var timer:Timer = new Timer(3000, 1);
+				var timer:Timer = new Timer(2000, 1);
 				timer.addEventListener(TimerEvent.TIMER, endHandler);
 				timer.start();
 			}
@@ -45,24 +50,49 @@
 				this.dispatchEvent(new Event('playEnd'));
 			}
 
+
+			protected function playEffect_effectStartHandler(event:EffectEvent):void
+			{
+				levelLabel.visible = true;
+			}
+
+
+			protected function play2Effect_effectStartHandler(event:EffectEvent):void
+			{
+				levelLabel.visible = false;
+				readyLabel.visible = true;
+			}
+
+
+			protected function play3Effect_effectStartHandler(event:EffectEvent):void
+			{
+				readyLabel.visible = false;
+				goLabel.visible = true;
+			}
+
 		]]>
 	</mx:Script>
 	<mx:Label id="levelLabel" text="Level 23" fontSize="50" fontWeight="bold" color="0xEE0000" 
 			  verticalCenter="0" horizontalCenter="0" visible="false"/>
-	<mx:Label id="readyLabel" text="Ready?" fontSize="50" visible="false" fontWeight="bold" color="0xEE0000" />
-	<mx:Label id="goLabel" text="GO!" fontSize="50" visible="false" fontWeight="bold" color="0xEE0000" />
+	<mx:Label id="readyLabel" text="Ready?" fontSize="50" visible="false" fontWeight="bold" color="0xEE0000" 
+			  verticalCenter="0" horizontalCenter="0"/>
+	<mx:Label id="goLabel" text="GO!" fontSize="50" visible="false" fontWeight="bold" color="0xEE0000" 
+			  verticalCenter="0" horizontalCenter="0"/>
 	
-	<mx:Parallel id="playEffect" duration="2000" startDelay="500" 
+	<mx:Parallel id="playEffect" duration="500" startDelay="500"
+				 effectStart="playEffect_effectStartHandler(event)"
 				 effectEnd="playEffect_effectEndHandler(event)">
 		<mx:Blur blurXFrom="800" blurXTo="1" blurYFrom="800" blurYTo="1" />
 		<mx:Zoom zoomHeightFrom="3" zoomHeightTo="1" zoomWidthFrom="3" zoomWidthTo="1" />
 	</mx:Parallel>
-	<mx:Parallel id="play2Effect" duration="2000" startDelay="300" 
+	<mx:Parallel id="play2Effect" duration="500" startDelay="300"
+				 effectStart="play2Effect_effectStartHandler(event)"
 				 effectEnd="play2Effect_effectEndHandler(event)">
 		<mx:Blur blurXFrom="800" blurXTo="1" blurYFrom="800" blurYTo="1" />
 		<mx:Zoom zoomHeightFrom="3" zoomHeightTo="1" zoomWidthFrom="3" zoomWidthTo="1" />
 	</mx:Parallel>
-	<mx:Parallel id="play3Effect" duration="2000" startDelay="300" 
+	<mx:Parallel id="play3Effect" duration="500" startDelay="300"
+				 effectStart="play3Effect_effectStartHandler(event)"
 				 effectEnd="play3Effect_effectEndHandler(event)">
 		<mx:Blur blurXFrom="800" blurXTo="1" blurYFrom="800" blurYTo="1" />
 		<mx:Zoom zoomHeightFrom="3" zoomHeightTo="1" zoomWidthFrom="3" zoomWidthTo="1" />

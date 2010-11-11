@@ -34,7 +34,6 @@
 				ctrlManager.stage = stage;
 				new MainHTTPService();
 				facade.sendNotification(AppFacade.INIT);
-				levelStartView.play(new LevelVO());
 //				testBullets();
 			}
 			
@@ -74,8 +73,7 @@
 			
 		]]>
 	</mx:Script>
-	<!--<game:GameModule id="gameModule" width="100%" height="100%" />-->
+	<game:GameModule id="gameModule" width="100%" height="100%" />
 	<mx:ModuleLoader id="mainModuleLoader" width="100%" height="100%" />
 	<view:MainMenuPage width="100%" height="100%" />
-	<view1:LevelStartView id="levelStartView" />
 </mx:Application>
