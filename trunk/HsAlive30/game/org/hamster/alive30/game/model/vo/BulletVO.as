@@ -8,7 +8,7 @@ package org.hamster.alive30.game.model.vo
 		public var cy:Number;
 		public var type:String;
 		public var moveType:String;
-		public var speedVector:Vector2D;
-		public var accelVector:Vector2D;
+		public const speedVector:Vector2D = new Vector2D();
+		public const accelVector:Vector2D = new Vector2D();
 	}
 }

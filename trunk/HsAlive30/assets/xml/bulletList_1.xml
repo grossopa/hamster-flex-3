@@ -1,62 +1,86 @@
 <result level="0">
 	<bullet-list time-gap="1000">
-		<bullet px="0" py="0.5" accel="0" type="blue" move-type="default" />
-		<bullet px="0.5" py="1" accel="0" type="blue" move-type="default" />
-		<bullet px="1" py="0.5" accel="0" type="blue" move-type="default" />
-		<bullet px="0.5" py="0" accel="0" type="blue" move-type="default" />
+		<bullet px="0" py="0.5" speed="3,0" accel="0,0" type="blue" move-type="follow" />
+		<bullet px="0.5" py="1" speed="0,-3" accel="0,0" type="blue" move-type="follow" />
+		<bullet px="1" py="0.5" speed="-3,0" accel="0,0" type="blue" move-type="follow" />
+		<bullet px="0.5" py="0" speed="0,3" accel="0,0" type="blue" move-type="follow" />
 	</bullet-list>
-	<bullet-list time-gap="400">
-		<bullet px="0" py="0.5" accel="0" type="red" move-type="default" />
-		<bullet px="0.5" py="1" accel="0" type="red" move-type="default" />
-		<bullet px="1" py="0.5" accel="0" type="red" move-type="default" />
-		<bullet px="0.5" py="0" accel="0" type="red" move-type="default" />
+	<bullet-list time-gap="600">
+		<bullet px="0" py="0.5" speed="3,0" accel="0,0" type="red" move-type="follow" />
+		<bullet px="0.5" py="1" speed="0,-3" accel="0,0" type="red" move-type="follow" />
+		<bullet px="1" py="0.5" speed="-3,0" accel="0,0" type="red" move-type="follow" />
+		<bullet px="0.5" py="0" speed="0,3" accel="0,0" type="red" move-type="follow" />
 	</bullet-list>
-	<bullet-list time-gap="400">
-		<bullet px="0" py="0.5" accel="0" type="blue" move-type="default" />
-		<bullet px="0.5" py="1" accel="0" type="blue" move-type="default" />
-		<bullet px="1" py="0.5" accel="0" type="blue" move-type="default" />
-		<bullet px="0.5" py="0" accel="0" type="blue" move-type="default" />
+		<bullet-list time-gap="600">
+		<bullet px="0" py="0.5" speed="3,0" accel="0,0" type="blue" move-type="default" />
+		<bullet px="0.5" py="1" speed="0,-3" accel="0,0" type="blue" move-type="default" />
+		<bullet px="1" py="0.5" speed="-3,0" accel="0,0" type="blue" move-type="default" />
+		<bullet px="0.5" py="0" speed="0,3" accel="0,0" type="blue" move-type="default" />
 	</bullet-list>
-	<bullet-list time-gap="400">
-		<bullet px="0" py="0.5" accel="0" type="red" move-type="default" />
-		<bullet px="0.5" py="1" accel="0" type="red" move-type="default" />
-		<bullet px="1" py="0.5" accel="0" type="red" move-type="default" />
-		<bullet px="0.5" py="0" accel="0" type="red" move-type="default" />
+		<bullet-list time-gap="600">
+		<bullet px="0" py="0.5" speed="3,0" accel="0,0" type="red" move-type="default" />
+		<bullet px="0.5" py="1" speed="0,-3" accel="0,0" type="red" move-type="default" />
+		<bullet px="1" py="0.5" speed="-3,0" accel="0,0" type="red" move-type="default" />
+		<bullet px="0.5" py="0" speed="0,3" accel="0,0" type="red" move-type="default" />
 	</bullet-list>
-	<bullet-list time-gap="400">
-		<bullet px="0" py="0" accel="0" type="red" move-type="default" />
-		<bullet px="1" py="0" accel="0" type="red" move-type="default" />
-		<bullet px="0" py="1" accel="0" type="red" move-type="default" />
-		<bullet px="1" py="1" accel="0" type="red" move-type="default" />
+		<bullet-list time-gap="600">
+		<bullet px="0" py="0.5" speed="3,0" accel="0,0" type="blue" move-type="default" />
+		<bullet px="0.5" py="1" speed="0,-3" accel="0,0" type="blue" move-type="default" />
+		<bullet px="1" py="0.5" speed="-3,0" accel="0,0" type="blue" move-type="default" />
+		<bullet px="0.5" py="0" speed="0,3" accel="0,0" type="blue" move-type="default" />
 	</bullet-list>
-	<bullet-list time-gap="400">
-		<bullet px="0" py="0.5" accel="0" type="blue" move-type="default" />
-		<bullet px="0.5" py="1" accel="0" type="blue" move-type="default" />
-		<bullet px="1" py="0.5" accel="0" type="blue" move-type="default" />
-		<bullet px="0.5" py="0" accel="0" type="blue" move-type="default" />
+		<bullet-list time-gap="600">
+		<bullet px="0" py="0.5" speed="3,0" accel="0,0" type="red" move-type="default" />
+		<bullet px="0.5" py="1" speed="0,-3" accel="0,0" type="red" move-type="default" />
+		<bullet px="1" py="0.5" speed="-3,0" accel="0,0" type="red" move-type="default" />
+		<bullet px="0.5" py="0" speed="0,3" accel="0,0" type="red" move-type="default" />
 	</bullet-list>
-	<bullet-list time-gap="400">
-		<bullet px="0" py="0" accel="0" type="red" move-type="default" />
-		<bullet px="1" py="0" accel="0" type="red" move-type="default" />
-		<bullet px="0" py="1" accel="0" type="red" move-type="default" />
-		<bullet px="1" py="1" accel="0" type="red" move-type="default" />
+		<bullet-list time-gap="600">
+		<bullet px="0" py="0.5" speed="3,0" accel="0,0" type="blue" move-type="default" />
+		<bullet px="0.5" py="1" speed="0,-3" accel="0,0" type="blue" move-type="default" />
+		<bullet px="1" py="0.5" speed="-3,0" accel="0,0" type="blue" move-type="default" />
+		<bullet px="0.5" py="0" speed="0,3" accel="0,0" type="blue" move-type="default" />
 	</bullet-list>
-		<bullet-list time-gap="400">
-		<bullet px="0" py="0.5" accel="0" type="blue" move-type="default" />
-		<bullet px="0.5" py="1" accel="0" type="blue" move-type="default" />
-		<bullet px="1" py="0.5" accel="0" type="blue" move-type="default" />
-		<bullet px="0.5" py="0" accel="0" type="blue" move-type="default" />
+		<bullet-list time-gap="600">
+		<bullet px="0" py="0.5" speed="3,0" accel="0,0" type="red" move-type="default" />
+		<bullet px="0.5" py="1" speed="0,-3" accel="0,0" type="red" move-type="default" />
+		<bullet px="1" py="0.5" speed="-3,0" accel="0,0" type="red" move-type="default" />
+		<bullet px="0.5" py="0" speed="0,3" accel="0,0" type="red" move-type="default" />
 	</bullet-list>
-		<bullet-list time-gap="400">
-		<bullet px="0" py="0" accel="0" type="red" move-type="default" />
-		<bullet px="1" py="0" accel="0" type="red" move-type="default" />
-		<bullet px="0" py="1" accel="0" type="red" move-type="default" />
-		<bullet px="1" py="1" accel="0" type="red" move-type="default" />
+		<bullet-list time-gap="600">
+		<bullet px="0" py="0.5" speed="3,0" accel="0,0" type="blue" move-type="default" />
+		<bullet px="0.5" py="1" speed="0,-3" accel="0,0" type="blue" move-type="default" />
+		<bullet px="1" py="0.5" speed="-3,0" accel="0,0" type="blue" move-type="default" />
+		<bullet px="0.5" py="0" speed="0,3" accel="0,0" type="blue" move-type="default" />
 	</bullet-list>
-		<bullet-list time-gap="400">
-		<bullet px="0" py="0.5" accel="0" type="blue" move-type="default" />
-		<bullet px="0.5" py="1" accel="0" type="blue" move-type="default" />
-		<bullet px="1" py="0.5" accel="0" type="blue" move-type="default" />
-		<bullet px="0.5" py="0" accel="0" type="blue" move-type="default" />
+		<bullet-list time-gap="600">
+		<bullet px="0" py="0.5" speed="3,0" accel="0,0" type="red" move-type="default" />
+		<bullet px="0.5" py="1" speed="0,-3" accel="0,0" type="red" move-type="default" />
+		<bullet px="1" py="0.5" speed="-3,0" accel="0,0" type="red" move-type="default" />
+		<bullet px="0.5" py="0" speed="0,3" accel="0,0" type="red" move-type="default" />
+	</bullet-list>
+		<bullet-list time-gap="600">
+		<bullet px="0" py="0.5" speed="3,0" accel="0,0" type="blue" move-type="default" />
+		<bullet px="0.5" py="1" speed="0,-3" accel="0,0" type="blue" move-type="default" />
+		<bullet px="1" py="0.5" speed="-3,0" accel="0,0" type="blue" move-type="default" />
+		<bullet px="0.5" py="0" speed="0,3" accel="0,0" type="blue" move-type="default" />
+	</bullet-list>
+		<bullet-list time-gap="600">
+		<bullet px="0" py="0.5" speed="3,0" accel="0,0" type="blue" move-type="default" />
+		<bullet px="0.5" py="1" speed="0,-3" accel="0,0" type="blue" move-type="default" />
+		<bullet px="1" py="0.5" speed="-3,0" accel="0,0" type="blue" move-type="default" />
+		<bullet px="0.5" py="0" speed="0,3" accel="0,0" type="blue" move-type="default" />
+	</bullet-list>
+		<bullet-list time-gap="600">
+		<bullet px="0" py="0.5" speed="3,0" accel="0,0" type="red" move-type="default" />
+		<bullet px="0.5" py="1" speed="0,-3" accel="0,0" type="red" move-type="default" />
+		<bullet px="1" py="0.5" speed="-3,0" accel="0,0" type="red" move-type="default" />
+		<bullet px="0.5" py="0" speed="0,3" accel="0,0" type="red" move-type="default" />
+	</bullet-list>
+	<bullet-list time-gap="600">
+		<bullet px="0" py="0.5" speed="3,0" accel="0,0" type="red" move-type="default" />
+		<bullet px="0.5" py="1" speed="0,-3" accel="0,0" type="red" move-type="default" />
+		<bullet px="1" py="0.5" speed="-3,0" accel="0,0" type="red" move-type="default" />
+		<bullet px="0.5" py="0" speed="0,3" accel="0,0" type="red" move-type="default" />
 	</bullet-list>
 </result>

@@ -68,6 +68,8 @@ package org.hamster.alive30.game.item
 		{
 			super();
 			this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
+			this.mouseChildren = false;
+			this.mouseEnabled = false;
 			
 			_glowFilter = new GlowFilter(0x0098ff, 1, 5, 5, 2, 3)
 			//this.filters = [_glowFilter];
