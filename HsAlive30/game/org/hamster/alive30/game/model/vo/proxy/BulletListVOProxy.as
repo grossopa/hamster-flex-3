@@ -45,6 +45,12 @@ package org.hamster.alive30.game.model.vo.proxy
 					var bulletVO:BulletVO = new BulletVO();
 					bulletVO.cx = AppConstants.APP_WIDTH * bulletXML.attribute("px");
 					bulletVO.cy = AppConstants.APP_HEIGHT * bulletXML.attribute("py");
+					var speedStr:String = bulletXML.attribute("speed");
+					bulletVO.speedVector.x = Number(speedStr.split(",")[0]);
+					bulletVO.speedVector.y = Number(speedStr.split(",")[1]);
+					var accelStr:String = bulletXML.attribute("accel");
+					bulletVO.accelVector.x = Number(accelStr.split(",")[0]);
+					bulletVO.accelVector.y = Number(accelStr.split(",")[0]);
 					bulletVO.type = bulletXML.attribute("type");
 					bulletVO.moveType = bulletXML.attribute("move-type");
 					bulletListVO.bulletVOList.push(bulletVO);

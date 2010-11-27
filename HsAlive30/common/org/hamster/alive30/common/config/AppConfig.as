@@ -4,7 +4,7 @@ package org.hamster.alive30.common.config
 	{
 		public static function get URL_BULLET_LIST():String
 		{
-			return "xml/bulletList.xml";
+			return "xml/bulletList_1.xml";
 		}
 	}
 }

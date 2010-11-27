@@ -6,7 +6,10 @@ package org.hamster.alive30.game.item
 	import flash.events.Event;
 	
 	import mx.effects.AnimateProperty;
-	import mx.effects.Tween;
+	import mx.effects.Effect;
+	import mx.effects.Fade;
+	import mx.effects.Parallel;
+	import mx.effects.Zoom;
 	
 	import org.hamster.alive30.common.component.BaseImage;
 	import org.hamster.alive30.common.util.IVector2DItem;
@@ -19,10 +22,10 @@ package org.hamster.alive30.game.item
 		private const _speedVector:Vector2D = new Vector2D();
 		private const _accelVector:Vector2D = new Vector2D();
 		
-		private var PLANE_OUTER_RED:Sprite = new ResourceConstants.PLANE_OUTER_RED();
-		private var PLANE_OUTER_BLUE:Sprite = new ResourceConstants.PLANE_OUTER_BLUE();
-		private var PLANE_OUTER_R2B:Sprite = new ResourceConstants.PLANE_OUTER_R2B();
-		private var PLANE_OUTER_B2R:Sprite = new ResourceConstants.PLANE_OUTER_B2R();
+		private var PLANE_OUTER_RED:Sprite = new ResourceConstants.PLANE_SHIELD_RED();
+		private var PLANE_OUTER_BLUE:Sprite = new ResourceConstants.PLANE_SHIELD_BLUE();
+		private var PLANE_OUTER_R2B:Sprite = new ResourceConstants.PLANE_SHIELD_R2B();
+		private var PLANE_OUTER_B2R:Sprite = new ResourceConstants.PLANE_SHIELD_B2R();
 		
 		private var _type:String;
 		private var _currentOuter:DisplayObject;
@@ -50,7 +53,7 @@ package org.hamster.alive30.game.item
 		
 		public function get isChangingType():Boolean
 		{
-			return _changeTypeTimeCount > GameConstants.PLANE_TYPE_COOL_DOWN_TIME;
+			return _changeTypeTimeCount >= GameConstants.PLANE_TYPE_COOL_DOWN_TIME;
 		}
 		
 		public function Plane()
@@ -84,7 +87,7 @@ package org.hamster.alive30.game.item
 			
 			if (_changeTypeTimeCount > timeFlag1) {
 				_changeTypeTimeCount -= timeElapsed;
-				if (_changeTypeTimeCount < timeFlag1) {
+				if (_changeTypeTimeCount <= timeFlag1) {
 					_currentOuter = this.removeChild(_currentOuter);
 					if (type == GameConstants.BLUE) {
 						_currentOuter = PLANE_OUTER_BLUE;
@@ -101,7 +104,7 @@ package org.hamster.alive30.game.item
 				percent = (oneAniTime - GameConstants.PLANE_ALL_CHANGE_TYPE_TIME 
 					+ _changeTypeTimeCount) / oneAniTime;
 				
-			} else if (_changeTypeTimeCount < timeFlag1 
+			} else if (_changeTypeTimeCount <= timeFlag1 
 				&& _changeTypeTimeCount > GameConstants.PLANE_TYPE_COOL_DOWN_TIME) {
 				percent = (oneAniTime - _changeTypeTimeCount + GameConstants.PLANE_TYPE_COOL_DOWN_TIME) / oneAniTime;
 			} else {
@@ -113,9 +116,5 @@ package org.hamster.alive30.game.item
 			_currentOuter.x = (1 - percent) * (this.width >> 1);
 			_currentOuter.y = (1 - percent) * (this.height >> 1);
 		}
-		
-		
-		
-		
 	}
 }
