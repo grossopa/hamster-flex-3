@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
+	backgroundColor="#F6F3F3"
+	creationComplete="init()" xmlns:local="*">
+<!--
+// Author: Anirudh Sasikumar (http://anirudhs.chaosnet.org/)
+// Copryright (C) 2009 Anirudh Sasikumar
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+-->	
+<mx:Style source="../embed_assets/main.css" />
+<mx:Script>
+	<![CDATA[
+		import flash.net.navigateToURL;
+		import mx.collections.ArrayCollection;
+		import net.anirudh.as3syntaxhighlight.CodePrettyPrint;
+		import mx.core.mx_internal;
+
+		[Bindable]
+		private var navData:ArrayCollection = new ArrayCollection(["Sync In Place", "Sync Preview", "Async In Place"]);
+		
+		[Bindable]
+		private var modeDesc:String = "";
+		
+		private function init():void
+		{
+			modeDesc = "Synchronous lexing and coloring (using TextRange). Good for <= 100 lines of code.";
+		}
+		
+		private function handleNavigation():void
+		{
+			switch ( tbar.selectedIndex )
+			{
+				case 0:
+					modeDesc = "Synchronous lexing and coloring (using TextRange). Good for <= 100 lines of code.";
+					break;
+				case 1:
+					modeDesc = "Synchronous lexing and html generation. htmlText used for coloring. Fastest mode.";
+					break;
+				case 2:
+					modeDesc = "Asynchronous lexing and coloring (using TextRange). Slow but will never block UI.";
+					break;
+				
+
+			}
+			vs.selectedIndex = tbar.selectedIndex;
+		}
+		
+	
+	]]>
+</mx:Script>
+	<mx:Label x="20" y="10" text="as3syntaxhighlight" styleName="heading"/>
+	<mx:Label right="20" y="10" 
+		buttonMode="true"
+		mouseChildren="false"
+		click="navigateToURL(new URLRequest('http://anirudhs.chaosnet.org/'))"
+		text="[by Anirudh Sasikumar]" styleName="subHeading" color="#404040"/>
+	<mx:Label right="20" y="28" 
+		buttonMode="true"
+		mouseChildren="false"
+		click="navigateToURL(new URLRequest('http://sandboxviolation.appspot.com/'))"
+		text="[developed for sandboxviolation]" styleName="subHeading" color="#404040"/>		
+	<mx:HRule y="51" left="20" right="20" 
+		strokeWidth="2" shadowColor="#999999" 
+		strokeColor="#060000" themeColor="#100101"/>
+	<mx:ToggleButtonBar id="tbar" 
+		dataProvider="{navData}"
+		top="70" left="20"
+		itemClick="handleNavigation()"		
+	   />
+	 <mx:Label id="descLabel"
+	 	right="20"
+	 	top="70"
+	 	text="{modeDesc}"
+	 	styleName="subHeading"
+	 	/>
+	<mx:ViewStack id="vs" top="110" left="20" right="20" bottom="20">
+		<local:SyncInPlace
+			id="syncInPlace"
+			/>	
+		<local:SyncPreview 
+			id="syncPreview"
+			 />
+			 
+		<local:AsyncInPlace
+			id="asyncInPlace"
+			/>
+	</mx:ViewStack>
+</mx:Application>

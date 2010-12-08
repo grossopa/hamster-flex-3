@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="120" height="30" 
+		   backgroundImage="@Embed(source='/item/tag1.png')">
+	<mx:Style>
+		.TagLabelStyle {
+			fontSize : 14;
+		}
+		
+		.TagLabelStyleSelected {
+			fontSize : 16;
+			fontWeight : bold;
+			color : #EE0000;
+		}
+	</mx:Style>
+	<mx:Script>
+		<![CDATA[
+			[Bindable] public var text:String;
+			[Bindable] public var selected:Boolean;
+		]]>
+	</mx:Script>
+	<mx:Label id="mainLabel" text="{text}" 
+			  styleName="{selected ? 'TagLabelStyleSelected' : 'TagLabelStyle'}" 
+			  verticalCenter="0" left="5" />
+</mx:Canvas>
