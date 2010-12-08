@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="800" height="600"
+				applicationComplete="application1_applicationCompleteHandler(event)"
+				xmlns:common="com.citi.ppt.common.*" xmlns:view="com.citi.ppt.main.view.*">
+	<mx:Script>
+		<![CDATA[
+			import com.citi.ppt.main.util.AppConstants;
+			import com.citi.ppt.main.view.item.TagItem;
+			
+			import mx.containers.Canvas;
+			import mx.events.FlexEvent;
+
+			protected function application1_applicationCompleteHandler(event:FlexEvent):void
+			{
+				var array:Array = new Array();
+				for (var i:int = 0; i < 10; i++) {
+					var canvas:Canvas = new Canvas();
+					canvas.width = flexBook.width;
+					canvas.height = flexBook.height;
+					canvas.setStyle("backgroundColor", 0xffffff);
+					array.push(canvas);
+					
+					var tagItem:TagItem = new TagItem();
+					tagItem.text = "Sample" + (i + 1);
+					this.tagContainer.addChild(tagItem);
+				}
+				tagItem.selected = true;
+				flexBook.content = array;
+			}
+
+		]]>
+	</mx:Script>
+	<common:FlexBook id="flexBook" width="{AppConstants.PAGE_WIDTH * 2}" 
+					 height="{AppConstants.PAGE_HEIGHT}" x="{50 - AppConstants.PAGE_WIDTH}" 
+					 y="50" itemSize="0" />
+	<view:TagContainer id="tagContainer" width="120" height="{flexBook.height}" 
+					   y="{flexBook.y + 10}" x="{flexBook.x + flexBook.width}" />
+</mx:Application>
