@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" 
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="600" height="500" 
 		   label="{resourceManager.getString('main', 'intro.intro1.title')}">
-	
+	<mx:Label text="What is Flex?"  fontFamily="Arial" fontSize="30" x="10" y="10" fontWeight="bold"/>
+	<mx:Image source="@Embed(source='/icons/flex.jpg')" x="250" y="197" width="100" height="100"/>
 </mx:Canvas>
