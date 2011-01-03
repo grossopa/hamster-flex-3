@@ -1,0 +1,334 @@
+<data image-root="org/hamster/mhp3/assets/image">
+  <weapons name="大剑" type="A">
+    <weapon name="古结云大剑">
+      <weapon name="结云大剑">
+        <weapon name="结云大剑改">
+          <weapon name="结云大刀">
+          </weapon>
+          <weapon name="41式对飞龙大剑">
+            <weapon name="41式对飞龙大剑改">
+              <weapon name="雷玛鲁柯达" />
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="巨剑">
+          <weapon name="巨剑改">
+            <weapon name="巨刃">
+              <weapon name="爆炎剑">
+                <weapon name="爆炎剑改">
+                  <weapon name="灵鹤大剑">
+                    <weapon name="灵鹤大剑改" />
+                  </weapon>
+                  <weapon name="爆锤大剑">
+                    <weapon name="爆锤大剑改">
+                      <weapon name="红莲爆锤大剑" />
+                    </weapon>
+                  </weapon>
+                </weapon>
+                <weapon name="迅龙爆炎">
+                  <weapon name="暗夜剑【宵暗】" />
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="狂暴大剑">
+          <weapon name="族长大剑">
+            <weapon name="族长大剑【我王】">
+            </weapon>
+          </weapon>
+          <weapon name="土砂龙大剑">
+            <weapon name="土砂龙巨刃">
+              <weapon name="土砂龙巨刃改">
+                <weapon name="黎明女神大剑">
+                  <weapon name="北极光大剑" />
+                </weapon>
+              </weapon>
+            </weapon>
+            <weapon name="轰龙大剑">
+              <weapon name="轰龙大剑改">
+                <weapon name="轰大剑【王虎】" />
+              </weapon>
+              <weapon name="暴君大剑">
+                <weapon name="吼大剑【荒咬】" />
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="骨刃">
+      <weapon name="骨刃改">
+        <weapon name="大型骨剑">
+          <weapon name="巨象刃">
+            <weapon name="巨象刃改">
+              <weapon name="刚剑塔罗斯">
+              </weapon>
+              <weapon name="腭刀">
+                <weapon name="巨大腭刀">
+                  <weapon name="龙腭刀" />
+                </weapon>
+              </weapon>
+            </weapon>
+            <weapon name="女武神之刃">
+              <weapon name="吉克琳迪">
+                <weapon name="大吉克琳迪" />
+              </weapon>
+              <weapon name="吉克姆特">
+                <weapon name="大吉克姆特" />
+              </weapon>
+            </weapon>
+          </weapon>
+          <weapon name="红色羽翼">
+            <weapon name="炎剑雄火龙">
+              <weapon name="焰剑雄火龙">
+                <weapon name="辉剑雄火龙" />
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+      </weapon>
+      <weapon name="水流大剑">
+        <weapon name="暴雨大剑">
+          <weapon name="暴雨大剑改">
+            <weapon name="暴雨巨刃" />
+          </weapon>
+        </weapon>
+        <weapon name="喧闹之角">
+          <weapon name="喧闹之角改">
+            <weapon name="刚角剑角龙" />
+          </weapon>
+        </weapon>
+        <weapon name="冰霜巨牙">
+          <weapon name="冰霜巨牙改">
+            <weapon name="冰霜骑士巨剑" />
+          </weapon>
+          <weapon name="盖尔冲击">
+            <weapon name="暴砂剑大沙尘暴" />
+          </weapon>
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="熔岩烈剑">
+      <weapon name="熔岩烈剑改">
+        <weapon name="爆裂熔岩烈剑" />
+      </weapon>
+    </weapon>
+    <weapon name="龙之毒大剑">
+      <weapon name="毒断巨刃" />
+    </weapon>
+    <weapon name="真结云大剑">
+      <weapon name="真结云大剑改">
+        <weapon name="结云大斩剑【云散】" />
+      </weapon>
+    </weapon>
+    <weapon name="番伞【秋雨】">
+      <weapon name="番伞【斩雨】">
+      </weapon>
+    </weapon> 
+    <weapon name="王大剑风来">
+      <weapon name="王牙大剑【黑雷】" />
+    </weapon>
+    <weapon name="破魔剑">
+      <weapon name="天魔剑">
+      </weapon>
+    </weapon>
+    <weapon name="狂战士之剑">
+      <weapon name="恐暴龙大剑">
+      </weapon>
+    </weapon>
+    <weapon name="煌黑大剑">
+      <weapon name="煌黑大剑阿鲁雷波">
+      </weapon>
+    </weapon>
+    <weapon name="真·轰断剑">
+    </weapon>
+    <weapon name="霸剑黑神斩">
+    </weapon>
+    <weapon name="崩剑冻灭斩">
+    </weapon>
+    <weapon name="凶剑【业云】">
+    </weapon>
+    <weapon name="腐锈大剑">
+      <weapon name="锈大剑">
+        <weapon name="远古大剑">
+          <weapon name="远古纪念">
+          </weapon>
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="风化严重的大剑">
+      <weapon name="风化的大剑">
+        <weapon name="远古龙大剑">
+        </weapon>
+      </weapon>
+    </weapon>
+  </weapons>
+
+  <weapons name="太刀" type="B">
+    <weapon name="古结云太刀">
+      <weapon name="结云太刀">
+        <weapon name="结云太刀改">
+          <weapon name="结云大太刀">
+          </weapon>
+          <weapon name="鲜血十字刀">
+            <weapon name="鲜血十字刀改">
+              <weapon name="毒刀堪特雷拉">
+              </weapon>
+              <weapon name="深红十字刀">
+                <weapon name="失落伊典">
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="铁刀">
+          <weapon name="铁刀【禊】">
+            <weapon name="铁刀【神乐】">
+              <weapon name="迅龙军刀">
+                <weapon name="迅龙军刀改">
+                  <weapon name="夜刀【月影】">
+                  </weapon>
+                  <weapon name="绿影军刀">
+                    <weapon name="疾风刀【里月影】">
+                    </weapon>
+                  </weapon>
+                </weapon>
+              </weapon>
+              <weapon name="一虎刀">
+                <weapon name="一虎刀【饿刃】">
+                  <weapon name="轰刀【饿虎】">
+                  </weapon>
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+          <weapon name="冻刃">
+            <weapon name="冻刃【冰华】">
+              <weapon name="六花垂冰丸">
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="青熊薙">
+          <weapon name="青熊薙改">
+            <weapon name="青熊长笔【留跳】">
+            </weapon>
+            <weapon name="断牙太刀">
+              <weapon name="断牙刀【一太刀】">
+              </weapon>
+            </weapon>
+            <weapon name="山刈镰">
+              <weapon name="山刈大镰">
+                <weapon name="山薙巨槌刀">
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+          <weapon name="水溺刀">
+            <weapon name="水溺刀改">
+              <weapon name="巨蛇长刃">
+              </weapon>
+              <weapon name="毒蛇长刃">
+                <weapon name="碎流毒蛇长刃">
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="骨刀【犬牙】">
+          <weapon name="骨刀【豺牙】">
+            <weapon name="骨刀无限">
+              <weapon name="骨刀无限改">
+                <weapon name="骨缚刀【影缝】">
+                </weapon>
+                <weapon name="骨刀极限">
+                  <weapon name="骨断刀【影鼬】">
+                  </weapon>
+                </weapon>
+              </weapon>
+              <weapon name="火舞者">
+                <weapon name="地狱火舞者">
+                </weapon>
+              </weapon>
+            </weapon>
+            <weapon name="飞龙刀【双火】">
+              <weapon name="飞龙刀【双炎】">
+                <weapon name="飞龙刀【双红莲】">
+                  <weapon name="飞龙刀【银】">
+                  </weapon>
+                </weapon>
+              </weapon>
+            </weapon>
+            <weapon name="爆锤刀">
+              <weapon name="爆锤刀改">
+                <weapon name="红莲钢锤刀">
+                </weapon>
+                <weapon name="铬合金刀">
+                  <weapon name="铬合金名刀">
+                  </weapon>
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+          <weapon name="毒狗太刀">
+            <weapon name="毒狗太刀改">
+              <weapon name="猛毒太刀">
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+      </weapon>   
+    </weapon>
+    <weapon name="狂风吞噬者">
+      <weapon name="超音吞噬者">
+        <weapon name="微风者">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="太刀鱼大太刀">
+      <weapon name="太刀鱼大太刀改">
+        <weapon name="鲜刀白凪">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="真结云太刀">
+      <weapon name="真结云太刀改">
+        <weapon name="灵刀结云·真打">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="南蛮刀">
+      <weapon name="南蛮刀改">
+        <weapon name="南蛮太刀【鲛斩】">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="王刀雷切">
+      <weapon name="王牙刀【伏雷】">
+      </weapon>
+    </weapon>
+    <weapon name="铁碎牙">
+      <weapon name="铁碎牙D">
+      </weapon>
+    </weapon>
+    <weapon name="恐暴惩罚者之刀">
+      <weapon name="灾难惩罚者之刀">
+      </weapon>
+    </weapon>
+    <weapon name="漆黑之爪">
+      <weapon name="漆黑爪【终焉】">
+      </weapon>
+    </weapon>
+    <weapon name="闪电雷霆">
+    </weapon>    
+    <weapon name="霸王剑">
+    </weapon>
+    <weapon name="霸刀黑神力">
+    </weapon>
+    <weapon name="崩刀冻魂裂">
+    </weapon>
+    <weapon name="凶刀【催花雨】">
+    </weapon>
+  </weapons>
+</data>

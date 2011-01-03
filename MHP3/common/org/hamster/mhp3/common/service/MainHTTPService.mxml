@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<services:HTTPServiceLocator xmlns:mx="http://www.adobe.com/2006/mxml"
+		   xmlns:services="org.hamster.services.*">
+	<mx:Script>
+		<![CDATA[
+			import org.hamster.mhp3.common.util.AppConfig;
+		]]>
+	</mx:Script>
+	<mx:HTTPService id="weaponXML" url="{AppConfig.WEAPON_XML}" method="GET" resultFormat="text" />
+</services:HTTPServiceLocator>

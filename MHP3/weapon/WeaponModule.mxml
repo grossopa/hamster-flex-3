@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" layout="vertical" width="100%" height="100%">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.collections.XMLListCollection;
+			import mx.events.FlexEvent;
+			import mx.events.ListEvent;
+			
+			import org.hamster.mhp3.common.facade.AppFacade;
+			import org.hamster.mhp3.common.util.AppConfig;
+			import org.hamster.mhp3.common.util.ResourceUtil;
+			import org.puremvc.as3.patterns.facade.Facade;
+			
+			import spark.events.IndexChangeEvent;
+			import spark.layouts.VerticalLayout;
+			
+			public static const ICON_LIST:Array = [
+				ResourceUtil.WEAPON_01,ResourceUtil.WEAPON_02,ResourceUtil.WEAPON_03,
+				ResourceUtil.WEAPON_04,ResourceUtil.WEAPON_05,ResourceUtil.WEAPON_06,
+				ResourceUtil.WEAPON_07,ResourceUtil.WEAPON_08,ResourceUtil.WEAPON_09,
+				ResourceUtil.WEAPON_10,ResourceUtil.WEAPON_11,ResourceUtil.WEAPON_12
+			];
+			
+			[Bindable] private var _weaponListXML:XMLListCollection;
+			
+			[Bindable] private var currentWeaponList:XMLListCollection;
+			
+			public function set weaponListXML(value:XMLListCollection):void
+			{
+				_weaponListXML = value;
+				selectionChange(0);
+			}
+			
+			public function get weaponListXML():XMLListCollection
+			{
+				return _weaponListXML;
+			}
+			[Bindable] public var currentSelection:String;
+			
+			protected function weaponTree_changeHandler(event:ListEvent):void
+			{
+				var xml:XML = XML(event.itemRenderer.data);
+				var typeFolder:String = currentWeaponList.attribute("type");
+				currentSelection = AppConfig.weaponImageRootURL + '/' + typeFolder + '/' + xml.attribute("name") + ".jpg";
+			}
+			
+
+			protected function weaponTabBar_changeHandler(event:IndexChangeEvent):void
+			{
+				selectionChange(weaponTabBar.selectedIndex);
+			}
+			
+			private function selectionChange(index:int):void
+			{
+				currentWeaponList = new XMLListCollection(new XMLList(_weaponListXML[index]));
+				weaponTree.setStyle("folderOpenIcon", ICON_LIST[index]); 
+				weaponTree.setStyle("folderClosedIcon", ICON_LIST[index]); 
+				weaponTree.setStyle("defaultLeafIcon", ICON_LIST[index]); 
+			}
+
+		]]>
+	</fx:Script>
+	<s:TabBar id="weaponTabBar" dataProvider="{_weaponListXML}" labelField="@name" change="weaponTabBar_changeHandler(event)"  />
+	<mx:HDividedBox width="100%" height="100%">
+		<mx:Tree id="weaponTree" dataProvider="{currentWeaponList.children()}" height="100%" width="300" change="weaponTree_changeHandler(event)" labelField="@name"  />
+		<mx:Image source="{currentSelection}" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" />
+	</mx:HDividedBox>
+</mx:Module>
