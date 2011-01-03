@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   frameRate="60"
+			   minWidth="955" minHeight="600" applicationComplete="app_applicationCompleteHandler(event)" xmlns:local="*">
+	<fx:Declarations>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import org.hamster.mhp3.common.facade.AppFacade;
+			
+			private var facade:AppFacade = AppFacade.instance;
+			
+			protected function app_applicationCompleteHandler(event:FlexEvent):void
+			{
+				facade.sendNotification(AppFacade.INIT, this);
+			}
+		]]>
+	</fx:Script>
+	<local:WeaponModule id="weaponModule" />
+</s:Application>
