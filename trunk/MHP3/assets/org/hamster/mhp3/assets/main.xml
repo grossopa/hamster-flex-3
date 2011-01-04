@@ -688,6 +688,195 @@
         </weapon>
       </weapon>
     </weapon>
+  </weapons>
 
-  </weapons>  
+  <weapons name="锤" type="E">
+    <weapon name="古结云木槌">
+      <weapon name="结云木槌">
+        <weapon name="结云木槌改">
+          <weapon name="结云冲击锤">
+          </weapon>
+          <weapon name="赤甲锤">
+            <weapon name="赤甲锤改">
+              <weapon name="甲锤巨人">
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="战锤">
+          <weapon name="战锤改">
+            <weapon name="战斗权杖">
+              <weapon name="强袭铁锤">
+                <weapon name="强袭铁锤改">
+                  <weapon name="冲击铁锤">
+                  </weapon>
+                  <weapon name="黑铁">
+                    <weapon name="鬼铁">
+                    </weapon>
+                  </weapon>
+                </weapon>
+                <weapon name="枪锤">
+                  <weapon name="枪锤改">
+                    <weapon name="死亡左轮">
+                    </weapon>
+                  </weapon>
+                </weapon>
+              </weapon>
+              <weapon name="轰龙锤">
+                <weapon name="轰锤【虎丸】">
+                </weapon>
+              </weapon>
+            </weapon>
+            <weapon name="冰霜核心">
+              <weapon name="冰霜核心改">
+                <weapon name="痛泣冰河">
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="喷火锤">
+          <weapon name="喷火锤改">
+            <weapon name="喷火彩鸟">
+              <weapon name="闪电红彩鸟">
+                <weapon name="电光红彩鸟">
+                </weapon>
+              </weapon>
+            </weapon>
+
+          </weapon>
+          <weapon name="红色冲击">
+            <weapon name="火龙碎弗拉肯">
+              <weapon name="星碎锤大流星">
+              </weapon>
+            </weapon>
+          </weapon>
+          <weapon name="花瓣大锤">
+            <weapon name="花冠毒锤">
+              <weapon name="毒槌猛毒">
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="锁骨">
+      <weapon name="锁骨改">
+        <weapon name="土砂龙大锤">
+          <weapon name="土砂龙大锤改">
+            <weapon name="土砂龙冲锋">
+              <weapon name="冰冻破坏者">
+                <weapon name="冰冻眩目者">
+                </weapon>
+              </weapon>
+            </weapon>
+            <weapon name="坚骨槌">
+              <weapon name="坚骨槌改">
+              </weapon>
+            </weapon>
+          </weapon>
+          <weapon name="爆锤黄铜骨节">
+            <weapon name="红莲骨节">
+              <weapon name="震锤巨人">
+              </weapon>
+              <weapon name="钢锤溶解骨节">
+                <weapon name="巨人爆锤">
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+      </weapon>
+      <weapon name="水兽骨钉锤">
+        <weapon name="水兽皮大锤">
+          <weapon name="水兽皮大锤改">
+            <weapon name="水锤伏贾诺">
+            </weapon>
+          </weapon>
+          <weapon name="尾槌巨锤">
+            <weapon name="尾槌巨锤改">
+              <weapon name="刚槌巨锤">
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+      </weapon>
+      <weapon name="野猪大锤">
+        <weapon name="野猪头大锤">
+          <weapon name="野猪巨大锤">
+            <weapon name="迅龙破坏者">
+              <weapon name="迅龙破坏者改">
+                <weapon name="夜行槌【常暗】">
+                </weapon>
+                <weapon name="潜行破坏者">
+                  <weapon name="暴风槌【里常暗】">
+                  </weapon>
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="大地之锤">
+        <weapon name="大地巨锤">
+            <weapon name="G·大地巨锤">
+    </weapon>
+    </weapon>
+    </weapon>
+    <weapon name="大南瓜">
+     <weapon name="大南瓜王">
+         <weapon name="灵槌南瓜王">
+    </weapon>
+    </weapon>   
+    </weapon>
+    <weapon name="真结云木槌">
+        <weapon name="真结云木槌改">
+            <weapon name="灵结云木槌">
+    </weapon>
+    </weapon>
+    </weapon>
+    <weapon name="仙石锤【响】">
+        <weapon name="仙石锤【崩】">
+            <weapon name="峯山锤">
+    </weapon>
+    </weapon>
+    </weapon>
+    <weapon name="蛋锤">
+        <weapon name="丸鸟卵槌">
+    </weapon>
+    </weapon>
+    <weapon name="王锤神雷">
+        <weapon name="王牙锤【大雷】">
+    </weapon>
+    </weapon>
+    <weapon name="混沌之锤">
+        <weapon name="混沌冲击">
+    </weapon>
+    </weapon>
+    <weapon name="煌黑坚锤">
+        <weapon name="煌黑坚锤阿鲁梅塔">
+    </weapon>
+    </weapon>
+    <weapon name="鬼之貌">
+    </weapon>
+    <weapon name="崩锤暴雪轰">
+    </weapon>
+    <weapon name="凶镜【妖云】">
+    </weapon>
+    <weapon name="腐锈大锤">
+        <weapon name="生锈大锤">
+            <weapon name="气息·核心">
+                <weapon name="熔岩·核心">
+    </weapon>
+    </weapon>
+    </weapon>
+    </weapon>
+    <weapon name="严重风化的大锤">
+        <weapon name="风化的大锤">
+            <weapon name="脉动·核心">
+    </weapon>
+    </weapon>
+    </weapon>
+  </weapons>
 </data>
