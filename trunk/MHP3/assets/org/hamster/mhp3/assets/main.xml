@@ -331,4 +331,195 @@
     <weapon name="凶刀【催花雨】">
     </weapon>
   </weapons>
+
+  <weapons name="片手剑" type="C">
+    <weapon name="古结云之钩">
+      <weapon name="结云之钩">
+        <weapon name="结云之钩改">
+          <weapon name="结云小战斧">
+          </weapon>
+          <weapon name="污浊男爵">
+            <weapon name="污浊男爵改">
+              <weapon name="污浊男爵毒剑">
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="猎刀">
+          <weapon name="猎刀改">
+            <weapon name="暗杀者之刀">
+              <weapon name="冰冻短剑">
+                <weapon name="冰冻短剑改">
+                  <weapon name="冰牙锐爪">
+                  </weapon>
+                  <weapon name="沙尘短剑">
+                    <weapon name="沙暴短剑">
+                    </weapon>
+                  </weapon>
+                  <weapon name="斗士之剑">
+                    <weapon name="奥德赛">
+                    </weapon>
+                  </weapon>
+                </weapon>
+              </weapon>
+              <weapon name="漆黑军刀">
+                <weapon name="漆黑军刀改">
+                  <weapon name="猛毒之爪">
+                  </weapon>
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="战士短剑">
+          <weapon name="战斗小刀">
+            <weapon name="战斗小刀改">
+              <weapon name="死亡小刀">
+              </weapon>
+            </weapon>
+            <weapon name="沉睡小刀">
+              <weapon name="沉睡小刀改">
+                <weapon name="眠龙小刀">
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="骨制小刀">
+      <weapon name="骨制小刀改">
+        <weapon name="骨单手剑">
+          <weapon name="骨单手剑改">
+            <weapon name="彩鸟绞肉机">
+            </weapon>
+            <weapon name="带毒者">
+              <weapon name="喷毒者">
+              </weapon>
+            </weapon>
+            <weapon name="尾槌龙单手剑">
+              <weapon name="山刻巨槌剑">
+              </weapon>
+            </weapon>
+          </weapon>
+          <weapon name="灼热之刃">
+            <weapon name="喷火者伊夫利特">
+              <weapon name="黄金之髓">
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+      </weapon>
+      <weapon name="水兽短剑">
+        <weapon name="水兽之爪">
+          <weapon name="水兽之爪改">
+            <weapon name="水兽王之爪">
+            </weapon>
+            <weapon name="紫色之爪">
+              <weapon name="苦剑紫水兽之剑">
+              </weapon>
+            </weapon>
+          </weapon>
+          <weapon name="迅龙刃">
+            <weapon name="暗夜剑【昏冥】">
+            </weapon>
+          </weapon>
+          <weapon name="轰龙之爪">
+            <weapon name="轰剑【虎眼】">
+            </weapon>
+            <weapon name="暴君之爪">
+              <weapon name="吼剑【地咬】">
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="土砂龙锤剑">
+          <weapon name="土砂龙锤剑改">
+            <weapon name="土砂龙爪剑">
+              <weapon name="咒魂">
+              </weapon>
+            </weapon>
+            <weapon name="爆锤单手剑">
+              <weapon name="爆锤单手剑改">
+                <weapon name="重爆锤单手剑">
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="昆虫奏者">
+      <weapon name="飞虫单手剑">
+        <weapon name="冰蓝飞虫剑">
+          <weapon name="冰蓝飞虫旋律">
+          </weapon>
+        </weapon>
+        <weapon name="雷光飞虫剑">
+          <weapon name="雷光飞虫旋律">
+          </weapon>
+        </weapon>
+      </weapon>
+      <weapon name="飞虫拘束者">
+        <weapon name="飞虫旋律拘束者">
+          <weapon name="大飞虫旋律拘束者">
+          </weapon>
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="矿石齿轮">
+      <weapon name="杀戮齿轮">
+        <weapon name="铀剑">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="狩猎族小刀">
+      <weapon name="狩猎族小刀改">
+        <weapon name="狩猎族之刃">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="猫猫肉掌">
+      <weapon name="猫猫肉掌改">
+        <weapon name="猫爪">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="真结云之钩">
+      <weapon name="真结云之钩改">
+        <weapon name="结云护山刀【神舞】">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="峯山小太刀">
+      <weapon name="小太刀【砂凪】">
+      </weapon>
+    </weapon>
+    <weapon name="王剑疾雷">
+      <weapon name="王牙剑【折雷】">
+      </weapon>
+    </weapon>
+    <weapon name="煌黑之剑">
+      <weapon name="煌黑剑阿鲁斯塔">
+      </weapon>
+    </weapon>
+    <weapon name="崩铊冰寒星">
+    </weapon>
+    <weapon name="凶宝【翠岚】">
+    </weapon>
+    <weapon name="腐锈单手剑">
+      <weapon name="生锈单手剑">
+        <weapon name="封龙剑【绝一门】">
+          <weapon name="封龙剑【怨绝一门】">
+          </weapon>
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="风化严重的单手剑">
+      <weapon name="风化的单手剑">
+        <weapon name="祀导器【一门外】">
+        </weapon>
+      </weapon>
+    </weapon>
+  </weapons>
 </data>
