@@ -522,4 +522,172 @@
       </weapon>
     </weapon>
   </weapons>
+
+  <weapons name="双刀" type="D">
+    <weapon name="古结云双剑">
+      <weapon name="结云双剑">
+        <weapon name="结云双剑改">
+          <weapon name="结云剃刀">
+          </weapon>
+          <weapon name="锹扬羽虫刀">
+            <weapon name="锹扬羽虫刀改">
+              <weapon name="双曲剑虫刀">
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="双刀">
+          <weapon name="双刀改">
+            <weapon name="决斗双刀">
+              <weapon name="双战斧">
+                <weapon name="双战斧改">
+                  <weapon name="飓风">
+                    <weapon name="龙卷风">
+                    </weapon>
+                  </weapon>
+                  <weapon name="教团细剑">
+                    <weapon name="神圣军刀">
+                    </weapon>
+                  </weapon>
+                </weapon>
+                <weapon name="轰龙剔刀">
+                  <weapon name="轰爪【虎血】">
+                  </weapon>
+                </weapon>
+              </weapon>
+              <weapon name="双电锯刀">
+                <weapon name="双电锯刀改">
+                  <weapon name="双刃斧">
+                  </weapon>
+                </weapon>
+              </weapon>
+            </weapon>
+            <weapon name="51式武装棍棒">
+              <weapon name="51式武装棍棒改">
+                <weapon name="潜口扑双剑">
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="骨铐">
+          <weapon name="骨铐改">
+            <weapon name="水兽双刃">
+              <weapon name="水兽双刃改">
+                <weapon name="大水兽双刃">
+                </weapon>
+              </weapon>
+            </weapon>
+            <weapon name="双炎">
+              <weapon name="高级双炎">
+                <weapon name="双剑龙炎">
+                  <weapon name="激龙双剑">
+                  </weapon>
+                </weapon>
+              </weapon>
+            </weapon>
+            <weapon name="角双剑">
+              <weapon name="角双剑改">
+                <weapon name="刚角龙双剑">
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="狗龙双刀">
+          <weapon name="狗龙双刀改">
+            <weapon name="首领双刃">
+              <weapon name="火焰风暴">
+                <weapon name="沙罗曼蛇">
+                </weapon>
+                <weapon name="水流风暴">
+                  <weapon name="水之精灵">
+                  </weapon>
+                </weapon>
+              </weapon>
+              <weapon name="迅龙双剑">
+                <weapon name="迅龙双剑改">
+                  <weapon name="夜天连刃【黑翼】">
+                  </weapon>
+                  <weapon name="绿迅双剑">
+                    <weapon name="旋风连刃【里黑翼】">
+                    </weapon>
+                  </weapon>
+                </weapon>
+              </weapon>
+            </weapon>
+            <weapon name="血红羽翼">
+              <weapon name="血红羽翼改">
+                <weapon name="毒液羽翼">
+                </weapon>
+                <weapon name="雷光幽灵">
+                  <weapon name="双翼刃电怪闪电">
+                  </weapon>
+                </weapon>
+              </weapon>
+            </weapon>
+            <weapon name="暴雪双刃">
+              <weapon name="暴雪双刃改">
+                <weapon name="暴雪霜冻刃">
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="狩团子【白玉】">
+      <weapon name="狩团子【白玉】上">
+        <weapon name="狩团子【白玉】雅">
+        </weapon>
+        <weapon name="狩团子【霜降玉】">
+          <weapon name="狩团子【霜降玉】雅">
+          </weapon>
+        </weapon>
+        <weapon name="狩团子【火药玉】">
+          <weapon name="狩团子【火药玉】雅">
+          </weapon>
+        </weapon>
+        <weapon name="狩团子【雷光玉】">
+          <weapon name="狩团子【雷光玉】雅">
+          </weapon>
+        </weapon>
+      </weapon>
+      <weapon name="狩团子【毒天狗玉】">
+        <weapon name="狩团子【毒天狗玉】雅">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="真结云双剑">
+      <weapon name="真结云双剑改">
+        <weapon name="无双刃结云【祀舞】">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="王双刃旗雷">
+      <weapon name="王牙双刃【土雷】">
+      </weapon>
+    </weapon>
+    <weapon name="海贼J双刃">
+      <weapon name="大海贼J双刃">
+      </weapon>
+    </weapon>
+    <weapon name="愤怒双刃">
+      <weapon name="恐暴双巨刃">
+      </weapon>
+    </weapon>
+    <weapon name="霸爪黑神牙">
+    </weapon>
+    <weapon name="崩刃霜寒月">
+    </weapon>
+    <weapon name="凶扇【黑风白雨】">
+    </weapon>
+    <weapon name="风化严重的双剑">
+      <weapon name="风化的双剑">
+        <weapon name="封龙剑【超绝一门】">
+        </weapon>
+      </weapon>
+    </weapon>
+
+  </weapons>  
 </data>
