@@ -13,7 +13,7 @@
 			import org.hamster.mhp3.common.facade.AppFacade;
 			
 			private var facade:AppFacade = AppFacade.instance;
-			
+			 
 			protected function app_applicationCompleteHandler(event:FlexEvent):void
 			{
 				facade.sendNotification(AppFacade.INIT, this);
