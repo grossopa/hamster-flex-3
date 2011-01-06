@@ -1232,4 +1232,299 @@
       </weapon>
     </weapon>
   </weapons>
+
+  <weapons name="铳枪" type="H">
+    <weapon name="古结云铳枪">
+      <weapon name="结云铳枪">
+        <weapon name="结云铳枪改">
+          <weapon name="结云爆裂铳">
+          </weapon>
+          <weapon name="迅龙铳枪">
+            <weapon name="迅龙铳枪改">
+              <weapon name="夜铳枪【残月】">
+              </weapon>
+              <weapon name="绿迅铳枪">
+                <weapon name="猛风铳枪【里残月】">
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+
+        </weapon>
+        <weapon name="讨伐队正式铳枪">
+          <weapon name="近卫队正式铳枪">
+            <weapon name="帝王铳枪">
+              <weapon name="钢铁破坏铳枪">
+                <weapon name="钢铁破坏铳枪改">
+                  <weapon name="烈日爆破者">
+                  </weapon>
+                </weapon>
+              </weapon>
+              <weapon name="古代式回旋铳枪">
+                <weapon name="古代式歼灭铳枪">
+                </weapon>
+              </weapon>
+            </weapon>
+            <weapon name="红色城墙">
+              <weapon name="红色城墙改">
+                <weapon name="银色城墙">
+                  <weapon name="银色战车">
+                  </weapon>
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+          <weapon name="62式突击铳枪">
+            <weapon name="62式突击铳枪改">
+              <weapon name="烈日狂奔突击者">
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="狗龙铳枪">
+          <weapon name="狗龙铳枪改">
+            <weapon name="公主烈炎">
+              <weapon name="公主烈炎改">
+                <weapon name="奥鲁特林迪">
+                  <weapon name="女王烈炎">
+                    <weapon name="煌铳枪伊修塔鲁">
+                    </weapon>
+                  </weapon>
+                </weapon>
+              </weapon>
+            </weapon>
+            <weapon name="彩鸟铳">
+              <weapon name="彩鸟铳改">
+                <weapon name="梦幻铳枪">
+                </weapon>
+                <weapon name="闪电羽铳枪">
+                  <weapon name="雷霆鸟铳枪">
+                  </weapon>
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="骨铳枪">
+          <weapon name="大骨铳枪">
+            <weapon name="龙骨铳枪">
+              <weapon name="轰龙铳">
+                <weapon name="轰龙铳改">
+                  <weapon name="轰铳枪【虎炮】">
+                  </weapon>
+                </weapon>
+              </weapon>
+              <weapon name="炎戈烈焰铳">
+                <weapon name="炎戈烈焰铳改">
+                  <weapon name="炎戈熔岩铳枪">
+                  </weapon>
+                </weapon>
+                <weapon name="冻戈水流铳">
+                  <weapon name="冻戈爆水铳">
+                  </weapon>
+                </weapon>
+              </weapon>
+
+            </weapon>
+            <weapon name="白兔铳枪">
+              <weapon name="白兔铳枪改">
+                <weapon name="白兔射线">
+                </weapon>
+              </weapon>
+              <weapon name="破坏射击者">
+                <weapon name="破坏王者">
+                  <weapon name="破坏暴君">
+                  </weapon>
+                </weapon>
+              </weapon>
+
+            </weapon>
+          </weapon>
+        </weapon>
+      </weapon>    
+    </weapon>
+    <weapon name="竹铳枪【鸟胁】">
+      <weapon name="竹铳枪【狮子胁】">
+        <weapon name="竹铳枪【龙胁】">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="真结云铳枪">
+      <weapon name="真结云铳枪改">
+        <weapon name="仙炮枪结云">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="碎牙炮">
+      <weapon name="崩牙炮">
+        <weapon name="峯铳枪【喷牙】">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="艾琉铳枪">
+      <weapon name="福福艾琉铳枪">
+      </weapon>
+    </weapon>
+    <weapon name="王铳枪刚雷">
+      <weapon name="王牙铳枪【火雷】">
+      </weapon>
+    </weapon>
+    <weapon name="银色皇冠">
+      <weapon name="银色皇冠改">
+      </weapon>
+    </weapon>
+    <weapon name="金色皇冠">
+      <weapon name="金色皇冠改">
+      </weapon>
+    </weapon>
+    <weapon name="白金皇冠">
+    </weapon>
+    <weapon name="霸铳枪黑神魂">
+    </weapon>
+    <weapon name="崩铳枪冻天炮">
+    </weapon>
+    <weapon name="凶铳枪【瑞雨】">
+    </weapon>
+    <weapon name="风化严重的铳枪">
+      <weapon name="风化的铳枪">
+        <weapon name="巨神兵守卫">
+        </weapon>
+      </weapon>
+    </weapon>
+  </weapons>
+
+  <weapons name="轻弩" type="I">
+    <weapon name="古结云弩">
+      <weapon name="结云弩">
+        <weapon name="结云弩改">
+          <weapon name="狗龙火焰">
+            <weapon name="狗龙火焰改">
+              <weapon name="眠狗火焰">
+                <weapon name="眠狗强轻弩">
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+          <weapon name="土砂轻弩">
+            <weapon name="土砂轻弩改">
+              <weapon name="潜口轻弩">
+                <weapon name="冰碎之炎">
+                  <weapon name="冰碎发射器">
+                  </weapon>
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+        <weapon name="水兽射手">
+          <weapon name="水兽强射手">
+            <weapon name="水兽瀑布">
+              <weapon name="水兽血流">
+                <weapon name="紫毒世·诺亚">
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="十字弩炮">
+      <weapon name="十字弩炮改">
+        <weapon name="十字迅雷弩">
+          <weapon name="女武神之焰">
+            <weapon name="女武神巨炎">
+              <weapon name="缭乱对弩">
+              </weapon>
+            </weapon>
+          </weapon>
+          <weapon name="猛毒之礼">
+            <weapon name="猛毒之礼改">
+              <weapon name="巨猛灌毒者">
+                <weapon name="永恒之弩">
+                </weapon>
+              </weapon>
+              <weapon name="血亡拘束者">
+                <weapon name="深红射弩">
+                </weapon>
+              </weapon>
+            </weapon>
+          </weapon>
+          <weapon name="冰霜加农">
+            <weapon name="冰霜地狱">
+              <weapon name="冰霜强袭者">
+              </weapon>
+            </weapon>
+          </weapon>
+          <weapon name="猎人步枪">
+            <weapon name="狙击射手">
+            </weapon>
+          </weapon>
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="瓢弹">
+      <weapon name="瓢弹【百成】">
+        <weapon name="瓢弹【千成】">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="真结云弩">
+      <weapon name="结云灵弩【弹雨】">
+      </weapon>
+    </weapon>
+    <weapon name="迅龙轻弩">
+      <weapon name="迅龙轻弩改">
+        <weapon name="夜行弩【枭之眼】">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="火龙炮">
+      <weapon name="火龙炮改">
+        <weapon name="狱火龙炮">
+          <weapon name="凤仙火龙炮">
+          </weapon>
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="王弩雷枪">
+      <weapon name="王牙弩【野雷】">
+      </weapon>
+    </weapon>
+    <weapon name="轰龙坦克">
+      <weapon name="轰弩【战虎】">
+      </weapon>
+      <weapon name="暴君坦克">
+        <weapon name="吼弩【军咬】">
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="尾槌灭气者">
+      <weapon name="尾槌灭气者改">
+        <weapon name="狂战士弩">
+          <weapon name="高级弩金牛座">
+          </weapon>
+        </weapon>
+      </weapon>
+    </weapon>
+    <weapon name="吹吹茶釜">
+      <weapon name="吹吹茶茶弩手">
+      </weapon>
+    </weapon>
+    <weapon name="恐暴机关枪">
+      <weapon name="狂暴领主弩">
+      </weapon>
+    </weapon>
+    <weapon name="崩弩艾努卡姆鲁巴斯">
+    </weapon>
+    <weapon name="凶针【水祸】">
+    </weapon>
+    <weapon name="鬼岛">
+      <weapon name="大鬼岛">
+      </weapon>
+    </weapon>
+    <weapon name="神岛">
+      <weapon name="大神岛【出云】">
+      </weapon>
+    </weapon>
+  </weapons>
 </data>
