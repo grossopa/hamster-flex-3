@@ -38,7 +38,7 @@
 			}
 			
 			public function get weaponListXML():XMLListCollection
-			{
+			{ 
 				return _weaponListXML;
 			}
 			[Bindable] public var currentSelection:String;
