@@ -1,0 +1,150 @@
+<!-- 
+  ant (war)       build war file of project
+  ant hibernate   generate pojo class via *.hbm.xml
+  ant clean       clean up
+  ant commonjar  build common jar file
+-->
+
+<project name="PersonalManager" default="war" basedir=".">
+  
+  <property environment="env" />
+  <property name="project.name" value="PersonalManager"/>
+	
+  <!-- please make sure following environment is properly configured -->
+  <property name="tomcatlib" value="${env.CATALINA_HOME}/lib"/>
+  
+  <!-- project default settings -->
+  <property name="test.classpath.location" value="test-lib" />
+  <property name="classpath.location" value="WebContent/WEB-INF/lib" />
+  
+  <!-- output folder properties -->
+  <property name="hibernate.output" value="hibernate-output" />
+  <property name="ant.classes.output" value="ant-classes" />
+	
+  <!-- jar configuration -->
+  <property name="commonjar.name" value="personalmanager-common.jar" />
+	
+  <!-- encoding configuration -->
+  <property name="output.encoding" value="UTF-8" />
+	
+  <!-- path configuration -->
+  <path id="classpath">
+    <fileset dir="${classpath.location}">
+      <include name="*.jar" />
+    </fileset>
+    
+    <fileset dir="${tomcatlib}">
+      <include name="**/*.jar" />
+    </fileset>
+  </path>
+  
+  <path id="test.classpath">  
+    <fileset dir="test-lib">
+      <include name="**/*.jar" />
+    </fileset>  
+  </path>
+  
+  <path id="toolslib">
+    <path location="${test.classpath.location}/hibernate-tools.jar" />
+    <fileset dir="${classpath.location}">
+      <include name="*.jar" />
+    </fileset>
+  </path>
+
+  <!-- task def configuration -->
+  <taskdef name="hibernatetool" 
+    classname="org.hibernate.tool.ant.HibernateToolTask" 
+    classpathref="toolslib" />
+  
+  <!-- targets -->
+  <target name="hibernate">
+    <hibernatetool destdir="${hibernate.output}">
+      <configuration>
+        <fileset dir="src">
+          <include name="**/*.hbm.xml"/>
+        </fileset>
+      </configuration>
+      <hbm2java jdk5="true" />
+    </hibernatetool>
+  </target>
+
+  <target name="war" depends="compile">
+    <war warfile="${project.name}.war" webxml="WebContent/WEB-INF/web.xml" encoding="${output.encoding}">
+      <fileset dir="WebContent" includes="**/*" excludes="WEB-INF/classes/**/*.*, WEB-INF/web.xml" />
+      <classes dir="${ant.classes.output}" />
+    </war>
+  </target>
+
+  <target name="compile" depends="clean">
+    <mkdir dir="${ant.classes.output}" />
+    <javac destdir="${ant.classes.output}" source="1.6" target="1.6" deprecation="off" debug="on" encoding="${output.encoding}">
+      <classpath refid="classpath" />
+      <classpath refid="test.classpath" />
+      <src path="src" />
+      <src path="conf" />
+      <src path="common"/>
+      <src path="weibo"/>
+      <src path="weibo4j"/>
+      <src path="scribe"/>
+    </javac>
+    <copy todir="${ant.classes.output}" outputencoding="${output.encoding}">
+      <fileset dir="src"/>
+      <fileset dir="conf"/>
+      <fileset dir="common"/>
+      <fileset dir="weibo"/>
+      <fileset dir="weibo4j" />
+      <fileset dir="scribe" />
+	  <filterset>
+		<filter token="ENCODING" value="${output.encoding}" />
+	  </filterset>
+    </copy>
+  </target>
+  
+  <target name="clean">
+    <delete dir="${ant.classes.output}" />
+    <delete dir="${hibernate.output}" />
+    <delete file="${project.name}.war" />
+  	<delete file="${commonjar.name}" />
+  </target>
+
+  <target name="test" depends="compile">
+  <mkdir dir="reports-tests" />
+   
+  <junit printsummary="yes" haltonfailure="yes" fork="yes">
+    <jvmarg value="-Dhttp.proxyHost=web-proxy.hpl.hp.com" />
+    <jvmarg value="-Dhttp.proxyPort=8080"/>
+    <jvmarg value="-DWKDIR=/home/grossopa/runnable/wkservice/"/>
+    <jvmarg value="-DBASEDIR=/home/grossopa/workspace/ArticleClipperJava/basedir/"/>
+    <jvmarg value="-DLOCAL_IP=16.157.68.193"/>
+  	
+    <classpath>
+      <pathelement path="${ant.classes.output}"/>
+    </classpath>
+    
+    <classpath refid="classpath" />
+    <classpath refid="test.classpath" />
+
+    <formatter type="xml"/>
+
+    <batchtest fork="yes" todir="reports-tests">
+      <fileset dir="test">
+        <include name="**/*.java"/>
+        <exclude name="**/JettyServer.java"/>
+        <exclude name="**/Base*.java"/>
+      </fileset>
+    </batchtest>
+  </junit>
+  </target>
+	
+  <target name="commonjar" depends="compile">
+    <jar destfile="${commonjar.name}">
+      <fileset dir="${ant.classes.output}">
+        <include name="com/hp/hpl/articleclipper/dao/**" />
+        <include name="com/hp/hpl/articleclipper/exception/**" />
+      	<include name="com/hp/hpl/articleclipper/pojo/**" />
+      	<include name="com/hp/hpl/articleclipper/service/CRUDService.*" />
+      	<include name="com/hp/hpl/articleclipper/service/impl/CRUDServiceImpl.*" />
+      </fileset>
+    </jar>
+  </target>
+</project>
