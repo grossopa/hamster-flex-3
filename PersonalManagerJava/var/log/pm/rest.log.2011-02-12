@@ -1,0 +1,5 @@
+2011/02/12 21:37:11:352 INFO  [16197143@qtp-3195425-0] acw.rest - 127.0.0.1 /PersonalManager/main/service/login?email=grossopaforever@gmail.com&password=asdf POST    take 48ms 
+2011/02/12 21:38:51:372 INFO  [16197143@qtp-3195425-0] acw.rest - 127.0.0.1 /PersonalManager/main/login?email=grossopaforever@gmail.com&password=asdf POST    take 50ms 
+2011/02/12 21:52:08:604 INFO  [18426253@qtp-4354460-0] acw.rest - 127.0.0.1 /PersonalManager/main/login?email=grossopaforever@gmail.com&password=asdf POST    take 104ms 
+2011/02/12 21:54:47:816 INFO  [18426253@qtp-4354460-0] acw.rest - 127.0.0.1 /PersonalManager/main/login.json?email=grossopaforever@gmail.com&password=asdf POST    take 50ms 
+2011/02/12 21:55:38:855 INFO  [16197143@qtp-3195425-0] acw.rest - 127.0.0.1 /PersonalManager/main/login?email=grossopaforever@gmail.com&password=asdf POST    take 48ms 
