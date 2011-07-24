@@ -5,7 +5,7 @@
   ant commonjar  build common jar file
 -->
 
-<project name="PersonalManager" default="war" basedir=".">
+<project name="PersonalManager" default="all-war" basedir=".">
   
   <property environment="env" />
   <property name="project.name" value="PersonalManager"/>
@@ -67,15 +67,28 @@
       <hbm2java jdk5="true" />
     </hibernatetool>
   </target>
+  
+  <target name="svn">
+	<exec executable="svn">
+		<arg line="update ./${project.name}"/>
+	</exec>
+  </target>
+	
+	  
+  <target name="deploywar">
+    <exec executable="cp">
+      <arg line="${project.name}.war ${env.CATALINA_HOME}/webapps/"/>
+	</exec>
+  </target>
 
-  <target name="war" depends="compile">
+  <target name="buildwar" depends="compile">
     <war warfile="${project.name}.war" webxml="WebContent/WEB-INF/web.xml" encoding="${output.encoding}">
       <fileset dir="WebContent" includes="**/*" excludes="WEB-INF/classes/**/*.*, WEB-INF/web.xml" />
       <classes dir="${ant.classes.output}" />
     </war>
   </target>
 
-  <target name="compile" depends="clean">
+  <target name="compile">
     <mkdir dir="${ant.classes.output}" />
     <javac destdir="${ant.classes.output}" source="1.6" target="1.6" deprecation="off" debug="on" encoding="${output.encoding}">
       <classpath refid="classpath" />
@@ -105,6 +118,15 @@
     <delete dir="${hibernate.output}" />
     <delete file="${project.name}.war" />
   	<delete file="${commonjar.name}" />
+  </target>
+  
+  <!-- combine of several ant tasks -->
+  <target name="all-war">
+	<ant target="svn" />
+	<ant target="clean" />
+	<ant target="compile" />
+	<ant target="buildwar" />
+  	<ant target="deploywar" />
   </target>
 
   <target name="test" depends="compile">
