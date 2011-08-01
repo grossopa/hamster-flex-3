@@ -7,6 +7,7 @@
 	<classpathentry kind="src" path="weibo"/>
 	<classpathentry kind="src" path="weibo4j"/>
 	<classpathentry kind="src" path="scribe"/>
+	<classpathentry kind="src" path="flex"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="test-lib/ant-junit.jar">

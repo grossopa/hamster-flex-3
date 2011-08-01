@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import org.hamster.pm.main.pojo.annotation.PojoToResponse;
 import org.hibernate.validator.Length;
 import org.hibernate.validator.NotNull;
+import org.springframework.flex.core.io.AmfIgnore;
 
 /**
  * USER
@@ -37,8 +38,8 @@ public class DUser extends AbstractPojo {
 	}
 
 	@Id
-	@PojoToResponse
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@PojoToResponse
 	public Long getId() {
 		return this.id;
 	}
@@ -60,10 +61,12 @@ public class DUser extends AbstractPojo {
 	
 	@NotNull
 	@Length(max=50)
+	@AmfIgnore
 	public String getPassword() {
 		return password;
 	}
 
+	@AmfIgnore
 	public void setPassword(String password) {
 		this.password = password;
 	}

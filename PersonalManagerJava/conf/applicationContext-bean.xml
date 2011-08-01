@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:flex="http://www.springframework.org/schema/flex"
 	xsi:schemaLocation="
 			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
-			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+			http://www.springframework.org/schema/flex 
+            http://www.springframework.org/schema/flex/spring-flex-1.0.xsd">
 
 	<context:property-placeholder location="classpath:init.properties" />
 
@@ -119,6 +124,46 @@
 	</bean>
 	<bean name="memcachedClient" factory-bean="memcachedClientBuilder"
 			factory-method="build" destroy-method="shutdown"/>-->
-
-
+			
+	<!-- blazeDS integration -->
+	<flex:message-broker services-config-path="classpath*:flex-services-config.xml">
+		<flex:mapping pattern="/messagebroker/*" />
+		<flex:config-processor ref="appConfigProcessor" />
+		<flex:exception-translator ref="appExceptionTranslator"/>
+		<flex:message-interceptor ref="appMessageInterceptor"/>
+	</flex:message-broker>
+	
+	<!-- services 
+	<flex:remoting-destination ref="userService" />-->
+	
+	<bean id="_messageBroker" class="org.springframework.flex.core.MessageBrokerFactoryBean" >
+		<property name="servicesConfigPath" value="classpath*:flex-services-config.xml" />
+	</bean>
+	
+	<!-- Maps request paths at /* to the BlazeDS MessageBroker -->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<value>
+				/*=_messageBroker
+			</value>
+		</property>
+	</bean>
+	
+	<!-- Dispatches requests mapped to a MessageBroker -->
+	<bean class="org.springframework.flex.servlet.MessageBrokerHandlerAdapter"/>
+	
+	<!-- Advanced MessageBroker Customization -->
+	<bean id="appConfigProcessor" class="org.hamster.pm.flex.config.AppMessageBrokerConfigProcessor" />
+	
+	<!-- Exception Translator -->
+	<bean id="appExceptionTranslator" class="org.hamster.pm.flex.exception.AppExceptionTranslator"/>
+	
+	<!-- Message Interceptor -->
+	<!-- Custom message interceptors may be used to apply special processing logic to 
+		 incoming and outgoing AMF messages in their de-serialized Java form. 
+		 For example, an interceptor can be used to inspect the contents of the incoming message, 
+		 or to add extra information to the outgoing message.  -->
+	<bean id="appMessageInterceptor" class="org.hamster.pm.flex.interceptor.AppMessageInterceptor"/>
+	
+	
 </beans>

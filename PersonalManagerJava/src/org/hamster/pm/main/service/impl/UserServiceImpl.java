@@ -9,9 +9,12 @@ import org.hamster.pm.main.service.IUserService;
 import org.hamster.pm.main.util.HashUtil;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Expression;
+import org.springframework.flex.remoting.RemotingDestination;
+import org.springframework.flex.remoting.RemotingInclude;
 import org.springframework.stereotype.Service;
 
 @Service("userService")
+@RemotingDestination(channels={"my-amf"})
 public class UserServiceImpl extends CRUDServiceImpl<DUser> implements IUserService {
 	
 	public static final String RANDOM_STRING = "kjIUN23JO";
@@ -24,6 +27,7 @@ public class UserServiceImpl extends CRUDServiceImpl<DUser> implements IUserServ
 	/* (non-Javadoc)
 	 * @see org.hamster.pm.main.service.IUserService#addUser(java.lang.String, java.lang.String)
 	 */
+	@RemotingInclude
 	public DUser addUser(String email, String password) {
 		String encryptedPass = getEncryptedPassword(email, password);
 		DUser user = new DUser(email, encryptedPass);
@@ -43,6 +47,7 @@ public class UserServiceImpl extends CRUDServiceImpl<DUser> implements IUserServ
 	 * @see org.hamster.pm.main.service.IUserService#validateUser(java.lang.String, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
+	@RemotingInclude
 	public DUser validateUser(String email, String password) {
 		String encryptedPass = getEncryptedPassword(email, password);
 		Criterion[] criterions = { Expression.eq("email", email), Expression.eq("password", encryptedPass) };

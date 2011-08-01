@@ -16,6 +16,8 @@
     <context:component-scan base-package="org.hamster.pm.weibo.web.rest" />
 
 	<context:annotation-config />
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
 	
 	<bean id="jsonViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" />
 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />

@@ -97,6 +97,19 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 		<url-pattern>/p/*</url-pattern>
 	</servlet-mapping>
 	
+	
+	<!-- blazeDS messagebroker -->
+	<servlet>
+	    <servlet-name>flex</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+	    <servlet-name>flex</servlet-name>
+	    <url-pattern>/messagebroker/*</url-pattern>
+	</servlet-mapping>
+	
 
 </web-app>
 

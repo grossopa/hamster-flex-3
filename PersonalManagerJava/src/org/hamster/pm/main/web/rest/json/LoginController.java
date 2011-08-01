@@ -1,4 +1,4 @@
-package org.hamster.pm.main.web.rest;
+package org.hamster.pm.main.web.rest.json;
 
 import java.util.Map;
 
@@ -32,7 +32,7 @@ public class LoginController {
 	private ISessionService sessionService;
 	
 	@RequestMapping(value = "/login", method = { RequestMethod.POST })
-	public String login(
+	public DUser login(
 			HttpServletRequest request,
 			HttpServletResponse response,
 			HttpSession session,
@@ -52,11 +52,11 @@ public class LoginController {
 			ControllerUtil.mappingResponse(modelMap, "status", 0, "token", key, "user", user);
 		}
 		
-		return JSON_VIEW;
+		return user;
 	}
 	
 	@RequestMapping(value = "/register", method = { RequestMethod.POST })
-	public String register(
+	public Map<String, Object> register(
 			HttpServletRequest request,
 			HttpServletResponse response,
 			HttpSession session,
@@ -65,11 +65,11 @@ public class LoginController {
 			ModelMap modelMap) {
 		userService.addUser(email, password);
 		login(request, response, session, modelMap, email, password, 7200);
-		return JSON_VIEW;
+		return modelMap;
 	}
 	
 	@RequestMapping(value = "/logout", method = { RequestMethod.POST })
-	public String logout(HttpServletRequest request,
+	public Map<String, Object> logout(HttpServletRequest request,
 			HttpServletResponse response,
 			HttpSession session, ModelMap modelMap) {
 		String key = (String) cookieService.getCookies(request).get(ControllerConstant.COOKIE_UUID);
@@ -79,7 +79,7 @@ public class LoginController {
 			sessionService.removeUser(session, key);
 		}
 		ControllerUtil.mappingResponse(modelMap, "status", 0);
-		return JSON_VIEW;
+		return modelMap;
 	}
 	
 	
