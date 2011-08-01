@@ -1,4 +1,4 @@
-package org.hamster.pm.main.web.rest;
+package org.hamster.pm.main.web.rest.page;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -9,6 +9,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/weibo"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/weibo4j"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/scribe"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/flex"/>
         <property name="context-root" value="CityOfAngels"/>
         <property name="java-output-path" value="/CityOfAngels/build/classes"/>
     </wb-module>

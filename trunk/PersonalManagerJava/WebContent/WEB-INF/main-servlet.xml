@@ -13,13 +13,30 @@
 	
 	<bean id="controllerAspect" class="org.hamster.pm.main.web.rest.aop.ControllerLogger" />
 	
-    <context:component-scan base-package="org.hamster.pm.main.web.rest" />
+    <context:component-scan base-package="org.hamster.pm.main.web.rest.json" />
     
 	<context:annotation-config />
 	
-	<bean id="jsonViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" />
-	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+	<bean class="org.hamster.pm.main.web.rest.aop.ControllerErrorHandler" />
 	
-    <bean class="org.hamster.pm.main.web.rest.aop.ControllerErrorHandler" />
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+	
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json"/>
+				<entry key="amf" value="application/x-amf"/>
+			</map>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+				<bean class="org.springframework.flex.http.AmfView" />
+			</list>
+		</property>
+	</bean>   
+	
+   
     
 </beans>

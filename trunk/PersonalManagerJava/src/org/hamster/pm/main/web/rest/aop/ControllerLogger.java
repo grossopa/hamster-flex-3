@@ -21,7 +21,7 @@ public class ControllerLogger {
 
 	public static final Logger log = Logger.getLogger("acw.rest");
 	
-	@Pointcut("execution(* org.hamster.pm.main.web.rest.LoginController.*(..))")
+	@Pointcut("execution(* org.hamster.pm.main.web.rest.json.LoginController.*(..))")
 	public void traceLog() { }
 	
 	public long startTime;

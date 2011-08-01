@@ -9,13 +9,15 @@
                 http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd
                 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-	<aop:aspectj-autoproxy/>
+	<!-- <aop:aspectj-autoproxy/>
 	
-	<bean id="controllerAspect" class="org.hamster.pm.main.web.rest.aop.ControllerLogger" />
+	<bean id="controllerAspect" class="org.hamster.pm.main.web.rest.aop.ControllerLogger" /> -->
 	
-    <context:component-scan base-package="org.hamster.pm.main.web.rest" />
+    <context:component-scan base-package="org.hamster.pm.main.web.rest.page" />
 
 	<context:annotation-config />
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
 	
 	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" />
 	
