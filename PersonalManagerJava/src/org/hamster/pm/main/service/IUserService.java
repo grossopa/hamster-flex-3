@@ -32,4 +32,12 @@ public interface IUserService extends CRUDService<DUser> {
 	 * @return null or user
 	 */
 	DUser validateUser(String email, String password);
+	
+	/**
+	 * update user
+	 * 
+	 * @param user
+	 * @return user
+	 */
+	DUser updateUser(DUser user);
 }

@@ -55,6 +55,12 @@ public class UserServiceImpl extends CRUDServiceImpl<DUser> implements IUserServ
 		return result.size() == 0 ? null : result.get(0);
 	}
 	
+	@RemotingInclude
+	public DUser updateUser(DUser user) {
+		this.dao.saveOrUpdate(user);
+		return user;
+	}
+	
 	/**
 	 * @param userName
 	 * @param password
