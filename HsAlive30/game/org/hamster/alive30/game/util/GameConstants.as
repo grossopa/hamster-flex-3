@@ -18,7 +18,7 @@ package org.hamster.alive30.game.util
 		public static const PLANE_TYPE_COOL_DOWN_TIME:Number 	= 100;
 		public static const PLANE_ALL_CHANGE_TYPE_TIME:Number 	= 400;
 		
-		public static const GAME_WIDTH:Number 	= 800;
+		public static const GAME_WIDTH:Number 	= 600;
 		public static const GAME_HEIGHT:Number 	= 600;
 		
 		public static const STATUS_IDLE:String 		= "statusIdle";

@@ -2,7 +2,7 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"  frameRate="60" backgroundColor="white"
 				layout="absolute" width="800" height="600" xmlns:game="org.hamster.alive30.game.*"
 				applicationComplete="application1_applicationCompleteHandler(event)" 
-				xmlns:view="org.hamster.alive30.menu.view.*" xmlns:view1="org.hamster.alive30.game.view.*">
+				xmlns:view="org.hamster.alive30.menu.view.*" xmlns:view1="org.hamster.alive30.game.view.*" xmlns:view2="org.hamster.alive30.main.view.*">
 	<mx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
@@ -34,46 +34,16 @@
 				ctrlManager.stage = stage;
 				new MainHTTPService();
 				facade.sendNotification(AppFacade.INIT);
-//				testBullets();
 			}
 			
 			public function loadGameModule(levelVO:LevelVO):void
 			{
 				this.mainModuleLoader.loadModule(AppConstants.MODULE_GAME);
 			}
-			
-			
-//			private function testBullets():void
-//			{
-//				var bulletListArray:Array = new Array();
-//				for (var i:int = 0; i < 10; i++) {
-//					var bulletList:BulletListVO = new BulletListVO();
-//					bulletList.timeGap = 800;
-//					bulletList.bulletVOList = [];
-//					for (var j:int = 0; j < 5; j++) {
-//						var bulletVO:BulletVO = new BulletVO();
-//						bulletVO.cx = (i % 2 == 0 ? 0.2 : 0.8) * GameConstants.GAME_WIDTH;
-//						bulletVO.cy = 0.2 * GameConstants.GAME_HEIGHT;
-//						bulletVO.type = i % 2 == 0 ? GameConstants.BLUE : GameConstants.RED;
-//						bulletVO.moveType = BulletMoveType.DEFAULT;
-//						bulletVO.speedVector = new Vector2D();
-//						bulletVO.speedVector.length = 3;
-//						if (i % 2 == 0) {
-//							bulletVO.speedVector.angle = (15 + 12 * j) * Math.PI / 180;
-//						} else {
-//							bulletVO.speedVector.angle = (105 + 12 * j) * Math.PI / 180;
-//						}
-//						bulletList.bulletVOList.push(bulletVO);
-//					}
-//					bulletListArray.push(bulletList);
-//				}
-//				
-//				gameModule.bulletListArray = bulletListArray;
-//			}
-			
 		]]>
 	</mx:Script>
-	<game:GameModule id="gameModule" width="100%" height="100%" />
+	<game:GameModule id="gameModule" width="{GameConstants.GAME_WIDTH}" height="{GameConstants.GAME_HEIGHT}" />
 	<mx:ModuleLoader id="mainModuleLoader" width="100%" height="100%" />
 	<view:MainMenuPage width="100%" height="100%" />
+	<view2:MainBoundView id="mainBoundView" />
 </mx:Application>

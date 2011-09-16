@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="800" height="600"
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="800" height="434"
 				applicationComplete="application1_applicationCompleteHandler(event)"
-				xmlns:common="com.citi.ppt.common.*" xmlns:view="com.citi.ppt.main.view.*">
+				xmlns:common="com.citi.ppt.common.*" xmlns:view="com.citi.ppt.main.view.*" backgroundColor="#FFFFFF">
 	<mx:Script>
 		<![CDATA[
 			import com.citi.ppt.main.util.AppConstants;
@@ -33,6 +33,34 @@
 	<common:FlexBook id="flexBook" width="{AppConstants.PAGE_WIDTH * 2}" 
 					 height="{AppConstants.PAGE_HEIGHT}" x="{50 - AppConstants.PAGE_WIDTH}" 
 					 y="50" itemSize="0" />
-	<view:TagContainer id="tagContainer" width="120" height="{flexBook.height}" 
-					   y="{flexBook.y + 10}" x="{flexBook.x + flexBook.width}" />
+	<mx:AreaChart x="273" y="10" id="areachart1" width="250" height="200">
+		<mx:series>
+			<mx:AreaSeries displayName="Series 1" yField=""/>
+		</mx:series>
+	</mx:AreaChart>
+	<mx:BubbleChart x="15" y="10" id="bubblechart1" width="250" height="200">
+		<mx:series>
+			<mx:BubbleSeries displayName="Series 1" yField="" radiusField=""/>
+		</mx:series>
+	</mx:BubbleChart>
+	<mx:BarChart x="15" y="218" id="barchart1" width="250" height="200">
+		<mx:series>
+			<mx:BarSeries displayName="Series 1" xField=""/>
+		</mx:series>
+	</mx:BarChart>
+	<mx:CandlestickChart x="273" y="218" id="candlestickchart1" width="250" height="200">
+		<mx:series>
+			<mx:CandlestickSeries displayName="Series 1" openField="" closeField="" highField="" lowField=""/>
+		</mx:series>
+	</mx:CandlestickChart>
+	<mx:LineChart x="531" y="10" id="linechart1" width="250" height="200">
+		<mx:series>
+			<mx:LineSeries displayName="Series 1" yField=""/>
+		</mx:series>
+	</mx:LineChart>
+	<mx:PieChart x="531" y="218" id="piechart1" width="250" height="200">
+		<mx:series>
+			<mx:PieSeries displayName="Series 1" field=""/>
+		</mx:series>
+	</mx:PieChart>
 </mx:Application>

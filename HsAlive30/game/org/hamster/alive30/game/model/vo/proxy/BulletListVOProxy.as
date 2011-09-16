@@ -1,5 +1,7 @@
 package org.hamster.alive30.game.model.vo.proxy
 {
+	import flash.events.EventDispatcher;
+	
 	import mx.collections.ArrayCollection;
 	
 	import org.hamster.alive30.common.config.AppConfig;

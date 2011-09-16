@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties mainApplicationPath="HsShowCase.mxml" projectUUID="acf00fb0-0e4c-4383-9f37-6aca8c35f041" version="6">
-  <compiler additionalCompilerArguments="-locale=en_US,zh_CN" autoRSLOrdering="false" copyDependentFiles="true" flexSDK="Flex 3.5" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+  <compiler additionalCompilerArguments="-locale=en_US,zh_CN" autoRSLOrdering="false" copyDependentFiles="true" flexSDK="Flex 3.5" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" linkType="1" path="common"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="assets"/>
@@ -9,6 +9,7 @@
       <compilerSourcePathEntry kind="1" linkType="1" path="imageRuler"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="utility"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="effects"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="tool"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -31,6 +32,7 @@
     <module application="src/Main.mxml" destPath="ImageCropperModule.swf" optimize="true" sourcePath="imageCropper/ImageCropperModule.mxml"/>
     <module application="src/Main.mxml" destPath="ImageRulerModule.swf" optimize="true" sourcePath="imageRuler/ImageRulerModule.mxml"/>
     <module application="src/Main.mxml" destPath="EffectsModule.swf" optimize="true" sourcePath="effects/EffectsModule.mxml"/>
+    <module application="src/Main.mxml" destPath="ToolModule.swf" optimize="true" sourcePath="tool/ToolModule.mxml"/>
   </modules>
   <buildCSSFiles/>
 </actionScriptProperties>

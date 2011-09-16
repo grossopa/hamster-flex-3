@@ -63,23 +63,14 @@
 
 		]]>
 	</mx:Script>
-	<mx:Canvas id="leftPanel" width="250" height="100%" backgroundColor="black" backgroundAlpha="0.5"
-			   hideEffect="{lpHideEffect}">
+	<mx:Canvas id="leftPanel" width="250" height="100%" backgroundColor="black" backgroundAlpha="0.5">
 		<mx:filters>
 			<filters:DropShadowFilter blurX="10" blurY="10" quality="3" />
 		</mx:filters>
 		<item:MenuSelectionLabel label="Start Game" y="200" width="100%" height="30" 
 								 click="menuselectionlabel1_clickHandler(event)" />
 	</mx:Canvas>
-	<mx:Parallel id="lpHideEffect" startDelay="300" duration="1000"
-				 effectEnd="lpHideEffect_effectEndHandler(event)">
-		<mx:Fade alphaFrom="1" alphaTo="0" />
-		<mx:Move xFrom="0" xTo="{-levelSelectorPage.width}" />
-	</mx:Parallel>
 	<view:LevelSelectorPage id="levelSelectorPage" visible="false" 
 							verticalCenter="0" horizontalCenter="0" 
-							showEffect="{lsShowEffect}" hideEffect="{lsHideEffect}"
 							levelSelected="levelSelectorPage_levelSelectedHandler(event)"/>
-	<mx:Fade id="lsShowEffect" duration="500" alphaFrom="0" alphaTo="1" />
-	<mx:Fade id="lsHideEffect" duration="500" alphaFrom="1" alphaTo="0" />
 </mx:Canvas>

@@ -3,14 +3,10 @@
  */
 package org.hamster.pm.main.service.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
-import org.hamster.pm.main.constant.ControllerConstant;
+import org.hamster.pm.main.pojo.DUser;
 import org.hamster.pm.main.service.ISessionService;
-import org.hamster.pm.main.util.CommonUtil;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,14 +22,8 @@ public class SimpleSessionService implements ISessionService {
 	 * @see org.hamster.pm.main.service.ISessionService#putUser(javax.servlet.http.HttpSession, java.lang.String)
 	 */
 	@Override
-	public String putUser(HttpSession session, String email) {
-		Map<String, Object> userInfo = null;
-		String key = CommonUtil.generateUUID();
-		userInfo = new HashMap<String, Object>();
-		userInfo.put(ControllerConstant.COOKIE_UUID, key);
-		userInfo.put(ControllerConstant.EMAIL, email);
-		session.setAttribute(key, userInfo);
-		return key;
+	public void putUser(HttpSession session, DUser user) {
+		session.setAttribute(user.getToken(), user);
 	}
 
 	/* (non-Javadoc)
@@ -54,12 +44,12 @@ public class SimpleSessionService implements ISessionService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String, Object> getUser(HttpSession session, String key) {
+	public DUser getUser(HttpSession session, String key) {
 		Object att = session.getAttribute(key);
 		if (att == null) {
 			return null;
 		} else {
-			return (Map<String, Object>) att;
+			return (DUser) att;
 		}
 	}
 	

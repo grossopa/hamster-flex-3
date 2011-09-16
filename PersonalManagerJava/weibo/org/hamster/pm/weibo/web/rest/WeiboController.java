@@ -49,7 +49,7 @@ public class WeiboController {
 			userKey = HashUtil.hash(String.valueOf(new Date().getTime()));
 			cookies.put(ControllerConstant.COOKIE_UUID, userKey);
 		}
-		cookieService.putUser(response, cookies, 864000000 * 365);
+		//cookieService.putUser(response, cookies, 864000000 * 365);
 		ModelAndView modelAndView = new ModelAndView("index");
 		
 		modelAndView.addObject(ControllerConstant.COOKIE_UUID, userKey);

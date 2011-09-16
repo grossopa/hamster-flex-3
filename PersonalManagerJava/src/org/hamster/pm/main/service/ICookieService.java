@@ -5,6 +5,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hamster.pm.main.pojo.DUser;
+
 public interface ICookieService {
 	
 	/**
@@ -14,7 +16,7 @@ public interface ICookieService {
 	 * @param userMap
 	 * @param expiry in seconds
 	 */
-	void putUser(HttpServletResponse response, Map<String, Object> userMap, int expiry);
+	void putUser(HttpServletResponse response, DUser user, int expiry);
 	
 	/**
 	 * remove cookie information
