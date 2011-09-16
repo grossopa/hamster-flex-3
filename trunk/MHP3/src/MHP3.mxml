@@ -12,11 +12,16 @@
 			
 			import org.hamster.mhp3.common.facade.AppFacade;
 			
+			[ResourceBundle("main")] 
+			[ResourceBundle("weapon")] 
+			
 			private var facade:AppFacade = AppFacade.instance;
 			 
 			protected function app_applicationCompleteHandler(event:FlexEvent):void
 			{
 				facade.sendNotification(AppFacade.INIT, this);
+				
+				this.resourceManager.localeChain = ['zh_CN', 'en_US'];
 			}
 		]]>
 	</fx:Script>

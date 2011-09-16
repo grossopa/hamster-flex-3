@@ -41,16 +41,16 @@ public class LoginController {
 			@RequestParam(value = "password", required = true) String password,
 			@RequestParam(value = "expiry", required = false, defaultValue = "7200") Integer expiry) {
 		DUser user = userService.validateUser(email, password);
-		if (user == null) {
-			ControllerUtil.writeFailureMessage(modelMap, 
-					ControllerConstant.LOGIN_EMAILPASSWORDWRONG, 
-					ControllerConstant.MSG_LOGIN_EMAILPASSWORDWRONG);
-		} else {
-			String key = sessionService.putUser(session, email);
-			cookieService.putUser(response, sessionService.getUser(session, key), expiry);
-			
-			ControllerUtil.mappingResponse(modelMap, "status", 0, "token", key, "user", user);
-		}
+//		if (user == null) {
+//			ControllerUtil.writeFailureMessage(modelMap, 
+//					ControllerConstant., 
+//					ControllerConstant.MSG_LOGIN_EMAILPASSWORDWRONG);
+//		} else {
+//			String key = sessionService.putUser(session, email);
+//			cookieService.putUser(response, sessionService.getUser(session, key), expiry);
+//			
+//			ControllerUtil.mappingResponse(modelMap, "status", 0, "token", key, "user", user);
+//		}
 		
 		return user;
 	}
@@ -72,13 +72,13 @@ public class LoginController {
 	public Map<String, Object> logout(HttpServletRequest request,
 			HttpServletResponse response,
 			HttpSession session, ModelMap modelMap) {
-		String key = (String) cookieService.getCookies(request).get(ControllerConstant.COOKIE_UUID);
-		Map<String, Object> userMap = sessionService.getUser(session, key);
-		cookieService.removeUser(response);
-		if (userMap != null) {
-			sessionService.removeUser(session, key);
-		}
-		ControllerUtil.mappingResponse(modelMap, "status", 0);
+//		String key = (String) cookieService.getCookies(request).get(ControllerConstant.COOKIE_UUID);
+//		Map<String, Object> userMap = sessionService.getUser(session, key);
+//		cookieService.removeUser(response);
+//		if (userMap != null) {
+//			sessionService.removeUser(session, key);
+//		}
+//		ControllerUtil.mappingResponse(modelMap, "status", 0);
 		return modelMap;
 	}
 	

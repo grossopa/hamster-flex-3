@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Module xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		   xmlns:s="library://ns.adobe.com/flex/spark" 
-		   xmlns:mx="library://ns.adobe.com/flex/mx" layout="vertical" width="100%" height="100%">
+		   xmlns:mx="library://ns.adobe.com/flex/mx" 
+		   xmlns:components="org.hamster.mhp3.weapon.components.*" layout="vertical" width="100%" height="100%" 
+		    creationComplete="module1_creationCompleteHandler(event)">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
@@ -28,8 +30,8 @@
 			];
 			
 			[Bindable] private var _weaponListXML:XMLListCollection;
-			
 			[Bindable] private var currentWeaponList:XMLListCollection;
+			[Bindable] private var currentWeaponXML:XML;
 			
 			public function set weaponListXML(value:XMLListCollection):void
 			{
@@ -45,9 +47,9 @@
 			
 			protected function weaponTree_changeHandler(event:ListEvent):void
 			{
-				var xml:XML = XML(event.itemRenderer.data);
+				currentWeaponXML = XML(event.itemRenderer.data);
 				var typeFolder:String = currentWeaponList.attribute("type");
-				currentSelection = AppConfig.weaponImageRootURL + '/' + typeFolder + '/' + xml.attribute("name") + ".jpg";
+				currentSelection = AppConfig.weaponImageRootURL + '/' + typeFolder + '/' + currentWeaponXML.attribute("name") + ".jpg";
 			}
 			
 
@@ -64,11 +66,18 @@
 				weaponTree.setStyle("defaultLeafIcon", ICON_LIST[index]); 
 			}
 
+
+			protected function module1_creationCompleteHandler(event:FlexEvent):void
+			{
+				this.resourceManager.localeChain = ['zh_CN', 'en_US'];
+			}
+
 		]]>
 	</fx:Script>
 	<s:TabBar id="weaponTabBar" dataProvider="{_weaponListXML}" labelField="@name" change="weaponTabBar_changeHandler(event)"  />
 	<mx:HDividedBox width="100%" height="100%">
 		<mx:Tree id="weaponTree" dataProvider="{currentWeaponList.children()}" height="100%" width="300" change="weaponTree_changeHandler(event)" labelField="@name"  />
 		<mx:Image source="{currentSelection}" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" />
+		<components:WeaponDetailView id="weaponDetailView" mainXML="{currentWeaponXML}" />
 	</mx:HDividedBox>
 </mx:Module>

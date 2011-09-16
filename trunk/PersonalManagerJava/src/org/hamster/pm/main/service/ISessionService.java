@@ -3,9 +3,9 @@
  */
 package org.hamster.pm.main.service;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
+
+import org.hamster.pm.main.pojo.DUser;
 
 /**
  * @author Grossopa
@@ -17,9 +17,8 @@ public interface ISessionService {
 	 * put a user into session
 	 * 
 	 * @param user
-	 * @return specific key
 	 */
-	String putUser(HttpSession session, String email);
+	void putUser(HttpSession session, DUser user);
 	
 	/**
 	 * logout a user by key from Cookie
@@ -27,7 +26,7 @@ public interface ISessionService {
 	 * @param key
 	 * @return success or not
 	 */
-	Boolean removeUser(HttpSession session, String key);
+	Boolean removeUser(HttpSession session, String token);
 	
 	
 	/**
@@ -37,6 +36,6 @@ public interface ISessionService {
 	 * @param key
 	 * @return user information
 	 */
-	Map<String, Object> getUser(HttpSession session, String key);
+	DUser getUser(HttpSession session, String token);
 	
 }

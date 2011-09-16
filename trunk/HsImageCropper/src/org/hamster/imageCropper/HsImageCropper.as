@@ -4,6 +4,7 @@ package org.hamster.imageCropper
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
+	import flash.ui.Mouse;
 	
 	import mx.containers.Canvas;
 	import mx.controls.Image;
@@ -83,6 +84,8 @@ package org.hamster.imageCropper
 			}
 		}
 		public function get source():Object { return this._mainImage.source }
+		
+		public function get content():Object { return this._mainImage.content }
 		public function set maintainAspectRatio(value:Boolean):void 
 		{
 			if (_maintainAspectRatio != value) {
@@ -216,6 +219,7 @@ package org.hamster.imageCropper
 			_selectMask.addEventListener(MouseEvent.MOUSE_DOWN, maskMouseDownHandler);
 			_selectMask.addEventListener(MouseEvent.MOUSE_MOVE, maskMouseMoveHandler);
 			_selectMask.addEventListener(MouseEvent.MOUSE_UP,   maskMouseUpHandler);
+			_selectMask.addEventListener(MouseEvent.MOUSE_OUT,  maskRollOutHandler);
 			this.addChild(_selectMask);
 		}
 		
@@ -381,6 +385,13 @@ package org.hamster.imageCropper
 //			_location = 0;
 //			this.hideResizeCursor();
 //			this._moveLoc = 0;
+		}
+		
+		private function maskRollOutHandler(evt:MouseEvent):void
+		{
+			if (this._mouseDown == false) {
+				hideResizeCursor();
+			}
 		}
 		
 		private function refreshLocation(px:Number, py:Number):uint

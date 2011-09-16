@@ -23,6 +23,5 @@
 		verticalScrollPolicy="off" horizontalScrollPolicy="off" backgroundColor="0x7F7F7F">
 		<mx:Image source="@Embed(source='/org/hamster/assets/splitmass.jpg')" 
 			width="200" height="200" x="150" />
-		<mx:TextArea text="FML" width="350" height="350" y="150" />
 	</mx:Canvas>
 </mx:Application>

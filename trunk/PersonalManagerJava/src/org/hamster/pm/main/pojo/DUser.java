@@ -25,6 +25,7 @@ public class DUser extends AbstractPojo {
 	private String email;
 	@AmfIgnoreField(onSerialization=false)
 	private String password;
+	private String token;
 
 	public DUser() {
 	}
@@ -68,6 +69,15 @@ public class DUser extends AbstractPojo {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	@Length(max=50)
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 	
 }
