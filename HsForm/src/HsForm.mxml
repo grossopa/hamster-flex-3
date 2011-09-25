@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" minWidth="955" minHeight="600" 
+				xmlns:controls="org.hamster.enterprise.controls.*" applicationComplete="app_applicationCompleteHandler(event)" xmlns:controls1="org.hamster.enterprise.test.controls.*">
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.events.ItemClickEvent;
+			
+			[Bindable] private var mainSelIndex:int;
+
+			protected function app_applicationCompleteHandler(event:FlexEvent):void
+			{
+				HsCurrencyTextInput.globalCurrFormatter = mainCurrencyFormatter;
+			}
+
+
+			protected function tabbar1_itemClickHandler(event:ItemClickEvent):void
+			{
+				this.mainSelIndex = event.index;
+			}
+
+		]]>
+	</mx:Script>
+	<mx:HBox width="100%" height="100%">
+		<mx:TabBar direction="vertical" dataProvider="mainVS"
+				   selectedIndex="{mainSelIndex}"  
+				   itemClick="tabbar1_itemClickHandler(event)"/>
+		<mx:ViewStack id="mainVS" width="100%" height="100%"
+					  selectedIndex="{mainSelIndex}">
+			<controls1:TextInputTestView id="textInputTestView" label="HsTextInput" />
+			<controls1:TextInputTestView id="textInputTestView2" label="2HsTextInput" />
+		</mx:ViewStack>
+	</mx:HBox>
+	
+	<controls:HsTextInput emptyText="Please input here.." />
+	<controls:HsCurrencyTextInput emptyText="Please input currency here" maxDecimalLength="3" maxIntLength="10" />
+	<controls:HsComboBox id="sComboBox" emptyText="Select..." />
+	<controls:HsDateField id="sDateField" />
+	<controls:HsMailTextInput id="sMailTextInput" emptyText="abcdefg.ghi@ljkm.com" />
+	<mx:Button y="30" />
+	
+	<mx:CurrencyFormatter id="mainCurrencyFormatter" 
+						  decimalSeparatorTo=","
+						  thousandsSeparatorTo="."
+						  currencySymbol="$$"/>
+						  
+</mx:Application>
