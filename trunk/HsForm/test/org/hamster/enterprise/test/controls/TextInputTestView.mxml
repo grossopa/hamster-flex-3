@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+		 xmlns:controls="org.hamster.enterprise.controls.*"
+		 horizontalAlign="center">
+	<controls:HsTextInput id="hsTextInput" width="400"
+						  emptyText="{emptyTextInput.text}"
+						  expression="{expressionTextInput.text}"
+						  required="{requiredCheckBox.selected}"
+						  noMatchErrorString="{noMatchErrorStringTextInput.text}"
+						  requiredFieldErrorString="{requiredFieldErrorStringTextInput.text}"
+						  enableValidationRuntime="{enableValidationRuntimeCheckBox.selected}"/>
+	<mx:HRule width="90%" />
+	<mx:Tile width="100%" height="100%">
+		<mx:Label text="Empty Text" />
+		<mx:TextInput id="emptyTextInput" text="Please input text here..." />
+		
+		<mx:Label text="Expression" />
+		<mx:TextInput id="expressionTextInput" text="^[a-zA-Z]+$" />
+		
+		<mx:Label text="Required" />
+		<mx:CheckBox id="requiredCheckBox" />
+		
+		<mx:Label text="No Match Error String" />
+		<mx:TextInput id="noMatchErrorStringTextInput" text="no match!!!!!" />
+		
+		<mx:Label text="Required Field Error String" />
+		<mx:TextInput id="requiredFieldErrorStringTextInput" text="required!!!!!" />
+		
+		<mx:Label text="Runtime Check" />
+		<mx:CheckBox id="enableValidationRuntimeCheckBox" />
+	</mx:Tile>
+</mx:VBox>
