@@ -1,12 +1,19 @@
 package org.hamster.enterprise.controls
 {
+	import flash.display.DisplayObject;
+	import flash.events.Event;
 	import flash.events.FocusEvent;
 	import flash.events.TextEvent;
 	import flash.text.TextField;
 	
 	import mx.controls.TextInput;
+	import mx.core.mx_internal;
 	import mx.events.ValidationResultEvent;
+	import mx.managers.IFocusManager;
 	import mx.validators.RegExpValidator;
+	import mx.validators.ValidationResult;
+	
+	use namespace mx_internal;
 	
 	[Event(name="hsRequiredChange", type="org.hamster.enterprise.controls.InputFieldEvent")]
 	
@@ -23,15 +30,6 @@ package org.hamster.enterprise.controls
 		{
 			return _textStatus == STATUS_EMPTY;
 			// return textField.textColor == _emptyTextColor && textField.text == _emptyText;
-		}
-		
-		override public function setStyle(styleProp:String, newValue:*):void
-		{
-			super.setStyle(styleProp, newValue);
-			
-			if (styleProp == 'borderColor') {
-				trace (newValue);
-			}
 		}
 		
 		public function setNormalText():void
@@ -57,12 +55,17 @@ package org.hamster.enterprise.controls
 		public function HsTextInput()
 		{
 			super();
+			this.addEventListener(Event.CHANGE, textChangeHandler);
 			this.addEventListener(TextEvent.TEXT_INPUT, textInputHandler);
 		}
 		
 		protected function textInputHandler(evt:TextEvent):void
 		{
 			// do nothing, sub class may override this function
+		}
+		
+		protected function textChangeHandler(evt:Event):void
+		{
 			if (this.enableValidationRuntime) {
 				this.validate();
 			}
@@ -110,8 +113,63 @@ package org.hamster.enterprise.controls
 //			if (this.focusManager.getFocus() == this) {
 //				this.focusManager.setFocus(this);
 //			}
+			var isError:Boolean = false;
+			if (result.results) {
+				for each (var resu:ValidationResult in result.results) {
+					if (resu.isError) {
+						isError = true;
+						break;
+					}
+				}
+			}
+			
+			setBorderColorForErrorString(isError);
+			
 			return result;
 			//}
+		}
+		
+		/**
+		 *  @private
+		 *  Set the appropriate borderColor based on errorString.
+		 *  If we have an errorString, use errorColor. If we don't
+		 *  have an errorString, restore the original borderColor.
+		 */
+		private function setBorderColorForErrorString(isError:Boolean):void
+		{
+			if (!isError)
+			{
+				if (!isNaN(origBorderColor))
+				{
+					setStyle("borderColor", origBorderColor);
+					saveBorderColor = true;
+				}
+			}
+			else
+			{
+				// Remember the original border color
+				if (saveBorderColor)
+				{
+					saveBorderColor = false;
+					origBorderColor = getStyle("borderColor");
+				}
+				
+				setStyle("borderColor", getStyle("errorColor"));
+			}
+			
+			styleChanged("themeColor");
+			
+			var focusManager:IFocusManager = super.focusManager;
+			var focusObj:DisplayObject = focusManager ?
+				DisplayObject(focusManager.getFocus()) :
+				null;
+			
+			if (focusManager && 
+				focusObj == this)
+			{
+				drawFocus(true);
+			}
+			
 		}
 		
 		override protected function focusInHandler(event:FocusEvent):void
