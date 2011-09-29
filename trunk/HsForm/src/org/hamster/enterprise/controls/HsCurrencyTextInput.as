@@ -8,6 +8,9 @@ package org.hamster.enterprise.controls
 	import mx.controls.TextInput;
 	import mx.formatters.CurrencyFormatter;
 	
+	[ResourceBundle("formatters")]
+	[ResourceBundle("SharedResources")]
+	
 	public class HsCurrencyTextInput extends HsTextInput implements IInputField
 	{
 		public static var globalCurrFormatter:CurrencyFormatter;
@@ -157,12 +160,16 @@ package org.hamster.enterprise.controls
 		
 		override public function get stringValue():String
 		{
-			var fmt:CurrencyFormatter = this.availableFormatter;
-			var decTo:String = fmt.decimalSeparatorTo;
-			var thuTo:String = fmt.thousandsSeparatorTo;
-			var symbo:String = fmt.currencySymbol;
-			var result:String = this.text.split(thuTo).join('').replace(symbo, '').replace(decTo, '.');
-			return result;
+			if (this.isShowingEmptyText) {
+				return "";
+			} else {
+				var fmt:CurrencyFormatter = this.availableFormatter;
+				var decTo:String = fmt.decimalSeparatorTo;
+				var thuTo:String = fmt.thousandsSeparatorTo;
+				var symbo:String = fmt.currencySymbol;
+				var result:String = this.text.split(thuTo).join('').replace(symbo, '').replace(decTo, '.');
+				return result;
+			}
 		}
 		
 		public function get intValue():int

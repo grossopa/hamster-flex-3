@@ -66,7 +66,7 @@ package org.hamster.enterprise.controls
 		
 		protected function textChangeHandler(evt:Event):void
 		{
-			if (this.enableValidationRuntime) {
+			if (this.enableValidation && this.enableValidationRuntime) {
 				this.validate();
 			}
 		}
@@ -76,8 +76,14 @@ package org.hamster.enterprise.controls
 			super.commitProperties();
 			
 			// expression changed
-			if (this.enableValidationRuntime || (_expressionChanged || this._requiredChanged)) {
+			if (this.enableValidation && (this.enableValidationRuntime || (_expressionChanged || this._requiredChanged))) {
 				this.validate();
+			} else if (_enableValidationChanged && !this.enableValidation) {
+				this.setBorderColorForErrorString(false);
+			}
+			
+			if (_regExpValidator && !this.enableValidation) {
+				_regExpValidator.enabled = enableValidation;
 			}
 			
 			if (text == "" && systemManager.stage.focus != TextField(textField)) {
@@ -92,6 +98,7 @@ package org.hamster.enterprise.controls
 			_requiredChanged = false;
 			_expressionChanged = false;
 			_enableValidationRuntimeChanged = false;
+			_enableValidationChanged = false;
 		}
 		
 		public function validate():ValidationResultEvent
@@ -101,18 +108,13 @@ package org.hamster.enterprise.controls
 			}
 			_regExpValidator.required 	= this.required;
 			_regExpValidator.source 	= this;
-			_regExpValidator.enabled 	= this.enabled;
+			_regExpValidator.enabled 	= this.enabled && this.enableValidation;
 			_regExpValidator.expression = this.expression;
 			_regExpValidator.noMatchError = this.noMatchErrorString;
 			_regExpValidator.requiredFieldError = this.requiredFieldErrorString;
 			_regExpValidator.property	= "text";
-			//if (this._textStatus == STATUS_EMPTY && this.required) {
-				//return _regExpValidator.validate("");
-			//} else {
 			var result:ValidationResultEvent = _regExpValidator.validate();
-//			if (this.focusManager.getFocus() == this) {
-//				this.focusManager.setFocus(this);
-//			}
+			
 			var isError:Boolean = false;
 			if (result.results) {
 				for each (var resu:ValidationResult in result.results) {
@@ -130,12 +132,14 @@ package org.hamster.enterprise.controls
 		}
 		
 		/**
-		 *  @private
+		 *  copied from mx.controls.TextInput.setBorderColorForErrorString()
+		 * 
+		 *  @protected
 		 *  Set the appropriate borderColor based on errorString.
 		 *  If we have an errorString, use errorColor. If we don't
 		 *  have an errorString, restore the original borderColor.
 		 */
-		private function setBorderColorForErrorString(isError:Boolean):void
+		protected function setBorderColorForErrorString(isError:Boolean):void
 		{
 			if (!isError)
 			{
@@ -181,7 +185,7 @@ package org.hamster.enterprise.controls
 			}
 			setNormalText();
 			
-			if (this.enableValidationRuntime) {
+			if (this.enableValidation && this.enableValidationRuntime) {
 				this.validate();
 			}
 		}
@@ -194,10 +198,11 @@ package org.hamster.enterprise.controls
 				setEmptyText();
 			}
 			
-			if (this.enableValidationRuntime) {
+			if (this.enableValidation && this.enableValidationRuntime) {
 				this.validate();
 			}
 		}
+		
 		
 		private var _mainData:Object;
 		private var _required:Boolean;
@@ -210,6 +215,8 @@ package org.hamster.enterprise.controls
 		private var _requiredFieldErrorString:String;
 		private var _enableValidationRuntime:Boolean;
 		private var _enableValidationRuntimeChanged:Boolean;
+		private var _enableValidation:Boolean;
+		private var _enableValidationChanged:Boolean;
 		
 		public function set mainData(value:Object):void
 		{
@@ -279,6 +286,20 @@ package org.hamster.enterprise.controls
 			return _enableValidationRuntime;
 		}
 		
+		public function set enableValidation(value:Boolean):void
+		{
+			if (_enableValidation != value) {
+				_enableValidation = value;
+				_enableValidationChanged = true;
+				this.invalidateProperties();
+			}			
+		}
+		
+		public function get enableValidation():Boolean
+		{
+			return this._enableValidation;
+		}
+		
 		public function set required(value:Boolean):void
 		{
 			if (_required != value) {
@@ -309,7 +330,7 @@ package org.hamster.enterprise.controls
 		
 		public function get stringValue():String
 		{
-			return this.text;
+			return this.isShowingEmptyText ? "" : this.text;
 		}
 		
 		
