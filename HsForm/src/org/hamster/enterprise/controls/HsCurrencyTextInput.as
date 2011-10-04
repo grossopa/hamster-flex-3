@@ -75,6 +75,41 @@ package org.hamster.enterprise.controls
 			return _maxIntLength;
 		}
 		
+		private var _maxValue:Object;
+		
+		public function set maxValue(value:Object):void
+		{
+			_maxValue = value != null ?
+				value :
+				resourceManager.getString(
+					"SharedResources", "currencyMaxValue");
+		}
+		
+		[Inspectable(category="General", defaultValue="null")]
+		
+		public function get maxValue():Object
+		{
+			return _maxValue;
+		}
+		
+		private var _minValue:Object;
+		
+		public function set minValue(value:Object):void
+		{
+			_minValue = value != null ?
+				value :
+				resourceManager.getString(
+					"SharedResources", "currencyMinValue");
+		}
+		
+		[Inspectable(category="General", defaultValue="null")]
+		
+		public function get minValue():Object
+		{
+			return _minValue;
+		}
+		
+		
 		public function HsCurrencyTextInput()
 		{
 			super();
@@ -105,8 +140,8 @@ package org.hamster.enterprise.controls
 				var symbo:String = fmt.currencySymbol;
 				this.text = fmt.format(stringValue);
 			}
-			
 		}
+		
 		
 		override protected function textInputHandler(evt:TextEvent):void
 		{

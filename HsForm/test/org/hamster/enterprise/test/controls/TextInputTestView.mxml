@@ -2,16 +2,53 @@
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
 		 xmlns:controls="org.hamster.enterprise.controls.*"
 		 horizontalAlign="center">
-	<controls:HsTextInput id="hsTextInput" width="400"
-						  emptyText="{emptyTextInput.text}"
-						  expression="{expressionTextInput.text}"
-						  required="{requiredCheckBox.selected}"
-						  noMatchErrorString="{noMatchErrorStringTextInput.text}"
-						  requiredFieldErrorString="{requiredFieldErrorStringTextInput.text}"
-						  enableValidationRuntime="{enableValidationRuntimeCheckBox.selected}"
-						   enableValidation="{enableValidationCheckBox.selected}"/>
-	<mx:HRule width="90%" />
-	<mx:Tile id="mainTile" width="100%" height="100%" tileWidth="{(mainTile.width / 6) - 6}" horizontalGap="5" >
+	<mx:Script>
+		<![CDATA[
+			
+		]]>
+	</mx:Script>
+	<mx:RadioButtonGroup id="mainRBG" />
+	<mx:HBox width="100%">
+		<mx:RadioButton id="textInputRB" label="Base TextInput" 
+						group="{mainRBG}" value="0" selected="true"/>
+		<mx:RadioButton id="currencyTextInputRB" label="Currency TextInput" 
+						group="{mainRBG}" value="1" />
+	</mx:HBox>
+	<mx:ViewStack id="mainViewStack" width="100%" height="25" 
+				  selectedIndex="{int(mainRBG.selectedValue)}">
+		<mx:HBox>
+			<mx:Label text="Base TextInput : " />
+			<controls:HsTextInput id="hsTextInput" width="400"
+								  emptyText="{emptyTextInput.text}"
+								  expression="{expressionTextInput.text}"
+								  required="{requiredCheckBox.selected}"
+								  noMatchErrorString="{noMatchErrorStringTextInput.text}"
+								  requiredFieldErrorString="{requiredFieldErrorStringTextInput.text}"
+								  enableValidationRuntime="{enableValidationRuntimeCheckBox.selected}"
+								  enableValidation="{enableValidationCheckBox.selected}"/>
+		</mx:HBox>
+		<mx:HBox>
+			<mx:Label text="Currency TextInput : " />
+			<controls:HsCurrencyTextInput id="hsCurrencyTextInput" width="400"
+										  emptyText="{emptyTextInput.text}"
+										  expression="{expressionTextInput.text}"
+										  required="{requiredCheckBox.selected}"
+										  noMatchErrorString="{noMatchErrorStringTextInput.text}"
+										  requiredFieldErrorString="{requiredFieldErrorStringTextInput.text}"
+										  enableValidationRuntime="{enableValidationRuntimeCheckBox.selected}"/>
+		</mx:HBox>
+	</mx:ViewStack>
+	<mx:HRule width="100%" />
+	<mx:Tile id="mainPropertyTile" width="100%" height="100%"
+			 tileWidth="{(mainPropertyTile.width / 6) - 6}" horizontalGap="5">
+		<mx:Label text="stringValue : " width="100%" />
+		<mx:Text text="{HsTextInput(this.mainViewStack.selectedChild.getChildAt(1)).stringValue}" />
+		<mx:Label text="text : " width="100%" />
+		<mx:Text text="{HsTextInput(this.mainViewStack.selectedChild.getChildAt(1)).text}" />
+	</mx:Tile>
+	<mx:HRule width="100%" />
+	<mx:Tile id="mainTile" width="100%" height="100%"
+			 tileWidth="{(mainTile.width / 6) - 6}" horizontalGap="5" >
 		<mx:Label text="Empty Text" width="100%" />
 		<mx:TextInput id="emptyTextInput" text="Please input text here..." width="100%" />
 		
@@ -36,12 +73,5 @@
 		<mx:Label text="Required Field Error String" width="100%" />
 		<mx:TextInput id="requiredFieldErrorStringTextInput" text="required!!!!!" width="100%" />
 	</mx:Tile>
-	<mx:HRule width="90%" />
-	<controls:HsCurrencyTextInput id="hsCurrencyTextInput" width="400"
-								  emptyText="{emptyTextInput.text}"
-								  expression="{expressionTextInput.text}"
-								  required="{requiredCheckBox.selected}"
-								  noMatchErrorString="{noMatchErrorStringTextInput.text}"
-								  requiredFieldErrorString="{requiredFieldErrorStringTextInput.text}"
-								  enableValidationRuntime="{enableValidationRuntimeCheckBox.selected}"/>
+	<mx:HRule width="100%" />
 </mx:VBox>
