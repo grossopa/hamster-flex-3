@@ -79,6 +79,7 @@ package org.hamster.enterprise.controls
 			if (this.enableValidation && (this.enableValidationRuntime || (_expressionChanged || this._requiredChanged))) {
 				this.validate();
 			} else if (_enableValidationChanged && !this.enableValidation) {
+				this.validate();
 				this.setBorderColorForErrorString(false);
 			}
 			
@@ -90,7 +91,6 @@ package org.hamster.enterprise.controls
 				setEmptyText();
 			} else if (isShowingEmptyText) {
 				// do nothing
-				//setEmptyText();
 			} else {
 				setNormalText();
 			}
@@ -116,7 +116,7 @@ package org.hamster.enterprise.controls
 			var result:ValidationResultEvent = _regExpValidator.validate();
 			
 			var isError:Boolean = false;
-			if (result.results) {
+			if (result && result.results) {
 				for each (var resu:ValidationResult in result.results) {
 					if (resu.isError) {
 						isError = true;
@@ -168,7 +168,7 @@ package org.hamster.enterprise.controls
 				DisplayObject(focusManager.getFocus()) :
 				null;
 			
-			if (focusManager && 
+			if (focusManager && focusManager.showFocusIndicator
 				focusObj == this)
 			{
 				drawFocus(true);
