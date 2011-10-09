@@ -109,6 +109,26 @@ package org.hamster.enterprise.controls
 			return _minValue;
 		}
 		
+		private var _isShowingFormattedText:Boolean = true;
+		private var _isShowingFormattedTextChanged:Boolean = false;
+		
+		public function get isShowingFormattedText():Boolean
+		{
+			return this._isShowingFormattedText;
+		}
+		
+		private var _isTextChangedBecauseOutOfBounds:Boolean = false;
+		
+		override protected function commitProperties():void
+		{
+			super.commitProperties();
+			
+			if (_isShowingFormattedTextChanged) {
+				
+			}
+			
+			_isShowingFormattedTextChanged = false;
+		}
 		
 		public function HsCurrencyTextInput()
 		{
@@ -128,6 +148,8 @@ package org.hamster.enterprise.controls
 				this.text = text.split(thuTo).join('').replace(symbo, '');
 			}
 			
+			_isShowingFormattedText = false;
+			_isShowingFormattedTextChanged = true;
 		}
 		
 		override protected function focusOutHandler(event:FocusEvent):void
@@ -140,6 +162,9 @@ package org.hamster.enterprise.controls
 				var symbo:String = fmt.currencySymbol;
 				this.text = fmt.format(stringValue);
 			}
+			
+			_isShowingFormattedText = true;
+			_isShowingFormattedTextChanged = true;
 		}
 		
 		
@@ -193,6 +218,38 @@ package org.hamster.enterprise.controls
 			}
 		}
 		
+		override protected function textChangeHandler(evt:Event):void
+		{
+			super.textChangeHandler(evt);
+			
+			if (_isTextChangedBecauseOutOfBounds) {
+				_isTextChangedBecauseOutOfBounds = false;
+				return;
+			}
+			
+			var numberVal:Number = this.numberValue;
+			if (!isNaN(numberVal)) {
+				if (this.minValue != null) {
+					var minVal:Number = Number(minValue);
+					numberVal = Math.max(minVal, numberVal);
+					_isTextChangedBecauseOutOfBounds = true;
+				}
+				
+				if (this.maxValue != null) {
+					var maxVal:Number = Number(maxValue);
+					numberVal = Math.min(maxVal, numberVal);
+					_isTextChangedBecauseOutOfBounds = true;
+				}
+			}
+			
+			if (_isTextChangedBecauseOutOfBounds) {
+				this.text = numberVal;
+			}
+		}
+		
+		[Bindable("textChanged")]
+		[CollapseWhiteSpace]
+		[NonCommittingChangeEvent("change")]
 		override public function get stringValue():String
 		{
 			if (this.isShowingEmptyText) {
@@ -206,16 +263,21 @@ package org.hamster.enterprise.controls
 				return result;
 			}
 		}
-		
+
+		[Bindable("textChanged")]
+		[CollapseWhiteSpace]
+		[NonCommittingChangeEvent("change")]
 		public function get intValue():int
 		{
 			return parseInt(stringValue);
 		}
-		
+
+		[Bindable("textChanged")]
+		[CollapseWhiteSpace]
+		[NonCommittingChangeEvent("change")]
 		public function get numberValue():Number
 		{
 			return parseFloat(stringValue);
 		}
-		
 	}
 }
