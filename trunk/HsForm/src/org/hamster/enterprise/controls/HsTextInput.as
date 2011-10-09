@@ -168,8 +168,7 @@ package org.hamster.enterprise.controls
 				DisplayObject(focusManager.getFocus()) :
 				null;
 			
-			if (focusManager && focusManager.showFocusIndicator
-				focusObj == this)
+			if (focusManager && focusObj == this)
 			{
 				drawFocus(true);
 			}
@@ -327,7 +326,10 @@ package org.hamster.enterprise.controls
 		{
 			return this._emptyText;
 		}
-		
+
+		[Bindable("textChanged")]
+		[CollapseWhiteSpace]
+		[NonCommittingChangeEvent("change")]
 		public function get stringValue():String
 		{
 			return this.isShowingEmptyText ? "" : this.text;

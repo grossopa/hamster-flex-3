@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
 		 xmlns:controls="org.hamster.enterprise.controls.*"
-		 horizontalAlign="center">
-	<mx:Script>
-		<![CDATA[
-			
-		]]>
-	</mx:Script>
+		 horizontalAlign="center" 
+		 creationComplete="vbox1_creationCompleteHandler(event)">
+	<mx:Script source="TextInputTestViewAs.as" />
+	<!-- variables -->
+	<mx:CurrencyFormatter id="globalCurrencyFormatter"
+						  currencySymbol="{globalCurrencySymbolTextInput.text}"
+						  decimalSeparatorTo="{globalDecimalSeparatorToTextInput.text}"
+						  thousandsSeparatorTo="{globalThousandSeparatorToTextInput.text}" />
+	
+	<mx:CurrencyFormatter id="privateCurrencyFormatter"
+						  currencySymbol="{privateCurrencySymbolTextInput.text}"
+						  decimalSeparatorTo="{privateDecimalSeparatorToTextInput.text}"
+						  thousandsSeparatorTo="{privateThousandSeparatorToTextInput.text}" />
+	<!-- Views -->
 	<mx:RadioButtonGroup id="mainRBG" />
 	<mx:HBox width="100%">
 		<mx:RadioButton id="textInputRB" label="Base TextInput" 
@@ -39,39 +47,85 @@
 		</mx:HBox>
 	</mx:ViewStack>
 	<mx:HRule width="100%" />
-	<mx:Tile id="mainPropertyTile" width="100%" height="100%"
+	<mx:Tile id="mainPropertyTile" width="100%" 
 			 tileWidth="{(mainPropertyTile.width / 6) - 6}" horizontalGap="5">
-		<mx:Label text="stringValue : " width="100%" />
+		<mx:Label text="stringValue : " />
 		<mx:Text text="{HsTextInput(this.mainViewStack.selectedChild.getChildAt(1)).stringValue}" />
-		<mx:Label text="text : " width="100%" />
+		<mx:Label text="text : "  />
 		<mx:Text text="{HsTextInput(this.mainViewStack.selectedChild.getChildAt(1)).text}" />
+		<mx:Spacer />
+		<mx:Spacer />
+		<!-- Currency TextInput -->
+		<mx:Label text="intValue : "
+				  visible="{mainViewStack.selectedIndex == 1}"
+				  includeInLayout="{mainViewStack.selectedIndex == 1}"/>
+		<mx:Text text="{hsCurrencyTextInput.intValue}"
+				 visible="{mainViewStack.selectedIndex == 1}"
+				 includeInLayout="{mainViewStack.selectedIndex == 1}"/>
+		<mx:Label text="numberValue : " 
+				  visible="{mainViewStack.selectedIndex == 1}"
+				  includeInLayout="{mainViewStack.selectedIndex == 1}"/>
+		<mx:Text text="{hsCurrencyTextInput.numberValue}" 
+				 visible="{mainViewStack.selectedIndex == 1}"
+				 includeInLayout="{mainViewStack.selectedIndex == 1}"/>
+		<mx:Spacer />
+		<mx:Spacer />
+		<!-- End of Currency TextInput -->
 	</mx:Tile>
 	<mx:HRule width="100%" />
-	<mx:Tile id="mainTile" width="100%" height="100%"
+	<mx:Tile id="mainTile" width="100%"
 			 tileWidth="{(mainTile.width / 6) - 6}" horizontalGap="5" >
-		<mx:Label text="Empty Text" width="100%" />
-		<mx:TextInput id="emptyTextInput" text="Please input text here..." width="100%" />
+		<mx:Label text="Empty Text" />
+		<mx:TextInput id="emptyTextInput" text="Please input text here..."  />
 		
-		<mx:Label text="Required" width="100%" />
-		<mx:CheckBox id="requiredCheckBox" width="100%" />
+		<mx:Label text="Required" />
+		<mx:CheckBox id="requiredCheckBox" />
 		
-		<mx:Spacer width="100%" />
-		<mx:Spacer width="100%" />
+		<mx:Spacer />
+		<mx:Spacer />
 		
-		<mx:Label text="Validation" width="100%" />
-		<mx:CheckBox id="enableValidationCheckBox" selected="true" width="100%" />
+		<mx:Label text="Validation" />
+		<mx:CheckBox id="enableValidationCheckBox" selected="true" />
 		
-		<mx:Label text="Expression" width="100%"/>
-		<mx:TextInput id="expressionTextInput" text="^[a-zA-Z]+$" width="100%" />
+		<mx:Label text="Expression" />
+		<mx:TextInput id="expressionTextInput" text="^[a-zA-Z]+$" />
 		
 		<mx:Label text="Runtime Check" />
 		<mx:CheckBox id="enableValidationRuntimeCheckBox" />
 		
-		<mx:Label text="No Match Error String" width="100%" />
-		<mx:TextInput id="noMatchErrorStringTextInput" text="no match!!!!!" width="100%" />
+		<mx:Label text="No Match Error String" />
+		<mx:TextInput id="noMatchErrorStringTextInput" text="no match!!!!!" />
 		
-		<mx:Label text="Required Field Error String" width="100%" />
-		<mx:TextInput id="requiredFieldErrorStringTextInput" text="required!!!!!" width="100%" />
+		<mx:Label text="Required Field Error String" />
+		<mx:TextInput id="requiredFieldErrorStringTextInput" text="required!!!!!" />
+		
+		<mx:Spacer />
+		<mx:Spacer />
+		
+		<!-- Currency TextInput -->
+		<mx:Label text="Use Private Currency Formatter" />
+		<mx:CheckBox id="privateCurrencyFormatterCheckBox" 
+					 selected="false" 
+					 change="privateCurrencyFormatterCheckBox_changeHandler(event)" />
+		<mx:Spacer />
+		<mx:Spacer />
+		<mx:Spacer />
+		<mx:Spacer />
+		
+		<mx:Label text="Global Currency Symbol" />
+		<mx:TextInput id="globalCurrencySymbolTextInput" text="$" />
+		<mx:Label text="Global Decimal Separator To" />
+		<mx:TextInput id="globalDecimalSeparatorToTextInput" text="," />
+		<mx:Label text="Global Thousand Separator To" />
+		<mx:TextInput id="globalThousandSeparatorToTextInput" text="." />
+		
+		<mx:Label text="Private Currency Symbol" />
+		<mx:TextInput id="privateCurrencySymbolTextInput" text="$" />
+		<mx:Label text="Private Decimal Separator To" />
+		<mx:TextInput id="privateDecimalSeparatorToTextInput" text="," />
+		<mx:Label text="Private Thousand Separator To" />
+		<mx:TextInput id="privateThousandSeparatorToTextInput" text="." />
+		<!-- End of Currency TextInput -->
 	</mx:Tile>
 	<mx:HRule width="100%" />
 </mx:VBox>
