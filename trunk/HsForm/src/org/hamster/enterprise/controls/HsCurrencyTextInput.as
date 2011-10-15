@@ -122,6 +122,7 @@ package org.hamster.enterprise.controls
 		override protected function commitProperties():void
 		{
 			super.commitProperties();
+			trace ("commit Properties");
 			
 			if (_isShowingFormattedTextChanged) {
 				
@@ -141,12 +142,14 @@ package org.hamster.enterprise.controls
 			var fmt:CurrencyFormatter = this.availableFormatter;
 			var decTo:String = fmt.decimalSeparatorTo;
 			// this.restrict = "0-9-" + decTo;
+
+			trace ('focusIn');
 			
-			if (text.length > 0) {
-				var thuTo:String = fmt.thousandsSeparatorTo;
-				var symbo:String = fmt.currencySymbol;
-				this.text = text.split(thuTo).join('').replace(symbo, '');
-			}
+//			if (text.length > 0) {
+//				var thuTo:String = fmt.thousandsSeparatorTo;
+//				var symbo:String = fmt.currencySymbol;
+//				this.text = text.split(thuTo).join('').replace(symbo, '');
+//			}
 			
 			_isShowingFormattedText = false;
 			_isShowingFormattedTextChanged = true;
@@ -221,29 +224,34 @@ package org.hamster.enterprise.controls
 		override protected function textChangeHandler(evt:Event):void
 		{
 			super.textChangeHandler(evt);
-			
-			if (_isTextChangedBecauseOutOfBounds) {
-				_isTextChangedBecauseOutOfBounds = false;
-				return;
-			}
+//			
+//			if (_isTextChangedBecauseOutOfBounds) {
+//				
+//				return;
+//			}
 			
 			var numberVal:Number = this.numberValue;
 			if (!isNaN(numberVal)) {
 				if (this.minValue != null) {
 					var minVal:Number = Number(minValue);
-					numberVal = Math.max(minVal, numberVal);
-					_isTextChangedBecauseOutOfBounds = true;
+					if (minVal > numberVal) {
+						numberVal = minVal;
+						_isTextChangedBecauseOutOfBounds = true;
+					}
 				}
 				
 				if (this.maxValue != null) {
 					var maxVal:Number = Number(maxValue);
-					numberVal = Math.min(maxVal, numberVal);
-					_isTextChangedBecauseOutOfBounds = true;
+					if (maxVal < numberVal) {
+						numberVal = maxVal;
+						_isTextChangedBecauseOutOfBounds = true;
+					}
 				}
 			}
 			
 			if (_isTextChangedBecauseOutOfBounds) {
-				this.text = numberVal;
+				this.text = numberVal.toString();
+				_isTextChangedBecauseOutOfBounds = false;
 			}
 		}
 		

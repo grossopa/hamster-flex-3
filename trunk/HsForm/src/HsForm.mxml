@@ -12,7 +12,6 @@
 
 			protected function app_applicationCompleteHandler(event:FlexEvent):void
 			{
-				HsCurrencyTextInput.globalCurrFormatter = mainCurrencyFormatter;
 			}
 
 
@@ -32,10 +31,5 @@
 			<controls1:TextInputTestView id="textInputTestView" label="HsTextInput" />
 		</mx:ViewStack>
 	</mx:VBox>
-	
-	<mx:CurrencyFormatter id="mainCurrencyFormatter" 
-						  decimalSeparatorTo=","
-						  thousandsSeparatorTo="."
-						  currencySymbol="$$"/>
 						  
 </mx:Application>
