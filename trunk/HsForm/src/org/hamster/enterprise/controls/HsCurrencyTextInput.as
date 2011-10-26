@@ -122,10 +122,18 @@ package org.hamster.enterprise.controls
 		override protected function commitProperties():void
 		{
 			super.commitProperties();
-			trace ("commit Properties");
 			
-			if (_isShowingFormattedTextChanged) {
+			if (_isShowingFormattedTextChanged && !isShowingEmptyText && text.length > 0) {
+				var fmt:CurrencyFormatter = this.availableFormatter;
+				var thuTo:String = fmt.thousandsSeparatorTo;
+				var decTo:String = fmt.decimalSeparatorTo; 
+				var symbo:String = fmt.currencySymbol;
 				
+				if (_isShowingFormattedText) {
+					textField.text = fmt.format(stringValue);
+				} else {
+					textField.text = text.split(thuTo).join('').replace(symbo, '');
+				}
 			}
 			
 			_isShowingFormattedTextChanged = false;
@@ -139,35 +147,19 @@ package org.hamster.enterprise.controls
 		override protected function focusInHandler(event:FocusEvent):void
 		{
 			super.focusInHandler(event);
-			var fmt:CurrencyFormatter = this.availableFormatter;
-			var decTo:String = fmt.decimalSeparatorTo;
-			// this.restrict = "0-9-" + decTo;
-
-			trace ('focusIn');
-			
-//			if (text.length > 0) {
-//				var thuTo:String = fmt.thousandsSeparatorTo;
-//				var symbo:String = fmt.currencySymbol;
-//				this.text = text.split(thuTo).join('').replace(symbo, '');
-//			}
 			
 			_isShowingFormattedText = false;
 			_isShowingFormattedTextChanged = true;
+			invalidateProperties();
 		}
 		
 		override protected function focusOutHandler(event:FocusEvent):void
 		{
 			super.focusOutHandler(event);
-			if (text.length > 0) {
-				var fmt:CurrencyFormatter = this.availableFormatter;
-				var thuTo:String = fmt.thousandsSeparatorTo;
-				var decTo:String = fmt.decimalSeparatorTo; 
-				var symbo:String = fmt.currencySymbol;
-				this.text = fmt.format(stringValue);
-			}
 			
 			_isShowingFormattedText = true;
 			_isShowingFormattedTextChanged = true;
+			invalidateProperties();
 		}
 		
 		
