@@ -8,6 +8,9 @@ package org.hamster.enterprise.controls
 	import mx.controls.TextInput;
 	import mx.formatters.CurrencyFormatter;
 	
+	import org.hamster.enterprise.utils.HsMathUtil;
+	import org.hamster.enterprise.utils.HsStringUtil;
+	
 	[ResourceBundle("formatters")]
 	[ResourceBundle("SharedResources")]
 	
@@ -41,14 +44,27 @@ package org.hamster.enterprise.controls
 			return _currencyFormatter;
 		}
 		
+		override public function set mainData(value:Object):void
+		{
+			if (_mainData != value) {
+				var num:Number = Number(value);
+				this._mainData = num;
+				this._mainDataChanged = true;
+				this.invalidateProperties();
+			}
+		}
+		
 		private var _maxDecimalLength:Object;
+		private var _inputLimitChanged:Boolean = false;
 		
 		public function set maxDecimalLength(value:Object):void
 		{
-			_maxDecimalLength = value != null ?
-				value :
-				resourceManager.getString(
-					"SharedResources", "maxDecimalLength");
+			if (_maxDecimalLength != value) {
+				_maxDecimalLength = value;
+				_inputLimitChanged = true;
+				this.invalidateProperties();
+			}
+//					"SharedResources", "maxDecimalLength");
 		}
 		
 		[Inspectable(category="General", defaultValue="null")]
@@ -62,10 +78,12 @@ package org.hamster.enterprise.controls
 		
 		public function set maxIntLength(value:Object):void
 		{
-			_maxIntLength = value != null ?
-				value :
-				resourceManager.getString(
-					"SharedResources", "maxIntLength");
+			if (_maxIntLength != value) {
+				_maxIntLength = value;
+				_inputLimitChanged = true;
+				this.invalidateProperties();
+			}
+//					"SharedResources", "maxIntLength");
 		}
 		
 		[Inspectable(category="General", defaultValue="null")]
@@ -79,10 +97,12 @@ package org.hamster.enterprise.controls
 		
 		public function set maxValue(value:Object):void
 		{
-			_maxValue = value != null ?
-				value :
-				resourceManager.getString(
-					"SharedResources", "currencyMaxValue");
+			if (_maxValue != value) {
+				_maxValue = value;
+				_inputLimitChanged = true;
+				this.invalidateProperties();
+			}
+//					"SharedResources", "currencyMaxValue");
 		}
 		
 		[Inspectable(category="General", defaultValue="null")]
@@ -96,10 +116,12 @@ package org.hamster.enterprise.controls
 		
 		public function set minValue(value:Object):void
 		{
-			_minValue = value != null ?
-				value :
-				resourceManager.getString(
-					"SharedResources", "currencyMinValue");
+			if (_minValue != value) {
+				_minValue = value;
+				_inputLimitChanged = true;
+				this.invalidateProperties();
+			}
+//					"SharedResources", "currencyMinValue");
 		}
 		
 		[Inspectable(category="General", defaultValue="null")]
@@ -107,6 +129,66 @@ package org.hamster.enterprise.controls
 		public function get minValue():Object
 		{
 			return _minValue;
+		}
+		
+//		/**
+//		 *  @private
+//		 *  Storage for the rounding property.
+//		 */
+//		private var _rounding:String;
+//		private var _roundingChanged:Boolean = false;
+//		
+//		/**
+//		 *  @private
+//		 */
+//		
+//		[Inspectable(category="General", enumeration="none,up,down,nearest", defaultValue="null")]
+//		
+//		/**
+//		 *  How to round the number.
+//		 *  In ActionScript, the value can be <code>NumberBaseRoundType.NONE</code>, 
+//		 *  <code>NumberBaseRoundType.UP</code>,
+//		 *  <code>NumberBaseRoundType.DOWN</code>, or <code>NumberBaseRoundType.NEAREST</code>.
+//		 *  In MXML, the value can be <code>"none"</code>, 
+//		 *  <code>"up"</code>, <code>"down"</code>, or <code>"nearest"</code>.
+//		 *
+//		 *  @default NumberBaseRoundType.NONE
+//		 *
+//		 *  @see mx.formatters.NumberBaseRoundType
+//		 */
+//		public function get rounding():String
+//		{
+//			return _rounding;
+//		}
+//		
+//		/**
+//		 *  @private
+//		 */
+//		public function set rounding(value:String):void
+//		{
+//			if (_rounding != value) {
+//				_rounding = value;
+//				_roundingChanged = true;
+//				this.invalidateProperties();
+//			}
+//			//		"formatters", "rounding");
+//		}
+		
+		private var _usePercentSign:Boolean;
+		private var _usePercentSignChanged:Boolean = false;
+		
+		public function set usePercentSign(value:Boolean):void
+		{
+			if (_usePercentSign != value) {
+				_usePercentSign = value;
+				_usePercentSignChanged = true;
+				this.invalidateProperties();
+			}
+		}
+		
+		public function get usePercentSign():Boolean
+		{
+			return _usePercentSign;
 		}
 		
 		private var _isShowingFormattedText:Boolean = true;
@@ -117,26 +199,62 @@ package org.hamster.enterprise.controls
 			return this._isShowingFormattedText;
 		}
 		
-		private var _isTextChangedBecauseOutOfBounds:Boolean = false;
-		
 		override protected function commitProperties():void
 		{
-			super.commitProperties();
+			var needSetText:Boolean = false;
+			var num:Number;
 			
-			if (_isShowingFormattedTextChanged && !isShowingEmptyText && text.length > 0) {
+			if ((_isShowingFormattedTextChanged || _usePercentSignChanged)
+				&& !isShowingEmptyText && text.length > 0) {
+				needSetText = true;
+				num = this.mainData as Number;
+//				var fmt:CurrencyFormatter = this.availableFormatter;
+//				var thuTo:String = fmt.thousandsSeparatorTo;
+//				var decTo:String = fmt.decimalSeparatorTo; 
+//				var symbo:String = fmt.currencySymbol;
+//				
+//				if (_isShowingFormattedText && !usePercentSign) {
+//					textField.text = fmt.format(stringValue);
+//				} else if (_isShowingFormattedText && usePercentSign) {
+//					textField.text = HsMathUtil.toFixed(numberValue * 100, int(maxDecimalLength), fmt.rounding) + "%";
+//				} else {
+//					textField.text = text.split(thuTo).join('').replace(symbo, '').replace('%', '');
+//				}
+//				
+//				this.text = textField.text;
+			}
+			
+			if (_inputLimitChanged || _mainDataChanged) {
+				needSetText = true;
+				num = this.mainData as Number;
+			}
+			
+			if (isNaN(mainData as Number)) {
+				this.text = "";
+			} else if (needSetText) {
 				var fmt:CurrencyFormatter = this.availableFormatter;
 				var thuTo:String = fmt.thousandsSeparatorTo;
 				var decTo:String = fmt.decimalSeparatorTo; 
 				var symbo:String = fmt.currencySymbol;
+				num = HsMathUtil.round(num, int(maxDecimalLength), fmt.rounding);
 				
-				if (_isShowingFormattedText) {
-					textField.text = fmt.format(stringValue);
+				if (isShowingFormattedText && !usePercentSign) {
+					textField.text = fmt.format(num);
+				} else if (isShowingFormattedText && usePercentSign) {
+					textField.text = num.toString();
 				} else {
-					textField.text = text.split(thuTo).join('').replace(symbo, '');
+					textField.text = text.split(thuTo).join('').replace(symbo, '').replace('%', '');
 				}
+				
+				this.text = textField.text;
 			}
 			
-			_isShowingFormattedTextChanged = false;
+			_inputLimitChanged 				= false;
+			_mainDataChanged 				= false;
+			_isShowingFormattedTextChanged  = false;
+			_usePercentSignChanged 			= false;
+			
+			super.commitProperties();
 		}
 		
 		public function HsCurrencyTextInput()
@@ -216,11 +334,6 @@ package org.hamster.enterprise.controls
 		override protected function textChangeHandler(evt:Event):void
 		{
 			super.textChangeHandler(evt);
-//			
-//			if (_isTextChangedBecauseOutOfBounds) {
-//				
-//				return;
-//			}
 			
 			var numberVal:Number = this.numberValue;
 			if (!isNaN(numberVal)) {
@@ -228,7 +341,7 @@ package org.hamster.enterprise.controls
 					var minVal:Number = Number(minValue);
 					if (minVal > numberVal) {
 						numberVal = minVal;
-						_isTextChangedBecauseOutOfBounds = true;
+						this.text = numberVal.toString();
 					}
 				}
 				
@@ -236,15 +349,12 @@ package org.hamster.enterprise.controls
 					var maxVal:Number = Number(maxValue);
 					if (maxVal < numberVal) {
 						numberVal = maxVal;
-						_isTextChangedBecauseOutOfBounds = true;
+						this.text = numberVal.toString();
 					}
 				}
 			}
 			
-			if (_isTextChangedBecauseOutOfBounds) {
-				this.text = numberVal.toString();
-				_isTextChangedBecauseOutOfBounds = false;
-			}
+			this._mainData = numberVal;
 		}
 		
 		[Bindable("textChanged")]
@@ -259,7 +369,7 @@ package org.hamster.enterprise.controls
 				var decTo:String = fmt.decimalSeparatorTo;
 				var thuTo:String = fmt.thousandsSeparatorTo;
 				var symbo:String = fmt.currencySymbol;
-				var result:String = this.text.split(thuTo).join('').replace(symbo, '').replace(decTo, '.');
+				var result:String = this.text.split(thuTo).join('').replace(symbo, '').replace(decTo, '.').replace('%', '');
 				return result;
 			}
 		}
@@ -269,7 +379,7 @@ package org.hamster.enterprise.controls
 		[NonCommittingChangeEvent("change")]
 		public function get intValue():int
 		{
-			return parseInt(stringValue);
+			return int(numberValue);
 		}
 
 		[Bindable("textChanged")]
@@ -277,7 +387,11 @@ package org.hamster.enterprise.controls
 		[NonCommittingChangeEvent("change")]
 		public function get numberValue():Number
 		{
-			return parseFloat(stringValue);
+			if (usePercentSign) {
+				return parseFloat(stringValue) / 100;
+			} else {
+				return parseFloat(stringValue);
+			}
 		}
 	}
 }

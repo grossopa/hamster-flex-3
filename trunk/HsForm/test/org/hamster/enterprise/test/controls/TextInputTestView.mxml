@@ -29,6 +29,8 @@
 						group="{mainRBG}" value="0" selected="true"/>
 		<mx:RadioButton id="currencyTextInputRB" label="Currency TextInput" 
 						group="{mainRBG}" value="1" />
+		<mx:RadioButton id="serialNumberTextInputRB" label="Serial Number TextInput" 
+						group="{mainRBG}" value="2" />
 	</mx:HBox>
 	<mx:ViewStack id="mainViewStack" width="100%" height="25" change="mainViewStack_changeHandler(event)"
 				  selectedIndex="{int(mainRBG.selectedValue)}">
@@ -46,6 +48,8 @@
 		<mx:HBox>
 			<mx:Label text="Currency TextInput : " />
 			<controls:HsCurrencyTextInput id="hsCurrencyTextInput" width="400"
+										  mainData="{mainDataTextInput.text}"
+										  usePercentSign="{usePercentSignCheckBox.selected}"
 										  emptyText="{emptyTextInput.text}"
 										  expression="{expressionTextInput.text}"
 										  required="{requiredCheckBox.selected}"
@@ -53,7 +57,24 @@
 										  requiredFieldErrorString="{requiredFieldErrorStringTextInput.text}"
 										  enableValidationRuntime="{enableValidationRuntimeCheckBox.selected}"
 										  maxValue="{parseFloat(currencyMaxValueTextInput.text)}"
-										  minValue="{parseFloat(currencyMinValueTextInput.text)}"/>
+										  minValue="{parseFloat(currencyMinValueTextInput.text)}"
+										  maxDecimalLength="{parseInt(maxDecimalTextInput.text)}"
+										  maxIntLength="{parseInt(maxIntTextInput.text)}"/>
+		</mx:HBox>
+		<mx:HBox>
+			<mx:Label text="Serial Number TextInput : " />
+			<controls:HsSerialNumberTextInput id="hsSerialNumberTextInput" width="400"
+								  text="1231"
+								  restrict="0-9"
+								  emptyText="{emptyTextInput.text}"
+								  expression="{expressionTextInput.text}"
+								  required="{requiredCheckBox.selected}"
+								  noMatchErrorString="{noMatchErrorStringTextInput.text}"
+								  requiredFieldErrorString="{requiredFieldErrorStringTextInput.text}"
+								  enableValidationRuntime="{enableValidationRuntimeCheckBox.selected}"
+								  enableValidation="{enableValidationCheckBox.selected}"
+								  separator="{separatorTextInput.text}"
+								  separatorIndexList="{separatorIndexListTextInput.text}"/>
 		</mx:HBox>
 	</mx:ViewStack>
 	<mx:HRule width="100%" />
@@ -87,28 +108,29 @@
 			 tileWidth="{(mainTile.width / 6) - 15}" horizontalGap="5" >
 		<mx:Label text="Empty Text" />
 		<mx:TextInput id="emptyTextInput" text="Please input text here..."  />
+		<mx:Label text="Main Data" />
+		<mx:TextInput id="mainDataTextInput" text="123.157"  />
+		<mx:Spacer />
+		<mx:Spacer />
 		
 		<mx:Label text="Required" />
 		<mx:CheckBox id="requiredCheckBox" />
-		
+		<mx:Spacer />
+		<mx:Spacer />
 		<mx:Spacer />
 		<mx:Spacer />
 		
 		<mx:Label text="Validation" />
 		<mx:CheckBox id="enableValidationCheckBox" selected="true" />
-		
 		<mx:Label text="Expression" />
 		<mx:TextInput id="expressionTextInput" text="^[a-zA-Z]+$" />
-		
 		<mx:Label text="Runtime Check" />
 		<mx:CheckBox id="enableValidationRuntimeCheckBox" />
 		
 		<mx:Label text="No Match Error String" />
 		<mx:TextInput id="noMatchErrorStringTextInput" text="no match!!!!!" />
-		
 		<mx:Label text="Required Field Error String" />
 		<mx:TextInput id="requiredFieldErrorStringTextInput" text="required!!!!!" />
-		
 		<mx:Spacer />
 		<mx:Spacer />
 		
@@ -117,8 +139,9 @@
 		<mx:CheckBox id="privateCurrencyFormatterCheckBox" 
 					 selected="false" 
 					 change="privateCurrencyFormatterCheckBox_changeHandler(event)" />
-		<mx:Spacer />
-		<mx:Spacer />
+		<mx:Label text="Use percent sign" />
+		<mx:CheckBox id="usePercentSignCheckBox" 
+					 selected="false" />
 		<mx:Spacer />
 		<mx:Spacer />
 		
@@ -140,7 +163,23 @@
 		<mx:TextInput id="currencyMaxValueTextInput" text="5000" />
 		<mx:Label text="Min Value : " />
 		<mx:TextInput id="currencyMinValueTextInput" text="-5000" />
+		<mx:Spacer />
+		<mx:Spacer />
+		
+		<mx:Label text="Max Decimal : " />
+		<mx:TextInput id="maxDecimalTextInput" text="4" />
+		<mx:Label text="Max Int : " />
+		<mx:TextInput id="maxIntTextInput" text="11" />
+		<mx:Spacer />
+		<mx:Spacer />
 		<!-- End of Currency TextInput -->
+		
+		<!-- Serial Number TextInput -->
+		<mx:Label text="Separator : " />
+		<mx:TextInput id="separatorTextInput" text=" " />
+		<mx:Label text="Separator Index List : " />
+		<mx:TextInput id="separatorIndexListTextInput" text="4,8,12,17,22" />
+		<!-- End of Serial Number TextInput -->
 	</mx:Tile>
 	<mx:HRule width="100%" />
 </mx:VBox>

@@ -61,7 +61,7 @@ package org.hamster.enterprise.controls
 		
 		protected function textInputHandler(evt:TextEvent):void
 		{
-			// do nothing, sub class may override this function
+			// do nothing, sub-classes may override this function
 		}
 		
 		protected function textChangeHandler(evt:Event):void
@@ -69,6 +69,15 @@ package org.hamster.enterprise.controls
 			if (this.enableValidation && this.enableValidationRuntime) {
 				this.validate();
 			}
+			
+			updateTextStyle();
+			
+			formatTextHandler();
+		}
+		
+		protected function formatTextHandler():void
+		{
+			// do nothing, sub-classes may override this function
 		}
 		
 		override protected function commitProperties():void
@@ -87,6 +96,16 @@ package org.hamster.enterprise.controls
 				_regExpValidator.enabled = enableValidation;
 			}
 			
+			updateTextStyle();
+			
+			_requiredChanged = false;
+			_expressionChanged = false;
+			_enableValidationRuntimeChanged = false;
+			_enableValidationChanged = false;
+		}
+		
+		protected function updateTextStyle():void
+		{
 			if (text == "" && systemManager.stage.focus != TextField(textField)) {
 				setEmptyText();
 			} else if (isShowingEmptyText) {
@@ -94,11 +113,6 @@ package org.hamster.enterprise.controls
 			} else {
 				setNormalText();
 			}
-			
-			_requiredChanged = false;
-			_expressionChanged = false;
-			_enableValidationRuntimeChanged = false;
-			_enableValidationChanged = false;
 		}
 		
 		public function validate():ValidationResultEvent
@@ -112,7 +126,7 @@ package org.hamster.enterprise.controls
 			_regExpValidator.expression = this.expression;
 			_regExpValidator.noMatchError = this.noMatchErrorString;
 			_regExpValidator.requiredFieldError = this.requiredFieldErrorString;
-			_regExpValidator.property	= "text";
+			_regExpValidator.property	= "stringValue";
 			var result:ValidationResultEvent = _regExpValidator.validate();
 			
 			var isError:Boolean = false;
@@ -128,7 +142,6 @@ package org.hamster.enterprise.controls
 			setBorderColorForErrorString(isError);
 			
 			return result;
-			//}
 		}
 		
 		/**
@@ -203,7 +216,8 @@ package org.hamster.enterprise.controls
 		}
 		
 		
-		private var _mainData:Object;
+		protected var _mainData:Object;
+		protected var _mainDataChanged:Boolean;
 		private var _required:Boolean;
 		private var _requiredChanged:Boolean;
 		private var _emptyText:String;

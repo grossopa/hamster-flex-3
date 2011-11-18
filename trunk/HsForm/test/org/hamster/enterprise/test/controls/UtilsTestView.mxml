@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+		 horizontalAlign="center">
+	<mx:Style>
+		.labelTitle {
+			fontSize 	: 16;
+			fontWeight 	: bold;
+		}
+	</mx:Style>
+	<mx:Script>
+		<![CDATA[
+			import mx.formatters.NumberBaseRoundType;
+			
+			import org.hamster.enterprise.utils.HsMathUtil;
+			public const ROUND_TYPE_DP:Array = [
+				{label : "Nearest", value : NumberBaseRoundType.NEAREST},
+				{label : "Down", value : NumberBaseRoundType.DOWN},
+				{label : "Up", value : NumberBaseRoundType.UP},
+				{label : "None", value : NumberBaseRoundType.NONE}
+			];
+		]]>
+	</mx:Script>
+	<mx:Label text="MathUtil.toFixed" styleName="labelTitle" />
+	<mx:Tile id="mainTile" width="100%" height="100%"
+			  tileWidth="{mainTile.width / 5 - 10}" horizontalGap="5">
+		<mx:Label text="Origin" />
+		<mx:Label text="Precision" />
+		<mx:Label text="Round Type" />
+		<mx:Label text="toFixed Result" />
+		<mx:Label text="Util Result" />
+		
+		<!-- changable fields -->
+		<mx:TextInput id="toFixedNumTI" />
+		<mx:NumericStepper id="precNumStepper" value="2" />
+		<mx:ComboBox id="roundTypeCB" selectedIndex="0" 
+					 dataProvider="{ROUND_TYPE_DP}" />
+		<mx:Label text="{parseFloat(toFixedNumTI.text).toFixed(precNumStepper.value)}" />
+		<mx:Label text="{HsMathUtil.toFixed(parseFloat(toFixedNumTI.text), precNumStepper.value, roundTypeCB.selectedItem.value, true)}" />
+		
+		<!-- 0.0000009 testing -->
+		<mx:Label id="toFixedNum1Lbl" text="0.00000009" />
+		<mx:Label id="precNum1Lbl" text="2" />
+		<mx:Label id="roundType1Lbl" text="nearest" />
+		<mx:Label text="{parseFloat(toFixedNum1Lbl.text).toFixed(parseInt(precNum1Lbl.text))}" 
+				  fontWeight="bold" color="red"/>
+		<mx:Label text="{HsMathUtil.toFixed(parseFloat(toFixedNum1Lbl.text), parseInt(precNum1Lbl.text), roundType1Lbl.text, true)}" />
+		
+		<!-- 0 testing -->
+		<mx:Label id="toFixedNum2Lbl" text="0" />
+		<mx:Label id="precNum2Lbl" text="0" />
+		<mx:Label id="roundType2Lbl" text="nearest" />
+		<mx:Label text="{parseFloat(toFixedNum2Lbl.text).toFixed(parseInt(precNum2Lbl.text))}" 
+				  fontWeight="bold" color="red"/>
+		<mx:Label text="{HsMathUtil.toFixed(parseFloat(toFixedNum2Lbl.text), parseInt(precNum2Lbl.text), roundType2Lbl.text, true)}" />
+		
+		<!-- .5 testing -->
+		<mx:Label id="toFixedNum3Lbl" text="123.115" />
+		<mx:Label id="precNum3Lbl" text="2" />
+		<mx:Label id="roundType3Lbl" text="nearest" />
+		<mx:Label text="{parseFloat(toFixedNum3Lbl.text).toFixed(parseInt(precNum3Lbl.text))}" 
+				  fontWeight="bold" color="red"/>
+		<mx:Label text="{HsMathUtil.toFixed(parseFloat(toFixedNum3Lbl.text), parseInt(precNum3Lbl.text), roundType3Lbl.text, true)}" />
+		
+	</mx:Tile>
+</mx:VBox>
