@@ -29,6 +29,7 @@
 		<mx:ViewStack id="mainVS" width="100%" height="100%"
 					  selectedIndex="{mainSelIndex}">
 			<controls1:TextInputTestView id="textInputTestView" label="HsTextInput" />
+			<controls1:UtilsTestView id="utilsTestView" label="Utils" />
 		</mx:ViewStack>
 	</mx:VBox>
 						  
