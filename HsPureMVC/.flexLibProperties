@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="org.hamster.framework.puremvc.HsSimpleCommand"/>
+    <classEntry path="org.hamster.framework.puremvc.HsMediator"/>
+    <classEntry path="org.hamster.framework.puremvc.HsFacade"/>
+    <classEntry path="org.hamster.framework.puremvc.HsProxy"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
