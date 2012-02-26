@@ -123,7 +123,7 @@
 		<mx:Label text="Validation" />
 		<mx:CheckBox id="enableValidationCheckBox" selected="true" />
 		<mx:Label text="Expression" />
-		<mx:TextInput id="expressionTextInput" text="^[a-zA-Z]+$" />
+		<mx:TextInput id="expressionTextInput" text="^[0-9 ]+$" />
 		<mx:Label text="Runtime Check" />
 		<mx:CheckBox id="enableValidationRuntimeCheckBox" />
 		

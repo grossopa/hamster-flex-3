@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" minWidth="955" minHeight="600" 
-				xmlns:controls="org.hamster.enterprise.controls.*" applicationComplete="app_applicationCompleteHandler(event)" xmlns:controls1="org.hamster.enterprise.test.controls.*">
+				xmlns:controls="org.hamster.enterprise.controls.*" applicationComplete="app_applicationCompleteHandler(event)" 
+				xmlns:controls1="org.hamster.enterprise.test.controls.*" backgroundColor="#dddddd">
+	<mx:Style>
+	</mx:Style>
 	<mx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
