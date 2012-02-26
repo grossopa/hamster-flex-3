@@ -139,6 +139,10 @@ package org.hamster.enterprise.controls
 				}
 			}
 			
+			if (!isError) {
+				this.errorString = "";
+			}
+			
 			setBorderColorForErrorString(isError);
 			
 			return result;
@@ -303,6 +307,9 @@ package org.hamster.enterprise.controls
 		{
 			if (_enableValidation != value) {
 				_enableValidation = value;
+				if (!_enableValidation) {
+					this.errorString = "";
+				}
 				_enableValidationChanged = true;
 				this.invalidateProperties();
 			}			

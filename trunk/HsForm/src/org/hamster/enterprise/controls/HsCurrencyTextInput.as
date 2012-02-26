@@ -208,20 +208,6 @@ package org.hamster.enterprise.controls
 				&& !isShowingEmptyText && text.length > 0) {
 				needSetText = true;
 				num = this.mainData as Number;
-//				var fmt:CurrencyFormatter = this.availableFormatter;
-//				var thuTo:String = fmt.thousandsSeparatorTo;
-//				var decTo:String = fmt.decimalSeparatorTo; 
-//				var symbo:String = fmt.currencySymbol;
-//				
-//				if (_isShowingFormattedText && !usePercentSign) {
-//					textField.text = fmt.format(stringValue);
-//				} else if (_isShowingFormattedText && usePercentSign) {
-//					textField.text = HsMathUtil.toFixed(numberValue * 100, int(maxDecimalLength), fmt.rounding) + "%";
-//				} else {
-//					textField.text = text.split(thuTo).join('').replace(symbo, '').replace('%', '');
-//				}
-//				
-//				this.text = textField.text;
 			}
 			
 			if (_inputLimitChanged || _mainDataChanged) {
@@ -296,6 +282,11 @@ package org.hamster.enterprise.controls
 				&& symbo != newInputText
 				&& "-" != newInputText)
 				|| (this.text.indexOf(decTo) != -1 && newInputText == decTo)) {
+				evt.preventDefault();
+				return;
+			}
+			
+			if (newInputText.indexOf('-') >= 0 && (this.text.indexOf('-') >= 0 || this.selectionBeginIndex > 0)) {
 				evt.preventDefault();
 				return;
 			}
