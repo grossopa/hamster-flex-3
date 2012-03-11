@@ -59,6 +59,30 @@ package org.hamster.dropboxTool.model
 			this.sendNotification(AppConstants.ACCESS_TOKEN_FAULT, event.resultObject);
 		}
 		
+		public function metadata(path:String):void
+		{
+			var configurationVO:ConfigurationVO = getConfigurationVOProxy().configurationVO;
+			dropboxClient.metadata(path, configurationVO.metadataSizeLimit, "", true, false);
+			dropboxClient.addEventListener(DropboxEvent.METADATA_RESULT, metadataResultHandler);
+			dropboxClient.addEventListener(DropboxEvent.METADATA_FAULT, metadataFaultHandler);
+		}
+		
+		private function metadataResultHandler(event:DropboxEvent):void
+		{
+			dropboxClient.removeEventListener(DropboxEvent.METADATA_RESULT, requestTokenFaultHandler);
+			this.sendNotification(AppConstants.METADATA_RESULT, event.resultObject);
+		}
+		
+		private function metadataFaultHandler(event:DropboxEvent):void
+		{
+			dropboxClient.removeEventListener(DropboxEvent.METADATA_RESULT, requestTokenFaultHandler);
+			this.sendNotification(AppConstants.METADATA_FAULT, event.resultObject);
+		}
+		
+		private function getConfigurationVOProxy():ConfigurationVOProxy
+		{
+			return ConfigurationVOProxy(facade.retrieveProxy(ConfigurationVOProxy.NAME));
+		}
 		
 		
 		

@@ -36,6 +36,11 @@ package org.hamster.dropboxTool.util
 			PopUpManager.removePopUp(target);
 		}
 		
+		public static function correctDropboxPath(path:String):String
+		{
+			return path.indexOf('/') == 0 ? path.substr(1) : path;
+		}
+		
 		public static function encrypt(txt:String):Array
 		{
 			// 2: get a key

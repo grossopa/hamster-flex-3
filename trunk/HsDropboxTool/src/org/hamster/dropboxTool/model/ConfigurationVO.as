@@ -9,6 +9,8 @@ package org.hamster.dropboxTool.model
 		public var accessTokenKey:String;
 		public var accessTokenSecret:String;
 		
+		public var metadataSizeLimit:int = 50;
+		
 		
 	}
 }

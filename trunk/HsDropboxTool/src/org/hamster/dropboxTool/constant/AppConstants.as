@@ -22,7 +22,13 @@ package org.hamster.dropboxTool.constant
 		public static const ACCESS_TOKEN_REQUEST:String     = "hsAccessTokenRequest";
 		public static const ACCESS_TOKEN_RESULT:String 		= DropboxEvent.ACCESS_TOKEN_RESULT;
 		public static const ACCESS_TOKEN_FAULT:String 		= DropboxEvent.ACCESS_TOKEN_FAULT;
+		public static const METADATA_REQUEST:String			= "hsMetadataRequest";
+		public static const METADATA_RESULT:String			= DropboxEvent.METADATA_RESULT;
+		public static const METADATA_FAULT:String			= DropboxEvent.METADATA_FAULT;
 		
 		public static const SHOW_FILE_LIST_VIEW:String		= "hsShowFileListView";
+		
+		//public static const SHOW_PROCESS_MASK:String		= "hsShowProcessMask";
+		//public static const HIDE_PROCESS_MASK:String		= "hsHideProcessMask";
 	}
 }
