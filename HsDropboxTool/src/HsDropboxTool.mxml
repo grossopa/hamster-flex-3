@@ -10,12 +10,15 @@
 		<![CDATA[
 			import mx.events.FlexEvent;
 			
+			import org.hamster.common.components.FlexErrorPopUpWindowSpark;
 			import org.hamster.dropboxTool.facade.AppFacade;
 			import org.hamster.dropboxTool.mediator.AppMediator;
 			import org.hamster.dropboxTool.util.CommonUtil;
 			
 			protected function windowedapplication1_applicationCompleteHandler(event:FlexEvent):void
 			{
+				new FlexErrorPopUpWindowSpark().register(this, true);
+				
 				var facade:AppFacade = AppFacade.instance;
 				facade.registerMediator(new AppMediator(this));
 			}

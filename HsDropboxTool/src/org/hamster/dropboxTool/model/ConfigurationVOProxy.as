@@ -66,6 +66,14 @@ package org.hamster.dropboxTool.model
 			
 			fs.close();
 			
+			
+			// set to others
+			var dropboxConfigProxy:DropboxConfigProxy = DropboxConfigProxy(facade.retrieveProxy(DropboxConfigProxy.NAME));
+			dropboxConfigProxy.dropboxConfig.requestTokenKey = configurationVO.requestTokenKey;
+			dropboxConfigProxy.dropboxConfig.requestTokenSecret = configurationVO.requestTokenSecret;
+			dropboxConfigProxy.dropboxConfig.accessTokenKey = configurationVO.accessTokenKey;
+			dropboxConfigProxy.dropboxConfig.accessTokenSecret = configurationVO.accessTokenSecret;
+			//var dropboxClientProxy:DropboxClientProxy = new DropboxClientProxy(facade.retrieveProxy(DropboxClientProxy.NAME));
 			this.sendNotification(AppConstants.CONFIGURATION_LOAD_RESULT, configurationVO);
 		}
 		

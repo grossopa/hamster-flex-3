@@ -5,20 +5,81 @@
 	<s:layout>
 		<s:VerticalLayout/>
 	</s:layout>
+	<fx:Metadata>
+		[Event(name="dropboxItemSelected", type="org.hamster.dropboxTool.event.DropboxItemEvent")]
+	</fx:Metadata>
 	<fx:Script>
 		<![CDATA[
+			import mx.collections.IList;
+			
+			import org.hamster.dropbox.models.DropboxFile;
+			
+			import spark.events.GridEvent;
+			
+			private var _dropboxFile:DropboxFile;
+			
+			[Bindable] private var mainDataGridDP:ArrayCollection = new ArrayCollection();
+			
+			public function set dropboxFile(value:DropboxFile):void
+			{
+				_dropboxFile = value;
+				if (value) {
+					mainDataGridDP = new ArrayCollection(value.contents);
+				}
+			}
+			
+			public function get dropboxFile():DropboxFile
+			{
+				return _dropboxFile;
+			}
+			
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
 	</fx:Declarations>
-	<s:DataGrid id="mainDataGrid" width="100%" height="100%">
+	<s:DataGrid id="mainDataGrid" width="100%" height="100%" dataProvider="{mainDataGridDP}" doubleClickEnabled="true">
 		<s:columns>
-			<mx:DataGridColumn id="nameDGC" dataField="name" />
-			<mx:DataGridColumn id="mineTypeDGC" dataField="mineType" />
-			<mx:DataGridColumn id="sizeDGC" dataField="size" />
-			<mx:DataGridColumn id="modifiedDGC" dataField="modified" />
-			<mx:DataGridColumn id="revisionDGC" dataField="revision" />
-			<mx:DataGridColumn id="isDeletedDGC" dataField="isDeleted" />
+			<s:ArrayCollection>
+				<s:GridColumn id="iconDGC" dataField="isDir" width="24">
+					<s:itemRenderer>
+						<fx:Component>
+							<s:GridItemRenderer width="24" height="24">
+								<s:Image source="{data.isDir ? ICON_FOLDER : ICON_FILE}" 
+										 width="24" height="24"
+										 verticalAlign="middle" horizontalAlign="center">
+									<fx:Script>
+										<![CDATA[
+											[Embed(source='icons/onebit_13.png')]
+											[Bindable] public static var ICON_FOLDER:Class;
+											[Embed(source='icons/onebit_39.png')]
+											[Bindable] public static var ICON_FILE:Class;
+											
+											private var _data:Object;
+											override public function set data(value:Object):void
+											{
+												_data = value;
+											}
+											
+											[Bindable]
+											override public function get data():Object
+											{
+												return _data;
+											}
+										]]>
+									</fx:Script>
+								</s:Image>
+							</s:GridItemRenderer>
+						</fx:Component>
+					</s:itemRenderer>
+				</s:GridColumn>
+				<s:GridColumn id="pathDGC" dataField="path" />
+				<s:GridColumn id="mineTypeDGC" dataField="mineType" />
+				<s:GridColumn id="sizeDGC" dataField="size" />
+				<s:GridColumn id="modifiedDGC" dataField="modified" />
+				<s:GridColumn id="revisionDGC" dataField="revision" />
+				<s:GridColumn id="isDeletedDGC" dataField="isDeleted" />
+			</s:ArrayCollection>
 		</s:columns>
 	</s:DataGrid>
 </s:Group>
