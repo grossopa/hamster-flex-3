@@ -2,6 +2,7 @@
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
     <classEntry path="org.hamster.common.util.StringUtil"/>
+    <classEntry path="org.hamster.common.components.FlexErrorPopUpWindowSpark"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
